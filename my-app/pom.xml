@@ -17,16 +17,16 @@ Java, Cucumber/Gherkin, APIs and Selenium in Docker.</description>
 	<properties>
 		<!-- Maven Dependencies-->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>		
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<meminitial>128m</meminitial>
 		<maxmem>512m</maxmem>
-		<maven.version>3.6.1</maven.version>
-		<maven-assembly-plugin.version>2.2-beta-2</maven-assembly-plugin.version>
+		<maven.version>3.9.9</maven.version>
+		<maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
-		<maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
+		<maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+		<maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
+		<maven-surefire-plugin.version>3.5.1</maven-surefire-plugin.version>
 		<!-- Cucumber Dependencies-->
 		<outputDirectory.path>target/test-classes/com/selenium/docker/cucumber</outputDirectory.path>
 		<directory.path>src/test/resources</directory.path>
@@ -40,67 +40,67 @@ Java, Cucumber/Gherkin, APIs and Selenium in Docker.</description>
 		<tag.ids>@Debug</tag.ids>
 		<forkCount>5</forkCount>
 		<!-- Jar Dependencies-->
-		<activation.version>1.1</activation.version>
+		<activation.version>1.1.1</activation.version>
 		<axis.version>1.4</axis.version>
 		<axis-jaxrpc.version>${axis.version}</axis-jaxrpc.version>
-		<byte-buddy.version>1.7.8</byte-buddy.version>
+		<byte-buddy.version>1.15.10</byte-buddy.version>
 		<byte-buddy-agent.version>${byte-buddy.version}</byte-buddy-agent.version>
 		<commons-collections.version>3.2.2</commons-collections.version>
-		<commons-csv.version>1.2</commons-csv.version>
-		<commons-io.version>2.6</commons-io.version>
+		<commons-csv.version>1.12.0</commons-csv.version>
+		<commons-io.version>2.17.0</commons-io.version>
 		<commons-lang.version>2.6</commons-lang.version>
-		<commons-lang3.version>3.4</commons-lang3.version>
-		<commons-logging.version>1.1.3</commons-logging.version>
-		<cucumber.version>1.2.4</cucumber.version>
-		<cucumber-core.version>1.2.2</cucumber-core.version>
+		<commons-lang3.version>3.17.0</commons-lang3.version>
+		<commons-logging.version>1.3.4</commons-logging.version>
+		<cucumber.version>7.20.1</cucumber.version>
+		<cucumber-core.version>${cucumber.version}</cucumber-core.version>
 		<cucumber-java.version>${cucumber.version}</cucumber-java.version>
 		<cucumber-junit.version>${cucumber.version}</cucumber-junit.version>
 		<cucumber-jvm.version>${cucumber.version}</cucumber-jvm.version>
-		<cucumber-jvm-deps.version>1.0.5</cucumber-jvm-deps.version>
-		<cucumber.jvm.parallel.version>4.2.0</cucumber.jvm.parallel.version>		
+		<cucumber-jvm-deps.version>1.0.6</cucumber-jvm-deps.version>
+		<cucumber.jvm.parallel.version>5.0.0</cucumber.jvm.parallel.version>		
 		<cucumber-picocontainer.version>${cucumber.version}</cucumber-picocontainer.version>
-		<cucumber-reporting.version>2.2.0</cucumber-reporting.version>
+		<cucumber-reporting.version>5.8.2</cucumber-reporting.version>
 		<cucumber-runner.version>1.3</cucumber-runner.version>
-		<db2jcc4.version>4.15.113</db2jcc4.version>
-		<dbunit.version>2.5.4</dbunit.version>
+		<db2jcc4.version>11.5.9.0</db2jcc4.version>
+		<dbunit.version>2.8.0</dbunit.version>
 		<databinding.version>1.3.0</databinding.version>
 		<eclipse-version>4.6.1</eclipse-version>
-		<gson.version>1.7.1</gson.version>
-		<guava.version>21.0</guava.version>
-		<hsqldb.version>2.3.1</hsqldb.version>
-		<htmlunit.version>2.26</htmlunit.version>
-		<htmlunit-driver.version>${htmlunit.version}</htmlunit-driver.version>
-		<httpclient.version>4.5.3</httpclient.version>
-		<httpmime.version>4.5.3</httpmime.version>
-		<ipp-v3-java.version>2.9.0</ipp-v3-java.version>
-		<jackcess.version>2.1.6</jackcess.version>
-		<javax.mail-api.version>1.5.2</javax.mail-api.version>
+		<gson.version>2.11.0</gson.version>
+		<guava.version>33.3.1-jre</guava.version>
+		<hsqldb.version>2.7.4</hsqldb.version>
+		<htmlunit.version>2.70.0</htmlunit.version>
+		<htmlunit-driver.version>4.21.0</htmlunit-driver.version>
+		<httpclient.version>4.5.14</httpclient.version>
+		<httpmime.version>4.5.14</httpmime.version>
+		<ipp-v3-java.version>6.0.7</ipp-v3-java.version>
+		<jackcess.version>4.0.7</jackcess.version>
+		<javax.mail-api.version>1.6.2</javax.mail-api.version>
 		<javax.persistence-api>2.2</javax.persistence-api>
-		<javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+		<javax.servlet-api.version>4.0.1</javax.servlet-api.version>
 		<jface.version>3.5.2</jface.version>
-		<joda-time.version>2.1</joda-time.version>
-		<h2.version>1.4.197</h2.version>
+		<joda-time.version>2.13.0</joda-time.version>
+		<h2.version>2.3.232</h2.version>
 		<eclipse-jface.version>3.5.2</eclipse-jface.version>
-		<jfreechart.version>1.0.13</jfreechart.version>
-		<json.version>20160212</json.version>
-		<jsoup.version>1.6.1</jsoup.version>
-		<junit.version>4.12</junit.version>
+		<jfreechart.version>1.5.4</jfreechart.version>
+		<json.version>20240303</json.version>
+		<jsoup.version>1.18.1</jsoup.version>
+		<junit.version>4.13.2</junit.version>
 		<jxl.version>2.6.12</jxl.version>
 		<lazy.version>1.0.1</lazy.version>
 		<log4j.version>1.2.17</log4j.version>
-		<log4j-core.version>2.9.1</log4j-core.version>
-		<mail.version>1.4.5</mail.version>
-		<mockito-core.version>2.7.22</mockito-core.version>
-		<mssql-jdbc.version>6.1.0.jre8</mssql-jdbc.version>
-		<objenesis.version>2.5</objenesis.version>
-		<pdfbox.version>1.8.9</pdfbox.version>
-		<phantomjsdriver.version>1.4.0</phantomjsdriver.version>
-		<plexus-utils.version>3.0.22</plexus-utils.version>
-		<poi.version>3.15</poi.version>
+		<log4j-core.version>2.24.1</log4j-core.version>
+		<mail.version>1.4.7</mail.version>
+		<mockito-core.version>5.14.2</mockito-core.version>
+		<mssql-jdbc.version>12.8.1.jre11</mssql-jdbc.version>
+		<objenesis.version>3.4</objenesis.version>
+		<pdfbox.version>3.0.3</pdfbox.version>
+		<phantomjsdriver.version>1.5.0</phantomjsdriver.version>
+		<plexus-utils.version>4.0.2</plexus-utils.version>
+		<poi.version>5.3.0</poi.version>
 		<poi-ooxml-schemas.version>${poi.version}</poi-ooxml-schemas.version>
-		<sauce_junit.version>2.1.18</sauce_junit.version>
-		<saucerest.version>1.0.23</saucerest.version>
-		<selenium.version>3.3.1</selenium.version>
+		<sauce_junit.version>2.1.25</sauce_junit.version>
+		<saucerest.version>1.0.47</saucerest.version>
+		<selenium.version>4.26.0</selenium.version>
 		<selenium-api.version>${selenium.version}</selenium-api.version>
 		<selenium-chrome-driver.version>${selenium.version}</selenium-chrome-driver.version>
 		<selenium-edge-driver.version>${selenium.version}</selenium-edge-driver.version>
@@ -116,15 +116,15 @@ Java, Cucumber/Gherkin, APIs and Selenium in Docker.</description>
 		<selenium-grid-core.version>1.0.5</selenium-grid-core.version>
 		<selenium-grid-hub.version>1.0.5</selenium-grid-hub.version>
 		<selenium-server-coreless.version>1.0.3</selenium-server-coreless.version>
-		<selenium-server-standalone.version>3.12.0</selenium-server-standalone.version>
-		<sqlite-jdbc.version>3.8.11.2</sqlite-jdbc.version>
+		<selenium-server-standalone.version>4.26.0</selenium-server-standalone.version>
+		<sqlite-jdbc.version>3.47.0.0</sqlite-jdbc.version>
 		<sqljdbc4.version>4.0</sqljdbc4.version>
 		<swt.version>4.6.1</swt.version>
 		<swt-win32.version>4.6.1</swt-win32.version>
-		<ucanaccess.version>4.0.2</ucanaccess.version>
+		<ucanaccess.version>5.0.1</ucanaccess.version>
 		<velocity.version>1.7</velocity.version>
 		<xml-apis.version>1.4.01</xml-apis.version>
-		<xmlsec.version>1.3.0</xmlsec.version>
+		<xmlsec.version>4.0.3</xmlsec.version>
 		<xmlunit.vesion>1.6</xmlunit.vesion>
 	</properties>
 
@@ -202,35 +202,29 @@ Java, Cucumber/Gherkin, APIs and Selenium in Docker.</description>
 		    <version>${commons-logging.version}</version>
 		</dependency>
 		<dependency>
-		    <groupId>info.cukes</groupId>
+		    <groupId>io.cucumber</groupId>
 		    <artifactId>cucumber-core</artifactId>
 		    <version>${cucumber-core.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>info.cukes</groupId>
+			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>
 			<version>${cucumber-java.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-jvm</artifactId>
-			<version>${cucumber-jvm.version}</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-jvm-deps</artifactId>
-			<version>${cucumber-jvm-deps.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>info.cukes</groupId>
+			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-junit</artifactId>
 			<version>${cucumber-junit.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>info.cukes</groupId>
+			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-picocontainer</artifactId>
 			<version>${cucumber-picocontainer.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-testng</artifactId>
+			<version>${cucumber.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.activation</groupId>
@@ -355,11 +349,6 @@ Java, Cucumber/Gherkin, APIs and Selenium in Docker.</description>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml-schemas</artifactId>
-			<version>${poi-ooxml-schemas.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
 			<version>${poi.version}</version>
 		</dependency>
@@ -389,7 +378,7 @@ Java, Cucumber/Gherkin, APIs and Selenium in Docker.</description>
 		    <version>${hsqldb.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>jfree</groupId>
+			<groupId>org.jfree</groupId>
 			<artifactId>jfreechart</artifactId>
 			<version>${jfreechart.version}</version>
 		</dependency>
@@ -440,11 +429,6 @@ Java, Cucumber/Gherkin, APIs and Selenium in Docker.</description>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-opera-driver</artifactId>
-			<version>${selenium-opera-driver.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-remote-driver</artifactId>
 			<version>${selenium-remote-driver.version}</version>
 		</dependency>
@@ -465,7 +449,7 @@ Java, Cucumber/Gherkin, APIs and Selenium in Docker.</description>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>htmlunit-driver</artifactId>
+			<artifactId>htmlunit3-driver</artifactId>
 			<version>${htmlunit-driver.version}</version>
 		</dependency>
 		<dependency>
@@ -475,7 +459,7 @@ Java, Cucumber/Gherkin, APIs and Selenium in Docker.</description>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-server</artifactId>
+			<artifactId>selenium-grid</artifactId>
 			<version>${selenium-server.version}</version>
 		</dependency>
 		<dependency>
@@ -504,7 +488,7 @@ Java, Cucumber/Gherkin, APIs and Selenium in Docker.</description>
 		    <version>${xmlunit.vesion}</version>
 		</dependency>
 		<dependency>
-		    <groupId>xml-security</groupId>
+		    <groupId>org.apache.santuario</groupId>
 		    <artifactId>xmlsec</artifactId>
 		    <version>${xmlsec.version}</version>
 		</dependency>
