@@ -12,15 +12,10 @@
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
-  <!-- <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
-  </properties> -->
 	<properties>
 		<!-- Maven Dependencies-->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>		
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 		<meminitial>128m</meminitial>
 		<maxmem>512m</maxmem>
 <!--
