@@ -32,7 +32,7 @@ COPY log4j.properties log4j.xml ./
 RUN ./mvnw clean package -DskipTests
 
 # Stage 2: Runtime stage
-FROM eclipse-temurin:17-jre
+FROM eclipse-temurin:17-jdk
 
 LABEL maintainer="CJS Consulting, L.L.C"
 
@@ -50,7 +50,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # Create app user (don't run as root)
 # Use existing group 1000 or create if needed
 RUN groupadd -g 1001 appuser || true && \
-    useradd -r -u 1001 -g 1001 appuser || true
+    useradd -r -u 1001 -g 1001 -m -d /home/appuser appuser || true
 
 # Set working directory
 WORKDIR /app
