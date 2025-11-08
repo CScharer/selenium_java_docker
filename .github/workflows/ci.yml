@@ -50,20 +50,19 @@ jobs:
         image: selenium/hub:4.26.0
         ports:
           - 4444:4444
-        options: >-
-          --health-cmd "curl -f http://localhost:4444/wd/hub/status || exit 1"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+          - 4442:4442
+          - 4443:4443
 
       chrome-node:
         image: selenium/node-chrome:4.26.0
         env:
-          SE_EVENT_BUS_HOST: selenium-hub
+          SE_EVENT_BUS_HOST: localhost
           SE_EVENT_BUS_PUBLISH_PORT: 4442
           SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
+          SE_NODE_MAX_SESSIONS: 5
         options: >-
           --shm-size=2gb
+          --network-alias chrome-node
 
     steps:
       - name: Checkout code
@@ -78,8 +77,22 @@ jobs:
 
       - name: Wait for Selenium Grid
         run: |
+          echo "Waiting for Grid Hub..."
           timeout 60 bash -c 'until curl -sf http://localhost:4444/wd/hub/status; do sleep 2; done'
-          echo "Grid is ready!"
+          echo "Grid Hub is up!"
+          
+          echo "Waiting for Chrome node to register..."
+          sleep 10
+          
+          for i in {1..20}; do
+            NODES=$(curl -sf http://localhost:4444/wd/hub/status | jq -r '.value.nodes | length' 2>/dev/null || echo "0")
+            echo "  Attempt $i: $NODES nodes registered"
+            if [ "$NODES" -gt "0" ]; then
+              echo "✅ Grid is ready with $NODES node(s)!"
+              break
+            fi
+            sleep 2
+          done
 
       - name: Run Smoke Tests
         timeout-minutes: 3
@@ -110,29 +123,30 @@ jobs:
         image: selenium/hub:4.26.0
         ports:
           - 4444:4444
-        options: >-
-          --health-cmd "curl -f http://localhost:4444/wd/hub/status || exit 1"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+          - 4442:4442
+          - 4443:4443
 
       chrome-node:
         image: selenium/node-chrome:4.26.0
         env:
-          SE_EVENT_BUS_HOST: selenium-hub
+          SE_EVENT_BUS_HOST: localhost
           SE_EVENT_BUS_PUBLISH_PORT: 4442
           SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
+          SE_NODE_MAX_SESSIONS: 5
         options: >-
           --shm-size=2gb
+          --network-alias chrome-node
 
       firefox-node:
         image: selenium/node-firefox:4.26.0
         env:
-          SE_EVENT_BUS_HOST: selenium-hub
+          SE_EVENT_BUS_HOST: localhost
           SE_EVENT_BUS_PUBLISH_PORT: 4442
           SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
+          SE_NODE_MAX_SESSIONS: 5
         options: >-
           --shm-size=2gb
+          --network-alias firefox-node
 
     steps:
       - name: Checkout code
@@ -147,8 +161,31 @@ jobs:
 
       - name: Wait for Selenium Grid
         run: |
+          echo "Waiting for Grid Hub..."
           timeout 60 bash -c 'until curl -sf http://localhost:4444/wd/hub/status; do sleep 2; done'
-          echo "Grid is ready!"
+          echo "Grid Hub is up!"
+          
+          echo "Waiting for browser nodes to register..."
+          sleep 10
+          
+          echo "Checking Grid status..."
+          curl -sf http://localhost:4444/wd/hub/status | jq '.' || true
+          
+          echo "Verifying nodes are available..."
+          for i in {1..30}; do
+            NODES=$(curl -sf http://localhost:4444/wd/hub/status | jq -r '.value.nodes | length' 2>/dev/null || echo "0")
+            echo "  Attempt $i: $NODES nodes registered"
+            if [ "$NODES" -gt "0" ]; then
+              echo "✅ Grid is ready with $NODES node(s)!"
+              curl -sf http://localhost:4444/wd/hub/status | jq '.value.nodes[] | {id: .id, availability: .availability, maxSessions: .maxSessions}' || true
+              break
+            fi
+            if [ "$i" -eq "30" ]; then
+              echo "⚠️  Warning: No nodes registered after 30 attempts"
+              echo "Proceeding anyway..."
+            fi
+            sleep 2
+          done
 
       - name: Run Grid Tests
         env:
