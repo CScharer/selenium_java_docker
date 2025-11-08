@@ -287,13 +287,40 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
+      - name: Run Checkstyle
+        run: |
+          ./mvnw checkstyle:check
+          echo "📊 Checkstyle report: target/checkstyle-result.xml"
+        continue-on-error: true
+
+      - name: Run SpotBugs
+        run: |
+          ./mvnw spotbugs:check
+          echo "🐛 SpotBugs report: target/spotbugsXml.xml"
+        continue-on-error: true
+
+      - name: Run PMD
+        run: |
+          ./mvnw pmd:check
+          echo "📋 PMD report: target/pmd.xml"
+        continue-on-error: true
+
       - name: Run dependency analysis
         run: ./mvnw dependency:analyze
         continue-on-error: true
 
-      - name: Check for dependency vulnerabilities
-        run: ./mvnw dependency:tree
-        continue-on-error: true
+      - name: Upload code quality reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-quality-reports
+          path: |
+            target/checkstyle-result.xml
+            target/spotbugsXml.xml
+            target/pmd.xml
+            target/site/
+          retention-days: 7
+          if-no-files-found: ignore
 
   docker-build:
     name: Docker Build Test
