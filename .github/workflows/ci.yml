@@ -95,17 +95,6 @@ jobs:
           timeout 60 bash -c 'until curl -sf http://localhost:4444/wd/hub/status; do sleep 2; done'
           echo "Grid is ready!"
 
-      - name: Verify TestNG Suite Configuration
-        run: |
-          echo "=== TestNG Suite File ==="
-          cat src/test/resources/testng-ci-suite.xml
-          echo ""
-          echo "=== Checking for Allure Listener ==="
-          grep -i "AllureTestNg" src/test/resources/testng-ci-suite.xml && echo "✅ Listener found in suite!" || echo "❌ Listener NOT found!"
-          echo ""
-          echo "=== ServiceLoader File ==="
-          cat src/test/resources/META-INF/services/org.testng.ITestNGListener || echo "❌ ServiceLoader file missing"
-
       - name: Run Grid Tests
         env:
           SELENIUM_REMOTE_URL: http://localhost:4444/wd/hub
@@ -113,39 +102,14 @@ jobs:
         run: |
           ./mvnw test -DsuiteXmlFile=testng-ci-suite.xml
 
-      - name: Debug test results
+      - name: Verify test results
         if: always()
         run: |
-          echo "=== Checking for test results ==="
-          ls -la target/ || echo "No target directory"
-          echo ""
-          echo "=== Surefire Reports ==="
-          ls -la target/surefire-reports/ || echo "No surefire-reports"
-          echo ""
-          echo "=== Allure Results Directory ==="
-          ls -la target/allure-results/ || echo "No allure-results"
-          echo ""
-          echo "=== Allure JSON Files ==="
-          find target -name "*-result.json" -ls || echo "No Allure JSON files"
-          echo ""
-          echo "=== Allure PNG Files ==="
-          find target -name "*.png" -ls || echo "No PNG files"
-          echo ""
-          echo "=== Total Allure File Count ==="
-          find target/allure-results -type f 2>/dev/null | wc -l || echo "0"
-      
-      - name: Verify files before upload
-        if: always()
-        run: |
-          echo "=== Files to be uploaded ==="
-          echo "Surefire reports:"
-          ls -la target/surefire-reports/ 2>&1 | head -10
-          echo ""
-          echo "Allure results:"
-          ls -la target/allure-results/ 2>&1 | head -20
-          echo ""
-          echo "Total Allure files to upload:"
-          find target/allure-results -type f 2>/dev/null | wc -l
+          echo "📊 Test Results Summary:"
+          echo "  Surefire reports: $(find target/surefire-reports -name "*.xml" 2>/dev/null | wc -l) files"
+          echo "  Allure results: $(find target/allure-results -name "*-result.json" 2>/dev/null | wc -l) tests"
+          echo "  Screenshots: $(find target/allure-results -name "*.png" 2>/dev/null | wc -l) images"
+          echo "  Total Allure files: $(find target/allure-results -type f 2>/dev/null | wc -l)"
       
       - name: Upload test results
         if: always()
@@ -185,39 +149,18 @@ jobs:
       - name: Prepare Allure results
         if: always()
         run: |
-          echo "=== Downloaded Artifacts Structure ==="
-          ls -la test-results/
-          echo ""
-          
-          echo "=== Checking each artifact contents ==="
-          for dir in test-results/*/; do
-            echo "Contents of $dir:"
-            ls -la "$dir" || true
-            echo ""
-          done
-          
-          echo "=== Finding allure-results directories ==="
-          find test-results -name "allure-results" -type d
-          echo ""
-          
-          echo "=== Finding all JSON files directly ==="
-          find test-results -name "*-result.json" | head -20
-          echo ""
-          
-          echo "=== Merging allure-results from all browsers ==="
+          echo "📊 Merging Allure results from all browsers..."
           mkdir -p allure-results
           
-          # Copy all *-result.json and related files directly
+          # Copy all result files directly (works regardless of directory structure)
           find test-results -name "*-result.json" -exec cp {} allure-results/ \; 2>&1 || true
           find test-results -name "*-container.json" -exec cp {} allure-results/ \; 2>&1 || true
           find test-results -name "*-attachment.*" -exec cp {} allure-results/ \; 2>&1 || true
           
-          echo ""
-          echo "=== Allure results after merge ==="
-          ls -la allure-results/
-          echo ""
-          echo "=== Total files merged ==="
-          find allure-results -type f | wc -l
+          echo "✅ Merge complete!"
+          echo "  JSON results: $(find allure-results -name "*-result.json" | wc -l)"
+          echo "  Screenshots: $(find allure-results -name "*.png" | wc -l)"
+          echo "  Total files: $(find allure-results -type f | wc -l)"
       
       - name: Install Allure CLI
         if: always()
