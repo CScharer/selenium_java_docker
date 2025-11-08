@@ -122,60 +122,38 @@ jobs:
     runs-on: ubuntu-latest
     needs: selenium-grid-tests
     if: always()
-
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+      
       - name: Download all test results
         uses: actions/download-artifact@v4
         with:
           pattern: test-results-*
           path: allure-results
           merge-multiple: true
-
-      - name: Get Allure history
-        if: always()
-        continue-on-error: true
-        run: |
-          git fetch origin gh-pages:gh-pages || echo "gh-pages branch does not exist yet"
-          if git show-ref --verify --quiet refs/heads/gh-pages; then
-            git checkout gh-pages
-            mkdir -p ../gh-pages
-            cp -r . ../gh-pages/ || true
-            git checkout -
-          else
-            echo "No gh-pages branch yet, skipping history"
-          fi
-
+      
       - name: Install Allure CLI
         if: always()
         run: |
+          echo "Installing Allure CLI..."
           wget -q https://github.com/allure-framework/allure2/releases/download/2.25.0/allure-2.25.0.tgz
           tar -zxf allure-2.25.0.tgz
           sudo mv allure-2.25.0 /opt/allure
           sudo ln -s /opt/allure/bin/allure /usr/local/bin/allure
           allure --version
-      
-      - name: Copy Allure history
-        if: always()
-        continue-on-error: true
-        run: |
-          mkdir -p allure-results/history
-          if [ -d "../gh-pages/allure-report/history" ]; then
-            cp -r ../gh-pages/allure-report/history/* allure-results/history/ || true
-            echo "✅ History copied from previous reports"
-          else
-            echo "ℹ️  No history available (first run or gh-pages not set up)"
-          fi
+          echo "✅ Allure CLI installed"
       
       - name: Generate Allure Report
         if: always()
         run: |
+          echo "Generating Allure report..."
+          mkdir -p allure-results/history
           allure generate allure-results --clean -o allure-report
           echo "✅ Report generated successfully!"
           ls -la allure-report/
-
+      
       - name: Upload Allure Report
         uses: actions/upload-artifact@v4
         if: always()
@@ -183,27 +161,20 @@ jobs:
           name: allure-report
           path: allure-report/
           retention-days: 30
-
-      - name: Deploy to GitHub Pages
-        if: github.ref == 'refs/heads/main'
-        continue-on-error: true
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: allure-report
-          destination_dir: allure-report
-          
-      - name: Comment on GitHub Pages setup
-        if: github.ref == 'refs/heads/main' && failure()
+      
+      - name: Upload Info
+        if: always()
         run: |
-          echo "ℹ️  GitHub Pages deployment may have failed"
-          echo "To enable GitHub Pages:"
-          echo "1. Go to Settings → Pages"
-          echo "2. Source: Deploy from a branch"
-          echo "3. Branch: gh-pages / root"
-          echo "4. Save"
+          echo "📊 Allure Report Generated!"
           echo ""
-          echo "Allure report is still available as an artifact!"
+          echo "Download the 'allure-report' artifact to view:"
+          echo "1. Go to this workflow run"
+          echo "2. Scroll to Artifacts section"
+          echo "3. Click 'allure-report' to download"
+          echo "4. Extract and open index.html"
+          echo ""
+          echo "To enable GitHub Pages for public reports:"
+          echo "Settings → Pages → Deploy from branch → gh-pages"
 
   code-quality:
     name: Code Quality Analysis
