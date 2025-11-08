@@ -1,6 +1,6 @@
 # CHANGE LOG
 
-## [2025-11-08 21:00:00 CST] - Allure Reporting Fix & GitHub Pages Deployment ✅
+## [2025-11-08 07:00:00 CST] - Allure Reporting Fix & GitHub Pages Deployment ✅
 
 ### Overview
 Fixed Allure report 404 errors in CI/CD and configured automatic GitHub Pages deployment. The root cause was that tests were running without the Allure listener being loaded, and results weren't being mounted from Docker containers. Now reports are fully populated and publicly accessible.
