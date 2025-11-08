@@ -1,5 +1,6 @@
 package com.cjs.qa.junit.tests;
 
+import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -11,6 +12,8 @@ import java.net.URL;
 /**
  * Simple TestNG test to verify Grid connection and basic Selenium functionality
  */
+@Epic("Selenium Grid Testing")
+@Feature("Basic Grid Tests")
 public class SimpleGridTest {
 
     private WebDriver driver;
@@ -39,16 +42,24 @@ public class SimpleGridTest {
     }
 
     @Test(priority = 1)
+    @Story("Grid Connection")
+    @Severity(SeverityLevel.BLOCKER)
+    @Description("Verify that connection to Selenium Grid is successful and driver is initialized")
     public void testGridConnection() {
         System.out.println("\n>>> Running testGridConnection");
+        Allure.step("Verify driver is not null");
         Assert.assertNotNull(driver, "Driver should be initialized");
         System.out.println("✅ Grid connection test PASSED\n");
     }
 
     @Test(priority = 2)
+    @Story("Basic Navigation")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Verify navigation to Google.com works correctly")
     public void testNavigateToGoogle() throws Exception {
         System.out.println("\n>>> Running testNavigateToGoogle");
         System.out.println("Navigating to Google...");
+        Allure.step("Navigate to Google.com");
         driver.get("https://www.google.com");
 
         String title = driver.getTitle();
@@ -59,9 +70,13 @@ public class SimpleGridTest {
     }
 
     @Test(priority = 3)
+    @Story("Basic Navigation")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Verify navigation to GitHub.com works correctly")
     public void testNavigateToGitHub() throws Exception {
         System.out.println("\n>>> Running testNavigateToGitHub");
         System.out.println("Navigating to GitHub...");
+        Allure.step("Navigate to GitHub.com");
         driver.get("https://github.com");
 
         String title = driver.getTitle();

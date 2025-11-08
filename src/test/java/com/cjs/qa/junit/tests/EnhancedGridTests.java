@@ -1,5 +1,6 @@
 package com.cjs.qa.junit.tests;
 
+import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +19,8 @@ import java.time.Duration;
 /**
  * Enhanced Grid tests demonstrating multi-browser support and advanced scenarios
  */
+@Epic("Selenium Grid Testing")
+@Feature("Enhanced Grid Tests")
 public class EnhancedGridTests {
 
     private WebDriver driver;
@@ -58,8 +61,12 @@ public class EnhancedGridTests {
     }
 
     @Test(priority = 1, description = "Verify Google homepage loads correctly")
+    @Story("Homepage Navigation")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Verify that Google homepage loads successfully and contains expected elements")
     public void testGoogleHomepage() {
         System.out.println(">>> Test: Google Homepage");
+        Allure.step("Navigate to Google homepage");
         driver.get("https://www.google.com");
 
         String title = driver.getTitle();
@@ -72,8 +79,12 @@ public class EnhancedGridTests {
     }
 
     @Test(priority = 2, description = "Perform a Google search and verify results")
+    @Story("Search Functionality")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Verify Google search functionality with proper waits and URL verification")
     public void testGoogleSearch() {
         System.out.println(">>> Test: Google Search");
+        Allure.step("Navigate to Google homepage");
         driver.get("https://www.google.com");
 
         String initialUrl = driver.getCurrentUrl();
@@ -81,10 +92,12 @@ public class EnhancedGridTests {
         // Find search box and enter search term
         WebElement searchBox = driver.findElement(By.name("q"));
         String searchTerm = "Selenium";
+        Allure.step("Enter search term: " + searchTerm);
         searchBox.sendKeys(searchTerm);
         System.out.println("Entered search term: " + searchTerm);
 
         // Submit search
+        Allure.step("Submit search");
         searchBox.sendKeys(Keys.RETURN);
 
         // Wait for URL to change (indicates search was performed)
@@ -102,8 +115,12 @@ public class EnhancedGridTests {
     }
 
     @Test(priority = 3, description = "Verify GitHub homepage and search")
+    @Story("Homepage Navigation")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Verify GitHub homepage loads and logo is present")
     public void testGitHubHomepage() {
         System.out.println(">>> Test: GitHub Homepage");
+        Allure.step("Navigate to GitHub homepage");
         driver.get("https://github.com");
 
         String title = driver.getTitle();
@@ -121,6 +138,9 @@ public class EnhancedGridTests {
     }
 
     @Test(priority = 4, description = "Test navigation between multiple sites")
+    @Story("Multi-Site Navigation")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Verify ability to navigate between multiple websites in same session")
     public void testMultiSiteNavigation() {
         System.out.println(">>> Test: Multi-Site Navigation");
 
@@ -144,8 +164,12 @@ public class EnhancedGridTests {
     }
 
     @Test(priority = 5, description = "Verify page load performance")
+    @Story("Performance Testing")
+    @Severity(SeverityLevel.MINOR)
+    @Description("Verify page loads within acceptable time limits (<10 seconds)")
     public void testPageLoadPerformance() {
         System.out.println(">>> Test: Page Load Performance");
+        Allure.step("Measure page load time");
 
         long startTime = System.currentTimeMillis();
         driver.get("https://www.google.com");
@@ -159,6 +183,9 @@ public class EnhancedGridTests {
     }
 
     @Test(priority = 6, description = "Test browser capabilities")
+    @Story("Browser Features")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Verify browser capabilities including JavaScript, cookies, and window management")
     public void testBrowserCapabilities() {
         System.out.println(">>> Test: Browser Capabilities");
 
@@ -182,7 +209,10 @@ public class EnhancedGridTests {
     }
 
     @Test(priority = 7, description = "Test form interaction")
-    public void testFormInteraction() throws InterruptedException {
+    @Story("Form Interactions")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Verify form field interactions including input, clear, and attribute validation")
+    public void testFormInteraction() {
         System.out.println(">>> Test: Form Interaction");
 
         driver.get("https://www.google.com");
@@ -203,6 +233,9 @@ public class EnhancedGridTests {
     }
 
     @Test(priority = 8, description = "Verify responsive design detection")
+    @Story("Responsive Design")
+    @Severity(SeverityLevel.MINOR)
+    @Description("Verify website works correctly at different viewport sizes")
     public void testResponsiveDesign() {
         System.out.println(">>> Test: Responsive Design");
 
