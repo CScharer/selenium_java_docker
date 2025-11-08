@@ -569,9 +569,6 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 					<parallel>methods</parallel>
 					<threadCount>5</threadCount>
 					<perCoreThreadCount>true</perCoreThreadCount>
-					<includes>
-						<include>**/RunCucumberTest.java</include>
-					</includes>
 					<systemPropertyVariables>
 						<cucumber.execution.parallel.enabled>true</cucumber.execution.parallel.enabled>
 						<cucumber.execution.parallel.config.strategy>fixed</cucumber.execution.parallel.config.strategy>
