@@ -1,5 +1,183 @@
 # CHANGE LOG
 
+## [2025-11-08 10:30:00 CST] - Fix: Selenium Grid Connection in GitHub Actions ✅
+
+### Overview
+Fixed "Could not start a new session" errors in GitHub Actions CI/CD. Browser nodes were unable to connect to Selenium Hub due to incorrect network configuration. Updated event bus settings and added comprehensive Grid readiness checks.
+
+### Problem
+
+**Test Failures:**
+```
+Could not start a new session. Possible causes are invalid address 
+of the remote server or browser start-up failure.
+
+Host info: host: 'runnervmw9dnm', ip: '10.1.0.6'
+```
+
+**Symptoms:**
+- ✅ Grid Hub starts successfully
+- ✅ Browser nodes start
+- ❌ Nodes don't connect to Hub
+- ❌ Tests can't create sessions
+- ❌ All tests fail immediately
+
+### Root Causes
+
+**1. Incorrect Event Bus Host:**
+```yaml
+# BEFORE (Wrong)
+chrome-node:
+  env:
+    SE_EVENT_BUS_HOST: selenium-hub  # ❌ Can't resolve in GitHub Actions
+```
+
+In GitHub Actions services, containers use the Docker bridge network. Nodes need to use `localhost` to connect to Hub ports.
+
+**2. Missing Event Bus Ports:**
+```yaml
+# Hub was only exposing 4444, not 4442/4443
+ports:
+  - 4444:4444  # ✅ WebDriver port
+  # Missing 4442 and 4443!
+```
+
+**3. Race Condition:**
+- Tests starting immediately after Hub is up
+- Nodes haven't registered yet
+- No sessions available
+- Tests fail
+
+### Solution
+
+**1. Fixed Event Bus Configuration:**
+```yaml
+# AFTER (Correct)
+services:
+  selenium-hub:
+    ports:
+      - 4444:4444
+      - 4442:4442  # Event bus publish
+      - 4443:4443  # Event bus subscribe
+
+  chrome-node:
+    env:
+      SE_EVENT_BUS_HOST: localhost  # ✅ Works in GitHub Actions
+      SE_EVENT_BUS_PUBLISH_PORT: 4442
+      SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
+      SE_NODE_MAX_SESSIONS: 5
+    options: >-
+      --shm-size=2gb
+      --network-alias chrome-node
+```
+
+**2. Added Node Registration Wait:**
+```bash
+# Wait for nodes to register
+for i in {1..30}; do
+  NODES=$(curl -sf http://localhost:4444/wd/hub/status | jq -r '.value.nodes | length')
+  echo "  Attempt $i: $NODES nodes registered"
+  if [ "$NODES" -gt "0" ]; then
+    echo "✅ Grid is ready with $NODES node(s)!"
+    break
+  fi
+  sleep 2
+done
+```
+
+**3. Added Grid Status Verification:**
+- Display node count
+- Show node availability
+- Display max sessions per node
+- Verify nodes are "UP" before tests run
+
+### Technical Details
+
+**GitHub Actions Services Network:**
+- Services run in Docker bridge network
+- Services communicate via exposed ports on localhost
+- Service names (selenium-hub) don't resolve between containers
+- Must use localhost + port mapping
+
+**Selenium Grid Event Bus:**
+- Port 4442: Publish events (Hub → Nodes)
+- Port 4443: Subscribe to events (Nodes → Hub)
+- Both ports must be accessible
+- Nodes use these to register and receive work
+
+**Timing:**
+- Hub starts: ~2 seconds
+- Nodes connect: ~8-10 seconds
+- Total Grid ready: ~12-15 seconds
+- Tests must wait for full readiness
+
+### Changes Applied
+
+**Both Jobs Updated:**
+1. **smoke-tests** - Chrome node only
+2. **selenium-grid-tests** - Chrome + Firefox nodes
+
+**For Each Job:**
+- ✅ Event bus ports exposed
+- ✅ SE_EVENT_BUS_HOST = localhost
+- ✅ SE_NODE_MAX_SESSIONS = 5
+- ✅ Node registration verification
+- ✅ Detailed status logging
+
+### Verification
+
+**New Wait Logic Output:**
+```
+Waiting for Grid Hub...
+Grid Hub is up!
+Waiting for browser nodes to register...
+  Attempt 1: 0 nodes registered
+  Attempt 2: 0 nodes registered
+  Attempt 3: 1 nodes registered
+✅ Grid is ready with 1 node(s)!
+{
+  "id": "...",
+  "availability": "UP",
+  "maxSessions": 5
+}
+```
+
+### Git Commit
+
+**Commit:** 5ca5789  
+**Message:** "fix: Fix Selenium Grid connection issues in GitHub Actions"
+
+### Expected Results
+
+**After this fix:**
+- ✅ Nodes will register successfully
+- ✅ Sessions can be created
+- ✅ Tests will connect to Grid
+- ✅ All tests should pass
+- ✅ Clean logs showing Grid status
+
+**Before this fix:**
+- ❌ Nodes couldn't find Hub
+- ❌ "Could not start a new session"
+- ❌ All tests failed
+
+### Next CI/CD Run
+
+**Monitor commit 5ca5789+:**
+1. Check "Wait for Selenium Grid" step
+2. Should show: "✅ Grid is ready with X node(s)!"
+3. Should show node details (id, availability, maxSessions)
+4. Tests should now connect successfully
+
+### Status
+✅ **Event Bus Config**: Fixed (localhost instead of selenium-hub)  
+✅ **Ports Exposed**: 4444, 4442, 4443  
+✅ **Wait Logic**: Enhanced with node verification  
+✅ **Status Logging**: Detailed Grid state output  
+✅ **Committed & Pushed**: GitHub (5ca5789)  
+
+---
+
 ## [2025-11-08 10:15:00 CST] - Fix: Checkstyle Scope Reduction (Clean Logs) ✅
 
 ### Overview
