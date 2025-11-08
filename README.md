@@ -2,12 +2,12 @@
 
 ![CI Pipeline](https://github.com/CScharer/selenium_java_docker/workflows/Selenium%20Grid%20CI%2FCD%20Pipeline/badge.svg)
 [![Tests](https://img.shields.io/badge/tests-11%2F11%20passing-brightgreen)](https://github.com/CScharer/selenium_java_docker/actions)
+[![Allure Report](https://img.shields.io/badge/📊_Allure-Report-orange.svg)](https://cscharer.github.io/selenium_java_docker/)
 [![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://www.oracle.com/java/)
 [![Selenium](https://img.shields.io/badge/Selenium-4.26.0-green.svg)](https://www.selenium.dev/)
 [![Cucumber](https://img.shields.io/badge/Cucumber-7.20.1-brightgreen.svg)](https://cucumber.io/)
 [![Maven](https://img.shields.io/badge/Maven-3.9.11-blue.svg)](https://maven.apache.org/)
 [![Docker](https://img.shields.io/badge/Docker-ready-blue.svg)](https://www.docker.com/)
-[![Allure](https://img.shields.io/badge/Reporting-Allure-orange.svg)](https://docs.qameta.io/allure/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Security](https://img.shields.io/badge/Security-Google%20Cloud-blue.svg)](https://cloud.google.com/secret-manager)
 
@@ -759,6 +759,7 @@ cp XML/UserSettings.xml.template XML/UserSettings.xml
 - Beautiful HTML dashboards with graphs
 - Epic/Feature/Story organization
 - Historical trend tracking
+- **📊 [View Latest Report](https://cscharer.github.io/selenium_java_docker/)** - Public GitHub Pages
 
 **✅ GitHub Actions CI/CD Pipeline**
 - Automated testing on every push

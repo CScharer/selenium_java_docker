@@ -7,6 +7,9 @@ on:
     branches: [ main, develop ]
   workflow_dispatch:
 
+permissions:
+  contents: write  # Required for GitHub Pages deployment
+
 env:
   JAVA_VERSION: '17'
   MAVEN_OPTS: -Xmx2048m
@@ -184,19 +187,31 @@ jobs:
           path: allure-report/
           retention-days: 30
       
-      - name: Upload Info
+      - name: Deploy to GitHub Pages
+        if: always() && github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
+          keep_files: false
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+      
+      - name: Report Info
         if: always()
         run: |
           echo "📊 Allure Report Generated!"
           echo ""
-          echo "Download the 'allure-report' artifact to view:"
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "🌐 View online report at:"
+            echo "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+            echo ""
+          fi
+          echo "📥 Or download the 'allure-report' artifact:"
           echo "1. Go to this workflow run"
           echo "2. Scroll to Artifacts section"
           echo "3. Click 'allure-report' to download"
           echo "4. Extract and open index.html"
-          echo ""
-          echo "To enable GitHub Pages for public reports:"
-          echo "Settings → Pages → Deploy from branch → gh-pages"
 
   code-quality:
     name: Code Quality Analysis
