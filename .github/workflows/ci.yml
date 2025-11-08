@@ -135,12 +135,18 @@ jobs:
           merge-multiple: true
 
       - name: Get Allure history
-        uses: actions/checkout@v4
         if: always()
         continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
+        run: |
+          git fetch origin gh-pages:gh-pages || echo "gh-pages branch does not exist yet"
+          if git show-ref --verify --quiet refs/heads/gh-pages; then
+            git checkout gh-pages
+            mkdir -p ../gh-pages
+            cp -r . ../gh-pages/ || true
+            git checkout -
+          else
+            echo "No gh-pages branch yet, skipping history"
+          fi
 
       - name: Install Allure CLI
         if: always()
@@ -156,8 +162,11 @@ jobs:
         continue-on-error: true
         run: |
           mkdir -p allure-results/history
-          if [ -d "gh-pages/allure-report/history" ]; then
-            cp -r gh-pages/allure-report/history/* allure-results/history/
+          if [ -d "../gh-pages/allure-report/history" ]; then
+            cp -r ../gh-pages/allure-report/history/* allure-results/history/ || true
+            echo "✅ History copied from previous reports"
+          else
+            echo "ℹ️  No history available (first run or gh-pages not set up)"
           fi
       
       - name: Generate Allure Report
@@ -177,11 +186,24 @@ jobs:
 
       - name: Deploy to GitHub Pages
         if: github.ref == 'refs/heads/main'
+        continue-on-error: true
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: allure-report
           destination_dir: allure-report
+          
+      - name: Comment on GitHub Pages setup
+        if: github.ref == 'refs/heads/main' && failure()
+        run: |
+          echo "ℹ️  GitHub Pages deployment may have failed"
+          echo "To enable GitHub Pages:"
+          echo "1. Go to Settings → Pages"
+          echo "2. Source: Deploy from a branch"
+          echo "3. Branch: gh-pages / root"
+          echo "4. Save"
+          echo ""
+          echo "Allure report is still available as an artifact!"
 
   code-quality:
     name: Code Quality Analysis
