@@ -171,16 +171,39 @@ jobs:
       - name: Prepare Allure results
         if: always()
         run: |
-          echo "Checking downloaded artifacts..."
+          echo "=== Downloaded Artifacts Structure ==="
           ls -la test-results/
+          echo ""
           
-          echo "Merging allure-results from all browsers..."
+          echo "=== Checking each artifact contents ==="
+          for dir in test-results/*/; do
+            echo "Contents of $dir:"
+            ls -la "$dir" || true
+            echo ""
+          done
+          
+          echo "=== Finding allure-results directories ==="
+          find test-results -name "allure-results" -type d
+          echo ""
+          
+          echo "=== Finding all JSON files directly ==="
+          find test-results -name "*-result.json" | head -20
+          echo ""
+          
+          echo "=== Merging allure-results from all browsers ==="
           mkdir -p allure-results
-          find test-results -name "allure-results" -type d -exec cp -r {}/* allure-results/ \; || true
           
-          echo "Allure results after merge:"
+          # Copy all *-result.json and related files directly
+          find test-results -name "*-result.json" -exec cp {} allure-results/ \; 2>&1 || true
+          find test-results -name "*-container.json" -exec cp {} allure-results/ \; 2>&1 || true
+          find test-results -name "*-attachment.*" -exec cp {} allure-results/ \; 2>&1 || true
+          
+          echo ""
+          echo "=== Allure results after merge ==="
           ls -la allure-results/
-          find allure-results -type f | head -20
+          echo ""
+          echo "=== Total files merged ==="
+          find allure-results -type f | wc -l
       
       - name: Install Allure CLI
         if: always()
