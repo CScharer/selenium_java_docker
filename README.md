@@ -1,7 +1,7 @@
 # CJS QA Automation Framework
 
 ![CI Pipeline](https://github.com/CScharer/selenium_java_docker/workflows/Selenium%20Grid%20CI%2FCD%20Pipeline/badge.svg)
-[![Tests](https://img.shields.io/badge/tests-16%20total%20(5%20smoke%20%2B%2011%20full)-brightgreen)](https://github.com/CScharer/selenium_java_docker/actions)
+[![Tests](https://img.shields.io/badge/tests-46%20total%20(5%20smoke%20%2B%2011%20full%20%2B%2030%20extended)-brightgreen)](https://github.com/CScharer/selenium_java_docker/actions)
 [![Allure Report](https://img.shields.io/badge/📊_Allure-Report-orange.svg)](https://cscharer.github.io/selenium_java_docker/)
 [![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://www.oracle.com/java/)
 [![Selenium](https://img.shields.io/badge/Selenium-4.26.0-green.svg)](https://www.selenium.dev/)
@@ -37,17 +37,18 @@ A comprehensive Selenium-based test automation framework supporting **30+ test s
 ## ✨ Features
 
 ### Core Capabilities
-- 🎯 **30+ Test Suites** - Comprehensive coverage across multiple domains
+- 🎯 **46 Test Scenarios** - Smoke (5) + Full (11) + Extended (30)
+- 📊 **Extended Coverage** - Data-driven, negative tests, advanced features
 - 🔐 **Secure Credential Management** - Google Cloud Secret Manager integration (0 hardcoded passwords!)
 - ⚡ **Smoke Test Suite** - Fast critical path verification in < 2 minutes
-- 🚀 **Parallel Execution** - Native parallel test support (5 threads)
+- 🚀 **Parallel Execution** - Native parallel test support (3-5 threads)
 - 🌐 **Multi-Browser Support** - Chrome, Firefox, Edge with Selenium Grid
 - 📊 **Beautiful Reports** - Allure reports with automatic screenshot capture
 - 🐳 **Fully Containerized** - Docker + Docker Compose with 3 environments
 - 🤖 **CI/CD Automated** - GitHub Actions pipeline with fail-fast smoke tests
 - 🎨 **Page Object Model** - Clean, maintainable test architecture
 - 📸 **Visual Evidence** - Screenshots on every test (success & failure)
-- 🎯 **16 Working Tests** - 100% passing rate with Grid integration
+- 🧪 **Professional Testing** - Log4j 2, Allure, TestNG data providers
 
 ### Modern Technology Stack
 - **Java 17** - Latest LTS version
@@ -62,6 +63,7 @@ A comprehensive Selenium-based test automation framework supporting **30+ test s
 - **JUnit 4 & TestNG** - Flexible test execution
 
 ### Recent Improvements (November 8, 2025)
+- ✅ **Extended Test Coverage** - 46 total tests with data-driven, negative & advanced scenarios
 - ✅ **Log4j 2 Logging** - Professional structured logging with rotation & archiving
 - ✅ **Code Quality Tools** - Checkstyle, SpotBugs, PMD automated analysis
 - ✅ **Smoke Test Suite** - 5 fast tests for critical path verification (< 2 min)
@@ -69,7 +71,7 @@ A comprehensive Selenium-based test automation framework supporting **30+ test s
 - ✅ **Allure Reporting** - Beautiful HTML reports with automatic screenshots
 - ✅ **GitHub Pages** - Public test reports at https://cscharer.github.io/selenium_java_docker/
 - ✅ **GitHub Actions CI/CD** - Automated testing with fail-fast strategy
-- ✅ **16 Working Tests** - SmokeTests (5) + SimpleGridTest (3) + EnhancedGridTests (8)
+- ✅ **46 Working Tests** - Smoke (5) + Full (11) + Extended (30)
 - ✅ **Screenshot Capture** - Visual evidence for every test execution
 - ✅ **Multi-Browser** - Matrix testing across Chrome & Firefox
 - ✅ **Google Cloud Secrets** - 43 passwords secured (0 hardcoded!)
@@ -234,6 +236,39 @@ docker-compose down
 - ✅ Checks search functionality
 - ✅ Validates form interaction
 - ✅ Fast feedback (< 2 min vs 15+ min full suite)
+
+### Extended Test Suite (📊 30+ scenarios)
+
+Comprehensive testing with data-driven, negative, and advanced tests:
+
+```bash
+# Run all extended tests
+docker-compose up -d selenium-hub chrome-node-1
+docker-compose run --rm tests -DsuiteXmlFile=testng-extended-suite.xml
+docker-compose down
+```
+
+**What it includes:**
+
+**Data-Driven Tests (19 scenarios):**
+- ✅ Multiple search queries (5 data sets)
+- ✅ Website accessibility (5 sites)
+- ✅ Edge case inputs (4 scenarios)
+
+**Negative Tests (7 scenarios):**
+- ✅ Non-existent element handling
+- ✅ Invalid URL navigation
+- ✅ Timeout handling
+- ✅ Error recovery
+- ✅ Stale element handling
+
+**Advanced Features (7 scenarios):**
+- ✅ JavaScript execution
+- ✅ Cookie management
+- ✅ Window management
+- ✅ Keyboard actions
+- ✅ Browser navigation
+- ✅ Performance metrics
 
 ### Using Helper Scripts (Recommended)
 
