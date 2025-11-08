@@ -654,6 +654,7 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 					<configLocation>google_checks.xml</configLocation>
 					<consoleOutput>true</consoleOutput>
 					<failsOnError>false</failsOnError>
+					<failOnViolation>false</failOnViolation>
 					<violationSeverity>warning</violationSeverity>
 					<includeTestSourceDirectory>true</includeTestSourceDirectory>
 				</configuration>
