@@ -47,4 +47,3 @@ chmod +x scripts/*.sh
 ## Using Maven Wrapper
 
 All scripts use `./mvnw` (Maven wrapper) instead of `mvn`. This ensures everyone uses the same Maven version without needing to install Maven separately.
-

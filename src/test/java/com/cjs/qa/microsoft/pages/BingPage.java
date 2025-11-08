@@ -1,0 +1,308 @@
+package com.cjs.qa.microsoft.pages;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import com.cjs.qa.core.Environment;
+import com.cjs.qa.core.QAException;
+import com.cjs.qa.jdbc.JDBC;
+import com.cjs.qa.microsoft.MicrosoftEnvironment;
+import com.cjs.qa.selenium.Page;
+import com.cjs.qa.utilities.Constants;
+import com.cjs.qa.utilities.IExtension;
+import com.cjs.qa.utilities.JavaHelpers;
+
+public class BingPage extends Page
+{
+	/**
+	 * @param webDriver
+	 */
+	public BingPage(WebDriver webDriver)
+	{
+		super(webDriver);
+	}
+
+	public static int			SEARCH_WAIT_TIME	= 1;
+	// public static int SEARCHES_MIN = 34;
+	public static By			bySearch			= By.xpath(".//*[@id='sb_form_go']");
+	public static By			bycurrentPoints		= By.xpath(".//*[@id='id_rc']");
+	static int					currentPoints		= -1;
+	private int					SEARCH				= 1;
+	private static int			searchesMade		= 0;
+	private static List<String>	wordsList			= null;
+
+	public static int getSearchesMade()
+	{
+		return searchesMade;
+	}
+
+	public static void setSearchesMade(int searchesMade)
+	{
+		BingPage.searchesMade = searchesMade;
+	}
+
+	public static List<String> getWordsList()
+	{
+		return wordsList;
+	}
+
+	public static void setWordsList(List<String> wordsList)
+	{
+		Environment.sysOut(Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
+		List<String> wordsListNew = new ArrayList<>();
+		for (String word : wordsList)
+		{
+			word = word.replaceAll(Constants.SYMBOL_TRADEMARK, "");
+			wordsListNew.add(word);
+		}
+		BingPage.wordsList = wordsListNew;
+	}
+
+	/**
+	 * @param browseForAnHour
+	 */
+	public void searchRandomSites(boolean browseForAnHour) throws QAException
+	{
+		Environment.sysOut(Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
+		final boolean SELECT_LINK = false;
+		final double PROCESS_TIME_HOURS = 0.05;
+		final double PROCESS_TIME_MILLISECONDS = (PROCESS_TIME_HOURS * 60 * 60 * 1000);
+		final int WORD_LIMIT = 100;
+		boolean searchRequired = false;
+		int currentPoints = 0;
+		int search = 1;
+		String searchValue = "";
+		SEARCH = SEARCH * -1;
+		if (SEARCH == 1)
+		{
+			searchValue = "http://www.bing" + IExtension.COM + "/search?q=search+";
+		} else
+		{
+			searchValue = "http://www.bing" + IExtension.COM + "/search?q=";
+		}
+		String url;
+		if (browseForAnHour)
+		{
+			final JDBC jdbc = new JDBC("", "QAAuto");
+			final List<String> badHREFList = Arrays
+					.asList("search?;javascript:void(0);=;javascript:void(0);#))]".split(Constants.DELIMETER_LIST));
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append("SELECT * ");
+			stringBuilder.append("FROM [t_WordDictionary] [w] ");
+			stringBuilder.append("WHERE LENGTH([w].[Word])>=4 ");
+			stringBuilder.append("AND [w].[Word] NOT IN(");
+			stringBuilder.append("SELECT * ");
+			stringBuilder.append("FROM [t_WordsUsed]) ");
+			stringBuilder.append("ORDER BY RANDOM() LIMIT " + WORD_LIMIT);
+			setWordsList(jdbc.queryResultsList(stringBuilder.toString(), false));
+			final long startTime = System.currentTimeMillis();
+			long elapsedTimeMilliseconds = 0;
+			do
+			{
+				url = searchValue + String.valueOf(search);
+				if (getWordsList().size() >= search)
+				{
+					String word = getWordsList().get(search - 1).replaceAll(Constants.SYMBOL_TRADEMARK, "");
+					if (!word.equals(""))
+					{
+						url = searchValue + word;
+					}
+				}
+				search(url);
+				search++;
+				setSearchesMade(search);
+				currentPoints = getCurrentPoints(search, currentPoints);
+				if (SELECT_LINK)
+				{
+					clickFirstLink(".//*[@id='b_results']//a[not(contains(@href,'search?'))]", badHREFList);
+				}
+				elapsedTimeMilliseconds = (System.currentTimeMillis() - startTime);
+				final double percentCompleteNumber = (elapsedTimeMilliseconds / PROCESS_TIME_MILLISECONDS);
+				final String percentCompleteString = JavaHelpers.formatNumber(percentCompleteNumber, "##0.00%");
+				MicrosoftEnvironment.sysOut("percentCompleteString:[" + percentCompleteString
+						+ "], elapsedTimeMilliseconds:[" + elapsedTimeMilliseconds + "]");
+				searchRequired = (BingPage.currentPoints != currentPoints && search < RewardsPage.SEARCHES_MIN
+						|| elapsedTimeMilliseconds <= PROCESS_TIME_MILLISECONDS);
+			} while (searchRequired);
+		} else
+		{
+			do
+			{
+				search++;
+				url = searchValue + String.valueOf(search);
+				search(url);
+				currentPoints = getCurrentPoints(search, currentPoints);
+				searchRequired = (BingPage.currentPoints != currentPoints || search < RewardsPage.SEARCHES_MIN);
+			} while (searchRequired);
+		}
+	}
+
+	private int getCurrentPoints(int search, int currentPoints)
+	{
+		Environment.sysOut(Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
+		if (BingPage.currentPoints != currentPoints)
+		{
+			BingPage.currentPoints = currentPoints;
+		}
+		objectExistsRefresh(bySearch, 5, 3);
+		WebElement webElement = webDriver.findElement(bySearch);
+		hoverObject(bySearch);
+		String text = "Rewards";
+		if (objectExists(bycurrentPoints, 1))
+		{
+			webElement = webDriver.findElement(bycurrentPoints);
+			hoverObject(bycurrentPoints);
+			text = webElement.getText();
+		}
+		if (text != null)
+		{
+			if (!text.equals("Rewards"))
+			{
+				currentPoints = Integer.valueOf(text);
+			} else
+			{
+				currentPoints += RewardsPage.POINTS_PER_SEACH_PC;
+				Environment.sysOut("Rewards Points Not Showing");
+				if (search >= RewardsPage.SEARCHES_MIN)
+				{
+					BingPage.currentPoints = currentPoints;
+				}
+			}
+		}
+		Environment.sysOut("search:[" + search + "], BingPage.currentPoints:[" + BingPage.currentPoints
+				+ "], currentPoints:[" + currentPoints + "]");
+		return currentPoints;
+	}
+
+	/**
+	 * @param xpathLinks
+	 * @param badHREFList
+	 */
+	public void clickFirstLink(String xpathLinks, List<String> badHREFList) throws QAException
+	{
+		Environment.sysOut(Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
+		final By links = By.xpath(xpathLinks);
+		final List<WebElement> searchLinks = webDriver.findElements(links);
+		if (searchLinks.isEmpty())
+		{
+			return;
+		}
+		WebElement webElement = null;
+		String href = null;
+		for (final WebElement element : searchLinks)
+		{
+			href = element.getAttribute("href");
+			boolean hrefBad = false;
+			for (final String badHREF : badHREFList)
+			{
+				if (href.toLowerCase().contains(badHREF.toLowerCase()))
+				{
+					hrefBad = true;
+					break;
+				}
+			}
+			if (!hrefBad)
+			{
+				webElement = element;
+				break;
+			}
+		}
+		Environment.sysOut("webElement:[" + webElement.getAttribute("tagName") + "], href:[" + href + "]");
+		try
+		{
+			clickObject(webElement);
+		} catch (final Exception e)
+		{
+			Environment.sysOut(e.getMessage());
+		}
+		search(href);
+	}
+
+	/**
+	 * @param url
+	 */
+	private void search(String url) throws QAException
+	{
+		Environment.sysOut(Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
+		MicrosoftEnvironment.sysOut("Searching:[" + url + "]");
+		webDriver.get(url);
+		sleep(SEARCH_WAIT_TIME);
+		// By audioSound = By.xpath(".//audio[@data-dobid='aud']/../input")
+		// By audioSound = By.xpath("*//span[@jsaction='dob.p']")
+		By audioSound = By.xpath("*//div[@data-type='audioplay']");
+		if (objectExists(audioSound, SEARCH_WAIT_TIME))
+		{
+			clickObject(audioSound);
+			sleep(Long.valueOf(SEARCH_WAIT_TIME * 3));
+			scrollToTop();
+		}
+	}
+
+	public void searchVivitSites() throws QAException
+	{
+		Environment.sysOut(Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
+		final String URL_VIVIT = "http://www.vivit-worldwide.org";
+		final String URL_VIVIT_YM = "https://vivitworldwide.site-ym";
+		final String LUGS = URL_VIVIT + "/?page=LocalUserGroups";
+		final String SIGS = URL_VIVIT + "/?page=SIGS";
+		final By lugLinks = By.xpath(".//*[@id='CustomPageBody']//a");
+		final By sigLinks = By.xpath(".//*[@id='CustomPageBody']//a");
+		maximizeWindow();
+		final List<String> urls = Arrays.asList(URL_VIVIT_YM + IExtension.COM + "/",
+				URL_VIVIT_YM + IExtension.COM + "/?page=board", URL_VIVIT_YM + IExtension.COM + "/staff/",
+				URL_VIVIT_YM + IExtension.COM + "/?page=Volunteer",
+				"http://c.ymcdn" + IExtension.COM
+						+ "/sites/www.vivit-worldwide.org/resource/resmgr/docs/2017_VivitMemberBrochure"
+						+ IExtension.PDF,
+				URL_VIVIT_YM + IExtension.COM + "/?page=HallofFame");
+		for (final String url : urls)
+		{
+			MicrosoftEnvironment.sysOut("Searching:[" + url + "]");
+			webDriver.get(url);
+			sleep(SEARCH_WAIT_TIME);
+		}
+		webDriver.get(LUGS);
+		sleep(5);
+		List<WebElement> links = webDriver.findElements(lugLinks);
+		for (int index = 0; index < links.size(); index++)
+		{
+			final WebElement element = links.get(index);
+			final String url = element.getAttribute("href");
+			MicrosoftEnvironment.sysOut("Clicking:[" + url + "]");
+			clickObject(element);
+			sleep(SEARCH_WAIT_TIME);
+			tabCloseExtras();
+			if (index < links.size())
+			{
+				webDriver.get(LUGS);
+				sleep(5);
+				links = webDriver.findElements(lugLinks);
+			}
+		}
+		webDriver.get(SIGS);
+		sleep(5);
+		links = webDriver.findElements(sigLinks);
+		for (int index = 0; index < links.size(); index++)
+		{
+			final WebElement element = links.get(index);
+			final String url = element.getAttribute("href");
+			MicrosoftEnvironment.sysOut("Clicking:[" + url + "]");
+			clickObject(element);
+			sleep(SEARCH_WAIT_TIME);
+			tabCloseExtras();
+			if (index < links.size())
+			{
+				webDriver.get(SIGS);
+				sleep(5);
+				webDriver.findElements(sigLinks);
+			}
+		}
+		// http://www.vivit-worldwide.org/?page=LocalUserGroups
+		// minimizeWindow()
+	}
+}

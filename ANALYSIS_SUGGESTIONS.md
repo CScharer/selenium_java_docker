@@ -1,9 +1,9 @@
 # Action Plan: Making the Project 100% Better
 ## CJS QA Automation Framework - Implementation Checklist
 
-**Created**: November 8, 2025  
-**Last Updated**: November 8, 2025  
-**Target Completion**: 8-12 weeks  
+**Created**: November 8, 2025
+**Last Updated**: November 8, 2025
+**Target Completion**: 8-12 weeks
 **Status**: 🚀 In Progress - Phase 1 Complete!
 
 ---
@@ -40,11 +40,11 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
 - ✅ All changes tested, committed, and pushed to GitHub
 - ✅ **Security Status**: CRITICAL → SECURE
 
-**Time Taken**: 3 hours (estimated 5-8 days - completed much faster!)  
-**Files Modified**: 16  
-**Lines Changed**: 6,480+ lines  
-**Secrets Created**: 43 in Google Cloud Secret Manager  
-**Build Status**: ✅ SUCCESS (397 files compiled)  
+**Time Taken**: 3 hours (estimated 5-8 days - completed much faster!)
+**Files Modified**: 16
+**Lines Changed**: 6,480+ lines
+**Secrets Created**: 43 in Google Cloud Secret Manager
+**Build Status**: ✅ SUCCESS (397 files compiled)
 **Tests**: ✅ PASSED (Integration verified)
 
 **See**: `INTEGRATION_COMPLETE.md` for full details
@@ -63,9 +63,9 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
 
 <a name="phase-1"></a>
 ## ✅ PHASE 1: SECURITY & CRITICAL FIXES (Week 1-2) - COMPLETE!
-**Priority**: CRITICAL  
-**Status**: ✅ **COMPLETED - November 8, 2025**  
-**Actual Time**: 3 hours (faster than estimated 5-8 days!)  
+**Priority**: CRITICAL
+**Status**: ✅ **COMPLETED - November 8, 2025**
+**Actual Time**: 3 hours (faster than estimated 5-8 days!)
 **Result**: All 43 passwords migrated, 0 hardcoded credentials remain
 
 ### Step 1.1: Audit & Document Current Credentials ✅ COMPLETE
@@ -131,17 +131,17 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   ```bash
   gcloud iam service-accounts create test-automation \
     --display-name="Test Automation Service Account"
-  
+
   gcloud projects add-iam-policy-binding cscharer \
     --member="serviceAccount:test-automation@cscharer.iam.gserviceaccount.com" \
     --role="roles/secretmanager.secretAccessor"
-  
+
   gcloud iam service-accounts keys create test-automation-key.json \
     --iam-account=test-automation@cscharer.iam.gserviceaccount.com
   ```
 
 ### Step 1.3: Migrate Passwords to Secret Manager ✅ COMPLETE
-**Goal**: Move all credentials to secure storage  
+**Goal**: Move all credentials to secure storage
 **Result**: 43/43 secrets created successfully in 84 seconds
 
 - [x] **1.3.1** Create secrets for EPasswords enum values:
@@ -168,24 +168,24 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   ```bash
   # Create file: src/test/java/com/cjs/qa/utilities/SecureConfig.java
   ```
-  
+
   ```java
   package com.cjs.qa.utilities;
-  
+
   import com.cjs.qa.utilities.GoogleCloud;
   import java.io.IOException;
   import java.util.HashMap;
   import java.util.Map;
-  
+
   public class SecureConfig {
       private static final String PROJECT_ID = "cscharer";
       private static final Map<String, String> cache = new HashMap<>();
-      
+
       public static String getPassword(String key) {
           if (cache.containsKey(key)) {
               return cache.get(key);
           }
-          
+
           try {
               String value = GoogleCloud.getKeyValue(PROJECT_ID, key);
               cache.put(key, value);
@@ -194,7 +194,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
               throw new RuntimeException("Failed to fetch secret: " + key, e);
           }
       }
-      
+
       public static void clearCache() {
           cache.clear();
       }
@@ -204,9 +204,9 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
 - [x] **1.3.3** Update EPasswords.java to use SecureConfig:
   ```java
   package com.cjs.qa.core.security;
-  
+
   import com.cjs.qa.utilities.SecureConfig;
-  
+
   public enum EPasswords {
       BTSROBOT("BTSROBOT_PASSWORD"),
       BTSROBOT_00("BTSROBOT_00_PASSWORD"),
@@ -226,13 +226,13 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
       UNITED_SECURITY_QUESTIONS("UNITED_SECURITY_QUESTIONS"),
       UNITED_SECURITY_ANSWERS("UNITED_SECURITY_ANSWERS"),
       VIVIT("VIVIT_PASSWORD");
-      
+
       private final String secretKey;
-      
+
       private EPasswords(String secretKey) {
           this.secretKey = secretKey;
       }
-      
+
       public String getValue() {
           return SecureConfig.getPassword(this.secretKey);
       }
@@ -244,10 +244,10 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   # Create migration script
   cat > migrate_companies.sh << 'EOF'
   #!/bin/bash
-  
+
   # Extract passwords from Companies.xml and create secrets
   # Format: COMPANY_CODE_PASSWORD
-  
+
   grep -A1 "<Password>" XML/Companies.xml | grep -v "^--$" | \
   while IFS= read -r line; do
       if [[ $line == *"<Password>"* ]]; then
@@ -258,7 +258,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
       fi
   done
   EOF
-  
+
   chmod +x migrate_companies.sh
   ./migrate_companies.sh
   ```
@@ -286,13 +286,13 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   ```
 
 ### Step 1.4: Update .gitignore & Remove Secrets ✅ COMPLETE
-**Goal**: Prevent future credential leaks  
+**Goal**: Prevent future credential leaks
 **Result**: 100+ protection rules added, 4 sensitive files protected
 
 - [x] **1.4.1** Update .gitignore:
   ```gitignore
   # Add to .gitignore
-  
+
   # Sensitive Configuration Files
   XML/Companies.xml
   XML/UserSettings.xml
@@ -304,26 +304,26 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   .env.*.local
   secrets/
   *-key.json
-  
+
   # Secret Manager service account keys
   *-sa-key.json
   test-automation-key.json
-  
+
   # Local configuration overrides
   application-local.yml
   application-local.properties
-  
+
   # WebDriver binaries
   src/test/resources/Drivers/*.exe
   src/test/resources/Drivers/chromedriver
   src/test/resources/Drivers/geckodriver
   src/test/resources/Drivers/msedgedriver
-  
+
   # Test data that might contain PII
   Data/RESULTS.xls
   Data/*.db
   Data/*.sqlite
-  
+
   # IDE-specific sensitive files
   .idea/dataSources.xml
   .idea/dataSources.local.xml
@@ -349,22 +349,22 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   ```bash
   cat > XML/README.md << 'EOF'
   # Configuration Files
-  
+
   ## Setup Instructions
-  
+
   1. Copy template files:
      ```bash
      cp Companies.xml.template Companies.xml
      cp UserSettings.xml.template UserSettings.xml
      ```
-  
+
   2. Configure Google Cloud credentials:
      ```bash
      gcloud auth application-default login
      ```
-  
+
   3. Passwords are fetched from Google Cloud Secret Manager automatically.
-  
+
   ## DO NOT commit these files:
   - Companies.xml
   - UserSettings.xml
@@ -375,7 +375,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
 ### Step 1.5: Purge Git History (OPTIONAL - Not Yet Done)
 **Goal**: Remove credentials from git history
 
-⚠️ **WARNING**: This rewrites git history. Coordinate with team!  
+⚠️ **WARNING**: This rewrites git history. Coordinate with team!
 **Status**: 🟡 OPTIONAL - Current code is secure, history cleanup can be done later
 
 - [ ] **1.5.1** Create full backup first:
@@ -390,7 +390,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   ```bash
   # macOS
   brew install bfg
-  
+
   # Or download manually
   wget https://repo1.maven.org/maven2/com/madgag/bfg/1.14.0/bfg-1.14.0.jar
   ```
@@ -415,7 +415,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   ```bash
   # Remove passwords from all history
   bfg --replace-text passwords_to_remove.txt
-  
+
   # Or using git filter-branch
   git filter-branch --force --index-filter \
     "git rm --cached --ignore-unmatch XML/Companies.xml XML/UserSettings.xml" \
@@ -441,9 +441,9 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   # Send this message to team:
   cat > TEAM_NOTIFICATION.md << 'EOF'
   # IMPORTANT: Repository History Rewrite
-  
+
   We've removed sensitive data from git history. You MUST:
-  
+
   1. Commit and push any outstanding changes NOW
   2. Delete your local repository
   3. Clone fresh from remote:
@@ -451,23 +451,23 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
      git clone [repository-url]
      ```
   4. Follow XML/README.md to configure credentials
-  
+
   DO NOT try to merge/rebase old branches!
   EOF
   ```
 
 ### Step 1.6: Security Validation ✅ COMPLETE
-**Goal**: Confirm no secrets remain  
+**Goal**: Confirm no secrets remain
 **Result**: All verification checks passed
 
 - [x] **1.6.1** Run security scan:
   ```bash
   # Install trufflehog
   brew install trufflehog
-  
+
   # Scan for secrets
   trufflehog filesystem . --json > security_scan.json
-  
+
   # Or use gitleaks
   brew install gitleaks
   gitleaks detect --source . --report-path gitleaks-report.json
@@ -499,8 +499,8 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
 
 <a name="phase-2"></a>
 ## 🟠 PHASE 2: DOCKER & INFRASTRUCTURE (Week 3-4)
-**Priority**: HIGH  
-**Estimated Time**: 7-10 days  
+**Priority**: HIGH
+**Estimated Time**: 7-10 days
 **Prerequisites**: Phase 1 complete
 
 ### Step 2.1: Docker Implementation (2 days)
@@ -511,38 +511,38 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   # Multi-stage build
   FROM maven:3.9.9-eclipse-temurin-17-alpine AS build
   WORKDIR /app
-  
+
   # Copy dependency files first (for caching)
   COPY pom.xml .
   RUN mvn dependency:go-offline -B
-  
+
   # Copy source and build
   COPY src ./src
   RUN mvn clean package -DskipTests
-  
+
   # Runtime image
   FROM eclipse-temurin:17-jre-alpine
   WORKDIR /app
-  
+
   # Install Chrome and ChromeDriver
   RUN apk add --no-cache \
       chromium \
       chromium-chromedriver \
       firefox-esr \
       && rm -rf /var/cache/apk/*
-  
+
   # Copy application
   COPY --from=build /app/target/*.jar app.jar
   COPY --from=build /app/target/test-classes ./test-classes
   COPY Configurations ./Configurations
   COPY Data ./Data
   COPY XML/*.xml.template ./XML/
-  
+
   # Set environment variables
   ENV CHROME_BIN=/usr/bin/chromium-browser
   ENV CHROMEDRIVER=/usr/bin/chromedriver
   ENV FIREFOX_BIN=/usr/bin/firefox-esr
-  
+
   # Run tests
   CMD ["java", "-cp", "app.jar:test-classes", "org.junit.runner.JUnitCore", "com.cjs.qa.junit.tests.Scenarios"]
   EOF
@@ -571,7 +571,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   ```bash
   cat > docker-compose.yml << 'EOF'
   version: '3.8'
-  
+
   services:
     selenium-hub:
       image: selenium/hub:4.26.0
@@ -589,7 +589,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
         interval: 10s
         timeout: 5s
         retries: 5
-  
+
     chrome:
       image: selenium/node-chrome:4.26.0
       depends_on:
@@ -605,7 +605,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
         - /dev/shm:/dev/shm
       deploy:
         replicas: 2
-  
+
     firefox:
       image: selenium/node-firefox:4.26.0
       depends_on:
@@ -618,7 +618,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
         - SE_NODE_MAX_SESSIONS=5
       deploy:
         replicas: 1
-  
+
     edge:
       image: selenium/node-edge:4.26.0
       depends_on:
@@ -631,7 +631,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
         - SE_NODE_MAX_SESSIONS=3
       deploy:
         replicas: 1
-  
+
     tests:
       build:
         context: .
@@ -649,7 +649,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
         - ./target/cucumber-reports:/app/target/cucumber-reports
         - ./test-automation-key.json:/secrets/test-automation-key.json:ro
       command: ["mvn", "clean", "test", "-DfailIfNoTests=false"]
-  
+
   volumes:
     test-results:
   EOF
@@ -672,20 +672,20 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   # scripts/docker-run-tests.sh
   cat > scripts/docker-run-tests.sh << 'EOF'
   #!/bin/bash
-  
+
   echo "🐳 Starting Selenium Grid..."
   docker-compose up -d selenium-hub chrome firefox edge
-  
+
   echo "⏳ Waiting for Grid to be ready..."
   timeout 60 bash -c 'until curl -sf http://localhost:4444/wd/hub/status; do sleep 2; done'
-  
+
   echo "🧪 Running tests..."
   docker-compose run --rm tests mvn clean test -Dtest=$1
-  
+
   echo "🛑 Stopping Grid..."
   docker-compose down
   EOF
-  
+
   chmod +x scripts/docker-run-tests.sh
   ```
 
@@ -703,7 +703,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
 - [ ] **2.2.2** Update SeleniumWebDriver.java:
   ```java
   import io.github.bonigarcia.wdm.WebDriverManager;
-  
+
   // In initializeWebDriver() method:
   case Browser.CHROME:
       if (!isRemote()) {
@@ -712,7 +712,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
       final ChromeOptions chromeOptions = setChromeOptions(null, null);
       setWebDriver(new ChromeDriver(chromeOptions));
       break;
-  
+
   case Browser.FIREFOX:
       if (!isRemote()) {
           WebDriverManager.firefoxdriver().setup();
@@ -720,7 +720,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
       FirefoxOptions firefoxOptions = new FirefoxOptions();
       setWebDriver(new FirefoxDriver(firefoxOptions));
       break;
-  
+
   case Browser.EDGE:
       if (!isRemote()) {
           WebDriverManager.edgedriver().setup();
@@ -760,15 +760,15 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   ```bash
   cat > src/test/resources/Drivers/README.md << 'EOF'
   # WebDriver Management
-  
+
   This project uses WebDriverManager for automatic driver management.
-  
+
   Drivers are automatically downloaded and cached at:
   - Windows: `C:\Users\{user}\.cache\selenium`
   - macOS/Linux: `~/.cache/selenium`
-  
+
   No manual driver management required!
-  
+
   ## Manual driver management (if needed):
   ```bash
   mvn exec:java -Dexec.mainClass="io.github.bonigarcia.wdm.WebDriverManager" \
@@ -788,7 +788,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   ```bash
   cat > .github/workflows/tests.yml << 'EOF'
   name: Automated Test Suite
-  
+
   on:
     push:
       branches: [ main, develop, feature/** ]
@@ -811,13 +811,13 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
             - chrome
             - firefox
             - edge
-  
+
   jobs:
     test:
       name: Test Suite (${{ matrix.browser }}, Java ${{ matrix.java }})
       runs-on: ubuntu-latest
       timeout-minutes: 60
-      
+
       strategy:
         fail-fast: false
         matrix:
@@ -826,31 +826,31 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
           include:
             - browser: edge
               java: 17
-      
+
       steps:
         - name: Checkout code
           uses: actions/checkout@v4
-        
+
         - name: Set up JDK ${{ matrix.java }}
           uses: actions/setup-java@v4
           with:
             java-version: ${{ matrix.java }}
             distribution: 'temurin'
             cache: 'maven'
-        
+
         - name: Authenticate to Google Cloud
           uses: google-github-actions/auth@v2
           with:
             credentials_json: ${{ secrets.GCP_SA_KEY }}
-        
+
         - name: Set up Cloud SDK
           uses: google-github-actions/setup-gcloud@v2
-        
+
         - name: Start Selenium Grid
           run: |
             docker-compose up -d selenium-hub ${{ matrix.browser }}
             timeout 60 bash -c 'until curl -sf http://localhost:4444/wd/hub/status; do sleep 2; done'
-        
+
         - name: Run Tests
           run: |
             mvn clean test \
@@ -859,11 +859,11 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
               -Dtest=${{ github.event.inputs.test_suite || 'Scenarios' }}
           env:
             GOOGLE_CLOUD_PROJECT: cscharer
-        
+
         - name: Generate Allure Report
           if: always()
           run: mvn allure:report
-        
+
         - name: Upload Test Results
           if: always()
           uses: actions/upload-artifact@v4
@@ -874,7 +874,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
               target/cucumber-reports/
               target/allure-results/
             retention-days: 30
-        
+
         - name: Publish Test Report
           if: always()
           uses: dorny/test-reporter@v1
@@ -882,24 +882,24 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
             name: Test Results (${{ matrix.browser }}, Java ${{ matrix.java }})
             path: target/surefire-reports/*.xml
             reporter: java-junit
-        
+
         - name: Comment PR with Results
           if: github.event_name == 'pull_request' && always()
           uses: EnricoMi/publish-unit-test-result-action@v2
           with:
             files: target/surefire-reports/*.xml
-        
+
         - name: Stop Selenium Grid
           if: always()
           run: docker-compose down
-  
+
   security-scan:
     name: Security Scanning
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
@@ -907,45 +907,45 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
           scan-ref: '.'
           format: 'sarif'
           output: 'trivy-results.sarif'
-      
+
       - name: Upload Trivy results to GitHub Security
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: 'trivy-results.sarif'
-      
+
       - name: OWASP Dependency Check
         run: |
           mvn org.owasp:dependency-check-maven:check
-      
+
       - name: Upload Dependency Check Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: dependency-check-report
           path: target/dependency-check-report.html
-  
+
   code-quality:
     name: Code Quality Analysis
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Full history for SonarQube
-      
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      
+
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
-      
+
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -962,33 +962,33 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   ```bash
   cat > .github/workflows/pr-validation.yml << 'EOF'
   name: Pull Request Validation
-  
+
   on:
     pull_request:
       branches: [ main, develop ]
-  
+
   jobs:
     validate:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v4
-        
+
         - name: Set up JDK 17
           uses: actions/setup-java@v4
           with:
             java-version: '17'
             distribution: 'temurin'
             cache: maven
-        
+
         - name: Compile
           run: mvn clean compile test-compile
-        
+
         - name: Run Checkstyle
           run: mvn checkstyle:check
-        
+
         - name: Run SpotBugs
           run: mvn spotbugs:check
-        
+
         - name: Check for TODO/FIXME
           run: |
             if grep -r "TODO\|FIXME" src/; then
@@ -1001,28 +1001,28 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   ```bash
   cat > .github/workflows/release.yml << 'EOF'
   name: Release
-  
+
   on:
     push:
       tags:
         - 'v*'
-  
+
   jobs:
     release:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v4
-        
+
         - name: Set up JDK 17
           uses: actions/setup-java@v4
           with:
             java-version: '17'
             distribution: 'temurin'
             cache: maven
-        
+
         - name: Build
           run: mvn clean package -DskipTests
-        
+
         - name: Create Release
           uses: softprops/action-gh-release@v1
           with:
@@ -1054,7 +1054,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
       labels:
         - "dependencies"
         - "maven"
-    
+
     - package-ecosystem: "github-actions"
       directory: "/"
       schedule:
@@ -1066,7 +1066,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
 - [ ] **2.3.7** Add branch protection rules:
   ```
   Navigate to: Settings > Branches > Branch protection rules
-  
+
   For 'main' branch:
   ☐ Require a pull request before merging
   ☐ Require approvals (1)
@@ -1107,35 +1107,35 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
       screenshot:
         onFailure: true
         format: png
-    
+
     secrets:
       provider: google-cloud
       project: ${GOOGLE_CLOUD_PROJECT:cscharer}
-    
+
     logging:
       level: ${LOG_LEVEL:INFO}
       logAll: true
       logApi: true
       logSql: true
-    
+
     parallel:
       enabled: true
       threads: ${TEST_THREADS:5}
       strategy: fixed
-  
+
   environments:
     dev:
       url: https://dev.example.com
       database:
         host: localhost
         port: 5432
-    
+
     test:
       url: https://test.example.com
       database:
         host: test-db.example.com
         port: 5432
-    
+
     prod:
       url: https://prod.example.com
       database:
@@ -1148,14 +1148,14 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   ```java
   // src/test/java/com/cjs/qa/utilities/ConfigManager.java
   package com.cjs.qa.utilities;
-  
+
   import org.yaml.snakeyaml.Yaml;
   import java.io.InputStream;
   import java.util.Map;
-  
+
   public class ConfigManager {
       private static Map<String, Object> config;
-      
+
       static {
           try (InputStream input = ConfigManager.class
                   .getResourceAsStream("/application.yml")) {
@@ -1165,29 +1165,29 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
               throw new RuntimeException("Failed to load configuration", e);
           }
       }
-      
+
       @SuppressWarnings("unchecked")
       public static <T> T get(String path, T defaultValue) {
           String[] keys = path.split("\\.");
           Map<String, Object> current = config;
-          
+
           for (int i = 0; i < keys.length - 1; i++) {
               current = (Map<String, Object>) current.get(keys[i]);
               if (current == null) return defaultValue;
           }
-          
+
           Object value = current.get(keys[keys.length - 1]);
           return value != null ? (T) value : defaultValue;
       }
-      
+
       public static String getString(String path) {
           return get(path, "");
       }
-      
+
       public static int getInt(String path) {
           return get(path, 0);
       }
-      
+
       public static boolean getBoolean(String path) {
           return get(path, false);
       }
@@ -1206,7 +1206,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
 
 <a name="phase-3"></a>
 ## 🟡 PHASE 3: DOCUMENTATION & QUALITY (Week 5-6)
-**Priority**: MEDIUM  
+**Priority**: MEDIUM
 **Estimated Time**: 8-10 days
 
 ### Step 3.1: Comprehensive README (2 days)
@@ -1301,7 +1301,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   // Replace Environment.sysOut() with proper logging
   import org.apache.logging.log4j.LogManager;
   import org.apache.logging.log4j.Logger;
-  
+
   private static final Logger logger = LogManager.getLogger(ClassName.class);
   logger.info("Message");
   ```
@@ -1390,7 +1390,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
 
 <a name="phase-4"></a>
 ## 🟢 PHASE 4: ADVANCED FEATURES (Week 7-12)
-**Priority**: LOW / NICE TO HAVE  
+**Priority**: LOW / NICE TO HAVE
 **Estimated Time**: 15-20 days
 
 ### Step 4.1: Test Data Management (3 days)
@@ -1469,7 +1469,7 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
 
 <a name="quick-wins"></a>
 ## ⚡ QUICK WINS (Can start anytime)
-**Priority**: ANY  
+**Priority**: ANY
 **Estimated Time**: < 1 day each
 
 ### Quick Win 1: Pre-commit Hooks (1 hour)
@@ -1500,13 +1500,13 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   ```markdown
   ## Description
   <!-- What does this PR do? -->
-  
+
   ## Type of Change
   - [ ] Bug fix
   - [ ] New feature
   - [ ] Breaking change
   - [ ] Documentation update
-  
+
   ## Checklist
   - [ ] Tests added/updated
   - [ ] Documentation updated
@@ -1528,17 +1528,17 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
 - [ ] **QW6.1** Create .editorconfig:
   ```ini
   root = true
-  
+
   [*]
   charset = utf-8
   end_of_line = lf
   insert_final_newline = true
   trim_trailing_whitespace = true
-  
+
   [*.{java,xml}]
   indent_style = tab
   indent_size = 4
-  
+
   [*.{yml,yaml,json}]
   indent_style = space
   indent_size = 2
@@ -1550,17 +1550,17 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   ```
   # Auto detect text files and perform LF normalization
   * text=auto
-  
+
   # Java sources
   *.java text diff=java
   *.gradle text diff=java
-  
+
   # These files are text and should be normalized
   *.xml text
   *.properties text
   *.yml text
   *.yaml text
-  
+
   # These files are binary
   *.jar binary
   *.exe binary
@@ -1587,21 +1587,21 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   ```bash
   #!/bin/bash
   set -e
-  
+
   echo "🧪 Running CJS QA Tests"
   echo "======================="
-  
+
   TEST_SUITE=${1:-"Scenarios"}
   BROWSER=${2:-"chrome"}
-  
+
   echo "Test Suite: $TEST_SUITE"
   echo "Browser: $BROWSER"
-  
+
   mvn clean test \
     -Dtest=$TEST_SUITE \
     -Dbrowser=$BROWSER \
     -DfailIfNoTests=false
-  
+
   echo "✅ Tests completed!"
   ```
 
@@ -1616,19 +1616,19 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
   ```
   # Default owners
   * @cscharer
-  
+
   # Test suites
   /src/test/java/com/cjs/qa/google/ @cscharer
   /src/test/java/com/cjs/qa/microsoft/ @cscharer
-  
+
   # Core framework
   /src/test/java/com/cjs/qa/core/ @cscharer
   /src/test/java/com/cjs/qa/selenium/ @cscharer
-  
+
   # Configuration
   /XML/ @cscharer
   /Configurations/ @cscharer
-  
+
   # CI/CD
   /.github/ @cscharer
   /docker-compose.yml @cscharer
@@ -1710,16 +1710,15 @@ Use this space to track decisions, blockers, or important notes:
 
 ```
 Date: [YYYY-MM-DD]
-Note: 
+Note:
 
 ---
 ```
 
 ---
 
-**Last Updated**: November 8, 2025  
-**Next Review**: Weekly  
+**Last Updated**: November 8, 2025
+**Next Review**: Weekly
 **Owner**: CJS QA Team
 
 🚀 **Let's make this framework 100% better!**
-

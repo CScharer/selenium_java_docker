@@ -44,6 +44,5 @@ All sensitive credentials are stored in **Google Cloud Secret Manager**, not in 
 
 ---
 
-**Last Updated**: November 8, 2025  
+**Last Updated**: November 8, 2025
 **Security Level**: High
-

@@ -1,0 +1,227 @@
+package com.cjs.qa.utilities;
+
+import java.io.IOException;
+
+import com.cjs.qa.core.Environment;
+
+public class Project
+{
+
+	private static String			fileSeperator	= System.getProperty("file.separator");
+	private static ConfigComponents	product;
+	private static String			root;
+
+	public static void setProduct(ConfigComponents product_)
+	{
+		product = product_;
+		root = pathWorkspace() + transformPath(product.name() + "/");
+	}
+
+	public static String environmentXML()
+	{
+		return path() + transformPath("environment" + IExtension.XML);
+	}
+
+	/**
+	 * @return Absolute path to Automation folder
+	 */
+	private static final String pathAutomation()
+	{
+		String automationPath = "";
+		final String OSName = System.getProperty("os.name");
+		try
+		{
+			if (OSName.startsWith("Windows"))
+			{
+				automationPath = "C:/Automation/";
+			} else if (OSName.startsWith("Linux"))
+			{
+				automationPath = "/Automation/";
+			} else if (OSName.startsWith("Mac"))
+			{
+				automationPath = "/Automation/";
+			} else
+			{
+				throw new IOException();
+			}
+		} catch (final IOException e)
+		{
+			System.err.println("Error getting Automation Path!");
+			e.printStackTrace();
+			automationPath = null;
+		}
+		return automationPath;
+	}
+
+	/**
+	 * @return Absolute path to Automation Workspace
+	 */
+	public static final String pathWorkspace()
+	{
+		String directoryFolder = transformPath(pathAutomation() + "BTS/");
+		FSO.folderCreate(directoryFolder);
+		return directoryFolder;
+	}
+
+	/**
+	 * @return Absolute path to Automation Repository
+	 */
+	public static final String pathRepository(String filePath)
+	{
+		String directoryFolder = transformPath(pathAutomation() + "repository/" + filePath);
+		FSO.folderCreate(directoryFolder);
+		return directoryFolder;
+	}
+
+	/**
+	 * Transforms the subpath to an OS independent format
+	 */
+	public static String transformPath(String subPath)
+	{
+		if (subPath.contains(Constants.DELIMETER_PATH))
+		{
+			Environment.sysOut("Backslash is not allowed in path!");
+			return null;
+		} else
+		{
+			final String convertedSubPath = subPath.replace("/", fileSeperator);
+			return convertedSubPath;
+		}
+	}
+
+	public static String pathFramework()
+	{
+		String directoryFolder = pathWorkspace() + transformPath("Framework/");
+		FSO.folderCreate(directoryFolder);
+		return directoryFolder;
+	}
+
+	public static String testResources(String filePath)
+	{
+		final String testResources = "src/test/resources/" + filePath;
+		String directoryFolder = pathFramework() + transformPath(testResources + filePath);
+		FSO.folderCreate(directoryFolder);
+		return directoryFolder;
+	}
+
+	public static String dataFiles(String filePath)
+	{
+		final String dataFiles = "src/test/resources/datafiles/";
+		String directoryFolder = path() + transformPath(dataFiles + filePath);
+		FSO.folderCreate(directoryFolder);
+		return directoryFolder;
+	}
+
+	public static String notifications(String filePath)
+	{
+		final String notifications = "src/test/resources/notifications/";
+		String directoryFolder = path() + transformPath(notifications + filePath);
+		FSO.folderCreate(directoryFolder);
+		return directoryFolder;
+	}
+
+	public static String documents(String filePath)
+	{
+		final String documents = "src/test/resources/documents/";
+		String directoryFolder = path() + transformPath(documents + filePath);
+		FSO.folderCreate(directoryFolder);
+		return directoryFolder;
+	}
+
+	public static String queryresults(String filePath)
+	{
+		final String queryresults = "src/test/resources/queryresults/";
+		String directoryFolder = path() + transformPath(queryresults + filePath);
+		FSO.folderCreate(directoryFolder);
+		return directoryFolder;
+	}
+
+	public static String templates(String filePath)
+	{
+		final String templates = "src/main/java/com/bts/framework/templates/";
+		String directoryFolder = pathFramework() + transformPath(templates + filePath);
+		FSO.folderCreate(directoryFolder);
+		return directoryFolder;
+	}
+
+	public static String tools(String filePath)
+	{
+		final String tools = "src/main/java/com/bts/framework/tools/";
+		String directoryFolder = pathFramework() + transformPath(tools + filePath);
+		FSO.folderCreate(directoryFolder);
+		return directoryFolder;
+	}
+
+	public static String testsuites(String filePath)
+	{
+		final String testsuites = "src/test/java/com/bts/" + product + "/testsuites/";
+		String directoryFolder = path() + transformPath(testsuites + filePath);
+		FSO.folderCreate(directoryFolder);
+		return directoryFolder;
+	}
+
+	public static String scripts(String filePath)
+	{
+		final String scripts = "src/main/java/com/bts/framework/utils/scripts/";
+		String directoryFolder = pathFramework() + transformPath(scripts + filePath);
+		FSO.folderCreate(directoryFolder);
+		return directoryFolder;
+	}
+
+	public static String environment(String filePath)
+	{
+		final String environment = "src/main/java/com/bts/framework/environment/";
+		String directoryFolder = pathFramework() + transformPath(environment + filePath);
+		FSO.folderCreate(directoryFolder);
+		return directoryFolder;
+	}
+
+	public static String downloads(String filePath)
+	{
+		final String downloads = "target/test-downloads/";
+		String directoryFolder = pathFramework() + transformPath(downloads + filePath);
+		FSO.folderCreate(directoryFolder);
+		return directoryFolder;
+	}
+
+	public static String screenshots(String filePath)
+	{
+		final String screenshots = "target/test-screenshots/";
+		String directoryFolder = pathFramework() + transformPath(screenshots + filePath);
+		FSO.folderCreate(directoryFolder);
+		return directoryFolder;
+	}
+
+	public static String dataFiles()
+	{
+		String directoryFolder = path() + transformPath("src/test/resources/datafiles/");
+		FSO.folderCreate(directoryFolder);
+		return directoryFolder;
+	}
+
+	public static String dataGeneration()
+	{
+		String directoryFolder = dataFiles() + transformPath("datagenerationfiles/");
+		FSO.folderCreate(directoryFolder);
+		return directoryFolder;
+	}
+
+	public static String manualverification()
+	{
+		String directoryFolder = path() + transformPath("manualverification/");
+		FSO.folderCreate(directoryFolder);
+		return directoryFolder;
+	}
+
+	public static String path()
+	{
+		return root;
+	}
+
+	public static String screenShots()
+	{
+		String directoryFolder = path() + transformPath("target/test-screenshots");
+		FSO.folderCreate(directoryFolder);
+		return directoryFolder;
+	}
+}

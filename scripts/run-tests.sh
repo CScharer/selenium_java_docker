@@ -26,4 +26,3 @@ echo ""
 echo ""
 echo "✅ Tests completed!"
 echo "📊 Reports available at: target/surefire-reports/"
-

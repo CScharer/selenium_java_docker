@@ -8,27 +8,27 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * SecureConfig - Utility class for retrieving secrets from Google Cloud Secret Manager.
- * 
+ *
  * This class provides a caching layer on top of GoogleCloud.getKeyValue() to improve
  * performance and reduce API calls to Secret Manager.
- * 
+ *
  * Usage:
  *   String password = SecureConfig.getPassword("AUTO_BTSQA_PASSWORD");
- * 
+ *
  * @author CJS QA Team
  * @version 1.0
  * @since 2025-11-08
  */
 public class SecureConfig {
-    
+
     private static final String PROJECT_ID = "cscharer";
     private static final Map<String, String> cache = new ConcurrentHashMap<>();
     private static boolean cacheEnabled = true;
-    
+
     /**
      * Retrieves a password/secret from Google Cloud Secret Manager.
      * Results are cached to minimize API calls.
-     * 
+     *
      * @param secretKey The name of the secret in Google Cloud (e.g., "AUTO_BTSQA_PASSWORD")
      * @return The secret value as a String
      * @throws RuntimeException if the secret cannot be retrieved
@@ -37,20 +37,20 @@ public class SecureConfig {
         if (secretKey == null || secretKey.trim().isEmpty()) {
             throw new IllegalArgumentException("Secret key cannot be null or empty");
         }
-        
+
         // Check cache first
         if (cacheEnabled && cache.containsKey(secretKey)) {
             return cache.get(secretKey);
         }
-        
+
         try {
             String value = GoogleCloud.getKeyValue(PROJECT_ID, secretKey);
-            
+
             // Cache the result
             if (cacheEnabled) {
                 cache.put(secretKey, value);
             }
-            
+
             return value;
         } catch (IOException e) {
             String errorMsg = "Failed to fetch secret from Google Cloud Secret Manager: " + secretKey;
@@ -58,10 +58,10 @@ public class SecureConfig {
             throw new RuntimeException(errorMsg, e);
         }
     }
-    
+
     /**
      * Retrieves a secret with a fallback value if the secret doesn't exist.
-     * 
+     *
      * @param secretKey The name of the secret
      * @param fallbackValue The value to return if secret retrieval fails
      * @return The secret value or fallback value
@@ -74,7 +74,7 @@ public class SecureConfig {
             return fallbackValue;
         }
     }
-    
+
     /**
      * Clears the secret cache. Useful for testing or forcing fresh secret retrieval.
      */
@@ -82,10 +82,10 @@ public class SecureConfig {
         cache.clear();
         Environment.sysOut("SecureConfig cache cleared. Size: " + cache.size());
     }
-    
+
     /**
      * Enables or disables caching.
-     * 
+     *
      * @param enabled true to enable caching, false to disable
      */
     public static void setCacheEnabled(boolean enabled) {
@@ -94,20 +94,20 @@ public class SecureConfig {
             clearCache();
         }
     }
-    
+
     /**
      * Returns the current cache size.
-     * 
+     *
      * @return Number of cached secrets
      */
     public static int getCacheSize() {
         return cache.size();
     }
-    
+
     /**
      * Preloads a secret into the cache without returning the value.
      * Useful for warming up the cache at application startup.
-     * 
+     *
      * @param secretKey The name of the secret to preload
      */
     public static void preloadSecret(String secretKey) {
@@ -118,10 +118,10 @@ public class SecureConfig {
             Environment.sysOut("WARNING: Failed to preload secret: " + secretKey);
         }
     }
-    
+
     /**
      * Preloads multiple secrets into the cache.
-     * 
+     *
      * @param secretKeys Array of secret names to preload
      */
     public static void preloadSecrets(String... secretKeys) {
@@ -130,4 +130,3 @@ public class SecureConfig {
         }
     }
 }
-

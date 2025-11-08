@@ -1,0 +1,246 @@
+package com.cjs.qa.bts.pages;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import com.cjs.qa.core.Environment;
+import com.cjs.qa.selenium.Page;
+import com.cjs.qa.utilities.Constants;
+
+public class PremiumSummaryPage extends Page
+{
+	public PremiumSummaryPage(WebDriver webDriver)
+	{
+		super(webDriver);
+	}
+
+	// DECLERATIONS
+	private final String	NODE_ViewPort		= ".//*[@id='viewport']";
+	// private final String NODE_PolicyInfoDiv =
+	// "/div[1]/div[1]/div[2]/div[1]/div/";
+	// private final By textPremium = By.xpath(NODE_ViewPort +
+	// NODE_PolicyInfoDiv + "div[2]/span");
+	// private final By textMinimumAdjustment = By.xpath(NODE_ViewPort +
+	// NODE_PolicyInfoDiv + "div[5]/span");
+	// private final By textTaxes = By.xpath(NODE_ViewPort + NODE_PolicyInfoDiv
+	// + "div[8]/span");
+	// private final By textFees = By.xpath(NODE_ViewPort + NODE_PolicyInfoDiv +
+	// "div[11]/span");
+	// private final By textSurcharge = By.xpath(NODE_ViewPort +
+	// NODE_PolicyInfoDiv + "div[14]/span");
+	// private final By textPolicyTotal = By.xpath(NODE_ViewPort +
+	// NODE_PolicyInfoDiv + "div[17]/span");
+	// private final By textTotalManualPremium = By.xpath(NODE_ViewPort +
+	// NODE_PolicyInfoDiv + "div[20]/span");
+	private final By		buttonExportExcel	= By.xpath(NODE_ViewPort + "/div[2]/div/a/span");
+	private final By		subHeaders			= By
+			.xpath(".//*[@id='productsPanel']/div[5]/div/div[@class='table']/div/..");
+	public final String		PAGE_TITLE			= "PremiumSummaryPage";
+
+	// METHODS GET TEXT
+	public List<String> getPolicyInformation()
+	{
+		return getElementsText(By.xpath(".//*[@id='viewport']//span[@class='data-label-r']"));
+	}
+
+	public List<String> getProductInformation()
+	{
+		return getElementsText(By.xpath(".//*[@id='productsPanel']//div"));
+	}
+
+	public String getTextPremium()
+	{
+		// final String premiumText = getLabel(textPremium);
+		// return premiumText;
+		return getPolicyInformation().get(1);
+	}
+
+	public String getTextMinimumAdjustment()
+	{
+		// final String minimumAdjustmentText = getLabel(textMinimumAdjustment);
+		// return minimumAdjustmentText;
+		return getPolicyInformation().get(3);
+	}
+
+	public String getTextTaxes()
+	{
+		// final String taxesText = getLabel(textTaxes);
+		// return taxesText;
+		return getPolicyInformation().get(5);
+	}
+
+	public String getTextFees()
+	{
+		// final String feesText = getLabel(textFees);
+		// return feesText;
+		return getPolicyInformation().get(7);
+	}
+
+	public String getTextSurcharge()
+	{
+		// final String surchargeText = getLabel(textSurcharge);
+		// return surchargeText;
+		return getPolicyInformation().get(9);
+	}
+
+	public String getTextPolicyTotal()
+	{
+		// final String policyTotalText = getLabel(textPolicyTotal);
+		// return policyTotalText;
+		return getPolicyInformation().get(11);
+	}
+
+	public String getTextTotalManualPremium()
+	{
+		// final String totalManualPremium = getLabel(textTotalManualPremium);
+		// return totalManualPremium;
+		return getPolicyInformation().get(13);
+	}
+
+	public String getSubHeaders()
+	{
+		String subHeaderText = "";
+		final List<WebElement> elements = webDriver.findElements(subHeaders);
+		for (final WebElement element : elements)
+		{
+			if (element.getText().contains("$"))
+			{
+				subHeaderText += element.getText().substring(0, element.getText().indexOf("$")).trim()
+						+ Constants.DELIMETER_LIST;
+			} else
+			{
+				subHeaderText += element.getText() + Constants.DELIMETER_LIST;
+			}
+		}
+		return subHeaderText;
+	}
+
+	// After this there needs to be something to work with the excel file that
+	// is getting exported
+	// This is the CSV that needs to be exported and then compared to the input
+	// file to make sure things are working as they should and all values are
+	// correct
+	// This needs to be converted before any checking can be done
+	// The exporting needs to be done on the microsoft side, this is not
+	// something you can do with just selenium
+	public void clickButtonExportExcel()
+	{
+		clickObject(buttonExportExcel);
+	}
+
+	public void clickAllButtons()
+	{
+		final List<WebElement> allButtons = webDriver
+				.findElements(By.xpath(".//*[@id='productsPanel']/*/div/div[1]/button"));
+		for (final WebElement we : allButtons)
+		{
+			clickObject(we);
+		}
+	}
+
+	public void verifyTable(String coverageDeductiblePremium)
+	{
+		final String state = coverageDeductiblePremium.substring(0, coverageDeductiblePremium.indexOf(":"));
+		final String coverage = coverageDeductiblePremium.substring(coverageDeductiblePremium.indexOf(":"),
+				coverageDeductiblePremium.indexOf(":"));
+		final String limitExp = coverageDeductiblePremium.substring(coverageDeductiblePremium.indexOf(":"),
+				coverageDeductiblePremium.indexOf(":"));
+		final String deductible = coverageDeductiblePremium.substring(coverageDeductiblePremium.indexOf(":"),
+				coverageDeductiblePremium.indexOf(":"));
+		final String classCode = coverageDeductiblePremium.substring(coverageDeductiblePremium.indexOf(":"),
+				coverageDeductiblePremium.indexOf(":"));
+		final String premium = coverageDeductiblePremium.substring(coverageDeductiblePremium.lastIndexOf(':') + 1,
+				coverageDeductiblePremium.length());
+		checkProductInfo(state, coverage, limitExp, deductible, classCode, premium);
+	}
+
+	public void checkProductInfo(String state, String coverage, String limitExp, String deductible, String classCode,
+			String premium)
+	{
+		String coverageFromTable = "";
+		if (state == " ")
+		{
+			if ((coverage == " ") && (deductible == " ") && (premium == " "))
+			{
+				Environment.sysOut("ALL BLANK");
+			} else if (deductible == "")
+			{
+				coverageFromTable = getWebElement(By.xpath(
+						" .//*/div/div/div/div/div/div/div/div/div/div/div/div/div[contains(.,'" + coverage + "')]"))
+								.getText();
+				assert (coverageFromTable.toString()
+						.equals(coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium));
+			} else
+			{
+				coverageFromTable = getWebElement(By.xpath(".//div/div/div/div/div/div/div/div/div/div/div[contains(.,'"
+						+ coverage + "')]/div[contains(.,'" + limitExp + "')]/div[contains(.,'" + premium + "')]"))
+								.getText();
+				assert (coverageFromTable.toString()
+						.equals(coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium));
+			}
+		} else if (state.equals("AL:") || state.equals("AK:") || state.equals("AZ") || state.equals("AR")
+				|| state.equals("CA") || state.equals("CO") || state.equals("CT") || state.equals("DE")
+				|| state.equals("FL") || state.equals("GA") || state.equals("HI") || state.equals("ID")
+				|| state.equals("IL") || state.equals("IN") || state.equals("IA") || state.equals("KS")
+				|| state.equals("KY") || state.equals("LA") || state.equals("ME") || state.equals("MD")
+				|| state.equals("MA") || state.equals("MI") || state.equals("MN") || state.equals("MS")
+				|| state.equals("MO") || state.equals("MT") || state.equals("NE") || state.equals("NV")
+				|| state.equals("ND") || state.equals("NY") || state.equals("OH") || state.equals("OK")
+				|| state.equals("OR") || state.equals("PA") || state.equals("RI") || state.equals("SC")
+				|| state.equals("SD") || state.equals("TN") || state.equals("TX") || state.equals("UT")
+				|| state.equals("VT") || state.equals("VA") || state.equals("WA") || state.equals("WV")
+				|| state.equals("WI") || state.equals("WY"))
+		{
+			if ((coverage == " ") && (deductible == " ") && (premium == " "))
+			{
+				Environment.sysOut("ALL BLANK");
+			} else if (deductible == "")
+			{
+				coverageFromTable = getWebElement(
+						By.xpath(" .//*[@id='stateCloser']/div[contains(.,'" + coverage + "')]")).getText();
+				assert (coverageFromTable.toString()
+						.equals(coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium));
+			} else
+			{
+				coverageFromTable = getWebElement(By.xpath(".//*[@id='stateCloser']/div[contains(.,'" + coverage
+						+ "')]/div[contains(.,'" + limitExp + "')]/div[contains(.,'" + premium + "')]")).getText();
+				assert (coverageFromTable.toString()
+						.equals(coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium));
+			}
+		} else
+		{
+			if ((coverage == " ") && (deductible == " ") && (premium == " "))
+			{
+				Environment.sysOut("ALL BLANK");
+			} else
+			{
+				coverageFromTable = getWebElement(
+						By.xpath(".//*[@id='productsPanel']/div/div/div/div[contains(.,'" + coverage + "')]"))
+								.getText();
+				assert (coverageFromTable.toString()
+						.equals(coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium));
+				Environment.sysOut("LAST ONE");
+			}
+			// else
+			// {
+			// coverageFromTable = getWebElement(By.xpath(
+			// ".//*[@id='stateCloser']/div[contains(.,'" + coverage +
+			// "')]/div[contains(.,'" + limitExp + "')]/div[contains(.,'" +
+			// premium + "')]"))
+			// .getText();
+			// assert (coverageFromTable.toString().equals(coverage + " " +
+			// limitExp + " " + deductible + " " + classCode + " " + premium));
+			// }
+			// coverageFromTable =
+			// getWebElement(By.xpath(".//div/div/div/div/div/div/div/div/div/div/div[contains(.,'"
+			// + coverage + "')]/div[contains(.,'"
+			// + limitExp + " ')]/div[contains(.,'" + premium +
+			// "')]")).getText();
+			// assert (coverageFromTable.toString().equals(coverage + " " +
+			// limitExp + " " + deductible + " " + classCode + " " + premium));
+		}
+	}
+}

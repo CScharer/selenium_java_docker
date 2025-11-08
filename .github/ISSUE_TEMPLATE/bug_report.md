@@ -72,6 +72,3 @@ Paste error here
 
 ## Possible Solution
 <!-- If you have suggestions on how to fix the bug -->
-
-
-

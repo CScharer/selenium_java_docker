@@ -1,0 +1,51 @@
+•	Vivit Website Registration Page:  https://www.vivit-worldwide.org/events/EventDetails.aspx?id=1209865&group= 
+•	Go To Webinar Event:  https://global.gotowebinar.com/manageWebinar.tmpl?webinar=4085145690110151939 
+•	Go To Webinar Registration Page:  https://attendee.gotowebinar.com/register/4085145690110151939 
+
+https://www.gotomeeting.com/ 
+Username:  jill.vivit@yahoo.com
+Password:  vivitrules1
+
+curl -X POST -H "Accept:application/json" -H "Content-Type: application/x-www-form-urlencoded" "https://api.getgo.com/oauth/access_token" -d 'grant_type=password&user_id=jill.vivit@yahoo.com&password=vivitrules1&client_id={WGhbDnxCGUwKNABGKeymjoII4gqalCa3}'
+curl -X POST -H "Accept:application/json" -H "Content-Type: application/x-www-form-urlencoded" "https://api.getgo.com/oauth/access_token" -d "grant_type="password"&user_id="jill.vivit@yahoo.com"&password="vivitrules1"&client_id="WGhbDnxCGUwKNABGKeymjoII4gqalCa3"
+
+Application Name: YM Seamless Registration 
+Consumer Key: WGhbDnxCGUwKNABGKeymjoII4gqalCa3
+Consumer Secret: DdkRQTJGLq4VF20t
+https://api.getgo.com/oauth/v2/authorize?response_type=code&client_id={consumerKey}
+https://api.getgo.com/oauth/v2/authorize?response_type=code&client_id={WGhbDnxCGUwKNABGKeymjoII4gqalCa3}
+
+Application Name: GoToWebinar API 
+Consumer Key: j0OYZLREJ0E4CY8pxcI7pAClF6m26OQ6
+Consumer Secret: QiTNRPL5W9VGvRri
+https://api.getgo.com/oauth/v2/authorize?response_type=code&client_id={j0OYZLREJ0E4CY8pxcI7pAClF6m26OQ6}
+
+CSCharer
+Application Name: GoToWebinar API 
+Consumer Key: LIoKpcSQNQEoTLLb4tI17WGgE8ADPqzn
+Consumer Secret: 4dAqAM8B7opvxnbA
+https://api.getgo.com/oauth/v2/authorize?response_type=code&client_id={LIoKpcSQNQEoTLLb4tI17WGgE8ADPqzn}
+
+https://api.getgo.com/gotoid/verify?action=resend&id=db78044d-3ac5-48e4-9355-9ba3c381e854
+
+API instructions can be found at:
+Go To Developer Center:  https://goto-developer.logmeininc.com
+The instructions on how to reach the helpdesk if needed are found under the support tab.
+
+More information for other integrations that may be helpful can be found at:
+https://www.gotomeeting.com/integration-marketplace
+
+Per Mark Ford:
+I see the process working like this:
+1.	Staff will create the YM event and the corresponding GTW event.
+2.	Staff will tag the YM event with the GTW event id.  This might be in an event field or in the description as a tag.  We may need Julanne to help with that unless Stephanie has an idea.
+3.	Your process will run once a day and do the following:
+a.	Query YM to get all active events that haven't occurred yet
+b.	Check each of those events for the GTW event id
+c.	For those active YM events with a GTW id that haven't yet occurred:
+i.	Get the list of registrants for the YM event
+ii.	Get the list of registrants for the corresponding GTW event
+iii.	If any are in the YM event but not the GTW event, add them to the GTW event
+I've done a lot with JSON at work lately so if you need any help with that, just let me know.
+Thanks again for working on this.
+I have not had time and this will be a huge help to Stephanie, Rhonda, and team.

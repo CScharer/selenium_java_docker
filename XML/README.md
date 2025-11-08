@@ -129,6 +129,5 @@ For issues or questions:
 
 ---
 
-**Last Updated**: November 8, 2025  
+**Last Updated**: November 8, 2025
 **Security Level**: High - Handle with care
-

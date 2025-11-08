@@ -7,8 +7,8 @@
 	<name>cjs-app-gui</name>
 	<description>CJS Quality Software Delivery Team (QSD)
 builds quality solutions (CJS QA Solutions)
-for Application Program Interface (API), 
-Graphical User Interface(GUI) 
+for Application Program Interface (API),
+Graphical User Interface(GUI)
 and Database testing through the use of
 Java, Cucumber/Gherkin, APIs and Selenium.</description>
 	<version>1.0.0</version>
@@ -17,7 +17,7 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 
 	<properties>
 		<!-- Maven Dependencies-->
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>		
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
 		<meminitial>128m</meminitial>
 		<maxmem>512m</maxmem>
@@ -169,7 +169,7 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 		<dependency>
 		    <groupId>com.intuit.quickbooks-online</groupId>
 		    <artifactId>ipp-v3-java-data</artifactId>
-		    <version>${ipp-v3-java.version}</version>    
+		    <version>${ipp-v3-java.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.intuit.quickbooks-online</groupId>

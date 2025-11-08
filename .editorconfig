@@ -37,4 +37,3 @@ indent_size = 2
 # Batch files
 [*.bat]
 end_of_line = crlf
-

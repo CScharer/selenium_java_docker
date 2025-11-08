@@ -76,7 +76,7 @@ Location: `target/surefire-reports/`
 ## Environment Details
 
 **OS**: <!-- e.g., macOS, Windows, Linux -->
-**Java Version**: 
+**Java Version**:
 ```bash
 java -version
 ```
@@ -112,6 +112,3 @@ java -version
 
 ## Additional Context
 <!-- Add any other context about the test failure here -->
-
-
-

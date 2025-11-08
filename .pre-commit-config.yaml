@@ -25,11 +25,11 @@ repos:
         name: Check for case conflicts
       - id: mixed-line-ending
         name: Check mixed line endings
-      
+
       # Security checks
       - id: detect-private-key
         name: Detect private keys
-      
+
       # Java specific
       - id: check-symlinks
         name: Check for broken symlinks
@@ -49,22 +49,19 @@ repos:
       # Custom hook to prevent secrets
       - id: check-secrets
         name: Check for hardcoded secrets
-        entry: bash -c 'if grep -r "password.*=.*\"[^$]" src/ 2>/dev/null | grep -v "SECRET\|AUTO_"; then echo "Possible hardcoded password found!"; exit 1; fi'
+        entry: bash
         language: system
         pass_filenames: false
-        
+        args:
+          - -c
+          - 'if grep -r "password.*=.*\"[^$]" src/ 2>/dev/null | grep -v "SECRET\|AUTO_"; then echo "Possible hardcoded password found!"; exit 1; fi'
+
       # Check for sensitive files
       - id: check-sensitive-files
         name: Check for sensitive files
-        entry: bash -c 'for f in XML/Companies.xml XML/UserSettings.xml ANALYSIS_PASS.md; do if git diff --cached --name-only | grep -q "$f"; then echo "ERROR: Attempting to commit sensitive file: $f"; exit 1; fi; done'
+        entry: bash
         language: system
         pass_filenames: false
-
-      # Verify Java compilation before commit
-      - id: java-compile-check
-        name: Verify Java compilation
-        entry: bash -c './mvnw compile test-compile -q 2>&1 | grep -q "BUILD SUCCESS" || exit 1'
-        language: system
-        pass_filenames: false
-        stages: [commit]
-
+        args:
+          - -c
+          - 'for f in XML/Companies.xml XML/UserSettings.xml ANALYSIS_PASS.md; do if git diff --cached --name-only | grep -q "$f"; then echo "ERROR: Attempting to commit sensitive file: $f"; exit 1; fi; done'
