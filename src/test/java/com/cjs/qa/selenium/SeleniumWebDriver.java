@@ -55,6 +55,7 @@ import com.cjs.qa.utilities.Processes;
 import com.google.gson.JsonObject;
 
 import io.cucumber.java.Scenario;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class SeleniumWebDriver
 {
@@ -535,11 +536,15 @@ public class SeleniumWebDriver
 				switch (getBrowser().toLowerCase())
 				{
 					case Browser.EDGE:
+						// WebDriverManager automatically downloads and sets up Edge driver
+						WebDriverManager.edgedriver().setup();
 						EdgeOptions edgeOpts = new EdgeOptions();
 						edgeOpts.merge(desiredCapabilities);
 						setWebDriver(new EdgeDriver(edgeOpts));
 						break;
 					case Browser.FIREFOX:
+						// WebDriverManager automatically downloads and sets up Gecko driver
+						WebDriverManager.firefoxdriver().setup();
 						final FirefoxOptions firefoxOptions = new FirefoxOptions();
 						Environment.sysOut("System.getProperty(" + Constants.QUOTE_DOUBLE
 								+ eDriverProperties.getWebDriverType() + Constants.QUOTE_DOUBLE + "):]"
@@ -577,15 +582,20 @@ public class SeleniumWebDriver
 						break;
 					case Browser.IE: // (very slow)
 					case Browser.INTERNET_EXPLORER:
+						// WebDriverManager automatically downloads and sets up IE driver
+						WebDriverManager.iedriver().setup();
 						InternetExplorerOptions ieOpts = new InternetExplorerOptions();
 						ieOpts.merge(desiredCapabilities);
 						setWebDriver(new InternetExplorerDriver(ieOpts));
 						break;
 					case Browser.SAFARI:
+						// Safari driver is bundled with Safari - no WebDriverManager needed
 						setWebDriver(new SafariDriver());
 						break;
 					default:
 					case Browser.CHROME:
+						// WebDriverManager automatically downloads and sets up Chrome driver
+						WebDriverManager.chromedriver().setup();
 						// final ChromeOptions chromeOptions =
 						// setChromeOptions(eDriverProperty.getWebDriverType(),
 						// eDriverProperty.getPathBinary());

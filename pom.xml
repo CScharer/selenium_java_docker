@@ -96,6 +96,7 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 		<saucerest.version>1.0.47</saucerest.version>
         <secretmanager.version>2.48.0</secretmanager.version>
 		<selenium.version>4.26.0</selenium.version>
+		<webdrivermanager.version>5.9.2</webdrivermanager.version>
 		<selenium-api.version>${selenium.version}</selenium-api.version>
 		<selenium-chrome-driver.version>${selenium.version}</selenium-chrome-driver.version>
 		<selenium-edge-driver.version>${selenium.version}</selenium-edge-driver.version>
@@ -135,6 +136,11 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
             <artifactId>google-cloud-secretmanager</artifactId>
             <version>${secretmanager.version}</version> <!-- Use the latest version -->
         </dependency>
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>${webdrivermanager.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>

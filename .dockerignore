@@ -1,0 +1,105 @@
+# CJS QA Automation Framework - Docker Ignore
+# Files and directories to exclude from Docker build context
+
+# Git
+.git/
+.gitignore
+.gitattributes
+.github/
+
+# Maven build outputs
+target/
+!target/*.jar
+
+# IDE files
+.idea/
+.vscode/
+.settings/
+.classpath
+.project
+*.iml
+*.ipr
+*.iws
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Test reports (will be generated in container)
+*.log
+*.tmp
+
+# Documentation (not needed in container)
+docs/
+*.md
+!README.md
+
+# Scripts (not needed in runtime)
+scripts/
+*.sh
+*.bat
+*.vbs
+
+# Sensitive files (should never be in image)
+XML/Companies.xml
+XML/UserSettings.xml
+Configurations/Environments.xml
+*-key.json
+*.credentials
+*.secrets
+.env
+.env.*
+
+# Temporary files
+migration_results.txt
+*_secrets_*.txt
+
+# Node modules (if any)
+node_modules/
+
+# Python artifacts (if any)
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+venv/
+.venv/
+
+# Backup files
+*.bak
+*.backup
+*.orig
+
+# Large binaries (WebDriverManager will download as needed)
+src/test/resources/Drivers/*.exe
+src/test/resources/Drivers/chromedriver
+src/test/resources/Drivers/geckodriver
+src/test/resources/Drivers/msedgedriver
+
+# Data files (unless needed for tests)
+Data/*.xls
+Data/*.xlsx
+!Data/Templates/
+
+# Travis CI
+travis.yml
+
+# Pre-commit
+.pre-commit-config.yaml
+.pre-commit-hooks.yaml
+
+# Maven local repository cache
+.m2/
+.maven/
+
+# Eclipse
+.dbeaver-data-sources.xml
+
+# Miscellaneous
+*.lck
+Parallel.lck
+Success.txt
+

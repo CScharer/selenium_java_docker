@@ -1,0 +1,208 @@
+# CJS QA Automation Framework - Docker Compose
+# Selenium Grid setup with Chrome, Firefox, and Edge nodes
+
+version: '3.8'
+
+services:
+  # Selenium Hub - Central point for test execution
+  selenium-hub:
+    image: selenium/hub:4.26.0
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"      # Selenium Grid UI
+      - "4442:4442"      # Event bus publish port
+      - "4443:4443"      # Event bus subscribe port
+    environment:
+      - GRID_MAX_SESSION=10
+      - GRID_BROWSER_TIMEOUT=300
+      - GRID_TIMEOUT=300
+      - SE_SESSION_REQUEST_TIMEOUT=300
+      - SE_SESSION_RETRY_INTERVAL=5
+    networks:
+      - selenium-grid
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4444/wd/hub/status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Chrome Node - 2 instances for parallel execution
+  chrome-node-1:
+    image: selenium/node-chrome:4.26.0
+    container_name: chrome-node-1
+    depends_on:
+      selenium-hub:
+        condition: service_healthy
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=5
+      - SE_NODE_SESSION_TIMEOUT=300
+      - SE_VNC_NO_PASSWORD=1
+      - SE_SCREEN_WIDTH=1920
+      - SE_SCREEN_HEIGHT=1080
+    ports:
+      - "5900:5900"      # VNC port for debugging
+      - "7900:7900"      # noVNC web interface
+    shm_size: 2gb
+    networks:
+      - selenium-grid
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5555/status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  chrome-node-2:
+    image: selenium/node-chrome:4.26.0
+    container_name: chrome-node-2
+    depends_on:
+      selenium-hub:
+        condition: service_healthy
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=5
+      - SE_NODE_SESSION_TIMEOUT=300
+      - SE_VNC_NO_PASSWORD=1
+      - SE_SCREEN_WIDTH=1920
+      - SE_SCREEN_HEIGHT=1080
+    ports:
+      - "5901:5900"      # VNC port for debugging
+      - "7901:7900"      # noVNC web interface
+    shm_size: 2gb
+    networks:
+      - selenium-grid
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5555/status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Firefox Node
+  firefox-node:
+    image: selenium/node-firefox:4.26.0
+    container_name: firefox-node
+    depends_on:
+      selenium-hub:
+        condition: service_healthy
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=5
+      - SE_NODE_SESSION_TIMEOUT=300
+      - SE_VNC_NO_PASSWORD=1
+      - SE_SCREEN_WIDTH=1920
+      - SE_SCREEN_HEIGHT=1080
+    ports:
+      - "5902:5900"      # VNC port for debugging
+      - "7902:7900"      # noVNC web interface
+    shm_size: 2gb
+    networks:
+      - selenium-grid
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5555/status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Edge Node
+  edge-node:
+    image: selenium/node-edge:4.26.0
+    container_name: edge-node
+    depends_on:
+      selenium-hub:
+        condition: service_healthy
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=5
+      - SE_NODE_SESSION_TIMEOUT=300
+      - SE_VNC_NO_PASSWORD=1
+      - SE_SCREEN_WIDTH=1920
+      - SE_SCREEN_HEIGHT=1080
+    ports:
+      - "5903:5900"      # VNC port for debugging
+      - "7903:7900"      # noVNC web interface
+    shm_size: 2gb
+    networks:
+      - selenium-grid
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5555/status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Test Execution Container
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cjs-qa-tests
+    depends_on:
+      selenium-hub:
+        condition: service_healthy
+      chrome-node-1:
+        condition: service_healthy
+      chrome-node-2:
+        condition: service_healthy
+      firefox-node:
+        condition: service_healthy
+      edge-node:
+        condition: service_healthy
+    environment:
+      - SELENIUM_REMOTE_URL=http://selenium-hub:4444/wd/hub
+      - BROWSER=${BROWSER:-chrome}
+      - HEADLESS=${HEADLESS:-false}
+      - PARALLEL_THREADS=${PARALLEL_THREADS:-5}
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/credentials/service-account-key.json
+    volumes:
+      # Mount test results for access from host
+      - ./target/surefire-reports:/app/target/surefire-reports
+      - ./target/cucumber-reports:/app/target/cucumber-reports
+      # Mount Google Cloud credentials if needed
+      - ~/.config/gcloud:/app/credentials:ro
+    networks:
+      - selenium-grid
+    # Override command to run specific tests
+    # command: ["-Dtest=Scenarios#Google"]
+
+networks:
+  selenium-grid:
+    driver: bridge
+
+# Usage:
+# 1. Start Selenium Grid only:
+#    docker-compose up -d selenium-hub chrome-node-1 chrome-node-2 firefox-node edge-node
+#
+# 2. Run tests:
+#    docker-compose up tests
+#
+# 3. Run specific test:
+#    docker-compose run --rm tests -Dtest=Scenarios#Google
+#
+# 4. View Selenium Grid Console:
+#    http://localhost:4444
+#
+# 5. Debug with VNC (password: secret):
+#    Chrome 1: vnc://localhost:5900
+#    Chrome 2: vnc://localhost:5901
+#    Firefox:  vnc://localhost:5902
+#    Edge:     vnc://localhost:5903
+#
+# 6. Debug with noVNC (browser):
+#    Chrome 1: http://localhost:7900
+#    Chrome 2: http://localhost:7901
+#    Firefox:  http://localhost:7902
+#    Edge:     http://localhost:7903
+#
+# 7. Stop all:
+#    docker-compose down
+#
+# 8. Clean up everything:
+#    docker-compose down -v --remove-orphans
+

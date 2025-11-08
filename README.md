@@ -440,18 +440,49 @@ pre-commit run --all-files
 
 ---
 
-## 🌐 Selenium Grid
+## 🐳 Docker & Selenium Grid
 
-### Local Grid
+### Quick Start with Docker
+
+```bash
+# 1. Start Selenium Grid
+docker-compose up -d selenium-hub chrome-node-1 firefox-node
+
+# 2. Run tests in Docker
+docker-compose up tests
+
+# 3. Run specific test
+docker-compose run --rm tests -Dtest=Scenarios#Google
+
+# 4. Stop everything
+docker-compose down
+```
+
+### Selenium Grid Console
+
+- **Web UI**: http://localhost:4444
+- **Chrome VNC**: vnc://localhost:5900 or http://localhost:7900 (noVNC)
+- **Firefox VNC**: vnc://localhost:5902 or http://localhost:7902 (noVNC)
+
+### Docker Features
+
+- ✅ **Selenium Hub** with 2 Chrome, Firefox, and Edge nodes
+- ✅ **VNC debugging** for visual test monitoring
+- ✅ **Automatic driver management** with WebDriverManager
+- ✅ **Multi-stage builds** for optimized images
+- ✅ **GitHub Actions CI/CD** workflow included
+- ✅ **Parallel execution** across multiple nodes
+
+**See [docs/DOCKER.md](docs/DOCKER.md) for complete Docker guide**
+
+### Local Grid (Without Docker)
+
 ```bash
 # Framework supports Selenium Grid for parallel execution
 # Configure in Configurations/Environments.xml
 <RUN_REMOTE>true</RUN_REMOTE>
-```
 
-### Remote Execution
-```bash
-# Run on Selenium Grid
+# Run on local Selenium Grid
 ./mvnw test -DrunRemote=true -DgridHub=http://localhost:4444/wd/hub
 ```
 
@@ -582,7 +613,10 @@ cp XML/UserSettings.xml.template XML/UserSettings.xml
 | **Excel** | Apache POI | 5.3.0 |
 | **PDF** | PDFBox | 3.0.3 |
 | **Security** | Google Cloud Secret Manager | 2.48.0 |
+| **Driver Management** | WebDriverManager | 5.9.2 |
 | **Database** | H2, SQLite, MSSQL | Various |
+| **Docker** | Docker Compose | 3.8 |
+| **CI/CD** | GitHub Actions | Latest |
 
 **Total**: 50+ dependencies, all managed via Maven
 
@@ -604,22 +638,34 @@ cp XML/UserSettings.xml.template XML/UserSettings.xml
 ## 🏆 Recent Achievements
 
 ### November 8, 2025
+
+- ✅ **Docker & Infrastructure Complete**
+  - Integrated WebDriverManager for automatic driver management
+  - Created Dockerfile with multi-stage build
+  - Implemented Docker Compose with Selenium Grid (Hub + 4 nodes)
+  - Added VNC debugging support
+  - Created GitHub Actions CI/CD workflow
+  - Comprehensive Docker documentation
+
 - ✅ **Security Overhaul Complete**
   - Migrated 43 passwords to Google Cloud Secret Manager
   - Removed all hardcoded credentials
   - Security status: CRITICAL → SECURE
 
-- ✅ **Quick Wins Complete**
+- ✅ **Quick Wins & Documentation Complete**
+  - Enhanced README with 700+ lines
   - Maven wrapper added
   - Helper scripts created
   - Pre-commit hooks configured
   - GitHub templates added
   - License and Code of Conduct added
+  - Documentation organization complete
 
 - ✅ **Progress**
-  - 40/150 tasks completed (27%)
-  - 4/10 milestones achieved
-  - 7 commits, 500+ files added
+  - 50/150 tasks completed (33%)
+  - Phase 1 (Security): 100% ✅
+  - Phase 2 (Docker): 25% 🔄
+  - 10 commits, 500+ files managed
 
 ---
 
