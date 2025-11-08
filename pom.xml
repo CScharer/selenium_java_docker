@@ -109,6 +109,12 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 		
 		<!-- Logging -->
 		<log4j2.version>2.22.0</log4j2.version>
+		
+		<!-- API Testing -->
+		<rest-assured.version>5.4.0</rest-assured.version>
+		<json-path.version>5.4.0</json-path.version>
+		<json-schema-validator.version>5.4.0</json-schema-validator.version>
+		
 		<selenium-api.version>${selenium.version}</selenium-api.version>
 		<selenium-chrome-driver.version>${selenium.version}</selenium-chrome-driver.version>
 		<selenium-edge-driver.version>${selenium.version}</selenium-edge-driver.version>
@@ -572,6 +578,26 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j2-impl</artifactId>
 			<version>${log4j2.version}</version>
+		</dependency>
+		
+		<!-- REST Assured for API Testing -->
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>${rest-assured.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>json-path</artifactId>
+			<version>${json-path.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>json-schema-validator</artifactId>
+			<version>${json-schema-validator.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

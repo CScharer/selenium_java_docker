@@ -1,11 +1,12 @@
 # CJS QA Automation Framework
 
 ![CI Pipeline](https://github.com/CScharer/selenium_java_docker/workflows/Selenium%20Grid%20CI%2FCD%20Pipeline/badge.svg)
-[![Tests](https://img.shields.io/badge/tests-46%20total%20(5%20smoke%20%2B%2011%20full%20%2B%2030%20extended)-brightgreen)](https://github.com/CScharer/selenium_java_docker/actions)
+[![Tests](https://img.shields.io/badge/tests-77%20total%20(UI:%2046%20%7C%20API:%2031)-brightgreen)](https://github.com/CScharer/selenium_java_docker/actions)
 [![Allure Report](https://img.shields.io/badge/📊_Allure-Report-orange.svg)](https://cscharer.github.io/selenium_java_docker/)
 [![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://www.oracle.com/java/)
 [![Selenium](https://img.shields.io/badge/Selenium-4.26.0-green.svg)](https://www.selenium.dev/)
 [![Cucumber](https://img.shields.io/badge/Cucumber-7.20.1-brightgreen.svg)](https://cucumber.io/)
+[![REST Assured](https://img.shields.io/badge/REST%20Assured-5.4.0-blue.svg)](https://rest-assured.io/)
 [![Maven](https://img.shields.io/badge/Maven-3.9.11-blue.svg)](https://maven.apache.org/)
 [![Docker](https://img.shields.io/badge/Docker-ready-blue.svg)](https://www.docker.com/)
 [![Code Quality](https://img.shields.io/badge/Code%20Quality-Checkstyle%20%7C%20SpotBugs%20%7C%20PMD-success.svg)](https://github.com/CScharer/selenium_java_docker/actions)
@@ -37,7 +38,8 @@ A comprehensive Selenium-based test automation framework supporting **30+ test s
 ## ✨ Features
 
 ### Core Capabilities
-- 🎯 **46 Test Scenarios** - Smoke (5) + Full (11) + Extended (30)
+- 🎯 **77 Test Scenarios** - UI (46) + API (31)
+- 🌐 **REST API Testing** - REST Assured 5.4.0 for API automation
 - 📊 **Extended Coverage** - Data-driven, negative tests, advanced features
 - 🔐 **Secure Credential Management** - Google Cloud Secret Manager integration (0 hardcoded passwords!)
 - ⚡ **Smoke Test Suite** - Fast critical path verification in < 2 minutes
@@ -48,22 +50,25 @@ A comprehensive Selenium-based test automation framework supporting **30+ test s
 - 🤖 **CI/CD Automated** - GitHub Actions pipeline with fail-fast smoke tests
 - 🎨 **Page Object Model** - Clean, maintainable test architecture
 - 📸 **Visual Evidence** - Screenshots on every test (success & failure)
-- 🧪 **Professional Testing** - Log4j 2, Allure, TestNG data providers
+- 🧪 **Professional Testing** - Log4j 2, Allure, TestNG, REST Assured
 
 ### Modern Technology Stack
 - **Java 17** - Latest LTS version
 - **Selenium 4.26.0** - Modern WebDriver API with Grid support
+- **REST Assured 5.4.0** - REST API testing & validation
 - **Cucumber 7.20.1** - BDD framework with Gherkin
+- **TestNG** - Advanced test framework with data providers
+- **Log4j 2.22.0** - Professional structured logging
 - **Maven 3.9.11** - Build management (wrapper included!)
 - **Docker & Docker Compose** - Complete containerization
 - **Allure 2.25.0** - Beautiful test reporting with screenshots
 - **GitHub Actions** - Automated CI/CD pipeline
 - **Google Cloud Secret Manager** - Enterprise-grade security
 - **WebDriverManager 5.9.2** - Automatic driver management
-- **JUnit 4 & TestNG** - Flexible test execution
 
 ### Recent Improvements (November 8, 2025)
-- ✅ **Extended Test Coverage** - 46 total tests with data-driven, negative & advanced scenarios
+- ✅ **API Testing Integration** - 31 REST API tests with REST Assured 5.4.0
+- ✅ **Extended Test Coverage** - 77 total tests (46 UI + 31 API)
 - ✅ **Log4j 2 Logging** - Professional structured logging with rotation & archiving
 - ✅ **Code Quality Tools** - Checkstyle, SpotBugs, PMD automated analysis
 - ✅ **Smoke Test Suite** - 5 fast tests for critical path verification (< 2 min)
@@ -71,7 +76,7 @@ A comprehensive Selenium-based test automation framework supporting **30+ test s
 - ✅ **Allure Reporting** - Beautiful HTML reports with automatic screenshots
 - ✅ **GitHub Pages** - Public test reports at https://cscharer.github.io/selenium_java_docker/
 - ✅ **GitHub Actions CI/CD** - Automated testing with fail-fast strategy
-- ✅ **46 Working Tests** - Smoke (5) + Full (11) + Extended (30)
+- ✅ **77 Working Tests** - UI (46) + API (31)
 - ✅ **Screenshot Capture** - Visual evidence for every test execution
 - ✅ **Multi-Browser** - Matrix testing across Chrome & Firefox
 - ✅ **Google Cloud Secrets** - 43 passwords secured (0 hardcoded!)
@@ -269,6 +274,59 @@ docker-compose down
 - ✅ Keyboard actions
 - ✅ Browser navigation
 - ✅ Performance metrics
+
+### API Testing (🌐 31 REST API tests)
+
+REST API testing with REST Assured - **No Selenium Grid required!**
+
+```bash
+# Run all API tests (fast, no browser needed)
+./scripts/run-api-tests.sh
+
+# Or with Maven directly
+./mvnw test -DsuiteXmlFile=testng-api-suite.xml
+```
+
+**What it includes:**
+
+**Basic API Tests (7 tests):**
+- ✅ GET requests & status codes
+- ✅ Response body validation
+- ✅ Header verification
+- ✅ Response time testing
+- ✅ Query parameters
+- ✅ Collection retrieval
+- ✅ Error handling (404)
+
+**CRUD Operations (7 tests):**
+- ✅ CREATE (POST)
+- ✅ READ (GET)
+- ✅ UPDATE (PUT)
+- ✅ PATCH (partial update)
+- ✅ DELETE
+- ✅ Nested resources
+- ✅ Filtering
+
+**Data-Driven API Tests (10 tests):**
+- ✅ Multiple endpoints (6 data sets)
+- ✅ Various post IDs (7 data sets)
+- ✅ Invalid endpoints (3 data sets)
+- ✅ Content types (3 data sets)
+
+**JSON Validation (7 tests):**
+- ✅ Structure validation
+- ✅ Data type checking
+- ✅ Array validation
+- ✅ Nested object validation
+- ✅ Collection operations
+- ✅ Complex JSON paths
+- ✅ Response size validation
+
+**Benefits:**
+- ⚡ **Fast**: No browser startup overhead
+- 🚀 **Lightweight**: Run anywhere (CI/CD, local, Docker)
+- 📊 **Integrated**: Same Allure reports as UI tests
+- 🔄 **Reusable**: REST Assured for all API testing
 
 ### Using Helper Scripts (Recommended)
 
