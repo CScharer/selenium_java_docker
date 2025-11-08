@@ -95,6 +95,17 @@ jobs:
           timeout 60 bash -c 'until curl -sf http://localhost:4444/wd/hub/status; do sleep 2; done'
           echo "Grid is ready!"
 
+      - name: Verify TestNG Suite Configuration
+        run: |
+          echo "=== TestNG Suite File ==="
+          cat src/test/resources/testng-ci-suite.xml
+          echo ""
+          echo "=== Checking for Allure Listener ==="
+          grep -i "AllureTestNg" src/test/resources/testng-ci-suite.xml && echo "✅ Listener found in suite!" || echo "❌ Listener NOT found!"
+          echo ""
+          echo "=== ServiceLoader File ==="
+          cat src/test/resources/META-INF/services/org.testng.ITestNGListener || echo "❌ ServiceLoader file missing"
+
       - name: Run Grid Tests
         env:
           SELENIUM_REMOTE_URL: http://localhost:4444/wd/hub
@@ -105,11 +116,23 @@ jobs:
       - name: Debug test results
         if: always()
         run: |
-          echo "Checking for test results..."
+          echo "=== Checking for test results ==="
           ls -la target/ || echo "No target directory"
+          echo ""
+          echo "=== Surefire Reports ==="
           ls -la target/surefire-reports/ || echo "No surefire-reports"
+          echo ""
+          echo "=== Allure Results Directory ==="
           ls -la target/allure-results/ || echo "No allure-results"
-          find target -name "*-result.json" || echo "No Allure JSON files"
+          echo ""
+          echo "=== Allure JSON Files ==="
+          find target -name "*-result.json" -ls || echo "No Allure JSON files"
+          echo ""
+          echo "=== Allure PNG Files ==="
+          find target -name "*.png" -ls || echo "No PNG files"
+          echo ""
+          echo "=== Total Allure File Count ==="
+          find target/allure-results -type f 2>/dev/null | wc -l || echo "0"
       
       - name: Upload test results
         if: always()
