@@ -46,7 +46,17 @@ services:
     ports:
       - "5900:5900"      # VNC port for debugging
       - "7900:7900"      # noVNC web interface
+    volumes:
+      - ./videos:/videos
     shm_size: 2gb
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2G
+        reservations:
+          cpus: '1.0'
+          memory: 1G
     networks:
       - selenium-grid
     healthcheck:
@@ -175,9 +185,53 @@ services:
     # Override command to run specific tests
     # command: ["-Dtest=Scenarios#Google"]
 
+  # Prometheus - Metrics Collection
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    platform: linux/arm64
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    networks:
+      - selenium-grid
+    restart: unless-stopped
+
+  # Grafana - Visualization Dashboard
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    platform: linux/arm64
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+    networks:
+      - selenium-grid
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
 networks:
   selenium-grid:
     driver: bridge
+
+volumes:
+  prometheus-data:
+  grafana-data:
 
 # Usage:
 # 1. Start Selenium Grid only:
@@ -209,4 +263,3 @@ networks:
 #
 # 8. Clean up everything:
 #    docker-compose down -v --remove-orphans
-
