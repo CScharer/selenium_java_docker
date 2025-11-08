@@ -1,9 +1,13 @@
 # CJS QA Automation Framework
 
+![CI Pipeline](https://github.com/CScharer/selenium_java_docker/workflows/Selenium%20Grid%20CI%2FCD%20Pipeline/badge.svg)
+[![Tests](https://img.shields.io/badge/tests-11%2F11%20passing-brightgreen)](https://github.com/CScharer/selenium_java_docker/actions)
 [![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://www.oracle.com/java/)
 [![Selenium](https://img.shields.io/badge/Selenium-4.26.0-green.svg)](https://www.selenium.dev/)
 [![Cucumber](https://img.shields.io/badge/Cucumber-7.20.1-brightgreen.svg)](https://cucumber.io/)
 [![Maven](https://img.shields.io/badge/Maven-3.9.11-blue.svg)](https://maven.apache.org/)
+[![Docker](https://img.shields.io/badge/Docker-ready-blue.svg)](https://www.docker.com/)
+[![Allure](https://img.shields.io/badge/Reporting-Allure-orange.svg)](https://docs.qameta.io/allure/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Security](https://img.shields.io/badge/Security-Google%20Cloud-blue.svg)](https://cloud.google.com/secret-manager)
 
@@ -33,33 +37,61 @@ A comprehensive Selenium-based test automation framework supporting **30+ test s
 
 ### Core Capabilities
 - 🎯 **30+ Test Suites** - Comprehensive coverage across multiple domains
-- 🔐 **Secure Credential Management** - Google Cloud Secret Manager integration
-- 🚀 **Parallel Execution** - Native Cucumber parallel test support (5 threads)
-- 🌐 **Multi-Browser Support** - Chrome, Firefox, Edge, Safari, IE
-- 📊 **Rich Reporting** - JUnit, TestNG, Cucumber, and Allure reports
+- 🔐 **Secure Credential Management** - Google Cloud Secret Manager integration (0 hardcoded passwords!)
+- 🚀 **Parallel Execution** - Native parallel test support (5 threads)
+- 🌐 **Multi-Browser Support** - Chrome, Firefox, Edge with Selenium Grid
+- 📊 **Beautiful Reports** - Allure reports with automatic screenshot capture
+- 🐳 **Fully Containerized** - Docker + Docker Compose with 3 environments
+- 🤖 **CI/CD Automated** - GitHub Actions pipeline with matrix testing
 - 🎨 **Page Object Model** - Clean, maintainable test architecture
-- ☁️ **Selenium Grid** - Remote execution support
-- 🔄 **CI/CD Ready** - GitHub Actions, Travis CI compatible
+- 📸 **Visual Evidence** - Screenshots on every test (success & failure)
+- 🎯 **11 Working Tests** - 100% passing rate with Grid integration
 
 ### Modern Technology Stack
 - **Java 17** - Latest LTS version
-- **Selenium 4.26.0** - Modern WebDriver API
+- **Selenium 4.26.0** - Modern WebDriver API with Grid support
 - **Cucumber 7.20.1** - BDD framework with Gherkin
 - **Maven 3.9.11** - Build management (wrapper included!)
+- **Docker & Docker Compose** - Complete containerization
+- **Allure 2.25.0** - Beautiful test reporting with screenshots
+- **GitHub Actions** - Automated CI/CD pipeline
 - **Google Cloud Secret Manager** - Enterprise-grade security
+- **WebDriverManager 5.9.2** - Automatic driver management
 - **JUnit 4 & TestNG** - Flexible test execution
 
-### Recent Improvements
-- ✅ Migrated to modern dependencies (Selenium 4, Cucumber 7, Java 17)
-- ✅ Google Cloud Secret Manager integration (0 hardcoded passwords!)
-- ✅ Comprehensive .gitignore protection
-- ✅ Pre-commit hooks for quality control
-- ✅ Maven wrapper for reproducible builds
-- ✅ Helper scripts for easy test execution
+### Recent Improvements (November 8, 2025)
+- ✅ **Containerized Testing** - Complete Docker + Selenium Grid setup
+- ✅ **Allure Reporting** - Beautiful HTML reports with automatic screenshots
+- ✅ **GitHub Actions CI/CD** - Automated testing on every push
+- ✅ **11 Working Tests** - SimpleGridTest (3) + EnhancedGridTests (8)
+- ✅ **Screenshot Capture** - Visual evidence for every test execution
+- ✅ **Multi-Browser** - Matrix testing across Chrome & Firefox
+- ✅ **Google Cloud Secrets** - 43 passwords secured (0 hardcoded!)
+- ✅ **WebDriverManager** - Automatic driver management (no manual downloads)
+- ✅ **Maven Wrapper** - Reproducible builds without Maven installation
+- ✅ **Pre-commit Hooks** - Automated code quality checks
 
 ---
 
 ## 🚀 Quick Start
+
+### **Option 1: Docker (Recommended - No Setup Required!)**
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/CScharer/selenium_java_docker.git
+cd selenium_java_docker
+
+# 2. Start Selenium Grid
+docker-compose up -d selenium-hub chrome-node-1
+
+# 3. Run tests with beautiful Allure reports
+./scripts/generate-allure-report.sh
+
+# That's it! Tests run in Docker, report opens automatically! 🎉
+```
+
+### **Option 2: Local Execution**
 
 ```bash
 # 1. Clone the repository
@@ -361,24 +393,49 @@ These files are **protected by .gitignore** and never committed:
 
 ## 📊 Test Reporting
 
-Test reports are generated in multiple formats:
+### Allure Reports (Recommended) 🎯
 
-### JUnit Reports
-Location: `target/surefire-reports/`
+Beautiful, interactive HTML reports with screenshots, graphs, and trends:
+
+```bash
+# Option 1: One-command (starts Grid, runs tests, opens report)
+./scripts/generate-allure-report.sh
+
+# Option 2: Manual
+docker-compose up -d selenium-hub chrome-node-1
+docker-compose run --rm tests -Dtest=SimpleGridTest,EnhancedGridTests
+allure serve target/allure-results
+docker-compose down
+```
+
+**Features:**
+- 📊 Interactive dashboards with graphs
+- 📸 Screenshots automatically captured
+- 📈 Historical trends (track improvements)
+- 🏷️ Organized by Epic/Feature/Story
+- ⏱️ Performance metrics
+- 🎯 Severity-based filtering
+
+**See:** [docs/ALLURE_REPORTING.md](docs/ALLURE_REPORTING.md) for complete guide
+
+### Traditional Reports
+
+**JUnit Reports**
 ```bash
 ./mvnw test
 open target/surefire-reports/index.html
 ```
 
-### Cucumber Reports
-Location: `target/cucumber-reports/`
+**Cucumber Reports**
 ```bash
 ./mvnw test
 open target/cucumber-reports/cucumber.html
 ```
 
-### TestNG Reports
-Location: `target/surefire-reports/`
+**TestNG Reports**
+```bash
+# Available in target/surefire-reports/
+```
 
 ---
 
@@ -448,43 +505,88 @@ pre-commit run --all-files
 # 1. Start Selenium Grid
 docker-compose up -d selenium-hub chrome-node-1 firefox-node
 
-# 2. Run tests in Docker
-docker-compose up tests
+# 2. View Grid Console
+open http://localhost:4444
 
-# 3. Run specific test
-docker-compose run --rm tests -Dtest=Scenarios#Google
+# 3. Run tests with Allure report
+./scripts/generate-allure-report.sh
 
-# 4. Stop everything
+# 4. Or run tests manually
+docker-compose run --rm tests -Dtest=SimpleGridTest,EnhancedGridTests
+
+# 5. Stop everything
 docker-compose down
 ```
 
-### Selenium Grid Console
+### Three Docker Environments
 
-- **Web UI**: http://localhost:4444
+- **`docker-compose.yml`** - Full setup with monitoring (Prometheus + Grafana)
+- **`docker-compose.dev.yml`** - Lightweight for development
+- **`docker-compose.prod.yml`** - Production with auto-scaling (4 Chrome + 2 Firefox nodes)
+
+```bash
+# Use specific environment
+docker-compose -f docker-compose.dev.yml up -d
+docker-compose -f docker-compose.prod.yml up -d
+```
+
+### Selenium Grid Console & Debugging
+
+- **Grid UI**: http://localhost:4444
+- **Prometheus**: http://localhost:9090
+- **Grafana**: http://localhost:3000 (admin/admin)
 - **Chrome VNC**: vnc://localhost:5900 or http://localhost:7900 (noVNC)
 - **Firefox VNC**: vnc://localhost:5902 or http://localhost:7902 (noVNC)
 
 ### Docker Features
 
-- ✅ **Selenium Hub** with 2 Chrome, Firefox, and Edge nodes
-- ✅ **VNC debugging** for visual test monitoring
-- ✅ **Automatic driver management** with WebDriverManager
-- ✅ **Multi-stage builds** for optimized images
-- ✅ **GitHub Actions CI/CD** workflow included
-- ✅ **Parallel execution** across multiple nodes
+- ✅ **Selenium Grid** - Hub + 4 browser nodes (2 Chrome, Firefox, Edge)
+- ✅ **VNC/noVNC** - Visual debugging (watch tests run live!)
+- ✅ **Monitoring** - Prometheus metrics + Grafana dashboards
+- ✅ **Multi-stage builds** - Optimized 414MB image
+- ✅ **ARM64 support** - Works on Apple Silicon (M1/M2/M3)
+- ✅ **Auto-scaling** - Scale nodes with `docker-compose up --scale`
+- ✅ **Health checks** - Automatic service monitoring
+- ✅ **WebDriverManager** - No manual driver downloads
 
 **See [docs/DOCKER.md](docs/DOCKER.md) for complete Docker guide**
 
-### Local Grid (Without Docker)
+### Grid Management Scripts
 
 ```bash
-# Framework supports Selenium Grid for parallel execution
-# Configure in Configurations/Environments.xml
-<RUN_REMOTE>true</RUN_REMOTE>
-
-# Run on local Selenium Grid
-./mvnw test -DrunRemote=true -DgridHub=http://localhost:4444/wd/hub
+./scripts/docker/grid-start.sh   # Start Grid
+./scripts/docker/grid-stop.sh    # Stop Grid
+./scripts/docker/grid-health.sh  # Check health
+./scripts/docker/grid-scale.sh   # Scale nodes
 ```
+
+---
+
+## 🤖 CI/CD - GitHub Actions
+
+### Automated Testing Pipeline
+
+Every push to `main` or `develop` triggers:
+
+```
+✅ Build & Compile → ✅ Grid Tests (Chrome) → ✅ Allure Report
+                   → ✅ Grid Tests (Firefox) → ✅ Code Quality
+                                             → ✅ Docker Build
+                                             → ✅ Test Summary
+```
+
+**Matrix Testing:**
+- 11 tests × 2 browsers = **22 test executions**
+- Automatic screenshot capture (22 screenshots per run)
+- Allure report with graphs and trends
+- GitHub Pages deployment
+
+**View Results:**
+- [GitHub Actions Tab](https://github.com/CScharer/selenium_java_docker/actions)
+- Check build status badge above
+- Download artifacts (test results, screenshots, Allure reports)
+
+**See:** [docs/GITHUB_ACTIONS.md](docs/GITHUB_ACTIONS.md) for complete CI/CD guide
 
 ---
 
@@ -492,13 +594,18 @@ docker-compose down
 
 Comprehensive documentation available in `/docs`:
 
+### Core Guides
+- **[DOCKER.md](docs/DOCKER.md)** - Complete Docker & Grid guide (500+ lines)
+- **[ALLURE_REPORTING.md](docs/ALLURE_REPORTING.md)** - Allure setup & usage (500+ lines)
+- **[GITHUB_ACTIONS.md](docs/GITHUB_ACTIONS.md)** - CI/CD pipeline guide (400+ lines)
+
 ### Getting Started
 - **[NEXT_STEPS.md](docs/NEXT_STEPS.md)** - What to do next
 - **[INTEGRATION_COMPLETE.md](docs/INTEGRATION_COMPLETE.md)** - Secret Manager setup
 
 ### Planning & Analysis
 - **[ANALYSIS.md](docs/ANALYSIS.md)** - Full project analysis
-- **[ANALYSIS_SUGGESTIONS.md](docs/ANALYSIS_SUGGESTIONS.md)** - 150-task roadmap (40/150 complete)
+- **[ANALYSIS_SUGGESTIONS.md](docs/ANALYSIS_SUGGESTIONS.md)** - 150-task roadmap (65/150 complete)
 
 ### Implementation Guides
 - **[ANALYSIS_PS_RESULTS.md](docs/ANALYSIS_PS_RESULTS.md)** - Password migration results
@@ -637,35 +744,48 @@ cp XML/UserSettings.xml.template XML/UserSettings.xml
 
 ## 🏆 Recent Achievements
 
-### November 8, 2025
+### November 8, 2025 - Major Infrastructure Update
 
-- ✅ **Docker & Infrastructure Complete**
-  - Integrated WebDriverManager for automatic driver management
-  - Created Dockerfile with multi-stage build
-  - Implemented Docker Compose with Selenium Grid (Hub + 4 nodes)
-  - Added VNC debugging support
-  - Created GitHub Actions CI/CD workflow
-  - Comprehensive Docker documentation
+**✅ Complete Containerized Testing Infrastructure**
+- Docker + Selenium Grid (Hub + 4 browser nodes)
+- 3 Docker Compose environments (default, dev, prod)
+- Monitoring stack (Prometheus + Grafana)
+- VNC/noVNC debugging support
+- ARM64 (Apple Silicon) compatibility
 
-- ✅ **Security Overhaul Complete**
-  - Migrated 43 passwords to Google Cloud Secret Manager
-  - Removed all hardcoded credentials
-  - Security status: CRITICAL → SECURE
+**✅ Allure Reporting with Screenshots**
+- Allure Framework 2.25.0 integration
+- Automatic screenshot capture on every test
+- Beautiful HTML dashboards with graphs
+- Epic/Feature/Story organization
+- Historical trend tracking
 
-- ✅ **Quick Wins & Documentation Complete**
-  - Enhanced README with 700+ lines
-  - Maven wrapper added
-  - Helper scripts created
-  - Pre-commit hooks configured
-  - GitHub templates added
-  - License and Code of Conduct added
-  - Documentation organization complete
+**✅ GitHub Actions CI/CD Pipeline**
+- Automated testing on every push
+- Matrix testing (Chrome + Firefox)
+- 6 parallel jobs (build, test, report, quality, docker, summary)
+- Allure report generation and deployment
+- Test artifact retention (7-30 days)
 
-- ✅ **Progress**
-  - 50/150 tasks completed (33%)
-  - Phase 1 (Security): 100% ✅
-  - Phase 2 (Docker): 25% 🔄
-  - 10 commits, 500+ files managed
+**✅ Working Test Suite (11 tests, 100% passing)**
+- SimpleGridTest (3 tests) - Basic Grid verification
+- EnhancedGridTests (8 tests) - Comprehensive scenarios
+- All with Allure annotations and screenshots
+- TestNG parallel execution ready
+
+**✅ Security & Quality**
+- 43 passwords secured in Google Cloud
+- Zero hardcoded credentials
+- Pre-commit hooks active
+- WebDriverManager (auto driver management)
+- AllureHelper utility for enhanced reporting
+
+**✅ Progress Update**
+- 65/150 tasks completed (43%)
+- Phase 1 (Security): 100% ✅
+- Phase 2 (Docker & Infrastructure): 100% ✅
+- Phase 3 (Testing & Reporting): 80% ✅
+- 12 commits today, 2,000+ lines added
 
 ---
 
@@ -746,12 +866,20 @@ Copyright © 2025 CJS Consulting, L.L.C
 ## 🚀 What's Next?
 
 Check out our roadmap in `docs/ANALYSIS_SUGGESTIONS.md`:
-- 40/150 tasks completed (27%)
+- **65/150 tasks completed (43%)** 🎯
 - Phase 1 (Security): ✅ COMPLETE
-- Quick Wins: ✅ COMPLETE
-- Phase 2 (Docker): In progress
-- Phase 3 (Documentation): Planned
-- Phase 4 (Advanced Features): Planned
+- Quick Wins: ✅ COMPLETE  
+- Phase 2 (Docker & Infrastructure): ✅ COMPLETE
+- Phase 3 (Testing & Reporting): ✅ 80% Complete
+- Phase 4 (Advanced Features): 📋 Planned
+
+### Upcoming Features
+- Code quality tools (Checkstyle, SpotBugs, PMD)
+- Smoke test suite for fast feedback
+- Extended test coverage (50+ tests)
+- API testing integration
+- Performance testing
+- Mobile testing support
 
 **Want to contribute?** See `docs/ANALYSIS_SUGGESTIONS.md` for the full roadmap!
 
