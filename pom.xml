@@ -652,11 +652,15 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 				</dependencies>
 				<configuration>
 					<configLocation>google_checks.xml</configLocation>
-					<consoleOutput>true</consoleOutput>
+					<consoleOutput>false</consoleOutput>
 					<failsOnError>false</failsOnError>
 					<failOnViolation>false</failOnViolation>
 					<violationSeverity>warning</violationSeverity>
-					<includeTestSourceDirectory>true</includeTestSourceDirectory>
+					<includeTestSourceDirectory>false</includeTestSourceDirectory>
+					<includes>**/com/cjs/qa/junit/tests/*.java</includes>
+					<sourceDirectories>
+						<sourceDirectory>${project.build.testSourceDirectory}/com/cjs/qa/junit/tests</sourceDirectory>
+					</sourceDirectories>
 				</configuration>
 				<executions>
 					<execution>
