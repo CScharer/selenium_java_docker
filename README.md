@@ -1,7 +1,7 @@
 # CJS QA Automation Framework
 
 ![CI Pipeline](https://github.com/CScharer/selenium_java_docker/workflows/Selenium%20Grid%20CI%2FCD%20Pipeline/badge.svg)
-[![Tests](https://img.shields.io/badge/tests-11%2F11%20passing-brightgreen)](https://github.com/CScharer/selenium_java_docker/actions)
+[![Tests](https://img.shields.io/badge/tests-16%20total%20(5%20smoke%20%2B%2011%20full)-brightgreen)](https://github.com/CScharer/selenium_java_docker/actions)
 [![Allure Report](https://img.shields.io/badge/📊_Allure-Report-orange.svg)](https://cscharer.github.io/selenium_java_docker/)
 [![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://www.oracle.com/java/)
 [![Selenium](https://img.shields.io/badge/Selenium-4.26.0-green.svg)](https://www.selenium.dev/)
@@ -38,14 +38,15 @@ A comprehensive Selenium-based test automation framework supporting **30+ test s
 ### Core Capabilities
 - 🎯 **30+ Test Suites** - Comprehensive coverage across multiple domains
 - 🔐 **Secure Credential Management** - Google Cloud Secret Manager integration (0 hardcoded passwords!)
+- ⚡ **Smoke Test Suite** - Fast critical path verification in < 2 minutes
 - 🚀 **Parallel Execution** - Native parallel test support (5 threads)
 - 🌐 **Multi-Browser Support** - Chrome, Firefox, Edge with Selenium Grid
 - 📊 **Beautiful Reports** - Allure reports with automatic screenshot capture
 - 🐳 **Fully Containerized** - Docker + Docker Compose with 3 environments
-- 🤖 **CI/CD Automated** - GitHub Actions pipeline with matrix testing
+- 🤖 **CI/CD Automated** - GitHub Actions pipeline with fail-fast smoke tests
 - 🎨 **Page Object Model** - Clean, maintainable test architecture
 - 📸 **Visual Evidence** - Screenshots on every test (success & failure)
-- 🎯 **11 Working Tests** - 100% passing rate with Grid integration
+- 🎯 **16 Working Tests** - 100% passing rate with Grid integration
 
 ### Modern Technology Stack
 - **Java 17** - Latest LTS version
@@ -60,10 +61,12 @@ A comprehensive Selenium-based test automation framework supporting **30+ test s
 - **JUnit 4 & TestNG** - Flexible test execution
 
 ### Recent Improvements (November 8, 2025)
+- ✅ **Smoke Test Suite** - 5 fast tests for critical path verification (< 2 min)
 - ✅ **Containerized Testing** - Complete Docker + Selenium Grid setup
 - ✅ **Allure Reporting** - Beautiful HTML reports with automatic screenshots
-- ✅ **GitHub Actions CI/CD** - Automated testing on every push
-- ✅ **11 Working Tests** - SimpleGridTest (3) + EnhancedGridTests (8)
+- ✅ **GitHub Pages** - Public test reports at https://cscharer.github.io/selenium_java_docker/
+- ✅ **GitHub Actions CI/CD** - Automated testing with fail-fast strategy
+- ✅ **16 Working Tests** - SmokeTests (5) + SimpleGridTest (3) + EnhancedGridTests (8)
 - ✅ **Screenshot Capture** - Visual evidence for every test execution
 - ✅ **Multi-Browser** - Matrix testing across Chrome & Firefox
 - ✅ **Google Cloud Secrets** - 43 passwords secured (0 hardcoded!)
@@ -207,6 +210,27 @@ See `Configurations/README.md` for details.
 ---
 
 ## 🧪 Running Tests
+
+### Quick Smoke Tests (⚡ < 2 minutes)
+
+Fast critical path verification before committing:
+
+```bash
+# Run smoke tests (5 critical tests)
+./scripts/run-smoke-tests.sh
+
+# Or with Docker directly
+docker-compose up -d selenium-hub chrome-node-1
+docker-compose run --rm tests -Dtest=SmokeTests
+docker-compose down
+```
+
+**What it does:**
+- ✅ Verifies Grid connection
+- ✅ Tests basic navigation
+- ✅ Checks search functionality
+- ✅ Validates form interaction
+- ✅ Fast feedback (< 2 min vs 15+ min full suite)
 
 ### Using Helper Scripts (Recommended)
 
