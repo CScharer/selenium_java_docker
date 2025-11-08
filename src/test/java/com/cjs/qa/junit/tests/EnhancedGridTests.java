@@ -1,5 +1,6 @@
 package com.cjs.qa.junit.tests;
 
+import com.cjs.qa.utilities.AllureHelper;
 import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -11,6 +12,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import java.net.URL;
@@ -68,6 +70,7 @@ public class EnhancedGridTests {
         System.out.println(">>> Test: Google Homepage");
         Allure.step("Navigate to Google homepage");
         driver.get("https://www.google.com");
+        AllureHelper.captureScreenshot(driver, "Google-Homepage");
 
         String title = driver.getTitle();
         System.out.println("Page title: " + title);
@@ -107,6 +110,7 @@ public class EnhancedGridTests {
         // Verify URL changed
         String currentUrl = driver.getCurrentUrl();
         System.out.println("Results URL: " + currentUrl);
+        AllureHelper.captureScreenshot(driver, "Google-Search-Results");
 
         Assert.assertNotEquals(currentUrl, initialUrl, "URL should have changed after search");
         Assert.assertTrue(currentUrl.contains("google.com"), "Should still be on Google");
@@ -132,6 +136,8 @@ public class EnhancedGridTests {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement logo = wait.until(ExpectedConditions.presenceOfElementLocated(
             By.cssSelector("[aria-label*='Homepage'], .octicon-mark-github, [data-testid='github-logo']")));
+        
+        AllureHelper.captureScreenshot(driver, "GitHub-Homepage");
 
         Assert.assertNotNull(logo, "GitHub logo should be present");
         System.out.println("✅ GitHub homepage verified");
@@ -256,8 +262,22 @@ public class EnhancedGridTests {
     }
 
     @AfterMethod
-    public void tearDown() {
+    public void tearDown(ITestResult result) {
         if (driver != null) {
+            // Capture screenshot based on test result
+            if (result.getStatus() == ITestResult.FAILURE) {
+                System.out.println("❌ Test failed - capturing failure evidence...");
+                AllureHelper.captureScreenshot(driver, "FAILURE-" + result.getName());
+                AllureHelper.attachPageSource(driver);
+                AllureHelper.attachBrowserLogs(driver);
+                AllureHelper.logBrowserInfo(driver);
+            } else if (result.getStatus() == ITestResult.SUCCESS) {
+                System.out.println("✅ Test passed - capturing success screenshot...");
+                AllureHelper.captureScreenshot(driver, "SUCCESS-" + result.getName());
+            } else if (result.getStatus() == ITestResult.SKIP) {
+                System.out.println("⏭️  Test skipped");
+            }
+            
             System.out.println("\nClosing " + currentBrowser.toUpperCase() + " browser...");
             driver.quit();
             System.out.println("Browser closed successfully");

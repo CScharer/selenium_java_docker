@@ -1,10 +1,12 @@
 package com.cjs.qa.junit.tests;
 
+import com.cjs.qa.utilities.AllureHelper;
 import io.qameta.allure.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import java.net.URL;
@@ -87,8 +89,19 @@ public class SimpleGridTest {
     }
 
     @AfterMethod
-    public void tearDown() {
+    public void tearDown(ITestResult result) {
         if (driver != null) {
+            // Capture screenshot on failure
+            if (result.getStatus() == ITestResult.FAILURE) {
+                System.out.println("❌ Test failed - capturing screenshot...");
+                AllureHelper.captureScreenshot(driver, "FAILURE-" + result.getName());
+                AllureHelper.attachPageSource(driver);
+                AllureHelper.logBrowserInfo(driver);
+            } else if (result.getStatus() == ITestResult.SUCCESS) {
+                System.out.println("✅ Test passed - capturing success screenshot...");
+                AllureHelper.captureScreenshot(driver, "SUCCESS-" + result.getName());
+            }
+            
             System.out.println("Closing browser...");
             driver.quit();
             System.out.println("Browser closed successfully");
