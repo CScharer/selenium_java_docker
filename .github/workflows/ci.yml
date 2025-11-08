@@ -97,7 +97,7 @@ jobs:
           SELENIUM_REMOTE_URL: http://localhost:4444/wd/hub
           BROWSER: ${{ matrix.browser }}
         run: |
-          ./mvnw test -Dtest=SimpleGridTest,EnhancedGridTests
+          ./mvnw test -DsuiteXmlFile=testng-ci-suite.xml
 
       - name: Debug test results
         if: always()
