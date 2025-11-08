@@ -1,9 +1,9 @@
 # CHANGE LOG
 
-## [2025-11-08 10:45:00 CST] - Fix: CI/CD Test Timeouts and Enhanced Diagnostics ✅
+## [2025-11-08 10:45:00 CST] - Fix: CI/CD Test Timeouts and Grid Readiness ✅
 
 ### Overview
-Fixed timeout issues in CI/CD and enhanced test result diagnostics. Smoke tests were timing out at 3 minutes, increased to 5 minutes. Grid tests now have 15-minute timeout. Added detailed test execution summaries to better diagnose issues.
+Fixed timeout issues in CI/CD by improving Grid readiness verification and adding fail-fast checks. Smoke tests were timing out because Grid wasn't fully ready. Added comprehensive readiness checks to ensure nodes are registered and available before tests start.
 
 ### Problem
 
@@ -13,20 +13,45 @@ Error: The action 'Run Smoke Tests' has timed out after 3 minutes
 ```
 
 **Root Causes:**
-1. 3-minute timeout too short for 5 smoke tests + Grid connection
-2. Grid connection can take 15-30 seconds
-3. Each smoke test ~30-60 seconds
-4. Total needed: ~4-5 minutes minimum
+1. Tests starting before Grid nodes fully registered
+2. Node registration can take 10-30 seconds after Hub is up
+3. Tests hang waiting for unavailable Grid
+4. 3-minute timeout insufficient if Grid never becomes ready
 
 ### Solution
+
+**Enhanced Grid Readiness Checks:**
+```bash
+# Step 1: Wait for nodes to register (up to 60 seconds)
+for i in {1..30}; do
+  NODES=$(curl -sf http://localhost:4444/wd/hub/status | jq -r '.value.nodes | length')
+  if [ "$NODES" -gt "0" ]; then
+    break
+  fi
+  sleep 2
+done
+
+# Step 2: Fail fast if no nodes
+if [ "$NODES" -eq "0" ]; then
+  echo "❌ ERROR: No nodes registered!"
+  exit 1
+fi
+
+# Step 3: Verify Grid.ready = true
+READY=$(curl -sf http://localhost:4444/wd/hub/status | jq -r '.value.ready')
+if [ "$READY" != "true" ]; then
+  echo "❌ Grid not ready!"
+  exit 1
+fi
+```
 
 **Timeout Updates:**
 ```yaml
 # Smoke Tests
-timeout-minutes: 5  # Was: 3
+timeout-minutes: 5  # Was: 3 (reasonable buffer)
 
 # Grid Tests  
-timeout-minutes: 15  # Was: none
+timeout-minutes: 15  # Was: none (handles slower tests)
 ```
 
 **TestNG Suite Usage:**
@@ -114,9 +139,29 @@ Deploy to Pages:      ~30 sec
 Total:                ~15-20 min
 ```
 
+### Key Improvements
+
+**1. Fail-Fast Grid Check:**
+- Don't start tests if Grid not ready
+- Exit immediately if no nodes after 60s
+- Prevents hanging tests
+- Clear error messages
+
+**2. Dual Verification:**
+- Wait for nodes to register (loop)
+- Final readiness check before tests
+- Verify Grid.ready = true
+- Verify nodes > 0
+
+**3. Better Error Messages:**
+- Shows why Grid check failed
+- Displays Grid status JSON
+- Clear indication of what's wrong
+- Helps debugging
+
 ### Git Commit
 
-**Commit:** a1fe08b (amended to include CHANGE.log)  
+**Commit:** c1e4968  
 **Message:** "fix: Increase test timeouts and improve CI diagnostics"
 
 ### Verification

@@ -94,13 +94,35 @@ jobs:
             sleep 2
           done
 
+      - name: Verify Grid is ready
+        run: |
+          echo "Final Grid readiness check..."
+          GRID_STATUS=$(curl -sf http://localhost:4444/wd/hub/status)
+          echo "$GRID_STATUS" | jq '.'
+          
+          READY=$(echo "$GRID_STATUS" | jq -r '.value.ready')
+          NODES=$(echo "$GRID_STATUS" | jq -r '.value.nodes | length')
+          
+          echo "Grid Ready: $READY"
+          echo "Nodes Available: $NODES"
+          
+          if [ "$READY" != "true" ] || [ "$NODES" -eq "0" ]; then
+            echo "❌ Grid is not ready! Aborting smoke tests."
+            exit 1
+          fi
+          
+          echo "✅ Grid is fully ready with $NODES node(s)"
+      
       - name: Run Smoke Tests
         timeout-minutes: 5
         env:
           SELENIUM_REMOTE_URL: http://localhost:4444/wd/hub
         run: |
           echo "Starting smoke tests..."
+          echo "Grid URL: $SELENIUM_REMOTE_URL"
+          
           ./mvnw test -DsuiteXmlFile=testng-smoke-suite.xml -Dmaven.test.failure.ignore=true
+          
           echo "Smoke tests completed"
 
       - name: Verify smoke results
@@ -198,11 +220,31 @@ jobs:
               break
             fi
             if [ "$i" -eq "30" ]; then
-              echo "⚠️  Warning: No nodes registered after 30 attempts"
-              echo "Proceeding anyway..."
+              echo "❌ ERROR: No nodes registered after 60 seconds!"
+              echo "Grid will not be functional. Failing job."
+              exit 1
             fi
             sleep 2
           done
+      
+      - name: Verify Grid is ready
+        run: |
+          echo "Final Grid readiness check..."
+          GRID_STATUS=$(curl -sf http://localhost:4444/wd/hub/status)
+          echo "$GRID_STATUS" | jq '.'
+          
+          READY=$(echo "$GRID_STATUS" | jq -r '.value.ready')
+          NODES=$(echo "$GRID_STATUS" | jq -r '.value.nodes | length')
+          
+          echo "Grid Ready: $READY"
+          echo "Nodes Available: $NODES"
+          
+          if [ "$READY" != "true" ] || [ "$NODES" -eq "0" ]; then
+            echo "❌ Grid is not ready! Aborting tests."
+            exit 1
+          fi
+          
+          echo "✅ Grid is fully ready with $NODES node(s)"
 
       - name: Run Grid Tests
         timeout-minutes: 15
