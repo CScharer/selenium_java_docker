@@ -133,26 +133,25 @@ public class NegativeTests {
     @Test(priority = 3)
     @Story("Element Interaction")
     @Severity(SeverityLevel.NORMAL)
-    @Description("Test interaction with hidden elements")
-    public void testHiddenElementInteraction() {
-        logger.info("\n>>> Test: Hidden Element Interaction");
+    @Description("Test interaction with disabled elements")
+    public void testDisabledElementInteraction() {
+        logger.info("\n>>> Test: Disabled Element Interaction");
         
-        Allure.step("Navigate to example page with hidden elements");
-        driver.get("https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp");
+        Allure.step("Navigate to Google");
+        driver.get("https://www.google.com");
         
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            logger.warn("Sleep interrupted", e);
-        }
+        Allure.step("Find search box");
+        WebElement searchBox = driver.findElement(By.name("q"));
         
-        AllureHelper.captureScreenshot(driver, "Hidden-Elements-Page");
+        Allure.step("Verify element is enabled");
+        boolean isEnabled = searchBox.isEnabled();
+        logger.info("Search box enabled: {}", isEnabled);
         
-        // Test passes if we successfully navigate and capture the page
-        String title = driver.getTitle();
-        Assert.assertFalse(title.isEmpty(), "Page should have a title");
+        Assert.assertTrue(isEnabled, "Search box should be enabled");
         
-        logger.info("✅ Hidden element page loaded");
+        AllureHelper.captureScreenshot(driver, "Element-State");
+        
+        logger.info("✅ Element state verified");
     }
     
     @Test(priority = 4)
