@@ -1,5 +1,195 @@
 # CHANGE LOG
 
+## [2025-11-08 11:00:00 CST] - Fix: GitHub Actions Services Network Configuration ✅
+
+### Overview
+Fixed browser nodes not registering with Selenium Hub in GitHub Actions. The issue was that SE_EVENT_BUS_HOST was set to 'localhost' but services communicate via service names in Docker networks. Changed back to 'selenium-hub' for inter-service communication while keeping localhost for runner-to-service communication.
+
+### Problem
+
+**Grid Status:**
+```json
+{
+  "value": {
+    "ready": false,
+    "message": "Selenium Grid not ready.",
+    "nodes": []
+  }
+}
+```
+
+**Error:**
+```
+Grid Ready: false
+Nodes Available: 0
+❌ Grid is not ready! Aborting smoke tests.
+```
+
+**Root Cause:**
+```yaml
+# INCORRECT (Previous attempt)
+chrome-node:
+  env:
+    SE_EVENT_BUS_HOST: localhost  # ❌ Doesn't work in services
+```
+
+### GitHub Actions Services Network Model
+
+**How GitHub Actions Services Work:**
+
+1. **Services run in Docker network:**
+   - Each service gets a container
+   - Containers communicate via service names
+   - Service name = DNS hostname in network
+
+2. **Runner accesses services:**
+   - Via localhost + mapped ports
+   - Example: `http://localhost:4444` → `selenium-hub:4444`
+
+3. **Services access each other:**
+   - Via service names (NOT localhost)
+   - Example: `selenium-hub:4442` from chrome-node
+
+**The Issue:**
+```
+chrome-node (container)
+  └─> Tries to connect to: localhost:4442
+      ❌ localhost in a container = itself, not the Hub!
+      
+Should be:
+chrome-node (container)
+  └─> Connects to: selenium-hub:4442
+      ✅ Service name resolves to Hub container
+```
+
+### Solution
+
+**Corrected Configuration:**
+```yaml
+services:
+  selenium-hub:
+    ports:
+      - 4444:4444  # Hub WebDriver (runner → hub)
+      - 4442:4442  # Event bus publish (nodes → hub)
+      - 4443:4443  # Event bus subscribe (hub → nodes)
+
+  chrome-node:
+    env:
+      SE_EVENT_BUS_HOST: selenium-hub  # ✅ Service name
+      SE_EVENT_BUS_PUBLISH_PORT: 4442
+      SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
+```
+
+**Network Communication:**
+- **Runner → Hub**: `http://localhost:4444` (via port mapping)
+- **Nodes → Hub**: `http://selenium-hub:4442/4443` (via service name)
+
+### Changes Applied
+
+**Both Jobs Updated:**
+- `smoke-tests` job
+- `selenium-grid-tests` job
+
+**For Each:**
+```yaml
+# Changed back to service name
+SE_EVENT_BUS_HOST: selenium-hub  # Was: localhost
+```
+
+**Removed:**
+```yaml
+--network-alias chrome-node  # Not needed
+```
+
+### Why Previous Attempt Failed
+
+**Commit 5ca5789 tried:**
+```yaml
+SE_EVENT_BUS_HOST: localhost  # ❌ Wrong for services
+```
+
+**Why it seemed logical:**
+- Runner uses localhost to access Hub
+- Thought services should too
+- But services are IN the Docker network
+
+**Why it doesn't work:**
+- `localhost` in a container = the container itself
+- Nodes can't find Hub at localhost:4442
+- No connection = no registration
+- Grid never ready
+
+### Correct Understanding
+
+**GitHub Actions Services Architecture:**
+```
+┌─────────────────────────────────────────┐
+│ Docker Network (services)               │
+│                                         │
+│  ┌──────────────┐                      │
+│  │ selenium-hub │ :4444, :4442, :4443  │
+│  └──────────────┘                      │
+│         ↑                               │
+│         │ (selenium-hub:4442/4443)      │
+│         │                               │
+│  ┌──────────────┐                      │
+│  │ chrome-node  │                      │
+│  └──────────────┘                      │
+│                                         │
+└─────────────────────────────────────────┘
+         ↑
+         │ (localhost:4444 mapped)
+         │
+    ┌─────────────┐
+    │   Runner    │ (runs tests)
+    └─────────────┘
+```
+
+### Expected Results
+
+**After this fix:**
+```
+Waiting for browser nodes to register...
+  Attempt 1: 0 nodes registered
+  Attempt 2: 1 nodes registered
+✅ Grid is ready with 1 node(s)!
+
+Grid Ready: true
+Nodes Available: 1
+✅ Grid is fully ready with 1 node(s)
+```
+
+**Then:**
+- ✅ Smoke tests will run
+- ✅ Grid tests will run
+- ✅ Sessions can be created
+
+### Git Commit
+
+**Commit:** (pending)  
+**Message:** "fix: Revert SE_EVENT_BUS_HOST to selenium-hub for services"
+
+### Learning
+
+**Key Insight:**
+- GitHub Actions services ≠ localhost
+- Services communicate via service names
+- Only runner uses localhost (via port mapping)
+- This is Docker networking 101
+
+**Documentation:**
+- https://docs.github.com/en/actions/using-containerized-services/about-service-containers
+- Services run in custom Docker network
+- Service name = network hostname
+
+### Status
+✅ **Event Bus Host**: Changed back to selenium-hub  
+✅ **Network Understanding**: Corrected  
+✅ **Both Jobs Updated**: smoke-tests + selenium-grid-tests  
+🔄 **Testing**: Pending next CI/CD run  
+
+---
+
 ## [2025-11-08 10:45:00 CST] - Fix: CI/CD Test Timeouts and Grid Readiness ✅
 
 ### Overview
