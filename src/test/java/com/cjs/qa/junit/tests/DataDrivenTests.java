@@ -115,8 +115,8 @@ public class DataDrivenTests {
             {"https://www.google.com", "Google"},
             {"https://github.com", "GitHub"},
             {"https://www.wikipedia.org", "Wikipedia"},
-            {"https://stackoverflow.com", "Stack Overflow"},
-            {"https://www.reddit.com", "Reddit"}
+            {"https://www.w3.org", "W3C"},
+            {"https://www.bing.com", "Bing"}
         };
     }
     

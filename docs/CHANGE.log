@@ -1,5 +1,162 @@
 # CHANGE LOG
 
+## [2025-11-08 11:15:00 CST] - Fix: Replace Bot-Protected Sites in Data-Driven Tests ✅
+
+### Overview
+Replaced Reddit and Stack Overflow in website accessibility tests with W3C and Bing. The original sites have aggressive anti-bot protection that blocks headless browsers, causing test failures. New sites are automation-friendly.
+
+### Problem
+
+**Test Failures:**
+- **Reddit**: "You've been blocked by network security"
+- **Stack Overflow**: "Verifying you are human" (CAPTCHA)
+
+**Root Cause:**
+- Modern sites detect headless browsers
+- Cloudflare/bot protection triggers
+- CAPTCHA challenges for automated browsers
+- Can't bypass without complex workarounds
+
+**Why They Block:**
+1. User-Agent detection
+2. Headless browser fingerprinting
+3. Missing browser features
+4. Behavioral analysis
+5. Rate limiting
+
+### Solution
+
+**Replaced Sites:**
+```java
+// BEFORE (Bot-protected)
+{"https://stackoverflow.com", "Stack Overflow"},  // ❌ CAPTCHA
+{"https://www.reddit.com", "Reddit"}              // ❌ Blocked
+
+// AFTER (Automation-friendly)
+{"https://www.w3.org", "W3C"},                    // ✅ Open standard
+{"https://www.bing.com", "Bing"}                  // ✅ No blocking
+```
+
+**Updated Test Data:**
+```java
+@DataProvider(name = "websiteUrls")
+public Object[][] websiteUrlsProvider() {
+    return new Object[][] {
+        {"https://www.google.com", "Google"},
+        {"https://github.com", "GitHub"},
+        {"https://www.wikipedia.org", "Wikipedia"},
+        {"https://www.w3.org", "W3C"},        // New
+        {"https://www.bing.com", "Bing"}      // New
+    };
+}
+```
+
+### Why These Sites Work
+
+**W3C (www.w3.org):**
+- ✅ World Wide Web Consortium
+- ✅ No bot detection
+- ✅ Automation-friendly
+- ✅ Stable and reliable
+- ✅ Fast loading
+
+**Bing (www.bing.com):**
+- ✅ Microsoft search engine
+- ✅ Allows headless browsers
+- ✅ Good for testing
+- ✅ No CAPTCHA for basic access
+- ✅ Similar to Google (search engine)
+
+### Test Coverage Maintained
+
+**Still Testing:**
+- ✅ Website accessibility (5 sites)
+- ✅ Title verification
+- ✅ URL validation
+- ✅ Page loading
+- ✅ Screenshot capture
+
+**Sites in Test Suite:**
+1. Google - Search engine
+2. GitHub - Developer platform
+3. Wikipedia - Encyclopedia
+4. W3C - Standards organization
+5. Bing - Search engine
+
+**Coverage:**
+- Different site types
+- Various technologies
+- Multiple domains
+- Real-world examples
+
+### Alternative Solutions Considered
+
+**Option 1: Add User-Agent Spoofing**
+```java
+options.addArguments("--user-agent=Mozilla/5.0...");
+```
+- ⚠️  Still detectable
+- ⚠️  Requires maintenance
+- ⚠️  May still be blocked
+
+**Option 2: Use Stealth Mode**
+```java
+options.setExperimentalOption("excludeSwitches", ["enable-automation"]);
+```
+- ⚠️  Complex setup
+- ⚠️  Not foolproof
+- ⚠️  Overkill for this test
+
+**Option 3: Skip Protected Sites**
+```java
+@Test(enabled = false)
+```
+- ⚠️  Reduces test count
+- ⚠️  Not ideal
+
+**Option 4: Replace with Friendly Sites (CHOSEN)**
+- ✅ Simple
+- ✅ Reliable
+- ✅ No detection issues
+- ✅ Same test coverage
+- ✅ Best practice
+
+### Benefits
+
+1. **Reliable Tests:**
+   - No more bot detection failures
+   - Consistent results
+   - Predictable behavior
+
+2. **Faster Execution:**
+   - No CAPTCHA delays
+   - No timeouts waiting for human verification
+   - Clean test runs
+
+3. **Better Test Quality:**
+   - Tests actual functionality
+   - Not fighting bot detection
+   - Focus on Selenium capabilities
+
+4. **Maintenance:**
+   - No need to update User-Agent
+   - No stealth mode complexity
+   - Simple and straightforward
+
+### Git Commit
+
+**Commit:** (pending)  
+**Message:** "fix: Replace bot-protected sites in accessibility tests"
+
+### Status
+✅ **Reddit**: Replaced with W3C  
+✅ **Stack Overflow**: Replaced with Bing  
+✅ **Test Count**: Still 19 scenarios  
+✅ **Coverage**: Maintained  
+✅ **Reliability**: Improved  
+
+---
+
 ## [2025-11-08 11:00:00 CST] - Fix: GitHub Actions Services Network Configuration ✅
 
 ### Overview
