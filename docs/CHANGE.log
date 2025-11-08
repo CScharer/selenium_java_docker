@@ -1,5 +1,240 @@
 # CHANGE LOG
 
+## [2025-11-08 10:00:00 CST] - Extended Test Coverage (30+ New Scenarios) ✅
+
+### Overview
+Implemented comprehensive extended test coverage with 30+ new test scenarios covering data-driven testing, negative/error scenarios, and advanced Selenium features. Total test count increased from 16 to 46 tests, providing extensive validation of framework capabilities.
+
+### New Test Classes
+
+#### 1. **DataDrivenTests.java** (3 methods, 19 scenarios)
+
+**Purpose:** Demonstrate TestNG data providers and parameterized testing
+
+**Test Methods:**
+- `testSearchWithMultipleQueries` - 5 search terms
+- `testWebsiteAccessibility` - 5 different websites
+- `testSearchEdgeCases` - 4 invalid inputs
+
+**Features:**
+- @DataProvider annotation
+- Multiple data sets per test
+- Parameter-driven execution
+- Edge case validation
+
+**Coverage:**
+```java
+@DataProvider(name = "searchQueries")
+public Object[][] searchQueriesProvider() {
+    return new Object[][] {
+        {"Selenium WebDriver", true},
+        {"TestNG Framework", true},
+        {"Docker Containers", true},
+        {"Java Programming", true},
+        {"CI/CD Pipeline", true}
+    };
+}
+```
+
+#### 2. **NegativeTests.java** (7 scenarios)
+
+**Purpose:** Validate error handling and recovery mechanisms
+
+**Test Methods:**
+1. `testNonExistentElement` - NoSuchElementException handling
+2. `testInvalidUrlNavigation` - Invalid URL error handling
+3. `testHiddenElementInteraction` - Hidden element detection
+4. `testElementWaitTimeout` - TimeoutException handling
+5. `testErrorRecovery` - Recovery after errors
+6. `testElementStateVerification` - Element state checks
+7. `testStaleElementHandling` - StaleElementReferenceException
+
+**Features:**
+- Exception catching and validation
+- Error recovery testing
+- Timeout scenarios
+- State verification
+
+#### 3. **AdvancedFeaturesTests.java** (7 scenarios)
+
+**Purpose:** Demonstrate advanced Selenium WebDriver capabilities
+
+**Test Methods:**
+1. `testJavaScriptExecution` - Execute JS in browser
+2. `testCookieManagement` - Add/get/delete cookies
+3. `testWindowManagement` - Resize/maximize windows
+4. `testKeyboardActions` - Advanced keyboard input
+5. `testBrowserNavigation` - Back/forward/refresh
+6. `testElementProperties` - Get element attributes
+7. `testPerformanceMetrics` - Measure load times
+
+**Advanced Features:**
+- JavascriptExecutor
+- Cookie manipulation
+- Window positioning
+- Actions class
+- Navigation API
+- Performance testing
+
+### TestNG Suite Configuration
+
+**Created: `testng-extended-suite.xml`**
+```xml
+<suite name="Extended Test Coverage Suite" parallel="tests" thread-count="3">
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+    </listeners>
+    
+    <test name="Data-Driven Tests">...</test>
+    <test name="Negative Tests">...</test>
+    <test name="Advanced Features Tests">...</test>
+</suite>
+```
+
+### Test Statistics
+
+**Before:**
+- 5 Smoke Tests
+- 3 Simple Grid Tests  
+- 8 Enhanced Grid Tests
+- **Total: 16 tests**
+
+**After:**
+- 5 Smoke Tests
+- 3 Simple Grid Tests
+- 8 Enhanced Grid Tests
+- 19 Data-Driven Tests
+- 7 Negative Tests
+- 7 Advanced Feature Tests
+- **Total: 46 tests** (+188% increase)
+
+### Coverage Areas
+
+**Data-Driven Testing:**
+- ✅ Parameterized test execution
+- ✅ Multiple data sets
+- ✅ TestNG @DataProvider
+- ✅ Edge case inputs
+- ✅ Dynamic test generation
+
+**Negative Testing:**
+- ✅ Exception handling
+- ✅ Invalid inputs
+- ✅ Timeout scenarios
+- ✅ Error recovery
+- ✅ State validation
+- ✅ Stale elements
+
+**Advanced Features:**
+- ✅ JavaScript execution
+- ✅ Cookie management
+- ✅ Window manipulation
+- ✅ Keyboard shortcuts
+- ✅ Browser navigation
+- ✅ Element properties
+- ✅ Performance metrics
+
+### Usage
+
+**Run Extended Suite:**
+```bash
+# Start Grid
+docker-compose up -d selenium-hub chrome-node-1
+
+# Run extended tests
+docker-compose run --rm tests -DsuiteXmlFile=testng-extended-suite.xml
+
+# Stop Grid
+docker-compose down
+```
+
+**Run Individual Test Classes:**
+```bash
+# Data-driven tests only
+docker-compose run --rm tests -Dtest=DataDrivenTests
+
+# Negative tests only
+docker-compose run --rm tests -Dtest=NegativeTests
+
+# Advanced features only
+docker-compose run --rm tests -Dtest=AdvancedFeaturesTests
+```
+
+### Benefits
+
+1. **Comprehensive Coverage:**
+   - Tests cover happy path, edge cases, and error scenarios
+   - Validates framework resilience
+   - Demonstrates advanced capabilities
+
+2. **Data-Driven Approach:**
+   - Reduces code duplication
+   - Easy to add new test data
+   - Scalable test design
+
+3. **Professional Quality:**
+   - Proper error handling
+   - Performance monitoring
+   - Advanced Selenium features
+
+4. **Learning Resource:**
+   - Examples of TestNG data providers
+   - Exception handling patterns
+   - Advanced WebDriver APIs
+
+### Technical Highlights
+
+**TestNG Data Providers:**
+- Clean separation of test data and logic
+- Reusable data sets
+- Easy maintenance
+
+**Exception Handling:**
+- NoSuchElementException
+- TimeoutException
+- StaleElementReferenceException
+- Proper recovery mechanisms
+
+**Advanced Selenium:**
+- JavascriptExecutor for JS execution
+- Actions class for complex interactions
+- Navigation API for browser history
+- Cookie API for session management
+
+### Git Commits
+
+**Commit 1:** 3d1a266 - "feat: Add Extended Test Coverage with 30+ new test scenarios"
+**Commit 2:** f7f41e6 - "docs: Update README for Extended Test Coverage"
+
+### Files Created
+
+1. `DataDrivenTests.java` - 320 lines
+2. `NegativeTests.java` - 295 lines
+3. `AdvancedFeaturesTests.java` - 370 lines
+4. `testng-extended-suite.xml` - 18 lines
+
+**Total:** 1,003 lines of new test code
+
+### Integration
+
+**All tests include:**
+- ✅ Log4j 2 logging
+- ✅ Allure reporting annotations
+- ✅ Screenshot capture
+- ✅ Proper setup/teardown
+- ✅ Error handling
+- ✅ Professional structure
+
+### Status
+✅ **Test Classes**: 3 new classes created  
+✅ **Test Scenarios**: 30+ scenarios added  
+✅ **Total Tests**: 46 (was 16)  
+✅ **TestNG Suite**: Extended suite configured  
+✅ **Documentation**: README updated  
+✅ **Committed & Pushed**: GitHub (3d1a266, f7f41e6)  
+
+---
+
 ## [2025-11-08 09:45:00 CST] - Fix: Checkstyle Non-Blocking Configuration ✅
 
 ### Overview
