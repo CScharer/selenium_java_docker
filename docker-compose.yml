@@ -1,13 +1,13 @@
 # CJS QA Automation Framework - Docker Compose
 # Selenium Grid setup with Chrome, Firefox, and Edge nodes
-
-version: '3.8'
+# Note: Uses seleniarm images for Apple Silicon (M1/M2/M3) compatibility
 
 services:
   # Selenium Hub - Central point for test execution
   selenium-hub:
-    image: selenium/hub:4.26.0
+    image: seleniarm/hub:latest
     container_name: selenium-hub
+    platform: linux/arm64
     ports:
       - "4444:4444"      # Selenium Grid UI
       - "4442:4442"      # Event bus publish port
@@ -28,8 +28,9 @@ services:
 
   # Chrome Node - 2 instances for parallel execution
   chrome-node-1:
-    image: selenium/node-chrome:4.26.0
+    image: seleniarm/node-chromium:latest
     container_name: chrome-node-1
+    platform: linux/arm64
     depends_on:
       selenium-hub:
         condition: service_healthy
@@ -55,8 +56,9 @@ services:
       retries: 5
 
   chrome-node-2:
-    image: selenium/node-chrome:4.26.0
+    image: seleniarm/node-chromium:latest
     container_name: chrome-node-2
+    platform: linux/arm64
     depends_on:
       selenium-hub:
         condition: service_healthy
@@ -83,8 +85,9 @@ services:
 
   # Firefox Node
   firefox-node:
-    image: selenium/node-firefox:4.26.0
+    image: seleniarm/node-firefox:latest
     container_name: firefox-node
+    platform: linux/arm64
     depends_on:
       selenium-hub:
         condition: service_healthy
@@ -109,10 +112,11 @@ services:
       timeout: 5s
       retries: 5
 
-  # Edge Node
+  # Edge Node (Note: Not available for ARM, using Chromium instead)
   edge-node:
-    image: selenium/node-edge:4.26.0
+    image: seleniarm/node-chromium:latest
     container_name: edge-node
+    platform: linux/arm64
     depends_on:
       selenium-hub:
         condition: service_healthy
