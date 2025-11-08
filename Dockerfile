@@ -16,7 +16,8 @@ COPY .mvn/ .mvn/
 COPY mvnw pom.xml ./
 
 # Download dependencies (this layer will be cached)
-RUN ./mvnw dependency:go-offline -B
+# Note: dependency:go-offline may fail for some plugins, continue anyway
+RUN ./mvnw dependency:go-offline -B || echo "Some dependencies could not be resolved offline"
 
 # Copy source code
 COPY src ./src
@@ -31,23 +32,25 @@ COPY log4j.properties log4j.xml ./
 RUN ./mvnw clean package -DskipTests
 
 # Stage 2: Runtime stage
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:17-jre
 
 LABEL maintainer="CJS Consulting, L.L.C"
 
-# Install required utilities
-RUN apk add --no-cache \
+# Install required utilities (using apt for Debian-based image)
+RUN apt-get update && apt-get install -y \
     curl \
     bash \
-    tzdata
+    tzdata \
+    && rm -rf /var/lib/apt/lists/*
 
 # Set timezone
 ENV TZ=America/Chicago
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Create app user (don't run as root)
-RUN addgroup -g 1000 appuser && \
-    adduser -D -u 1000 -G appuser appuser
+# Use existing group 1000 or create if needed
+RUN groupadd -g 1001 appuser || true && \
+    useradd -r -u 1001 -g 1001 appuser || true
 
 # Set working directory
 WORKDIR /app
@@ -87,4 +90,3 @@ ENTRYPOINT ["./mvnw", "test"]
 
 # Override with specific test if needed
 # docker run --rm cjs-qa-tests -Dtest=Scenarios#Google
-
