@@ -1,5 +1,4 @@
-# CJS QA Automation Framework - CI/CD Pipeline
-name: CI/CD Pipeline
+name: Selenium Grid CI/CD Pipeline
 
 on:
   push:
@@ -7,49 +6,30 @@ on:
   pull_request:
     branches: [ main, develop ]
   workflow_dispatch:
-    inputs:
-      browser:
-        description: 'Browser to run tests on'
-        required: true
-        default: 'chrome'
-        type: choice
-        options:
-          - chrome
-          - firefox
-          - edge
-      test_suite:
-        description: 'Test suite to run (leave empty for all tests)'
-        required: false
-        type: string
+
+env:
+  JAVA_VERSION: '17'
+  MAVEN_OPTS: -Xmx2048m
 
 jobs:
-  # Job 1: Build and Compile
-  build:
+  build-and-compile:
     name: Build & Compile
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+      
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: ${{ env.JAVA_VERSION }}
           distribution: 'temurin'
           cache: 'maven'
-
-      - name: Cache Maven packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
-      - name: Compile code
+      
+      - name: Compile project
         run: ./mvnw clean compile test-compile
-
+      
       - name: Upload compiled classes
         uses: actions/upload-artifact@v4
         with:
@@ -57,201 +37,207 @@ jobs:
           path: target/
           retention-days: 1
 
-  # Job 2: Unit Tests (no Selenium)
-  unit-tests:
-    name: Unit Tests
+  selenium-grid-tests:
+    name: Grid Tests - ${{ matrix.browser }}
     runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: 'maven'
-
-      - name: Download compiled classes
-        uses: actions/download-artifact@v4
-        with:
-          name: compiled-classes
-          path: target/
-
-      - name: Run unit tests
-        run: ./mvnw test -Dtest=SecureConfigTest
-        continue-on-error: true
-
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: unit-test-results
-          path: target/surefire-reports/
-          retention-days: 7
-
-  # Job 3: Selenium Tests with Docker Compose
-  selenium-tests:
-    name: Selenium Tests (${{ matrix.browser }})
-    runs-on: ubuntu-latest
-    needs: build
+    needs: build-and-compile
+    
     strategy:
-      fail-fast: false
       matrix:
-        browser: [chrome, firefox, edge]
-
+        browser: [chrome, firefox]
+      fail-fast: false
+    
+    services:
+      selenium-hub:
+        image: selenium/hub:4.26.0
+        ports:
+          - 4444:4444
+        options: >-
+          --health-cmd "curl -f http://localhost:4444/wd/hub/status || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      
+      chrome-node:
+        image: selenium/node-chrome:4.26.0
+        env:
+          SE_EVENT_BUS_HOST: selenium-hub
+          SE_EVENT_BUS_PUBLISH_PORT: 4442
+          SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
+        options: >-
+          --shm-size=2gb
+      
+      firefox-node:
+        image: selenium/node-firefox:4.26.0
+        env:
+          SE_EVENT_BUS_HOST: selenium-hub
+          SE_EVENT_BUS_PUBLISH_PORT: 4442
+          SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
+        options: >-
+          --shm-size=2gb
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+      
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: ${{ env.JAVA_VERSION }}
           distribution: 'temurin'
           cache: 'maven'
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Authenticate with Google Cloud
-        if: env.GOOGLE_CREDENTIALS != ''
+      
+      - name: Wait for Selenium Grid
+        run: |
+          timeout 60 bash -c 'until curl -sf http://localhost:4444/wd/hub/status; do sleep 2; done'
+          echo "Grid is ready!"
+      
+      - name: Run Grid Tests
         env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CLOUD_CREDENTIALS }}
+          SELENIUM_REMOTE_URL: http://localhost:4444/wd/hub
+          BROWSER: ${{ matrix.browser }}
         run: |
-          if [ ! -z "$GOOGLE_CREDENTIALS" ]; then
-            echo "$GOOGLE_CREDENTIALS" | base64 -d > $HOME/gcloud-key.json
-            echo "GOOGLE_APPLICATION_CREDENTIALS=$HOME/gcloud-key.json" >> $GITHUB_ENV
-          fi
-
-      - name: Start Selenium Grid
-        run: |
-          docker-compose up -d selenium-hub chrome-node-1 firefox-node edge-node
-          echo "Waiting for Selenium Grid to be ready..."
-          timeout 60 bash -c 'until curl -s http://localhost:4444/wd/hub/status | grep -q "\"ready\":true"; do sleep 2; done'
-          echo "Selenium Grid is ready!"
-
-      - name: Show Grid status
-        run: curl -s http://localhost:4444/wd/hub/status | jq .
-
-      - name: Run Selenium tests
-        run: |
-          ./mvnw test \
-            -Dbrowser=${{ matrix.browser }} \
-            -DseleniumHub=http://localhost:4444/wd/hub \
-            -Dtest=Scenarios#Google
-        continue-on-error: true
-
+          ./mvnw test -Dtest=SimpleGridTest,EnhancedGridTests
+      
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: selenium-test-results-${{ matrix.browser }}
+          name: test-results-${{ matrix.browser }}
           path: |
             target/surefire-reports/
-            target/cucumber-reports/
+            target/allure-results/
           retention-days: 7
-
+      
       - name: Upload screenshots
-        if: always()
+        if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: screenshots-${{ matrix.browser }}
-          path: Screenshots/
+          path: target/screenshots/
           retention-days: 7
 
-      - name: Stop Selenium Grid
-        if: always()
-        run: docker-compose down
-
-  # Job 4: Code Quality Checks
-  code-quality:
-    name: Code Quality
+  allure-report:
+    name: Generate Allure Report
     runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: 'maven'
-
-      - name: Run dependency check
-        run: ./mvnw dependency:tree
-
-      - name: Check for security vulnerabilities
-        run: ./mvnw dependency:analyze
-        continue-on-error: true
-
-  # Job 5: Docker Build Test
-  docker-build:
-    name: Docker Build Test
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build Docker image
-        run: docker build -t cjs-qa-tests:latest .
-
-      - name: Test Docker image
-        run: |
-          docker images cjs-qa-tests:latest
-          docker inspect cjs-qa-tests:latest
-
-  # Job 6: Generate Report
-  report:
-    name: Generate Test Report
-    runs-on: ubuntu-latest
-    needs: [unit-tests, selenium-tests]
+    needs: selenium-grid-tests
     if: always()
-
+    
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
       - name: Download all test results
         uses: actions/download-artifact@v4
         with:
-          pattern: '*-test-results*'
-          path: all-test-results/
-
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
+          pattern: test-results-*
+          path: allure-results
+          merge-multiple: true
+      
+      - name: Generate Allure Report
+        uses: simple-elf/allure-report-action@v1.7
         with:
-          files: |
-            all-test-results/**/*.xml
-          check_name: Test Results
-
-      - name: Comment Test Summary on PR
-        if: github.event_name == 'pull_request' && always()
-        uses: actions/github-script@v7
+          allure_results: allure-results
+          allure_history: allure-history
+          keep_reports: 20
+      
+      - name: Upload Allure Report
+        uses: actions/upload-artifact@v4
         with:
-          script: |
-            const fs = require('fs');
-            const testResults = fs.readdirSync('all-test-results', { recursive: true });
-            const comment = `## 🧪 Test Results Summary\n\n` +
-                           `Browser tests completed for: Chrome, Firefox, Edge\n\n` +
-                           `Check the Actions tab for detailed results.`;
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: comment
-            });
+          name: allure-report
+          path: allure-report/
+          retention-days: 30
+      
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-report
+          destination_dir: allure-report
 
-# Environment variables
-env:
-  MAVEN_OPTS: -Xmx512m
-  JAVA_TOOL_OPTIONS: -Xmx512m
+  code-quality:
+    name: Code Quality Analysis
+    runs-on: ubuntu-latest
+    needs: build-and-compile
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
+          cache: 'maven'
+      
+      - name: Run dependency analysis
+        run: ./mvnw dependency:analyze
+        continue-on-error: true
+      
+      - name: Check for dependency vulnerabilities
+        run: ./mvnw dependency:tree
+        continue-on-error: true
 
+  docker-build:
+    name: Docker Build Test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Build Docker test container
+        run: docker-compose build tests
+      
+      - name: Verify container can run
+        run: docker run --rm selenium_java_docker-tests:latest ./mvnw --version
+
+  test-summary:
+    name: Test Summary
+    runs-on: ubuntu-latest
+    needs: [selenium-grid-tests, allure-report]
+    if: always()
+    
+    steps:
+      - name: Download test results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: test-results-*
+          path: test-results
+      
+      - name: Create test summary
+        run: |
+          echo "## 🧪 Test Execution Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Test Results by Browser" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          for browser in chrome firefox; do
+            if [ -d "test-results/test-results-$browser" ]; then
+              echo "#### ${browser^} Browser" >> $GITHUB_STEP_SUMMARY
+              
+              # Count test results
+              total=$(find "test-results/test-results-$browser" -name "TEST-*.xml" -exec grep -h "tests=" {} \; | head -1 | sed 's/.*tests="\([0-9]*\)".*/\1/' || echo "0")
+              failures=$(find "test-results/test-results-$browser" -name "TEST-*.xml" -exec grep -h "failures=" {} \; | head -1 | sed 's/.*failures="\([0-9]*\)".*/\1/' || echo "0")
+              errors=$(find "test-results/test-results-$browser" -name "TEST-*.xml" -exec grep -h "errors=" {} \; | head -1 | sed 's/.*errors="\([0-9]*\)".*/\1/' || echo "0")
+              
+              if [ "$failures" = "0" ] && [ "$errors" = "0" ]; then
+                echo "✅ All tests passed!" >> $GITHUB_STEP_SUMMARY
+              else
+                echo "❌ Some tests failed" >> $GITHUB_STEP_SUMMARY
+              fi
+              
+              echo "- Tests: $total" >> $GITHUB_STEP_SUMMARY
+              echo "- Failures: $failures" >> $GITHUB_STEP_SUMMARY
+              echo "- Errors: $errors" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+            fi
+          done
+          
+          echo "### 📊 Allure Report" >> $GITHUB_STEP_SUMMARY
+          echo "Download the 'allure-report' artifact to view detailed test results" >> $GITHUB_STEP_SUMMARY
