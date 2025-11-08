@@ -1,0 +1,35 @@
+# CODEOWNERS - Defines code ownership for automatic PR reviewer assignment
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for everything in the repo
+* @CScharer
+
+# Core framework components
+/src/test/java/com/cjs/qa/core/ @CScharer
+/src/test/java/com/cjs/qa/selenium/ @CScharer
+
+# Utilities
+/src/test/java/com/cjs/qa/utilities/ @CScharer
+
+# Test suites
+/src/test/java/com/cjs/qa/google/ @CScharer
+/src/test/java/com/cjs/qa/microsoft/ @CScharer
+/src/test/java/com/cjs/qa/linkedin/ @CScharer
+/src/test/java/com/cjs/qa/vivit/ @CScharer
+/src/test/java/com/cjs/qa/bts/ @CScharer
+
+# Configuration files
+/XML/ @CScharer
+/Configurations/ @CScharer
+/pom.xml @CScharer
+
+# CI/CD and Infrastructure
+/.github/ @CScharer
+/docker-compose.yml @CScharer
+/Dockerfile @CScharer
+/scripts/ @CScharer
+
+# Documentation
+/*.md @CScharer
+/docs/ @CScharer
+
