@@ -8,6 +8,7 @@
 [![Cucumber](https://img.shields.io/badge/Cucumber-7.20.1-brightgreen.svg)](https://cucumber.io/)
 [![Maven](https://img.shields.io/badge/Maven-3.9.11-blue.svg)](https://maven.apache.org/)
 [![Docker](https://img.shields.io/badge/Docker-ready-blue.svg)](https://www.docker.com/)
+[![Code Quality](https://img.shields.io/badge/Code%20Quality-Checkstyle%20%7C%20SpotBugs%20%7C%20PMD-success.svg)](https://github.com/CScharer/selenium_java_docker/actions)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Security](https://img.shields.io/badge/Security-Google%20Cloud-blue.svg)](https://cloud.google.com/secret-manager)
 
@@ -61,6 +62,7 @@ A comprehensive Selenium-based test automation framework supporting **30+ test s
 - **JUnit 4 & TestNG** - Flexible test execution
 
 ### Recent Improvements (November 8, 2025)
+- ✅ **Code Quality Tools** - Checkstyle, SpotBugs, PMD automated analysis
 - ✅ **Smoke Test Suite** - 5 fast tests for critical path verification (< 2 min)
 - ✅ **Containerized Testing** - Complete Docker + Selenium Grid setup
 - ✅ **Allure Reporting** - Beautiful HTML reports with automatic screenshots
