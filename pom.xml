@@ -106,6 +106,9 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 		<spotbugs-maven-plugin.version>4.8.2.0</spotbugs-maven-plugin.version>
 		<spotbugs.version>4.8.2</spotbugs.version>
 		<maven-pmd-plugin.version>3.21.2</maven-pmd-plugin.version>
+		
+		<!-- Logging -->
+		<log4j2.version>2.22.0</log4j2.version>
 		<selenium-api.version>${selenium.version}</selenium-api.version>
 		<selenium-chrome-driver.version>${selenium.version}</selenium-chrome-driver.version>
 		<selenium-edge-driver.version>${selenium.version}</selenium-edge-driver.version>
@@ -552,6 +555,23 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 			<groupId>io.qameta.allure</groupId>
 			<artifactId>allure-java-commons</artifactId>
 			<version>${allure.version}</version>
+		</dependency>
+		
+		<!-- Log4j 2 for structured logging -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j2-impl</artifactId>
+			<version>${log4j2.version}</version>
 		</dependency>
 	</dependencies>
 

@@ -2,6 +2,8 @@ package com.cjs.qa.junit.tests;
 
 import com.cjs.qa.utilities.AllureHelper;
 import io.qameta.allure.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -17,6 +19,7 @@ import java.net.URL;
 @Epic("Selenium Grid Testing")
 @Feature("Basic Grid Tests")
 public class SimpleGridTest {
+    private static final Logger logger = LogManager.getLogger(SimpleGridTest.class);
 
     private WebDriver driver;
     private String gridUrl;
@@ -29,9 +32,9 @@ public class SimpleGridTest {
             gridUrl = "http://localhost:4444/wd/hub";
         }
 
-        System.out.println("========================================");
-        System.out.println("Connecting to Grid at: " + gridUrl);
-        System.out.println("========================================");
+        logger.info("========================================");
+        logger.info("Connecting to Grid at: {}", gridUrl);
+        logger.info("========================================");
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
@@ -40,7 +43,7 @@ public class SimpleGridTest {
         options.addArguments("--disable-gpu");
 
         driver = new RemoteWebDriver(new URL(gridUrl), options);
-        System.out.println("✅ Successfully connected to Grid!");
+        logger.info("✅ Successfully connected to Grid!");
     }
 
     @Test(priority = 1)
@@ -48,10 +51,10 @@ public class SimpleGridTest {
     @Severity(SeverityLevel.BLOCKER)
     @Description("Verify that connection to Selenium Grid is successful and driver is initialized")
     public void testGridConnection() {
-        System.out.println("\n>>> Running testGridConnection");
+        logger.info("\n>>> Running testGridConnection");
         Allure.step("Verify driver is not null");
         Assert.assertNotNull(driver, "Driver should be initialized");
-        System.out.println("✅ Grid connection test PASSED\n");
+        logger.info("✅ Grid connection test PASSED\n");
     }
 
     @Test(priority = 2)
@@ -59,16 +62,16 @@ public class SimpleGridTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify navigation to Google.com works correctly")
     public void testNavigateToGoogle() throws Exception {
-        System.out.println("\n>>> Running testNavigateToGoogle");
-        System.out.println("Navigating to Google...");
+        logger.info("\n>>> Running testNavigateToGoogle");
+        logger.info("Navigating to Google...");
         Allure.step("Navigate to Google.com");
         driver.get("https://www.google.com");
 
         String title = driver.getTitle();
-        System.out.println("Page title: " + title);
+        logger.info("Page title: {}", title);
 
         Assert.assertTrue(title.contains("Google"), "Title should contain 'Google'");
-        System.out.println("✅ Google navigation test PASSED\n");
+        logger.info("✅ Google navigation test PASSED\n");
     }
 
     @Test(priority = 3)
@@ -76,16 +79,16 @@ public class SimpleGridTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify navigation to GitHub.com works correctly")
     public void testNavigateToGitHub() throws Exception {
-        System.out.println("\n>>> Running testNavigateToGitHub");
-        System.out.println("Navigating to GitHub...");
+        logger.info("\n>>> Running testNavigateToGitHub");
+        logger.info("Navigating to GitHub...");
         Allure.step("Navigate to GitHub.com");
         driver.get("https://github.com");
 
         String title = driver.getTitle();
-        System.out.println("Page title: " + title);
+        logger.info("Page title: {}", title);
 
         Assert.assertTrue(title.contains("GitHub"), "Title should contain 'GitHub'");
-        System.out.println("✅ GitHub navigation test PASSED\n");
+        logger.info("✅ GitHub navigation test PASSED\n");
     }
 
     @AfterMethod
@@ -93,19 +96,19 @@ public class SimpleGridTest {
         if (driver != null) {
             // Capture screenshot on failure
             if (result.getStatus() == ITestResult.FAILURE) {
-                System.out.println("❌ Test failed - capturing screenshot...");
+                logger.error("❌ Test failed - capturing screenshot...");
                 AllureHelper.captureScreenshot(driver, "FAILURE-" + result.getName());
                 AllureHelper.attachPageSource(driver);
                 AllureHelper.logBrowserInfo(driver);
             } else if (result.getStatus() == ITestResult.SUCCESS) {
-                System.out.println("✅ Test passed - capturing success screenshot...");
+                logger.info("✅ Test passed - capturing success screenshot...");
                 AllureHelper.captureScreenshot(driver, "SUCCESS-" + result.getName());
             }
             
-            System.out.println("Closing browser...");
+            logger.info("Closing browser...");
             driver.quit();
-            System.out.println("Browser closed successfully");
-            System.out.println("========================================\n");
+            logger.info("Browser closed successfully");
+            logger.info("========================================\n");
         }
     }
 }

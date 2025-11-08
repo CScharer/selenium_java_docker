@@ -2,6 +2,8 @@ package com.cjs.qa.junit.tests;
 
 import com.cjs.qa.utilities.AllureHelper;
 import io.qameta.allure.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -24,6 +26,7 @@ import java.time.Duration;
 @Epic("Selenium Grid Testing")
 @Feature("Enhanced Grid Tests")
 public class EnhancedGridTests {
+    private static final Logger logger = LogManager.getLogger(EnhancedGridTests.class);
 
     private WebDriver driver;
     private String gridUrl;
@@ -38,10 +41,10 @@ public class EnhancedGridTests {
             gridUrl = "http://localhost:4444/wd/hub";
         }
 
-        System.out.println("\n========================================");
-        System.out.println("Test Browser: " + browser.toUpperCase());
-        System.out.println("Grid URL: " + gridUrl);
-        System.out.println("========================================");
+        logger.info("\n========================================");
+        logger.info("Test Browser: {}", browser.toUpperCase());
+        logger.info("Grid URL: {}", gridUrl);
+        logger.info("========================================");
 
         if ("firefox".equalsIgnoreCase(browser)) {
             FirefoxOptions options = new FirefoxOptions();
@@ -59,7 +62,7 @@ public class EnhancedGridTests {
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-        System.out.println("✅ " + currentBrowser.toUpperCase() + " browser initialized\n");
+        logger.info("✅ {} browser initialized\n", currentBrowser.toUpperCase());
     }
 
     @Test(priority = 1, description = "Verify Google homepage loads correctly")
@@ -67,18 +70,18 @@ public class EnhancedGridTests {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify that Google homepage loads successfully and contains expected elements")
     public void testGoogleHomepage() {
-        System.out.println(">>> Test: Google Homepage");
+        logger.info(">>> Test: Google Homepage");
         Allure.step("Navigate to Google homepage");
         driver.get("https://www.google.com");
         AllureHelper.captureScreenshot(driver, "Google-Homepage");
 
         String title = driver.getTitle();
-        System.out.println("Page title: " + title);
+        logger.info("Page title: {}", title);
 
         Assert.assertTrue(title.contains("Google"), "Title should contain 'Google'");
         Assert.assertTrue(driver.getCurrentUrl().contains("google.com"), "URL should contain google.com");
 
-        System.out.println("✅ Google homepage loaded successfully");
+        logger.info("✅ Google homepage loaded successfully");
     }
 
     @Test(priority = 2, description = "Perform a Google search and verify results")
@@ -86,7 +89,7 @@ public class EnhancedGridTests {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify Google search functionality with proper waits and URL verification")
     public void testGoogleSearch() {
-        System.out.println(">>> Test: Google Search");
+        logger.info(">>> Test: Google Search");
         Allure.step("Navigate to Google homepage");
         driver.get("https://www.google.com");
 
@@ -97,7 +100,7 @@ public class EnhancedGridTests {
         String searchTerm = "Selenium";
         Allure.step("Enter search term: " + searchTerm);
         searchBox.sendKeys(searchTerm);
-        System.out.println("Entered search term: " + searchTerm);
+        logger.info("Entered search term: {}", searchTerm);
 
         // Submit search
         Allure.step("Submit search");
@@ -109,13 +112,13 @@ public class EnhancedGridTests {
 
         // Verify URL changed
         String currentUrl = driver.getCurrentUrl();
-        System.out.println("Results URL: " + currentUrl);
+        logger.info("Results URL: {}", currentUrl);
         AllureHelper.captureScreenshot(driver, "Google-Search-Results");
 
         Assert.assertNotEquals(currentUrl, initialUrl, "URL should have changed after search");
         Assert.assertTrue(currentUrl.contains("google.com"), "Should still be on Google");
 
-        System.out.println("✅ Search completed successfully");
+        logger.info("✅ Search completed successfully");
     }
 
     @Test(priority = 3, description = "Verify GitHub homepage and search")
@@ -123,12 +126,12 @@ public class EnhancedGridTests {
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify GitHub homepage loads and logo is present")
     public void testGitHubHomepage() {
-        System.out.println(">>> Test: GitHub Homepage");
+        logger.info(">>> Test: GitHub Homepage");
         Allure.step("Navigate to GitHub homepage");
         driver.get("https://github.com");
 
         String title = driver.getTitle();
-        System.out.println("Page title: " + title);
+        logger.info("Page title: {}", title);
 
         Assert.assertTrue(title.contains("GitHub"), "Title should contain 'GitHub'");
 
@@ -140,7 +143,7 @@ public class EnhancedGridTests {
         AllureHelper.captureScreenshot(driver, "GitHub-Homepage");
 
         Assert.assertNotNull(logo, "GitHub logo should be present");
-        System.out.println("✅ GitHub homepage verified");
+        logger.info("✅ GitHub homepage verified");
     }
 
     @Test(priority = 4, description = "Test navigation between multiple sites")
@@ -148,7 +151,7 @@ public class EnhancedGridTests {
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify ability to navigate between multiple websites in same session")
     public void testMultiSiteNavigation() {
-        System.out.println(">>> Test: Multi-Site Navigation");
+        logger.info(">>> Test: Multi-Site Navigation");
 
         // Navigate to multiple sites
         String[] sites = {
@@ -160,13 +163,13 @@ public class EnhancedGridTests {
         for (String site : sites) {
             driver.get(site);
             String currentUrl = driver.getCurrentUrl();
-            System.out.println("Navigated to: " + currentUrl);
+            logger.info("Navigated to: {}", currentUrl);
 
             Assert.assertTrue(currentUrl.contains(site.replace("https://www.", "").replace("https://", "")),
                 "URL should match expected site");
         }
 
-        System.out.println("✅ Multi-site navigation successful");
+        logger.info("✅ Multi-site navigation successful");
     }
 
     @Test(priority = 5, description = "Verify page load performance")
@@ -174,7 +177,7 @@ public class EnhancedGridTests {
     @Severity(SeverityLevel.MINOR)
     @Description("Verify page loads within acceptable time limits (<10 seconds)")
     public void testPageLoadPerformance() {
-        System.out.println(">>> Test: Page Load Performance");
+        logger.info(">>> Test: Page Load Performance");
         Allure.step("Measure page load time");
 
         long startTime = System.currentTimeMillis();
@@ -182,10 +185,10 @@ public class EnhancedGridTests {
         long endTime = System.currentTimeMillis();
 
         long loadTime = endTime - startTime;
-        System.out.println("Page load time: " + loadTime + "ms");
+        logger.info("Page load time: {}ms", loadTime);
 
         Assert.assertTrue(loadTime < 10000, "Page should load within 10 seconds");
-        System.out.println("✅ Page load performance acceptable");
+        logger.info("✅ Page load performance acceptable");
     }
 
     @Test(priority = 6, description = "Test browser capabilities")
@@ -193,7 +196,7 @@ public class EnhancedGridTests {
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify browser capabilities including JavaScript, cookies, and window management")
     public void testBrowserCapabilities() {
-        System.out.println(">>> Test: Browser Capabilities");
+        logger.info(">>> Test: Browser Capabilities");
 
         driver.get("https://www.google.com");
 
@@ -203,15 +206,15 @@ public class EnhancedGridTests {
 
         // Verify cookies can be retrieved
         var cookies = driver.manage().getCookies();
-        System.out.println("Cookies found: " + cookies.size());
+        logger.info("Cookies found: {}", cookies.size());
         Assert.assertTrue(cookies.size() > 0, "Should have at least one cookie");
 
         // Verify window can be resized
         driver.manage().window().setSize(new org.openqa.selenium.Dimension(1024, 768));
         org.openqa.selenium.Dimension size = driver.manage().window().getSize();
-        System.out.println("Window size: " + size.width + "x" + size.height);
+        logger.info("Window size: {}x{}", size.width, size.height);
 
-        System.out.println("✅ Browser capabilities verified");
+        logger.info("✅ Browser capabilities verified");
     }
 
     @Test(priority = 7, description = "Test form interaction")
@@ -219,7 +222,7 @@ public class EnhancedGridTests {
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify form field interactions including input, clear, and attribute validation")
     public void testFormInteraction() {
-        System.out.println(">>> Test: Form Interaction");
+        logger.info(">>> Test: Form Interaction");
 
         driver.get("https://www.google.com");
 
@@ -235,7 +238,7 @@ public class EnhancedGridTests {
         searchBox.sendKeys("Grid Testing");
         Assert.assertEquals(searchBox.getAttribute("value"), "Grid Testing");
 
-        System.out.println("✅ Form interaction successful");
+        logger.info("✅ Form interaction successful");
     }
 
     @Test(priority = 8, description = "Verify responsive design detection")
@@ -243,7 +246,7 @@ public class EnhancedGridTests {
     @Severity(SeverityLevel.MINOR)
     @Description("Verify website works correctly at different viewport sizes")
     public void testResponsiveDesign() {
-        System.out.println(">>> Test: Responsive Design");
+        logger.info(">>> Test: Responsive Design");
 
         driver.get("https://www.google.com");
 
@@ -252,13 +255,13 @@ public class EnhancedGridTests {
 
         for (int[] viewport : viewports) {
             driver.manage().window().setSize(new org.openqa.selenium.Dimension(viewport[0], viewport[1]));
-            System.out.println("Testing viewport: " + viewport[0] + "x" + viewport[1]);
+            logger.info("Testing viewport: {}x{}", viewport[0], viewport[1]);
 
             WebElement searchBox = driver.findElement(By.name("q"));
             Assert.assertTrue(searchBox.isDisplayed(), "Search box should be visible at " + viewport[0] + "x" + viewport[1]);
         }
 
-        System.out.println("✅ Responsive design verified");
+        logger.info("✅ Responsive design verified");
     }
 
     @AfterMethod
@@ -266,22 +269,22 @@ public class EnhancedGridTests {
         if (driver != null) {
             // Capture screenshot based on test result
             if (result.getStatus() == ITestResult.FAILURE) {
-                System.out.println("❌ Test failed - capturing failure evidence...");
+                logger.error("❌ Test failed - capturing failure evidence...");
                 AllureHelper.captureScreenshot(driver, "FAILURE-" + result.getName());
                 AllureHelper.attachPageSource(driver);
                 AllureHelper.attachBrowserLogs(driver);
                 AllureHelper.logBrowserInfo(driver);
             } else if (result.getStatus() == ITestResult.SUCCESS) {
-                System.out.println("✅ Test passed - capturing success screenshot...");
+                logger.info("✅ Test passed - capturing success screenshot...");
                 AllureHelper.captureScreenshot(driver, "SUCCESS-" + result.getName());
             } else if (result.getStatus() == ITestResult.SKIP) {
-                System.out.println("⏭️  Test skipped");
+                logger.info("⏭️  Test skipped");
             }
             
-            System.out.println("\nClosing " + currentBrowser.toUpperCase() + " browser...");
+            logger.info("\nClosing {} browser...", currentBrowser.toUpperCase());
             driver.quit();
-            System.out.println("Browser closed successfully");
-            System.out.println("========================================\n");
+            logger.info("Browser closed successfully");
+            logger.info("========================================\n");
         }
     }
 }

@@ -2,6 +2,8 @@ package com.cjs.qa.utilities;
 
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +15,7 @@ import java.io.ByteArrayInputStream;
  * Provides screenshot capture, logging, and attachment functionality
  */
 public class AllureHelper {
+    private static final Logger logger = LogManager.getLogger(AllureHelper.class);
 
     /**
      * Capture and attach screenshot to Allure report
@@ -24,9 +27,9 @@ public class AllureHelper {
             try {
                 byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
                 Allure.addAttachment(name, "image/png", new ByteArrayInputStream(screenshot), ".png");
-                System.out.println("📸 Screenshot captured: " + name);
+                logger.info("📸 Screenshot captured: " + name);
             } catch (Exception e) {
-                System.err.println("⚠️  Failed to capture screenshot: " + e.getMessage());
+                logger.error("⚠️  Failed to capture screenshot: " + e.getMessage());
             }
         }
     }
@@ -50,7 +53,7 @@ public class AllureHelper {
             try {
                 return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
             } catch (Exception e) {
-                System.err.println("⚠️  Failed to capture screenshot: " + e.getMessage());
+                logger.error("⚠️  Failed to capture screenshot: " + e.getMessage());
                 return new byte[0];
             }
         }
@@ -102,9 +105,9 @@ public class AllureHelper {
                 );
                 
                 attachText("Browser Info", info);
-                System.out.println("ℹ️  Browser info logged to Allure");
+                logger.info("ℹ️  Browser info logged to Allure");
             } catch (Exception e) {
-                System.err.println("⚠️  Failed to log browser info: " + e.getMessage());
+                logger.error("⚠️  Failed to log browser info: " + e.getMessage());
             }
         }
     }
@@ -118,9 +121,9 @@ public class AllureHelper {
             try {
                 String pageSource = driver.getPageSource();
                 attachHtml("Page Source", pageSource);
-                System.out.println("📄 Page source attached to Allure");
+                logger.info("📄 Page source attached to Allure");
             } catch (Exception e) {
-                System.err.println("⚠️  Failed to attach page source: " + e.getMessage());
+                logger.error("⚠️  Failed to attach page source: " + e.getMessage());
             }
         }
     }
@@ -138,11 +141,11 @@ public class AllureHelper {
                 
                 if (logBuilder.length() > 0) {
                     attachText("Browser Console Logs", logBuilder.toString());
-                    System.out.println("📋 Browser logs attached to Allure");
+                    logger.info("📋 Browser logs attached to Allure");
                 }
             } catch (Exception e) {
                 // Some drivers don't support logs
-                System.out.println("ℹ️  Browser logs not available for this driver");
+                logger.info("ℹ️  Browser logs not available for this driver");
             }
         }
     }

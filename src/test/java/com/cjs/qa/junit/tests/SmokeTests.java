@@ -2,6 +2,8 @@ package com.cjs.qa.junit.tests;
 
 import com.cjs.qa.utilities.AllureHelper;
 import io.qameta.allure.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -30,22 +32,23 @@ import java.time.Duration;
 @Epic("Smoke Tests")
 @Feature("Critical Path Verification")
 public class SmokeTests {
+    private static final Logger logger = LogManager.getLogger(SmokeTests.class);
     
     private WebDriver driver;
     private String gridUrl;
     
     @BeforeMethod
     public void setUp() throws Exception {
-        System.out.println("\n========================================");
-        System.out.println("🔥 SMOKE TEST - Fast Critical Path Check");
+        logger.info("\n========================================");
+        logger.info("🔥 SMOKE TEST - Fast Critical Path Check");
         
         gridUrl = System.getenv("SELENIUM_REMOTE_URL");
         if (gridUrl == null || gridUrl.isEmpty()) {
             gridUrl = "http://selenium-hub:4444/wd/hub";
         }
         
-        System.out.println("Grid URL: " + gridUrl);
-        System.out.println("========================================");
+        logger.info("Grid URL: {}", gridUrl);
+        logger.info("========================================");
         
         // Fast setup - minimal options
         ChromeOptions options = new ChromeOptions();
@@ -58,7 +61,7 @@ public class SmokeTests {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
         
-        System.out.println("✅ Driver initialized in headless mode");
+        logger.info("✅ Driver initialized in headless mode");
     }
     
     @Test(priority = 1, groups = "smoke")
@@ -66,7 +69,7 @@ public class SmokeTests {
     @Severity(SeverityLevel.BLOCKER)
     @Description("Verify Selenium Grid is accessible and responsive")
     public void smokeTest_GridConnection() {
-        System.out.println("\n>>> Smoke Test 1: Grid Connection");
+        logger.info("\n>>> Smoke Test 1: Grid Connection");
         
         Allure.step("Verify driver is initialized");
         Assert.assertNotNull(driver, "Driver should be initialized");
@@ -74,9 +77,9 @@ public class SmokeTests {
         Allure.step("Verify session ID exists");
         String sessionId = ((RemoteWebDriver) driver).getSessionId().toString();
         Assert.assertNotNull(sessionId, "Session ID should exist");
-        System.out.println("Session ID: " + sessionId);
+        logger.info("Session ID: {}", sessionId);
         
-        System.out.println("✅ Grid connection verified");
+        logger.info("✅ Grid connection verified");
     }
     
     @Test(priority = 2, groups = "smoke")
@@ -84,21 +87,21 @@ public class SmokeTests {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify homepage loads successfully")
     public void smokeTest_HomepageLoads() {
-        System.out.println("\n>>> Smoke Test 2: Homepage Load");
+        logger.info("\n>>> Smoke Test 2: Homepage Load");
         
         Allure.step("Navigate to Google homepage");
         driver.get("https://www.google.com");
         
         Allure.step("Verify page title");
         String title = driver.getTitle();
-        System.out.println("Page title: " + title);
+        logger.info("Page title: {}", title);
         Assert.assertTrue(title.contains("Google"), "Title should contain 'Google'");
         
         Allure.step("Verify URL is correct");
         String currentUrl = driver.getCurrentUrl();
         Assert.assertTrue(currentUrl.contains("google.com"), "URL should contain google.com");
         
-        System.out.println("✅ Homepage loaded successfully");
+        logger.info("✅ Homepage loaded successfully");
     }
     
     @Test(priority = 3, groups = "smoke")
@@ -106,7 +109,7 @@ public class SmokeTests {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify basic search functionality works")
     public void smokeTest_SearchWorks() {
-        System.out.println("\n>>> Smoke Test 3: Search Functionality");
+        logger.info("\n>>> Smoke Test 3: Search Functionality");
         
         Allure.step("Navigate to Google");
         driver.get("https://www.google.com");
@@ -133,7 +136,7 @@ public class SmokeTests {
         Assert.assertNotEquals(resultUrl, initialUrl, "URL should change after search");
         Assert.assertTrue(resultUrl.contains("google"), "Should still be on Google");
         
-        System.out.println("✅ Search functionality working");
+        logger.info("✅ Search functionality working");
     }
     
     @Test(priority = 4, groups = "smoke")
@@ -141,7 +144,7 @@ public class SmokeTests {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify navigation between multiple pages")
     public void smokeTest_NavigationWorks() {
-        System.out.println("\n>>> Smoke Test 4: Multi-Page Navigation");
+        logger.info("\n>>> Smoke Test 4: Multi-Page Navigation");
         
         String[] sites = {
             "https://www.google.com",
@@ -155,10 +158,10 @@ public class SmokeTests {
             Allure.step("Verify page loaded");
             String currentUrl = driver.getCurrentUrl();
             Assert.assertTrue(currentUrl.startsWith("http"), "Should have valid URL");
-            System.out.println("  ✓ Loaded: " + site);
+            logger.info("  ✓ Loaded: {}", site);
         }
         
-        System.out.println("✅ Multi-page navigation working");
+        logger.info("✅ Multi-page navigation working");
     }
     
     @Test(priority = 5, groups = "smoke")
@@ -166,7 +169,7 @@ public class SmokeTests {
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify basic form input functionality")
     public void smokeTest_FormInput() {
-        System.out.println("\n>>> Smoke Test 5: Form Input");
+        logger.info("\n>>> Smoke Test 5: Form Input");
         
         Allure.step("Navigate to Google");
         driver.get("https://www.google.com");
@@ -189,23 +192,23 @@ public class SmokeTests {
         String clearedValue = searchBox.getAttribute("value");
         Assert.assertTrue(clearedValue.isEmpty() || clearedValue.equals(""), "Field should be cleared");
         
-        System.out.println("✅ Form input working");
+        logger.info("✅ Form input working");
     }
     
     @AfterMethod
     public void tearDown(ITestResult result) {
         if (driver != null) {
             if (result.getStatus() == ITestResult.FAILURE) {
-                System.out.println("❌ Smoke test failed - capturing evidence...");
+                logger.error("❌ Smoke test failed - capturing evidence...");
                 AllureHelper.captureScreenshot(driver, "SMOKE-FAILURE-" + result.getName());
                 AllureHelper.attachPageSource(driver);
                 AllureHelper.logBrowserInfo(driver);
             } else if (result.getStatus() == ITestResult.SUCCESS) {
-                System.out.println("✅ Smoke test passed");
+                logger.info("✅ Smoke test passed");
             }
             
             driver.quit();
-            System.out.println("========================================\n");
+            logger.info("========================================\n");
         }
     }
 }
