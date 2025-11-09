@@ -785,6 +785,9 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 				<executions>
 					<execution>
 						<id>configuration</id>
+						<goals>
+							<goal>configure</goal>
+						</goals>
 						<configuration>
 							<testFilesDirectory>src/test/jmeter</testFilesDirectory>
 							<resultsDirectory>${project.build.directory}/jmeter/results</resultsDirectory>
