@@ -32,7 +32,7 @@ public class SQL {
   private static String TABLE_PSTAR_PDF_COMPARE = "tblPSTAR_PDF_Compare";
   private static String TABLE_SUBMISSIONLOG = "tblSubmissionLog";
 
-  public int EX_updateDBUserToAdmin(String eMail) {
+  public int exUpdateDbUserToAdmin(String eMail) {
     String sql =
         JDBCConstants.INSERT_INTO
             + "[EntDB_"
@@ -59,7 +59,7 @@ public class SQL {
     return recordsUpdated;
   }
 
-  public int EX_updateDBUserToNonAdmin(String eMail) {
+  public int exUpdateDbUserToNonAdmin(String eMail) {
     String sql =
         "DELETE FROM [EntDB_"
             + Environment.getEnvironment()

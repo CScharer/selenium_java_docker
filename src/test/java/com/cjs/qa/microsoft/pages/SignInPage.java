@@ -35,7 +35,7 @@ public class SignInPage extends Page {
   /**
    * @param value
    */
-  public void CheckboxKeepMeSignedInSet(String value) {
+  public void checkboxKeepMeSignedInSet(String value) {
     if (objectExists(CheckboxKeepMeSignedIn)) {
       setCheckbox(CheckboxKeepMeSignedIn, value);
     }
@@ -63,7 +63,7 @@ public class SignInPage extends Page {
     editEmailSet(CJSConstants.EMAIL_ADDRESS_MSN);
     buttonNextClick();
     editPasswordSet(EPasswords.EMAIL_MSN.getValue());
-    CheckboxKeepMeSignedInSet("checked");
+    checkboxKeepMeSignedInSet("checked");
     buttonSignInClick();
   }
 

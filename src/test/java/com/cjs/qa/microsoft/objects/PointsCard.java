@@ -89,7 +89,7 @@ public class PointsCard {
                 MicrosoftReport.getFieldHTML(
                     JavaHelpers.formatNumber(
                         Double.valueOf(pointsCard.getPointsTop()),
-                        MicrosoftReport.getFORMAT_NUMBER()));
+                        MicrosoftReport.getFormatNumber()));
             break;
           case "xPath":
             value =

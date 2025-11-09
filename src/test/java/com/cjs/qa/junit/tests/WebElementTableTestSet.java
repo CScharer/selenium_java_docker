@@ -56,7 +56,7 @@ public class WebElementTableTestSet {
     getSeleniumWebDriver().killBrowser();
   }
 
-  private String getBOXOFFICE_MOJO_DATE() {
+  private String getBoxOfficeMojoDate() {
     return BOXOFFICE_MOJO_DATE;
   }
 
@@ -64,7 +64,7 @@ public class WebElementTableTestSet {
     return methodName;
   }
 
-  private String getPATH_OUTPUT() {
+  private String getPathOutput() {
     return PATH_OUTPUT;
   }
 
@@ -288,10 +288,10 @@ public class WebElementTableTestSet {
                 + "/chart/boxoffice?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=2773216402&pf_rd_r=01DVJQ5VZWPDNQW51NYR&pf_rd_s=right-7&pf_rd_t=15061&pf_rd_i=homepage&ref_=hm_cht_sm";
         xPathTable = ".//*[@id='boxoffice']/table";
         break;
-      case "tBoxOfficeMojo_00":
+      case "testBoxOfficeMojo00":
       case "tBoxOfficeMojo_01":
-      case "tBoxOfficeMojo_07":
-      case "tBoxOfficeMojo_34":
+      case "testBoxOfficeMojo07":
+      case "testBoxOfficeMojo34":
         final String[] aDays = getMethodName().split("_");
         final String days = aDays[1];
         if (days.equals("0")) {
@@ -299,20 +299,20 @@ public class WebElementTableTestSet {
               "http://www.boxofficemojo"
                   + IExtension.COM
                   + "/daily/chart/?sortdate="
-                  + getBOXOFFICE_MOJO_DATE()
+                  + getBoxOfficeMojoDate()
                   + "&p="
                   + IExtension.HTML;
         } else {
           // url = "http://www.boxofficemojo" + IExtension.COM +
           // "/daily/chart/?view=1day&sortdate=" +
-          // getBOXOFFICE_MOJO_DATE() + "&p="+ IExtension.HTML
+          // getBoxOfficeMojoDate() + "&p="+ IExtension.HTML
           url =
               "http://www.boxofficemojo"
                   + IExtension.COM
                   + "/daily/chart/?view="
                   + days
                   + "day&sortdate="
-                  + getBOXOFFICE_MOJO_DATE()
+                  + getBoxOfficeMojoDate()
                   + "&p="
                   + IExtension.HTML;
         }
@@ -352,7 +352,7 @@ public class WebElementTableTestSet {
     setTable();
     readWriteSysOut(1, 1, 0, 0);
     getWebElementTable().highlightObjects(false);
-    getWebElementTable().exportTable(getPATH_OUTPUT() + getMethodName() + IExtension.CSV);
+    getWebElementTable().exportTable(getPathOutput() + getMethodName() + IExtension.CSV);
     getWebElementTable().reset();
   }
 
@@ -416,46 +416,46 @@ public class WebElementTableTestSet {
   }
 
   @Test
-  public void tBoxOfficeMojo_00() {
+  public void testBoxOfficeMojo00() {
     setTable();
     readWriteSysOut(1, 1, 0, 0);
     getWebElementTable().highlightObjects(false);
     getWebElementTable()
         .exportTable(
-            getPATH_OUTPUT() + getMethodName() + "_" + getBOXOFFICE_MOJO_DATE() + IExtension.CSV);
+            getPathOutput() + getMethodName() + "_" + getBoxOfficeMojoDate() + IExtension.CSV);
     getWebElementTable().reset();
   }
 
   @Test
-  public void tBboxOfficeMojo_01() {
+  public void testBoxOfficeMojo01() {
     setTable();
     readWriteSysOut(1, 1, 0, 0);
     getWebElementTable().highlightObjects(false);
     getWebElementTable()
         .exportTable(
-            getPATH_OUTPUT() + getMethodName() + "_" + getBOXOFFICE_MOJO_DATE() + IExtension.CSV);
+            getPathOutput() + getMethodName() + "_" + getBoxOfficeMojoDate() + IExtension.CSV);
     getWebElementTable().reset();
   }
 
   @Test
-  public void tBoxOfficeMojo_07() {
+  public void testBoxOfficeMojo07() {
     setTable();
     readWriteSysOut(1, 1, 0, 0);
     getWebElementTable().highlightObjects(false);
     getWebElementTable()
         .exportTable(
-            getPATH_OUTPUT() + getMethodName() + "_" + getBOXOFFICE_MOJO_DATE() + IExtension.CSV);
+            getPathOutput() + getMethodName() + "_" + getBoxOfficeMojoDate() + IExtension.CSV);
     getWebElementTable().reset();
   }
 
   @Test
-  public void tBoxOfficeMojo_34() {
+  public void testBoxOfficeMojo34() {
     setTable();
     readWriteSysOut(1, 1, 0, 0);
     getWebElementTable().highlightObjects(false);
     getWebElementTable()
         .exportTable(
-            getPATH_OUTPUT() + getMethodName() + "_" + getBOXOFFICE_MOJO_DATE() + IExtension.CSV);
+            getPathOutput() + getMethodName() + "_" + getBoxOfficeMojoDate() + IExtension.CSV);
     getWebElementTable().reset();
   }
 

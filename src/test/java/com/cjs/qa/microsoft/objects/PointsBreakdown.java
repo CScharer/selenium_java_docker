@@ -56,14 +56,14 @@ public class PointsBreakdown {
                 MicrosoftReport.getFieldHTML(
                     JavaHelpers.formatNumber(
                         Double.valueOf(pointsBreakdown.getPointsAvailable()),
-                        MicrosoftReport.getFORMAT_NUMBER()));
+                        MicrosoftReport.getFormatNumber()));
             break;
           case "Points (Earned)":
             value =
                 MicrosoftReport.getFieldHTML(
                     JavaHelpers.formatNumber(
                         Double.valueOf(pointsBreakdown.getPointsEarned()),
-                        MicrosoftReport.getFORMAT_NUMBER()));
+                        MicrosoftReport.getFormatNumber()));
             break;
           case "xPath":
             value =

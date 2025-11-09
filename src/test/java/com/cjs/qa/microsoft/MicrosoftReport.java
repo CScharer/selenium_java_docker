@@ -26,7 +26,7 @@ public class MicrosoftReport {
     return stringBuilder.toString();
   }
 
-  public static String getFORMAT_NUMBER() {
+  public static String getFormatNumber() {
     return FORMAT_NUMBER;
   }
 

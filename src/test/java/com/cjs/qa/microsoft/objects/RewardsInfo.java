@@ -48,7 +48,7 @@ public class RewardsInfo {
             if (fieldName.contains("Points") && !fieldName.contains("Message")) {
               value =
                   JavaHelpers.formatNumber(
-                      Double.valueOf(rewardsInfo.getValue()), MicrosoftReport.getFORMAT_NUMBER());
+                      Double.valueOf(rewardsInfo.getValue()), MicrosoftReport.getFormatNumber());
             }
             if (fieldName.contains("Needed") && Double.valueOf(rewardsInfo.getValue()) > 0) {
               value =
@@ -61,7 +61,7 @@ public class RewardsInfo {
                       + ">"
                       + JavaHelpers.formatNumber(
                           Double.valueOf(rewardsInfo.getValue()),
-                          MicrosoftReport.getFORMAT_NUMBER());
+                          MicrosoftReport.getFormatNumber());
             }
             value = MicrosoftReport.getFieldHTML(value);
             break;
