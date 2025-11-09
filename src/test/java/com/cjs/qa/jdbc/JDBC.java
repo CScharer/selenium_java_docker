@@ -445,30 +445,6 @@ public class JDBC {
     return Arrays.asList(records.get(0).split(Constants.SYMBOL_TRADEMARK));
   }
 
-  public Map<String, String> getFieldNamesMap(String table) {
-    final String sql = JDBCConstants.SELECT_ALL_FROM + "[" + table + "] LIMIT 0;";
-    final List<Map<String, String>> records = queryResultsString(sql, true);
-    return records.get(0);
-  }
-
-  private void getStatement() {
-    try {
-      statement = connection.createStatement();
-    } catch (final SQLException e) {
-      Environment.sysOut(e);
-    }
-  }
-
-  public ResultSet queryResults(String sql) {
-    connect(dbParameters);
-    try {
-      return statement.executeQuery(sql);
-    } catch (final Exception e) {
-      Environment.sysOut(e);
-      return null;
-    }
-  }
-
   public List<String> getFieldNamesList(String tableName, boolean sqlite) {
     final List<String> listResults = new ArrayList<>();
     try {
@@ -489,6 +465,12 @@ public class JDBC {
     }
   }
 
+  public Map<String, String> getFieldNamesMap(String table) {
+    final String sql = JDBCConstants.SELECT_ALL_FROM + "[" + table + "] LIMIT 0;";
+    final List<Map<String, String>> records = queryResultsString(sql, true);
+    return records.get(0);
+  }
+
   public Map<String, String> getFieldNamesMap(String tableName, boolean sqlite) {
     List<String> fieldNameList = getFieldNamesList(tableName, sqlite);
     Map<String, String> fieldNameMap = new HashMap<>();
@@ -496,6 +478,24 @@ public class JDBC {
       fieldNameMap.put(fieldName, null);
     }
     return fieldNameMap;
+  }
+
+  private void getStatement() {
+    try {
+      statement = connection.createStatement();
+    } catch (final SQLException e) {
+      Environment.sysOut(e);
+    }
+  }
+
+  public ResultSet queryResults(String sql) {
+    connect(dbParameters);
+    try {
+      return statement.executeQuery(sql);
+    } catch (final Exception e) {
+      Environment.sysOut(e);
+      return null;
+    }
   }
 
   public String queryResults(String sql, String delimeter, boolean includeColumnNames) {
