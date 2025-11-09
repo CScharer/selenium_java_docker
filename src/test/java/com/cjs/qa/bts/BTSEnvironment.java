@@ -25,7 +25,7 @@ public class BTSEnvironment extends Environment {
   private static String gridHub = null;
   private static String gridPort = null;
 
-  public BTSEnvironment() {}
+  public BTSEnvironment() { }
 
   public static String getGridHub() {
     return gridHub;

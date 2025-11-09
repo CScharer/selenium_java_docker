@@ -11,7 +11,7 @@ public class Attendee {
   private String rsvpResponse;
   private DataSet dataSet;
 
-  public Attendee() {}
+  public Attendee() { }
 
   public Attendee(
       String registerID,

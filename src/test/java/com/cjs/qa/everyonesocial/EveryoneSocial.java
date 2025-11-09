@@ -27,7 +27,7 @@ public class EveryoneSocial {
   public TechBeaconPage TechBeaconPage;
   private WebDriver webDriver = null;
 
-  public EveryoneSocial() {}
+  public EveryoneSocial() { }
 
   public EveryoneSocial(WebDriver webDriver) {
     setWebDriver(webDriver);

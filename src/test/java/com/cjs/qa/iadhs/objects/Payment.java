@@ -53,7 +53,7 @@ public class Payment {
   private Double paymentAmount;
   private String typeOfPayment;
 
-  public Payment() {}
+  public Payment() { }
 
   public Payment(
       String paymentWithheld,

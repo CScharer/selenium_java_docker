@@ -18,7 +18,7 @@ public class GroupLeaderLink {
   private String webSiteMemberID;
   private String leaderType;
 
-  public GroupLeaderLink() {}
+  public GroupLeaderLink() { }
 
   public GroupLeaderLink(
       String groupType, String pageID, String webSiteMemberID, String leaderType) {

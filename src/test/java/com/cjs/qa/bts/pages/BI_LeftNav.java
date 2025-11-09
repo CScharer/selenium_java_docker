@@ -20,7 +20,7 @@ public class BI_LeftNav extends Page {
   private final By buttonManageProducts =
       By.xpath(".//*[@id='left-sidebar']/div/div[2]/div/ul/li[6]");
   // .id("manageProductsId");
-  // private By CWG(){}
+  // private By CWG() { }
   private final By buttonBusinessowners = By.id("Businessowners500914");
   private final By buttonForms = By.id("FormsForms");
   private final By buttonCommissions = By.id("defaultCommissionsId");

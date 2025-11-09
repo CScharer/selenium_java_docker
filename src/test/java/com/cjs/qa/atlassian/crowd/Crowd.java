@@ -6,7 +6,7 @@ public class Crowd {
 
   private String url = "crowd" + Atlassian.getDomain();
 
-  public Crowd() {}
+  public Crowd() { }
 
   public String getUrl() {
     return url;

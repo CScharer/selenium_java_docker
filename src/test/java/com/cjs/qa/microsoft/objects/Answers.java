@@ -11,7 +11,7 @@ public class Answers {
   private String dataOption = null; // Button Text Value
   private boolean correct = false; // Is Correct
 
-  public Answers() {}
+  public Answers() { }
 
   public String getDataID() {
     return dataID;

@@ -19,7 +19,7 @@ public class XLSXCellStyles {
   private String styleName;
   private CellStyle styleObject;
 
-  public XLSXCellStyles() {}
+  public XLSXCellStyles() { }
 
   public XLSXCellStyles(int styleIndex, String styleName, CellStyle styleObject)
       throws QAException {

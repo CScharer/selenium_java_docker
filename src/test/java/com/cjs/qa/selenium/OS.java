@@ -1,7 +1,7 @@
 package com.cjs.qa.selenium;
 
 public final class OS {
-  private OS() {}
+  private OS() { }
 
   public static final String ANDROID = "android";
   public static final String ANY = "any";

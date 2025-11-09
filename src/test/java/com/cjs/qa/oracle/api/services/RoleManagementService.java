@@ -23,7 +23,7 @@ public class RoleManagementService extends WebService {
           + "/"
           + OracleConstants.API_ROL_VERSION_MINOR;
 
-  public RoleManagementService() {}
+  public RoleManagementService() { }
 
   /**
    * @param ssoUserTokenId

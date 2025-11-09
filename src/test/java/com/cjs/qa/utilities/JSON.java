@@ -3,7 +3,7 @@ package com.cjs.qa.utilities;
 import org.json.JSONObject;
 
 public final class JSON {
-  private JSON() {}
+  private JSON() { }
 
   /**
    * @param json - The json string value.

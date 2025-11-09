@@ -9,7 +9,7 @@ public class Event {
   private String isValid;
   private List<Registration> registrationList;
 
-  public Event() {}
+  public Event() { }
 
   public Event(String eventDate, String eventID, String eventName) {
     this.eventDate = eventDate;

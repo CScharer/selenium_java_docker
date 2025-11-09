@@ -18,7 +18,7 @@ public class Calendars {
   private String details;
   private String eventURL;
 
-  public Calendars() {}
+  public Calendars() { }
 
   private static String appendRecord(String tableName, List<String> fieldsList, Calendars record) {
     StringBuilder stringBuilder = new StringBuilder();

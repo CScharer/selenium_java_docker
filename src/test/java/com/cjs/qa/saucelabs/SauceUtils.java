@@ -19,7 +19,7 @@ public final class SauceUtils {
   public static final String DEFAULT_ACCESS_KEY = "ff17d4b9-b11d-487c-826d-81b856993668";
   private static SauceREST sauceRESTClient;
 
-  private SauceUtils() {}
+  private SauceUtils() { }
 
   private static SauceREST getSauceRestClient(String userName, String accessKey) {
     if (sauceRESTClient == null) {

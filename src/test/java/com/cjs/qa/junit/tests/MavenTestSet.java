@@ -17,7 +17,7 @@ public class MavenTestSet {
   public String STRING_BUFFER = JavaHelpers.createBufferString("*", 100, "") + Constants.NEWLINE;
   public FSO fso = new FSO();
 
-  public MavenTestSet() {}
+  public MavenTestSet() { }
 
   @Test
   public void dependencyTest() throws Exception {

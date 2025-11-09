@@ -10,7 +10,7 @@ import java.util.List;
 public class VivitAPIDatabase {
   private List<VivitAPIDatabaseUpdates> vivitAPIDatabaseUpdates = new ArrayList<>();
 
-  public VivitAPIDatabase() {}
+  public VivitAPIDatabase() { }
 
   public void add(VivitAPIDatabaseUpdates vivitAPIDatabaseUpdates) {
     getVivitAPIDatabaseUpdates().add(vivitAPIDatabaseUpdates);

@@ -13,7 +13,7 @@ public class XLSCellFonts {
   private Font fontObject;
   private String fontName;
 
-  public XLSCellFonts() {}
+  public XLSCellFonts() { }
 
   public XLSCellFonts(Font fontObject, String fontName) throws QAException {
     this.fontObject = fontObject;

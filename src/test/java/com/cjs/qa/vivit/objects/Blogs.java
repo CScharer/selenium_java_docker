@@ -18,7 +18,7 @@ public class Blogs {
   private String lastActivity;
   private String blogURL;
 
-  public Blogs() {}
+  public Blogs() { }
 
   public Blogs(
       String groupName,

@@ -35,7 +35,7 @@ public class CopyPolicyPage extends Page {
   private final By CheckboxUserEnteredPolicyNumber = By.id(NODE_COPYPOLICY + "userEnteredPolNbrBI");
   private final By editCopyFromPolicyNumber = By.id(NODE_COPYPOLICY + "sourcePolicyNbrId");
   private final By editCopyToPolicyNumber = By.id(NODE_COPYPOLICY + "targetPolicyNbrId");
-  // private By ExistingProductsInformationCheckbox(){}
+  // private By ExistingProductsInformationCheckbox() { }
   private final By buttonDelete = By.id(NODE_COPYPOLICY + "DelBtn");
   private final By buttonCopy = By.id(NODE_COPYPOLICY + "copyBtn");
   private final By buttonCancel = By.id(NODE_COPYPOLICY + "cancelBtn");

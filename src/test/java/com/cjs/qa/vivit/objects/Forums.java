@@ -19,7 +19,7 @@ public class Forums {
   private String lastActivity;
   private String forumURL;
 
-  public Forums() {}
+  public Forums() { }
 
   public Forums(
       String groupName,

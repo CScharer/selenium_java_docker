@@ -22,7 +22,7 @@ public class SoftAssert {
   // private final List<String> listAssertionFailures = new ArrayList<>();
   private Map<String, String> failureMap = new HashMap<>();
 
-  public SoftAssert() {}
+  public SoftAssert() { }
 
   public void assertAll() {
     assertAll(null);

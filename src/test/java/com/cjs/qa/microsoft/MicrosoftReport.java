@@ -97,7 +97,7 @@ public class MicrosoftReport {
     return stringBuilder.toString();
   }
 
-  public MicrosoftReport() {}
+  public MicrosoftReport() { }
 
   private String getReportBreakdown() {
     final StringBuilder stringBuilder = new StringBuilder();

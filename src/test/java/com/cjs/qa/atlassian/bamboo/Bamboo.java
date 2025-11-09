@@ -6,7 +6,7 @@ public class Bamboo {
 
   private String url = "bamboo" + Atlassian.getDomain();
 
-  public Bamboo() {}
+  public Bamboo() { }
 
   public String getUrl() {
     return url;
