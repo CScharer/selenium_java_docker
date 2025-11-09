@@ -1619,7 +1619,7 @@ public class VivitData extends Environment {
     List<Map<String, String>> agendaMapList =
         jdbc.queryResultsString(stringBuilderQuery.toString(), false);
     Map<String, String> agendaMap = agendaMapList.get(0);
-    String airportTo = agendaMap.get("Airport");
+    final String airportTo = agendaMap.get("Airport");
     String dateDepartTo = agendaMap.get("DateDepartTo");
     String dateDepartFrom = agendaMap.get("DateDepartFrom");
     stringBuilderQuery = new StringBuilder();
