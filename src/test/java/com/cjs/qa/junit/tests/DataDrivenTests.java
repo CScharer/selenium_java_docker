@@ -45,12 +45,20 @@ public class DataDrivenTests {
     LOGGER.info("========================================");
 
     ChromeOptions options = new ChromeOptions();
-    options.addArguments("--headless");
+    
+    // Check if headless mode is requested (default: true)
+    String headlessProperty = System.getProperty("headless", "true");
+    boolean isHeadless = !headlessProperty.equalsIgnoreCase("false");
+    
+    if (isHeadless) {
+      options.addArguments("--headless");
+    }
     options.addArguments("--no-sandbox");
     options.addArguments("--disable-dev-shm-usage");
     options.addArguments("--disable-gpu");
 
     driver = new RemoteWebDriver(new URL(gridUrl), options);
+    LOGGER.info("✅ Driver initialized in " + (isHeadless ? "headless" : "headed") + " mode");
     LOGGER.info("✅ Driver initialized");
   }
 

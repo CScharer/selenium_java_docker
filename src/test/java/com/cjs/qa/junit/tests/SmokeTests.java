@@ -49,7 +49,14 @@ public class SmokeTests {
 
     // Fast setup - minimal options
     ChromeOptions options = new ChromeOptions();
-    options.addArguments("--headless");
+    
+    // Check if headless mode is requested (default: true)
+    String headlessProperty = System.getProperty("headless", "true");
+    boolean isHeadless = !headlessProperty.equalsIgnoreCase("false");
+    
+    if (isHeadless) {
+      options.addArguments("--headless");
+    }
     options.addArguments("--no-sandbox");
     options.addArguments("--disable-dev-shm-usage");
     options.addArguments("--disable-gpu");
@@ -58,7 +65,7 @@ public class SmokeTests {
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
 
-    LOGGER.info("✅ Driver initialized in headless mode");
+    LOGGER.info("✅ Driver initialized in " + (isHeadless ? "headless" : "headed") + " mode");
   }
 
   @Test(priority = 1, groups = "smoke")

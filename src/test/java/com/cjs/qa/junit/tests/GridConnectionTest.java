@@ -27,12 +27,20 @@ public class GridConnectionTest {
     System.out.println("Connecting to Grid at: " + gridUrl);
 
     ChromeOptions options = new ChromeOptions();
-    options.addArguments("--headless");
+    
+    // Check if headless mode is requested (default: true)
+    String headlessProperty = System.getProperty("headless", "true");
+    boolean isHeadless = !headlessProperty.equalsIgnoreCase("false");
+    
+    if (isHeadless) {
+      options.addArguments("--headless");
+    }
     options.addArguments("--no-sandbox");
     options.addArguments("--disable-dev-shm-usage");
     options.addArguments("--disable-gpu");
 
     driver = new RemoteWebDriver(new URL(gridUrl), options);
+    System.out.println("✅ Driver initialized in " + (isHeadless ? "headless" : "headed") + " mode");
     System.out.println("Successfully connected to Grid!");
   }
 
