@@ -60,7 +60,7 @@ public class Page extends JavaHelpers {
   public static final String LABEL_OPTION_CHECKED = "checked";
   public static final String LABEL_OPTION_UNCHECKED = "unchecked";
   // red;deeppink;fuchsia
-  public static final String borderColor = "deeppink";
+  public static final String BORDER_COLOR = "deeppink";
   public final String SCRIPT_GET_ELEMENT_BORDER =
       "var element = arguments[0];if (element.currentStyle) {var style ="
           + " element.currentStyle;var border = style['borderTopWidth'] + ' ' +"
@@ -83,7 +83,7 @@ public class Page extends JavaHelpers {
           + " style.getPropertyValue('border-left-width') + ' ' +"
           + " style.getPropertyValue('border-left-style') + ' ' +"
           + " style.getPropertyValue('border-left-color');}element.style.border = '4px solid "
-          + borderColor
+          + BORDER_COLOR
           + "';"
           + "return border;";
   public final String SCRIPT_UNHIGHLIGHT_ELEMENT =

@@ -383,7 +383,7 @@ public class XLSX implements IExcel {
 
   private String getCellValue(Cell xCell) throws QAException {
     final FormulaEvaluator formulaEvaluator = null;
-    return IExcel.dataFormatter.formatCellValue(xCell, formulaEvaluator).trim();
+    return IExcel.DATA_FORMATTER.formatCellValue(xCell, formulaEvaluator).trim();
   }
 
   public int getColumnCount(int sheet) throws QAException {

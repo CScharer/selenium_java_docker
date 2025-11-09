@@ -98,7 +98,7 @@ public interface IExcel {
   public static final int MAX_CELL_HEIGHT = 409;
   public static final int MAX_CELL_WIDTH = 255;
   public static final int MAX_SHEET_NAME_LENGTH = 31;
-  public static final DataFormatter dataFormatter = new DataFormatter();
+  public static final DataFormatter DATA_FORMATTER = new DataFormatter();
 
   public static String getFileType(String fileName) {
     Environment.sysOut("fileCheck:[" + fileName + "]");

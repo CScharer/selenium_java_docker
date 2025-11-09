@@ -25,7 +25,7 @@ public class ExcelFormulaSumTestSet {
           + Constants.DELIMETER_PATH;
   public static final String SHEET_NAME = IExcel.SHEET_SUMMARY;
   public static final int COUNT_ROWS = 10;
-  protected static final Map<String, Integer> COlUMNS_MAP = getColumns();
+  protected static final Map<String, Integer> COLUMNS_MAP = getColumns();
 
   @Test
   public void testExcelSum() throws IOException, QAException {
@@ -43,7 +43,7 @@ public class ExcelFormulaSumTestSet {
   }
 
   private void createData(XLS excel) throws QAException {
-    for (Entry entry : COlUMNS_MAP.entrySet()) {
+    for (Entry entry : COLUMNS_MAP.entrySet()) {
       String columnName = (String) entry.getKey();
       int column = (int) entry.getValue();
       excel.writeCell(SHEET_NAME, column, 0, columnName);
@@ -65,7 +65,7 @@ public class ExcelFormulaSumTestSet {
 
   private void sumData(XLS excel) throws QAException {
     final int rows = excel.getRowCount(SHEET_NAME);
-    for (Entry entry : COlUMNS_MAP.entrySet()) {
+    for (Entry entry : COLUMNS_MAP.entrySet()) {
       String columnName = (String) entry.getKey();
       int column = (int) entry.getValue();
       String columnLetter = Convert.fromNumberToLetterExcel(column);

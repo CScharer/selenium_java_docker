@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SecureConfig {
 
   private static final String PROJECT_ID = "cscharer";
-  private static final Map<String, String> cache = new ConcurrentHashMap<>();
+  private static final Map<String, String> CACHE = new ConcurrentHashMap<>();
   private static boolean cacheEnabled = true;
 
   /**
@@ -37,8 +37,8 @@ public class SecureConfig {
     }
 
     // Check cache first
-    if (cacheEnabled && cache.containsKey(secretKey)) {
-      return cache.get(secretKey);
+    if (cacheEnabled && CACHE.containsKey(secretKey)) {
+      return CACHE.get(secretKey);
     }
 
     try {
@@ -46,7 +46,7 @@ public class SecureConfig {
 
       // Cache the result
       if (cacheEnabled) {
-        cache.put(secretKey, value);
+        CACHE.put(secretKey, value);
       }
 
       return value;
@@ -76,8 +76,8 @@ public class SecureConfig {
 
   /** Clears the secret cache. Useful for testing or forcing fresh secret retrieval. */
   public static void clearCache() {
-    cache.clear();
-    Environment.sysOut("SecureConfig cache cleared. Size: " + cache.size());
+    CACHE.clear();
+    Environment.sysOut("SecureConfig cache cleared. Size: " + CACHE.size());
   }
 
   /**
@@ -98,7 +98,7 @@ public class SecureConfig {
    * @return Number of cached secrets
    */
   public static int getCacheSize() {
-    return cache.size();
+    return CACHE.size();
   }
 
   /**
