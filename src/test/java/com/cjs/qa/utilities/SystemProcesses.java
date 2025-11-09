@@ -27,7 +27,7 @@ public class SystemProcesses {
       Arrays.asList("M;SVC;APPS;V".split(Constants.DELIMETER_LIST));
   public static final List<String> LIST_FIELDS_PROCESS_STANDARD =
       Arrays.asList("Image Name;PID".split(Constants.DELIMETER_LIST));
-  public static final Map<String, List<String>> fieldsProcessMap = getProcessFields();
+  public static final Map<String, List<String>> FIELDS_PROCESS_MAP = getProcessFields();
 
   public static void check() {
     try {
@@ -53,7 +53,7 @@ public class SystemProcesses {
         final Map<String, String> mapResults = CommandLine.runProcess(command, true);
         Environment.sysOut("mapResults:[" + mapResults.toString() + "]");
         final String tableName = "t_Core_Processes_" + processType;
-        final List<String> fieldsList = fieldsProcessMap.get(processType);
+        final List<String> fieldsList = FIELDS_PROCESS_MAP.get(processType);
         importData(dateTimeStamp, tableName, fieldsList);
         final StringBuilder sqlStringBuilder = new StringBuilder();
         switch (processType) {

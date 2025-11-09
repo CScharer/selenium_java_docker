@@ -9,12 +9,12 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 
 public class RewardsInfo {
-  public static final List<String> reportFieldList =
+  public static final List<String> REPORT_FIELD_LIST =
       Arrays.asList("Method", "xPath", "Field", "Value");
   private static List<RewardsInfo> rewardsInfoList;
 
   public static List<String> getReportFieldList() {
-    return reportFieldList;
+    return REPORT_FIELD_LIST;
   }
 
   public static List<RewardsInfo> getRewardsInfoList() {

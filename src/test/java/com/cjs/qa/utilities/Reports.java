@@ -35,7 +35,7 @@ public class Reports {
   private static final Map<String, String> MAP_STRING_SUMMARY = getColumnsString(STRING_SUMMARY);
   private static final Map<String, String> MAP_STRING_COUNTS = getColumnsString(STRING_COUNTS);
   private static Map<String, Integer> resultColumns = null;
-  private static final FSO fso = new FSO();
+  private static final FSO FSO = new FSO();
 
   private static synchronized void _updateReport(File filePathName, byte[] byteArray)
       throws IOException {

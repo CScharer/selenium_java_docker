@@ -30,27 +30,27 @@ public class FlightsPage extends Page {
   public static final String HEADINGS_SUMMARY =
       "Traveler;Airport/Location Depart;Time Depart;Airport/Location Arrive;Time"
           + " Arrive;Stops;Price;URL";
-  public static final String bestDepartingFlights =
+  public static final String BEST_DEPARTING_FLIGHTS =
       ".//div[@class='gws-flights-results__best-flights']";
-  public static final String otherDepartingFlights =
+  public static final String OTHER_DEPARTING_FLIGHTS =
       ".//div[contains(@aria-labelledby,'gws-flights-results__other_flights_heading')]";
-  public static final String departingFlightsRecord =
+  public static final String DEPARTING_FLIGHTS_RECORD =
       "//div[contains(@class,'gws-flights-results__collapsed-itinerary')]";
-  public static final By bestDepartingFlightsBy =
-      By.xpath(bestDepartingFlights + departingFlightsRecord);
-  public static final By otherDepartingFlightsBy =
-      By.xpath(otherDepartingFlights + departingFlightsRecord);
-  public static final By errorPage =
+  public static final By BEST_DEPARTING_FLIGHTS_BY =
+      By.xpath(BEST_DEPARTING_FLIGHTS + DEPARTING_FLIGHTS_RECORD);
+  public static final By OTHER_DEPARTING_FLIGHTS_BY =
+      By.xpath(OTHER_DEPARTING_FLIGHTS + DEPARTING_FLIGHTS_RECORD);
+  public static final By ERROR_PAGE =
       By.xpath(".//p[@role='status'][.='Oops, something went wrong.']");
 
   public List<WebElement> getBestDepartingFlightsList() {
-    scrollToElement(bestDepartingFlights);
-    return webDriver.findElements(bestDepartingFlightsBy);
+    scrollToElement(BEST_DEPARTING_FLIGHTS);
+    return webDriver.findElements(BEST_DEPARTING_FLIGHTS_BY);
   }
 
   public List<WebElement> getOtherDepartingFlightsList() {
-    scrollToElement(otherDepartingFlights);
-    return webDriver.findElements(otherDepartingFlightsBy);
+    scrollToElement(OTHER_DEPARTING_FLIGHTS);
+    return webDriver.findElements(OTHER_DEPARTING_FLIGHTS_BY);
   }
 
   public void getFlightsOld(
