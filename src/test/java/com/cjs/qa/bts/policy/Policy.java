@@ -11,7 +11,7 @@ public class Policy {
   public String sequenceNumber = null;
   public String dateTimeStamp = DateHelpers.getCurrentDateAndTime();
 
-  public static void main(String[] args) {}
+  public static void main(String[] args) { }
 
   public Policy(String policy) {
     this.computerName = Environment.getComputerName();

@@ -48,7 +48,7 @@ public class LogInPage extends Page {
 
   public void waitPageLoad() throws QAException {
     final By byButtonContinue = By.xpath(".//*[@id='SSOForm']//input[@value='Continue']");
-    do {} while (objectExists(byButtonContinue));
+    do { } while (objectExists(byButtonContinue));
   }
 
   public void login() throws QAException {
