@@ -153,7 +153,9 @@ public class Sa_EventsNamespace extends YMService {
     if (endDate != null) {
       stringBuilder.append(Constants.nlTab(1, 2) + "<EndDate>" + endDate + "</EndDate>");
     }
-    if (name != null) stringBuilder.append(Constants.nlTab(1, 2) + "<Name>" + name + "</Name>");
+    if (name != null) {
+      stringBuilder.append(Constants.nlTab(1, 2) + "<Name>" + name + "</Name>");
+    }
     if (status != null) {
       switch (status) {
         case "Inactive":

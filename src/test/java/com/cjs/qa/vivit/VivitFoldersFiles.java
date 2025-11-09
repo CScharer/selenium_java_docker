@@ -6,7 +6,7 @@ import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.DateHelpers;
 import com.cjs.qa.utilities.IExtension;
 
-public class VivitFoldersFiles {
+public final class VivitFoldersFiles {
   public static final String PATH_DATA =
       VivitEnvironment.FOLDER_DATA + "Data" + Constants.DELIMETER_PATH;
   public static final String PATH_DATA_TODAY =
