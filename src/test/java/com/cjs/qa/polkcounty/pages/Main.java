@@ -95,6 +95,9 @@ public class Main extends Page {
                 indexRow = rowElements.size();
               }
               break;
+            default:
+              Environment.sysOut("Unexpected column number: " + column + ". Skipping.");
+              break;
           }
           if (column == 1) {
             final WebElement elementA = columnElement.findElement(By.xpath("./a"));
@@ -380,6 +383,9 @@ public class Main extends Page {
               }
               // }
             }
+            break;
+          default:
+            Environment.sysOut("Unexpected column number: " + column + ". Skipping.");
             break;
         }
       }

@@ -42,6 +42,9 @@ public class LoginPage extends Page {
           case "btsrobot":
             sPassword = "Welcome00";
             break;
+          default:
+            Environment.sysOut("Unknown user: " + sUserName + ". Password not set.");
+            break;
         }
         setEditPassword(sPassword);
         clickButtonSubmit();

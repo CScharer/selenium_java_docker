@@ -1,5 +1,6 @@
 package com.cjs.qa.bts.pages;
 
+import com.cjs.qa.core.Environment;
 import com.cjs.qa.selenium.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -84,6 +85,9 @@ public class SearchResultsPage extends Page {
       case "Policy To Quote Renewal":
       case "Policy To Renewal":
         xPath = "html/body//div[.='" + policy + "']/../..//div[.='Copy Policy']";
+        break;
+      default:
+        Environment.sysOut("Unknown action value: " + value + ". xPath not set.");
         break;
     }
     sleep(1);

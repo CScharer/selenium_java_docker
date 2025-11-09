@@ -178,6 +178,10 @@ public class AmendPage extends Page {
       case "Charge or Return Premium":
         xPath += "RETURN_P";
         break;
+      default:
+        Environment.sysOut("Unknown apply type: " + value + ". xPath may be invalid.");
+        xPath += "UNKNOWN";
+        break;
     }
     xPath += "']/../..";
     final By by = By.xpath(xPath);
