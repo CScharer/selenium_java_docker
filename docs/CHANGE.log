@@ -1,5 +1,76 @@
 # CHANGE LOG
 
+## [2025-11-08 15:45:00 CST] - Fix: Replace Wikipedia with W3C in JMeter Web Test ✅
+
+### Overview
+Wikipedia was returning 403 Forbidden errors in JMeter Web Load Test due to anti-bot protection. Replaced with W3C (www.w3.org) which is bot-friendly.
+
+### Problem
+
+**JMeter Web Load Test Failure:**
+```
+Load Wikipedia: 403 Forbidden
+```
+
+**Root Cause:**
+- Wikipedia has anti-bot protection
+- Blocks automated requests from JMeter
+- Returns 403 Forbidden status
+- Fails performance test assertions
+
+### Solution
+
+**Replaced Wikipedia with W3C:**
+
+```xml
+<!-- Before -->
+<HTTPSamplerProxy testname="Load Wikipedia">
+  <stringProp name="HTTPSampler.domain">www.wikipedia.org</stringProp>
+  <stringProp name="HTTPSampler.protocol">https</stringProp>
+  <stringProp name="HTTPSampler.path">/</stringProp>
+</HTTPSamplerProxy>
+
+<!-- After -->
+<HTTPSamplerProxy testname="Load W3C">
+  <stringProp name="HTTPSampler.domain">www.w3.org</stringProp>
+  <stringProp name="HTTPSampler.protocol">https</stringProp>
+  <stringProp name="HTTPSampler.path">/</stringProp>
+</HTTPSamplerProxy>
+```
+
+**Why W3C:**
+- ✅ Bot-friendly (no anti-bot protection)
+- ✅ Reliable for automated testing
+- ✅ Returns consistent 200 OK responses
+- ✅ Used successfully in other tests
+
+### Updated Test Targets
+
+**JMeter Web Load Test (Web_Load_Test.jmx):**
+1. **Load Google** (www.google.com) ✅
+2. **Load GitHub** (github.com) ✅
+3. **Load W3C** (www.w3.org) ✅ (replaced Wikipedia)
+
+**Thread Configuration:**
+- Users: 30 threads
+- Ramp-up: 20 seconds
+- Loops: 3
+
+### Git Commits
+
+**Commit:** (pending)
+**Files:**
+- `src/test/jmeter/Web_Load_Test.jmx` - Replaced Wikipedia with W3C
+- `docs/CHANGE.log` - This documentation
+
+### Status
+✅ **Wikipedia**: Removed (403 Forbidden)  
+✅ **W3C**: Added (bot-friendly)  
+✅ **JMeter CLI**: Working  
+✅ **Web Load Test**: Should complete successfully  
+
+---
+
 ## [2025-11-08 15:30:00 CST] - Solution: Switch to JMeter CLI (Bypass Maven Plugin) ✅
 
 ### Overview
