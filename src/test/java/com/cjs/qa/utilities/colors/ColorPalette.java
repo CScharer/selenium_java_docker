@@ -1,5 +1,6 @@
 package com.cjs.qa.utilities.colors;
 
+import com.cjs.qa.core.Environment;
 import com.cjs.qa.utilities.Constants;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +76,10 @@ public class ColorPalette {
           case "RGB":
             stringBuilder.append(
                 Constants.QUOTE_DOUBLE + colorPalette.getRgb() + Constants.QUOTE_DOUBLE + "");
+            break;
+          default:
+            Environment.sysOut("Unknown color type: " + type + ". Using empty value.");
+            stringBuilder.append("\"\"");
             break;
         }
         stringBuilder.append(")");

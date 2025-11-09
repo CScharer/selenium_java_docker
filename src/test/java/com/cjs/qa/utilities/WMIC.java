@@ -219,8 +219,10 @@ public class WMIC {
         return getAggregate();
       case "AUTHORITY":
         return getAuthority();
+      default:
+        Environment.sysOut("Unknown WMIC argument: " + argument + ". Returning null.");
+        return null;
     }
-    return null;
   }
 
   private String createCommand() {

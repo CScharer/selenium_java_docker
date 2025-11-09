@@ -160,6 +160,9 @@ public class SystemProcesses {
                       .split(Constants.DELIMETER_LIST));
           listFieldsProcess.addAll(listFieldsTemp);
           break;
+        default:
+          Environment.sysOut("Unknown process type: " + processType + ". Using standard fields only.");
+          break;
       }
       fieldsProcessMap.put(processType, listFieldsProcess);
       sqlStringBuilder.append(

@@ -925,6 +925,10 @@ public class DateHelpers {
             break;
           case Calendar.SATURDAY:
             break;
+          default:
+            // This should never happen as Calendar.DAY_OF_WEEK is 1-7
+            Environment.sysOut("Unexpected day of week: " + calendarStart.get(Calendar.DAY_OF_WEEK));
+            break;
         }
         // if (calendarStart.get(Calendar.DAY_OF_WEEK) !=
         // Calendar.SATURDAY

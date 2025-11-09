@@ -218,6 +218,9 @@ public class HTML {
             fontItalics = true;
             fontUnderline = true;
             break;
+          default:
+            // Normal contractor - no special formatting
+            break;
         }
         String value = mapReport.get(field);
         if (mapReport.get("Contractor").equals("Cumulative")) {

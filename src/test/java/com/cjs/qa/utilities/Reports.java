@@ -308,6 +308,10 @@ public class Reports {
         case "Forms":
           fields = "Action;Index;ProductName;FormNumber;EditionDate;State";
           break;
+        default:
+          Environment.sysOut("Unknown section: " + section + ". Using empty fields.");
+          fields = "";
+          break;
       }
       final List<String> fieldNames = Arrays.asList(fields.split(Constants.DELIMETER_LIST));
       setColumnsIndex(fields);
