@@ -567,12 +567,12 @@ public class Scenarios {
     // browserList = Arrays.asList("ie","firefox")
     for (int browserIndex = 0; browserIndex < browserList.size(); browserIndex++) {
       final String browser = browserList.get(browserIndex);
-      jenkins_WebDriverValidate(browser, softAssert);
+      jenkinsWebDriverValidate(browser, softAssert);
     }
     softAssert.assertAll();
   }
 
-  private void jenkins_WebDriverValidate(String browser, SoftAssert softAssert) throws Throwable {
+  private void jenkinsWebDriverValidate(String browser, SoftAssert softAssert) throws Throwable {
     if (!browser.equalsIgnoreCase(ISelenium.BROWSER_DEFAULT)) {
       setSeleniumWebDriver(
           new SeleniumWebDriver(browser, Environment.isRunRemote(), null, null, null));
@@ -1074,7 +1074,7 @@ public class Scenarios {
 
   // @Ignore
   @Test
-  public void Wellmark() throws Throwable {
+  public void wellmark() throws Throwable {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     getWellmark().LogInPage.login();

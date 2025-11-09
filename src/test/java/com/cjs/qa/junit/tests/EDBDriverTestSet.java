@@ -11,7 +11,7 @@ public class EDBDriverTestSet {
       Arrays.asList("DB2", "MICROSOFT", "QUICKBOOKS", "SQLITE", "SQLSERVER", "UCANACCESS");
 
   @Test
-  public void EDBDrivers() {
+  public void edbDrivers() {
     for (final String databaseType : databaseTypeList) {
       final EDBDriver eDBDriver = EDBDriver.fromString(databaseType);
       Environment.sysOut(
