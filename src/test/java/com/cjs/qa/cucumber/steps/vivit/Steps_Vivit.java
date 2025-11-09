@@ -28,19 +28,115 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
 public class Steps_Vivit extends Environment {
-  protected Scenario scenarioObject = null;
-  protected Selenium selenium = null;
-  protected WebDriver webDriver = null;
-  protected final Map<String, List> mapListTest = new HashMap<>();
-  protected final List<Map<String, String>> listMapTest = new ArrayList<>();
-  protected Map<String, String> mapTest = Reports.getColumnsString(Reports.STRING_SUMMARY);
-  protected String browser = ISelenium.BROWSER_DEFAULT;
-  protected double timeStarted = 0;
-  protected double timeCompleted = 0;
-  protected Vivit vivit;
-  protected String application = null;
-  protected String document = null;
-  protected String xml = null;
+  private Scenario scenarioObject = null;
+  private Selenium selenium = null;
+  private WebDriver webDriver = null;
+  private final Map<String, List> mapListTest = new HashMap<>();
+  private final List<Map<String, String>> listMapTest = new ArrayList<>();
+  private Map<String, String> mapTest = Reports.getColumnsString(Reports.STRING_SUMMARY);
+  private String browser = ISelenium.BROWSER_DEFAULT;
+  private double timeStarted = 0;
+  private double timeCompleted = 0;
+  private Vivit vivit;
+  private String application = null;
+  private String document = null;
+  private String xml = null;
+
+  protected Scenario getScenarioObject() {
+    return scenarioObject;
+  }
+
+  protected void setScenarioObject(Scenario scenarioObject) {
+    this.scenarioObject = scenarioObject;
+  }
+
+  protected Selenium getSelenium() {
+    return selenium;
+  }
+
+  protected void setSelenium(Selenium selenium) {
+    this.selenium = selenium;
+  }
+
+  protected WebDriver getWebDriver() {
+    return webDriver;
+  }
+
+  protected void setWebDriver(WebDriver webDriver) {
+    this.webDriver = webDriver;
+  }
+
+  protected Map<String, List> getMapListTest() {
+    return mapListTest;
+  }
+
+  protected List<Map<String, String>> getListMapTest() {
+    return listMapTest;
+  }
+
+  protected Map<String, String> getMapTest() {
+    return mapTest;
+  }
+
+  protected void setMapTest(Map<String, String> mapTest) {
+    this.mapTest = mapTest;
+  }
+
+  protected String getStepBrowser() {
+    return browser;
+  }
+
+  protected void setStepBrowser(String browser) {
+    this.browser = browser;
+  }
+
+  protected double getTimeStarted() {
+    return timeStarted;
+  }
+
+  protected void setTimeStarted(double timeStarted) {
+    this.timeStarted = timeStarted;
+  }
+
+  protected double getTimeCompleted() {
+    return timeCompleted;
+  }
+
+  protected void setTimeCompleted(double timeCompleted) {
+    this.timeCompleted = timeCompleted;
+  }
+
+  protected Vivit getVivit() {
+    return vivit;
+  }
+
+  protected void setVivit(Vivit vivit) {
+    this.vivit = vivit;
+  }
+
+  protected String getApplication() {
+    return application;
+  }
+
+  protected void setApplication(String application) {
+    this.application = application;
+  }
+
+  protected String getDocument() {
+    return document;
+  }
+
+  protected void setDocument(String document) {
+    this.document = document;
+  }
+
+  protected String getXml() {
+    return xml;
+  }
+
+  protected void setXml(String xml) {
+    this.xml = xml;
+  }
 
   // mvn clean install -Dtest=forkCount="5" -Dtags="@Vivit"
   @Before
@@ -48,13 +144,13 @@ public class Steps_Vivit extends Environment {
     mapTest.put(
         "Started",
         DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_US_STANDARD_DATE_TIME + ".SSS"));
-    timeStarted = System.currentTimeMillis();
-    scenarioObject = scenario;
+    setTimeStarted(System.currentTimeMillis());
+    setScenarioObject(scenario);
     mapTest.put("API", "true");
     mapTest.put("DB", "true");
     mapTest.put("GUI", "true");
-    mapTest.put("Test Name", scenarioObject.getName());
-    String sessionId = scenarioObject.getId();
+    mapTest.put("Test Name", getScenarioObject().getName());
+    String sessionId = getScenarioObject().getId();
     mapTest.put("Scenario ID", sessionId);
     mapTest.put("Session ID", sessionId);
     Environment.sysOut("User Name:[" + Constants.CURRENT_USER + "]");
@@ -64,10 +160,10 @@ public class Steps_Vivit extends Environment {
     }
     try {
       if (mapTest.get("GUI").equals("true")) {
-        webDriver = ISelenium.browserProfiling(browser, scenarioObject);
-        selenium = new Selenium(webDriver);
-        selenium.getSessionInformation();
-        sessionId = selenium.getSessionId().toString();
+        setWebDriver(ISelenium.browserProfiling(getStepBrowser(), getScenarioObject()));
+        setSelenium(new Selenium(getWebDriver()));
+        getSelenium().getSessionInformation();
+        sessionId = getSelenium().getSessionId().toString();
         mapTest.put("Session ID", sessionId);
       }
     } catch (final Exception e) {
@@ -79,38 +175,38 @@ public class Steps_Vivit extends Environment {
   @After
   public void testTeardown() throws QAException {
     Environment.sysOut("mapTest:" + mapTest.toString() + " Tearing Down...");
-    if (scenarioObject.isFailed()) {
+    if (getScenarioObject().isFailed()) {
       Environment.sysOutFailure("mapTest:" + mapTest.toString() + "] FAILED");
     }
-    mapTest.put("Status", scenarioObject.getStatus().toString());
+    mapTest.put("Status", getScenarioObject().getStatus().toString());
     mapTest.put(
         "Completed",
         DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_US_STANDARD_DATE_TIME + ".SSS"));
-    timeCompleted = System.currentTimeMillis();
+    setTimeCompleted(System.currentTimeMillis());
     mapTest.put(
         "Elapsed (seconds)",
-        String.valueOf((timeCompleted - timeStarted) / Constants.MILLISECONDS));
+        String.valueOf((getTimeCompleted() - getTimeStarted()) / Constants.MILLISECONDS));
     listMapTest.add(mapTest);
     mapListTest.put("Summary", listMapTest);
-    if (scenarioObject.isFailed()) {
+    if (getScenarioObject().isFailed()) {
       if (mapTest.get("GUI").equals("true")) {
-        selenium.embedScreenshot(scenarioObject, webDriver);
+        getSelenium().embedScreenshot(getScenarioObject(), getWebDriver());
       }
     }
-    selenium.killBrowser(webDriver);
+    getSelenium().killBrowser(getWebDriver());
     try {
-      Reports.createReportExcelLock(scenarioObject, mapListTest);
+      Reports.createReportExcelLock(getScenarioObject(), mapListTest);
     } catch (final Exception e) {
       Environment.sysOut(e.getMessage());
     }
     Environment.sysOut("mapTest:" + mapTest.toString() + "] Torn Down!!!");
-    scenarioObject = null;
-    selenium = null;
+    setScenarioObject(null);
+    setSelenium(null);
   }
 
   @Given("^Environment Setup Vivit$")
   public void environment_Setup_Vivit(DataTable table) throws Throwable {
-    browser = "";
+    setStepBrowser("");
     final List<List<String>> data = table.asLists();
     for (final List<?> item : data) {
       final String field = (String) item.get(0);
@@ -118,9 +214,9 @@ public class Steps_Vivit extends Environment {
       if (!value.equals("")) {
         switch (field.toLowerCase()) {
           case "browser":
-            browser = value.toUpperCase().trim();
-            // browser = Environment.getBrowser();
-            mapTest.put("Browser", browser);
+            setStepBrowser(value.toUpperCase().trim());
+            // setStepBrowser(Environment.getStepBrowser());
+            mapTest.put("Browser", getStepBrowser());
             break;
           case "company":
             final String company = value.toUpperCase().trim();
@@ -143,14 +239,14 @@ public class Steps_Vivit extends Environment {
     }
     // if (browser.equals(""))
     // {
-    // browser = Environment.getBrowser();
+    // browser = Environment.getStepBrowser();
     // webDriver = selenium.browserProfiling(webDriver, browser,
     // Environment.isRunRemote());
     // sessionId = (((RemoteWebDriver)
-    // webDriver).getSessionId()).toString();
+    // getWebDriver()).getSessionId()).toString();
     // Environment.sysOut("mapTest:" + mapTest.toString());
     // }
-    vivit = new Vivit(webDriver);
+    setVivit(new Vivit(getWebDriver()));
   }
 
   // TODO ************************************************** GUI
