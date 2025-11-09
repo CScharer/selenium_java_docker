@@ -37,6 +37,13 @@ public class LogInPage extends Page {
     buttonOKClick();
   }
 
+  public void login() throws QAException {
+    load();
+    login(CJSConstants.USERID_VIVIT, EPasswords.MY_WELLMARK.getValue());
+    waitPageLoad();
+    JavaHelpers.sleep(5);
+  }
+
   public boolean load() throws QAException {
     maximizeWindow();
     Environment.sysOut("Loading:[" + WellmarkEnvironment.URL_LOGIN + "]");
@@ -49,12 +56,5 @@ public class LogInPage extends Page {
   public void waitPageLoad() throws QAException {
     final By byButtonContinue = By.xpath(".//*[@id='SSOForm']//input[@value='Continue']");
     do { } while (objectExists(byButtonContinue));
-  }
-
-  public void login() throws QAException {
-    load();
-    login(CJSConstants.USERID_VIVIT, EPasswords.MY_WELLMARK.getValue());
-    waitPageLoad();
-    JavaHelpers.sleep(5);
   }
 }

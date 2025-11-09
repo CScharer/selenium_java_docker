@@ -340,15 +340,6 @@ public class SSOService extends WebService {
   }
 
   /**
-   * @param count
-   */
-  public void registerUsers(int count) {
-    for (int i = 1; i <= count; i++) {
-      registerUser(true);
-    }
-  }
-
-  /**
    * @param confirmUser
    * @param addSecurityQuestions
    * @param addNames
@@ -498,6 +489,15 @@ public class SSOService extends WebService {
       }
     }
     return eMail;
+  }
+
+  /**
+   * @param count
+   */
+  public void registerUsers(int count) {
+    for (int i = 1; i <= count; i++) {
+      registerUser(true);
+    }
   }
 
   /**
