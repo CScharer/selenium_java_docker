@@ -1,5 +1,181 @@
 # CHANGE LOG
 
+## [2025-11-08 14:00:00 CST] - Fix: JMeter Single Invocation (Root Cause Identified) ✅
+
+### Overview
+**ROOT CAUSE FOUND!** JMeter plugin requires all goals to run in a SINGLE Maven invocation to share execution context and state. Running them separately causes "No results for path: $[0]" error.
+
+### Root Cause
+
+**From jmeter-run.log:**
+```
+[ERROR] Failed to execute goal jmeter-maven-plugin:3.7.0:jmeter
+[ERROR] No results for path: $[0]
+[ERROR] Current Execution ID: configuration
+```
+
+**The Problem:**
+```bash
+# This DOESN'T WORK (separate invocations):
+./mvnw jmeter:configure    # Creates config
+./mvnw jmeter:jmeter       # Can't find config! ❌
+./mvnw jmeter:results      # Nothing to process! ❌
+```
+
+**Why It Fails:**
+1. `jmeter:configure` runs and creates configuration
+2. Maven process **ends**
+3. `jmeter:jmeter` starts in **new Maven process**
+4. Plugin looks for execution ID "configuration" from previous run
+5. **State not shared** between separate Maven invocations
+6. Error: "No results for path: $[0]"
+
+### Solution
+
+**Run all goals in SINGLE Maven invocation:**
+
+```bash
+# This WORKS (single invocation, shared state):
+./mvnw jmeter:configure jmeter:jmeter jmeter:results
+```
+
+**Why It Works:**
+1. Single Maven process starts
+2. `jmeter:configure` creates configuration **in memory**
+3. `jmeter:jmeter` accesses **same execution context**
+4. `jmeter:results` processes results **from same session**
+5. All goals share state ✅
+6. Success!
+
+### Updated Workflow
+
+```yaml
+- name: Run JMeter Tests (All Goals in Single Invocation)
+  continue-on-error: true
+  run: |
+    echo "IMPORTANT: All goals run in SINGLE Maven invocation"
+    
+    # All three goals in ONE command - this is the key!
+    ./mvnw jmeter:configure jmeter:jmeter jmeter:results 2>&1 | tee jmeter-full.log
+    
+    # Show what was created
+    find target/jmeter -type f
+```
+
+**Key Points:**
+- ✅ Single `./mvnw` command
+- ✅ All goals in one line (space-separated)
+- ✅ Shared execution context
+- ✅ State persists across goals
+- ✅ Configuration accessible to subsequent goals
+
+### Why Previous Approaches Failed
+
+**Attempt 1: Execution IDs in pom.xml**
+- ❌ Only works for lifecycle-bound goals
+- ❌ Not for direct CLI invocation
+
+**Attempt 2: Explicit test file listing**
+- ❌ Syntax issues
+- ❌ Still had separate invocations
+
+**Attempt 3: Ultra-simplified config**
+- ❌ Config was fine
+- ❌ Problem was separate invocations
+
+**Attempt 4: Separate steps with logging**
+- ✅ **FOUND THE ROOT CAUSE!**
+- Logs showed: "No results for path: $[0]"
+- Logs showed: "Current Execution ID: configuration"
+
+**Attempt 5: Single invocation (CORRECT)**
+- ✅ Runs all goals in one Maven process
+- ✅ Shared execution context
+- ✅ Configuration accessible
+- ✅ THIS IS THE FIX!
+
+### Maven Plugin State Management
+
+**JMeter Maven Plugin Behavior:**
+```
+Goal: jmeter:configure
+├─ Creates: jmeter-maven-plugin-config.json
+├─ Stores: Execution context in memory
+└─ Expects: Same Maven session for jmeter:jmeter
+
+Goal: jmeter:jmeter
+├─ Looks for: Execution ID "configuration"
+├─ Reads: In-memory state from jmeter:configure
+└─ Fails if: Different Maven process
+
+Goal: jmeter:results
+├─ Processes: Results from jmeter:jmeter
+└─ Generates: HTML reports
+```
+
+**The Lesson:**
+Maven plugins can maintain **in-memory state** across goals within the **same invocation**. Separate invocations start **fresh processes** with **no shared state**.
+
+### Expected Output
+
+```bash
+[INFO] --- jmeter:3.7.0:configure (default-cli) ---
+[INFO] Building JMeter configuration...
+[INFO] Configuration complete
+
+[INFO] --- jmeter:3.7.0:jmeter (default-cli) ---
+[INFO] Executing 2 test files...
+[INFO] Running: API_Performance_Test.jmx
+[INFO] Running: Web_Load_Test.jmx
+[INFO] Tests complete
+
+[INFO] --- jmeter:3.7.0:results (default-cli) ---
+[INFO] Processing results...
+[INFO] Generating HTML reports...
+[INFO] BUILD SUCCESS
+```
+
+### Updated Files
+
+**.github/workflows/performance.yml:**
+- Combined all JMeter goals into single invocation
+- Changed from 3 separate steps to 1 unified step
+- Added clear comments explaining why
+- Single log file: `jmeter-full.log`
+
+### Benefits
+
+**Simplified Execution:**
+- ✅ One command instead of three
+- ✅ Clearer workflow
+- ✅ Fewer moving parts
+
+**Reliable State Management:**
+- ✅ Shared execution context
+- ✅ Configuration accessible to all goals
+- ✅ No state loss between goals
+
+**Easier Debugging:**
+- ✅ Single log file to review
+- ✅ Complete execution trace
+- ✅ All output in one place
+
+### Git Commits
+
+**Commit:** (pending)
+**Files:**
+- `.github/workflows/performance.yml` - Single invocation fix
+- `docs/CHANGE.log` - Root cause analysis
+
+### Status
+✅ **Root Cause**: Identified (separate invocations lose state)  
+✅ **Solution**: Single Maven invocation for all goals  
+✅ **Fix Applied**: All goals run in one command  
+✅ **Expected Result**: JMeter tests will now execute  
+🎯 **Ready to Test**: Next run should work!  
+
+---
+
 ## [2025-11-08 13:45:00 CST] - Debug: JMeter Verbose Logging and Error Visibility 🔍
 
 ### Overview

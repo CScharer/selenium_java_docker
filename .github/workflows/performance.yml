@@ -306,29 +306,28 @@ jobs:
           
           echo "✅ All JMeter test files present"
       
-      - name: Configure JMeter
-        run: |
-          echo "🔧 Step 1: Configuring JMeter..."
-          ./mvnw jmeter:configure -X 2>&1 | tee jmeter-configure.log
-          echo ""
-          echo "Configuration complete. Checking for config file..."
-          find target -name "*.json" -o -name "jmeter*" | head -20
-      
-      - name: Run JMeter Tests
+      - name: Run JMeter Tests (All Goals in Single Invocation)
         continue-on-error: true
         run: |
-          echo "📊 Step 2: Running JMeter tests..."
-          ./mvnw jmeter:jmeter -X 2>&1 | tee jmeter-run.log
+          echo "📊 Running JMeter: configure + jmeter + results..."
+          echo "IMPORTANT: All goals run in SINGLE Maven invocation to share state"
+          echo ""
+          
+          # Run all three goals in a SINGLE mvnw command
+          # This ensures they share execution context and state
+          ./mvnw jmeter:configure jmeter:jmeter jmeter:results 2>&1 | tee jmeter-full.log
           
           echo ""
-          echo "Checking for test results..."
-          find target/jmeter -type f | head -20 || echo "No files found"
-      
-      - name: Generate JMeter Reports
-        continue-on-error: true
-        run: |
-          echo "📈 Step 3: Generating reports..."
-          ./mvnw jmeter:results -X 2>&1 | tee jmeter-results.log || echo "Results generation completed"
+          echo "=========================================="
+          echo "Checking for generated files..."
+          echo "=========================================="
+          
+          if [ -d "target/jmeter" ]; then
+            echo "JMeter target directory:"
+            find target/jmeter -type f 2>/dev/null | head -20 || echo "  (empty)"
+          else
+            echo "⚠️  No target/jmeter directory found"
+          fi
       
       - name: Upload JMeter Logs
         uses: actions/upload-artifact@v4
@@ -336,7 +335,7 @@ jobs:
         with:
           name: jmeter-logs
           path: |
-            jmeter-*.log
+            jmeter-full.log
             target/jmeter/
           retention-days: 7
       
