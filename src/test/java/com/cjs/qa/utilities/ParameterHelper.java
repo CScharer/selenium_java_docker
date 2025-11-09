@@ -54,7 +54,7 @@ public class ParameterHelper {
     ParameterHelper parameterHelper = null;
     try {
       String methodName = JavaHelpers.getCallingMethodName();
-      final StackTraceElement stackTraceArray[] = (new Throwable()).getStackTrace();
+      final StackTraceElement[] stackTraceArray = (new Throwable()).getStackTrace();
       StackTraceElement stackTraceElement = stackTraceArray[2];
       methodName = stackTraceElement.getMethodName();
       String className = stackTraceElement.getClassName();

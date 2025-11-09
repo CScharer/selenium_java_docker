@@ -606,7 +606,7 @@ public interface ISelenium {
     int iIndex = 0;
     Select Dropdown;
     String sItem = null;
-    String aItems[] = null;
+    String[] aItems = null;
     String sMessage = null;
     if (Environment.isLogAll()) {
       Environment.sysOut("");

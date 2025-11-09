@@ -158,7 +158,7 @@ public class FSO {
         file.delete();
       } else {
         // list all the directory contents
-        final String files[] = file.list();
+        final String[] files = file.list();
         for (final String fileTemp : files) {
           // construct the file structure
           final File fileDelete = new File(file, fileTemp);

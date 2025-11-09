@@ -15,7 +15,7 @@ import org.apache.poi.xslf.usermodel.XSLFSlideMaster;
 import org.apache.poi.xslf.usermodel.XSLFTextShape;
 
 public class PowerPoint {
-  public static void main(String args[]) throws IOException {
+  public static void main(String[] args) throws IOException {
     final String fileName = "createPPTX" + IExtension.PPTX;
     final String title = "Power Point Example";
     //
