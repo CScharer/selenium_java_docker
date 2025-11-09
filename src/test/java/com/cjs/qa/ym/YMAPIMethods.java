@@ -165,10 +165,13 @@ public final class YMAPIMethods {
             case LABEL_INTEGER:
             case "Number":
               parameterDeclarationType = LABEL_INTEGER;
+              break;
             case "Decimal":
               parameterDeclarationType = "Double";
+              break;
             case LABEL_BOOLEAN:
               parameterDeclarationType = LABEL_BOOLEAN;
+              break;
             case "Comma Delimited List":
             case "Date":
             case "DateTime":

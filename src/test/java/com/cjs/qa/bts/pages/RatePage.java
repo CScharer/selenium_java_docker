@@ -132,10 +132,13 @@ public class RatePage extends Page {
             break;
           case "agricultural output":
             actual.put(field, getLabelAgriculturalOutput());
+            break;
           case "general liability":
             actual.put(field, getLabelGeneralLiability());
+            break;
           case "policywide coverages":
             actual.put(field, getLabelGeneralLiability());
+            break;
           default:
             Environment.sysOut("[" + field + "]" + ISelenium.FIELD_NOT_CODED);
             break;

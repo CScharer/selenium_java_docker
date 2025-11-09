@@ -225,6 +225,7 @@ public class ContactInfoPage extends Page {
             break;
           case "(Company Website)":
             appendLinkedInField(methodName + " " + "(Company)", site);
+            break;
           default:
             break;
         }
@@ -254,6 +255,7 @@ public class ContactInfoPage extends Page {
             break;
           case "(Company Website)":
             appendLinkedInField(methodName + " " + "(Company)", site);
+            break;
           default:
             break;
         }
