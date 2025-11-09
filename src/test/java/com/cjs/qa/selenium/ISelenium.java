@@ -160,13 +160,14 @@ public interface ISelenium {
     // (F5466750-F292-4D4A-9637-5B0755B92C49)] -> xpath:
     final String indexer = webElementString.substring(0, webElementString.indexOf("Driver:"));
     final int parents = ((indexer.lastIndexOf("[") + 1) / 2);
-    if (parents != parentList.size())
+    if (parents != parentList.size()) {
       Assert.fail(
           "The parentList ["
               + parentList.size()
               + "] does not match the number of parents ["
               + parents
               + "]");
+    }
     final String[] nodes = webElementString.split(" -> xpath: .");
     final StringBuilder stringBuilder = new StringBuilder();
     for (int indexLevel = 1; indexLevel <= parentList.size(); indexLevel++) {
@@ -581,7 +582,7 @@ public interface ISelenium {
           break;
         }
       }
-      if (match == false) {
+      if (!match) {
         matchAll = match;
       }
     }
@@ -617,7 +618,7 @@ public interface ISelenium {
       Dropdown = new Select(webDriver.findElement(By.name(field)));
       Dropdown.selectByVisibleText(value);
       match = true;
-      if (match == true) {
+      if (match) {
         return match;
       }
       for (iIndex = 0; iIndex < aItems.length; iIndex++) {

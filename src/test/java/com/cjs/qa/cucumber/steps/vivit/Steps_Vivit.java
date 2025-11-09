@@ -59,7 +59,7 @@ public class Steps_Vivit extends Environment {
     mapTest.put("Session ID", sessionId);
     Environment.sysOut("User Name:[" + Constants.CURRENT_USER + "]");
     Environment.sysOut("mapTest:" + mapTest.toString() + " Starting...");
-    if (Environment.environmentSet == false) {
+    if (Environment.environmentSet) {
       Environment.setEnvironmentVariableValues();
     }
     try {

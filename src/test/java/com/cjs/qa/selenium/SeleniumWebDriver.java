@@ -466,7 +466,7 @@ public class SeleniumWebDriver {
                 System.out.print(".");
               }
             }
-          } while (driverInstanciated == false && attempt < MAX_INSTANCIATION_ATTEMPTS);
+          } while (!driverInstanciated && attempt < MAX_INSTANCIATION_ATTEMPTS);
           if (!driverInstanciated) {
             throw new QAException("Remote Web Driver could not be instanciated");
           }
@@ -1102,5 +1102,4 @@ public class SeleniumWebDriver {
     // stringBuilder.append(c.nlTab(newLine, tab) + "}");
     return stringBuilder.toString();
   }
-  ;
 }
