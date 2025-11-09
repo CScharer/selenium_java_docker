@@ -350,7 +350,6 @@ public class HTML {
             + "></link>");
     stringBuilderReport.append("</head>");
     stringBuilderReport.append("<body>");
-    StringBuilder stringBuilderTable = new StringBuilder();
     StringBuilder stringBuilderHeader = new StringBuilder();
     stringBuilderHeader.append(
         "<table class="
@@ -395,11 +394,11 @@ public class HTML {
     stringBuilderHeader.append("</th>");
     stringBuilderHeader.append("</tr>");
     stringBuilderHeader.append("</table>");
+    final StringBuilder stringBuilderTable = new StringBuilder();
     stringBuilderTable.append(stringBuilderHeader.toString());
     stringBuilderHeader = null;
     tab--;
     stringBuilderReport.append(stringBuilderTable.toString());
-    stringBuilderTable = null;
     stringBuilderReport.append("</body>");
     stringBuilderReport.append("</html>");
     final String report = stringBuilderReport.toString();

@@ -83,8 +83,7 @@ public class Coder {
     stringBuilder.append(JDBCConstants.WHERE + "[Page]='" + currentPage + "' ");
     stringBuilder.append(JDBCConstants.ORDER_BY + "[Index], [Location], [Method];");
     Environment.sysOut("stringBuilder.toString():[" + stringBuilder.toString() + "]");
-    List<Map<Integer, String>> recordsCodeListMap =
-        jdbc.queryResultsIndex(stringBuilder.toString(), true);
+    final String codeQuery = stringBuilder.toString();
     stringBuilder = new StringBuilder();
     stringBuilder.append(
         JDBCConstants.SELECT_DISTINCT + "[Type], [Name], [PagePopulate], [PageValidate] ");
@@ -106,6 +105,8 @@ public class Coder {
     stringBuilderAll.append(getInputs(recordsOtherListMap, mapOtherFields));
     stringBuilderAll.append(getTable(recordsOtherListMap, mapOtherFields));
     stringBuilderAll.append(Constants.nlTab(1, 0));
+    final List<Map<Integer, String>> recordsCodeListMap =
+        jdbc.queryResultsIndex(codeQuery, true);
     Map<String, Integer> mapCodeFields = null;
     if (!recordsCodeListMap.isEmpty()) {
       mapCodeFields = getHashMapFields(recordsCodeListMap.get(0));
