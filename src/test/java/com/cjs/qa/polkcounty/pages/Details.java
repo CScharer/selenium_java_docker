@@ -213,6 +213,9 @@ public class Details extends Page {
               // }
             }
             break;
+          default:
+            Environment.sysOut("Unexpected column number: " + column + ". Skipping.");
+            break;
         }
       }
     }

@@ -134,6 +134,9 @@ public class Steps_Vivit extends Environment {
             final String environment = value.toUpperCase().trim();
             mapTest.put("Environment", environment);
             break;
+          default:
+            Environment.sysOut("Unknown field: " + field + ". Skipping value: " + value);
+            break;
         }
         Environment.sysOut(field + ":[" + value + "]");
       }

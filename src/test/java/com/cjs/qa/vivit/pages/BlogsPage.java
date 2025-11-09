@@ -118,6 +118,9 @@ public class BlogsPage extends Page {
               mapBlogs.put("LastActivity", fieldValue);
               lastActivity = fieldValue;
               break;
+            default:
+              Environment.sysOut("Unknown field name: " + fieldName + ". Skipping.");
+              break;
           }
         }
       }

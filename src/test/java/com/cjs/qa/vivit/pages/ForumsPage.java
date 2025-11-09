@@ -110,6 +110,9 @@ public class ForumsPage extends Page {
             forumURL = href;
             name = fieldValue;
             break;
+          default:
+            Environment.sysOut("Unexpected field index: " + fieldIndex + ". Skipping.");
+            break;
         }
       }
       Forums.getForumsList()

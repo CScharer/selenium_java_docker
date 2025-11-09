@@ -146,6 +146,9 @@ public class GroupPage extends Page {
             case "SIGS":
               groupName = groupName.replace("Special Interest Group", groupType);
               break;
+            default:
+              Environment.sysOut("Unknown group type: " + groupType + ". Using original group name.");
+              break;
           }
           final Map<String, By> mapByGroupURLsBy = getGroupURLs();
           final Map<String, String> mapGroupURLs = new HashMap<>();
@@ -327,6 +330,9 @@ public class GroupPage extends Page {
         break;
       case "SIGS":
         url = VivitEnvironment.URL_LOGIN + "?page=SIGS";
+        break;
+      default:
+        Environment.sysOut("Unknown group type: " + GROUP + ". Using default LUGS URL.");
         break;
     }
     webDriver.get(url);

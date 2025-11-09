@@ -113,6 +113,9 @@ public class SearchPage extends Page {
       case "SIGS":
         url = VivitEnvironment.URL_LOGIN + "?page=SIGS";
         break;
+      default:
+        Environment.sysOut("Unknown group type: " + GROUP + ". Using default LUGS URL.");
+        break;
     }
     webDriver.get(url);
     final List<WebElement> webElements = webDriver.findElements(linksGroups);
