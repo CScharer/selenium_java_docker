@@ -7,12 +7,16 @@ import java.util.List;
 import org.junit.Test;
 
 public class EDBDriverTestSet {
-  final List<String> databaseTypeList =
+  private final List<String> databaseTypeList =
       Arrays.asList("DB2", "MICROSOFT", "QUICKBOOKS", "SQLITE", "SQLSERVER", "UCANACCESS");
+
+  private List<String> getDatabaseTypeList() {
+    return databaseTypeList;
+  }
 
   @Test
   public void edbDrivers() {
-    for (final String databaseType : databaseTypeList) {
+    for (final String databaseType : getDatabaseTypeList()) {
       final EDBDriver eDBDriver = EDBDriver.fromString(databaseType);
       Environment.sysOut(
           "Driver Type:["

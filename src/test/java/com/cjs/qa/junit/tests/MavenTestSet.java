@@ -14,10 +14,18 @@ import java.util.Map;
 import org.junit.Test;
 
 public class MavenTestSet {
-  public String STRING_BUFFER = JavaHelpers.createBufferString("*", 100, "") + Constants.NEWLINE;
-  public FSO fso = new FSO();
+  private String stringBuffer = JavaHelpers.createBufferString("*", 100, "") + Constants.NEWLINE;
+  private FSO fso = new FSO();
 
   public MavenTestSet() { }
+
+  private String getStringBuffer() {
+    return stringBuffer;
+  }
+
+  private FSO getFso() {
+    return fso;
+  }
 
   @Test
   public void dependencyTest() throws Exception {
@@ -50,7 +58,7 @@ public class MavenTestSet {
       final String filePathName = path.toString();
       if (filePathName.contains("pom" + IExtension.XML)) {
         if (filePathName.equals(projectAnalyze)) {
-          stringBuilder.append(STRING_BUFFER);
+          stringBuilder.append(getStringBuffer());
           stringBuilder.append(newLine("PATH_WORKSPACE:" + PATH_WORKSPACE));
           stringBuilder.append(newLine("resultsPathFile:" + resultsPathFile));
           stringBuilder.append(newLine("filePathName:[" + filePathName + "]"));
@@ -71,12 +79,12 @@ public class MavenTestSet {
         }
       }
     }
-    FSO.fileWrite(resultsPathFile, STRING_BUFFER, true);
+    FSO.fileWrite(resultsPathFile, getStringBuffer(), true);
   }
 
   private String runDependencyCheck(
       String batchPathFile, String projectPath, String resultsPathFile) throws Exception {
-    final StringBuilder stringBuilder = new StringBuilder(STRING_BUFFER);
+    final StringBuilder stringBuilder = new StringBuilder(getStringBuffer());
     stringBuilder.append(newLine("Checking POM Dependencies for [" + projectPath + "]"));
     stringBuilder.append(newLine("Creating Temporary Batch File [" + batchPathFile + "]"));
     final StringBuilder stringBuilderBatch = new StringBuilder();

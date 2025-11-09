@@ -16,9 +16,33 @@ public class PhantomJS {
   public static final String DRIVER_PATH = "C:\\Selenium\\Grid2\\Drivers\\";
   public static final String DRIVER_EXE_PHANTOMJS = "phantomjs.exe";
   public static final String DRIVER_PATH_PHANTOMJS = DRIVER_PATH + DRIVER_EXE_PHANTOMJS;
-  WebDriver webDriver;
-  WebElement webElement;
-  By byObject;
+  private WebDriver webDriver;
+  private WebElement webElement;
+  private By byObject;
+
+  private WebDriver getWebDriver() {
+    return webDriver;
+  }
+
+  private void setWebDriver(WebDriver webDriver) {
+    this.webDriver = webDriver;
+  }
+
+  private WebElement getWebElement() {
+    return webElement;
+  }
+
+  private void setWebElement(WebElement webElement) {
+    this.webElement = webElement;
+  }
+
+  private By getByObject() {
+    return byObject;
+  }
+
+  private void setByObject(By byObject) {
+    this.byObject = byObject;
+  }
 
   @Before
   public void beforeTest() throws Exception {
@@ -39,36 +63,36 @@ public class PhantomJS {
   public void phantomJS() throws Exception {
     System.setProperty("phantomjs.binary.path", DRIVER_PATH_PHANTOMJS);
     // WebDriver webDriver = new PhantomJSDriver(BrowserVersion.CHROME)
-    webDriver = new PhantomJSDriver();
-    webDriver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(10));
-    webDriver.get("https://www.google.com");
+    setWebDriver(new PhantomJSDriver());
+    getWebDriver().manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(10));
+    getWebDriver().get("https://www.google.com");
     for (int counter = 1; counter <= 10; counter++) {
       final String searchString = "Searching for " + counter;
-      byObject = By.name("q");
-      webElement = waitExists(byObject);
-      webElement.clear();
-      webElement.sendKeys(searchString);
-      System.out.println("Search Text:[" + webElement.getAttribute("value") + "]");
-      // byObject = By.xpath(".//input[@name='btnK']");
-      // byObject = By.name("btnK");
-      // webElement = waitExists(byObject);
-      // // webElement.submit()
-      // webElement.click();
-      webElement.sendKeys(Keys.ENTER);
-      webDriver.navigate().refresh();
+      setByObject(By.name("q"));
+      setWebElement(waitExists(getByObject()));
+      getWebElement().clear();
+      getWebElement().sendKeys(searchString);
+      System.out.println("Search Text:[" + getWebElement().getAttribute("value") + "]");
+      // setByObject(By.xpath(".//input[@name='btnK']"));
+      // setByObject(By.name("btnK"));
+      // setWebElement(waitExists(getByObject()));
+      // // getWebElement().submit()
+      // getWebElement().click();
+      getWebElement().sendKeys(Keys.ENTER);
+      getWebDriver().navigate().refresh();
     }
-    byObject = By.id("gb_70");
-    byObject = By.xpath(".//a[.='Sign in']");
-    webElement = waitExists(byObject);
-    webElement.click();
-    String title = webDriver.getTitle();
+    setByObject(By.id("gb_70"));
+    setByObject(By.xpath(".//a[.='Sign in']"));
+    setWebElement(waitExists(getByObject()));
+    getWebElement().click();
+    String title = getWebDriver().getTitle();
     System.out.println("title:[" + title + "]");
   }
 
   protected WebElement waitExists(By by) {
     // May need to update as new webDriverWait returns boolean.
     final WebDriverWait webDriverWait =
-        new WebDriverWait(webDriver, java.time.Duration.ofSeconds(15));
+        new WebDriverWait(getWebDriver(), java.time.Duration.ofSeconds(15));
     return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(by));
   }
 }
