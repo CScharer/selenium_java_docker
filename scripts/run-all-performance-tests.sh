@@ -68,10 +68,11 @@ echo "║  STEP 3/3: JMETER TESTS (30%)                                  ║"
 echo "╚════════════════════════════════════════════════════════════════╝"
 echo ""
 
-if [ -d "src/test/jmeter" ]; then
-    ./mvnw jmeter:jmeter jmeter:results || OVERALL_RESULT=1
+if [ -f "scripts/run-jmeter-tests.sh" ]; then
+    chmod +x scripts/run-jmeter-tests.sh
+    ./scripts/run-jmeter-tests.sh || OVERALL_RESULT=1
 else
-    echo "⚠️  No JMeter tests found - skipping"
+    echo "⚠️  JMeter script not found - skipping"
     OVERALL_RESULT=1
 fi
 
@@ -85,7 +86,8 @@ echo ""
 echo "Results Locations:"
 echo "   Locust:  target/locust/report.html"
 echo "   Gatling: target/gatling/*/index.html"
-echo "   JMeter:  target/jmeter/reports/index.html"
+echo "   JMeter API:  target/jmeter/reports/api/index.html"
+echo "   JMeter Web:  target/jmeter/reports/web/index.html"
 echo ""
 
 echo "Metrics Collected:"

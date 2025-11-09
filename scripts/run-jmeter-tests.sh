@@ -1,6 +1,7 @@
 #!/bin/bash
 # JMeter Performance Test Runner
 # 30% of performance testing allocation
+# Uses JMeter CLI directly (not Maven plugin)
 
 set -e
 
@@ -9,6 +10,8 @@ echo "=========================================="
 
 # Configuration
 JMETER_VERSION="5.6.3"
+JMETER_HOME="apache-jmeter-${JMETER_VERSION}"
+JMETER_BIN="${JMETER_HOME}/bin/jmeter"
 TEST_DIR="src/test/jmeter"
 RESULTS_DIR="target/jmeter"
 
@@ -29,6 +32,23 @@ echo "📋 Available Test Plans:"
 find $TEST_DIR -name "*.jmx" -exec basename {} \; | sed 's/^/   - /'
 echo ""
 
+# Download and install JMeter if not present
+if [ ! -f "$JMETER_BIN" ]; then
+    echo "📥 Downloading Apache JMeter ${JMETER_VERSION}..."
+    wget -q https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${JMETER_VERSION}.tgz
+    
+    echo "📦 Extracting JMeter..."
+    tar -xzf apache-jmeter-${JMETER_VERSION}.tgz
+    
+    echo "✅ JMeter installed"
+    $JMETER_BIN --version
+else
+    echo "✅ JMeter already installed"
+    $JMETER_BIN --version
+fi
+
+echo ""
+
 # Clean previous results
 echo "🧹 Cleaning previous results..."
 rm -rf $RESULTS_DIR/results
@@ -36,13 +56,35 @@ rm -rf $RESULTS_DIR/reports
 mkdir -p $RESULTS_DIR/results
 mkdir -p $RESULTS_DIR/reports
 
-# Run JMeter tests via Maven
+# Run JMeter tests using CLI directly
 echo "🚀 Executing JMeter test plans..."
 echo ""
 
-./mvnw jmeter:jmeter jmeter:results
+# Run API Performance Test
+echo "1️⃣ Running API_Performance_Test.jmx..."
+$JMETER_BIN -n \
+    -t $TEST_DIR/API_Performance_Test.jmx \
+    -l $RESULTS_DIR/results/api-results.jtl \
+    -e -o $RESULTS_DIR/reports/api \
+    -j $RESULTS_DIR/api-jmeter.log
 
-JMETER_EXIT_CODE=$?
+API_EXIT_CODE=$?
+echo "   Exit code: $API_EXIT_CODE"
+echo ""
+
+# Run Web Load Test
+echo "2️⃣ Running Web_Load_Test.jmx..."
+$JMETER_BIN -n \
+    -t $TEST_DIR/Web_Load_Test.jmx \
+    -l $RESULTS_DIR/results/web-results.jtl \
+    -e -o $RESULTS_DIR/reports/web \
+    -j $RESULTS_DIR/web-jmeter.log
+
+WEB_EXIT_CODE=$?
+echo "   Exit code: $WEB_EXIT_CODE"
+echo ""
+
+JMETER_EXIT_CODE=$((API_EXIT_CODE + WEB_EXIT_CODE))
 
 echo ""
 echo "=========================================="
@@ -56,33 +98,28 @@ echo "=========================================="
 # Display results
 echo ""
 echo "📊 JMeter Results:"
-if [ -d "$RESULTS_DIR/reports" ]; then
-    echo "   Reports directory: $RESULTS_DIR/reports"
-    
-    # Check for HTML dashboard
-    if [ -f "$RESULTS_DIR/reports/index.html" ]; then
-        echo "   Dashboard: $RESULTS_DIR/reports/index.html"
-        echo ""
-        echo "💡 Open in browser:"
-        echo "   open $RESULTS_DIR/reports/index.html  (macOS)"
-        echo "   xdg-open $RESULTS_DIR/reports/index.html  (Linux)"
-        echo ""
-        
-        # Auto-open on macOS
-        if [[ "$OSTYPE" == "darwin"* ]]; then
-            read -p "Open dashboard now? (y/n) " -n 1 -r
-            echo
-            if [[ $REPLY =~ ^[Yy]$ ]]; then
-                open "$RESULTS_DIR/reports/index.html"
-            fi
-        fi
-    fi
+echo ""
+
+if [ -f "$RESULTS_DIR/reports/api/index.html" ]; then
+    echo "✅ API Performance Test Report:"
+    echo "   Dashboard: $RESULTS_DIR/reports/api/index.html"
+    echo "   Results: $RESULTS_DIR/results/api-results.jtl"
 else
-    echo "   No reports generated"
+    echo "❌ API Performance Test: No report generated"
 fi
 
 echo ""
-echo "📈 Performance Metrics:"
+
+if [ -f "$RESULTS_DIR/reports/web/index.html" ]; then
+    echo "✅ Web Load Test Report:"
+    echo "   Dashboard: $RESULTS_DIR/reports/web/index.html"
+    echo "   Results: $RESULTS_DIR/results/web-results.jtl"
+else
+    echo "❌ Web Load Test: No report generated"
+fi
+
+echo ""
+echo "📈 Performance Metrics Available:"
 echo "   - Response time statistics"
 echo "   - Throughput (requests/sec)"
 echo "   - Error percentage"
@@ -90,10 +127,28 @@ echo "   - Latency graphs"
 echo "   - Transaction reports"
 
 echo ""
-echo "💡 View detailed results:"
-echo "   - HTML reports: $RESULTS_DIR/reports/"
-echo "   - CSV data: $RESULTS_DIR/results/"
-echo "   - JTL files: $RESULTS_DIR/results/*.jtl"
+echo "💡 Open Reports in Browser:"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo "   open $RESULTS_DIR/reports/api/index.html"
+    echo "   open $RESULTS_DIR/reports/web/index.html"
+    echo ""
+    
+    read -p "Open API report now? (y/n) " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        open "$RESULTS_DIR/reports/api/index.html"
+        open "$RESULTS_DIR/reports/web/index.html"
+    fi
+else
+    echo "   xdg-open $RESULTS_DIR/reports/api/index.html"
+    echo "   xdg-open $RESULTS_DIR/reports/web/index.html"
+fi
+
+echo ""
+echo "📁 All Results:"
+echo "   - API Reports: $RESULTS_DIR/reports/api/"
+echo "   - Web Reports: $RESULTS_DIR/reports/web/"
+echo "   - Raw Data: $RESULTS_DIR/results/"
 
 exit $JMETER_EXIT_CODE
 

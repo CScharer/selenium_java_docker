@@ -260,7 +260,7 @@ jobs:
           path: target/gatling/
           retention-days: 30
 
-  # Run THIRD - JMeter (after Locust)
+  # Run THIRD - JMeter (after Locust) - Using JMeter CLI directly
   jmeter-comprehensive:
     name: JMeter Load Tests (30%) - Step 3
     runs-on: ubuntu-latest
@@ -281,109 +281,110 @@ jobs:
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: 'temurin'
-          cache: 'maven'
+      
+      - name: Download and Install JMeter
+        run: |
+          echo "📥 Downloading Apache JMeter 5.6.3..."
+          wget -q https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.3.tgz
+          
+          echo "📦 Extracting JMeter..."
+          tar -xzf apache-jmeter-5.6.3.tgz
+          
+          echo "✅ JMeter installed"
+          apache-jmeter-5.6.3/bin/jmeter --version
       
       - name: Verify JMeter Test Files
         run: |
           echo "📊 Verifying JMeter test files..."
-          echo ""
-          echo "Current directory: $(pwd)"
-          echo "MAVEN_OPTS: $MAVEN_OPTS"
-          echo ""
-          
-          if [ ! -d "src/test/jmeter" ]; then
-            echo "❌ JMeter test directory not found!"
-            exit 1
-          fi
-          
-          echo "JMeter test directory contents:"
-          ls -la src/test/jmeter/
-          echo ""
           
           if [ ! -f "src/test/jmeter/API_Performance_Test.jmx" ]; then
             echo "❌ API_Performance_Test.jmx not found!"
             exit 1
-          else
-            echo "✅ API_Performance_Test.jmx present ($(wc -c < src/test/jmeter/API_Performance_Test.jmx) bytes)"
           fi
           
           if [ ! -f "src/test/jmeter/Web_Load_Test.jmx" ]; then
             echo "❌ Web_Load_Test.jmx not found!"
             exit 1
-          else
-            echo "✅ Web_Load_Test.jmx present ($(wc -c < src/test/jmeter/Web_Load_Test.jmx) bytes)"
           fi
           
-          echo ""
-          echo "✅ All JMeter test files present and valid"
+          echo "✅ API_Performance_Test.jmx ($(wc -c < src/test/jmeter/API_Performance_Test.jmx) bytes)"
+          echo "✅ Web_Load_Test.jmx ($(wc -c < src/test/jmeter/Web_Load_Test.jmx) bytes)"
       
-      - name: Run JMeter Tests (All Goals in Single Invocation)
+      - name: Prepare Results Directories
+        run: |
+          mkdir -p target/jmeter/results
+          mkdir -p target/jmeter/reports
+      
+      - name: Run API Performance Test
         continue-on-error: true
         run: |
-          echo "📊 Running JMeter: configure + jmeter + results..."
-          echo "IMPORTANT: All goals run in SINGLE Maven invocation to share state"
-          echo ""
-          echo "Test files directory: \${project.basedir}/src/test/jmeter"
-          echo ""
-          
-          # Run all three goals in a SINGLE mvnw command with extra verbose output
-          # This ensures they share execution context and state
-          ./mvnw jmeter:configure jmeter:jmeter jmeter:results -X 2>&1 | tee jmeter-full.log
-          
-          JMETER_EXIT_CODE=${PIPESTATUS[0]}
+          echo "🚀 Running API Performance Test..."
+          apache-jmeter-5.6.3/bin/jmeter -n \
+            -t src/test/jmeter/API_Performance_Test.jmx \
+            -l target/jmeter/results/api-results.jtl \
+            -e -o target/jmeter/reports/api \
+            -j target/jmeter/api-jmeter.log
           
           echo ""
-          echo "=========================================="
-          echo "JMeter exit code: $JMETER_EXIT_CODE"
-          echo "Checking for generated files..."
-          echo "=========================================="
-          
-          if [ -d "target/jmeter" ]; then
-            echo "JMeter target directory:"
-            find target/jmeter -type f 2>/dev/null | head -30 || echo "  (empty)"
-            echo ""
-            echo "Directory structure:"
-            tree target/jmeter -L 3 2>/dev/null || find target/jmeter -type d 2>/dev/null
-          else
-            echo "⚠️  No target/jmeter directory found"
-          fi
+          echo "API Test completed. Results:"
+          ls -la target/jmeter/results/api-results.jtl || echo "No results file"
+          ls -la target/jmeter/reports/api/index.html || echo "No report generated"
       
-      - name: Upload JMeter Logs
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: jmeter-logs
-          path: |
-            jmeter-full.log
-            target/jmeter/
-          retention-days: 7
+      - name: Run Web Load Test
+        continue-on-error: true
+        run: |
+          echo "🚀 Running Web Load Test..."
+          apache-jmeter-5.6.3/bin/jmeter -n \
+            -t src/test/jmeter/Web_Load_Test.jmx \
+            -l target/jmeter/results/web-results.jtl \
+            -e -o target/jmeter/reports/web \
+            -j target/jmeter/web-jmeter.log
+          
+          echo ""
+          echo "Web Test completed. Results:"
+          ls -la target/jmeter/results/web-results.jtl || echo "No results file"
+          ls -la target/jmeter/reports/web/index.html || echo "No report generated"
       
-      - name: Display JMeter Results
+      - name: Display JMeter Results Summary
         if: always()
         run: |
-          echo "📊 JMeter Results Summary:"
-          if [ -d "target/jmeter/results" ]; then
-            echo "Results directory contents:"
-            ls -la target/jmeter/results/
+          echo "=========================================="
+          echo "📊 JMeter Performance Test Summary"
+          echo "=========================================="
+          echo ""
+          
+          if [ -f "target/jmeter/results/api-results.jtl" ]; then
+            echo "✅ API Test Results:"
+            echo "   File: target/jmeter/results/api-results.jtl"
+            echo "   Size: $(wc -c < target/jmeter/results/api-results.jtl) bytes"
+            echo "   Lines: $(wc -l < target/jmeter/results/api-results.jtl)"
           else
-            echo "⚠️  No results directory found"
+            echo "❌ API Test: No results"
           fi
           
-          if [ -d "target/jmeter/reports" ]; then
-            echo "Reports directory contents:"
-            ls -la target/jmeter/reports/
+          echo ""
+          
+          if [ -f "target/jmeter/results/web-results.jtl" ]; then
+            echo "✅ Web Test Results:"
+            echo "   File: target/jmeter/results/web-results.jtl"
+            echo "   Size: $(wc -c < target/jmeter/results/web-results.jtl) bytes"
+            echo "   Lines: $(wc -l < target/jmeter/results/web-results.jtl)"
           else
-            echo "⚠️  No reports directory found"
+            echo "❌ Web Test: No results"
           fi
+          
+          echo ""
+          echo "📁 Generated Files:"
+          find target/jmeter -type f 2>/dev/null | head -30
+          echo ""
+          echo "=========================================="
       
-      - name: Upload JMeter Results  
+      - name: Upload JMeter Results
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: jmeter-performance-results
-          path: |
-            target/jmeter/
-            jmeter-*.log
+          path: target/jmeter/
           retention-days: 30
 
   # Summary runs after all tests complete
