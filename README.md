@@ -7,6 +7,7 @@
 [![Selenium](https://img.shields.io/badge/Selenium-4.26.0-green.svg)](https://www.selenium.dev/)
 [![Cucumber](https://img.shields.io/badge/Cucumber-7.20.1-brightgreen.svg)](https://cucumber.io/)
 [![REST Assured](https://img.shields.io/badge/REST%20Assured-5.4.0-blue.svg)](https://rest-assured.io/)
+[![Performance](https://img.shields.io/badge/Performance-Gatling%20%7C%20JMeter%20%7C%20Locust-yellow.svg)](docs/PERFORMANCE_TESTING.md)
 [![Maven](https://img.shields.io/badge/Maven-3.9.11-blue.svg)](https://maven.apache.org/)
 [![Docker](https://img.shields.io/badge/Docker-ready-blue.svg)](https://www.docker.com/)
 [![Code Quality](https://img.shields.io/badge/Code%20Quality-Checkstyle%20%7C%20SpotBugs%20%7C%20PMD-success.svg)](https://github.com/CScharer/selenium_java_docker/actions)
@@ -67,6 +68,7 @@ A comprehensive Selenium-based test automation framework supporting **30+ test s
 - **WebDriverManager 5.9.2** - Automatic driver management
 
 ### Recent Improvements (November 8, 2025)
+- ✅ **Performance Testing** - Gatling (30%), JMeter (30%), Locust (40%)
 - ✅ **API Testing Integration** - 31 REST API tests with REST Assured 5.4.0
 - ✅ **Extended Test Coverage** - 77 total tests (46 UI + 31 API)
 - ✅ **Log4j 2 Logging** - Professional structured logging with rotation & archiving
@@ -327,6 +329,62 @@ REST API testing with REST Assured - **No Selenium Grid required!**
 - 🚀 **Lightweight**: Run anywhere (CI/CD, local, Docker)
 - 📊 **Integrated**: Same Allure reports as UI tests
 - 🔄 **Reusable**: REST Assured for all API testing
+
+### Performance Testing (⚡ 3 Tools)
+
+Load and stress testing with industry-leading tools:
+
+```bash
+# Locust (40% - Primary tool, Python)
+./scripts/run-locust-tests.sh
+
+# Gatling (30% - Detailed reports, Scala)
+./scripts/run-gatling-tests.sh
+
+# JMeter (30% - Industry standard, Java)
+./scripts/run-jmeter-tests.sh
+
+# Run all performance tests
+./scripts/run-all-performance-tests.sh
+```
+
+**Tool Comparison:**
+
+| Tool | Language | Best For | Output |
+|------|----------|----------|--------|
+| **Locust** (40%) | Python | Real-time monitoring, flexible scripting | Web UI + HTML |
+| **Gatling** (30%) | Scala | Detailed analysis, beautiful reports | HTML Dashboard |
+| **JMeter** (30%) | Java | Industry standard, protocol support | HTML + CSV |
+
+**What it includes:**
+
+**Locust Tests (40% allocation):**
+- ✅ api_load_test.py - API performance testing
+- ✅ web_load_test.py - Website load testing
+- ✅ comprehensive_load_test.py - Complete scenarios
+- ✅ Real-time web UI: http://localhost:8089
+- ✅ 100-200 concurrent users
+
+**Gatling Tests (30% allocation):**
+- ✅ ApiLoadSimulation.scala - REST API load test
+- ✅ WebLoadSimulation.scala - Web page load test
+- ✅ Ramp: 1-50 users over 30s
+- ✅ Beautiful HTML reports with graphs
+
+**JMeter Tests (30% allocation):**
+- ✅ API_Performance_Test.jmx - API load testing
+- ✅ Web_Load_Test.jmx - Website load testing
+- ✅ 30-50 concurrent users
+- ✅ Industry-standard reports
+
+**Metrics Collected:**
+- ⏱️  Response times (min/max/avg/p95/p99)
+- 📊 Throughput (requests per second)
+- ✅ Success/failure rates
+- 👥 Concurrent users
+- 📈 Performance trends
+
+**See:** [Performance Testing Guide](docs/PERFORMANCE_TESTING.md)
 
 ### Using Helper Scripts (Recommended)
 

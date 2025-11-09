@@ -1,5 +1,413 @@
 # CHANGE LOG
 
+## [2025-11-08 12:00:00 CST] - Performance Testing Integration (Gatling, JMeter, Locust) ✅
+
+### Overview
+Implemented comprehensive performance testing framework using three industry-standard tools: Locust (40%), Gatling (30%), and JMeter (30%). Added load testing, stress testing, and performance monitoring capabilities for both API and web endpoints. Each tool serves specific purposes with unique strengths.
+
+### Tool Allocation Strategy
+
+**Locust - 40% (Primary Tool)**
+- Python-based performance testing
+- Real-time web UI dashboard
+- Flexible scripting
+- Best for: API testing, real-time monitoring
+
+**Gatling - 30% (Detailed Analysis)**
+- Scala-based load testing
+- Beautiful HTML reports
+- High-performance async I/O
+- Best for: Complex scenarios, detailed metrics
+
+**JMeter - 30% (Industry Standard)**
+- Java-based performance tool
+- Comprehensive protocol support
+- Mature ecosystem
+- Best for: Enterprise requirements, multiple protocols
+
+### Dependencies Added
+
+**Gatling (Maven):**
+```xml
+<dependency>
+    <groupId>io.gatling.highcharts</groupId>
+    <artifactId>gatling-charts-highcharts</artifactId>
+    <version>3.10.3</version>
+</dependency>
+```
+
+**Maven Plugins:**
+- `gatling-maven-plugin` 4.7.0
+- `jmeter-maven-plugin` 3.7.0
+- `scala-maven-plugin` 4.8.1
+
+**Locust (Python):**
+```txt
+locust==2.20.0
+requests==2.31.0
+matplotlib==3.8.2
+pandas==2.1.4
+```
+
+### Test Files Created
+
+#### Locust Tests (40% - 3 Python files)
+
+**1. api_load_test.py**
+- API endpoint testing
+- CRUD operations (weighted tasks)
+- Realistic user simulation
+- Dynamic payloads
+
+**Features:**
+```python
+class ApiUser(HttpUser):
+    wait_time = between(1, 3)
+    
+    @task(10)  # Weight: Most common
+    def get_all_posts(self):
+        self.client.get("/posts")
+    
+    @task(3)  # Weight: Less common
+    def create_post(self):
+        self.client.post("/posts", json={...})
+```
+
+**Task Weights:**
+- GET /posts: 10 (most frequent)
+- GET /posts/{id}: 8
+- GET /users: 6
+- GET /comments: 5
+- POST /posts: 3
+- PUT /posts/{id}: 2
+- DELETE /posts/{id}: 1 (least frequent)
+
+**2. web_load_test.py**
+- Website load testing
+- Multiple site navigation
+- Realistic browsing patterns
+- Page load metrics
+
+**Sites Tested:**
+- Google (weight: 3)
+- GitHub (weight: 3)
+- Wikipedia (weight: 2)
+- W3C (weight: 2)
+
+**3. comprehensive_load_test.py**
+- Sequential user journeys (SequentialTaskSet)
+- Batch request patterns
+- Query parameter testing
+- Complex scenarios
+
+**User Journey:**
+1. Browse posts
+2. Read specific post
+3. Read comments
+4. Create new post
+5. Update post
+
+#### Gatling Tests (30% - 2 Scala files)
+
+**1. ApiLoadSimulation.scala**
+
+**Load Profile:**
+```scala
+setUp(
+  scenario.inject(
+    rampUsers(50).during(30.seconds),
+    constantUsersPerSec(5).during(60.seconds)
+  )
+).assertions(
+  global.responseTime.max.lt(5000),
+  global.responseTime.mean.lt(1000),
+  global.successfulRequests.percent.gt(95)
+)
+```
+
+**Scenario:**
+- GET /posts
+- GET /posts/1
+- GET /posts/1/comments
+- GET /users/1
+- POST /posts (create)
+
+**2. WebLoadSimulation.scala**
+
+**Load Profile:**
+```scala
+rampUsers(30).during(20.seconds)
+```
+
+**Pages Tested:**
+- Google homepage
+- GitHub homepage
+- Wikipedia homepage
+- W3C homepage
+
+#### JMeter Tests (30% - 2 JMX files)
+
+**1. API_Performance_Test.jmx**
+
+**Configuration:**
+- Thread Group: 50 users
+- Ramp-up: 30 seconds
+- Loops: 5 iterations
+- Samplers: GET /posts, GET /posts/1, POST /posts
+- Assertions: Status code 200/201
+- Timer: 1-second think time
+
+**2. Web_Load_Test.jmx**
+
+**Configuration:**
+- Thread Group: 30 users
+- Ramp-up: 20 seconds
+- Loops: 3 iterations
+- Samplers: Google, GitHub, Wikipedia
+- Timer: 2-second think time
+
+### Helper Scripts Created
+
+**1. run-locust-tests.sh**
+- Interactive or headless mode
+- Test file selection
+- Auto-report opening
+- Result summary
+
+**2. run-gatling-tests.sh**
+- Runs all Gatling simulations
+- Auto-opens HTML reports
+- Performance metrics display
+
+**3. run-jmeter-tests.sh**
+- Runs all JMeter test plans
+- Generates HTML dashboards
+- CSV result extraction
+
+**4. run-all-performance-tests.sh**
+- Master runner for all tools
+- Sequential execution
+- Combined results summary
+- Tool comparison
+
+### Documentation Created
+
+**PERFORMANCE_TESTING.md (Comprehensive Guide)**
+
+**Sections:**
+- Tool comparison and allocation
+- Installation instructions
+- Test file descriptions
+- Running each tool
+- Interpreting results
+- Best practices
+- Troubleshooting
+- CI/CD integration examples
+- Performance metrics explained
+- Load testing strategy
+
+**Content:**
+- 500+ lines of documentation
+- Usage examples for each tool
+- Command reference
+- Metrics interpretation
+- Troubleshooting guide
+
+### Usage
+
+**Quick Performance Test:**
+```bash
+# Locust (fastest, most flexible)
+./scripts/run-locust-tests.sh
+# Opens web UI at http://localhost:8089
+```
+
+**Comprehensive Analysis:**
+```bash
+# Run all three tools
+./scripts/run-all-performance-tests.sh
+```
+
+**Individual Tools:**
+```bash
+# Locust - Headless
+locust -f src/test/locust/api_load_test.py --headless \
+       --users 100 --spawn-rate 10 --run-time 3m
+
+# Gatling
+./mvnw gatling:test
+
+# JMeter
+./mvnw jmeter:jmeter jmeter:results
+```
+
+### Performance Test Scenarios
+
+**API Load Test:**
+- Target: JSONPlaceholder API
+- Users: 50-200 concurrent
+- Duration: 2-5 minutes
+- Operations: GET, POST, PUT, DELETE
+- Validates: All CRUD operations
+
+**Web Load Test:**
+- Targets: Google, GitHub, Wikipedia, W3C
+- Users: 20-50 concurrent
+- Duration: 1-3 minutes
+- Operations: Page loads, navigation
+- Validates: Page accessibility, load times
+
+### Metrics and Reports
+
+**Locust Reports:**
+- Location: `target/locust/report.html`
+- Real-time: http://localhost:8089
+- Format: Interactive web UI, HTML, CSV
+
+**Gatling Reports:**
+- Location: `target/gatling/<simulation>-<timestamp>/index.html`
+- Format: Beautiful HTML dashboard with graphs
+- Metrics: Response time distribution, percentiles, RPS
+
+**JMeter Reports:**
+- Location: `target/jmeter/reports/index.html`
+- Format: HTML dashboard, JTL files, CSV
+- Metrics: Summary, graphs, transaction times
+
+### Performance Targets
+
+**API Endpoints:**
+- Response time (avg): < 500ms
+- Response time (p95): < 1s
+- Response time (p99): < 2s
+- Success rate: > 99%
+- RPS: > 100
+
+**Web Pages:**
+- Page load (avg): < 2s
+- Page load (p95): < 5s
+- Page load (p99): < 10s
+- Success rate: > 95%
+- RPS: > 20
+
+### Benefits
+
+**1. Multi-Tool Approach:**
+- Cross-validate results
+- Different perspectives
+- Comprehensive coverage
+- Best tool for each scenario
+
+**2. Professional Quality:**
+- Industry-standard tools
+- Enterprise-grade testing
+- Production-ready
+- Detailed analytics
+
+**3. Flexibility:**
+- Python, Scala, Java options
+- Interactive and headless modes
+- Local and distributed testing
+- Easy integration
+
+**4. Rich Reporting:**
+- Real-time dashboards (Locust)
+- Beautiful reports (Gatling)
+- Standard metrics (JMeter)
+- Combined analysis
+
+### Git Commits
+
+**Commit:** (pending)
+**Files Created:**
+- `ApiLoadSimulation.scala` - Gatling API test
+- `WebLoadSimulation.scala` - Gatling web test
+- `API_Performance_Test.jmx` - JMeter API test
+- `Web_Load_Test.jmx` - JMeter web test
+- `api_load_test.py` - Locust API test
+- `web_load_test.py` - Locust web test
+- `comprehensive_load_test.py` - Locust comprehensive test
+- `requirements.txt` - Python dependencies
+- `run-locust-tests.sh` - Locust runner
+- `run-gatling-tests.sh` - Gatling runner
+- `run-jmeter-tests.sh` - JMeter runner
+- `run-all-performance-tests.sh` - Master runner
+- `PERFORMANCE_TESTING.md` - Complete guide
+
+**Total:** 2,000+ lines of performance testing code and documentation
+
+### File Structure
+
+```
+src/test/
+├── scala/                          # Gatling (30%)
+│   ├── ApiLoadSimulation.scala
+│   └── WebLoadSimulation.scala
+│
+├── jmeter/                         # JMeter (30%)
+│   ├── API_Performance_Test.jmx
+│   └── Web_Load_Test.jmx
+│
+└── locust/                         # Locust (40%)
+    ├── api_load_test.py
+    ├── web_load_test.py
+    └── comprehensive_load_test.py
+
+scripts/
+├── run-locust-tests.sh
+├── run-gatling-tests.sh
+├── run-jmeter-tests.sh
+└── run-all-performance-tests.sh
+
+requirements.txt                    # Python/Locust deps
+
+docs/
+└── PERFORMANCE_TESTING.md          # Complete guide
+
+target/
+├── locust/                         # Locust results
+├── gatling/                        # Gatling results
+└── jmeter/                         # JMeter results
+```
+
+### Integration
+
+**All tools integrate with:**
+- ✅ Maven build system
+- ✅ Helper scripts for easy execution
+- ✅ Standardized reporting structure
+- ✅ CI/CD ready (headless modes)
+- ✅ Professional documentation
+
+### Next Steps (Optional)
+
+**1. CI/CD Integration:**
+- Add performance-tests job to GitHub Actions
+- Run on schedule or manual trigger
+- Upload performance reports
+- Track trends over time
+
+**2. Baseline Establishment:**
+- Run tests to establish baselines
+- Document acceptable performance
+- Set up alerts for degradation
+
+**3. Custom Scenarios:**
+- Add application-specific tests
+- Model real user workflows
+- Test production-like loads
+
+### Status
+✅ **Locust**: 3 test files created (40%)  
+✅ **Gatling**: 2 simulations created (30%)  
+✅ **JMeter**: 2 test plans created (30%)  
+✅ **Dependencies**: All added  
+✅ **Scripts**: 4 runner scripts created  
+✅ **Documentation**: Complete guide created  
+✅ **README**: Updated with performance section  
+
+---
+
 ## [2025-11-08 11:45:00 CST] - Fix: Replace Slow W3Schools Test in NegativeTests ✅
 
 ### Overview
