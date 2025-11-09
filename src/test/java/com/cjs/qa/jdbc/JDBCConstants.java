@@ -1,6 +1,6 @@
 package com.cjs.qa.jdbc;
 
-public class JDBCConstants {
+public final class JDBCConstants {
   public static final String AS = "as ";
   public static final String ALTER = "alter ";
   public static final String IF_EXISTS = "if exists ";

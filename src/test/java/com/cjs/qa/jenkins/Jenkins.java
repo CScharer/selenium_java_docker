@@ -5,7 +5,7 @@ import com.cjs.qa.utilities.FSO;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
 
-public class Jenkins {
+public final class Jenkins {
   private Jenkins() { // Empty
   }
 

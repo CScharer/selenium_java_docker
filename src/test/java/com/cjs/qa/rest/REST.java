@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class REST {
-  public REST() {}
+  public REST() { }
 
   public static Map<String, String> getAPIJSONResponse(
       String credentials, String requestMethod, String apiRequest, String url) throws QAException {
