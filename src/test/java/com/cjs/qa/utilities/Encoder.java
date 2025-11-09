@@ -61,14 +61,14 @@ public class Encoder {
     sEncoded = sValue;
     switch (base) {
       case "52":
-        iDecodedDate = Decode(sEncoded.substring(0, 5));
-        iDecodedTime = Decode(sEncoded.substring(5, 9));
-        iDecodedNano = Decode(sEncoded.substring(9));
+        iDecodedDate = decode(sEncoded.substring(0, 5));
+        iDecodedTime = decode(sEncoded.substring(5, 9));
+        iDecodedNano = decode(sEncoded.substring(9));
         break;
       default:
-        iDecodedDate = Decode(sEncoded.substring(0, 6));
-        iDecodedTime = Decode(sEncoded.substring(6, 11));
-        iDecodedNano = Decode(sEncoded.substring(11));
+        iDecodedDate = decode(sEncoded.substring(0, 6));
+        iDecodedTime = decode(sEncoded.substring(6, 11));
+        iDecodedNano = decode(sEncoded.substring(11));
         break;
     }
     sDecoded = String.valueOf(iDecodedDate);
@@ -99,13 +99,13 @@ public class Encoder {
     final int iDate = Integer.valueOf(sDate);
     final int iTime = Integer.valueOf(sTime);
     final int iNano = Integer.valueOf(sNano);
-    String sDateEncoded = Encode(iDate);
-    sDateEncoded += Encode(iTime);
-    sDateEncoded += Encode(iNano);
+    String sDateEncoded = encode(iDate);
+    sDateEncoded += encode(iTime);
+    sDateEncoded += encode(iNano);
     return sDateEncoded;
   }
 
-  public String Encode(int iNumber) {
+  public String encode(int iNumber) {
     String sText = "";
     final int iTextLength = (int) Math.ceil(Math.log(iNumber) / Math.log(characterSet.length()));
     for (int iLoop = 0; iLoop < iTextLength; iLoop++) {
@@ -117,7 +117,7 @@ public class Encoder {
     return sText;
   }
 
-  public int Decode(String sText) {
+  public int decode(String sText) {
     int iNumber = 0;
     final int iTextLength = sText.length();
     for (int iLoop = 0; iLoop < iTextLength; iLoop++) {

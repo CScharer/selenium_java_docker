@@ -37,7 +37,7 @@ public class Reports {
   private static Map<String, Integer> resultColumns = null;
   private static final FSO FSO = new FSO();
 
-  private static synchronized void _updateReport(File filePathName, byte[] byteArray)
+  private static synchronized void updateReport(File filePathName, byte[] byteArray)
       throws IOException {
     FileChannel fileChannel = null;
     try {

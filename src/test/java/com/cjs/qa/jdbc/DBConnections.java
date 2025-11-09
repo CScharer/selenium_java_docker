@@ -5,7 +5,7 @@ import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.IExtension;
 
 public class DBConnections {
-  private static DBParameters Access() {
+  private static DBParameters access() {
     final DBParameters dbParameters = new DBParameters("UCANACCESS");
     dbParameters.setServer(
         "Driver={Microsoft Access Driver (*" + IExtension.MDB + ", *" + IExtension.ACCDB + ")}");
@@ -26,7 +26,7 @@ public class DBConnections {
     return dbParameters;
   }
 
-  private static DBParameters MSAccess() {
+  private static DBParameters msAccess() {
     final DBParameters dbParameters = new DBParameters("UCANACCESS");
     dbParameters.setServer(
         "Driver={Microsoft Access Driver (*" + IExtension.MDB + ", *" + IExtension.ACCDB + ")}");
@@ -47,7 +47,7 @@ public class DBConnections {
     return dbParameters;
   }
 
-  private static DBParameters MSExcel() {
+  private static DBParameters msExcel() {
     final DBParameters dbParameters = new DBParameters("UCANACCESS");
     dbParameters.setServer(
         "Driver={Driver do Microsoft Excel (*" + IExtension.XLS + ", *" + IExtension.XLSX + ")}");
@@ -75,7 +75,7 @@ public class DBConnections {
     return dbParameters;
   }
 
-  private static DBParameters SQLite() {
+  private static DBParameters sqLite() {
     // org.sqlite.JDBC
     // jdbc:sqlite:C:\Workspace\Data\Databases\qadb.sqlite
     final DBParameters dbParameters = new DBParameters("SQLITE");
@@ -85,7 +85,7 @@ public class DBConnections {
     return dbParameters;
   }
 
-  private static DBParameters SQLServer() {
+  private static DBParameters sqlServer() {
     final DBParameters dbParameters = new DBParameters("SQLSERVER");
     dbParameters.setServer(CJSConstants.JIRA_TEST_DATABASE_SERVER);
     dbParameters.setPort(CJSConstants.JIRA_TEST_DATABASE_PORT);
@@ -109,7 +109,7 @@ public class DBConnections {
   public static DBParameters getDBParametersAutoCoder(String environment) {
     switch (environment.toUpperCase()) {
       default:
-        final DBParameters parameters = SQLite();
+        final DBParameters parameters = sqLite();
         parameters.setName(Constants.PATH_FILES_DATA_DATABASES + "AutoCoder" + IExtension.SQLITE);
         parameters.setConnectionString(parameters.getUrlPrefix() + parameters.getName());
         return parameters;
@@ -119,7 +119,7 @@ public class DBConnections {
   public static DBParameters getDBParametersAutoCoderExcel(String environment) {
     switch (environment.toUpperCase()) {
       default:
-        final DBParameters parameters = SQLite();
+        final DBParameters parameters = sqLite();
         parameters.setName(
             Constants.PATH_FILES_DATA_DATABASES + "AutoCoderExcel" + IExtension.SQLITE);
         parameters.setConnectionString(parameters.getUrlPrefix() + parameters.getName());
@@ -130,35 +130,35 @@ public class DBConnections {
   public static DBParameters getDBParametersMSAccess(String environment) {
     switch (environment.toUpperCase()) {
       default:
-        return MSAccess();
+        return msAccess();
     }
   }
 
   public static DBParameters getDBParametersMSExcel(String environment) {
     switch (environment.toUpperCase()) {
       default:
-        return MSExcel();
+        return msExcel();
     }
   }
 
   public static DBParameters getDBParametersJira(String environment) {
     switch (environment.toUpperCase()) {
       default:
-        return SQLServer();
+        return sqlServer();
     }
   }
 
   public static DBParameters getDBParametersQAAuto(String environment) {
     switch (environment.toUpperCase()) {
       default:
-        return SQLite();
+        return sqLite();
     }
   }
 
   public static DBParameters getDBParametersQATools(String environment) {
     switch (environment.toUpperCase()) {
       default:
-        DBParameters dbParameters = SQLite();
+        DBParameters dbParameters = sqLite();
         dbParameters.setName(Constants.PATH_FILES_DATA_DATABASES + "qatools" + IExtension.SQLITE);
         dbParameters.setConnectionString(dbParameters.getUrlPrefix() + dbParameters.getName());
         return dbParameters;
@@ -168,7 +168,7 @@ public class DBConnections {
   public static DBParameters getDBParametersQaToolsWeb(String environment) {
     switch (environment.toUpperCase()) {
       default:
-        return Access();
+        return access();
     }
   }
 }

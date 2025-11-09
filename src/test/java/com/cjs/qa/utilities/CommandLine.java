@@ -142,7 +142,7 @@ public class CommandLine {
     return tasksList.contains(processName.toLowerCase());
   }
 
-  public static boolean IsProcessRunning(String processRunning) {
+  public static boolean isProcessRunningNoException(String processRunning) {
     Process process;
     try {
       process = Runtime.getRuntime().exec(TASKLIST);

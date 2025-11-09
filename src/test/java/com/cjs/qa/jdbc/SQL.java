@@ -87,7 +87,7 @@ public class SQL {
     return recordsUpdated;
   }
 
-  public int EX_sqlGetPartyID(String eMail) {
+  public int exSqlGetPartyId(String eMail) {
     int partyID = 0;
     String sql =
         JDBCConstants.SELECT
