@@ -497,6 +497,10 @@ public interface ISelenium {
         desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.merge(safariOptions);
         break;
+      default:
+        Environment.sysOut("Unknown browser: " + browser + ". Using default capabilities.");
+        desiredCapabilities = new DesiredCapabilities();
+        break;
     }
     switch (operatingSystem.toUpperCase()) {
       case "android":
@@ -546,6 +550,10 @@ public interface ISelenium {
         break;
       case "yosemite":
         desiredCapabilities.setPlatform(Platform.YOSEMITE);
+        break;
+      default:
+        Environment.sysOut("Unknown operating system: " + operatingSystem + ". Using ANY platform.");
+        desiredCapabilities.setPlatform(Platform.ANY);
         break;
     }
     return desiredCapabilities;

@@ -209,8 +209,10 @@ public interface IExcel {
         return HSSFColor.HSSFColorPredefined.WHITE.getIndex();
       case "yellow":
         return HSSFColor.HSSFColorPredefined.YELLOW.getIndex();
+      default:
+        Environment.sysOut("Unknown color: " + color + ". Returning -1.");
+        return -1;
     }
-    return -1;
   }
 
   public static HyperlinkType getHyperlinkType(String hyperlinkType) {
@@ -223,8 +225,10 @@ public interface IExcel {
         return HyperlinkType.FILE;
       case "url":
         return HyperlinkType.URL;
+      default:
+        Environment.sysOut("Unknown hyperlink type: " + hyperlinkType + ". Returning null.");
+        return null;
     }
-    return null;
   }
 
   public static XLS updateSummarySheetXLS(

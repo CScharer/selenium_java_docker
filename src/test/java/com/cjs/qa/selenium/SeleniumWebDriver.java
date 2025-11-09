@@ -703,6 +703,10 @@ public class SeleniumWebDriver {
         desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.merge(safariOpts);
         break;
+      default:
+        Environment.sysOut("Unknown browser: " + browser + ". Using default capabilities.");
+        desiredCapabilities = new DesiredCapabilities();
+        break;
     }
     switch (operatingSystem.toLowerCase()) {
       case OS.ANDROID:
@@ -752,6 +756,10 @@ public class SeleniumWebDriver {
         break;
       case OS.YOSEMITE:
         desiredCapabilities.setPlatform(Platform.YOSEMITE);
+        break;
+      default:
+        Environment.sysOut("Unknown operating system: " + operatingSystem + ". Using ANY platform.");
+        desiredCapabilities.setPlatform(Platform.ANY);
         break;
     }
     return desiredCapabilities;
