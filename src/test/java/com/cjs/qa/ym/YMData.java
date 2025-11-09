@@ -1501,7 +1501,7 @@ public class YMData extends Environment {
   }
 
   @Test
-  public void Verification() throws Throwable {
+  public void verification() throws Throwable {
     // YourMembership_Response yourMembership_Response = new
     // UnmarshallEventResponse()
     // yourMembership_Response.getResults().getResultTotal();

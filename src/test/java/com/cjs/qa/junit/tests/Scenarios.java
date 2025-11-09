@@ -310,7 +310,7 @@ public class Scenarios {
 
   @Test
   // @Ignore
-  public void AmericanAirlines() throws Throwable {
+  public void americanAirlines() throws Throwable {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     getAmericanAirlines().VacationabilityPage.populate();
@@ -330,7 +330,7 @@ public class Scenarios {
   }
 
   @Test
-  public void Core() throws Throwable {
+  public void core() throws Throwable {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     // SystemProcesses.check()
@@ -417,7 +417,7 @@ public class Scenarios {
   }
 
   @Test
-  public void Dropbox() throws Throwable {
+  public void dropbox() throws Throwable {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     JDBC jdbc = new JDBC("", DATABASE_QA);
@@ -439,7 +439,7 @@ public class Scenarios {
   }
 
   @Test
-  public void EveryoneSocial() throws Throwable {
+  public void everyoneSocial() throws Throwable {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     getEveryoneSocial()
@@ -527,7 +527,7 @@ public class Scenarios {
   }
 
   @Test
-  public void Google() throws Throwable {
+  public void google() throws Throwable {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     JavaHelpers.displaySystemProperties();
@@ -537,20 +537,20 @@ public class Scenarios {
   }
 
   @Test // @Ignore
-  public void Hardees() throws Throwable {
+  public void hardees() throws Throwable {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     getHardees().SurveyPage.populate();
   }
 
   @Test
-  public void IaDhs() throws Throwable {
+  public void iaDhs() throws Throwable {
     getIadhs().SignInPage.signIn(CJSConstants.USERID_DHS, EPasswords.IADHS.getValue());
     getIadhs().CasePaymentsPage.getPreviousPayments();
   }
 
   @Test
-  public void Jenkins() throws Throwable {
+  public void jenkins() throws Throwable {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     final SoftAssert softAssert = new SoftAssert();
@@ -595,7 +595,7 @@ public class Scenarios {
   }
 
   @Test
-  public void jenkins_Colors() throws Throwable {
+  public void jenkinsColors() throws Throwable {
     getSeleniumWebDriver().killBrowser();
     getSeleniumWebDriver().setBrowser(ISelenium.BROWSER_DEFAULT);
     getSeleniumWebDriver().initializeWebDriver();
@@ -645,7 +645,7 @@ public class Scenarios {
   }
 
   @Test
-  public void jenkins_Pluralsight() throws Throwable {
+  public void jenkinsPluralsight() throws Throwable {
     final String FILE_PATHNAME =
         Constants.PATH_DESKTOP + "PluralSightSessionInformation" + IExtension.TXT;
     final List<String> listSessions = new ArrayList<>();
@@ -688,7 +688,7 @@ public class Scenarios {
   }
 
   @Test
-  public void LinkedIn() throws Throwable {
+  public void linkedIn() throws Throwable {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     // getLinkedIn().run(getSeleniumWebDriver().getWebDriver());
@@ -703,7 +703,7 @@ public class Scenarios {
   }
 
   @Test
-  public void Marlboro() throws Throwable {
+  public void marlboro() throws Throwable {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     final SoftAssert softAssert = new SoftAssert();
@@ -745,7 +745,7 @@ public class Scenarios {
   }
 
   @Test
-  public void marlboro_EarnPoints() throws Throwable {
+  public void marlboroEarnPoints() throws Throwable {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     JDBC jdbc = new JDBC("", DATABASE_QA);
@@ -768,7 +768,7 @@ public class Scenarios {
   }
 
   @Test
-  public void Microsoft() throws Throwable {
+  public void microsoft() throws Throwable {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     try {
@@ -795,7 +795,7 @@ public class Scenarios {
   }
 
   @Test
-  public void PolkCounty() {
+  public void polkCounty() {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     getPolkCounty().Main.getInmatesOnTheWeb(true);
@@ -950,7 +950,7 @@ public class Scenarios {
   }
 
   @Test
-  public void jenkins_testSendEMail() throws Throwable {
+  public void jenkinsTestSendEMail() throws Throwable {
     final String date = new Date().toString();
     final String subject = "Test-Send Email";
     String from = "";
@@ -992,7 +992,7 @@ public class Scenarios {
   }
 
   @Test
-  public void United() throws Throwable {
+  public void united() throws Throwable {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     getUnited().HomePage.load();
@@ -1015,7 +1015,7 @@ public class Scenarios {
   }
 
   @Test
-  public void Vivit() throws Throwable {
+  public void vivit() throws Throwable {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     // setVivit(new Vivit(getSeleniumWebDriver().getWebDriver()))
@@ -1046,7 +1046,7 @@ public class Scenarios {
   }
 
   @Test
-  public void vivit_Commutes() throws Throwable {
+  public void vivitCommutes() throws Throwable {
     Environment.setEnvironmentFileStructure("Google");
     setGoogle(new Google(getSeleniumWebDriver().getWebDriver()));
     Environment.setScrollToObject(false);

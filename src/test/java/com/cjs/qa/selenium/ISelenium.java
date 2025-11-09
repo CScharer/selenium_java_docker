@@ -557,7 +557,7 @@ public interface ISelenium {
    * @param values
    * @return
    */
-  public default boolean WebCheckboxSelect(WebDriver webDriver, String field, String values) {
+  public default boolean webCheckboxSelect(WebDriver webDriver, String field, String values) {
     boolean matchAll = true;
     boolean match = false;
     if (Environment.isLogAll()) {
@@ -601,7 +601,7 @@ public interface ISelenium {
    * @param value
    * @return
    */
-  public default boolean WebComboBoxSelect(WebDriver webDriver, String field, String value) {
+  public default boolean webComboBoxSelect(WebDriver webDriver, String field, String value) {
     boolean match = false;
     int iIndex = 0;
     Select Dropdown;
