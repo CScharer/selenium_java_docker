@@ -1410,7 +1410,9 @@ public class YMData extends Environment {
     StringBuilder sqlStringBuilder;
     final List<String> delimitedFieldList =
         Arrays.asList(
-            "Micro_Focus_Product_Centers;Micro_Focus_Products_Used;Big_Data_Software_Products_Used;Micro_Focus_Backup_&_Governance_Products_Used;Micro_Focus_ITOM_Products_Used;Micro_Focus_Application_Delivery_Products_Used"
+            ("Micro_Focus_Product_Centers;Micro_Focus_Products_Used;Big_Data_Software_Products_Used;"
+                    + "Micro_Focus_Backup_&_Governance_Products_Used;Micro_Focus_ITOM_Products_Used;"
+                    + "Micro_Focus_Application_Delivery_Products_Used")
                 .split(Constants.DELIMETER_LIST)); // Other_Micro_Focus_Products_Used
     for (final String delimitedField : delimitedFieldList) {
       sqlStringBuilder = new StringBuilder();

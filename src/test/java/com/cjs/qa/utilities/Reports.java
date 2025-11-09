@@ -303,7 +303,8 @@ public class Reports {
           break;
         case "Product":
           fields =
-              "Action;Index;Node;Element;Product;UnitState;CategoryDescription;SubUnit;Total;Coverage;SubCoverage;Identifier;Premium";
+              "Action;Index;Node;Element;Product;UnitState;CategoryDescription;"
+                  + "SubUnit;Total;Coverage;SubCoverage;Identifier;Premium";
           break;
         case "Forms":
           fields = "Action;Index;ProductName;FormNumber;EditionDate;State";

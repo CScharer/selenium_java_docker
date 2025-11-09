@@ -374,7 +374,9 @@ public class WebService {
           soapElement2
               .getOwnerDocument()
               .createCDATASection(
-                  "<TFGPSBasicXMLDO><!--<companyNumber>069</companyNumber>--><policyNumber>6022713</policyNumber><policyTermNumber>20</policyTermNumber><!--<tranEffectiveDate>03/01/2018</tranEffectiveDate>--></TFGPSBasicXMLDO>");
+                  "<TFGPSBasicXMLDO><!--<companyNumber>069</companyNumber>-->"
+                      + "<policyNumber>6022713</policyNumber><policyTermNumber>20</policyTermNumber>"
+                      + "<!--<tranEffectiveDate>03/01/2018</tranEffectiveDate>--></TFGPSBasicXMLDO>");
       soapElement2.appendChild(cdata);
       // soapElement2.addTextNode(" <![CDATA[");
       // final SOAPElement soapElement3 =

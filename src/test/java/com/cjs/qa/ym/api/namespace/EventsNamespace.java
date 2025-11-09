@@ -29,7 +29,8 @@ public class EventsNamespace extends YMService {
 
   public static List<String> dataSetList() throws Throwable {
     return Arrays.asList(
-        "strEmail;strWorkTitle;strEmployerName;strAddress1;strAddress2;strCity;strLocation;strPostalCode;strCountry;strPhone;strRSVPComments;Custom_AdditionalComments"
+        ("strEmail;strWorkTitle;strEmployerName;strAddress1;strAddress2;strCity;strLocation;"
+                + "strPostalCode;strCountry;strPhone;strRSVPComments;Custom_AdditionalComments")
             .split(Constants.DELIMETER_LIST));
   }
 
@@ -39,13 +40,17 @@ public class EventsNamespace extends YMService {
 
   public static List<String> eventInformationList() throws Throwable {
     return Arrays.asList(
-        "Name;EventID;StartDateTime;EndDateTime;LocationName;LocationAddress1;LocationAddress2;LocationCity;LocationLocation;LocationPostalCode;LocationCountry;ContactName;ContactEmail;ContactPhone;ShortDescription"
+        ("Name;EventID;StartDateTime;EndDateTime;LocationName;LocationAddress1;LocationAddress2;"
+                + "LocationCity;LocationLocation;LocationPostalCode;LocationCountry;ContactName;"
+                + "ContactEmail;ContactPhone;ShortDescription")
             .split(Constants.DELIMETER_LIST));
   }
 
   public static List<String> eventRegistrationList() throws Throwable {
     return Arrays.asList(
-        "Status;EventName;FirstName;LastName;BadgeNumber;RegistrationID;DateRegistered;Attended;OrderID;MemberID;InvoiceID;IsPrimaryRegistrant;PrimaryRegistrantRegistrationID;PrimaryRegistrantMemberID;AttendeeType"
+        ("Status;EventName;FirstName;LastName;BadgeNumber;RegistrationID;DateRegistered;Attended;"
+                + "OrderID;MemberID;InvoiceID;IsPrimaryRegistrant;PrimaryRegistrantRegistrationID;"
+                + "PrimaryRegistrantMemberID;AttendeeType")
             .split(Constants.DELIMETER_LIST));
   }
 

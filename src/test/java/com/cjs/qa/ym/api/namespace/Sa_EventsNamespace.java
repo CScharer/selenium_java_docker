@@ -21,7 +21,9 @@ public class Sa_EventsNamespace extends YMService {
   public Map<String, String> eventMap() throws Throwable {
     final List<String> fields =
         Arrays.asList(
-            "Name;EventID;StartDateTime;EndDateTime;LocationName;LocationAddress1;LocationAddress2;LocationCity;LocationLocation;LocationPostalCode;LocationCountry;ContactName;ContactEmail;ContactPhone;ShortDescription;Active"
+            ("Name;EventID;StartDateTime;EndDateTime;LocationName;LocationAddress1;LocationAddress2;"
+                    + "LocationCity;LocationLocation;LocationPostalCode;LocationCountry;ContactName;"
+                    + "ContactEmail;ContactPhone;ShortDescription;Active")
                 .split(Constants.DELIMETER_LIST));
     final Map<String, String> eventMap = new HashMap<>();
     for (final String field : fields) {

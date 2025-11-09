@@ -583,7 +583,11 @@ public class Scenarios {
           Arrays.asList(
               "https://www.google"
                   + IExtension.COM
-                  + "/search?source=hp&ei=6-S2WvWLLISAsQXKn5bQCA&q=selenium+scrolling&oq=selenium+scrolling&gs_l=psy-ab.3...44501.49572.0.49803.24.14.1.0.0.0.467.467.4-1.2.0....0...1.1.64.psy-ab..21.3.604.6..0j46j35i39k1j0i227i67k1j0i20i263k1j0i67k1j0i46k1j0i131k1.134.9dIQCkpwP-Y");
+                  + "/search?source=hp&ei=6-S2WvWLLISAsQXKn5bQCA"
+                  + "&q=selenium+scrolling&oq=selenium+scrolling"
+                  + "&gs_l=psy-ab.3...44501.49572.0.49803.24.14.1.0.0.0.467.467.4-1.2.0"
+                  + "....0...1.1.64.psy-ab..21.3.604.6..0j46j35i39k1j0i227i67k1"
+                  + "j0i20i263k1j0i67k1j0i46k1j0i131k1.134.9dIQCkpwP-Y");
       for (final String url : urlList) {
         getSeleniumWebDriver().getWebDriver().get(url);
         captureImages();
@@ -671,7 +675,9 @@ public class Scenarios {
         URL_PLURALSIGHT + IExtension.COM + "/library/courses/test-driven-development-java");
     // final String url =
     // URL_PLURALSIGHT + IExtension.COM +
-    // "/player?course=scrum-master-fundamentals-scrum-master&author=jeremy-jarrell&name=scrum-master-fundamentals-scrum-master-m0&clip=0&mode=live"
+    // "/player?course=scrum-master-fundamentals-scrum-master"
+    // + "&author=jeremy-jarrell&name=scrum-master-fundamentals-scrum-master-m0"
+    // + "&clip=0&mode=live"
     final PluralSightPage pluralSight = new PluralSightPage(getSeleniumWebDriver().getWebDriver());
     pluralSight.LoginPage.login();
     FSO.fileDelete(FILE_PATHNAME);

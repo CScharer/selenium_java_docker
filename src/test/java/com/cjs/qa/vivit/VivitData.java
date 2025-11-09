@@ -151,7 +151,8 @@ public class VivitData extends Environment {
             ColorsHEX.VIVIT_LIGHTBLUE.getValue());
     final List<String> viewsList =
         Arrays.asList(
-            "v_Vivit_Broken_Links;v_Vivit_GroupLeaders_Current_By_Group;v_Vivit_GroupLeaders_Current_By_Role;v_Vivit_Contractors_Billable_Hours"
+            ("v_Vivit_Broken_Links;v_Vivit_GroupLeaders_Current_By_Group;"
+                    + "v_Vivit_GroupLeaders_Current_By_Role;v_Vivit_Contractors_Billable_Hours")
                 .split(Constants.DELIMETER_LIST));
     JDBC jdbc = new JDBC("", DATABASE_DEFINITION);
     for (int viewIndex = 0; viewIndex < viewsList.size(); viewIndex++) {

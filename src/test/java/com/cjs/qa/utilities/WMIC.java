@@ -230,7 +230,8 @@ public class WMIC {
     stringBuilder.append("wmic ");
     final List<String> arguments =
         Arrays.asList(
-            "NAMESPACE;ROLE;NODE;IMPLEVEL;AUTHLEVEL;LOCALE;PRIVILEGES;TRACE;RECORD;INTERACTIVE;FAILFAST;USER;PASSWORD;OUTPUT;APPEND;AGGREGATE;AUTHORITY"
+            ("NAMESPACE;ROLE;NODE;IMPLEVEL;AUTHLEVEL;LOCALE;PRIVILEGES;TRACE;"
+                    + "RECORD;INTERACTIVE;FAILFAST;USER;PASSWORD;OUTPUT;APPEND;AGGREGATE;AUTHORITY")
                 .split(Constants.DELIMETER_LIST));
     for (final String argument : arguments) {
       final String argumentValue = getArgumentValue(argument);

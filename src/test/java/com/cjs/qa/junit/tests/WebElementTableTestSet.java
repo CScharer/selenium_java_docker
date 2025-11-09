@@ -285,7 +285,9 @@ public class WebElementTableTestSet {
         url =
             "http://www.imdb"
                 + IExtension.COM
-                + "/chart/boxoffice?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=2773216402&pf_rd_r=01DVJQ5VZWPDNQW51NYR&pf_rd_s=right-7&pf_rd_t=15061&pf_rd_i=homepage&ref_=hm_cht_sm";
+                + "/chart/boxoffice?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=2773216402"
+                + "&pf_rd_r=01DVJQ5VZWPDNQW51NYR&pf_rd_s=right-7"
+                + "&pf_rd_t=15061&pf_rd_i=homepage&ref_=hm_cht_sm";
         xPathTable = ".//*[@id='boxoffice']/table";
         break;
       case "testBoxOfficeMojo00":
