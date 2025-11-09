@@ -13,7 +13,7 @@ public class ODBCMSAccess_64 {
 
   public void main(String[] args) {
     Connection oConnection =
-        ConnectDb(
+        connectDb(
             "C:"
                 + Constants.DELIMETER_PATH
                 + "Temp"
@@ -37,7 +37,7 @@ public class ODBCMSAccess_64 {
     }
   }
 
-  public Connection ConnectDb(String database) {
+  public Connection connectDb(String database) {
     Environment.sysOut("Connecting to [" + database + "]");
     try {
       // String dir = System.getProperty("user.dir");

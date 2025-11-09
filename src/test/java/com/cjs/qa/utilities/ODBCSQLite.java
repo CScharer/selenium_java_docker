@@ -32,7 +32,7 @@ public class ODBCSQLite {
             "MachineName",
             "SubmitCompany");
     Connection oConnection =
-        ConnectDb(
+        connectDb(
             "C:"
                 + Constants.DELIMETER_PATH
                 + "Automation"
@@ -66,7 +66,7 @@ public class ODBCSQLite {
     }
   }
 
-  public static Connection ConnectDb(String database) {
+  public static Connection connectDb(String database) {
     System.out.println("Connecting to [" + database + "]");
 
     try {

@@ -33,7 +33,7 @@ public class ODBCMSAccess {
             "SubmitCompany");
     // Map<String, String> map = new HashMap<>();
     Connection connection =
-        ConnectDb(
+        connectDb(
             "C:"
                 + Constants.DELIMETER_PATH
                 + "Temp"
@@ -42,7 +42,7 @@ public class ODBCMSAccess {
                 + IExtension.MDB);
     final ODBCSQLite odbcSQLite = new ODBCSQLite();
     final Connection connectionSQLite =
-        ODBCSQLite.ConnectDb(
+        ODBCSQLite.connectDb(
             "C:"
                 + Constants.DELIMETER_PATH
                 + "Automation"
@@ -98,7 +98,7 @@ public class ODBCMSAccess {
     }
   }
 
-  public static Connection ConnectDb(String database) {
+  public static Connection connectDb(String database) {
     System.out.println("Connecting to [" + database + "]");
     try {
       // String dir = System.getProperty("user.dir");

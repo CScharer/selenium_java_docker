@@ -22,7 +22,7 @@ public class ODBCExcel {
             + "urls"
             + IExtension.XLS;
     final List<String> lFields = Arrays.asList("company", "abbreviation", "environment", "url");
-    Connection oConnection = ConnectDb(sDatabase);
+    Connection oConnection = connectDb(sDatabase);
     try {
       final Statement oStatement = oConnection.createStatement();
       final ResultSet oResultSet =
@@ -52,7 +52,7 @@ public class ODBCExcel {
     }
   }
 
-  public static Connection ConnectDb(String database) {
+  public static Connection connectDb(String database) {
     System.out.println("Connecting to [" + database + "]");
     try {
       // String dir = System.getProperty("user.dir");
