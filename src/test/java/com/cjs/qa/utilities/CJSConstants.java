@@ -4,7 +4,7 @@ import com.cjs.qa.core.security.EPasswords;
 import com.cjs.qa.selenium.ISelenium;
 
 public class CJSConstants {
-  public static boolean sysoAll = true;
+  public static final boolean SYSO_ALL = true;
   public static final String PATH_FILES_DATA = Constants.PATH_FILES_DATA;
   public static final String PATH_FILES_DATA_PROJECT =
       Constants.PATH_PROJECT + "Data" + Constants.DELIMETER_PATH;

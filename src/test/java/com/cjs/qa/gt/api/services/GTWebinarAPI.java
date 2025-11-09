@@ -5,13 +5,25 @@ import com.cjs.qa.gt.api.namespace.webinar.RegistrantsNamespace;
 import com.cjs.qa.gt.api.namespace.webinar.WebinarsNamespace;
 
 public class GTWebinarAPI {
+  private AuthNamespace authNamespace;
+  private WebinarsNamespace webinarsNamespace;
+  private RegistrantsNamespace registrantsNamespace;
+
   public GTWebinarAPI() throws Throwable {
-    AuthNamespace = new AuthNamespace();
-    WebinarsNamespace = new WebinarsNamespace();
-    RegistrantsNamespace = new RegistrantsNamespace();
+    authNamespace = new AuthNamespace();
+    webinarsNamespace = new WebinarsNamespace();
+    registrantsNamespace = new RegistrantsNamespace();
   }
 
-  public AuthNamespace AuthNamespace;
-  public WebinarsNamespace WebinarsNamespace;
-  public RegistrantsNamespace RegistrantsNamespace;
+  public AuthNamespace getAuthNamespace() {
+    return authNamespace;
+  }
+
+  public WebinarsNamespace getWebinarsNamespace() {
+    return webinarsNamespace;
+  }
+
+  public RegistrantsNamespace getRegistrantsNamespace() {
+    return registrantsNamespace;
+  }
 }

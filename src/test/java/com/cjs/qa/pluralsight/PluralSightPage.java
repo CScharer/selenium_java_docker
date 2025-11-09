@@ -6,14 +6,26 @@ import com.cjs.qa.pluralsight.pages.TableOfContentsPage;
 import org.openqa.selenium.WebDriver;
 
 public class PluralSightPage {
-  public LoginPage LoginPage;
-  public SessionPage SessionPage;
-  public TableOfContentsPage TableOfContentsPage;
+  private LoginPage loginPage;
+  private SessionPage sessionPage;
+  private TableOfContentsPage tableOfContentsPage;
 
   public PluralSightPage(WebDriver webDriver) {
-    LoginPage = new LoginPage(webDriver);
-    SessionPage = new SessionPage(webDriver);
-    TableOfContentsPage = new TableOfContentsPage(webDriver);
+    loginPage = new LoginPage(webDriver);
+    sessionPage = new SessionPage(webDriver);
+    tableOfContentsPage = new TableOfContentsPage(webDriver);
     webDriver.manage().timeouts().pageLoadTimeout(java.time.Duration.ofSeconds(120));
+  }
+
+  public LoginPage getLoginPage() {
+    return loginPage;
+  }
+
+  public SessionPage getSessionPage() {
+    return sessionPage;
+  }
+
+  public TableOfContentsPage getTableOfContentsPage() {
+    return tableOfContentsPage;
   }
 }

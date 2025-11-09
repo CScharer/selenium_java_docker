@@ -21,8 +21,8 @@ public class GTWebinarService {
   public static final String API_GT_AUTH = URL_GT + "/oauth/" + API_VERSION;
   public static final String API_GT_BASE = URL_GT + "/G2W/rest/" + API_VERSION;
   public static final String CONNECTED_TO = "Connection to [";
-  public static String accountKey = null;
-  public static String accessToken = null;
+  private static String accountKey = null;
+  private static String accessToken = null;
   private static boolean serviceActive = true; // false;
 
   // private static int callID = 0;

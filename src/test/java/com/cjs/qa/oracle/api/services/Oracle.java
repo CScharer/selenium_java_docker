@@ -3,12 +3,36 @@ package com.cjs.qa.oracle.api.services;
 import com.cjs.qa.core.api.WebService;
 
 public class Oracle extends WebService {
-  public String browser;
-  public WebService APIPage;
-  public OracleDynamicVariables OracleDynamicVariables;
+  private String browser;
+  private WebService apiPage;
+  private OracleDynamicVariables oracleDynamicVariables;
 
   public Oracle() {
     // API = new API(Environment, driver);
-    OracleDynamicVariables = new OracleDynamicVariables();
+    oracleDynamicVariables = new OracleDynamicVariables();
+  }
+
+  public String getBrowser() {
+    return browser;
+  }
+
+  public void setBrowser(String browser) {
+    this.browser = browser;
+  }
+
+  public WebService getApiPage() {
+    return apiPage;
+  }
+
+  public void setApiPage(WebService apiPage) {
+    this.apiPage = apiPage;
+  }
+
+  public OracleDynamicVariables getOracleDynamicVariables() {
+    return oracleDynamicVariables;
+  }
+
+  public void setOracleDynamicVariables(OracleDynamicVariables oracleDynamicVariables) {
+    this.oracleDynamicVariables = oracleDynamicVariables;
   }
 }

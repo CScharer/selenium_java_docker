@@ -23,7 +23,7 @@ import java.util.Map.Entry;
 public class JDBC {
   private String environment = "TST";
   private String database = "QAAuto";
-  public DBParameters dbParameters = null;
+  private DBParameters dbParameters = null;
   private Connection connection = null;
   private Statement statement = null;
   private ResultSet resultSet = null;
@@ -437,6 +437,14 @@ public class JDBC {
 
   private String getEnvironment() {
     return environment;
+  }
+
+  public DBParameters getDbParameters() {
+    return dbParameters;
+  }
+
+  public void setDbParameters(DBParameters dbParameters) {
+    this.dbParameters = dbParameters;
   }
 
   public List<String> getFieldNamesList(String table) {

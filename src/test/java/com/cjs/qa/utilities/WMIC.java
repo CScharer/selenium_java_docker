@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class WMIC {
-  public final WMICAlias wmicAlias = new WMICAlias();
+  private final WMICAlias wmicAlias = new WMICAlias();
   private String namespace = null;
   private String role = null;
   private String node = null;
@@ -115,6 +115,10 @@ public class WMIC {
     this.failfast = failfast;
   }
 
+  public WMICAlias getWmicAlias() {
+    return wmicAlias;
+  }
+
   public String getUser() {
     return user;
   }
@@ -169,10 +173,6 @@ public class WMIC {
 
   public void setCommand(String command) {
     this.command = command;
-  }
-
-  public WMICAlias getWmicAlias() {
-    return wmicAlias;
   }
 
   public Map<String, String> run() throws Exception {

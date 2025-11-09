@@ -18,7 +18,7 @@ import java.util.Map.Entry;
 import org.junit.Test;
 
 public class Coder {
-  protected static JDBC jdbc = new JDBC("", "AutoCoderExcel");
+  private static JDBC jdbc = new JDBC("", "AutoCoderExcel");
   public static final String COMMENT = "// ";
   protected static final List<String> TYPES_INPUT =
       Arrays.asList("Checkbox;Dropdown;Edit;Option;RadioButton".split(Constants.DELIMETER_LIST));
@@ -38,13 +38,13 @@ public class Coder {
   public void testCodeCreation() throws QAException, Exception {
     String pageName = "ConnectionsPage";
     String code = createCode(pageName);
-    String fileNamePath = jdbc.dbParameters.getName().replace(IExtension.SQLITE, IExtension.JAVA);
+    String fileNamePath = jdbc.getDbParameters().getName().replace(IExtension.SQLITE, IExtension.JAVA);
     FSO.fileWrite(fileNamePath, code, false);
   }
 
   private static void getRecordsFromExcel(String pageName) throws QAException, Exception {
     final String SHEET_NAME = pageName; // IExcel.SHEET_DEFAULT;
-    String filePathName = jdbc.dbParameters.getName().replaceAll(IExtension.SQLITE, IExtension.XLS);
+    String filePathName = jdbc.getDbParameters().getName().replaceAll(IExtension.SQLITE, IExtension.XLS);
     // IExcel.updateSummarySheetXLS(filePathName, sheetName, sheetLinkName);
     final XLS excel = new XLS(filePathName, SHEET_NAME);
     Environment.sysOut("excel.getSheetCount():[" + excel.getSheetCount() + "]");

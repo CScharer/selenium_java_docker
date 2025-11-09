@@ -22,7 +22,7 @@ public class Main extends Page {
   }
 
   private JDBC jdbc = new JDBC("", "");
-  final By byNoResults = By.xpath(".//*[@id='ctl00_ContentPlaceHolder1_noResults']");
+  private final By byNoResults = By.xpath(".//*[@id='ctl00_ContentPlaceHolder1_noResults']");
 
   public void load() {
     maximizeWindow();

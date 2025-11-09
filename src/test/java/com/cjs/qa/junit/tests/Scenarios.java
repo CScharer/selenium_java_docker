@@ -394,7 +394,7 @@ public class Scenarios {
       // wmic.setAppend("append")
       wmic.setAggregate("ON");
       // wmic.setAuthority("authority")
-      wmic.wmicAlias.setAlias(null);
+      wmic.getWmicAlias().setAlias(null);
       wmic.setCommand(
           "CMD /C "
               + Constants.QUOTE_DOUBLE
@@ -531,9 +531,9 @@ public class Scenarios {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     JavaHelpers.displaySystemProperties();
-    getGoogle().SignInPage.load();
-    getGoogle().SignInPage.editSearchSet("Searching");
-    getGoogle().SignInPage.pressEnter();
+    getGoogle().getSignInPage().load();
+    getGoogle().getSignInPage().editSearchSet("Searching");
+    getGoogle().getSignInPage().pressEnter();
   }
 
   @Test // @Ignore
@@ -679,14 +679,14 @@ public class Scenarios {
     // + "&author=jeremy-jarrell&name=scrum-master-fundamentals-scrum-master-m0"
     // + "&clip=0&mode=live"
     final PluralSightPage pluralSight = new PluralSightPage(getSeleniumWebDriver().getWebDriver());
-    pluralSight.LoginPage.login();
+    pluralSight.getLoginPage().login();
     FSO.fileDelete(FILE_PATHNAME);
     for (int index = 0; index < listSessions.size(); index++) {
       final String sessionInformation =
-          pluralSight.SessionPage.getSessionInformation(listSessions.get(index));
+          pluralSight.getSessionPage().getSessionInformation(listSessions.get(index));
       FSO.fileWrite(FILE_PATHNAME, sessionInformation, true);
       final String tableOfContents =
-          pluralSight.TableOfContentsPage.getTableOfContents(listSessions.get(index));
+          pluralSight.getTableOfContentsPage().getTableOfContents(listSessions.get(index));
       FSO.fileWrite(FILE_PATHNAME, tableOfContents, true);
       FSO.fileWrite(FILE_PATHNAME, Constants.NEWLINE, true);
       Environment.sysOut(sessionInformation);
@@ -804,7 +804,7 @@ public class Scenarios {
   public void polkCounty() {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
-    getPolkCounty().Main.getInmatesOnTheWeb(true);
+    getPolkCounty().getMain().getInmatesOnTheWeb(true);
   }
 
   public void setAmericanAirlines(AmericanAirlines americanAirlines) {

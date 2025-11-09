@@ -18,16 +18,24 @@ import org.openqa.selenium.WebDriver;
 public class WebDriverUtils {
   // final String PATH_SCREENSHOTS = "C:" + Constants.DELIMETER_PATH + "Temp"
   // + Constants.DELIMETER_PATH + "Screenshots" + Constants.DELIMETER_PATH;
-  final String PATH_SCREENSHOTS = "./target/reports/Screenshots/";
-  WebDriver driver;
+  private final String pathScreenshots = "./target/reports/Screenshots/";
+  private WebDriver driver;
 
   public WebDriverUtils(WebDriver driver) {
     this.driver = driver;
   }
 
+  public String getPathScreenshots() {
+    return pathScreenshots;
+  }
+
+  public WebDriver getDriver() {
+    return driver;
+  }
+
   public void takeScreenshotDesktop(String path, String name, String extension) {
     if (path.equals("")) {
-      path = PATH_SCREENSHOTS;
+      path = pathScreenshots;
     }
     final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
     final GraphicsDevice[] screens = ge.getScreenDevices();
@@ -56,7 +64,7 @@ public class WebDriverUtils {
 
   public void takeScreenshot(String path, String name, String extension) {
     if (path.equals("")) {
-      path = PATH_SCREENSHOTS;
+      path = pathScreenshots;
     }
     if (extension.equals("")) {
       extension = "png";

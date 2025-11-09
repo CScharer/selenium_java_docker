@@ -1634,7 +1634,7 @@ public class VivitData extends Environment {
     for (Map<String, String> flyingMap : flyingListMap) {
       String airportFrom = flyingMap.get("Airport");
       List<Flight> flightList =
-          google.FlightsPage.getFlights(airportFrom, airportTo, dateDepartTo, dateDepartFrom);
+          google.getFlightsPage().getFlights(airportFrom, airportTo, dateDepartTo, dateDepartFrom);
       for (Flight flight : flightList) {
         stringBuilderSQL = appendRecordFlight(stringBuilderSQL, flight);
       }
@@ -1647,7 +1647,7 @@ public class VivitData extends Environment {
     List<Map<String, String>> driverListMap =
         jdbc.queryResultsString(stringBuilderQuery.toString(), false);
     for (Map<String, String> driverMap : driverListMap) {
-      Flight flight = google.FlightsPage.getDriveData(driverMap, airportTo);
+      Flight flight = google.getFlightsPage().getDriveData(driverMap, airportTo);
       sysOut("flight:" + flight.toString());
       stringBuilderSQL = appendRecordFlight(stringBuilderSQL, flight);
     }
@@ -1847,7 +1847,7 @@ public class VivitData extends Environment {
     stringBuilderSQL.append(";");
     List<Map<String, String>> airportListMap =
         jdbc.queryResultsString(stringBuilderSQL.toString(), false);
-    google.FlightsPage.getFlightsOld(
+    google.getFlightsPage().getFlightsOld(
         VivitFoldersFiles.DATA_FLIGHTS, airportListMap, airportTo, dateDepartTo, dateDepartFrom);
   }
 
@@ -2959,7 +2959,7 @@ public class VivitData extends Environment {
     sysOut(dbConnection.toString());
     try {
       final JDBC jdbc = new JDBC("", DATABASE_DEFINITION);
-      jdbc.dbParameters = dbConnection;
+      jdbc.setDbParameters(dbConnection);
       final String sql = JDBCConstants.SELECT_ALL_FROM + "customer";
       jdbc.execute(sql);
     } catch (final Exception e) {

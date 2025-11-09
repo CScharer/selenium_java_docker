@@ -19,9 +19,13 @@ public class PolkCountyEnvironment extends Environment {
   public static final String FILE_LOG = FOLDER_DATA + "Log_" + COMPANY + IExtension.LOG;
   public static final String URL_LOGIN =
       "http://apps2." + COMPANY + "iowa.gov/inmatesontheweb/main.aspx";
-  public final List<String> classExlusionList =
+  private final List<String> classExlusionList =
       JavaHelpers.getExclusions(this.getClass().getPackage().getName());
 
   public PolkCountyEnvironment() { // Empty
+  }
+
+  public List<String> getClassExlusionList() {
+    return classExlusionList;
   }
 }

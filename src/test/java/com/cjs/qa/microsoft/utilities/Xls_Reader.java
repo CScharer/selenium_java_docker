@@ -23,15 +23,15 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class Xls_Reader {
 
-  public static String filename =
+  private static String filename =
       System.getProperty("user.dir")
           + Constants.DELIMETER_PATH
           + "TestData"
           + Constants.DELIMETER_PATH;
-  public String path;
-  public FileInputStream fileInputStream = null;
-  public FileOutputStream fileOutputStream = null;
-  public POIFSFileSystem poifsFileSystem = null;
+  private String path;
+  private FileInputStream fileInputStream = null;
+  private FileOutputStream fileOutputStream = null;
+  private POIFSFileSystem poifsFileSystem = null;
   private XSSFWorkbook workbook = null;
   private XSSFSheet sheet = null;
   private XSSFRow row = null;
@@ -47,6 +47,26 @@ public class Xls_Reader {
     } catch (final Exception e) {
       e.printStackTrace();
     }
+  }
+
+  public static String getFilename() {
+    return filename;
+  }
+
+  public String getPath() {
+    return path;
+  }
+
+  public FileInputStream getFileInputStream() {
+    return fileInputStream;
+  }
+
+  public FileOutputStream getFileOutputStream() {
+    return fileOutputStream;
+  }
+
+  public POIFSFileSystem getPoifsFileSystem() {
+    return poifsFileSystem;
   }
 
   public int getRowCount(String sheetName) {
