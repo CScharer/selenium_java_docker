@@ -409,7 +409,6 @@ public class XLS implements IExcel {
   }
 
   public int getColumnCount(String sheet) throws QAException {
-    int rows = 0;
     int columns = 0;
     if (!sheetExists(sheet)) {
       return columns;
@@ -417,7 +416,7 @@ public class XLS implements IExcel {
     int columnIndex = 0;
     sheetIndex = getWorkbook().getSheetIndex(sheet);
     setWorkSheet(getWorkbook().getSheetAt(sheetIndex));
-    rows = getWorkSheet().getPhysicalNumberOfRows();
+    final int rows = getWorkSheet().getPhysicalNumberOfRows();
     for (int row = 0; row < rows; row++) {
       setWorkRow(getWorkSheet().getRow(row));
       if (getWorkRow() != null) {

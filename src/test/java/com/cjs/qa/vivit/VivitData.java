@@ -2089,7 +2089,7 @@ public class VivitData extends Environment {
       throws Throwable {
     sysOut(Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     sysOut(ParameterHelper.getParameters(Arrays.asList()));
-    List<Map<Integer, String>> testInformationListMap =
+    final List<Map<Integer, String>> testInformationListMap =
         getReportHTMLTestInformationListMap(seleniumWebDriver);
     final StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append(
