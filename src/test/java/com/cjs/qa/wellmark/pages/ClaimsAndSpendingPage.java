@@ -194,6 +194,19 @@ public class ClaimsAndSpendingPage extends Page {
     return stringBuilder;
   }
 
+  public void getRecords() throws QAException {
+    getHeadingInfo();
+    StringBuilder stringBuilder = getRecords("Medical and Pharmacy");
+    // stringBuilder = getRecords("Medical")
+    // stringBuilder = getRecords("Pharmacy")
+    // if (FSO.fileExists(Environment.FILE_CSV))
+    // {
+    // stringBuilder = sortRecords(stringBuilder)
+    final String fileName = Environment.FOLDER_DATA + "Wellmark" + IExtension.CSV;
+    FSO.fileWrite(fileName, stringBuilder.toString(), false);
+    // }
+  }
+
   private Map<String, String> getHeadingMap() throws QAException {
     final Map<String, String> headingMap = new HashMap<>();
     for (final String heading : listHeadings) {
@@ -211,19 +224,6 @@ public class ClaimsAndSpendingPage extends Page {
       record = temp.trim();
     }
     return record;
-  }
-
-  public void getRecords() throws QAException {
-    getHeadingInfo();
-    StringBuilder stringBuilder = getRecords("Medical and Pharmacy");
-    // stringBuilder = getRecords("Medical")
-    // stringBuilder = getRecords("Pharmacy")
-    // if (FSO.fileExists(Environment.FILE_CSV))
-    // {
-    // stringBuilder = sortRecords(stringBuilder)
-    final String fileName = Environment.FOLDER_DATA + "Wellmark" + IExtension.CSV;
-    FSO.fileWrite(fileName, stringBuilder.toString(), false);
-    // }
   }
 
   private StringBuilder sortRecords(StringBuilder stringBuilder) throws QAException {

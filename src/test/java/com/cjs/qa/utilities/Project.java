@@ -91,6 +91,12 @@ public class Project {
     return directoryFolder;
   }
 
+  public static String dataFiles() {
+    String directoryFolder = path() + transformPath("src/test/resources/datafiles/");
+    FSO.folderCreate(directoryFolder);
+    return directoryFolder;
+  }
+
   public static String notifications(String filePath) {
     final String notifications = "src/test/resources/notifications/";
     String directoryFolder = path() + transformPath(notifications + filePath);
@@ -157,12 +163,6 @@ public class Project {
   public static String screenshots(String filePath) {
     final String screenshots = "target/test-screenshots/";
     String directoryFolder = pathFramework() + transformPath(screenshots + filePath);
-    FSO.folderCreate(directoryFolder);
-    return directoryFolder;
-  }
-
-  public static String dataFiles() {
-    String directoryFolder = path() + transformPath("src/test/resources/datafiles/");
     FSO.folderCreate(directoryFolder);
     return directoryFolder;
   }
