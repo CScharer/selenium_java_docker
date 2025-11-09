@@ -323,7 +323,7 @@ jobs:
           echo "📊 Running JMeter: configure + jmeter + results..."
           echo "IMPORTANT: All goals run in SINGLE Maven invocation to share state"
           echo ""
-          echo "Test files directory: ${project.basedir}/src/test/jmeter"
+          echo "Test files directory: \${project.basedir}/src/test/jmeter"
           echo ""
           
           # Run all three goals in a SINGLE mvnw command with extra verbose output

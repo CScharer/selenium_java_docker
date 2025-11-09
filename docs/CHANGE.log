@@ -1,5 +1,55 @@
 # CHANGE LOG
 
+## [2025-11-08 15:15:00 CST] - Fix: Bash Variable Escaping in Workflow ✅
+
+### Overview
+Fixed bash "bad substitution" error in workflow echo statement. Maven variable `${project.basedir}` was being interpreted by bash instead of displayed as literal text.
+
+### Problem
+
+**Workflow error:**
+```
+/home/runner/work/_temp/xxx.sh: line 4: 
+Test files directory: ${project.basedir}/src/test/jmeter: bad substitution
+```
+
+**Root Cause:**
+```yaml
+echo "Test files directory: ${project.basedir}/src/test/jmeter"
+```
+- Bash tries to expand `${project.basedir}` as a bash variable
+- Variable doesn't exist in bash context → "bad substitution" error
+- This was just a display/echo statement (not actual configuration)
+
+### Solution
+
+**Escaped the dollar sign:**
+```yaml
+echo "Test files directory: \${project.basedir}/src/test/jmeter"
+```
+
+Now bash prints the literal text instead of trying to expand it.
+
+### Note
+
+The **pom.xml configuration is correct**:
+- `${project.basedir}` in pom.xml is fine (Maven will interpret it)
+- Only the echo statement needed escaping
+- This was a workflow display issue, not a JMeter config issue
+
+### Git Commits
+
+**Commit:** (pending)
+**Files:**
+- `.github/workflows/performance.yml` - Escaped bash variable
+
+### Status
+✅ **Bash Error**: Fixed (escaped $ sign)  
+🔍 **JMeter Config**: Still testing  
+📊 **Next Run**: Should complete without bash errors  
+
+---
+
 ## [2025-11-08 15:00:00 CST] - Debug: Absolute Paths + Enhanced Verification 🔍
 
 ### Overview
