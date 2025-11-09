@@ -106,7 +106,7 @@ public class HomePage extends Page {
     clickObject(linkSignIn);
   }
 
-  public void signIn(String eMail, String password, String RememberMe) throws QAException {
+  public void signIn(String eMail, String password, String rememberMe) throws QAException {
     boolean success = false;
     int attempt = 0;
     final int ATTEMPTS_MAX = 3;
@@ -119,7 +119,7 @@ public class HomePage extends Page {
         linkSignInClick();
         editEmailSet(eMail);
         editPasswordSet(password);
-        CheckboxRememberMeSet(RememberMe);
+        CheckboxRememberMeSet(rememberMe);
         buttonSignInClick();
         success = true;
       } catch (Exception e) {

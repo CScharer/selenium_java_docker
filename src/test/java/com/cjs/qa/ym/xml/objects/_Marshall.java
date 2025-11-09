@@ -82,18 +82,18 @@ public class _Marshall {
   }
 
   public String yourMembership_ResponseMarshall(
-      YourMembership_Response yourMembership_Response, String filePathName) throws JAXBException {
+      YourMembership_Response yourMembershipResponse, String filePathName) throws JAXBException {
     JAXBContext jaxbContext = JAXBContext.newInstance(YourMembership_Response.class);
     Marshaller marshaller = jaxbContext.createMarshaller();
     marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
     String xml = null;
     if (filePathName != null) {
-      marshaller.marshal(yourMembership_Response, new File(filePathName));
+      marshaller.marshal(yourMembershipResponse, new File(filePathName));
     }
     //        xml = FSO.fileReadAll(filePathName);
-    //        marshaller.marshal(yourMembership_Response, System.out);
+    //        marshaller.marshal(yourMembershipResponse, System.out);
     StringWriter stringWriter = new StringWriter();
-    marshaller.marshal(yourMembership_Response, stringWriter);
+    marshaller.marshal(yourMembershipResponse, stringWriter);
     xml = stringWriter.toString();
     return xml;
   }

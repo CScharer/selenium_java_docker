@@ -9,8 +9,8 @@ public class Project {
   private static ConfigComponents product;
   private static String root;
 
-  public static void setProduct(ConfigComponents product_) {
-    product = product_;
+  public static void setProduct(ConfigComponents productValue) {
+    product = productValue;
     root = pathWorkspace() + transformPath(product.name() + "/");
   }
 

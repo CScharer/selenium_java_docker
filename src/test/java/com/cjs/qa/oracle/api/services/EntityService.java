@@ -1587,7 +1587,7 @@ public class EntityService extends WebService {
       String eMail,
       String phoneNum,
       String phoneType,
-      String Title,
+      String title,
       String types) {
     final Map<String, String> oOrgContacts = new HashMap<>();
     oOrgContacts.put("Address1", address1);
@@ -1607,7 +1607,7 @@ public class EntityService extends WebService {
     oOrgContacts.put("eMail", eMail);
     oOrgContacts.put("PhoneNumber", phoneNum);
     oOrgContacts.put("PhoneType", phoneType);
-    oOrgContacts.put("Title", Title);
+    oOrgContacts.put("Title", title);
     return oOrgContacts;
   }
 
@@ -1702,7 +1702,7 @@ public class EntityService extends WebService {
       String date,
       String description,
       String imageShortKey,
-      String LEEDRating,
+      String leedRating,
       String location,
       String owner,
       String projectTypes) {
@@ -1712,7 +1712,7 @@ public class EntityService extends WebService {
     oOrgProject.put("DateCompleted", date);
     oOrgProject.put("Description", description);
     oOrgProject.put("Imageshortkey", imageShortKey);
-    oOrgProject.put("LEEDRating", LEEDRating);
+    oOrgProject.put("LEEDRating", leedRating);
     oOrgProject.put("Location", location);
     oOrgProject.put("Owner", owner);
     oOrgProject.put("ProjectTypes", projectTypes);

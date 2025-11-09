@@ -31,9 +31,9 @@ public class AbstractPage implements ISelenium {
     Dropdown.selectByVisibleText(selection);
   }
 
-  protected void setEdit(By By, String value) {
-    Environment.sysOut("Object:" + By.toString());
-    final WebElement element = webDriver.findElement(By);
+  protected void setEdit(By byLocator, String value) {
+    Environment.sysOut("Object:" + byLocator.toString());
+    final WebElement element = webDriver.findElement(byLocator);
     final WebDriverWait wait = new WebDriverWait(this.webDriver, java.time.Duration.ofSeconds(10));
     wait.until(ExpectedConditions.elementToBeClickable(element));
     Environment.sysOut("Displayed:" + element.isDisplayed());
