@@ -20,7 +20,6 @@ public class SearchPage extends Page {
 
   public void searchSites() {
     try {
-      StringBuilder stringBuilderCSV = new StringBuilder();
       final String fileName = Environment.FOLDER_DATA + "searchVivitSites" + IExtension.CSV;
       final String LIGS = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
       final String SIGS = VivitEnvironment.URL_LOGIN + "?page=SIGS";
@@ -88,8 +87,8 @@ public class SearchPage extends Page {
           webDriver.findElements(sigLinks);
         }
       }
+      final StringBuilder stringBuilderCSV = new StringBuilder();
       FSO.fileWrite(fileName, stringBuilderCSV.toString(), false);
-      stringBuilderCSV = null;
       // https://www.vivit-worldwide.org/?page=LocalUserGroups
       // minimizeWindow();
     } catch (final Exception e) {

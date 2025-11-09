@@ -230,7 +230,6 @@ public class BTSConvertDatabaseToXML {
       List<String> listServiceAccount =
           Arrays.asList("Service_Account", "Password", "Password_Java");
       List<String> listEnvironment = Arrays.asList("URL");
-      List<String> listDatabase = Arrays.asList("Server", "PortNumber", "Instance", "Database");
       for (String company : listCompany) {
         xPath =
             BTSCompanyEnvironmentData.NODE_COMPANY
@@ -263,6 +262,8 @@ public class BTSConvertDatabaseToXML {
                 + BTSCompanyEnvironmentData.NODE_TEXT;
         writeInformation(document, xPath);
       }
+      final List<String> listDatabase =
+          Arrays.asList("Server", "PortNumber", "Instance", "Database");
       for (String database : listDatabase) {
         xPath =
             BTSCompanyEnvironmentData.NODE_COMPANY
