@@ -781,25 +781,11 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 					<resultsDirectory>${project.build.directory}/jmeter/results</resultsDirectory>
 					<generateReports>true</generateReports>
 					<ignoreResultFailures>true</ignoreResultFailures>
-					<propertiesUser>
-						<testFilesIncluded>*.jmx</testFilesIncluded>
-					</propertiesUser>
+					<testFilesIncluded>
+						<jMeterTestFile>API_Performance_Test.jmx</jMeterTestFile>
+						<jMeterTestFile>Web_Load_Test.jmx</jMeterTestFile>
+					</testFilesIncluded>
 				</configuration>
-				<executions>
-					<execution>
-						<id>configuration</id>
-						<goals>
-							<goal>configure</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>jmeter-tests</id>
-						<goals>
-							<goal>jmeter</goal>
-							<goal>results</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			
 			<!-- Scala Compiler for Gatling (disabled by default, enable with -Pgatling) -->
