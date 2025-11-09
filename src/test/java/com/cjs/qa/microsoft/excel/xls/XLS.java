@@ -172,8 +172,8 @@ public class XLS implements IExcel {
   }
 
   public boolean autoSizeColumns(String sheet) throws QAException
-        // , int column)
-      {
+      // , int column)
+  {
     final int columns = getColumnCount(sheet);
     for (int column = 0; column < columns; column++) {
       autoSizeColumn(sheet, column);

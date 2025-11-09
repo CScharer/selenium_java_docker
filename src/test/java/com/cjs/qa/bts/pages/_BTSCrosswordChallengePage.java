@@ -113,7 +113,6 @@ public class _BTSCrosswordChallengePage extends Page {
       Environment.sysOut(gridSquare);
       final String gridValue[] = gridSquare.split("=");
       final int iGridSquare = Integer.valueOf(gridValue[0]);
-      ;
       String sLetter = "";
       try {
         sLetter = gridValue[1];

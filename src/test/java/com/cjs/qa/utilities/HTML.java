@@ -77,7 +77,7 @@ public class HTML {
     StringBuilder stringBuilderTable = new StringBuilder();
     boolean firstRecord = false;
     for (Map<String, String> mapReport : reportListMap) {
-      if (firstRecord == false) {
+      if (!firstRecord) {
         firstRecord = true;
         stringBuilderTable.append(
             "<table  class="
@@ -170,7 +170,7 @@ public class HTML {
     StringBuilder stringBuilderTable = new StringBuilder();
     boolean firstRecord = false;
     for (Map<String, String> mapReport : reportListMap) {
-      if (firstRecord == false) {
+      if (!firstRecord) {
         firstRecord = true;
         stringBuilderTable.append(
             "<table  class="

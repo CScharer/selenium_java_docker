@@ -145,10 +145,12 @@ public class Sa_EventsNamespace extends YMService {
             + "Sa.Events.All.GetIDs"
             + Constants.QUOTE_DOUBLE
             + ">");
-    if (startDate != null)
+    if (startDate != null) {
       stringBuilder.append(Constants.nlTab(1, 2) + "<StartDate>" + startDate + "</StartDate>");
-    if (endDate != null)
+    }
+    if (endDate != null) {
       stringBuilder.append(Constants.nlTab(1, 2) + "<EndDate>" + endDate + "</EndDate>");
+    }
     if (name != null) stringBuilder.append(Constants.nlTab(1, 2) + "<Name>" + name + "</Name>");
     if (status != null) {
       switch (status) {
@@ -163,9 +165,10 @@ public class Sa_EventsNamespace extends YMService {
       }
       stringBuilder.append(Constants.nlTab(1, 2) + "<Status>" + status + "</Status>");
     }
-    if (lastModifiedDate != null)
+    if (lastModifiedDate != null) {
       stringBuilder.append(
           Constants.nlTab(1, 2) + "<LastModifiedDate>" + lastModifiedDate + "</LastModifiedDate>");
+    }
     stringBuilder.append(Constants.nlTab(1, 1) + YMAPI.LABEL_CALL_METHOD_SUFFIX);
     return getAPIXMLResponse("POST", stringBuilder.toString());
   }

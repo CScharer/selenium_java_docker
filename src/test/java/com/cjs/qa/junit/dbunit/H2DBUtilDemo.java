@@ -54,7 +54,6 @@ public class H2DBUtilDemo extends BaseDBUnitTestForJPADao {
   public void testTeardown() throws Exception {
     Environment.sysOut("TearDown-Test Method:[" + getTestName() + "]");
     DatabaseOperation.DELETE.execute(iDatabaseConnection, dataSet);
-    ;
   }
 
   @AfterClass

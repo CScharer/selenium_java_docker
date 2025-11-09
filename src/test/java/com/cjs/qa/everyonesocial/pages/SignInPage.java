@@ -90,9 +90,7 @@ public class SignInPage extends Page {
   public void clickButtonLogin() {
     clickObject(getByButtonLogin());
     By byEndTour = By.xpath(".//button[.='End Tour']");
-    if (objectExists(byEndTour, new Page(webDriver).TIMEOUT_ELEMENT))
-      ;
-    {
+    if (objectExists(byEndTour, new Page(webDriver).TIMEOUT_ELEMENT)) {
       clickObject(byEndTour);
     }
   }

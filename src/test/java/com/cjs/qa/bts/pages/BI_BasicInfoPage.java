@@ -43,9 +43,9 @@ public class BI_BasicInfoPage extends Page {
 
   public String getBasicInformation() {
     // Wait for Processing Policy pop-up window to disappear
-    do {
-      ;
-    } while (objectExists(By.xpath(".//*[contains(text(),'Loading Basic Information')]")) == true);
+    while (objectExists(By.xpath(".//*[contains(text(),'Loading Basic Information')]"))) {
+      // Wait for pop-up to disappear
+    }
     final List<String> list = getElementsText(By.xpath(".//*[@id='basicInformation']//label"));
     list.addAll(getElementsText(By.xpath(".//*[@id='basicInformation']//input")));
     return list.toString();

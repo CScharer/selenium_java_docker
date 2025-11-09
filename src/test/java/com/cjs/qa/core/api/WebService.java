@@ -336,7 +336,7 @@ public class WebService {
     for (final String character : characters.keySet()) {
       String replacee = null;
       String replacer = null;
-      if (revert == false) {
+      if (!revert) {
         replacee = character;
         replacer = characters.get(character);
       } else {

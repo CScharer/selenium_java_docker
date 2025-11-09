@@ -7,7 +7,6 @@ public class RTestRun extends RTestSet {
   private String testRunName;
   private String testRunStatus;
   private List<RTestSet> RTestSet = new ArrayList<>();
-  ;
 
   public RTestRun(String stepName, String stepStatus) {
     super(stepName, stepStatus);

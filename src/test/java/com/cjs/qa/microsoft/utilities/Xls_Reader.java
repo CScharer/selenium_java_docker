@@ -390,11 +390,7 @@ public class Xls_Reader {
     int sheetIndex = workbook.getSheetIndex(sheetName);
     if (sheetIndex == -1) {
       sheetIndex = workbook.getSheetIndex(sheetName.toUpperCase());
-      if (sheetIndex == -1) {
-        return false;
-      } else {
-        return true;
-      }
+      return sheetIndex != -1;
     } else {
       return true;
     }
