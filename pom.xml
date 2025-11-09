@@ -778,7 +778,21 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 					<testFilesDirectory>src/test/jmeter</testFilesDirectory>
 					<resultsDirectory>${project.build.directory}/jmeter/results</resultsDirectory>
 					<generateReports>true</generateReports>
+					<ignoreResultFailures>true</ignoreResultFailures>
+					<propertiesUser>
+						<testFilesIncluded>*.jmx</testFilesIncluded>
+					</propertiesUser>
 				</configuration>
+				<executions>
+					<execution>
+						<id>jmeter-tests</id>
+						<goals>
+							<goal>configure</goal>
+							<goal>jmeter</goal>
+							<goal>results</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			
 			<!-- Scala Compiler for Gatling (disabled by default, enable with -Pgatling) -->
@@ -816,6 +830,16 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 								<goals>
 									<goal>testCompile</goal>
 								</goals>
+								<configuration>
+									<!-- Only compile Scala sources, don't touch Java sources -->
+									<sendJavaToScalac>false</sendJavaToScalac>
+									<includes>
+										<include>**/*.scala</include>
+									</includes>
+									<excludes>
+										<exclude>**/*.java</exclude>
+									</excludes>
+								</configuration>
 							</execution>
 						</executions>
 					</plugin>
