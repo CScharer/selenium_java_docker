@@ -286,25 +286,36 @@ jobs:
       - name: Verify JMeter Test Files
         run: |
           echo "📊 Verifying JMeter test files..."
+          echo ""
+          echo "Current directory: $(pwd)"
+          echo "MAVEN_OPTS: $MAVEN_OPTS"
+          echo ""
+          
           if [ ! -d "src/test/jmeter" ]; then
             echo "❌ JMeter test directory not found!"
             exit 1
           fi
           
-          echo "JMeter test files:"
+          echo "JMeter test directory contents:"
           ls -la src/test/jmeter/
+          echo ""
           
           if [ ! -f "src/test/jmeter/API_Performance_Test.jmx" ]; then
             echo "❌ API_Performance_Test.jmx not found!"
             exit 1
+          else
+            echo "✅ API_Performance_Test.jmx present ($(wc -c < src/test/jmeter/API_Performance_Test.jmx) bytes)"
           fi
           
           if [ ! -f "src/test/jmeter/Web_Load_Test.jmx" ]; then
             echo "❌ Web_Load_Test.jmx not found!"
             exit 1
+          else
+            echo "✅ Web_Load_Test.jmx present ($(wc -c < src/test/jmeter/Web_Load_Test.jmx) bytes)"
           fi
           
-          echo "✅ All JMeter test files present"
+          echo ""
+          echo "✅ All JMeter test files present and valid"
       
       - name: Run JMeter Tests (All Goals in Single Invocation)
         continue-on-error: true
@@ -312,19 +323,27 @@ jobs:
           echo "📊 Running JMeter: configure + jmeter + results..."
           echo "IMPORTANT: All goals run in SINGLE Maven invocation to share state"
           echo ""
+          echo "Test files directory: ${project.basedir}/src/test/jmeter"
+          echo ""
           
-          # Run all three goals in a SINGLE mvnw command
+          # Run all three goals in a SINGLE mvnw command with extra verbose output
           # This ensures they share execution context and state
-          ./mvnw jmeter:configure jmeter:jmeter jmeter:results 2>&1 | tee jmeter-full.log
+          ./mvnw jmeter:configure jmeter:jmeter jmeter:results -X 2>&1 | tee jmeter-full.log
+          
+          JMETER_EXIT_CODE=${PIPESTATUS[0]}
           
           echo ""
           echo "=========================================="
+          echo "JMeter exit code: $JMETER_EXIT_CODE"
           echo "Checking for generated files..."
           echo "=========================================="
           
           if [ -d "target/jmeter" ]; then
             echo "JMeter target directory:"
-            find target/jmeter -type f 2>/dev/null | head -20 || echo "  (empty)"
+            find target/jmeter -type f 2>/dev/null | head -30 || echo "  (empty)"
+            echo ""
+            echo "Directory structure:"
+            tree target/jmeter -L 3 2>/dev/null || find target/jmeter -type d 2>/dev/null
           else
             echo "⚠️  No target/jmeter directory found"
           fi

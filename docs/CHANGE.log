@@ -1,5 +1,60 @@
 # CHANGE LOG
 
+## [2025-11-08 15:00:00 CST] - Debug: Absolute Paths + Enhanced Verification 🔍
+
+### Overview
+Added absolute paths using `${project.basedir}` and enhanced verification to diagnose why test files aren't being discovered.
+
+### Changes
+
+**1. Absolute Paths in pom.xml:**
+```xml
+<testFilesDirectory>${project.basedir}/src/test/jmeter</testFilesDirectory>
+```
+
+Changed from relative `src/test/jmeter` to absolute `${project.basedir}/src/test/jmeter` to ensure plugin can locate directory regardless of working directory.
+
+**2. Enhanced File Verification:**
+```bash
+- Show current working directory
+- Show file sizes (verify not empty/corrupted)
+- Show MAVEN_OPTS
+- Enhanced output formatting
+```
+
+**3. Improved Debug Output:**
+```bash
+- Added -X flag for full Maven debug
+- Capture exit code
+- Show complete directory structure (tree or find)
+- List up to 30 files instead of 20
+```
+
+### Purpose
+
+Diagnostic run to determine:
+1. Are files actually present in CI environment?
+2. Are file sizes correct (not 0 bytes)?
+3. Is working directory correct?
+4. Does absolute path help plugin find files?
+5. What does full debug output show?
+
+### Git Commits
+
+**Commit:** (pending)
+**Files:**
+- `pom.xml` - Absolute paths with ${project.basedir}
+- `.github/workflows/performance.yml` - Enhanced verification
+- `docs/CHANGE.log` - This documentation
+
+### Status
+🔍 **Absolute Paths**: Using ${project.basedir}  
+🔍 **Enhanced Verification**: File sizes + directory info  
+🔍 **Full Debug**: -X flag enabled  
+📊 **Next Run**: Will show complete diagnostic info  
+
+---
+
 ## [2025-11-08 14:45:00 CST] - Fix: Explicit JMeter Test File Discovery ✅
 
 ### Overview
