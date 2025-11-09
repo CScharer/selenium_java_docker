@@ -40,10 +40,10 @@ public class UnmarshallYourMembership_Response {
     try {
       for (final Iterator<jakarta.xml.soap.Node> bodyIterator =
               soapMessage.getSOAPBody().getChildElements();
-          bodyIterator.hasNext(); ) {
+          bodyIterator.hasNext();) {
         final SOAPElement soapBody = (SOAPElement) bodyIterator.next();
         for (final Iterator<jakarta.xml.soap.Node> dataIterator = soapBody.getChildElements();
-            dataIterator.hasNext(); ) {
+            dataIterator.hasNext();) {
           final SOAPElement dataElement = (SOAPElement) dataIterator.next();
           final Node node = dataElement.getFirstChild();
           JAXBContext context;
