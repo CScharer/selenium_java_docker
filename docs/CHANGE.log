@@ -1,5 +1,153 @@
 # CHANGE LOG
 
+## [2025-11-08 13:45:00 CST] - Debug: JMeter Verbose Logging and Error Visibility 🔍
+
+### Overview
+Enhanced JMeter workflow with verbose logging, error capturing, and separated execution steps to identify root cause of silent failures.
+
+### Problem
+
+**JMeter Failing Silently:**
+- Workflow shows "BUILD FAILURE"
+- Error suppression with `exit 0` hides actual error
+- Results/reports directories empty (only . and ..)
+- No artifact created (nothing to upload)
+- No visibility into what's failing
+
+### Solution
+
+**1. Separated Execution Steps**
+
+Split JMeter into 3 distinct steps with full logging:
+
+```yaml
+- name: Configure JMeter
+  run: |
+    ./mvnw jmeter:configure -X 2>&1 | tee jmeter-configure.log
+    find target -name "*.json" -o -name "jmeter*"
+
+- name: Run JMeter Tests
+  continue-on-error: true
+  run: |
+    ./mvnw jmeter:jmeter -X 2>&1 | tee jmeter-run.log
+    find target/jmeter -type f
+
+- name: Generate JMeter Reports
+  continue-on-error: true
+  run: |
+    ./mvnw jmeter:results -X 2>&1 | tee jmeter-results.log
+```
+
+**Key Changes:**
+- ✅ Separate steps for each goal
+- ✅ Verbose output (`-X` flag)
+- ✅ Capture logs to files (`tee`)
+- ✅ Continue on error (don't fail workflow)
+- ✅ Show what files were created after each step
+
+**2. Enhanced Artifact Upload**
+
+Upload both results AND debug logs:
+
+```yaml
+- name: Upload JMeter Logs
+  uses: actions/upload-artifact@v4
+  if: always()
+  with:
+    name: jmeter-logs
+    path: |
+      jmeter-*.log
+      target/jmeter/
+    retention-days: 7
+
+- name: Upload JMeter Results
+  path: |
+    target/jmeter/
+    jmeter-*.log
+```
+
+**Key Changes:**
+- ✅ Upload configure log
+- ✅ Upload run log
+- ✅ Upload results log
+- ✅ Upload any generated files
+- ✅ Always upload (even on failure)
+
+### Debugging Strategy
+
+**Capture Everything:**
+1. Full Maven debug output (`-X`)
+2. Stdout and stderr (`2>&1`)
+3. Save to log files (`tee`)
+4. Show file creation (`find`)
+5. Upload all artifacts
+
+**Step-by-Step Visibility:**
+- Configure: See if config.json created
+- Run: See if JTL/CSV files created
+- Results: See if HTML reports created
+
+**Root Cause Analysis:**
+With full logs, we can identify:
+- Configuration errors
+- Missing dependencies
+- File permission issues
+- Plugin compatibility issues
+- Test execution failures
+
+### Expected Outputs
+
+**After Configure:**
+```
+target/jmeter/jmeter-maven-plugin-config.json
+```
+
+**After Run:**
+```
+target/jmeter/results/*.jtl
+target/jmeter/results/*.csv
+```
+
+**After Results:**
+```
+target/jmeter/reports/*.html
+target/jmeter/reports/index.html
+```
+
+### Next Steps
+
+**With these logs, we can:**
+1. See exact error messages
+2. Identify missing configuration
+3. Determine plugin issues
+4. Fix root cause permanently
+
+### Updated Files
+
+**.github/workflows/performance.yml:**
+- Split into 3 separate steps (configure, run, results)
+- Added verbose logging (`-X` flag)
+- Added log capture (`tee` commands)
+- Added file discovery after each step
+- Added log artifact upload
+- Made steps non-blocking (`continue-on-error`)
+
+### Git Commits
+
+**Commit:** (pending)
+**Files:**
+- `.github/workflows/performance.yml` - Debug logging
+- `docs/CHANGE.log` - This documentation
+
+### Status
+🔍 **Debug Mode**: Enabled (verbose logging)  
+📝 **Log Capture**: All steps logged to files  
+📤 **Artifact Upload**: Logs + results + reports  
+🚫 **Non-Blocking**: Workflow continues on error  
+📊 **Visibility**: Full error transparency  
+
+---
+
 ## [2025-11-08 13:30:00 CST] - Fix: JMeter Auto-Discovery and Robust Execution ✅
 
 ### Overview

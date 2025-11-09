@@ -306,18 +306,39 @@ jobs:
           
           echo "✅ All JMeter test files present"
       
-      - name: Run JMeter Tests
+      - name: Configure JMeter
         run: |
-          echo "📊 Running JMeter Performance Tests..."
-          echo "This will configure, execute, and generate reports in one step"
+          echo "🔧 Step 1: Configuring JMeter..."
+          ./mvnw jmeter:configure -X 2>&1 | tee jmeter-configure.log
+          echo ""
+          echo "Configuration complete. Checking for config file..."
+          find target -name "*.json" -o -name "jmeter*" | head -20
+      
+      - name: Run JMeter Tests
+        continue-on-error: true
+        run: |
+          echo "📊 Step 2: Running JMeter tests..."
+          ./mvnw jmeter:jmeter -X 2>&1 | tee jmeter-run.log
           
-          # Run all JMeter goals in sequence
-          ./mvnw clean jmeter:configure jmeter:jmeter jmeter:results -Dmaven.test.skip=true || {
-            echo "⚠️  JMeter execution completed with issues"
-            echo "Checking for results..."
-            ls -la target/jmeter/ || echo "No results directory"
-            exit 0
-          }
+          echo ""
+          echo "Checking for test results..."
+          find target/jmeter -type f | head -20 || echo "No files found"
+      
+      - name: Generate JMeter Reports
+        continue-on-error: true
+        run: |
+          echo "📈 Step 3: Generating reports..."
+          ./mvnw jmeter:results -X 2>&1 | tee jmeter-results.log || echo "Results generation completed"
+      
+      - name: Upload JMeter Logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: jmeter-logs
+          path: |
+            jmeter-*.log
+            target/jmeter/
+          retention-days: 7
       
       - name: Display JMeter Results
         if: always()
@@ -337,12 +358,14 @@ jobs:
             echo "⚠️  No reports directory found"
           fi
       
-      - name: Upload JMeter Results
+      - name: Upload JMeter Results  
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: jmeter-performance-results
-          path: target/jmeter/
+          path: |
+            target/jmeter/
+            jmeter-*.log
           retention-days: 30
 
   # Summary runs after all tests complete
