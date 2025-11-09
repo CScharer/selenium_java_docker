@@ -2,37 +2,32 @@ package com.cjs.qa.ym.api.dataobjects;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Results")
-public class Results
-{
-	// @XmlElement(name = "Results")
-	// private Results results;
-	@XmlElement(name = "ResultTotal")
-	private int			resultTotal;
-	@XmlElement(name = "Item")
-	private List<Item>	item	= new ArrayList<>();
+public class Results {
+  // @XmlElement(name = "Results")
+  // private Results results;
+  @XmlElement(name = "ResultTotal")
+  private int resultTotal;
 
-	public int getResultTotal()
-	{
-		return resultTotal;
-	}
+  @XmlElement(name = "Item")
+  private List<Item> item = new ArrayList<>();
 
-	public void setResultTotal(int resultTotal)
-	{
-		this.resultTotal = resultTotal;
-	}
+  public int getResultTotal() {
+    return resultTotal;
+  }
 
-	public List<Item> getItem()
-	{
-		return item;
-	}
+  public void setResultTotal(int resultTotal) {
+    this.resultTotal = resultTotal;
+  }
 
-	public void setItem(List<Item> item)
-	{
-		this.item = item;
-	}
+  public List<Item> getItem() {
+    return item;
+  }
+
+  public void setItem(List<Item> item) {
+    this.item = item;
+  }
 }

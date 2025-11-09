@@ -1,215 +1,179 @@
 package com.cjs.qa.linkedin.pages;
 
+import com.cjs.qa.core.Environment;
+import com.cjs.qa.selenium.ISelenium;
+import com.cjs.qa.selenium.Page;
+import io.cucumber.datatable.DataTable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.cjs.qa.core.Environment;
-import com.cjs.qa.selenium.ISelenium;
-import com.cjs.qa.selenium.Page;
+public class HomePage extends Page {
+  public HomePage(WebDriver webDriver) {
+    super(webDriver);
+  }
 
-import io.cucumber.datatable.DataTable;
+  // DOCUMENTATION
+  // clickButtonHome:
+  // Clicks the [Home] Button.
+  // clickButtonJobs:
+  // Clicks the [Jobs] Button.
+  // clickButtonMe:
+  // Clicks the [Me] Button.
+  // clickButtonMessaging:
+  // Clicks the [Messaging] Button.
+  // clickButtonMyNetwork:
+  // Clicks the [My Network] Button.
+  // clickButtonNotifications:
+  // Clicks the [Notifications] Button.
+  // populatePage:
+  // Populates the value of the all of the fields.
+  // validatePage:
+  // Validates the value of the all of the fields.
 
-public class HomePage extends Page
-{
-	public HomePage(WebDriver webDriver)
-	{
-		super(webDriver);
-	}
+  // INPUTS
 
-	// DOCUMENTATION
-	// clickButtonHome:
-	// Clicks the [Home] Button.
-	// clickButtonJobs:
-	// Clicks the [Jobs] Button.
-	// clickButtonMe:
-	// Clicks the [Me] Button.
-	// clickButtonMessaging:
-	// Clicks the [Messaging] Button.
-	// clickButtonMyNetwork:
-	// Clicks the [My Network] Button.
-	// clickButtonNotifications:
-	// Clicks the [Notifications] Button.
-	// populatePage:
-	// Populates the value of the all of the fields.
-	// validatePage:
-	// Validates the value of the all of the fields.
+  // TABLE DEF
+  // DataTable dataTable = Convert.toDataTable(Arrays.asList));
 
-	// INPUTS
+  public By getByButtonHome() {
+    return By.xpath(".//*[@id='feed-tab-icon']");
+  }
 
-	// TABLE DEF
-	// DataTable dataTable = Convert.toDataTable(Arrays.asList));
+  public By getByButtonMyNetwork() {
+    return By.xpath(".//*[@id='mynetwork-tab-icon']");
+  }
 
-	public By getByButtonHome()
-	{
-		return By.xpath(".//*[@id='feed-tab-icon']");
-	}
+  public By getByButtonJobs() {
+    return By.xpath(".//*[@id='jobs-tab-icon']");
+  }
 
-	public By getByButtonMyNetwork()
-	{
-		return By.xpath(".//*[@id='mynetwork-tab-icon']");
-	}
+  public By getByButtonMessaging() {
+    return By.xpath(".//*[@id='messaging-tab-icon']");
+  }
 
-	public By getByButtonJobs()
-	{
-		return By.xpath(".//*[@id='jobs-tab-icon']");
-	}
+  public By getByButtonNotifications() {
+    return By.xpath(".//*[@id='notifications-tab-icon']");
+  }
 
-	public By getByButtonMessaging()
-	{
-		return By.xpath(".//*[@id='messaging-tab-icon']");
-	}
+  public By getByButtonMe() {
+    return By.xpath(".//*[@id='nav-settings__dropdown-trigger']");
+  }
 
-	public By getByButtonNotifications()
-	{
-		return By.xpath(".//*[@id='notifications-tab-icon']");
-	}
+  public void clickButtonHome() {
+    clickObject(getByButtonHome());
+  }
 
-	public By getByButtonMe()
-	{
-		return By.xpath(".//*[@id='nav-settings__dropdown-trigger']");
-	}
+  public boolean isButtonHomeDisplayed() {
+    return isDisplayed(getByButtonHome());
+  }
 
-	public void clickButtonHome()
-	{
-		clickObject(getByButtonHome());
-	}
+  public boolean isButtonHomeEnabled() {
+    return isEnabled(getByButtonHome());
+  }
 
-	public boolean isButtonHomeDisplayed()
-	{
-		return isDisplayed(getByButtonHome());
-	}
+  public void clickButtonMyNetwork() {
+    clickObject(getByButtonMyNetwork());
+  }
 
-	public boolean isButtonHomeEnabled()
-	{
-		return isEnabled(getByButtonHome());
-	}
+  public boolean isButtonMyNetworkDisplayed() {
+    return isDisplayed(getByButtonMyNetwork());
+  }
 
-	public void clickButtonMyNetwork()
-	{
-		clickObject(getByButtonMyNetwork());
-	}
+  public boolean isButtonMyNetworkEnabled() {
+    return isEnabled(getByButtonMyNetwork());
+  }
 
-	public boolean isButtonMyNetworkDisplayed()
-	{
-		return isDisplayed(getByButtonMyNetwork());
-	}
+  public void clickButtonJobs() {
+    clickObject(getByButtonJobs());
+  }
 
-	public boolean isButtonMyNetworkEnabled()
-	{
-		return isEnabled(getByButtonMyNetwork());
-	}
+  public boolean isButtonJobsDisplayed() {
+    return isDisplayed(getByButtonJobs());
+  }
 
-	public void clickButtonJobs()
-	{
-		clickObject(getByButtonJobs());
-	}
+  public boolean isButtonJobsEnabled() {
+    return isEnabled(getByButtonJobs());
+  }
 
-	public boolean isButtonJobsDisplayed()
-	{
-		return isDisplayed(getByButtonJobs());
-	}
+  public void clickButtonMessaging() {
+    clickObject(getByButtonMessaging());
+  }
 
-	public boolean isButtonJobsEnabled()
-	{
-		return isEnabled(getByButtonJobs());
-	}
+  public boolean isButtonMessagingDisplayed() {
+    return isDisplayed(getByButtonMessaging());
+  }
 
-	public void clickButtonMessaging()
-	{
-		clickObject(getByButtonMessaging());
-	}
+  public boolean isButtonMessagingEnabled() {
+    return isEnabled(getByButtonMessaging());
+  }
 
-	public boolean isButtonMessagingDisplayed()
-	{
-		return isDisplayed(getByButtonMessaging());
-	}
+  public void clickButtonNotifications() {
+    clickObject(getByButtonNotifications());
+  }
 
-	public boolean isButtonMessagingEnabled()
-	{
-		return isEnabled(getByButtonMessaging());
-	}
+  public boolean isButtonNotificationsDisplayed() {
+    return isDisplayed(getByButtonNotifications());
+  }
 
-	public void clickButtonNotifications()
-	{
-		clickObject(getByButtonNotifications());
-	}
+  public boolean isButtonNotificationsEnabled() {
+    return isEnabled(getByButtonNotifications());
+  }
 
-	public boolean isButtonNotificationsDisplayed()
-	{
-		return isDisplayed(getByButtonNotifications());
-	}
+  public void clickButtonMe() {
+    clickObject(getByButtonMe());
+  }
 
-	public boolean isButtonNotificationsEnabled()
-	{
-		return isEnabled(getByButtonNotifications());
-	}
+  public boolean isButtonMeDisplayed() {
+    return isDisplayed(getByButtonMe());
+  }
 
-	public void clickButtonMe()
-	{
-		clickObject(getByButtonMe());
-	}
+  public boolean isButtonMeEnabled() {
+    return isEnabled(getByButtonMe());
+  }
 
-	public boolean isButtonMeDisplayed()
-	{
-		return isDisplayed(getByButtonMe());
-	}
+  // SWITCHES POPULATE
+  public void populatePage(DataTable dataTable) {
+    List<List<String>> list = dataTable.asLists();
+    for (List<?> item : list) {
+      String field = (String) item.get(0);
+      String value = (String) item.get(1);
+      if (!value.equals("")) {
+        Environment.sysOut("{Field}" + field + ", {Value}" + value);
+        switch (field.toLowerCase()) {
+          default:
+            value = "[" + field + "]" + ISelenium.FIELD_NOT_CODED;
+            Environment.sysOut("[" + field + "]" + ISelenium.FIELD_NOT_CODED);
+            break;
+        }
+      }
+    }
+  }
 
-	public boolean isButtonMeEnabled()
-	{
-		return isEnabled(getByButtonMe());
-	}
-
-	// SWITCHES POPULATE
-	public void populatePage(DataTable dataTable)
-	{
-		List<List<String>> list = dataTable.asLists();
-		for (List<?> item : list)
-		{
-			String field = (String) item.get(0);
-			String value = (String) item.get(1);
-			if (!value.equals(""))
-			{
-				Environment.sysOut("{Field}" + field + ", {Value}" + value);
-				switch (field.toLowerCase())
-				{
-					default:
-						value = "[" + field + "]" + ISelenium.FIELD_NOT_CODED;
-						Environment.sysOut("[" + field + "]" + ISelenium.FIELD_NOT_CODED);
-						break;
-				}
-			}
-		}
-	}
-
-	// SWITCHES VALIDATE
-	public void validatePage(DataTable dataTable)
-	{
-		Map<String, String> expected = new HashMap<>();
-		Map<String, String> actual = new HashMap<>();
-		List<List<String>> list = dataTable.asLists();
-		for (List<?> item : list)
-		{
-			String field = (String) item.get(0);
-			String value = (String) item.get(1);
-			if (!value.equals(""))
-			{
-				Environment.sysOut("{Field}" + field + ", {Value}" + value);
-				expected.put(field, value);
-				switch (field.toLowerCase())
-				{
-					default:
-						value = "[" + field + "]" + ISelenium.FIELD_NOT_CODED;
-						Environment.sysOut("[" + field + "]" + ISelenium.FIELD_NOT_CODED);
-						break;
-				}
-				actual.put(field, value);
-			}
-		}
-		Assert.assertSame(this.getClass().getName() + "validatePage", expected.toString(), actual.toString());
-	}
+  // SWITCHES VALIDATE
+  public void validatePage(DataTable dataTable) {
+    Map<String, String> expected = new HashMap<>();
+    Map<String, String> actual = new HashMap<>();
+    List<List<String>> list = dataTable.asLists();
+    for (List<?> item : list) {
+      String field = (String) item.get(0);
+      String value = (String) item.get(1);
+      if (!value.equals("")) {
+        Environment.sysOut("{Field}" + field + ", {Value}" + value);
+        expected.put(field, value);
+        switch (field.toLowerCase()) {
+          default:
+            value = "[" + field + "]" + ISelenium.FIELD_NOT_CODED;
+            Environment.sysOut("[" + field + "]" + ISelenium.FIELD_NOT_CODED);
+            break;
+        }
+        actual.put(field, value);
+      }
+    }
+    Assert.assertSame(
+        this.getClass().getName() + "validatePage", expected.toString(), actual.toString());
+  }
 }

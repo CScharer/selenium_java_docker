@@ -2,150 +2,136 @@ package com.cjs.qa.ym.api.dataobjects;
 
 import javax.xml.bind.annotation.XmlElement;
 
-public class DataSet
-{
-	@XmlElement(name = "strEmail")
-	private String	strEmail;
-	@XmlElement(name = "strWorkTitle")
-	private String	strWorkTitle;
-	@XmlElement(name = "strEmployerName")
-	private String	strEmployerName;
-	@XmlElement(name = "strAddress1")
-	private String	strAddress1;
-	@XmlElement(name = "strAddress2")
-	private String	strAddress2;
-	@XmlElement(name = "strCity")
-	private String	strCity;
-	@XmlElement(name = "strLocation")
-	private String	strLocation;
-	@XmlElement(name = "strPostalCode")
-	private String	strPostalCode;
-	@XmlElement(name = "strCountry")
-	private String	strCountry;
-	@XmlElement(name = "strPhone")
-	private String	strPhone;
-	@XmlElement(name = "strRSVPComments")
-	private String	strRSVPComments;
-	@XmlElement(name = "Custom_AdditionalComments")
-	private String	customAdditionalComments;
+public class DataSet {
+  @XmlElement(name = "strEmail")
+  private String strEmail;
 
-	public String getStrEmail()
-	{
-		return strEmail;
-	}
+  @XmlElement(name = "strWorkTitle")
+  private String strWorkTitle;
 
-	public void setStrEmail(String strEmail)
-	{
-		this.strEmail = strEmail;
-	}
+  @XmlElement(name = "strEmployerName")
+  private String strEmployerName;
 
-	public String getStrWorkTitle()
-	{
-		return strWorkTitle;
-	}
+  @XmlElement(name = "strAddress1")
+  private String strAddress1;
 
-	public void setStrWorkTitle(String strWorkTitle)
-	{
-		this.strWorkTitle = strWorkTitle;
-	}
+  @XmlElement(name = "strAddress2")
+  private String strAddress2;
 
-	public String getStrEmployerName()
-	{
-		return strEmployerName;
-	}
+  @XmlElement(name = "strCity")
+  private String strCity;
 
-	public void setStrEmployerName(String strEmployerName)
-	{
-		this.strEmployerName = strEmployerName;
-	}
+  @XmlElement(name = "strLocation")
+  private String strLocation;
 
-	public String getStrAddress1()
-	{
-		return strAddress1;
-	}
+  @XmlElement(name = "strPostalCode")
+  private String strPostalCode;
 
-	public void setStrAddress1(String strAddress1)
-	{
-		this.strAddress1 = strAddress1;
-	}
+  @XmlElement(name = "strCountry")
+  private String strCountry;
 
-	public String getStrAddress2()
-	{
-		return strAddress2;
-	}
+  @XmlElement(name = "strPhone")
+  private String strPhone;
 
-	public void setStrAddress2(String strAddress2)
-	{
-		this.strAddress2 = strAddress2;
-	}
+  @XmlElement(name = "strRSVPComments")
+  private String strRSVPComments;
 
-	public String getStrCity()
-	{
-		return strCity;
-	}
+  @XmlElement(name = "Custom_AdditionalComments")
+  private String customAdditionalComments;
 
-	public void setStrCity(String strCity)
-	{
-		this.strCity = strCity;
-	}
+  public String getStrEmail() {
+    return strEmail;
+  }
 
-	public String getStrLocation()
-	{
-		return strLocation;
-	}
+  public void setStrEmail(String strEmail) {
+    this.strEmail = strEmail;
+  }
 
-	public void setStrLocation(String strLocation)
-	{
-		this.strLocation = strLocation;
-	}
+  public String getStrWorkTitle() {
+    return strWorkTitle;
+  }
 
-	public String getStrPostalCode()
-	{
-		return strPostalCode;
-	}
+  public void setStrWorkTitle(String strWorkTitle) {
+    this.strWorkTitle = strWorkTitle;
+  }
 
-	public void setStrPostalCode(String strPostalCode)
-	{
-		this.strPostalCode = strPostalCode;
-	}
+  public String getStrEmployerName() {
+    return strEmployerName;
+  }
 
-	public String getStrCountry()
-	{
-		return strCountry;
-	}
+  public void setStrEmployerName(String strEmployerName) {
+    this.strEmployerName = strEmployerName;
+  }
 
-	public void setStrCountry(String strCountry)
-	{
-		this.strCountry = strCountry;
-	}
+  public String getStrAddress1() {
+    return strAddress1;
+  }
 
-	public String getStrPhone()
-	{
-		return strPhone;
-	}
+  public void setStrAddress1(String strAddress1) {
+    this.strAddress1 = strAddress1;
+  }
 
-	public void setStrPhone(String strPhone)
-	{
-		this.strPhone = strPhone;
-	}
+  public String getStrAddress2() {
+    return strAddress2;
+  }
 
-	public String getStrRSVPComments()
-	{
-		return strRSVPComments;
-	}
+  public void setStrAddress2(String strAddress2) {
+    this.strAddress2 = strAddress2;
+  }
 
-	public void setStrRSVPComments(String strRSVPComments)
-	{
-		this.strRSVPComments = strRSVPComments;
-	}
+  public String getStrCity() {
+    return strCity;
+  }
 
-	public String getCustomAdditionalComments()
-	{
-		return customAdditionalComments;
-	}
+  public void setStrCity(String strCity) {
+    this.strCity = strCity;
+  }
 
-	public void setCustomAdditionalComments(String customAdditionalComments)
-	{
-		this.customAdditionalComments = customAdditionalComments;
-	}
+  public String getStrLocation() {
+    return strLocation;
+  }
+
+  public void setStrLocation(String strLocation) {
+    this.strLocation = strLocation;
+  }
+
+  public String getStrPostalCode() {
+    return strPostalCode;
+  }
+
+  public void setStrPostalCode(String strPostalCode) {
+    this.strPostalCode = strPostalCode;
+  }
+
+  public String getStrCountry() {
+    return strCountry;
+  }
+
+  public void setStrCountry(String strCountry) {
+    this.strCountry = strCountry;
+  }
+
+  public String getStrPhone() {
+    return strPhone;
+  }
+
+  public void setStrPhone(String strPhone) {
+    this.strPhone = strPhone;
+  }
+
+  public String getStrRSVPComments() {
+    return strRSVPComments;
+  }
+
+  public void setStrRSVPComments(String strRSVPComments) {
+    this.strRSVPComments = strRSVPComments;
+  }
+
+  public String getCustomAdditionalComments() {
+    return customAdditionalComments;
+  }
+
+  public void setCustomAdditionalComments(String customAdditionalComments) {
+    this.customAdditionalComments = customAdditionalComments;
+  }
 }

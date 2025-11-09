@@ -1,135 +1,114 @@
 package com.cjs.qa.bts.pages;
 
+import com.cjs.qa.core.Environment;
+import com.cjs.qa.selenium.ISelenium;
+import com.cjs.qa.selenium.Page;
+import io.cucumber.datatable.DataTable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.cjs.qa.core.Environment;
-import com.cjs.qa.selenium.ISelenium;
-import com.cjs.qa.selenium.Page;
+public class BI_APlusFarmPage extends Page {
+  public BI_APlusFarmPage(WebDriver webDriver) {
+    super(webDriver);
+  }
 
-import io.cucumber.datatable.DataTable;
+  //
+  // DECLARATIONS
+  private final By DropdownSelectthePriorPolicyPrefix = By.id("PRI_POL_PRE");
+  private final By editEnterthePriorPolicyNumber = By.id("PRI_POL_NUM");
+  private final By editEnterthePriorPolicyMod = By.id("PRI_POL_MOD");
+  public final String PAGE_TITLE = "BI_APlusFarmPage";
 
-public class BI_APlusFarmPage extends Page
-{
-	public BI_APlusFarmPage(WebDriver webDriver)
-	{
-		super(webDriver);
-	}
+  public void verifyPage() {
+    verifyTitle(PAGE_TITLE);
+  }
 
-	//
-	// DECLARATIONS
-	private final By	DropdownSelectthePriorPolicyPrefix	= By.id("PRI_POL_PRE");
-	private final By	editEnterthePriorPolicyNumber		= By.id("PRI_POL_NUM");
-	private final By	editEnterthePriorPolicyMod			= By.id("PRI_POL_MOD");
-	public final String	PAGE_TITLE							= "BI_APlusFarmPage";
+  // METHODS GET
+  public String getDropdownSelectthePriorPolicyPrefix() {
+    return getDropdown(DropdownSelectthePriorPolicyPrefix);
+  }
 
-	public void verifyPage()
-	{
-		verifyTitle(PAGE_TITLE);
-	}
+  public String getEditEnterthePriorPolicyNumber() {
+    return getEdit(editEnterthePriorPolicyNumber);
+  }
 
-	// METHODS GET
-	public String getDropdownSelectthePriorPolicyPrefix()
-	{
-		return getDropdown(DropdownSelectthePriorPolicyPrefix);
-	}
+  public String getEditEnterthePriorPolicyMod() {
+    return getEdit(editEnterthePriorPolicyMod);
+  }
 
-	public String getEditEnterthePriorPolicyNumber()
-	{
-		return getEdit(editEnterthePriorPolicyNumber);
-	}
+  // METHODS SET
+  public void selectDropdownSelectthePriorPolicyPrefix(String value) {
+    selectDropdown(DropdownSelectthePriorPolicyPrefix, value);
+  }
 
-	public String getEditEnterthePriorPolicyMod()
-	{
-		return getEdit(editEnterthePriorPolicyMod);
-	}
+  public void setEditEnterthePriorPolicyNumber(String value) {
+    setEdit(editEnterthePriorPolicyNumber, value);
+  }
 
-	// METHODS SET
-	public void selectDropdownSelectthePriorPolicyPrefix(String value)
-	{
-		selectDropdown(DropdownSelectthePriorPolicyPrefix, value);
-	}
+  public void setEditEnterthePriorPolicyMod(String value) {
+    setEdit(editEnterthePriorPolicyMod, value);
+  }
 
-	public void setEditEnterthePriorPolicyNumber(String value)
-	{
-		setEdit(editEnterthePriorPolicyNumber, value);
-	}
+  // SWITCHES POPULATE
+  public void populatePage(DataTable table) {
+    final List<List<String>> data = table.asLists();
+    for (final List<?> item : data) {
+      final String field = (String) item.get(0);
+      final String value = (String) item.get(1);
+      if (!value.equals("")) {
+        switch (field.toLowerCase()) {
+          case "select the prior policy prefix":
+            selectDropdownSelectthePriorPolicyPrefix(value);
+            break;
+          case "enter the prior policy number":
+            setEditEnterthePriorPolicyNumber(value);
+            break;
+          case "enter the prior policy mod":
+            setEditEnterthePriorPolicyMod(value);
+            break;
+          default:
+            Environment.sysOut("[" + field + "]" + ISelenium.FIELD_NOT_CODED);
+            break;
+        }
+      }
+    }
+  }
 
-	public void setEditEnterthePriorPolicyMod(String value)
-	{
-		setEdit(editEnterthePriorPolicyMod, value);
-	}
-
-	// SWITCHES POPULATE
-	public void populatePage(DataTable table)
-	{
-		final List<List<String>> data = table.asLists();
-		for (final List<?> item : data)
-		{
-			final String field = (String) item.get(0);
-			final String value = (String) item.get(1);
-			if (!value.equals(""))
-			{
-				switch (field.toLowerCase())
-				{
-					case "select the prior policy prefix":
-						selectDropdownSelectthePriorPolicyPrefix(value);
-						break;
-					case "enter the prior policy number":
-						setEditEnterthePriorPolicyNumber(value);
-						break;
-					case "enter the prior policy mod":
-						setEditEnterthePriorPolicyMod(value);
-						break;
-					default:
-						Environment.sysOut("[" + field + "]" + ISelenium.FIELD_NOT_CODED);
-						break;
-				}
-			}
-		}
-	}
-
-	// SWITCHES VALIDATE
-	public void validatePage(DataTable table)
-	{
-		final Map<String, String> expected = new HashMap<>();
-		final Map<String, String> actual = new HashMap<>();
-		final List<List<String>> data = table.asLists();
-		for (final List<?> item : data)
-		{
-			final String field = (String) item.get(0);
-			String value = (String) item.get(1);
-			if (!value.equals(""))
-			{
-				if (Environment.isLogAll())
-				{
-					Environment.sysOut("({Field}" + field + ", {Value}" + value + ");");
-				}
-				expected.put(field, value);
-				switch (field.toLowerCase())
-				{
-					case "select the prior policy prefix":
-						value = getDropdownSelectthePriorPolicyPrefix();
-						break;
-					case "enter the prior policy number":
-						value = getEditEnterthePriorPolicyNumber();
-						break;
-					case "enter the prior policy mod":
-						value = getEditEnterthePriorPolicyMod();
-						break;
-					default:
-						value = "[" + field + "]" + ISelenium.FIELD_NOT_CODED;
-						Environment.sysOut(value);
-						break;
-				}
-				actual.put(field, value);
-			}
-		}
-		Assert.assertSame(PAGE_TITLE + " validatePage", expected, actual);
-	}
+  // SWITCHES VALIDATE
+  public void validatePage(DataTable table) {
+    final Map<String, String> expected = new HashMap<>();
+    final Map<String, String> actual = new HashMap<>();
+    final List<List<String>> data = table.asLists();
+    for (final List<?> item : data) {
+      final String field = (String) item.get(0);
+      String value = (String) item.get(1);
+      if (!value.equals("")) {
+        if (Environment.isLogAll()) {
+          Environment.sysOut("({Field}" + field + ", {Value}" + value + ");");
+        }
+        expected.put(field, value);
+        switch (field.toLowerCase()) {
+          case "select the prior policy prefix":
+            value = getDropdownSelectthePriorPolicyPrefix();
+            break;
+          case "enter the prior policy number":
+            value = getEditEnterthePriorPolicyNumber();
+            break;
+          case "enter the prior policy mod":
+            value = getEditEnterthePriorPolicyMod();
+            break;
+          default:
+            value = "[" + field + "]" + ISelenium.FIELD_NOT_CODED;
+            Environment.sysOut(value);
+            break;
+        }
+        actual.put(field, value);
+      }
+    }
+    Assert.assertSame(PAGE_TITLE + " validatePage", expected, actual);
+  }
 }

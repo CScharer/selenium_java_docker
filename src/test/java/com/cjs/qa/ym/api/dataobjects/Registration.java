@@ -1,203 +1,184 @@
 package com.cjs.qa.ym.api.dataobjects;
 
 import java.util.List;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Sa.Events.Event.Registration.Get")
-public class Registration
-{
-	@XmlElement(name = "Status")
-	private String			status;
-	@XmlElement(name = "EventName")
-	private String			eventName;
-	@XmlElement(name = "FirstName")
-	private String			firstName;
-	@XmlElement(name = "LastName")
-	private String			lastName;
-	@XmlElement(name = "BadgeNumber")
-	private String			badgeNumber;
-	@XmlElement(name = "RegistrationID")
-	private String			registrationID;
-	@XmlElement(name = "DateRegistered")
-	private String			dateRegistered;
-	@XmlElement(name = "Attended")
-	private String			attended;
-	@XmlElement(name = "OrderID")
-	private String			orderID;
-	@XmlElement(name = "MemberID")
-	private String			memberID;
-	@XmlElement(name = "InvoiceID")
-	private String			invoiceID;
-	@XmlElement(name = "IsPrimaryRegistrant")
-	private String			isPrimaryRegistrant;
-	@XmlElement(name = "PrimaryRegistrantRegistrationID")
-	private String			primaryRegistrantRegistrationID;
-	@XmlElement(name = "PrimaryRegistrantMemberID")
-	private String			primaryRegistrantMemberID;
-	@XmlElement(name = "AttendeeType")
-	private String			attendeeType;
-	@XmlElement(name = "DataSet")
-	private List<DataSet>	dataSet;
+public class Registration {
+  @XmlElement(name = "Status")
+  private String status;
 
-	public String getStatus()
-	{
-		return status;
-	}
+  @XmlElement(name = "EventName")
+  private String eventName;
 
-	public void setStatus(String status)
-	{
-		this.status = status;
-	}
+  @XmlElement(name = "FirstName")
+  private String firstName;
 
-	public String getEventName()
-	{
-		return eventName;
-	}
+  @XmlElement(name = "LastName")
+  private String lastName;
 
-	public void setEventName(String eventName)
-	{
-		this.eventName = eventName;
-	}
+  @XmlElement(name = "BadgeNumber")
+  private String badgeNumber;
 
-	public String getFirstName()
-	{
-		return firstName;
-	}
+  @XmlElement(name = "RegistrationID")
+  private String registrationID;
 
-	public void setFirstName(String firstName)
-	{
-		this.firstName = firstName;
-	}
+  @XmlElement(name = "DateRegistered")
+  private String dateRegistered;
 
-	public String getLastName()
-	{
-		return lastName;
-	}
+  @XmlElement(name = "Attended")
+  private String attended;
 
-	public void setLastName(String lastName)
-	{
-		this.lastName = lastName;
-	}
+  @XmlElement(name = "OrderID")
+  private String orderID;
 
-	public String getBadgeNumber()
-	{
-		return badgeNumber;
-	}
+  @XmlElement(name = "MemberID")
+  private String memberID;
 
-	public void setBadgeNumber(String badgeNumber)
-	{
-		this.badgeNumber = badgeNumber;
-	}
+  @XmlElement(name = "InvoiceID")
+  private String invoiceID;
 
-	public String getRegistrationID()
-	{
-		return registrationID;
-	}
+  @XmlElement(name = "IsPrimaryRegistrant")
+  private String isPrimaryRegistrant;
 
-	public void setRegistrationID(String registrationID)
-	{
-		this.registrationID = registrationID;
-	}
+  @XmlElement(name = "PrimaryRegistrantRegistrationID")
+  private String primaryRegistrantRegistrationID;
 
-	public String getDateRegistered()
-	{
-		return dateRegistered;
-	}
+  @XmlElement(name = "PrimaryRegistrantMemberID")
+  private String primaryRegistrantMemberID;
 
-	public void setDateRegistered(String dateRegistered)
-	{
-		this.dateRegistered = dateRegistered;
-	}
+  @XmlElement(name = "AttendeeType")
+  private String attendeeType;
 
-	public String getAttended()
-	{
-		return attended;
-	}
+  @XmlElement(name = "DataSet")
+  private List<DataSet> dataSet;
 
-	public void setAttended(String attended)
-	{
-		this.attended = attended;
-	}
+  public String getStatus() {
+    return status;
+  }
 
-	public String getOrderID()
-	{
-		return orderID;
-	}
+  public void setStatus(String status) {
+    this.status = status;
+  }
 
-	public void setOrderID(String orderID)
-	{
-		this.orderID = orderID;
-	}
+  public String getEventName() {
+    return eventName;
+  }
 
-	public String getMemberID()
-	{
-		return memberID;
-	}
+  public void setEventName(String eventName) {
+    this.eventName = eventName;
+  }
 
-	public void setMemberID(String memberID)
-	{
-		this.memberID = memberID;
-	}
+  public String getFirstName() {
+    return firstName;
+  }
 
-	public String getInvoiceID()
-	{
-		return invoiceID;
-	}
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
 
-	public void setInvoiceID(String invoiceID)
-	{
-		this.invoiceID = invoiceID;
-	}
+  public String getLastName() {
+    return lastName;
+  }
 
-	public String getIsPrimaryRegistrant()
-	{
-		return isPrimaryRegistrant;
-	}
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
 
-	public void setIsPrimaryRegistrant(String isPrimaryRegistrant)
-	{
-		this.isPrimaryRegistrant = isPrimaryRegistrant;
-	}
+  public String getBadgeNumber() {
+    return badgeNumber;
+  }
 
-	public String getPrimaryRegistrantRegistrationID()
-	{
-		return primaryRegistrantRegistrationID;
-	}
+  public void setBadgeNumber(String badgeNumber) {
+    this.badgeNumber = badgeNumber;
+  }
 
-	public void setPrimaryRegistrantRegistrationID(String primaryRegistrantRegistrationID)
-	{
-		this.primaryRegistrantRegistrationID = primaryRegistrantRegistrationID;
-	}
+  public String getRegistrationID() {
+    return registrationID;
+  }
 
-	public String getPrimaryRegistrantMemberID()
-	{
-		return primaryRegistrantMemberID;
-	}
+  public void setRegistrationID(String registrationID) {
+    this.registrationID = registrationID;
+  }
 
-	public void setPrimaryRegistrantMemberID(String primaryRegistrantMemberID)
-	{
-		this.primaryRegistrantMemberID = primaryRegistrantMemberID;
-	}
+  public String getDateRegistered() {
+    return dateRegistered;
+  }
 
-	public String getAttendeeType()
-	{
-		return attendeeType;
-	}
+  public void setDateRegistered(String dateRegistered) {
+    this.dateRegistered = dateRegistered;
+  }
 
-	public void setAttendeeType(String attendeeType)
-	{
-		this.attendeeType = attendeeType;
-	}
+  public String getAttended() {
+    return attended;
+  }
 
-	public List<DataSet> getDataSet()
-	{
-		return dataSet;
-	}
+  public void setAttended(String attended) {
+    this.attended = attended;
+  }
 
-	public void setDataSet(List<DataSet> dataSet)
-	{
-		this.dataSet = dataSet;
-	}
+  public String getOrderID() {
+    return orderID;
+  }
+
+  public void setOrderID(String orderID) {
+    this.orderID = orderID;
+  }
+
+  public String getMemberID() {
+    return memberID;
+  }
+
+  public void setMemberID(String memberID) {
+    this.memberID = memberID;
+  }
+
+  public String getInvoiceID() {
+    return invoiceID;
+  }
+
+  public void setInvoiceID(String invoiceID) {
+    this.invoiceID = invoiceID;
+  }
+
+  public String getIsPrimaryRegistrant() {
+    return isPrimaryRegistrant;
+  }
+
+  public void setIsPrimaryRegistrant(String isPrimaryRegistrant) {
+    this.isPrimaryRegistrant = isPrimaryRegistrant;
+  }
+
+  public String getPrimaryRegistrantRegistrationID() {
+    return primaryRegistrantRegistrationID;
+  }
+
+  public void setPrimaryRegistrantRegistrationID(String primaryRegistrantRegistrationID) {
+    this.primaryRegistrantRegistrationID = primaryRegistrantRegistrationID;
+  }
+
+  public String getPrimaryRegistrantMemberID() {
+    return primaryRegistrantMemberID;
+  }
+
+  public void setPrimaryRegistrantMemberID(String primaryRegistrantMemberID) {
+    this.primaryRegistrantMemberID = primaryRegistrantMemberID;
+  }
+
+  public String getAttendeeType() {
+    return attendeeType;
+  }
+
+  public void setAttendeeType(String attendeeType) {
+    this.attendeeType = attendeeType;
+  }
+
+  public List<DataSet> getDataSet() {
+    return dataSet;
+  }
+
+  public void setDataSet(List<DataSet> dataSet) {
+    this.dataSet = dataSet;
+  }
 }

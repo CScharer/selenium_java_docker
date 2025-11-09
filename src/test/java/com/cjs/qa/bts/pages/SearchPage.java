@@ -1,197 +1,165 @@
 package com.cjs.qa.bts.pages;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.selenium.ISelenium;
 import com.cjs.qa.selenium.Page;
-
 import io.cucumber.datatable.DataTable;
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
-public class SearchPage extends Page
-{
-	public SearchPage(WebDriver webDriver)
-	{
-		super(webDriver);
-	}
+public class SearchPage extends Page {
+  public SearchPage(WebDriver webDriver) {
+    super(webDriver);
+  }
 
-	private final By	editPolicyNumber			= By.id("policyNumber");
-	private final By	editSequenceNumber			= By.id("sequenceNumber");
-	private final By	CheckboxIncludeAllPolicies	= By.id("includeAllPolicies");
-	private final By	editFirstName				= By.id("firstName");
-	private final By	editLastName				= By.id("lastName");
-	private final By	editBusinessName			= By.id("businessName");
-	private final By	editClientID				= By.id("clientId");
-	private final By	editFEIN					= By.id("fein");
-	private final By	buttonAddClientAndPolicy	= By.id("addClientAndPolicy");
-	private final By	buttonAddClientAndQuote		= By.id("addClientAndQuote");
-	private final By	buttonNavLeft				= By.xpath("//button[contains(@data-sidebar,'left')]");
-	private final By	buttonNavRight				= By.xpath("//button[contains(@data-sidebar,'right')]");
-	private final By	linkAddNewPolicy			= By.linkText("Add New Policy");
-	private final By	linkAddNewQuote				= By.linkText("Add New Quote");
-	private final By	linkClientInformation		= By.linkText("Client Information");
-	private final By	linkTransferOwnership		= By.linkText("Transfer Ownership");
-	private final By	imagePrimaryLogo			= By.xpath("//div[@class='primary-logo']");
-	private final By	buttonSearch				= By.id("searchButton");
-	private final By	buttonClear					= By.id("clearButton");
-	private final By	DropdownLogin				= By
-			.xpath("//button[contains(@class,'btn-primary')][@data-toggle='Dropdown']");
-	public final String	PAGE_TITLE					= "SearchPage";
+  private final By editPolicyNumber = By.id("policyNumber");
+  private final By editSequenceNumber = By.id("sequenceNumber");
+  private final By CheckboxIncludeAllPolicies = By.id("includeAllPolicies");
+  private final By editFirstName = By.id("firstName");
+  private final By editLastName = By.id("lastName");
+  private final By editBusinessName = By.id("businessName");
+  private final By editClientID = By.id("clientId");
+  private final By editFEIN = By.id("fein");
+  private final By buttonAddClientAndPolicy = By.id("addClientAndPolicy");
+  private final By buttonAddClientAndQuote = By.id("addClientAndQuote");
+  private final By buttonNavLeft = By.xpath("//button[contains(@data-sidebar,'left')]");
+  private final By buttonNavRight = By.xpath("//button[contains(@data-sidebar,'right')]");
+  private final By linkAddNewPolicy = By.linkText("Add New Policy");
+  private final By linkAddNewQuote = By.linkText("Add New Quote");
+  private final By linkClientInformation = By.linkText("Client Information");
+  private final By linkTransferOwnership = By.linkText("Transfer Ownership");
+  private final By imagePrimaryLogo = By.xpath("//div[@class='primary-logo']");
+  private final By buttonSearch = By.id("searchButton");
+  private final By buttonClear = By.id("clearButton");
+  private final By DropdownLogin =
+      By.xpath("//button[contains(@class,'btn-primary')][@data-toggle='Dropdown']");
+  public final String PAGE_TITLE = "SearchPage";
 
-	public void verifyPage()
-	{
-		verifyTitle(PAGE_TITLE);
-	}
+  public void verifyPage() {
+    verifyTitle(PAGE_TITLE);
+  }
 
-	public void setEditPolicyNumber(String value)
-	{
-		setEdit(editPolicyNumber, value);
-	}
+  public void setEditPolicyNumber(String value) {
+    setEdit(editPolicyNumber, value);
+  }
 
-	public void setEditSequenceNumber(String value)
-	{
-		setEdit(editSequenceNumber, value);
-	}
+  public void setEditSequenceNumber(String value) {
+    setEdit(editSequenceNumber, value);
+  }
 
-	public void setEditFirstName(String value)
-	{
-		setEdit(editFirstName, value);
-	}
+  public void setEditFirstName(String value) {
+    setEdit(editFirstName, value);
+  }
 
-	public void setEditLastName(String value)
-	{
-		setEdit(editLastName, value);
-	}
+  public void setEditLastName(String value) {
+    setEdit(editLastName, value);
+  }
 
-	public void setEditBusinessName(String value)
-	{
-		setEdit(editBusinessName, value);
-	}
+  public void setEditBusinessName(String value) {
+    setEdit(editBusinessName, value);
+  }
 
-	public void setEditFEIN(String value)
-	{
-		setEdit(editFEIN, value);
-	}
+  public void setEditFEIN(String value) {
+    setEdit(editFEIN, value);
+  }
 
-	public void setEditClientID(String value)
-	{
-		setEdit(editClientID, value);
-	}
+  public void setEditClientID(String value) {
+    setEdit(editClientID, value);
+  }
 
-	public void toggleCheckboxIncludeAllPolicies()
-	{
-		clickObject(CheckboxIncludeAllPolicies);
-	}
+  public void toggleCheckboxIncludeAllPolicies() {
+    clickObject(CheckboxIncludeAllPolicies);
+  }
 
-	public void clickButtonAddClientAndPolicy()
-	{
-		clickObject(buttonAddClientAndPolicy);
-	}
+  public void clickButtonAddClientAndPolicy() {
+    clickObject(buttonAddClientAndPolicy);
+  }
 
-	public void clickButtonAddClientQuote()
-	{
-		clickObject(buttonAddClientAndQuote);
-	}
+  public void clickButtonAddClientQuote() {
+    clickObject(buttonAddClientAndQuote);
+  }
 
-	public void clickbuttonNavLeft()
-	{
-		clickObject(buttonNavLeft);
-	}
+  public void clickbuttonNavLeft() {
+    clickObject(buttonNavLeft);
+  }
 
-	public void clickbuttonNavRight()
-	{
-		clickObject(buttonNavRight);
-	}
+  public void clickbuttonNavRight() {
+    clickObject(buttonNavRight);
+  }
 
-	public void clickImagePrimaryLogo()
-	{
-		clickObject(imagePrimaryLogo);
-	}
+  public void clickImagePrimaryLogo() {
+    clickObject(imagePrimaryLogo);
+  }
 
-	public void clickButtonSearch()
-	{
-		clickObject(buttonSearch);
-	}
+  public void clickButtonSearch() {
+    clickObject(buttonSearch);
+  }
 
-	public void clickButtonClear()
-	{
-		clickObject(buttonClear);
-	}
+  public void clickButtonClear() {
+    clickObject(buttonClear);
+  }
 
-	public void clickDropdownLogin()
-	{
-		clickObject(DropdownLogin);
-	}
+  public void clickDropdownLogin() {
+    clickObject(DropdownLogin);
+  }
 
-	public void SelectSearchResults(String value)
-	{
-		clickObject(By.partialLinkText(value));
-	}
+  public void SelectSearchResults(String value) {
+    clickObject(By.partialLinkText(value));
+  }
 
-	public void clickLinkAddNewPolicy()
-	{
-		clickObject(linkAddNewPolicy);
-	}
+  public void clickLinkAddNewPolicy() {
+    clickObject(linkAddNewPolicy);
+  }
 
-	public void clickLinkAddNewQuote()
-	{
-		clickObject(linkAddNewQuote);
-	}
+  public void clickLinkAddNewQuote() {
+    clickObject(linkAddNewQuote);
+  }
 
-	public void clickLinkClientInformation()
-	{
-		clickObject(linkClientInformation);
-	}
+  public void clickLinkClientInformation() {
+    clickObject(linkClientInformation);
+  }
 
-	public void clickLinkTransferOwnership()
-	{
-		clickObject(linkTransferOwnership);
-	}
+  public void clickLinkTransferOwnership() {
+    clickObject(linkTransferOwnership);
+  }
 
-	public void populatePage(DataTable table)
-	{
-		final List<List<String>> data = table.asLists();
-		for (final List<?> item : data)
-		{
-			final String field = (String) item.get(0);
-			final String value = (String) item.get(1);
-			if (!value.equals(""))
-			{
-				if (Environment.isLogAll())
-				{
-					Environment.sysOut("({Field}" + field + ", {Value}" + value + ");");
-				}
-				switch (field.toLowerCase())
-				{
-					case "policy number":
-						setEditPolicyNumber(value);
-						break;
-					case "sequence number":
-						setEditSequenceNumber(value);
-						break;
-					case "include all policies":
-						toggleCheckboxIncludeAllPolicies();
-						break;
-					case "first name":
-						setEditFirstName(value);
-						break;
-					case "last name":
-						setEditLastName(value);
-						break;
-					case "client id":
-						setEditClientID(value);
-						break;
-					case "fein":
-						setEditFEIN(value);
-						break;
-					default:
-						Environment.sysOut("[" + field + "]" + ISelenium.FIELD_NOT_CODED);
-						break;
-				}
-			}
-		}
-	}
+  public void populatePage(DataTable table) {
+    final List<List<String>> data = table.asLists();
+    for (final List<?> item : data) {
+      final String field = (String) item.get(0);
+      final String value = (String) item.get(1);
+      if (!value.equals("")) {
+        if (Environment.isLogAll()) {
+          Environment.sysOut("({Field}" + field + ", {Value}" + value + ");");
+        }
+        switch (field.toLowerCase()) {
+          case "policy number":
+            setEditPolicyNumber(value);
+            break;
+          case "sequence number":
+            setEditSequenceNumber(value);
+            break;
+          case "include all policies":
+            toggleCheckboxIncludeAllPolicies();
+            break;
+          case "first name":
+            setEditFirstName(value);
+            break;
+          case "last name":
+            setEditLastName(value);
+            break;
+          case "client id":
+            setEditClientID(value);
+            break;
+          case "fein":
+            setEditFEIN(value);
+            break;
+          default:
+            Environment.sysOut("[" + field + "]" + ISelenium.FIELD_NOT_CODED);
+            break;
+        }
+      }
+    }
+  }
 }

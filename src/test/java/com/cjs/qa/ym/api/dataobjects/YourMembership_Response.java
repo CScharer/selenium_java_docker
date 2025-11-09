@@ -5,54 +5,47 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "YourMembership_Response")
-public class YourMembership_Response
-{
-	@XmlElement(name = "ErrCode")
-	private String	errCode;
-	@XmlElement(name = "ExtendedErrorInfo")
-	private String	extendedErrorInfo;
-	@XmlElement(name = "Results")
-	private Results	results;
-	@XmlAnyElement
-	private Object	otherStuff;
+public class YourMembership_Response {
+  @XmlElement(name = "ErrCode")
+  private String errCode;
 
-	public String getErrCode()
-	{
-		return errCode;
-	}
+  @XmlElement(name = "ExtendedErrorInfo")
+  private String extendedErrorInfo;
 
-	public void setErrCode(String errCode)
-	{
-		this.errCode = errCode;
-	}
+  @XmlElement(name = "Results")
+  private Results results;
 
-	public String getExtendedErrorInfo()
-	{
-		return extendedErrorInfo;
-	}
+  @XmlAnyElement private Object otherStuff;
 
-	public void setExtendedErrorInfo(String extendedErrorInfo)
-	{
-		this.extendedErrorInfo = extendedErrorInfo;
-	}
+  public String getErrCode() {
+    return errCode;
+  }
 
-	public Results getResults()
-	{
-		return results;
-	}
+  public void setErrCode(String errCode) {
+    this.errCode = errCode;
+  }
 
-	public void setResults(Results results)
-	{
-		this.results = results;
-	}
+  public String getExtendedErrorInfo() {
+    return extendedErrorInfo;
+  }
 
-	public Object getOtherStuff()
-	{
-		return otherStuff;
-	}
+  public void setExtendedErrorInfo(String extendedErrorInfo) {
+    this.extendedErrorInfo = extendedErrorInfo;
+  }
 
-	public void setOtherStuff(Object otherStuff)
-	{
-		this.otherStuff = otherStuff;
-	}
+  public Results getResults() {
+    return results;
+  }
+
+  public void setResults(Results results) {
+    this.results = results;
+  }
+
+  public Object getOtherStuff() {
+    return otherStuff;
+  }
+
+  public void setOtherStuff(Object otherStuff) {
+    this.otherStuff = otherStuff;
+  }
 }

@@ -16,16 +16,11 @@ limitations under the License.
 ==================================================================== */
 package com.cjs.qa.microsoft.excel.xls;
 
+import com.cjs.qa.utilities.IExtension;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.ClientAnchor;
-import org.apache.poi.ss.usermodel.Drawing;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFChart;
 import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
 import org.apache.poi.xssf.usermodel.XSSFDrawing;
@@ -39,58 +34,57 @@ import org.openxmlformats.schemas.drawingml.x2006.chart.CTNumDataSource;
 import org.openxmlformats.schemas.drawingml.x2006.chart.CTPlotArea;
 import org.openxmlformats.schemas.drawingml.x2006.chart.STLegendPos;
 
-import com.cjs.qa.utilities.IExtension;
-
-/**
- * Line chart example.
- */
-public class XLSXLineChart
-{
-	public static void main(String[] args) throws IOException
-	{
-		final XSSFWorkbook workbookXLSX = new XSSFWorkbook();
-		final XSSFSheet sheetXLSX = workbookXLSX.createSheet("linechart");
-		final int NUM_OF_ROWS = 3;
-		final int NUM_OF_COLUMNS = 10;
-		// Create a row and put some cells in it. Rows are 0 based.
-		Row row;
-		Cell cell;
-		for (int rowIndex = 0; rowIndex < NUM_OF_ROWS; rowIndex++)
-		{
-			row = sheetXLSX.createRow((short) rowIndex);
-			for (int colIndex = 0; colIndex < NUM_OF_COLUMNS; colIndex++)
-			{
-				cell = row.createCell((short) colIndex);
-				cell.setCellValue(colIndex * (rowIndex + 1));
-			}
-		}
-		final XSSFDrawing drawing = sheetXLSX.createDrawingPatriarch();
-		final XSSFClientAnchor clientAnchor = drawing.createAnchor(0, 0, 0, 0, 0, 5, 10, 15);
-		final XSSFChart chart = drawing.createChart(clientAnchor);
-		// Set legend position using low-level API
-		chart.getCTChart().addNewLegend().addNewLegendPos().setVal(STLegendPos.TR); // TOP_RIGHT
-		// Create line chart data using low-level API for POI 5.x
-		CTChart ctChart = chart.getCTChart();
-		CTPlotArea ctPlotArea = ctChart.getPlotArea();
-		CTLineChart ctLineChart = ctPlotArea.addNewLineChart();
-		ctLineChart.addNewVaryColors().setVal(false);
-		// Add series
-		for (int seriesIndex = 1; seriesIndex < NUM_OF_ROWS; seriesIndex++)
-		{
-			CTLineSer ctLineSer = ctLineChart.addNewSer();
-			ctLineSer.addNewIdx().setVal(seriesIndex - 1);
-			ctLineSer.addNewOrder().setVal(seriesIndex - 1);
-			// Category axis data
-			CTAxDataSource cads = ctLineSer.addNewCat();
-			cads.addNewNumRef().setF("linechart!$A$1:$" + (char)('A' + NUM_OF_COLUMNS - 1) + "$1");
-			// Values
-			CTNumDataSource ctNumDataSource = ctLineSer.addNewVal();
-			ctNumDataSource.addNewNumRef().setF("linechart!$A$" + (seriesIndex + 1) + ":$" + (char)('A' + NUM_OF_COLUMNS - 1) + "$" + (seriesIndex + 1));
-		}
-		// Write the output to a file
-		final FileOutputStream fileOut = new FileOutputStream("ooxml-line-chart" + IExtension.XLSX);
-		workbookXLSX.write(fileOut);
-		fileOut.close();
-		workbookXLSX.close();
-	}
+/** Line chart example. */
+public class XLSXLineChart {
+  public static void main(String[] args) throws IOException {
+    final XSSFWorkbook workbookXLSX = new XSSFWorkbook();
+    final XSSFSheet sheetXLSX = workbookXLSX.createSheet("linechart");
+    final int NUM_OF_ROWS = 3;
+    final int NUM_OF_COLUMNS = 10;
+    // Create a row and put some cells in it. Rows are 0 based.
+    Row row;
+    Cell cell;
+    for (int rowIndex = 0; rowIndex < NUM_OF_ROWS; rowIndex++) {
+      row = sheetXLSX.createRow((short) rowIndex);
+      for (int colIndex = 0; colIndex < NUM_OF_COLUMNS; colIndex++) {
+        cell = row.createCell((short) colIndex);
+        cell.setCellValue(colIndex * (rowIndex + 1));
+      }
+    }
+    final XSSFDrawing drawing = sheetXLSX.createDrawingPatriarch();
+    final XSSFClientAnchor clientAnchor = drawing.createAnchor(0, 0, 0, 0, 0, 5, 10, 15);
+    final XSSFChart chart = drawing.createChart(clientAnchor);
+    // Set legend position using low-level API
+    chart.getCTChart().addNewLegend().addNewLegendPos().setVal(STLegendPos.TR); // TOP_RIGHT
+    // Create line chart data using low-level API for POI 5.x
+    CTChart ctChart = chart.getCTChart();
+    CTPlotArea ctPlotArea = ctChart.getPlotArea();
+    CTLineChart ctLineChart = ctPlotArea.addNewLineChart();
+    ctLineChart.addNewVaryColors().setVal(false);
+    // Add series
+    for (int seriesIndex = 1; seriesIndex < NUM_OF_ROWS; seriesIndex++) {
+      CTLineSer ctLineSer = ctLineChart.addNewSer();
+      ctLineSer.addNewIdx().setVal(seriesIndex - 1);
+      ctLineSer.addNewOrder().setVal(seriesIndex - 1);
+      // Category axis data
+      CTAxDataSource cads = ctLineSer.addNewCat();
+      cads.addNewNumRef().setF("linechart!$A$1:$" + (char) ('A' + NUM_OF_COLUMNS - 1) + "$1");
+      // Values
+      CTNumDataSource ctNumDataSource = ctLineSer.addNewVal();
+      ctNumDataSource
+          .addNewNumRef()
+          .setF(
+              "linechart!$A$"
+                  + (seriesIndex + 1)
+                  + ":$"
+                  + (char) ('A' + NUM_OF_COLUMNS - 1)
+                  + "$"
+                  + (seriesIndex + 1));
+    }
+    // Write the output to a file
+    final FileOutputStream fileOut = new FileOutputStream("ooxml-line-chart" + IExtension.XLSX);
+    workbookXLSX.write(fileOut);
+    fileOut.close();
+    workbookXLSX.close();
+  }
 }

@@ -1,17 +1,5 @@
 package com.cjs.qa.wellmark.pages;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import com.cjs.qa.jdbc.JDBC;
@@ -21,248 +9,242 @@ import com.cjs.qa.selenium.Page;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.FSO;
 import com.cjs.qa.utilities.IExtension;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-public class ClaimsAndSpendingPage extends Page
-{
-	public ClaimsAndSpendingPage(WebDriver webDriver)
-	{
-		super(webDriver);
-	}
+public class ClaimsAndSpendingPage extends Page {
+  public ClaimsAndSpendingPage(WebDriver webDriver) {
+    super(webDriver);
+  }
 
-	private List<String>	listHeadings			= null;
-	private List<String>	listTypes				= null;
-	private final By		linkMedicalAndPharmacy	= By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_tabAll']/a");
-	private final By		linkMedical				= By
-			.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_tabMedical']/a");
-	private final By		linkPharmacy			= By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_tabPharm']/a");
-	private final By		gridMedicalAndPharmacy	= By
-			.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_AllClaimsGrid']/tbody");
-	private final By		gridMedical				= By
-			.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_MedClaimsGrid']/tbody");
-	private final By		gridPharmacy			= By
-			.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_PharmClaimsGrid']/tbody");
-	// ClaimsAndSpendingPage
-	// .//*[@id='ctl00_ContentLeft_DisplayGrid_AllClaimsGrid']
-	// Medical
-	// .//*[@id='ctl00_ContentLeft_DisplayGrid_MedClaimsGrid']
-	// Pharmacy
-	// .//*[@id='ctl00_ContentLeft_DisplayGrid_PharmClaimsGrid']
-	// ./tbody/tr/td/node()
-	// ./tbody/tr/td/span
-	// ./tbody/tr/td/div/span
-	// ./tbody/tr/td/b/span
-	// ./tbody/tr/td/select/option[@selected]
+  private List<String> listHeadings = null;
+  private List<String> listTypes = null;
+  private final By linkMedicalAndPharmacy =
+      By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_tabAll']/a");
+  private final By linkMedical = By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_tabMedical']/a");
+  private final By linkPharmacy = By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_tabPharm']/a");
+  private final By gridMedicalAndPharmacy =
+      By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_AllClaimsGrid']/tbody");
+  private final By gridMedical =
+      By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_MedClaimsGrid']/tbody");
+  private final By gridPharmacy =
+      By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_PharmClaimsGrid']/tbody");
 
-	private void getHeadingInfo() throws QAException
-	{
-		final String LABEL_SPAN = "//span";
-		listHeadings = new ArrayList<>();
-		listTypes = new ArrayList<>();
-		listHeadings.add("Patient Name");
-		listTypes.add(LABEL_SPAN);
-		listHeadings.add("Service Date");
-		listTypes.add(LABEL_SPAN);
-		listHeadings.add("Provider");
-		listTypes.add(LABEL_SPAN);
-		listHeadings.add("Amount Charged");
-		listTypes.add(LABEL_SPAN);
-		listHeadings.add("Your Share");
-		listTypes.add(LABEL_SPAN);
-		listHeadings.add("Status");
-		listTypes.add(LABEL_SPAN);
-		listHeadings.add("Issue Date");
-		listTypes.add("/div");
-		listHeadings.add("Details");
-		listTypes.add(LABEL_SPAN);
-		listHeadings.add("Category");
-		listTypes.add("//select/option[@selected]");
-		listHeadings.add("Note");
-		listTypes.add("/span/a");
-	}
+  // ClaimsAndSpendingPage
+  // .//*[@id='ctl00_ContentLeft_DisplayGrid_AllClaimsGrid']
+  // Medical
+  // .//*[@id='ctl00_ContentLeft_DisplayGrid_MedClaimsGrid']
+  // Pharmacy
+  // .//*[@id='ctl00_ContentLeft_DisplayGrid_PharmClaimsGrid']
+  // ./tbody/tr/td/node()
+  // ./tbody/tr/td/span
+  // ./tbody/tr/td/div/span
+  // ./tbody/tr/td/b/span
+  // ./tbody/tr/td/select/option[@selected]
 
-	public void linkClaimsPerPageClick(int linksPerPage) throws QAException
-	{
-		// By linkClaimsPerPage =
-		// By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_aa100']")
-		By linkClaimsPerPage = By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_aa" + linksPerPage + "']");
-		clickObject(linkClaimsPerPage);
-	}
+  private void getHeadingInfo() throws QAException {
+    final String LABEL_SPAN = "//span";
+    listHeadings = new ArrayList<>();
+    listTypes = new ArrayList<>();
+    listHeadings.add("Patient Name");
+    listTypes.add(LABEL_SPAN);
+    listHeadings.add("Service Date");
+    listTypes.add(LABEL_SPAN);
+    listHeadings.add("Provider");
+    listTypes.add(LABEL_SPAN);
+    listHeadings.add("Amount Charged");
+    listTypes.add(LABEL_SPAN);
+    listHeadings.add("Your Share");
+    listTypes.add(LABEL_SPAN);
+    listHeadings.add("Status");
+    listTypes.add(LABEL_SPAN);
+    listHeadings.add("Issue Date");
+    listTypes.add("/div");
+    listHeadings.add("Details");
+    listTypes.add(LABEL_SPAN);
+    listHeadings.add("Category");
+    listTypes.add("//select/option[@selected]");
+    listHeadings.add("Note");
+    listTypes.add("/span/a");
+  }
 
-	public void linkMedicalAndPharmacyClick() throws QAException
-	{
-		clickObject(linkMedicalAndPharmacy);
-	}
+  public void linkClaimsPerPageClick(int linksPerPage) throws QAException {
+    // By linkClaimsPerPage =
+    // By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_aa100']")
+    By linkClaimsPerPage =
+        By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_aa" + linksPerPage + "']");
+    clickObject(linkClaimsPerPage);
+  }
 
-	public void linkMedicalClick() throws QAException
-	{
-		clickObject(linkMedical);
-	}
+  public void linkMedicalAndPharmacyClick() throws QAException {
+    clickObject(linkMedicalAndPharmacy);
+  }
 
-	public void linkPharmacyClick() throws QAException
-	{
-		clickObject(linkPharmacy);
-	}
+  public void linkMedicalClick() throws QAException {
+    clickObject(linkMedical);
+  }
 
-	public StringBuilder getRecords(String type) throws QAException
-	{
-		final String BY_XPATH = "By.xpath: ";
-		final StringBuilder stringBuilder = new StringBuilder();
-		StringBuilder sqlStringBuilder = new StringBuilder();
-		By byType = null;
-		waitPageLoaded();
-		switch (type)
-		{
-			case "Medical and Pharmacy":
-				byType = gridMedicalAndPharmacy;
-				linkMedicalAndPharmacyClick();
-				break;
-			case "Medical":
-				byType = gridMedical;
-				linkMedicalClick();
-				break;
-			case "Pharmacy":
-				byType = gridPharmacy;
-				linkPharmacyClick();
-				break;
-			default:
-				break;
-		}
-		waitPageLoaded();
-		linkClaimsPerPageClick(100);
-		waitPageLoaded();
-		sleep(1);
-		final List<String> headings = new ArrayList<>();
-		webDriver.findElements(byType);
-		final List<WebElement> headingElements = webDriver
-				.findElements(By.xpath(byType.toString().replace(BY_XPATH, "") + "/tr[" + 1 + "]/th/a"));
-		Environment.sysOut(headingElements.toString());
-		for (int indexHeading = 0; indexHeading < headingElements.size(); indexHeading++)
-		{
-			final WebElement element = headingElements.get(indexHeading);
-			Environment.sysOut(element.toString());
-			String value = element.getText();
-			value = value.replaceAll("Not sorted", "");
-			value = value.replaceAll(Constants.NL, "");
-			value = value.trim();
-			headings.add(value);
-			if (indexHeading != 0)
-			{
-				stringBuilder.append(",");
-			}
-			stringBuilder.append(value);
-		}
-		stringBuilder.append(Constants.NEWLINE);
-		Environment.sysOut(listHeadings);
-		Environment.sysOut(headings);
-		Assert.assertEquals("Headings " + type, listHeadings, headings);
-		String xPath = byType.toString().replace(BY_XPATH, "") + "/tr";
-		Environment.sysOut("xPath:" + xPath);
-		final List<WebElement> rowElements = webDriver.findElements(By.xpath(xPath));
-		for (int indexRecord = 2; indexRecord <= rowElements.size(); indexRecord++)
-		{
-			final Map<String, String> recordMap = getHeadingMap();
-			for (int index = 0; index < listHeadings.size(); index++)
-			{
-				final int indexField = index + 1;
-				// Environment.sysOut("xPath:" + xPath)
-				// Environment.sysOut(HEADINGS.get((index)).toString() +
-				// " xpath:[" + xPath + "]")
-				xPath = byType.toString().replace(BY_XPATH, "") + "/tr[" + indexRecord + "]/td[" + indexField + "]"
-						+ listTypes.get(index);
-				// Environment.sysOut("xPath:" + xPath)
-				final WebElement cell = webDriver.findElement(By.xpath(xPath));
-				// Environment.sysOut(cell.toString())
-				final String value = cell.getText().trim();
-				Environment.sysOut(listHeadings.get((index)) + ":[" + value + "]");
-				if (index != 0)
-				{
-					stringBuilder.append(",");
-				}
-				final String record = formatValue(value);
-				if (record.contains(",") || record.contains(Constants.QUOTE_DOUBLE + ""))
-				{
-					stringBuilder.append(Constants.QUOTE_DOUBLE + record + Constants.QUOTE_DOUBLE + "");
-				} else
-				{
-					stringBuilder.append(record);
-				}
-				recordMap.put(listHeadings.get(index), record);
-			}
-			stringBuilder.append(Constants.NEWLINE);
-			Environment.sysOut("recordMap:[" + recordMap.toString() + "]");
-			sqlStringBuilder = SQL.appendStringBuilderSQLInsertRecord("t_Wellmark", sqlStringBuilder, recordMap, true);
-		}
-		JDBC jdbc = new JDBC("", "QAAuto");
-		try
-		{
-			jdbc.executeUpdate(JDBCConstants.DELETE_FROM + "[t_Wellmark];", false);
-			jdbc.executeUpdate(sqlStringBuilder.toString(), false);
-		} catch (final Exception e)
-		{
-			Environment.sysOut(e);
-		}
-		return stringBuilder;
-	}
+  public void linkPharmacyClick() throws QAException {
+    clickObject(linkPharmacy);
+  }
 
-	private Map<String, String> getHeadingMap() throws QAException
-	{
-		final Map<String, String> headingMap = new HashMap<>();
-		for (final String heading : listHeadings)
-		{
-			headingMap.put(heading, "");
-		}
-		return headingMap;
-	}
+  public StringBuilder getRecords(String type) throws QAException {
+    final String BY_XPATH = "By.xpath: ";
+    final StringBuilder stringBuilder = new StringBuilder();
+    StringBuilder sqlStringBuilder = new StringBuilder();
+    By byType = null;
+    waitPageLoaded();
+    switch (type) {
+      case "Medical and Pharmacy":
+        byType = gridMedicalAndPharmacy;
+        linkMedicalAndPharmacyClick();
+        break;
+      case "Medical":
+        byType = gridMedical;
+        linkMedicalClick();
+        break;
+      case "Pharmacy":
+        byType = gridPharmacy;
+        linkPharmacyClick();
+        break;
+      default:
+        break;
+    }
+    waitPageLoaded();
+    linkClaimsPerPageClick(100);
+    waitPageLoaded();
+    sleep(1);
+    final List<String> headings = new ArrayList<>();
+    webDriver.findElements(byType);
+    final List<WebElement> headingElements =
+        webDriver.findElements(
+            By.xpath(byType.toString().replace(BY_XPATH, "") + "/tr[" + 1 + "]/th/a"));
+    Environment.sysOut(headingElements.toString());
+    for (int indexHeading = 0; indexHeading < headingElements.size(); indexHeading++) {
+      final WebElement element = headingElements.get(indexHeading);
+      Environment.sysOut(element.toString());
+      String value = element.getText();
+      value = value.replaceAll("Not sorted", "");
+      value = value.replaceAll(Constants.NL, "");
+      value = value.trim();
+      headings.add(value);
+      if (indexHeading != 0) {
+        stringBuilder.append(",");
+      }
+      stringBuilder.append(value);
+    }
+    stringBuilder.append(Constants.NEWLINE);
+    Environment.sysOut(listHeadings);
+    Environment.sysOut(headings);
+    Assert.assertEquals("Headings " + type, listHeadings, headings);
+    String xPath = byType.toString().replace(BY_XPATH, "") + "/tr";
+    Environment.sysOut("xPath:" + xPath);
+    final List<WebElement> rowElements = webDriver.findElements(By.xpath(xPath));
+    for (int indexRecord = 2; indexRecord <= rowElements.size(); indexRecord++) {
+      final Map<String, String> recordMap = getHeadingMap();
+      for (int index = 0; index < listHeadings.size(); index++) {
+        final int indexField = index + 1;
+        // Environment.sysOut("xPath:" + xPath)
+        // Environment.sysOut(HEADINGS.get((index)).toString() +
+        // " xpath:[" + xPath + "]")
+        xPath =
+            byType.toString().replace(BY_XPATH, "")
+                + "/tr["
+                + indexRecord
+                + "]/td["
+                + indexField
+                + "]"
+                + listTypes.get(index);
+        // Environment.sysOut("xPath:" + xPath)
+        final WebElement cell = webDriver.findElement(By.xpath(xPath));
+        // Environment.sysOut(cell.toString())
+        final String value = cell.getText().trim();
+        Environment.sysOut(listHeadings.get((index)) + ":[" + value + "]");
+        if (index != 0) {
+          stringBuilder.append(",");
+        }
+        final String record = formatValue(value);
+        if (record.contains(",") || record.contains(Constants.QUOTE_DOUBLE + "")) {
+          stringBuilder.append(Constants.QUOTE_DOUBLE + record + Constants.QUOTE_DOUBLE + "");
+        } else {
+          stringBuilder.append(record);
+        }
+        recordMap.put(listHeadings.get(index), record);
+      }
+      stringBuilder.append(Constants.NEWLINE);
+      Environment.sysOut("recordMap:[" + recordMap.toString() + "]");
+      sqlStringBuilder =
+          SQL.appendStringBuilderSQLInsertRecord("t_Wellmark", sqlStringBuilder, recordMap, true);
+    }
+    JDBC jdbc = new JDBC("", "QAAuto");
+    try {
+      jdbc.executeUpdate(JDBCConstants.DELETE_FROM + "[t_Wellmark];", false);
+      jdbc.executeUpdate(sqlStringBuilder.toString(), false);
+    } catch (final Exception e) {
+      Environment.sysOut(e);
+    }
+    return stringBuilder;
+  }
 
-	private String formatValue(String value) throws QAException
-	{
-		final List<String> replacees = Arrays.asList(Constants.NEWLINE, Constants.CR, Constants.NL, Constants.TAB,
-				"EOB");
-		String record = value;
-		for (final String replacee : replacees)
-		{
-			final String temp = record.replaceAll(replacee, "");
-			record = temp.trim();
-		}
-		return record;
-	}
+  private Map<String, String> getHeadingMap() throws QAException {
+    final Map<String, String> headingMap = new HashMap<>();
+    for (final String heading : listHeadings) {
+      headingMap.put(heading, "");
+    }
+    return headingMap;
+  }
 
-	public void getRecords() throws QAException
-	{
-		getHeadingInfo();
-		StringBuilder stringBuilder = getRecords("Medical and Pharmacy");
-		// stringBuilder = getRecords("Medical")
-		// stringBuilder = getRecords("Pharmacy")
-		// if (FSO.fileExists(Environment.FILE_CSV))
-		// {
-		// stringBuilder = sortRecords(stringBuilder)
-		final String fileName = Environment.FOLDER_DATA + "Wellmark" + IExtension.CSV;
-		FSO.fileWrite(fileName, stringBuilder.toString(), false);
-		// }
-	}
+  private String formatValue(String value) throws QAException {
+    final List<String> replacees =
+        Arrays.asList(Constants.NEWLINE, Constants.CR, Constants.NL, Constants.TAB, "EOB");
+    String record = value;
+    for (final String replacee : replacees) {
+      final String temp = record.replaceAll(replacee, "");
+      record = temp.trim();
+    }
+    return record;
+  }
 
-	private StringBuilder sortRecords(StringBuilder stringBuilder) throws QAException
-	{
-		// This sorts on the string value to the dates will not sort properly.
-		final String[] records = stringBuilder.toString().split(Constants.NEWLINE);
-		final String headings = records[0];
-		stringBuilder = new StringBuilder();
-		stringBuilder.append(headings);
-		List<String> list = new ArrayList<>();
-		for (int index = 1; index < records.length; index++)
-		{
-			list.add(records[index]);
-		}
-		Collections.sort(list);
-		for (int index = 0; index < list.size(); index++)
-		{
-			stringBuilder.append(Constants.NEWLINE);
-			stringBuilder.append(list.get(index));
-			// if (index < (arrayList.size() - 1))
-			// {
-			// stringBuilder.append(Constants.NEWLINE)
-			// }
-		}
-		return stringBuilder;
-	}
+  public void getRecords() throws QAException {
+    getHeadingInfo();
+    StringBuilder stringBuilder = getRecords("Medical and Pharmacy");
+    // stringBuilder = getRecords("Medical")
+    // stringBuilder = getRecords("Pharmacy")
+    // if (FSO.fileExists(Environment.FILE_CSV))
+    // {
+    // stringBuilder = sortRecords(stringBuilder)
+    final String fileName = Environment.FOLDER_DATA + "Wellmark" + IExtension.CSV;
+    FSO.fileWrite(fileName, stringBuilder.toString(), false);
+    // }
+  }
+
+  private StringBuilder sortRecords(StringBuilder stringBuilder) throws QAException {
+    // This sorts on the string value to the dates will not sort properly.
+    final String[] records = stringBuilder.toString().split(Constants.NEWLINE);
+    final String headings = records[0];
+    stringBuilder = new StringBuilder();
+    stringBuilder.append(headings);
+    List<String> list = new ArrayList<>();
+    for (int index = 1; index < records.length; index++) {
+      list.add(records[index]);
+    }
+    Collections.sort(list);
+    for (int index = 0; index < list.size(); index++) {
+      stringBuilder.append(Constants.NEWLINE);
+      stringBuilder.append(list.get(index));
+      // if (index < (arrayList.size() - 1))
+      // {
+      // stringBuilder.append(Constants.NEWLINE)
+      // }
+    }
+    return stringBuilder;
+  }
 }

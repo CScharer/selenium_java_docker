@@ -1,18 +1,17 @@
 package com.cjs.qa.utilities;
 
-public enum Log
-{
-	ALL(true), METHOD(true), MAIL(true);
+public enum Log {
+  ALL(true),
+  METHOD(true),
+  MAIL(true);
 
-	private boolean value;
+  private boolean value;
 
-	private Log(boolean value)
-	{
-		this.value = value;
-	}
+  private Log(boolean value) {
+    this.value = value;
+  }
 
-	public boolean getValue()
-	{
-		return value;
-	}
+  public boolean getValue() {
+    return value;
+  }
 }

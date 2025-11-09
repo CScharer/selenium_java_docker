@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+    "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+    "https://checkstyle.org/dtds/configuration_1_3.dtd">
+
+<!--
+  Custom Checkstyle configuration for CJS Selenium Framework
+  Based on Google Java Style but with pragmatic adjustments for existing code
+-->
+
+<module name="Checker">
+  <property name="charset" value="UTF-8"/>
+  <property name="severity" value="warning"/>
+  <property name="fileExtensions" value="java"/>
+
+  <!-- Excludes -->
+  <module name="BeforeExecutionExclusionFileFilter">
+    <property name="fileNamePattern" value="module\-info\.java$"/>
+  </module>
+
+  <module name="SuppressionFilter">
+    <property name="file" value="${config_loc}/checkstyle-suppressions.xml" default="checkstyle-suppressions.xml"/>
+    <property name="optional" value="true"/>
+  </module>
+
+  <!-- File Tab Character (No tabs, use spaces) -->
+  <module name="FileTabCharacter">
+    <property name="eachLine" value="true"/>
+  </module>
+
+  <!-- Line Length: Increase to 120 (more practical) -->
+  <module name="LineLength">
+    <property name="max" value="120"/>
+    <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
+  </module>
+
+  <module name="TreeWalker">
+    <!-- Indentation: Use 2-space indentation (Google Style, matches google-java-format) -->
+    <module name="Indentation">
+      <property name="basicOffset" value="2"/>
+      <property name="braceAdjustment" value="0"/>
+      <property name="caseIndent" value="2"/>
+      <property name="throwsIndent" value="4"/>
+      <property name="lineWrappingIndentation" value="4"/>
+      <property name="arrayInitIndent" value="2"/>
+    </module>
+
+    <!-- Javadoc: Very lenient for test code -->
+    <!-- Note: Disabled Javadoc checks for test code as they're self-documenting with annotations -->
+    <!--
+    <module name="MissingJavadocType">
+      <property name="scope" value="public"/>
+    </module>
+
+    <module name="MissingJavadocMethod">
+      <property name="scope" value="public"/>
+    </module>
+    -->
+
+    <!-- Naming Conventions: Basic checks only -->
+    <module name="TypeName"/>
+    <module name="PackageName"/>
+
+    <!-- Note: Removed strict naming checks to allow flexible naming patterns in legacy code -->
+
+    <!-- Imports: Warn on redundant imports only -->
+    <module name="RedundantImport"/>
+
+    <!-- Note: Removed AvoidStarImport and UnusedImports - common in legacy code -->
+
+    <!-- Whitespace -->
+    <module name="EmptyLineSeparator">
+      <property name="allowNoEmptyLineBetweenFields" value="true"/>
+      <property name="allowMultipleEmptyLines" value="false"/>
+    </module>
+
+    <module name="WhitespaceAround">
+      <property name="allowEmptyConstructors" value="true"/>
+      <property name="allowEmptyMethods" value="true"/>
+      <property name="allowEmptyTypes" value="true"/>
+      <property name="allowEmptyLoops" value="true"/>
+    </module>
+
+    <!-- Braces: Require braces but don't enforce placement style -->
+    <module name="NeedBraces">
+      <property name="allowSingleLineStatement" value="true"/>
+    </module>
+
+    <!-- Note: LeftCurly and RightCurly checks removed to allow flexible brace styles -->
+
+    <!-- Coding -->
+    <module name="EmptyStatement"/>
+    <module name="EqualsHashCode"/>
+    <module name="SimplifyBooleanExpression"/>
+    <module name="SimplifyBooleanReturn"/>
+
+    <!-- Design -->
+    <module name="OneTopLevelClass"/>
+
+  </module>
+</module>

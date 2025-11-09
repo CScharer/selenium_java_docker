@@ -1,35 +1,33 @@
 package com.cjs.qa.bts.pages;
 
+import com.cjs.qa.selenium.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.cjs.qa.selenium.Page;
+public class Sidebar extends Page {
+  public Sidebar(WebDriver webDriver) {
+    super(webDriver);
+  }
 
-public class Sidebar extends Page
-{
-	public Sidebar(WebDriver webDriver)
-	{
-		super(webDriver);
-	}
+  private final By sidebarLeft =
+      By.xpath(".//div[@class='ng-scope']//button[@data-sidebar='left']/i");
+  private final By sidebarRight =
+      By.xpath(".//div[@class='ng-scope']//button[@data-sidebar='right']/i");
 
-	private final By	sidebarLeft		= By.xpath(".//div[@class='ng-scope']//button[@data-sidebar='left']/i");
-	private final By	sidebarRight	= By.xpath(".//div[@class='ng-scope']//button[@data-sidebar='right']/i");
-	// private By sidebarRight = By.xpath(".//*[@id='outer-east-open-btn']");
+  // private By sidebarRight = By.xpath(".//*[@id='outer-east-open-btn']");
 
-	// METHODS SET
-	public void toggleSidebarLeft()
-	{
-		clickObject(sidebarLeft);
-		// getWebElement(sidebarLeft).click();
-		// getWebElement(By.xpath("html/body/div[1]")).sendKeys(Keys.CONTROL,
-		// Keys.ARROW_RIGHT);
-	}
+  // METHODS SET
+  public void toggleSidebarLeft() {
+    clickObject(sidebarLeft);
+    // getWebElement(sidebarLeft).click();
+    // getWebElement(By.xpath("html/body/div[1]")).sendKeys(Keys.CONTROL,
+    // Keys.ARROW_RIGHT);
+  }
 
-	public void toggleSidebarRight()
-	{
-		clickObject(sidebarRight);
-		// getWebElement(sidebarRight).click();
-		// getWebElement(By.xpath("html/body/div[1]")).sendKeys(Keys.CONTROL,
-		// Keys.ARROW_LEFT);
-	}
+  public void toggleSidebarRight() {
+    clickObject(sidebarRight);
+    // getWebElement(sidebarRight).click();
+    // getWebElement(By.xpath("html/body/div[1]")).sendKeys(Keys.CONTROL,
+    // Keys.ARROW_LEFT);
+  }
 }

@@ -1,154 +1,136 @@
 package com.cjs.qa.vivit.pages;
 
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.selenium.Page;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.FSO;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.vivit.VivitEnvironment;
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-public class SearchPage extends Page
-{
-	public SearchPage(WebDriver webDriver)
-	{
-		super(webDriver);
-	}
+public class SearchPage extends Page {
+  public SearchPage(WebDriver webDriver) {
+    super(webDriver);
+  }
 
-	final By linksGroups = By.xpath("//*[@id='CustomPageBody']//a[text()!='contact us today!']");
+  final By linksGroups = By.xpath("//*[@id='CustomPageBody']//a[text()!='contact us today!']");
 
-	public void searchSites()
-	{
-		try
-		{
-			StringBuilder stringBuilderCSV = new StringBuilder();
-			final String fileName = Environment.FOLDER_DATA + "searchVivitSites" + IExtension.CSV;
-			final String LIGS = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
-			final String SIGS = VivitEnvironment.URL_LOGIN + "?page=SIGS";
-			final By ligLinks = By.xpath(".//*[@id='CustomPageBody']//a[text()!='contact us today!']");
-			final By sigLinks = By.xpath(".//*[@id='CustomPageBody']//a[text()!='contact us today!']");
-			final By hrefLinks = By.xpath(".//*[@id='ctl00_PageContent_tdZone2']/table/tbody/tr/td/a");
-			// final List<String> urls =
-			// Arrays.asList("https://vivitworldwide.site-ym" + IExtension.COM +
-			// "/", "https://vivitworldwide.site-ym" + IExtension.COM +
-			// "/?page=board", "https://vivitworldwide.site-ym" + IExtension.COM
-			// + "/staff/", "https://vivitworldwide.site-ym" + IExtension.COM +
-			// "/?page=Volunteer", "https://c.ymcdn" + IExtension.COM +
-			// "/sites/www.vivit-worldwide.org/resource/resmgr/docs/2017_VivitMemberBrochure"
-			// + IExtension.PDF, "https://vivitworldwide.site-ym" +
-			// IExtension.COM + "/?page=HallofFame");
-			// for (final String url : urls) {
-			// VivitEnvironment.sysOut("Searching:[" + url + "]");
-			// webDriver.get(url);
-			// }
-			webDriver.get(LIGS);
-			sleep(1, 0);
-			List<WebElement> links = webDriver.findElements(ligLinks);
-			for (int index = 0; index < links.size(); index++)
-			{
-				final WebElement element = links.get(index);
-				final String url = element.getAttribute("href");
-				VivitEnvironment.sysOut("Clicking:[" + url + "]");
-				clickObject(element);
-				final List<WebElement> webElements = webDriver.findElements(hrefLinks);
-				for (WebElement webElement : webElements)
-				{
-					final String leaderName = webElement.getText();
-					final String href = webElement.getAttribute("href");
-					webElement = webElement.findElement(By.xpath("./../b"));
-					final String leaderType = webElement.getText();
-					Environment.sysOut("Leader Type:[" + leaderType + "]");
-					Environment.sysOut("Leader:[" + leaderName + "]");
-					Environment.sysOut("Href:[" + href + "]");
-				}
-				if (index < links.size())
-				{
-					webDriver.get(LIGS);
-					sleep(1, 0);
-					links = webDriver.findElements(ligLinks);
-				}
-			}
-			webDriver.get(SIGS);
-			sleep(1, 0);
-			links = webDriver.findElements(sigLinks);
-			for (int index = 0; index < links.size(); index++)
-			{
-				final WebElement element = links.get(index);
-				final String url = element.getAttribute("href");
-				VivitEnvironment.sysOut("Clicking:[" + url + "]");
-				clickObject(element);
-				final List<WebElement> webElements = webDriver.findElements(hrefLinks);
-				for (WebElement webElement : webElements)
-				{
-					final String leaderName = webElement.getText();
-					final String href = webElement.getAttribute("href");
-					webElement = webElement.findElement(By.xpath("./../b"));
-					final String leaderType = webElement.getText();
-					Environment.sysOut("Leader Type:[" + leaderType + "]");
-					Environment.sysOut("Leader:[" + leaderName + "]");
-					Environment.sysOut("Href:[" + href + "]");
-				}
-				if (index < links.size())
-				{
-					webDriver.get(SIGS);
-					sleep(1, 0);
-					webDriver.findElements(sigLinks);
-				}
-			}
-			FSO.fileWrite(fileName, stringBuilderCSV.toString(), false);
-			stringBuilderCSV = null;
-			// https://www.vivit-worldwide.org/?page=LocalUserGroups
-			// minimizeWindow();
-		} catch (final Exception e)
-		{
-			Environment.sysOut(e);
-		}
-	}
+  public void searchSites() {
+    try {
+      StringBuilder stringBuilderCSV = new StringBuilder();
+      final String fileName = Environment.FOLDER_DATA + "searchVivitSites" + IExtension.CSV;
+      final String LIGS = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
+      final String SIGS = VivitEnvironment.URL_LOGIN + "?page=SIGS";
+      final By ligLinks = By.xpath(".//*[@id='CustomPageBody']//a[text()!='contact us today!']");
+      final By sigLinks = By.xpath(".//*[@id='CustomPageBody']//a[text()!='contact us today!']");
+      final By hrefLinks = By.xpath(".//*[@id='ctl00_PageContent_tdZone2']/table/tbody/tr/td/a");
+      // final List<String> urls =
+      // Arrays.asList("https://vivitworldwide.site-ym" + IExtension.COM +
+      // "/", "https://vivitworldwide.site-ym" + IExtension.COM +
+      // "/?page=board", "https://vivitworldwide.site-ym" + IExtension.COM
+      // + "/staff/", "https://vivitworldwide.site-ym" + IExtension.COM +
+      // "/?page=Volunteer", "https://c.ymcdn" + IExtension.COM +
+      // "/sites/www.vivit-worldwide.org/resource/resmgr/docs/2017_VivitMemberBrochure"
+      // + IExtension.PDF, "https://vivitworldwide.site-ym" +
+      // IExtension.COM + "/?page=HallofFame");
+      // for (final String url : urls) {
+      // VivitEnvironment.sysOut("Searching:[" + url + "]");
+      // webDriver.get(url);
+      // }
+      webDriver.get(LIGS);
+      sleep(1, 0);
+      List<WebElement> links = webDriver.findElements(ligLinks);
+      for (int index = 0; index < links.size(); index++) {
+        final WebElement element = links.get(index);
+        final String url = element.getAttribute("href");
+        VivitEnvironment.sysOut("Clicking:[" + url + "]");
+        clickObject(element);
+        final List<WebElement> webElements = webDriver.findElements(hrefLinks);
+        for (WebElement webElement : webElements) {
+          final String leaderName = webElement.getText();
+          final String href = webElement.getAttribute("href");
+          webElement = webElement.findElement(By.xpath("./../b"));
+          final String leaderType = webElement.getText();
+          Environment.sysOut("Leader Type:[" + leaderType + "]");
+          Environment.sysOut("Leader:[" + leaderName + "]");
+          Environment.sysOut("Href:[" + href + "]");
+        }
+        if (index < links.size()) {
+          webDriver.get(LIGS);
+          sleep(1, 0);
+          links = webDriver.findElements(ligLinks);
+        }
+      }
+      webDriver.get(SIGS);
+      sleep(1, 0);
+      links = webDriver.findElements(sigLinks);
+      for (int index = 0; index < links.size(); index++) {
+        final WebElement element = links.get(index);
+        final String url = element.getAttribute("href");
+        VivitEnvironment.sysOut("Clicking:[" + url + "]");
+        clickObject(element);
+        final List<WebElement> webElements = webDriver.findElements(hrefLinks);
+        for (WebElement webElement : webElements) {
+          final String leaderName = webElement.getText();
+          final String href = webElement.getAttribute("href");
+          webElement = webElement.findElement(By.xpath("./../b"));
+          final String leaderType = webElement.getText();
+          Environment.sysOut("Leader Type:[" + leaderType + "]");
+          Environment.sysOut("Leader:[" + leaderName + "]");
+          Environment.sysOut("Href:[" + href + "]");
+        }
+        if (index < links.size()) {
+          webDriver.get(SIGS);
+          sleep(1, 0);
+          webDriver.findElements(sigLinks);
+        }
+      }
+      FSO.fileWrite(fileName, stringBuilderCSV.toString(), false);
+      stringBuilderCSV = null;
+      // https://www.vivit-worldwide.org/?page=LocalUserGroups
+      // minimizeWindow();
+    } catch (final Exception e) {
+      Environment.sysOut(e);
+    }
+  }
 
-	public void validateGroups()
-	{
-		validateGroup("LUGS");
-		validateGroup("SIGS");
-	}
+  public void validateGroups() {
+    validateGroup("LUGS");
+    validateGroup("SIGS");
+  }
 
-	public void validateGroup(String group)
-	{
-		// Default
-		final String GROUP = group.toUpperCase();
-		String url = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
-		switch (GROUP)
-		{
-			case "LUGS":
-				url = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
-				break;
-			case "SIGS":
-				url = VivitEnvironment.URL_LOGIN + "?page=SIGS";
-				break;
-		}
-		webDriver.get(url);
-		final List<WebElement> webElements = webDriver.findElements(linksGroups);
-		Environment.sysOut("Total " + GROUP + ":[" + webElements.size() + "]");
-		StringBuilder stringBuilder = new StringBuilder();
-		for (int index = 0; index < webElements.size(); index++)
-		{
-			final WebElement webElement = webElements.get(index);
-			highlightCurrentElement(webElement);
-			final String item = webElement.getText();
-			if (!item.trim().equals(""))
-			{
-				stringBuilder.append(item + Constants.NEWLINE);
-				Environment.sysOut(index + ":[" + item + "]");
-			}
-		}
-		final String fileData = Environment.FOLDER_DATA + group + "-List" + IExtension.TXT;
-		String expected = FSO.fileReadAll(fileData);
-		expected = expected.replace("CÃ´te d'Ivoire", "Côte d'Ivoire");
-		final String actual = stringBuilder.toString();
-		Environment.softAssert.assertEquals(expected, actual, group);
-	}
+  public void validateGroup(String group) {
+    // Default
+    final String GROUP = group.toUpperCase();
+    String url = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
+    switch (GROUP) {
+      case "LUGS":
+        url = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
+        break;
+      case "SIGS":
+        url = VivitEnvironment.URL_LOGIN + "?page=SIGS";
+        break;
+    }
+    webDriver.get(url);
+    final List<WebElement> webElements = webDriver.findElements(linksGroups);
+    Environment.sysOut("Total " + GROUP + ":[" + webElements.size() + "]");
+    StringBuilder stringBuilder = new StringBuilder();
+    for (int index = 0; index < webElements.size(); index++) {
+      final WebElement webElement = webElements.get(index);
+      highlightCurrentElement(webElement);
+      final String item = webElement.getText();
+      if (!item.trim().equals("")) {
+        stringBuilder.append(item + Constants.NEWLINE);
+        Environment.sysOut(index + ":[" + item + "]");
+      }
+    }
+    final String fileData = Environment.FOLDER_DATA + group + "-List" + IExtension.TXT;
+    String expected = FSO.fileReadAll(fileData);
+    expected = expected.replace("CÃ´te d'Ivoire", "Côte d'Ivoire");
+    final String actual = stringBuilder.toString();
+    Environment.softAssert.assertEquals(expected, actual, group);
+  }
 }

@@ -1,67 +1,54 @@
 package com.cjs.qa.utilities;
 
-public class Parameter
-{
-	// List<Parameter> parameterList = null;
-	private int		index	= -1;
-	private String	name	= null;
-	private String	type	= null;
-	private Object	value	= null;
+public class Parameter {
+  // List<Parameter> parameterList = null;
+  private int index = -1;
+  private String name = null;
+  private String type = null;
+  private Object value = null;
 
-	public Parameter()
-	{
-	}
+  public Parameter() {}
 
-	public Parameter(Integer index, String name, String type, Object value)
-	{
-		this.index = index;
-		this.name = name;
-		this.type = type;
-		this.value = value;
-	}
+  public Parameter(Integer index, String name, String type, Object value) {
+    this.index = index;
+    this.name = name;
+    this.type = type;
+    this.value = value;
+  }
 
-	public Integer getIndex()
-	{
-		return index;
-	}
+  public Integer getIndex() {
+    return index;
+  }
 
-	public String getName()
-	{
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public String getType()
-	{
-		return type;
-	}
+  public String getType() {
+    return type;
+  }
 
-	public Object getValue()
-	{
-		return value;
-	}
+  public Object getValue() {
+    return value;
+  }
 
-	public void setIndex(int index)
-	{
-		this.index = index;
-	}
+  public void setIndex(int index) {
+    this.index = index;
+  }
 
-	public void setIndex(Integer index)
-	{
-		this.index = index;
-	}
+  public void setIndex(Integer index) {
+    this.index = index;
+  }
 
-	public void setName(String name)
-	{
-		this.name = name;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public void setType(String type)
-	{
-		this.type = type;
-	}
+  public void setType(String type) {
+    this.type = type;
+  }
 
-	public void setValue(Object value)
-	{
-		this.value = value;
-	}
+  public void setValue(Object value) {
+    this.value = value;
+  }
 }

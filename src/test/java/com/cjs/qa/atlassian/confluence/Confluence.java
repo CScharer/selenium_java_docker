@@ -2,22 +2,17 @@ package com.cjs.qa.atlassian.confluence;
 
 import com.cjs.qa.atlassian.Atlassian;
 
-public class Confluence
-{
+public class Confluence {
 
-	private String url = "confluence" + Atlassian.getDomain();
+  private String url = "confluence" + Atlassian.getDomain();
 
-	public Confluence()
-	{
-	}
+  public Confluence() {}
 
-	public String getUrl()
-	{
-		return url;
-	}
+  public String getUrl() {
+    return url;
+  }
 
-	public void setUrl(String url)
-	{
-		this.url = url;
-	}
+  public void setUrl(String url) {
+    this.url = url;
+  }
 }
