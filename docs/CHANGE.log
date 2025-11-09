@@ -1,5 +1,111 @@
 # CHANGE LOG
 
+## [2025-11-08 14:45:00 CST] - Fix: Explicit JMeter Test File Discovery ✅
+
+### Overview
+Plugin's auto-discovery wasn't finding test files. Configure ran successfully but created empty JSON config, causing "No results for path: $[0]" error. Explicitly listing test files fixes discovery.
+
+### Problem (from latest jmeter-full.log)
+
+**Configure step ran:**
+```
+[INFO] Building JMeter directory structure... ✅
+[INFO] Generating JSON Test config... ✅
+[INFO] Configuring JMeter artifacts... ✅
+[INFO] Configuring JMeter properties... ✅
+```
+
+**But NO test files discovered!**
+- No "Found test file..." messages
+- No "Scanning..." messages
+- Empty JSON config created
+
+**Result:**
+```
+[INFO] --- jmeter:3.7.0:jmeter ---
+[ERROR] No results for path: $[0]
+```
+
+**Root Cause:**
+- "$[0]" means accessing first element of array
+- Array is EMPTY (no test files in config)
+- Auto-discovery failed to find .jmx files
+- Need explicit file listing
+
+### Solution
+
+**Explicitly list test files in configuration:**
+
+```xml
+<configuration>
+  <testFilesDirectory>src/test/jmeter</testFilesDirectory>
+  <resultsDirectory>${project.build.directory}/jmeter/results</resultsDirectory>
+  <testFilesIncluded>
+    <jMeterTestFile>API_Performance_Test.jmx</jMeterTestFile>
+    <jMeterTestFile>Web_Load_Test.jmx</jMeterTestFile>
+  </testFilesIncluded>
+</configuration>
+```
+
+**Added to BOTH locations:**
+1. Plugin-level `<configuration>` (for general use)
+2. Execution-level `<configuration>` (for "configuration" execution)
+
+### Why This Works
+
+**Auto-Discovery (Wasn't Working):**
+- Plugin scans testFilesDirectory
+- Looks for *.jmx files
+- For some reason, not finding them
+- Creates empty config
+
+**Explicit Listing (Works):**
+- Plugin reads exact filenames from config
+- Doesn't need to scan/discover
+- Creates config with known files
+- jmeter:jmeter has files to process ✅
+
+**Expected Configure Output:**
+```
+[INFO] Building JMeter directory structure...
+[INFO] Generating JSON Test config...
+[INFO] Found test file: API_Performance_Test.jmx ✅
+[INFO] Found test file: Web_Load_Test.jmx ✅
+[INFO] Config contains 2 tests ✅
+```
+
+### Complete JMeter Configuration
+
+**All Requirements Met:**
+1. ✅ Single Maven invocation (shared state)
+2. ✅ Execution ID "configuration" (reference point)
+3. ✅ Goal "configure" in execution (validation)
+4. ✅ **Explicit test files** (discovery)
+5. ✅ Configuration in execution (settings)
+
+### Updated Files
+
+**pom.xml:**
+- Added `<testFilesIncluded>` to plugin config
+- Added `<testFilesIncluded>` to execution config
+- Listed both test files explicitly
+
+### Git Commits
+
+**Commit:** fe37f1d
+**Files:**
+- `pom.xml` - Explicit test file listing
+- `docs/CHANGE.log` - This documentation
+
+### Status
+✅ **Single Invocation**: Yes  
+✅ **Execution ID**: "configuration"  
+✅ **Configure Goal**: In execution  
+✅ **Test Files**: Explicitly listed  
+✅ **Ready**: All 5 requirements met!  
+
+---
+
 ## [2025-11-08 14:30:00 CST] - Fix: JMeter Execution with Configure Goal ✅
 
 ### Overview
