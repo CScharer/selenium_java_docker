@@ -5,12 +5,20 @@ import com.cjs.qa.iadhs.pages.SignInPage;
 import org.openqa.selenium.WebDriver;
 
 public class IaDhs {
-  public CasePaymentsPage CasePaymentsPage;
-  public SignInPage SignInPage;
+  private CasePaymentsPage casePaymentsPage;
+  private SignInPage signInPage;
+
+  public CasePaymentsPage getCasePaymentsPage() {
+    return casePaymentsPage;
+  }
+
+  public SignInPage getSignInPage() {
+    return signInPage;
+  }
 
   public IaDhs(WebDriver webDriver) {
-    CasePaymentsPage = new CasePaymentsPage(webDriver);
-    SignInPage = new SignInPage(webDriver);
+    casePaymentsPage = new CasePaymentsPage(webDriver);
+    signInPage = new SignInPage(webDriver);
     webDriver.manage().timeouts().pageLoadTimeout(java.time.Duration.ofSeconds(120));
   }
 }

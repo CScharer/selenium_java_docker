@@ -18,8 +18,12 @@ public class DropboxEnvironment extends Environment {
           + IExtension.XML;
   public static final String FILE_LOG = FOLDER_DATA + "Log_" + COMPANY + IExtension.LOG;
   public static final String URL_LOGIN = "https://www." + COMPANY + IExtension.COM + "/";
-  public final List<String> classExlusionList =
+  private final List<String> classExlusionList =
       JavaHelpers.getExclusions(this.getClass().getPackage().getName());
+
+  public List<String> getClassExlusionList() {
+    return classExlusionList;
+  }
 
   public DropboxEnvironment() { // Empty
   }

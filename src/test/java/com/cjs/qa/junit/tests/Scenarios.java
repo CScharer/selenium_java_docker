@@ -313,7 +313,7 @@ public class Scenarios {
   public void americanAirlines() throws Throwable {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
-    getAmericanAirlines().VacationabilityPage.populate();
+    getAmericanAirlines().getVacationabilityPage().populate();
   }
 
   public void captureImages() {
@@ -433,7 +433,7 @@ public class Scenarios {
       for (int index = 0; index < eMails.length; index++) {
         final String eMail = eMails[index];
         Environment.sysOut("eMail:[" + eMail + "]");
-        getDropbox().SignInPage.signInToVerifyActiveAccount(eMail);
+        getDropbox().getSignInPage().signInToVerifyActiveAccount(eMail);
       }
     }
   }
@@ -540,13 +540,13 @@ public class Scenarios {
   public void hardees() throws Throwable {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
-    getHardees().SurveyPage.populate();
+    getHardees().getSurveyPage().populate();
   }
 
   @Test
   public void iaDhs() throws Throwable {
-    getIadhs().SignInPage.signIn(CJSConstants.USERID_DHS, EPasswords.IADHS.getValue());
-    getIadhs().CasePaymentsPage.getPreviousPayments();
+    getIadhs().getSignInPage().signIn(CJSConstants.USERID_DHS, EPasswords.IADHS.getValue());
+    getIadhs().getCasePaymentsPage().getPreviousPayments();
   }
 
   @Test

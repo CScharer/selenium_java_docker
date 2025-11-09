@@ -16,39 +16,71 @@ public class SurveyPage extends Page {
   }
 
   private final String NODE_ROOT = ".//*[@id='surveyQuestions']";
-  final By editCN1 = By.xpath(".//*[@id='CN1']");
-  final By editCN2 = By.xpath(".//*[@id='CN2']");
-  final By editCN3 = By.xpath(".//*[@id='CN3']");
-  final By editCN4 = By.xpath(".//*[@id='CN4']");
-  final By editCN5 = By.xpath(".//*[@id='CN5']");
-  final By editCN6 = By.xpath(".//*[@id='CN6']");
-  final By buttonStart = By.xpath(".//*[@id='NextButton']");
-  final By buttonNext = buttonStart; // By.xpath(".//*[@id='NextButton']");
+  private final By editCN1 = By.xpath(".//*[@id='CN1']");
+  private final By editCN2 = By.xpath(".//*[@id='CN2']");
+  private final By editCN3 = By.xpath(".//*[@id='CN3']");
+  private final By editCN4 = By.xpath(".//*[@id='CN4']");
+  private final By editCN5 = By.xpath(".//*[@id='CN5']");
+  private final By editCN6 = By.xpath(".//*[@id='CN6']");
+  private final By buttonStart = By.xpath(".//*[@id='NextButton']");
+  private final By buttonNext = buttonStart; // By.xpath(".//*[@id='NextButton']");
   final By CheckboxAgree = By.xpath("");
   final By labelThankYou = By.xpath("");
 
+  private By getEditCN1() {
+    return editCN1;
+  }
+
+  private By getEditCN2() {
+    return editCN2;
+  }
+
+  private By getEditCN3() {
+    return editCN3;
+  }
+
+  private By getEditCN4() {
+    return editCN4;
+  }
+
+  private By getEditCN5() {
+    return editCN5;
+  }
+
+  private By getEditCN6() {
+    return editCN6;
+  }
+
+  private By getButtonStart() {
+    return buttonStart;
+  }
+
+  private By getButtonNext() {
+    return buttonNext;
+  }
+
   public void editCN1Set(String value) throws QAException {
-    setEdit(editCN1, value);
+    setEdit(getEditCN1(), value);
   }
 
   public void editCN2Set(String value) throws QAException {
-    setEdit(editCN2, value);
+    setEdit(getEditCN2(), value);
   }
 
   public void editCN3Set(String value) throws QAException {
-    setEdit(editCN3, value);
+    setEdit(getEditCN3(), value);
   }
 
   public void editCN4Set(String value) throws QAException {
-    setEdit(editCN4, value);
+    setEdit(getEditCN4(), value);
   }
 
   public void editCN5Set(String value) throws QAException {
-    setEdit(editCN5, value);
+    setEdit(getEditCN5(), value);
   }
 
   public void editCN6Set(String value) throws QAException {
-    setEdit(editCN6, value);
+    setEdit(getEditCN6(), value);
   }
 
   public void optionDidYouVisistTheMcDonaldsLocatedAtSelect(String value) throws QAException {
@@ -192,11 +224,11 @@ public class SurveyPage extends Page {
   }
 
   public void buttonStartClick() throws QAException {
-    clickObject(buttonStart);
+    clickObject(getButtonStart());
   }
 
   public void buttonNextClick() throws QAException {
-    clickObject(buttonNext);
+    clickObject(getButtonNext());
   }
 
   public void load() throws QAException {

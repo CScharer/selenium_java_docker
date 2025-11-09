@@ -4,10 +4,14 @@ import com.cjs.qa.americanairlines.pages.VacationabilityPage;
 import org.openqa.selenium.WebDriver;
 
 public class AmericanAirlines {
-  public VacationabilityPage VacationabilityPage;
+  private VacationabilityPage vacationabilityPage;
+
+  public VacationabilityPage getVacationabilityPage() {
+    return vacationabilityPage;
+  }
 
   public AmericanAirlines(WebDriver webDriver) {
-    VacationabilityPage = new VacationabilityPage(webDriver);
+    vacationabilityPage = new VacationabilityPage(webDriver);
     webDriver.manage().timeouts().pageLoadTimeout(java.time.Duration.ofSeconds(120));
   }
 }

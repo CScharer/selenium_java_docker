@@ -19,8 +19,12 @@ public class IaDhsEnvironment extends Environment {
   public static final String FILE_LOG = FOLDER_DATA + "Log_" + COMPANY + IExtension.LOG;
   public static final String URL_LOGIN =
       "https://secureapp.dhs.state.ia.us/customerweb/cases/807487/payments";
-  public final List<String> classExlusionList =
+  private final List<String> classExlusionList =
       JavaHelpers.getExclusions(this.getClass().getPackage().getName());
+
+  public List<String> getClassExlusionList() {
+    return classExlusionList;
+  }
 
   public IaDhsEnvironment() { // Empty
   }

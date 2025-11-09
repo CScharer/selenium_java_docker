@@ -23,14 +23,26 @@ public class CasePaymentsPage extends Page {
   // Headings
   // .//*[@id='content']/div/section/div/div[2]/div[2]/div/b
   // .//*[@id='content']//div/div[2]/div[2]//b
-  final By headingsBy = By.xpath(".//*[@id='content']//div/div[2]/div[2]//b");
+  private final By headingsBy = By.xpath(".//*[@id='content']//div/div[2]/div[2]//b");
   // Payments
   // .//*[@id='content']/div/section/div/div[2]/section/div[2]/div/a
   // .//*[@id='content']//div[2]/section/div[2]//a[1]
-  final By previousPaymentRecordsBy = By.xpath(".//*[@id='content']//div[2]/section/div");
-  final By lastPaymentBy = By.xpath(".//*[@id='content']//div[2]/section/div[2]//a[2]");
+  private final By previousPaymentRecordsBy = By.xpath(".//*[@id='content']//div[2]/section/div");
+  private final By lastPaymentBy = By.xpath(".//*[@id='content']//div[2]/section/div[2]//a[2]");
   private List<Payment> paymentList = new ArrayList<>();
   private Payment payment = new Payment();
+
+  private By getHeadingsBy() {
+    return headingsBy;
+  }
+
+  private By getPreviousPaymentRecordsBy() {
+    return previousPaymentRecordsBy;
+  }
+
+  private By getLastPaymentBy() {
+    return lastPaymentBy;
+  }
 
   protected List<Payment> getPaymentList() {
     return paymentList;
@@ -51,7 +63,7 @@ public class CasePaymentsPage extends Page {
   public void getLastPayment() throws Throwable {
     List<String> headingList = validateHeadingList();
     // Only get the most recent payment.
-    List<WebElement> lastPaymentWebElementList = webDriver.findElements(lastPaymentBy);
+    List<WebElement> lastPaymentWebElementList = webDriver.findElements(getLastPaymentBy());
     getRecordWebElementsPayment(headingList, lastPaymentWebElementList);
     getPayment().append(getPaymentList());
   }
@@ -60,7 +72,7 @@ public class CasePaymentsPage extends Page {
     final int RECORDS_CHECK_MAX = 3;
     List<String> headingList = validateHeadingList();
     List<WebElement> previousPaymentRecordsWebElementList =
-        webDriver.findElements(previousPaymentRecordsBy);
+        webDriver.findElements(getPreviousPaymentRecordsBy());
     int recordsCheck = (previousPaymentRecordsWebElementList.size() - 1);
     if (recordsCheck > RECORDS_CHECK_MAX) {
       recordsCheck = RECORDS_CHECK_MAX;
@@ -107,7 +119,7 @@ public class CasePaymentsPage extends Page {
     List<WebElement> headingWebElementList;
     do {
       JavaHelpers.sleep(3);
-      headingWebElementList = webDriver.findElements(headingsBy);
+      headingWebElementList = webDriver.findElements(getHeadingsBy());
       headingCount = headingWebElementList.size();
       Environment.sysOut("Heading Count:[" + headingCount + "]");
     } while (headingCount == 0);

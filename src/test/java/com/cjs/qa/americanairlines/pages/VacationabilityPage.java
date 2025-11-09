@@ -12,42 +12,82 @@ public class VacationabilityPage extends Page {
     super(webDriver);
   }
 
-  public int searches = 180;
-  final By labelLoading = By.xpath(".//*[@id='cphBody_divLoader']//div[@class='loader-text']");
-  final By editFirstName = By.xpath(".//*[@id='txtFirst']");
-  final By editLastName = By.xpath(".//*[@id='txtLast']");
-  final By editEmail = By.xpath(".//*[@id='txtEmail']");
-  final By editAANumber = By.xpath(".//*[@id='txtAANumber']");
-  final By CheckboxAgree = By.xpath(".//*[@id='divRegistration']//label[@for='chkAgree']/span");
-  final By buttonRegister = By.xpath(".//*[@id='btnRegister']");
-  final By labelThankYou =
+  private int searches = 180;
+  private final By labelLoading = By.xpath(".//*[@id='cphBody_divLoader']//div[@class='loader-text']");
+  private final By editFirstName = By.xpath(".//*[@id='txtFirst']");
+  private final By editLastName = By.xpath(".//*[@id='txtLast']");
+  private final By editEmail = By.xpath(".//*[@id='txtEmail']");
+  private final By editAANumber = By.xpath(".//*[@id='txtAANumber']");
+  private final By checkboxAgree = By.xpath(".//*[@id='divRegistration']//label[@for='chkAgree']/span");
+  private final By buttonRegister = By.xpath(".//*[@id='btnRegister']");
+  private final By labelThankYou =
       By.xpath(".//*[@id='cphBody_divStaticPage']//div[@class='box-title-copy']");
 
+  private int getSearches() {
+    return searches;
+  }
+
+  private void setSearches(int searches) {
+    this.searches = searches;
+  }
+
+  private By getLabelLoading() {
+    return labelLoading;
+  }
+
+  private By getEditFirstName() {
+    return editFirstName;
+  }
+
+  private By getEditLastName() {
+    return editLastName;
+  }
+
+  private By getEditEmail() {
+    return editEmail;
+  }
+
+  private By getEditAANumber() {
+    return editAANumber;
+  }
+
+  private By getCheckboxAgree() {
+    return checkboxAgree;
+  }
+
+  private By getButtonRegister() {
+    return buttonRegister;
+  }
+
+  private By getLabelThankYou() {
+    return labelThankYou;
+  }
+
   public void editFirstNameSet(String value) throws QAException {
-    setEdit(editFirstName, value);
+    setEdit(getEditFirstName(), value);
   }
 
   public void editLastNameSet(String value) throws QAException {
-    setEdit(editLastName, value);
+    setEdit(getEditLastName(), value);
   }
 
   public void editEmailSet(String value) throws QAException {
-    setEdit(editEmail, value);
+    setEdit(getEditEmail(), value);
   }
 
   public void editAANumberSet(String value) throws QAException {
-    setEdit(editAANumber, value);
+    setEdit(getEditAANumber(), value);
   }
 
   public void CheckboxAgreeSet(String value) throws QAException {
-    setCheckbox(CheckboxAgree, value);
+    setCheckbox(getCheckboxAgree(), value);
   }
 
   public void buttonRegisterClick() throws QAException {
-    clickObject(buttonRegister);
-    waitExists(labelThankYou);
-    searches++;
-    Environment.sysOut("Registered:[" + searches + "] times.");
+    clickObject(getButtonRegister());
+    waitExists(getLabelThankYou());
+    setSearches(getSearches() + 1);
+    Environment.sysOut("Registered:[" + getSearches() + "] times.");
   }
 
   public void load() throws QAException {
@@ -57,7 +97,7 @@ public class VacationabilityPage extends Page {
     int waits = 0;
     do {
       waits++;
-    } while (objectExists(labelLoading));
+    } while (objectExists(getLabelLoading()));
     Environment.sysOut("Waited For Load:[" + waits + "] times.");
   }
 

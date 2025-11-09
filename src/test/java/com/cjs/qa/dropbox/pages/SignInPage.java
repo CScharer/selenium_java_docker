@@ -14,73 +14,105 @@ public class SignInPage extends Page {
     super(webDriver);
   }
 
-  By checkboxRememberMeInput = By.xpath(".//*[@name='remember_me']");
-  final By checkboxRememberMe = By.xpath(".//*[@name='remember_me']/..");
-  final By editEmail = By.xpath(".//*[@name='login_email']");
-  final By editPassword = By.xpath(".//*[@name='login_password']");
-  final By buttonNext = By.xpath(".//input[@value='Next']");
-  final By buttonSignIn = By.xpath(".//button[@id='sign-up-in']");
-  final By buttonSignInRegular =
+  private By checkboxRememberMeInput = By.xpath(".//*[@name='remember_me']");
+  private final By checkboxRememberMe = By.xpath(".//*[@name='remember_me']/..");
+  private final By editEmail = By.xpath(".//*[@name='login_email']");
+  private final By editPassword = By.xpath(".//*[@name='login_password']");
+  private final By buttonNext = By.xpath(".//input[@value='Next']");
+  private final By buttonSignIn = By.xpath(".//button[@id='sign-up-in']");
+  private final By buttonSignInRegular =
       By.xpath(".//button[contains(@class,'signin-button')][@type='submit']");
-  final By buttonSignInWithGoogle =
+  private final By buttonSignInWithGoogle =
       By.xpath(".//button[contains(@class,'auth-google')][@type='button']");
 
+  private By getCheckboxRememberMeInput() {
+    return checkboxRememberMeInput;
+  }
+
+  private By getCheckboxRememberMe() {
+    return checkboxRememberMe;
+  }
+
+  private By getEditEmail() {
+    return editEmail;
+  }
+
+  private By getEditPassword() {
+    return editPassword;
+  }
+
+  private By getButtonNext() {
+    return buttonNext;
+  }
+
+  private By getButtonSignIn() {
+    return buttonSignIn;
+  }
+
+  private By getButtonSignInRegular() {
+    return buttonSignInRegular;
+  }
+
+  private By getButtonSignInWithGoogle() {
+    return buttonSignInWithGoogle;
+  }
+
   public void buttonNextClick() throws QAException {
-    if (objectExists(buttonNext)) {
-      clickObject(buttonNext);
+    if (objectExists(getButtonNext())) {
+      clickObject(getButtonNext());
     }
   }
 
   public void buttonSignInClick() throws QAException {
-    if (objectExists(buttonSignIn)) {
-      clickObject(buttonSignIn);
+    if (objectExists(getButtonSignIn())) {
+      clickObject(getButtonSignIn());
     }
   }
 
   public void buttonSignInRegularClick() throws QAException {
-    if (objectExists(buttonSignInRegular)) {
-      clickObject(buttonSignInRegular);
+    if (objectExists(getButtonSignInRegular())) {
+      clickObject(getButtonSignInRegular());
     }
   }
 
   public void buttonSignInWithGoogleClick() throws QAException {
-    if (objectExists(buttonSignInWithGoogle)) {
-      clickObject(buttonSignInWithGoogle);
+    if (objectExists(getButtonSignInWithGoogle())) {
+      clickObject(getButtonSignInWithGoogle());
     }
   }
 
   public void CheckboxRememberMeSet(String value) throws QAException {
-    if (objectExists(checkboxRememberMe)) {
-      setCheckbox(checkboxRememberMeInput, value);
+    if (objectExists(getCheckboxRememberMe())) {
+      setCheckbox(getCheckboxRememberMeInput(), value);
     }
   }
 
   @Override
   protected void setCheckbox(By by, String value) {
     if (Environment.isLogAll()) {
-      Environment.sysOut("({Field}" + checkboxRememberMe.toString() + ", {Value}" + value + ");");
+      Environment.sysOut("({Field}" + getCheckboxRememberMe().toString() + ", {Value}" + value + ");");
     }
     switch (value.toLowerCase()) {
       case "checked":
-        if (getCheckbox(checkboxRememberMeInput) != value) {
-          getWebDriver().findElement(checkboxRememberMe).click();
+        if (getCheckbox(getCheckboxRememberMeInput()) != value) {
+          getWebDriver().findElement(getCheckboxRememberMe()).click();
         }
         break;
       case "unchecked":
-        if (getCheckbox(checkboxRememberMeInput) != value) {
-          getWebDriver().findElement(checkboxRememberMe).click();
+        if (getCheckbox(getCheckboxRememberMeInput()) != value) {
+          getWebDriver().findElement(getCheckboxRememberMe()).click();
         }
         break;
       default:
         Environment.sysOut("The value [" + value + "] is not supported for a Checkbox.");
         break;
     }
-    if (getCheckbox(checkboxRememberMeInput) != value) {
+    if (getCheckbox(getCheckboxRememberMeInput()) != value) {
       Environment.sysOut(
           "The value ["
               + value
               + "] was not selected for Checkbox ["
-              + checkboxRememberMe.toString()
+              + getCheckboxRememberMe().toString()
               + "].");
     }
   }
@@ -101,14 +133,14 @@ public class SignInPage extends Page {
   }
 
   public void editEmailSet(String value) throws QAException {
-    if (objectExists(editEmail)) {
-      setEdit(editEmail, value);
+    if (objectExists(getEditEmail())) {
+      setEdit(getEditEmail(), value);
     }
   }
 
   public void editPasswordSet(String value) throws QAException {
-    if (objectExists(editPassword)) {
-      setEdit(editPassword, value);
+    if (objectExists(getEditPassword())) {
+      setEdit(getEditPassword(), value);
     }
   }
 

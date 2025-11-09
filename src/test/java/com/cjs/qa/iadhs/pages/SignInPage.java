@@ -12,20 +12,32 @@ public class SignInPage extends Page {
     super(webDriver);
   }
 
-  final By editUserName = By.xpath(".//*[@id='userId']");
-  final By editPassword = By.xpath(".//*[@id='xyz']");
-  final By buttonSignIn = By.xpath(".//*[@id='signInBtn']");
+  private final By editUserName = By.xpath(".//*[@id='userId']");
+  private final By editPassword = By.xpath(".//*[@id='xyz']");
+  private final By buttonSignIn = By.xpath(".//*[@id='signInBtn']");
+
+  private By getEditUserName() {
+    return editUserName;
+  }
+
+  private By getEditPassword() {
+    return editPassword;
+  }
+
+  private By getButtonSignIn() {
+    return buttonSignIn;
+  }
 
   public void buttonSignInClick() throws QAException {
-    clickObject(buttonSignIn);
+    clickObject(getButtonSignIn());
   }
 
   public void editUserNameSet(String value) throws QAException {
-    setEdit(editUserName, value);
+    setEdit(getEditUserName(), value);
   }
 
   public void editPasswordSet(String value) throws QAException {
-    setEditPassword(editPassword, value);
+    setEditPassword(getEditPassword(), value);
   }
 
   public void load() throws QAException {
@@ -37,7 +49,7 @@ public class SignInPage extends Page {
   public void signIn(String userName, String password) throws QAException {
     do {
       load();
-    } while (!objectExists(editUserName, 1));
+    } while (!objectExists(getEditUserName(), 1));
     editUserNameSet(userName);
     editPasswordSet(password);
     buttonSignInClick();
