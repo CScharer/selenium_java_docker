@@ -13,14 +13,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class HomePage extends Page {
-  final By byLogo = By.xpath(".//*[@id='logo']/img");
-  final By CheckboxRememberMe = By.xpath(".//*[@id='rememberme']");
-  final By buttonSignIn =
+  private final By byLogo = By.xpath(".//*[@id='logo']/img");
+  private final By CheckboxRememberMe = By.xpath(".//*[@id='rememberme']");
+  private final By buttonSignIn =
       By.xpath(".//*[@id='ctl00_PageContent_MainLogin']//input[@value='Sign In']");
-  final By buttonSignOut = By.xpath(".//*[@id='itoolbar']/a[.='Sign Out']");
-  final By editEmail = By.xpath(".//*[@id='u']");
-  final By editPassword = By.xpath(".//*[@id='p']");
-  final By linkSignIn = By.xpath(".//*[@id='itoolbar']/a[.='Sign In']");
+  private final By buttonSignOut = By.xpath(".//*[@id='itoolbar']/a[.='Sign Out']");
+  private final By editEmail = By.xpath(".//*[@id='u']");
+  private final By editPassword = By.xpath(".//*[@id='p']");
+  private final By linkSignIn = By.xpath(".//*[@id='itoolbar']/a[.='Sign In']");
 
   public HomePage(WebDriver webDriver) {
     super(webDriver);

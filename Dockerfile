@@ -27,6 +27,7 @@ COPY XML ./XML
 
 # Copy configuration files
 COPY log4j.properties log4j.xml ./
+COPY checkstyle-custom.xml checkstyle-suppressions.xml ./
 
 # Build the project (skip tests in build stage)
 RUN ./mvnw clean package -DskipTests

@@ -13,11 +13,11 @@ public class MemberAccountUpdatePage extends Page {
   }
 
   final String NODE_LABEL = "/*[@id='divContactInfo']/section";
-  final By labelAddress = By.xpath("./" + NODE_LABEL + "/h3[.='Address']/../div");
-  final By labelEmailAddress = By.xpath("./" + NODE_LABEL + "/h3[.='Email address']/../div");
-  final By labelPhoneNumber = By.xpath("./" + NODE_LABEL + "/h3[.='Phone number']/../div");
-  final By buttonAcceptAndSubmit = By.xpath(".//*[@id='btnAccept']");
-  final By buttonAcceptAndUpdateLater = By.xpath(".//*[@id='btnUpdateLater']");
+  private final By labelAddress = By.xpath("./" + NODE_LABEL + "/h3[.='Address']/../div");
+  private final By labelEmailAddress = By.xpath("./" + NODE_LABEL + "/h3[.='Email address']/../div");
+  private final By labelPhoneNumber = By.xpath("./" + NODE_LABEL + "/h3[.='Phone number']/../div");
+  private final By buttonAcceptAndSubmit = By.xpath(".//*[@id='btnAccept']");
+  private final By buttonAcceptAndUpdateLater = By.xpath(".//*[@id='btnUpdateLater']");
 
   public String getLabelAddress() throws QAException {
     return getLabel(labelAddress);

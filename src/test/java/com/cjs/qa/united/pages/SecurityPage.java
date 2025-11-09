@@ -21,9 +21,9 @@ public class SecurityPage extends Page {
     super(webDriver);
   }
 
-  final By optionDontRememberThisDevice =
+  private final By optionDontRememberThisDevice =
       By.xpath(".//*[@id='authQuestionsForm']/div/div/label[@for='IsRememberDevice_False']");
-  final By buttonNext = By.xpath(".//*[@id='btnNext']");
+  private final By buttonNext = By.xpath(".//*[@id='btnNext']");
 
   public void buttonNextClick() throws QAException {
     clickObject(buttonNext);

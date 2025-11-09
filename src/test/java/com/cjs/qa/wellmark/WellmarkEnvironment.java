@@ -26,9 +26,13 @@ public class WellmarkEnvironment extends Environment {
           + "SingleSignOn/My"
           + COMPANY
           + "MemberPortal/";
-  public final List<String> classExlusionList =
+  private final List<String> classExlusionList =
       JavaHelpers.getExclusions(this.getClass().getPackage().getName());
 
   public WellmarkEnvironment() { // Empty
+  }
+
+  public List<String> getClassExlusionList() {
+    return classExlusionList;
   }
 }

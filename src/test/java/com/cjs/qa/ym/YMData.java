@@ -1105,7 +1105,7 @@ public class YMData extends Environment {
             headingsCSVMap = record.toMap();
             final List<String> headingsCSVList = Convert.fromKeySetToList(headingsCSVMap.keySet());
             headingsExpectedList = new ArrayList(headingsExpectedList);
-            headingsExpectedList.removeAll(VivitData.DATABASE_ONLY_FIELDS);
+            headingsExpectedList.removeAll(VivitData.getDatabaseOnlyFields());
             headingsExpectedList.sort(null);
             headingsCSVList.sort(null);
             sysOut("headingsCSVList:[" + headingsCSVList + "]");
@@ -1150,7 +1150,7 @@ public class YMData extends Environment {
           mapMember.put(VivitData.LABEL_WEB_SITE_MEMBER_ID, web_Site_Member_ID);
           for (final String field : headingsExpectedList) {
             try {
-              if (!VivitData.DATABASE_ONLY_FIELDS.contains(field)
+              if (!VivitData.getDatabaseOnlyFields().contains(field)
                   && !headingsExpectedMissingList.contains(field)) {
                 mapMember.put(field, record.get(field));
               }

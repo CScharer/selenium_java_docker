@@ -16,7 +16,7 @@ public class SearchPage extends Page {
     super(webDriver);
   }
 
-  final By linksGroups = By.xpath("//*[@id='CustomPageBody']//a[text()!='contact us today!']");
+  private final By linksGroups = By.xpath("//*[@id='CustomPageBody']//a[text()!='contact us today!']");
 
   public void searchSites() {
     try {

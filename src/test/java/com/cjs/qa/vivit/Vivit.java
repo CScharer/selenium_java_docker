@@ -12,26 +12,62 @@ import com.cjs.qa.vivit.pages.StaffPage;
 import org.openqa.selenium.WebDriver;
 
 public class Vivit {
-  public BlogsPage BlogsPage;
-  public BoDPage BoDPage;
-  public CalendarsPage CalendarsPage;
-  public ForumsPage ForumsPage;
-  public GroupPage GroupPage;
-  public HomePage HomePage;
-  public MyMemberProfilePage MyMemberProfilePage;
-  public SearchPage SearchPage;
-  public StaffPage StaffPage;
+  private BlogsPage blogsPage;
+  private BoDPage bodPage;
+  private CalendarsPage calendarsPage;
+  private ForumsPage forumsPage;
+  private GroupPage groupPage;
+  private HomePage homePage;
+  private MyMemberProfilePage myMemberProfilePage;
+  private SearchPage searchPage;
+  private StaffPage staffPage;
 
   public Vivit(WebDriver webDriver) {
-    BlogsPage = new BlogsPage(webDriver);
-    BoDPage = new BoDPage(webDriver);
-    CalendarsPage = new CalendarsPage(webDriver);
-    ForumsPage = new com.cjs.qa.vivit.pages.ForumsPage(webDriver);
-    GroupPage = new GroupPage(webDriver);
-    HomePage = new HomePage(webDriver);
-    MyMemberProfilePage = new MyMemberProfilePage(webDriver);
-    SearchPage = new SearchPage(webDriver);
-    StaffPage = new StaffPage(webDriver);
+    blogsPage = new BlogsPage(webDriver);
+    bodPage = new BoDPage(webDriver);
+    calendarsPage = new CalendarsPage(webDriver);
+    forumsPage = new com.cjs.qa.vivit.pages.ForumsPage(webDriver);
+    groupPage = new GroupPage(webDriver);
+    homePage = new HomePage(webDriver);
+    myMemberProfilePage = new MyMemberProfilePage(webDriver);
+    searchPage = new SearchPage(webDriver);
+    staffPage = new StaffPage(webDriver);
     webDriver.manage().timeouts().pageLoadTimeout(java.time.Duration.ofSeconds(120));
+  }
+
+  public BlogsPage getBlogsPage() {
+    return blogsPage;
+  }
+
+  public BoDPage getBodPage() {
+    return bodPage;
+  }
+
+  public CalendarsPage getCalendarsPage() {
+    return calendarsPage;
+  }
+
+  public ForumsPage getForumsPage() {
+    return forumsPage;
+  }
+
+  public GroupPage getGroupPage() {
+    return groupPage;
+  }
+
+  public HomePage getHomePage() {
+    return homePage;
+  }
+
+  public MyMemberProfilePage getMyMemberProfilePage() {
+    return myMemberProfilePage;
+  }
+
+  public SearchPage getSearchPage() {
+    return searchPage;
+  }
+
+  public StaffPage getStaffPage() {
+    return staffPage;
   }
 }

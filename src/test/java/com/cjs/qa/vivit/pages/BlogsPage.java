@@ -20,7 +20,7 @@ public class BlogsPage extends Page {
   }
 
   public String BLOGS_URL_COMMUNITY = "https://www.vivit-worldwide.org/members/blogs.asp";
-  final By byTableBlogs = By.xpath(".//*[@id='SpContent_Container']/form/table/tbody/tr");
+  private final By byTableBlogs = By.xpath(".//*[@id='SpContent_Container']/form/table/tbody/tr");
 
   public void getBlogData() throws Throwable {
     Environment.sysOut(

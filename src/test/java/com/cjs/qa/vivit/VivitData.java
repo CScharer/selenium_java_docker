@@ -91,8 +91,12 @@ public class VivitData extends Environment {
           + "["
           + VivitViews.VIVIT_CONTRACTORS_BILLABLE_HOURS
           + "]";
-  public static final List<String> DATABASE_ONLY_FIELDS =
+  private static final List<String> DATABASE_ONLY_FIELDS =
       Arrays.asList(LABEL_RECORD_COMPLETE, LABEL_RECORD_NUMBER);
+
+  public static List<String> getDatabaseOnlyFields() {
+    return DATABASE_ONLY_FIELDS;
+  }
 
   @Test
   public void temporaryTest() {
@@ -2846,7 +2850,7 @@ public class VivitData extends Environment {
   public static void initializeTest(Vivit vivit) throws Throwable {
     sysOut(Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     sysOut(ParameterHelper.getParameters(Arrays.asList(Arrays.asList(vivit, "vivit"))));
-    final String logoSource = vivit.HomePage.getLogoSource();
+    final String logoSource = vivit.getHomePage().getLogoSource();
     setLogoSource(logoSource);
     checkStatus(LABEL_INITIALIZE_STATUS);
   }

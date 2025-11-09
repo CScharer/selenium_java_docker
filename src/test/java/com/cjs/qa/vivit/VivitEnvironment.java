@@ -21,9 +21,13 @@ public class VivitEnvironment extends Environment {
           + IExtension.XML;
   public static final String FILE_LOG = FOLDER_DATA + "Log_" + COMPANY + IExtension.LOG;
   public static final String URL_LOGIN = "https://www." + COMPANY + "-worldwide.org/";
-  public final List<String> classExlusionList =
+  private final List<String> classExlusionList =
       JavaHelpers.getExclusions(this.getClass().getPackage().getName());
 
   public VivitEnvironment() { // Empty
+  }
+
+  public List<String> getClassExlusionList() {
+    return classExlusionList;
   }
 }

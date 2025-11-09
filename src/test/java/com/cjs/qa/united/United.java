@@ -8,18 +8,38 @@ import com.cjs.qa.united.pages.SecurityPage;
 import org.openqa.selenium.WebDriver;
 
 public class United {
-  public BookTravelPage BookTravelPage;
-  public HomePage HomePage;
-  public LoginPage LoginPage;
-  public MemberAccountUpdatePage MemberAccountUpdatePage;
-  public SecurityPage SecurityPage;
+  private BookTravelPage bookTravelPage;
+  private HomePage homePage;
+  private LoginPage loginPage;
+  private MemberAccountUpdatePage memberAccountUpdatePage;
+  private SecurityPage securityPage;
 
   public United(WebDriver webDriver) {
-    BookTravelPage = new BookTravelPage(webDriver);
-    HomePage = new HomePage(webDriver);
-    LoginPage = new LoginPage(webDriver);
-    MemberAccountUpdatePage = new MemberAccountUpdatePage(webDriver);
-    SecurityPage = new SecurityPage(webDriver);
+    bookTravelPage = new BookTravelPage(webDriver);
+    homePage = new HomePage(webDriver);
+    loginPage = new LoginPage(webDriver);
+    memberAccountUpdatePage = new MemberAccountUpdatePage(webDriver);
+    securityPage = new SecurityPage(webDriver);
     webDriver.manage().timeouts().pageLoadTimeout(java.time.Duration.ofSeconds(120));
+  }
+
+  public BookTravelPage getBookTravelPage() {
+    return bookTravelPage;
+  }
+
+  public HomePage getHomePage() {
+    return homePage;
+  }
+
+  public LoginPage getLoginPage() {
+    return loginPage;
+  }
+
+  public MemberAccountUpdatePage getMemberAccountUpdatePage() {
+    return memberAccountUpdatePage;
+  }
+
+  public SecurityPage getSecurityPage() {
+    return securityPage;
   }
 }

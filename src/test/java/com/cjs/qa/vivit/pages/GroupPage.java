@@ -30,8 +30,8 @@ public class GroupPage extends Page {
   }
 
   final List<String> listGroupLeaders = new ArrayList<>();
-  final By byTitleBar = By.xpath(".//*[@id='SpTitleBar']");
-  final By byLinksGroups = By.xpath("//*[@id='CustomPageBody']//a[text()!='contact us today!']");
+  private final By byTitleBar = By.xpath(".//*[@id='SpTitleBar']");
+  private final By byLinksGroups = By.xpath("//*[@id='CustomPageBody']//a[text()!='contact us today!']");
 
   public void getGroupPageData() throws Throwable {
     Environment.sysOut(

@@ -19,7 +19,7 @@ public class CalendarsPage extends Page {
   }
 
   public String CALENDAR_URL_COMMUNITY = "https://www.vivit-worldwide.org/events/event_list.asp";
-  final By byTableCalendars = By.xpath(".//*[@id='EventList']/tbody/tr/td[1]/div");
+  private final By byTableCalendars = By.xpath(".//*[@id='EventList']/tbody/tr/td[1]/div");
 
   public void getCalendarData() throws Throwable {
     Environment.sysOut(

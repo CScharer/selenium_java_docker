@@ -21,9 +21,13 @@ public class UnitedEnvironment extends Environment {
   // ual/en/us";
   public static final String URL_LOGIN = URL_HOME;
   // + "/account/account/signin";
-  public final List<String> classExlusionList =
+  private final List<String> classExlusionList =
       JavaHelpers.getExclusions(this.getClass().getPackage().getName());
 
   public UnitedEnvironment() { // Empty
+  }
+
+  public List<String> getClassExlusionList() {
+    return classExlusionList;
   }
 }

@@ -699,9 +699,9 @@ public class Scenarios {
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     // getLinkedIn().run(getSeleniumWebDriver().getWebDriver());
     getLinkedIn()
-        .LoginPage
+        .getLoginPage()
         .login(
-            getLinkedIn().LoginAlternatePage,
+            getLinkedIn().getLoginAlternatePage(),
             CJSConstants.EMAIL_ADDRESS_MSN,
             EPasswords.LINKEDIN.getValue());
     getLinkedIn().getConnectionURLS(getSeleniumWebDriver().getWebDriver(), true);
@@ -1001,12 +1001,12 @@ public class Scenarios {
   public void united() throws Throwable {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
-    getUnited().HomePage.load();
-    getUnited().HomePage.buttonSignInClick();
-    getUnited().LoginPage.login("JGD80526", EPasswords.UNITED.getValue(), "unchecked");
-    getUnited().SecurityPage.answerSecurityQuestions();
+    getUnited().getHomePage().load();
+    getUnited().getHomePage().buttonSignInClick();
+    getUnited().getLoginPage().login("JGD80526", EPasswords.UNITED.getValue(), "unchecked");
+    getUnited().getSecurityPage().answerSecurityQuestions();
     getUnited()
-        .MemberAccountUpdatePage
+        .getMemberAccountUpdatePage()
         .validateMemberAccountInformation(
             "2211 Grand Ave Unit 3\nWest Des Moines, IA 502655628",
             CJSConstants.EMAIL_ADDRESS_MSN,
@@ -1016,8 +1016,8 @@ public class Scenarios {
     // "Cebu, PH (CEB)", "Dec 11, 2017",
     // "Dec 19, 2017")
     // .//*[@id='fl-results-loader-full']/div[@class='spinner-container']
-    getUnited().HomePage.buttonSignInClick();
-    getUnited().HomePage.buttonSignOutClick();
+    getUnited().getHomePage().buttonSignInClick();
+    getUnited().getHomePage().buttonSignOutClick();
   }
 
   @Test
@@ -1027,8 +1027,8 @@ public class Scenarios {
     // setVivit(new Vivit(getSeleniumWebDriver().getWebDriver()))
     // getVivit().BoDPage.getData();
     // getVivit().StaffPage.getData();
-    getVivit().HomePage.signIn(CJSConstants.USERID_VIVIT, EPasswords.VIVIT.getValue(), "checked");
-    // getVivit().HomePage.clickUpdateProfileLink()
+    getVivit().getHomePage().signIn(CJSConstants.USERID_VIVIT, EPasswords.VIVIT.getValue(), "checked");
+    // getVivit().getHomePage().clickUpdateProfileLink()
     VivitDataFactory vivitDataFactory = new VivitDataFactory();
     DataTable dataTable = vivitDataFactory.getBio("Web_Site_Member_ID", "10969660");
     // vivitDataFactory.getBio("Username", CJSConstants.USERID_VIVIT)
@@ -1041,12 +1041,12 @@ public class Scenarios {
     // getVivit().SearchPage.validateGroups()
     VivitData.initializeTest(getVivit());
     VivitData.initializeData(getSeleniumWebDriver());
-    getVivit().GroupPage.getGroupPageData();
-    // getVivit().SearchPage.searchSites()
-    getVivit().BlogsPage.getBlogData();
-    getVivit().CalendarsPage.getCalendarData();
-    getVivit().ForumsPage.getForumData();
-    getVivit().HomePage.clickButtonSignOut();
+    getVivit().getGroupPage().getGroupPageData();
+    // getVivit().getSearchPage().searchSites()
+    getVivit().getBlogsPage().getBlogData();
+    getVivit().getCalendarsPage().getCalendarData();
+    getVivit().getForumsPage().getForumData();
+    getVivit().getHomePage().clickButtonSignOut();
     getSeleniumWebDriver().killBrowser();
     VivitData.wrapUp(true, true);
   }
@@ -1083,10 +1083,10 @@ public class Scenarios {
   public void wellmark() throws Throwable {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
-    getWellmark().LogInPage.login();
-    getWellmark().PopUpPage.linkNoThanksClick();
-    getWellmark().HomePage.linkSeeAllClaimsClick();
-    getWellmark().ClaimsAndSpendingPage.getRecords();
+    getWellmark().getLogInPage().login();
+    getWellmark().getPopUpPage().linkNoThanksClick();
+    getWellmark().getHomePage().linkSeeAllClaimsClick();
+    getWellmark().getClaimsAndSpendingPage().getRecords();
     // getWellmark().DetailsPage.getData()
   }
 }

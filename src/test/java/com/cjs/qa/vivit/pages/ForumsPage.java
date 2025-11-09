@@ -17,7 +17,7 @@ public class ForumsPage extends Page {
     super(webDriver);
   }
 
-  final By byTableForums =
+  private final By byTableForums =
       By.xpath(".//*[@id='SpContent_Container']/table/tbody/tr[@class!='header']");
 
   public void getForumData() throws Throwable {

@@ -9,20 +9,44 @@ import com.cjs.qa.wellmark.pages.TempPage;
 import org.openqa.selenium.WebDriver;
 
 public class Wellmark {
-  public ClaimsAndSpendingPage ClaimsAndSpendingPage;
-  public DetailsPage DetailsPage;
-  public HomePage HomePage;
-  public LogInPage LogInPage;
-  public PopUpPage PopUpPage;
-  public TempPage TempPage;
+  private ClaimsAndSpendingPage claimsAndSpendingPage;
+  private DetailsPage detailsPage;
+  private HomePage homePage;
+  private LogInPage logInPage;
+  private PopUpPage popUpPage;
+  private TempPage tempPage;
 
   public Wellmark(WebDriver webDriver) {
-    ClaimsAndSpendingPage = new ClaimsAndSpendingPage(webDriver);
-    DetailsPage = new com.cjs.qa.wellmark.pages.DetailsPage(webDriver);
-    HomePage = new HomePage(webDriver);
-    LogInPage = new LogInPage(webDriver);
-    PopUpPage = new PopUpPage(webDriver);
-    TempPage = new TempPage(webDriver);
+    claimsAndSpendingPage = new ClaimsAndSpendingPage(webDriver);
+    detailsPage = new com.cjs.qa.wellmark.pages.DetailsPage(webDriver);
+    homePage = new HomePage(webDriver);
+    logInPage = new LogInPage(webDriver);
+    popUpPage = new PopUpPage(webDriver);
+    tempPage = new TempPage(webDriver);
     webDriver.manage().timeouts().pageLoadTimeout(java.time.Duration.ofSeconds(120));
+  }
+
+  public ClaimsAndSpendingPage getClaimsAndSpendingPage() {
+    return claimsAndSpendingPage;
+  }
+
+  public DetailsPage getDetailsPage() {
+    return detailsPage;
+  }
+
+  public HomePage getHomePage() {
+    return homePage;
+  }
+
+  public LogInPage getLogInPage() {
+    return logInPage;
+  }
+
+  public PopUpPage getPopUpPage() {
+    return popUpPage;
+  }
+
+  public TempPage getTempPage() {
+    return tempPage;
   }
 }

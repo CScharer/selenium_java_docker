@@ -17,19 +17,39 @@ import org.openqa.selenium.WebDriver;
 
 public class LinkedIn {
   public static final String LINKEDIN_URL = LinkedInEnvironment.URL_LOGIN.toLowerCase() + "in/";
-  public ConnectionsPage ConnectionsPage;
-  public ContactInfoPage ContactInfoPage;
-  public HomePage HomePage;
-  public LoginAlternatePage LoginAlternatePage;
-  public LoginPage LoginPage;
+  private ConnectionsPage connectionsPage;
+  private ContactInfoPage contactInfoPage;
+  private HomePage homePage;
+  private LoginAlternatePage loginAlternatePage;
+  private LoginPage loginPage;
 
   public LinkedIn(WebDriver webDriver) {
-    ConnectionsPage = new ConnectionsPage(webDriver);
-    ContactInfoPage = new ContactInfoPage(webDriver);
-    HomePage = new HomePage(webDriver);
-    LoginAlternatePage = new LoginAlternatePage(webDriver);
-    LoginPage = new LoginPage(webDriver);
+    connectionsPage = new ConnectionsPage(webDriver);
+    contactInfoPage = new ContactInfoPage(webDriver);
+    homePage = new HomePage(webDriver);
+    loginAlternatePage = new LoginAlternatePage(webDriver);
+    loginPage = new LoginPage(webDriver);
     webDriver.manage().timeouts().pageLoadTimeout(java.time.Duration.ofSeconds(120));
+  }
+
+  public ConnectionsPage getConnectionsPage() {
+    return connectionsPage;
+  }
+
+  public ContactInfoPage getContactInfoPage() {
+    return contactInfoPage;
+  }
+
+  public HomePage getHomePage() {
+    return homePage;
+  }
+
+  public LoginAlternatePage getLoginAlternatePage() {
+    return loginAlternatePage;
+  }
+
+  public LoginPage getLoginPage() {
+    return loginPage;
   }
 
   public void getConnectionContactInfo(WebDriver webDriver, boolean run) throws Throwable {
@@ -46,7 +66,7 @@ public class LinkedIn {
       Environment.sysOut(methodName + ":linkedInMapList.size():[" + linkedInMapList.size() + "]");
       return;
     }
-    ContactInfoPage.getContactInfoPageData(linkedInMapList);
+    contactInfoPage.getContactInfoPageData(linkedInMapList);
     Data.update();
   }
 
@@ -64,7 +84,7 @@ public class LinkedIn {
       Environment.sysOut(methodName + ":linkedInMapList.size():[" + linkedInMapList.size() + "]");
       return;
     }
-    HomePage.clickButtonMyNetwork();
+    homePage.clickButtonMyNetwork();
     sleepRandom(2, 4, 250, 750);
     String urlConnections = LinkedInEnvironment.URL_LOGIN + "mynetwork/invite-connect/connections/";
     webDriver.get(urlConnections);
@@ -73,10 +93,10 @@ public class LinkedIn {
       Map<String, String> map = linkedInMapList.get(mapIndex);
       if (JavaHelpers.hasValue(map.get("First Name"))
           && JavaHelpers.hasValue(map.get("Last Name"))) {
-        ConnectionsPage.setEditSearchbyname(
+        connectionsPage.setEditSearchbyname(
             map.get("First Name").trim() + " " + map.get("Last Name").trim());
         sleepRandom(2, 4, 250, 750);
-        String href = ConnectionsPage.getUserHREF();
+        String href = connectionsPage.getUserHREF();
         if (JavaHelpers.hasValue(href)) {
           href = href.toLowerCase();
           if (href.contains(LINKEDIN_URL)) {
@@ -95,8 +115,8 @@ public class LinkedIn {
   }
 
   public void run(WebDriver webDriver) throws Throwable {
-    LoginPage.login(
-        LoginAlternatePage, CJSConstants.EMAIL_ADDRESS_MSN, EPasswords.LINKEDIN.getValue());
+    loginPage.login(
+        loginAlternatePage, CJSConstants.EMAIL_ADDRESS_MSN, EPasswords.LINKEDIN.getValue());
     getConnectionURLS(webDriver, true);
     getConnectionContactInfo(webDriver, true);
   }
