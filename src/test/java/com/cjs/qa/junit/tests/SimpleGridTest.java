@@ -16,7 +16,7 @@ import org.testng.annotations.*;
 @Epic("Selenium Grid Testing")
 @Feature("Basic Grid Tests")
 public class SimpleGridTest {
-  private static final Logger logger = LogManager.getLogger(SimpleGridTest.class);
+  private static final Logger LOGGER = LogManager.getLogger(SimpleGridTest.class);
 
   private WebDriver driver;
   private String gridUrl;
@@ -29,9 +29,9 @@ public class SimpleGridTest {
       gridUrl = "http://localhost:4444/wd/hub";
     }
 
-    logger.info("========================================");
-    logger.info("Connecting to Grid at: {}", gridUrl);
-    logger.info("========================================");
+    LOGGER.info("========================================");
+    LOGGER.info("Connecting to Grid at: {}", gridUrl);
+    LOGGER.info("========================================");
 
     ChromeOptions options = new ChromeOptions();
     options.addArguments("--headless");
@@ -40,7 +40,7 @@ public class SimpleGridTest {
     options.addArguments("--disable-gpu");
 
     driver = new RemoteWebDriver(new URL(gridUrl), options);
-    logger.info("✅ Successfully connected to Grid!");
+    LOGGER.info("✅ Successfully connected to Grid!");
   }
 
   @Test(priority = 1)
@@ -48,10 +48,10 @@ public class SimpleGridTest {
   @Severity(SeverityLevel.BLOCKER)
   @Description("Verify that connection to Selenium Grid is successful and driver is initialized")
   public void testGridConnection() {
-    logger.info("\n>>> Running testGridConnection");
+    LOGGER.info("\n>>> Running testGridConnection");
     Allure.step("Verify driver is not null");
     Assert.assertNotNull(driver, "Driver should be initialized");
-    logger.info("✅ Grid connection test PASSED\n");
+    LOGGER.info("✅ Grid connection test PASSED\n");
   }
 
   @Test(priority = 2)
@@ -59,16 +59,16 @@ public class SimpleGridTest {
   @Severity(SeverityLevel.CRITICAL)
   @Description("Verify navigation to Google.com works correctly")
   public void testNavigateToGoogle() throws Exception {
-    logger.info("\n>>> Running testNavigateToGoogle");
-    logger.info("Navigating to Google...");
+    LOGGER.info("\n>>> Running testNavigateToGoogle");
+    LOGGER.info("Navigating to Google...");
     Allure.step("Navigate to Google.com");
     driver.get("https://www.google.com");
 
     String title = driver.getTitle();
-    logger.info("Page title: {}", title);
+    LOGGER.info("Page title: {}", title);
 
     Assert.assertTrue(title.contains("Google"), "Title should contain 'Google'");
-    logger.info("✅ Google navigation test PASSED\n");
+    LOGGER.info("✅ Google navigation test PASSED\n");
   }
 
   @Test(priority = 3)
@@ -76,16 +76,16 @@ public class SimpleGridTest {
   @Severity(SeverityLevel.CRITICAL)
   @Description("Verify navigation to GitHub.com works correctly")
   public void testNavigateToGitHub() throws Exception {
-    logger.info("\n>>> Running testNavigateToGitHub");
-    logger.info("Navigating to GitHub...");
+    LOGGER.info("\n>>> Running testNavigateToGitHub");
+    LOGGER.info("Navigating to GitHub...");
     Allure.step("Navigate to GitHub.com");
     driver.get("https://github.com");
 
     String title = driver.getTitle();
-    logger.info("Page title: {}", title);
+    LOGGER.info("Page title: {}", title);
 
     Assert.assertTrue(title.contains("GitHub"), "Title should contain 'GitHub'");
-    logger.info("✅ GitHub navigation test PASSED\n");
+    LOGGER.info("✅ GitHub navigation test PASSED\n");
   }
 
   @AfterMethod
@@ -93,19 +93,19 @@ public class SimpleGridTest {
     if (driver != null) {
       // Capture screenshot on failure
       if (result.getStatus() == ITestResult.FAILURE) {
-        logger.error("❌ Test failed - capturing screenshot...");
+        LOGGER.error("❌ Test failed - capturing screenshot...");
         AllureHelper.captureScreenshot(driver, "FAILURE-" + result.getName());
         AllureHelper.attachPageSource(driver);
         AllureHelper.logBrowserInfo(driver);
       } else if (result.getStatus() == ITestResult.SUCCESS) {
-        logger.info("✅ Test passed - capturing success screenshot...");
+        LOGGER.info("✅ Test passed - capturing success screenshot...");
         AllureHelper.captureScreenshot(driver, "SUCCESS-" + result.getName());
       }
 
-      logger.info("Closing browser...");
+      LOGGER.info("Closing browser...");
       driver.quit();
-      logger.info("Browser closed successfully");
-      logger.info("========================================\n");
+      LOGGER.info("Browser closed successfully");
+      LOGGER.info("========================================\n");
     }
   }
 }

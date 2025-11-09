@@ -27,23 +27,23 @@ import org.testng.annotations.*;
 @Epic("Extended Test Coverage")
 @Feature("Negative Tests")
 public class NegativeTests {
-  private static final Logger logger = LogManager.getLogger(NegativeTests.class);
+  private static final Logger LOGGER = LogManager.getLogger(NegativeTests.class);
 
   private WebDriver driver;
   private String gridUrl;
 
   @BeforeMethod
   public void setUp() throws Exception {
-    logger.info("========================================");
-    logger.info("⚠️  NEGATIVE TEST SETUP");
+    LOGGER.info("========================================");
+    LOGGER.info("⚠️  NEGATIVE TEST SETUP");
 
     gridUrl = System.getenv("SELENIUM_REMOTE_URL");
     if (gridUrl == null || gridUrl.isEmpty()) {
       gridUrl = "http://localhost:4444/wd/hub";
     }
 
-    logger.info("Grid URL: {}", gridUrl);
-    logger.info("========================================");
+    LOGGER.info("Grid URL: {}", gridUrl);
+    LOGGER.info("========================================");
 
     ChromeOptions options = new ChromeOptions();
     options.addArguments("--headless");
@@ -53,7 +53,7 @@ public class NegativeTests {
 
     driver = new RemoteWebDriver(new URL(gridUrl), options);
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-    logger.info("✅ Driver initialized");
+    LOGGER.info("✅ Driver initialized");
   }
 
   @Test(priority = 1)
@@ -61,7 +61,7 @@ public class NegativeTests {
   @Severity(SeverityLevel.CRITICAL)
   @Description("Test handling of non-existent elements")
   public void testNonExistentElement() {
-    logger.info("\n>>> Test: Non-existent Element");
+    LOGGER.info("\n>>> Test: Non-existent Element");
 
     Allure.step("Navigate to Google");
     driver.get("https://www.google.com");
@@ -73,9 +73,9 @@ public class NegativeTests {
       // Try to find an element that doesn't exist
       WebElement nonExistent =
           driver.findElement(By.id("this-element-definitely-does-not-exist-12345"));
-      logger.error("Element was found (unexpected!)");
+      LOGGER.error("Element was found (unexpected!)");
     } catch (NoSuchElementException e) {
-      logger.info("Correctly caught NoSuchElementException");
+      LOGGER.info("Correctly caught NoSuchElementException");
       elementNotFound = true;
     }
 
@@ -85,7 +85,7 @@ public class NegativeTests {
     Assert.assertTrue(
         elementNotFound, "NoSuchElementException should be thrown for non-existent element");
 
-    logger.info("✅ Non-existent element handled correctly");
+    LOGGER.info("✅ Non-existent element handled correctly");
   }
 
   @Test(priority = 2)
@@ -93,7 +93,7 @@ public class NegativeTests {
   @Severity(SeverityLevel.NORMAL)
   @Description("Test invalid URL navigation")
   public void testInvalidUrlNavigation() {
-    logger.info("\n>>> Test: Invalid URL Navigation");
+    LOGGER.info("\n>>> Test: Invalid URL Navigation");
 
     String invalidUrl = "https://this-domain-definitely-does-not-exist-12345.com";
 
@@ -108,18 +108,18 @@ public class NegativeTests {
       String currentUrl = driver.getCurrentUrl();
       String title = driver.getTitle();
 
-      logger.info("Current URL after invalid navigation: {}", currentUrl);
-      logger.info("Current Title: {}", title);
+      LOGGER.info("Current URL after invalid navigation: {}", currentUrl);
+      LOGGER.info("Current Title: {}", title);
 
       AllureHelper.captureScreenshot(driver, "Invalid-URL");
 
       // Browser should handle the error (might show error page)
       Assert.assertNotNull(currentUrl, "Should have some URL even if invalid");
 
-      logger.info("✅ Invalid URL handled by browser");
+      LOGGER.info("✅ Invalid URL handled by browser");
 
     } catch (Exception e) {
-      logger.info("Exception caught during invalid URL navigation: {}", e.getMessage());
+      LOGGER.info("Exception caught during invalid URL navigation: {}", e.getMessage());
       AllureHelper.captureScreenshot(driver, "Invalid-URL-Exception");
       // This is acceptable behavior
     }
@@ -130,7 +130,7 @@ public class NegativeTests {
   @Severity(SeverityLevel.NORMAL)
   @Description("Test interaction with disabled elements")
   public void testDisabledElementInteraction() {
-    logger.info("\n>>> Test: Disabled Element Interaction");
+    LOGGER.info("\n>>> Test: Disabled Element Interaction");
 
     Allure.step("Navigate to Google");
     driver.get("https://www.google.com");
@@ -140,13 +140,13 @@ public class NegativeTests {
 
     Allure.step("Verify element is enabled");
     boolean isEnabled = searchBox.isEnabled();
-    logger.info("Search box enabled: {}", isEnabled);
+    LOGGER.info("Search box enabled: {}", isEnabled);
 
     Assert.assertTrue(isEnabled, "Search box should be enabled");
 
     AllureHelper.captureScreenshot(driver, "Element-State");
 
-    logger.info("✅ Element state verified");
+    LOGGER.info("✅ Element state verified");
   }
 
   @Test(priority = 4)
@@ -154,7 +154,7 @@ public class NegativeTests {
   @Severity(SeverityLevel.NORMAL)
   @Description("Test element wait timeout")
   public void testElementWaitTimeout() {
-    logger.info("\n>>> Test: Element Wait Timeout");
+    LOGGER.info("\n>>> Test: Element Wait Timeout");
 
     Allure.step("Navigate to Google");
     driver.get("https://www.google.com");
@@ -168,10 +168,10 @@ public class NegativeTests {
           ExpectedConditions.presenceOfElementLocated(
               By.id("element-that-will-never-appear-12345")));
 
-      logger.error("Element appeared (unexpected!)");
+      LOGGER.error("Element appeared (unexpected!)");
 
     } catch (TimeoutException e) {
-      logger.info("Correctly caught TimeoutException after {} seconds", 3);
+      LOGGER.info("Correctly caught TimeoutException after {} seconds", 3);
       timeoutOccurred = true;
     }
 
@@ -180,7 +180,7 @@ public class NegativeTests {
     Allure.step("Verify timeout occurred");
     Assert.assertTrue(timeoutOccurred, "TimeoutException should occur when element doesn't appear");
 
-    logger.info("✅ Timeout handled correctly");
+    LOGGER.info("✅ Timeout handled correctly");
   }
 
   @Test(priority = 5)
@@ -188,13 +188,13 @@ public class NegativeTests {
   @Severity(SeverityLevel.CRITICAL)
   @Description("Test recovery after error")
   public void testErrorRecovery() {
-    logger.info("\n>>> Test: Error Recovery");
+    LOGGER.info("\n>>> Test: Error Recovery");
 
     Allure.step("Cause an error");
     try {
       driver.findElement(By.id("non-existent-element"));
     } catch (NoSuchElementException e) {
-      logger.info("Error occurred as expected");
+      LOGGER.info("Error occurred as expected");
     }
 
     Allure.step("Recover and perform valid action");
@@ -203,7 +203,7 @@ public class NegativeTests {
     WebElement searchBox = driver.findElement(By.name("q"));
     searchBox.sendKeys("Recovery test");
 
-    logger.info("Successfully recovered and performed action");
+    LOGGER.info("Successfully recovered and performed action");
 
     AllureHelper.captureScreenshot(driver, "After-Recovery");
 
@@ -212,7 +212,7 @@ public class NegativeTests {
     Assert.assertTrue(
         currentUrl.contains("google.com"), "Should successfully recover and navigate");
 
-    logger.info("✅ Error recovery successful");
+    LOGGER.info("✅ Error recovery successful");
   }
 
   @Test(priority = 6)
@@ -220,7 +220,7 @@ public class NegativeTests {
   @Severity(SeverityLevel.NORMAL)
   @Description("Test element state verification")
   public void testElementStateVerification() {
-    logger.info("\n>>> Test: Element State Verification");
+    LOGGER.info("\n>>> Test: Element State Verification");
 
     Allure.step("Navigate to Google");
     driver.get("https://www.google.com");
@@ -236,7 +236,7 @@ public class NegativeTests {
 
     AllureHelper.captureScreenshot(driver, "Element-State");
 
-    logger.info("✅ Element state verified");
+    LOGGER.info("✅ Element state verified");
   }
 
   @Test(priority = 7)
@@ -244,7 +244,7 @@ public class NegativeTests {
   @Severity(SeverityLevel.MINOR)
   @Description("Test stale element reference handling")
   public void testStaleElementHandling() {
-    logger.info("\n>>> Test: Stale Element Handling");
+    LOGGER.info("\n>>> Test: Stale Element Handling");
 
     Allure.step("Navigate to dynamic page");
     driver.get("https://www.google.com");
@@ -261,10 +261,10 @@ public class NegativeTests {
     try {
       element.sendKeys("This should fail");
     } catch (StaleElementReferenceException e) {
-      logger.info("Correctly caught StaleElementReferenceException");
+      LOGGER.info("Correctly caught StaleElementReferenceException");
       staleElementCaught = true;
     } catch (Exception e) {
-      logger.info("Caught different exception: {}", e.getClass().getSimpleName());
+      LOGGER.info("Caught different exception: {}", e.getClass().getSimpleName());
       // Still acceptable
       staleElementCaught = true;
     }
@@ -275,23 +275,23 @@ public class NegativeTests {
     String currentUrl = driver.getCurrentUrl();
     Assert.assertTrue(currentUrl.contains("github"), "Should be on GitHub page");
 
-    logger.info("✅ Stale element handled (caught: {})", staleElementCaught);
+    LOGGER.info("✅ Stale element handled (caught: {})", staleElementCaught);
   }
 
   @AfterMethod
   public void tearDown(ITestResult result) {
     if (driver != null) {
       if (result.getStatus() == ITestResult.FAILURE) {
-        logger.error("❌ Negative test failed (unexpected!)");
+        LOGGER.error("❌ Negative test failed (unexpected!)");
         AllureHelper.captureScreenshot(driver, "FAILURE-" + result.getName());
         AllureHelper.attachPageSource(driver);
       } else if (result.getStatus() == ITestResult.SUCCESS) {
-        logger.info("✅ Negative test passed");
+        LOGGER.info("✅ Negative test passed");
       }
 
-      logger.info("Closing browser...");
+      LOGGER.info("Closing browser...");
       driver.quit();
-      logger.info("========================================\n");
+      LOGGER.info("========================================\n");
     }
   }
 }

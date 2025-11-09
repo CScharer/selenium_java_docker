@@ -20,16 +20,16 @@ import org.testng.annotations.*;
 @Epic("API Testing")
 @Feature("Data-Driven API Tests")
 public class ApiDataDrivenTests {
-  private static final Logger logger = LogManager.getLogger(ApiDataDrivenTests.class);
+  private static final Logger LOGGER = LogManager.getLogger(ApiDataDrivenTests.class);
   private static final String BASE_URL = "https://jsonplaceholder.typicode.com";
 
   @BeforeClass
   public void setUp() {
     RestAssured.baseURI = BASE_URL;
-    logger.info("========================================");
-    logger.info("📊 DATA-DRIVEN API TEST SETUP");
-    logger.info("Base URL: {}", BASE_URL);
-    logger.info("========================================");
+    LOGGER.info("========================================");
+    LOGGER.info("📊 DATA-DRIVEN API TEST SETUP");
+    LOGGER.info("Base URL: {}", BASE_URL);
+    LOGGER.info("========================================");
   }
 
   @DataProvider(name = "endpoints")
@@ -49,19 +49,19 @@ public class ApiDataDrivenTests {
   @Severity(SeverityLevel.NORMAL)
   @Description("Test multiple endpoints return expected data")
   public void testEndpoints(String endpoint, int expectedCount) {
-    logger.info("\n>>> Test: Endpoint {}", endpoint);
+    LOGGER.info("\n>>> Test: Endpoint {}", endpoint);
 
     Allure.step("GET " + endpoint);
     Response response = given().when().get(endpoint).then().statusCode(200).extract().response();
 
     int actualCount = response.jsonPath().getList("$").size();
-    logger.info("Expected: {}, Actual: {}", expectedCount, actualCount);
+    LOGGER.info("Expected: {}, Actual: {}", expectedCount, actualCount);
 
     Allure.step("Verify count");
     Assert.assertEquals(
         actualCount, expectedCount, endpoint + " should return " + expectedCount + " items");
 
-    logger.info("✅ {} validated", endpoint);
+    LOGGER.info("✅ {} validated", endpoint);
   }
 
   @DataProvider(name = "postIds")
@@ -74,12 +74,12 @@ public class ApiDataDrivenTests {
   @Severity(SeverityLevel.NORMAL)
   @Description("Test retrieving posts by various IDs")
   public void testPostById(int postId) {
-    logger.info("\n>>> Test: Get Post ID {}", postId);
+    LOGGER.info("\n>>> Test: Get Post ID {}", postId);
 
     Allure.step("GET /posts/" + postId);
     given().when().get("/posts/" + postId).then().statusCode(200).body("id", equalTo(postId));
 
-    logger.info("✅ Post {} retrieved", postId);
+    LOGGER.info("✅ Post {} retrieved", postId);
   }
 
   @DataProvider(name = "invalidEndpoints")
@@ -96,12 +96,12 @@ public class ApiDataDrivenTests {
   @Severity(SeverityLevel.NORMAL)
   @Description("Test invalid endpoints return correct error codes")
   public void testInvalidEndpoints(String endpoint, int expectedStatus) {
-    logger.info("\n>>> Test: Invalid Endpoint {}", endpoint);
+    LOGGER.info("\n>>> Test: Invalid Endpoint {}", endpoint);
 
     Allure.step("GET " + endpoint + " (expect " + expectedStatus + ")");
     given().when().get(endpoint).then().statusCode(expectedStatus);
 
-    logger.info("✅ Error code {} returned correctly", expectedStatus);
+    LOGGER.info("✅ Error code {} returned correctly", expectedStatus);
   }
 
   @DataProvider(name = "contentTypes")
@@ -118,7 +118,7 @@ public class ApiDataDrivenTests {
   @Severity(SeverityLevel.MINOR)
   @Description("Test content type headers")
   public void testContentTypes(String endpoint, String expectedType) {
-    logger.info("\n>>> Test: Content Type for {}", endpoint);
+    LOGGER.info("\n>>> Test: Content Type for {}", endpoint);
 
     Allure.step("Verify Content-Type header");
     Response response =
@@ -131,14 +131,14 @@ public class ApiDataDrivenTests {
             .extract()
             .response();
 
-    logger.info("Content-Type: {}", response.getContentType());
-    logger.info("✅ Content type validated");
+    LOGGER.info("Content-Type: {}", response.getContentType());
+    LOGGER.info("✅ Content type validated");
   }
 
   @AfterClass
   public void tearDown() {
-    logger.info("========================================");
-    logger.info("✅ Data-Driven API Tests Completed");
-    logger.info("========================================\n");
+    LOGGER.info("========================================");
+    LOGGER.info("✅ Data-Driven API Tests Completed");
+    LOGGER.info("========================================\n");
   }
 }

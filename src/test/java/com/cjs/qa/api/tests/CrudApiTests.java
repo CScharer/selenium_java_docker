@@ -20,16 +20,16 @@ import org.testng.annotations.*;
 @Epic("API Testing")
 @Feature("CRUD Operations")
 public class CrudApiTests {
-  private static final Logger logger = LogManager.getLogger(CrudApiTests.class);
+  private static final Logger LOGGER = LogManager.getLogger(CrudApiTests.class);
   private static final String BASE_URL = "https://jsonplaceholder.typicode.com";
 
   @BeforeClass
   public void setUp() {
     RestAssured.baseURI = BASE_URL;
-    logger.info("========================================");
-    logger.info("🔧 CRUD API TEST SETUP");
-    logger.info("Base URL: {}", BASE_URL);
-    logger.info("========================================");
+    LOGGER.info("========================================");
+    LOGGER.info("🔧 CRUD API TEST SETUP");
+    LOGGER.info("Base URL: {}", BASE_URL);
+    LOGGER.info("========================================");
   }
 
   @Test(priority = 1)
@@ -37,7 +37,7 @@ public class CrudApiTests {
   @Severity(SeverityLevel.CRITICAL)
   @Description("Test POST request to create new resource")
   public void testCreatePost() {
-    logger.info("\n>>> Test: POST - Create Resource");
+    LOGGER.info("\n>>> Test: POST - Create Resource");
 
     String requestBody =
         "{\n"
@@ -66,8 +66,8 @@ public class CrudApiTests {
             .response();
 
     int createdId = response.jsonPath().getInt("id");
-    logger.info("Created resource with ID: {}", createdId);
-    logger.info("✅ POST request successful");
+    LOGGER.info("Created resource with ID: {}", createdId);
+    LOGGER.info("✅ POST request successful");
   }
 
   @Test(priority = 2)
@@ -75,7 +75,7 @@ public class CrudApiTests {
   @Severity(SeverityLevel.CRITICAL)
   @Description("Test GET request to retrieve specific resource")
   public void testReadPost() {
-    logger.info("\n>>> Test: GET - Read Resource");
+    LOGGER.info("\n>>> Test: GET - Read Resource");
 
     Allure.step("Send GET request for specific post");
     Response response =
@@ -90,8 +90,8 @@ public class CrudApiTests {
             .response();
 
     String title = response.jsonPath().getString("title");
-    logger.info("Post title: {}", title);
-    logger.info("✅ GET request successful");
+    LOGGER.info("Post title: {}", title);
+    LOGGER.info("✅ GET request successful");
   }
 
   @Test(priority = 3)
@@ -99,7 +99,7 @@ public class CrudApiTests {
   @Severity(SeverityLevel.CRITICAL)
   @Description("Test PUT request to update resource")
   public void testUpdatePost() {
-    logger.info("\n>>> Test: PUT - Update Resource");
+    LOGGER.info("\n>>> Test: PUT - Update Resource");
 
     String updateBody =
         "{\n"
@@ -124,7 +124,7 @@ public class CrudApiTests {
         .body("title", equalTo("Updated Title"))
         .body("id", equalTo(1));
 
-    logger.info("✅ PUT request successful");
+    LOGGER.info("✅ PUT request successful");
   }
 
   @Test(priority = 4)
@@ -132,7 +132,7 @@ public class CrudApiTests {
   @Severity(SeverityLevel.NORMAL)
   @Description("Test PATCH request for partial update")
   public void testPatchPost() {
-    logger.info("\n>>> Test: PATCH - Partial Update");
+    LOGGER.info("\n>>> Test: PATCH - Partial Update");
 
     String patchBody = "{\n" + "  \"title\": \"Patched Title\"\n" + "}";
 
@@ -151,7 +151,7 @@ public class CrudApiTests {
         .body("title", equalTo("Patched Title"))
         .body("id", equalTo(1));
 
-    logger.info("✅ PATCH request successful");
+    LOGGER.info("✅ PATCH request successful");
   }
 
   @Test(priority = 5)
@@ -159,12 +159,12 @@ public class CrudApiTests {
   @Severity(SeverityLevel.CRITICAL)
   @Description("Test DELETE request to remove resource")
   public void testDeletePost() {
-    logger.info("\n>>> Test: DELETE - Remove Resource");
+    LOGGER.info("\n>>> Test: DELETE - Remove Resource");
 
     Allure.step("Send DELETE request");
     given().log().all().when().delete("/posts/1").then().log().all().statusCode(200);
 
-    logger.info("✅ DELETE request successful");
+    LOGGER.info("✅ DELETE request successful");
   }
 
   @Test(priority = 6)
@@ -172,7 +172,7 @@ public class CrudApiTests {
   @Severity(SeverityLevel.NORMAL)
   @Description("Test GET nested resources")
   public void testNestedResources() {
-    logger.info("\n>>> Test: GET Nested Resources");
+    LOGGER.info("\n>>> Test: GET Nested Resources");
 
     Allure.step("Get comments for specific post");
     Response response =
@@ -188,8 +188,8 @@ public class CrudApiTests {
             .response();
 
     int commentCount = response.jsonPath().getList("$").size();
-    logger.info("Comments found: {}", commentCount);
-    logger.info("✅ Nested resources retrieved");
+    LOGGER.info("Comments found: {}", commentCount);
+    LOGGER.info("✅ Nested resources retrieved");
   }
 
   @Test(priority = 7)
@@ -197,7 +197,7 @@ public class CrudApiTests {
   @Severity(SeverityLevel.NORMAL)
   @Description("Test filtering with query parameters")
   public void testFiltering() {
-    logger.info("\n>>> Test: Filtering Resources");
+    LOGGER.info("\n>>> Test: Filtering Resources");
 
     Allure.step("Filter posts by userId");
     given()
@@ -209,13 +209,13 @@ public class CrudApiTests {
         .body("$", hasSize(10)) // User 1 has 10 posts
         .body("userId", everyItem(equalTo(1)));
 
-    logger.info("✅ Filtering working correctly");
+    LOGGER.info("✅ Filtering working correctly");
   }
 
   @AfterClass
   public void tearDown() {
-    logger.info("========================================");
-    logger.info("✅ Basic API Tests Completed");
-    logger.info("========================================\n");
+    LOGGER.info("========================================");
+    LOGGER.info("✅ Basic API Tests Completed");
+    LOGGER.info("========================================\n");
   }
 }
