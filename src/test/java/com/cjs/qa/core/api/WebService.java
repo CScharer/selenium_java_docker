@@ -191,17 +191,6 @@ public class WebService {
     return map;
   }
 
-  public static void writeSOAPMessageToOutputStream(SOAPMessage soapMessage) {
-    final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-    try {
-      soapMessage.writeTo(byteArrayOutputStream);
-      final String soapMessageString = byteArrayOutputStream.toString();
-      Environment.sysOut(getSOAPMessageValue(soapMessage, true));
-    } catch (SOAPException | IOException e) {
-      Environment.sysOut(e);
-    }
-  }
-
   public static String getAPIXMLResponse(Policy policy, String url, SOAPMessage soapMessage) {
     getAPIXMLRequest(policy, soapMessage);
     xml = null;
@@ -247,6 +236,96 @@ public class WebService {
       Environment.sysOut(e);
     }
     return xml;
+  }
+
+  public static Map<String, String> getAPIXMLResponse(
+      String requestMethod, String url, String apiRequest) {
+    final Map<String, String> map = new HashMap<>();
+    map.put("requestMethod", requestMethod);
+    map.put("url", url);
+    map.put("apiRequest", apiRequest);
+    if (Environment.isLogAPI()) {
+      Environment.sysOut(
+          "getAPIXMLResponse Parameters:"
+              + Constants.NL
+              + Constants.TAB
+              + "requestMethod:["
+              + requestMethod
+              + "]"
+              + Constants.NL
+              + Constants.TAB
+              + "url:["
+              + url
+              + "]"
+              + Constants.NL
+              + Constants.TAB
+              + "apiRequest["
+              + apiRequest
+              + "]");
+    }
+    int responseCode = -1;
+    HttpURLConnection httpURLConnection = null;
+    String xml = "";
+    String line = "";
+    try {
+      final URL oURL = new URL(url);
+      httpURLConnection = (HttpURLConnection) oURL.openConnection();
+      httpURLConnection.setDoOutput(true);
+      httpURLConnection.setInstanceFollowRedirects(false);
+      if (!requestMethod.equals("")) {
+        httpURLConnection.setRequestMethod(requestMethod);
+      }
+      // httpURLConnection.setRequestProperty("Content-Type",
+      // "text/xml");
+      httpURLConnection.setRequestProperty("Accept", "application/xml");
+      httpURLConnection.setRequestProperty("charset", StandardCharsets.UTF_8.toString());
+      httpURLConnection.setRequestProperty(
+          "Content-Length", "" + Integer.toString(apiRequest.getBytes().length));
+      httpURLConnection.setUseCaches(false);
+      final DataOutputStream dataOutputStream =
+          new DataOutputStream(httpURLConnection.getOutputStream());
+      dataOutputStream.writeBytes(apiRequest);
+      dataOutputStream.flush();
+      responseCode = httpURLConnection.getResponseCode();
+      map.put("responseCode", String.valueOf(responseCode));
+      final String responseMessage = String.valueOf(httpURLConnection.getResponseMessage());
+      map.put("responseMessage", responseMessage);
+      if (responseCode == HttpURLConnection.HTTP_OK) {
+        final BufferedReader bufferedReader =
+            new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+        while ((line = bufferedReader.readLine()) != null) {
+          xml += line;
+        }
+        bufferedReader.close();
+        map.put("xml", xml);
+      }
+      dataOutputStream.close();
+      httpURLConnection.disconnect();
+      if (responseCode != HttpURLConnection.HTTP_OK) {
+        Environment.sysOut("responseCode:[" + responseCode + "]");
+        Environment.sysOut("responseMessage:[" + responseMessage + "]");
+      }
+      dataOutputStream.close();
+      httpURLConnection.disconnect();
+    } catch (final Exception e) {
+      Environment.sysOut(e);
+    }
+    // if (responseCode != HttpURLConnection.HTTP_OK)
+    // {
+    // Assert.fail(xml);
+    // }
+    return map;
+  }
+
+  public static void writeSOAPMessageToOutputStream(SOAPMessage soapMessage) {
+    final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+    try {
+      soapMessage.writeTo(byteArrayOutputStream);
+      final String soapMessageString = byteArrayOutputStream.toString();
+      Environment.sysOut(getSOAPMessageValue(soapMessage, true));
+    } catch (SOAPException | IOException e) {
+      Environment.sysOut(e);
+    }
   }
 
   public SOAPMessage createSOAPRequestFromString(String apiRequest) {
@@ -388,84 +467,5 @@ public class WebService {
       Environment.sysOut(e);
     }
     return xml;
-  }
-
-  public static Map<String, String> getAPIXMLResponse(
-      String requestMethod, String url, String apiRequest) {
-    final Map<String, String> map = new HashMap<>();
-    map.put("requestMethod", requestMethod);
-    map.put("url", url);
-    map.put("apiRequest", apiRequest);
-    if (Environment.isLogAPI()) {
-      Environment.sysOut(
-          "getAPIXMLResponse Parameters:"
-              + Constants.NL
-              + Constants.TAB
-              + "requestMethod:["
-              + requestMethod
-              + "]"
-              + Constants.NL
-              + Constants.TAB
-              + "url:["
-              + url
-              + "]"
-              + Constants.NL
-              + Constants.TAB
-              + "apiRequest["
-              + apiRequest
-              + "]");
-    }
-    int responseCode = -1;
-    HttpURLConnection httpURLConnection = null;
-    String xml = "";
-    String line = "";
-    try {
-      final URL oURL = new URL(url);
-      httpURLConnection = (HttpURLConnection) oURL.openConnection();
-      httpURLConnection.setDoOutput(true);
-      httpURLConnection.setInstanceFollowRedirects(false);
-      if (!requestMethod.equals("")) {
-        httpURLConnection.setRequestMethod(requestMethod);
-      }
-      // httpURLConnection.setRequestProperty("Content-Type",
-      // "text/xml");
-      httpURLConnection.setRequestProperty("Accept", "application/xml");
-      httpURLConnection.setRequestProperty("charset", StandardCharsets.UTF_8.toString());
-      httpURLConnection.setRequestProperty(
-          "Content-Length", "" + Integer.toString(apiRequest.getBytes().length));
-      httpURLConnection.setUseCaches(false);
-      final DataOutputStream dataOutputStream =
-          new DataOutputStream(httpURLConnection.getOutputStream());
-      dataOutputStream.writeBytes(apiRequest);
-      dataOutputStream.flush();
-      responseCode = httpURLConnection.getResponseCode();
-      map.put("responseCode", String.valueOf(responseCode));
-      final String responseMessage = String.valueOf(httpURLConnection.getResponseMessage());
-      map.put("responseMessage", responseMessage);
-      if (responseCode == HttpURLConnection.HTTP_OK) {
-        final BufferedReader bufferedReader =
-            new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
-        while ((line = bufferedReader.readLine()) != null) {
-          xml += line;
-        }
-        bufferedReader.close();
-        map.put("xml", xml);
-      }
-      dataOutputStream.close();
-      httpURLConnection.disconnect();
-      if (responseCode != HttpURLConnection.HTTP_OK) {
-        Environment.sysOut("responseCode:[" + responseCode + "]");
-        Environment.sysOut("responseMessage:[" + responseMessage + "]");
-      }
-      dataOutputStream.close();
-      httpURLConnection.disconnect();
-    } catch (final Exception e) {
-      Environment.sysOut(e);
-    }
-    // if (responseCode != HttpURLConnection.HTTP_OK)
-    // {
-    // Assert.fail(xml);
-    // }
-    return map;
   }
 }
