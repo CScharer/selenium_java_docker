@@ -32,7 +32,7 @@ public class AuthNamespace extends GTWebinarService {
     stringBuilder.append(Constants.nlTab(1, 1) + "\"password\":\"" + PASSWORD + "\",");
     stringBuilder.append(Constants.nlTab(1, 1) + "\"client_id\":\"" + API_CONSUMER_KEY + "\"");
     stringBuilder.append(Constants.nlTab(1, 0) + "}");
-    Map<String, String> mapResponse; // = getAPIJSONResponse(credentials,
+    // Map<String, String> mapResponse = getAPIJSONResponse(credentials,
     // "POST", stringBuilder.toString(),
     // url);
     StringBuilder curlStringBuilder = new StringBuilder();
@@ -47,7 +47,7 @@ public class AuthNamespace extends GTWebinarService {
     curlStringBuilder.append("&client_id=\"" + API_CONSUMER_KEY + "\"");
     String command = "cmd /C " + curlStringBuilder.toString();
     Environment.sysOut("command:[" + command + "]");
-    mapResponse = CommandLine.runProcess(command, true);
+    final Map<String, String> mapResponse = CommandLine.runProcess(command, true);
     String json = mapResponse.get("lines");
     json = JSON.formatPretty(json, 4);
     Environment.sysOut("json Response:[" + Constants.NEWLINE + json + "]");
