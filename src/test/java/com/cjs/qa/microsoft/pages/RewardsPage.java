@@ -531,9 +531,8 @@ public class RewardsPage extends Page {
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     for (int pointsCardIndex = 0; pointsCardIndex < pointsCardList.size(); pointsCardIndex++) {
       final PointsCard pointsCard = pointsCardList.get(pointsCardIndex);
-      if (!pointsCard.isCollected())
+      if (!pointsCard.isCollected()) {
       // if (pointsCard.isCollected())
-      {
         final int pointsAvailable = pointsCard.getPointsTop();
         switch (pointsAvailable) { // Ignore the points message for now, but code to collect
             // the

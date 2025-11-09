@@ -160,8 +160,7 @@ public final class YMAPIMethods {
           // final String parameterRequired =
           // mapMethodParameters.get("Required")
           String parameterDeclarationType = LABEL_STRING;
-          switch (parameterDeclarationType) // type)
-          {
+          switch (parameterDeclarationType) { // type)
             case "32-bit Int":
             case LABEL_INTEGER:
             case "Number":
@@ -271,8 +270,7 @@ public final class YMAPIMethods {
             // final String parameterRequired =
             // mapMethodParameters.get("Required")
             String parameterDeclarationType = LABEL_STRING;
-            switch (newTemplateYMAPIClass) // type)
-            {
+            switch (newTemplateYMAPIClass) { // type)
               case "32-bit Int":
               case "Decimal":
               case LABEL_INTEGER:

@@ -167,10 +167,9 @@ public class SQL {
       final String[] recordData = listRecord.split(Constants.DELIMETER_LIST);
       // Environment.sysOut("recordData.length:[" + recordData.length +
       // "]")
-      for (int index = 0; index < listFields.size(); index++)
+      for (int index = 0; index < listFields.size(); index++) {
       // for (int recordIndex = 0; recordIndex < recordData.length
       // recordIndex++)
-      {
         // String value = recordData[index]
         String value = "";
         if (index > (recordData.length - 1)) {
@@ -301,9 +300,8 @@ public class SQL {
     stringBuilder.append(JDBCConstants.INSERT_INTO + "[" + tableName + "] (");
     stringBuilder.append(fieldNames.replace(", ", ","));
     stringBuilder.append(") VALUES (");
-    for (int keyIndex = 0; keyIndex < fields.length; keyIndex++)
+    for (int keyIndex = 0; keyIndex < fields.length; keyIndex++) {
     // for (String key : hashMapRecord.keySet())
-    {
       final String fieldValue = mapPage.get(fields[keyIndex]);
       if (fieldValue == null) {
         stringBuilder.append("''");
