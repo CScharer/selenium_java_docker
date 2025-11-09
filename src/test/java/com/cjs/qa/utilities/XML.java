@@ -263,9 +263,11 @@ public class XML {
         break;
       }
       if (descendants.equals("")) {
-        return descendants += getNodeDescendantNames(nodeParent, rootDescendant, parent);
+        descendants += getNodeDescendantNames(nodeParent, rootDescendant, parent);
+        return descendants;
       } else {
-        return descendants += "~" + getNodeDescendantNames(nodeParent, rootDescendant, parent);
+        descendants += "~" + getNodeDescendantNames(nodeParent, rootDescendant, parent);
+        return descendants;
       }
     } while (!parent.equals("InsurancePolicyXML"));
     return descendants;
