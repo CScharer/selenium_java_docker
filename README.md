@@ -384,6 +384,11 @@ Load and stress testing with industry-leading tools:
 - 👥 Concurrent users
 - 📈 Performance trends
 
+**Automated Execution:**
+- 🌙 **Nightly Quick Check** (10 PM CST) - 30-second smoke test
+- 📅 **Weekly Comprehensive** (Sunday 10 PM CST) - All 3 tools
+- 🎯 **Manual Trigger** - Run any time via GitHub Actions UI
+
 **See:** [Performance Testing Guide](docs/PERFORMANCE_TESTING.md)
 
 ### Using Helper Scripts (Recommended)

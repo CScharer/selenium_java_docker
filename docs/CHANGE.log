@@ -1,5 +1,235 @@
 # CHANGE LOG
 
+## [2025-11-08 12:30:00 CST] - Automated Performance Testing (3 Execution Modes) ✅
+
+### Overview
+Implemented automated performance testing in GitHub Actions with three execution modes: nightly quick checks (10 PM CST), weekly comprehensive tests (Sunday 10 PM CST), and manual triggers. Provides flexible performance monitoring without slowing daily CI/CD.
+
+### Execution Modes
+
+**Option 1: Weekly Comprehensive (Scheduled)**
+- **When**: Every Sunday at 10 PM CST (4 AM UTC Monday)
+- **What**: All 3 tools (Locust, Gatling, JMeter)
+- **Duration**: ~8-12 minutes
+- **Purpose**: Full performance validation
+
+**Option 2: Manual Trigger (On-Demand)**
+- **When**: Any time via GitHub Actions UI
+- **What**: Choose test type (all, locust-only, gatling-only, jmeter-only, quick-smoke)
+- **Duration**: Configurable
+- **Purpose**: Ad-hoc performance testing
+
+**Option 3: Nightly Quick Check (Hybrid)**
+- **When**: Every night at 10 PM CST (4 AM UTC)
+- **What**: Locust 30-second smoke test (10 users)
+- **Duration**: ~30 seconds
+- **Purpose**: Catch performance regressions early
+
+### Workflow Configuration
+
+**Created: `.github/workflows/performance.yml`**
+
+**Schedule Cron:**
+```yaml
+schedule:
+  # Weekly: Sunday 10 PM CST = Monday 4 AM UTC
+  - cron: '0 4 * * 1'
+  
+  # Nightly: Every day 10 PM CST = 4 AM UTC next day
+  - cron: '0 4 * * *'
+```
+
+**Manual Trigger Inputs:**
+```yaml
+workflow_dispatch:
+  inputs:
+    test_type:
+      - all
+      - locust-only
+      - gatling-only
+      - jmeter-only
+      - quick-smoke
+    
+    users: '100'        # Configurable
+    duration: '3m'      # Configurable
+```
+
+**Smart Logic:**
+- Determines if Sunday (comprehensive) or weekday (quick)
+- Manual triggers override schedule
+- Different jobs based on test mode
+
+### Jobs Created
+
+**1. determine-test-type**
+- Checks day of week
+- Determines quick vs comprehensive
+- Sets outputs for conditional jobs
+
+**2. quick-performance-check** (Nightly)
+- Locust only
+- 10 users, 30 seconds
+- Fast regression detection
+- Runs Mon-Sat nights
+
+**3. locust-comprehensive** (Weekly/Manual)
+- API load test (100 users, 3 min)
+- Comprehensive test (150 users, 3 min)
+- Runs Sunday nights or manual
+
+**4. gatling-comprehensive** (Weekly/Manual)
+- All Gatling simulations
+- Uses -Pgatling profile
+- Beautiful HTML reports
+
+**5. jmeter-comprehensive** (Weekly/Manual)
+- All JMeter test plans
+- Standard metrics
+- HTML dashboards
+
+**6. performance-summary**
+- Downloads all results
+- Displays combined summary
+- Shows key metrics
+- Lists available reports
+
+### Execution Schedule
+
+```
+Sunday 10 PM CST:
+  ├─ Locust (40%) - 6 minutes
+  ├─ Gatling (30%) - 3 minutes
+  └─ JMeter (30%) - 3 minutes
+  Total: ~12 minutes comprehensive
+
+Monday-Saturday 10 PM CST:
+  └─ Locust Quick (30 seconds)
+  Total: ~30 seconds
+
+Any time (Manual):
+  └─ Choose test type
+  Total: Variable
+```
+
+### Time Zone Configuration
+
+**User Timezone: CST (UTC-6)**
+
+**Conversion:**
+- 10 PM CST = 4 AM UTC next day
+- Sunday 10 PM CST = Monday 4 AM UTC
+- Nightly 10 PM CST = 4 AM UTC daily
+
+**GitHub Actions uses UTC**, so all cron times are UTC.
+
+### Features
+
+**Smart Scheduling:**
+- Automatically determines test type based on day
+- Sunday = comprehensive (all tools)
+- Other days = quick smoke (Locust only)
+
+**Manual Control:**
+- Trigger any time via Actions UI
+- Select specific tool
+- Configure users and duration
+- Override defaults
+
+**Artifact Storage:**
+- All reports saved as artifacts
+- 30-day retention (comprehensive)
+- 7-day retention (quick checks)
+- Download HTML reports anytime
+
+**Non-Blocking:**
+- Separate workflow from main CI/CD
+- Doesn't affect functional tests
+- Can run in parallel
+
+### Benefits
+
+**1. Continuous Monitoring:**
+- Daily quick checks (30s)
+- Catch regressions immediately
+- Weekly comprehensive analysis
+
+**2. Flexible Execution:**
+- Scheduled automatic runs
+- Manual on-demand testing
+- Configurable parameters
+
+**3. Resource Efficient:**
+- Quick checks use minimal resources
+- Comprehensive tests run off-peak (Sun night)
+- Smart scheduling based on needs
+
+**4. Complete Coverage:**
+- All 3 tools validated weekly
+- Daily performance smoke tests
+- Full historical tracking
+
+### Usage
+
+**View Scheduled Runs:**
+```
+Go to: GitHub → Actions → Performance Testing
+See: Scheduled runs (nightly & weekly)
+```
+
+**Manual Trigger:**
+```
+1. Go to: GitHub → Actions → Performance Testing
+2. Click: "Run workflow"
+3. Select:
+   - Test type (all, locust-only, etc.)
+   - Users (default: 100)
+   - Duration (default: 3m)
+4. Click: "Run workflow" button
+```
+
+**Download Results:**
+```
+1. Go to workflow run
+2. Scroll to Artifacts section
+3. Download:
+   - locust-performance-results
+   - gatling-performance-results
+   - jmeter-performance-results
+4. Extract and open index.html
+```
+
+### Metrics Tracked
+
+**Nightly Quick Checks:**
+- Response time trends
+- Throughput stability
+- Error rate monitoring
+- Baseline validation
+
+**Weekly Comprehensive:**
+- All endpoints tested
+- All HTTP methods
+- Cross-tool validation
+- Detailed analysis
+
+### Git Commits
+
+**Commit:** (pending)
+**Files:**
+- `.github/workflows/performance.yml` - New workflow
+- `README.md` - Updated with automation info
+- `docs/CHANGE.log` - Comprehensive documentation
+
+### Status
+✅ **Nightly Quick Check**: Configured (10 PM CST, 30s)  
+✅ **Weekly Comprehensive**: Configured (Sunday 10 PM CST)  
+✅ **Manual Trigger**: Enabled (any time)  
+✅ **Smart Scheduling**: Day-based logic  
+✅ **Artifact Upload**: All results saved  
+✅ **Summary Report**: Combined metrics  
+
+---
+
 ## [2025-11-08 12:15:00 CST] - Fix: Disable Scala Compilation by Default ✅
 
 ### Overview
