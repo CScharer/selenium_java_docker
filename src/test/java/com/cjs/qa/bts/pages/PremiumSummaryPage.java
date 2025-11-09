@@ -151,10 +151,10 @@ public class PremiumSummaryPage extends Page {
       String classCode,
       String premium) {
     String coverageFromTable = "";
-    if (state == " ") {
-      if ((coverage == " ") && (deductible == " ") && (premium == " ")) {
+    if (" ".equals(state)) {
+      if (" ".equals(coverage) && " ".equals(deductible) && " ".equals(premium)) {
         Environment.sysOut("ALL BLANK");
-      } else if (deductible == "") {
+      } else if ("".equals(deductible)) {
         coverageFromTable =
             getWebElement(
                     By.xpath(
@@ -229,9 +229,9 @@ public class PremiumSummaryPage extends Page {
         || state.equals("WV")
         || state.equals("WI")
         || state.equals("WY")) {
-      if ((coverage == " ") && (deductible == " ") && (premium == " ")) {
+      if (" ".equals(coverage) && " ".equals(deductible) && " ".equals(premium)) {
         Environment.sysOut("ALL BLANK");
-      } else if (deductible == "") {
+      } else if ("".equals(deductible)) {
         coverageFromTable =
             getWebElement(By.xpath(" .//*[@id='stateCloser']/div[contains(.,'" + coverage + "')]"))
                 .getText();
@@ -257,7 +257,7 @@ public class PremiumSummaryPage extends Page {
                 coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium));
       }
     } else {
-      if ((coverage == " ") && (deductible == " ") && (premium == " ")) {
+      if (" ".equals(coverage) && " ".equals(deductible) && " ".equals(premium)) {
         Environment.sysOut("ALL BLANK");
       } else {
         coverageFromTable =
