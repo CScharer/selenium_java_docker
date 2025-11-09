@@ -21,7 +21,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class YMAPIMethods {
+public final class YMAPIMethods {
   public static final String LABEL_NAME = "Name";
   public static final String LABEL_DESCRIPTION = "Description";
   public static final String LABEL_BOOLEAN = "Boolean";

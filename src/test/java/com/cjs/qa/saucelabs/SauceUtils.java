@@ -10,7 +10,7 @@ import java.util.Map.Entry;
 import org.json.JSONObject;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-public class SauceUtils {
+public final class SauceUtils {
   public static final String DEFAULT_HOST = "sauceconnect.berkley-bts" + IExtension.COM;
   public static final String DEFAULT_PORT = "4445";
   public static final String DEFAULT_TUNNEL_IDENTIFIER = "prodSLTunnel";

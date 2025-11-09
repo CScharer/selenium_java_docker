@@ -24,7 +24,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-public class Email {
+public final class Email {
   // linkFilePath = "C:" + Constants.DELIMETER_PATH + "Program Files" +
   // Constants.DELIMETER_PATH + "File Name" + IExtension.TXT
   // linkFile = "linkFile [file: " + resultsFile.replace(" ", "%20")" + "]"

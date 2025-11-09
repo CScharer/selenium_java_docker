@@ -1,6 +1,6 @@
 package com.cjs.qa.selenium;
 
-public class Browser {
+public final class Browser {
   private Browser() {}
 
   public static final String CHROME = "chrome";

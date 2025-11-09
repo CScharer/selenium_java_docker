@@ -3,7 +3,7 @@ package com.cjs.qa.utilities;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegularExpression {
+public final class RegularExpression {
   private RegularExpression() {}
 
   public static final String EMAIL =

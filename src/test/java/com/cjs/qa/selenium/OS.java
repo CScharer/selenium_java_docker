@@ -1,6 +1,6 @@
 package com.cjs.qa.selenium;
 
-public class OS {
+public final class OS {
   private OS() {}
 
   public static final String ANDROID = "android";

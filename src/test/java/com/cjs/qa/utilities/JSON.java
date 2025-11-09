@@ -2,7 +2,7 @@ package com.cjs.qa.utilities;
 
 import org.json.JSONObject;
 
-public class JSON {
+public final class JSON {
   private JSON() {}
 
   /**
