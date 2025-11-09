@@ -94,7 +94,7 @@ public class Data {
   public static int getDailyLimit() {
     Environment.sysOut(
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");
-    String methodName = JavaHelpers.getCurrentMethodName();
+    final String methodName = JavaHelpers.getCurrentMethodName();
     StringBuilder sqlStringBuilder = new StringBuilder();
     sqlStringBuilder.append(JDBCConstants.SELECT_ALL_FROM);
     sqlStringBuilder.append("[" + TABLE_LINKEDIN + "];");

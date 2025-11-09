@@ -51,7 +51,7 @@ public class SecureConfigTest {
     // First retrieval (should hit Secret Manager)
     long startTime = System.currentTimeMillis();
     String password1 = SecureConfig.getPassword("AUTO_BTSQA_PASSWORD");
-    long firstCallTime = System.currentTimeMillis() - startTime;
+    final long firstCallTime = System.currentTimeMillis() - startTime;
 
     assertEquals("Cache should have 1 item", 1, SecureConfig.getCacheSize());
 

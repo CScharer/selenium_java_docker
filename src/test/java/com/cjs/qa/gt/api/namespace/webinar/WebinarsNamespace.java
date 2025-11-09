@@ -39,7 +39,7 @@ public class WebinarsNamespace extends GTWebinarService {
   public Map<String, String> getAllWebinarsForAnAccount(String credentials, String accountKey)
       throws Throwable {
     // /accounts/{accountKey}/webinars
-    String url = API_GT_BASE + "/accounts/" + accountKey + "/webinars";
+    final String url = API_GT_BASE + "/accounts/" + accountKey + "/webinars";
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("");
     // return getAPIJSONResponse(credentials, "GET",

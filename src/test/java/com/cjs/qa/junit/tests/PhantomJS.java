@@ -43,7 +43,7 @@ public class PhantomJS {
     webDriver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(10));
     webDriver.get("https://www.google.com");
     for (int counter = 1; counter <= 10; counter++) {
-      String searchString = "Searching for " + counter;
+      final String searchString = "Searching for " + counter;
       byObject = By.name("q");
       webElement = waitExists(byObject);
       webElement.clear();

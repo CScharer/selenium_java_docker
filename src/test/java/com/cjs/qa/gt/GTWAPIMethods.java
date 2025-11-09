@@ -48,7 +48,7 @@ public class GTWAPIMethods {
             gtwMethodMapListIndex++) {
           Map<String, String> gtwMethodMap = gtwMethodMapList.get(gtwMethodMapListIndex);
           String className = gtwMethodMap.get("Namespace") + "Namespace";
-          String filePathClassName = gtwNamespaceClassPath + className + IExtension.JAVA;
+          final String filePathClassName = gtwNamespaceClassPath + className + IExtension.JAVA;
           if (gtwMethodMapListIndex == 0) {
             stringBuilderClass = getClassHeader(stringBuilderClass, className);
           }

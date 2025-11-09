@@ -234,7 +234,7 @@ public class VivitData extends Environment {
     String datePreviousBackUp =
         DateHelpers.getCurrentDatePlusMinusDays(
             DateHelpers.FORMAT_yyyyMMdd, (DAYS_TO_KEEP_BACKUPS * -1));
-    String dateCurrentBackUp = DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_yyyyMMdd);
+    final String dateCurrentBackUp = DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_yyyyMMdd);
     String tableName = VivitTables.PREFIX + tableGroupName;
     // Drop the old backup table.
     String tableNameBackUpPrevious = tableName + "_" + datePreviousBackUp;
@@ -252,7 +252,7 @@ public class VivitData extends Environment {
     sysOut(sqlStringBuilder.toString());
     SQL.executeVivit("DropIfExists", tableNameBackUp, sqlStringBuilder);
     // Create the new current backup table from the Previous table.
-    String tableNamePrevious = tableName + "_" + "Previous";
+    final String tableNamePrevious = tableName + "_" + "Previous";
     sqlStringBuilder = new StringBuilder();
     sqlStringBuilder.append(JDBCConstants.CREATE_TABLE + "[" + tableNameBackUp + "] ");
     sqlStringBuilder.append(JDBCConstants.AS);
