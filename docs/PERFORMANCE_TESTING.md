@@ -136,16 +136,23 @@ locust -f src/test/locust/api_load_test.py --worker --master-host=<master-ip>
 ./scripts/run-gatling-tests.sh
 ```
 
+**With Maven (requires -Pgatling profile):**
+```bash
+./mvnw gatling:test -Pgatling
+```
+
 **Specific Simulation:**
 ```bash
-./mvnw gatling:test -Dgatling.simulationClass=simulations.ApiLoadSimulation
+./mvnw gatling:test -Pgatling -Dgatling.simulationClass=simulations.ApiLoadSimulation
 ```
 
 **With Custom Users:**
 ```bash
-./mvnw gatling:test -Dgatling.simulationClass=simulations.ApiLoadSimulation \
+./mvnw gatling:test -Pgatling -Dgatling.simulationClass=simulations.ApiLoadSimulation \
                     -Dusers=100
 ```
+
+**Note:** The `-Pgatling` profile activates Scala compilation. This is disabled by default to avoid compiling Scala files during normal builds (since they're not needed for UI/API tests).
 
 ### Load Profiles
 

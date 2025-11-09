@@ -55,7 +55,7 @@ echo "╚═══════════════════════�
 echo ""
 
 if [ -d "src/test/scala" ]; then
-    ./mvnw gatling:test || OVERALL_RESULT=1
+    ./mvnw gatling:test -Pgatling || OVERALL_RESULT=1
 else
     echo "⚠️  No Gatling tests found - skipping"
     OVERALL_RESULT=1

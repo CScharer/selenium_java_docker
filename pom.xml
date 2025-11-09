@@ -781,13 +781,15 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 				</configuration>
 			</plugin>
 			
-			<!-- Scala Compiler for Gatling -->
+			<!-- Scala Compiler for Gatling (disabled by default, enable with -Pgatling) -->
 			<plugin>
 				<groupId>net.alchim31.maven</groupId>
 				<artifactId>scala-maven-plugin</artifactId>
 				<version>${scala-maven-plugin.version}</version>
 				<executions>
 					<execution>
+						<id>scala-compile</id>
+						<phase>none</phase>
 						<goals>
 							<goal>compile</goal>
 							<goal>testCompile</goal>
@@ -797,6 +799,32 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 			</plugin>
 		</plugins>
 	</build>
+	
+	<profiles>
+		<!-- Profile to enable Gatling/Scala compilation -->
+		<profile>
+			<id>gatling</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>net.alchim31.maven</groupId>
+						<artifactId>scala-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>scala-compile</id>
+								<phase>process-test-resources</phase>
+								<goals>
+									<goal>testCompile</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+	
+
 	<organization>
 		<name>CJS Consulting, L.L.C</name>
 		<url>http://www.cjsconsulting.com</url>

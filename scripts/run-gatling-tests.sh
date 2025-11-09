@@ -32,7 +32,7 @@ echo ""
 echo "🚀 Executing Gatling simulations..."
 echo ""
 
-./mvnw gatling:test
+./mvnw gatling:test -Pgatling
 
 GATLING_EXIT_CODE=$?
 
