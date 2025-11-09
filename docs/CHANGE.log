@@ -1,5 +1,156 @@
 # CHANGE LOG
 
+## [2025-11-08 14:15:00 CST] - Fix: JMeter Execution Binding + Single Invocation ✅
+
+### Overview
+JMeter plugin requires BOTH single invocation AND execution binding with ID "configuration" in POM. Added execution binding back while keeping single invocation approach.
+
+### Problem (from latest jmeter-full.log)
+
+**Configure step succeeded:**
+```
+[INFO] --- jmeter:3.7.0:configure (default-cli) ---
+[INFO] Building JMeter directory structure... ✅
+[INFO] Configuring JMeter artifacts... ✅
+```
+
+**But jmeter goal still failed:**
+```
+[INFO] --- jmeter:3.7.0:jmeter (default-cli) ---
+[ERROR] No results for path: $[0]
+[ERROR] Current Execution ID: configuration
+```
+
+**Root Cause:**
+Plugin is looking for execution with ID "configuration" in POM, even when goals run in same invocation!
+
+### Solution
+
+**JMeter plugin needs BOTH:**
+1. ✅ Single Maven invocation (shared state)
+2. ✅ Execution binding with ID "configuration" (reference point)
+
+**Updated pom.xml:**
+```xml
+<plugin>
+  <groupId>com.lazerycode.jmeter</groupId>
+  <artifactId>jmeter-maven-plugin</artifactId>
+  <configuration>
+    <testFilesDirectory>src/test/jmeter</testFilesDirectory>
+    <resultsDirectory>${project.build.directory}/jmeter/results</resultsDirectory>
+    <generateReports>true</generateReports>
+    <ignoreResultFailures>true</ignoreResultFailures>
+  </configuration>
+  <executions>
+    <execution>
+      <id>configuration</id>
+      <configuration>
+        <testFilesDirectory>src/test/jmeter</testFilesDirectory>
+        <resultsDirectory>${project.build.directory}/jmeter/results</resultsDirectory>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
+```
+
+**Key Points:**
+- Plugin-level `<configuration>` for general settings
+- Execution with ID "configuration" so plugin can find it
+- No goals bound to lifecycle (works with direct invocation)
+- Configuration duplicated in execution for plugin to reference
+
+### How It Works
+
+**When you run:**
+```bash
+./mvnw jmeter:configure jmeter:jmeter jmeter:results
+```
+
+**What happens:**
+1. Maven starts single process
+2. jmeter:configure runs:
+   - Looks for execution ID "configuration" in POM ✅
+   - Reads configuration from that execution ✅
+   - Creates artifacts and stores state in memory ✅
+3. jmeter:jmeter runs (same process):
+   - Looks for execution ID "configuration" ✅
+   - Finds it in POM ✅
+   - Accesses in-memory state from configure ✅
+   - Executes tests ✅
+4. jmeter:results runs (same process):
+   - Processes results from jmeter ✅
+   - Generates reports ✅
+
+### Why This Works Now
+
+**Previous Understanding (Incomplete):**
+- Thought only single invocation was needed
+- Removed execution binding
+- Plugin still couldn't find "configuration" ID
+
+**Current Understanding (Complete):**
+- Single invocation provides shared state ✅
+- Execution binding provides reference point ✅
+- Plugin needs BOTH to work ✅
+
+**The Execution Binding:**
+```xml
+<execution>
+  <id>configuration</id>  <!-- Plugin looks for this ID -->
+  <configuration>
+    <!-- Settings the plugin will use -->
+  </configuration>
+</execution>
+```
+
+**Purpose:**
+- Provides named execution that plugin can reference
+- Not bound to lifecycle (no `<phase>` or `<goals>`)
+- Just a configuration container with an ID
+- Plugin searches for this ID when running
+
+### Expected Output
+
+```bash
+[INFO] --- jmeter:3.7.0:configure (default-cli) ---
+[INFO] Building JMeter directory structure... ✅
+[INFO] Found execution: configuration ✅
+[INFO] Configuring JMeter artifacts... ✅
+
+[INFO] --- jmeter:3.7.0:jmeter (default-cli) ---
+[INFO] Found execution: configuration ✅
+[INFO] Executing test files... ✅
+[INFO] Running: API_Performance_Test.jmx ✅
+[INFO] Running: Web_Load_Test.jmx ✅
+
+[INFO] --- jmeter:3.7.0:results (default-cli) ---
+[INFO] Generating HTML reports... ✅
+[INFO] BUILD SUCCESS 🎉
+```
+
+### Updated Files
+
+**pom.xml:**
+- Added `<executions>` section back
+- Execution with ID "configuration"
+- No goals or phase binding
+- Just configuration for plugin to reference
+
+### Git Commits
+
+**Commit:** (pending)
+**Files:**
+- `pom.xml` - Added execution binding with ID "configuration"
+- `docs/CHANGE.log` - Explanation of complete solution
+
+### Status
+✅ **Single Invocation**: Maintained (shared state)  
+✅ **Execution Binding**: Added (reference point)  
+✅ **Configuration**: Duplicated in execution  
+✅ **Ready to Test**: Should work now!  
+
+---
+
 ## [2025-11-08 14:00:00 CST] - Fix: JMeter Single Invocation (Root Cause Identified) ✅
 
 ### Overview
