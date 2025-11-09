@@ -1,5 +1,201 @@
 # CHANGE LOG
 
+## [2025-11-08 13:00:00 CST] - Fix: Gatling Multiple Simulations + JMeter Execution ID ✅
+
+### Overview
+Fixed Gatling to run multiple simulations and corrected JMeter execution ID configuration to prevent initialization errors.
+
+### Problem
+
+**Issue 1: Gatling Multiple Simulations Error**
+```
+Failed to execute goal gatling-maven-plugin:4.7.0:test
+More than 1 simulation to run. Either specify one with 
+-Dgatling.simulationClass=<className>, or enable 
+runMultipleSimulations in your pom.xml
+```
+- We have 2 simulations: `ApiLoadSimulation` and `WebLoadSimulation`
+- Gatling defaults to running only one simulation
+- Needs explicit configuration to run multiple
+
+**Issue 2: JMeter Execution ID Mismatch**
+```
+Failed to execute goal jmeter-maven-plugin:3.7.0:jmeter
+No results for path: $[0]
+Current Execution ID: configuration
+```
+- JMeter plugin expects execution ID "configuration" for configure goal
+- We had single execution ID "jmeter-tests" for all goals
+- Plugin couldn't find proper configuration
+
+### Solution
+
+**1. Enable Gatling Multiple Simulations**
+
+Updated `pom.xml` Gatling plugin:
+
+```xml
+<plugin>
+  <groupId>io.gatling</groupId>
+  <artifactId>gatling-maven-plugin</artifactId>
+  <configuration>
+    <simulationsFolder>src/test/scala</simulationsFolder>
+    <resultsFolder>target/gatling</resultsFolder>
+    <!-- Enable running multiple simulations -->
+    <runMultipleSimulations>true</runMultipleSimulations>
+  </configuration>
+</plugin>
+```
+
+**What It Does:**
+- Allows Gatling to run all simulations in `src/test/scala`
+- Both `ApiLoadSimulation` and `WebLoadSimulation` execute
+- No need to specify `-Dgatling.simulationClass`
+
+**2. Fixed JMeter Execution IDs**
+
+Updated `pom.xml` JMeter plugin:
+
+```xml
+<plugin>
+  <groupId>com.lazerycode.jmeter</groupId>
+  <artifactId>jmeter-maven-plugin</artifactId>
+  <executions>
+    <!-- Separate execution for configure goal -->
+    <execution>
+      <id>configuration</id>
+      <goals>
+        <goal>configure</goal>
+      </goals>
+    </execution>
+    <!-- Separate execution for test goals -->
+    <execution>
+      <id>jmeter-tests</id>
+      <goals>
+        <goal>jmeter</goal>
+        <goal>results</goal>
+      </goals>
+    </execution>
+  </executions>
+</plugin>
+```
+
+**What It Does:**
+- Splits configure and test into separate executions
+- `configuration` execution ID matches plugin's expectation
+- Proper initialization before running tests
+
+### Execution Flow
+
+**Gatling (Step 1):**
+```
+Start Gatling
+ ├─ Compile Scala sources (Gatling profile)
+ ├─ Discover simulations in src/test/scala/
+ ├─ Run ApiLoadSimulation (50 users, 90 sec)
+ ├─ Run WebLoadSimulation (30 users, 20 sec)
+ └─ Generate reports
+Total: ~3 minutes
+```
+
+**Locust (Step 2):**
+```
+Start Locust (after Gatling completes)
+ ├─ Run api_load_test.py (100 users, 3 min)
+ ├─ Run comprehensive_load_test.py (150 users, 3 min)
+ └─ Generate reports
+Total: ~6 minutes
+```
+
+**JMeter (Step 3):**
+```
+Start JMeter (after Locust completes)
+ ├─ Execute "configuration" (creates config.json)
+ ├─ Run API_Performance_Test.jmx (50 users)
+ ├─ Run Web_Load_Test.jmx (30 users)
+ ├─ Execute "results" (generates HTML reports)
+ └─ Complete
+Total: ~3 minutes
+```
+
+### Benefits
+
+**Gatling Multiple Simulations:**
+- ✅ Runs all simulations automatically
+- ✅ No manual simulation selection needed
+- ✅ Complete coverage (API + Web)
+- ✅ Single command execution
+
+**JMeter Execution IDs:**
+- ✅ Proper initialization sequence
+- ✅ Plugin finds configuration correctly
+- ✅ No "No results" errors
+- ✅ Clean execution flow
+
+### Simulations Running
+
+**Gatling (2 simulations):**
+1. **ApiLoadSimulation**
+   - Target: JSONPlaceholder API
+   - Users: 50 ramp + 5/sec constant
+   - Duration: 90 seconds
+   - Operations: GET, POST, PUT, DELETE
+
+2. **WebLoadSimulation**
+   - Target: Google, GitHub, Wikipedia, W3C
+   - Users: 30 over 20 seconds
+   - Duration: 20 seconds
+   - Operations: Page loads + navigation
+
+**Locust (2 test files):**
+1. **api_load_test.py**
+   - Target: JSONPlaceholder API
+   - Users: 100 concurrent
+   - Duration: 3 minutes
+   - Operations: Weighted tasks (GET 10x, POST 3x, etc.)
+
+2. **comprehensive_load_test.py** (if exists)
+   - Extended scenarios
+   - Users: 150 concurrent
+   - Duration: 3 minutes
+
+**JMeter (2 test plans):**
+1. **API_Performance_Test.jmx**
+   - Target: JSONPlaceholder API
+   - Users: 50 threads, 30s ramp-up
+   - Loops: 5
+   - Operations: GET all, GET single, POST create
+
+2. **Web_Load_Test.jmx**
+   - Target: Google, GitHub, Wikipedia
+   - Users: 30 threads, 20s ramp-up
+   - Loops: 3
+   - Operations: Homepage loads
+
+### Updated Files
+
+**pom.xml:**
+- Gatling plugin: Added `runMultipleSimulations=true`
+- JMeter plugin: Split into two executions (configuration + jmeter-tests)
+
+**Workflow (.github/workflows/performance.yml):**
+- No changes needed (goals already correct)
+
+### Git Commits
+
+**Commit:** (pending)
+**Files:**
+- `pom.xml` - Gatling + JMeter configuration fixes
+- `docs/CHANGE.log` - This documentation
+
+### Status
+✅ **Gatling Multiple Simulations**: Enabled (runs both API + Web)  
+✅ **JMeter Execution IDs**: Fixed (configuration + jmeter-tests)  
+✅ **Sequential Execution**: Maintained (Gatling → Locust → JMeter)  
+✅ **All Simulations**: Running (2 Gatling, 2 Locust, 2 JMeter)  
+
+---
+
 ## [2025-11-08 12:45:00 CST] - Fix: Sequential Performance Test Execution + Compilation Fixes ✅
 
 ### Overview

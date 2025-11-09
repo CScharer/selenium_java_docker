@@ -766,6 +766,8 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 				<configuration>
 					<simulationsFolder>src/test/scala</simulationsFolder>
 					<resultsFolder>target/gatling</resultsFolder>
+					<!-- Enable running multiple simulations (ApiLoadSimulation + WebLoadSimulation) -->
+					<runMultipleSimulations>true</runMultipleSimulations>
 				</configuration>
 			</plugin>
 			
@@ -785,9 +787,14 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 				</configuration>
 				<executions>
 					<execution>
-						<id>jmeter-tests</id>
+						<id>configuration</id>
 						<goals>
 							<goal>configure</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>jmeter-tests</id>
+						<goals>
 							<goal>jmeter</goal>
 							<goal>results</goal>
 						</goals>
