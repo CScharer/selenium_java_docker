@@ -9,6 +9,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class PremiumSummaryPage extends Page {
+  
+  // State abbreviations for validation
+  private static final List<String> STATE_ABBREVIATIONS = List.of(
+      "AL:", "AK:", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
+      "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
+      "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "ND", "NY",
+      "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT",
+      "VT", "VA", "WA", "WV", "WI", "WY");
+  
   public PremiumSummaryPage(WebDriver webDriver) {
     super(webDriver);
   }
@@ -183,52 +192,7 @@ public class PremiumSummaryPage extends Page {
             .equals(
                 coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium));
       }
-    } else if (state.equals("AL:")
-        || state.equals("AK:")
-        || state.equals("AZ")
-        || state.equals("AR")
-        || state.equals("CA")
-        || state.equals("CO")
-        || state.equals("CT")
-        || state.equals("DE")
-        || state.equals("FL")
-        || state.equals("GA")
-        || state.equals("HI")
-        || state.equals("ID")
-        || state.equals("IL")
-        || state.equals("IN")
-        || state.equals("IA")
-        || state.equals("KS")
-        || state.equals("KY")
-        || state.equals("LA")
-        || state.equals("ME")
-        || state.equals("MD")
-        || state.equals("MA")
-        || state.equals("MI")
-        || state.equals("MN")
-        || state.equals("MS")
-        || state.equals("MO")
-        || state.equals("MT")
-        || state.equals("NE")
-        || state.equals("NV")
-        || state.equals("ND")
-        || state.equals("NY")
-        || state.equals("OH")
-        || state.equals("OK")
-        || state.equals("OR")
-        || state.equals("PA")
-        || state.equals("RI")
-        || state.equals("SC")
-        || state.equals("SD")
-        || state.equals("TN")
-        || state.equals("TX")
-        || state.equals("UT")
-        || state.equals("VT")
-        || state.equals("VA")
-        || state.equals("WA")
-        || state.equals("WV")
-        || state.equals("WI")
-        || state.equals("WY")) {
+    } else if (STATE_ABBREVIATIONS.contains(state)) {
       if (" ".equals(coverage) && " ".equals(deductible) && " ".equals(premium)) {
         Environment.sysOut("ALL BLANK");
       } else if ("".equals(deductible)) {

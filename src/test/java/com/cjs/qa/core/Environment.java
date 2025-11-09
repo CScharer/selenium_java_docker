@@ -250,14 +250,6 @@ public class Environment {
     }
   }
 
-  public static String getGridHub() {
-    return gridHub;
-  }
-
-  public static String getGridPort() {
-    return gridPort;
-  }
-
   public static void sysOut(int value) {
     sysOut(String.valueOf(value));
   }
@@ -278,18 +270,6 @@ public class Environment {
     e.printStackTrace();
   }
 
-  public static void sysOutFailure(String value) {
-    sysOut(value);
-    final String messageOut = getSysOutHeader() + value;
-    if (FILE_LOG == null) {
-      sysOut("FILE_LOG:[" + FILE_LOG + "]" + Constants.NEWLINE + value);
-    } else {
-      FSO.fileWrite(FILE_LOG, messageOut + Constants.TAB, true);
-      FSO.fileWrite(FILE_LOG, "FAILED", true);
-      FSO.fileWrite(FILE_LOG, Constants.NL, true);
-    }
-  }
-
   public static void sysOut(String[] value) {
     sysOut(Arrays.toString(value));
   }
@@ -308,6 +288,26 @@ public class Environment {
 
   public static void sysOut(boolean value) {
     sysOut(String.valueOf(value));
+  }
+
+  public static String getGridHub() {
+    return gridHub;
+  }
+
+  public static String getGridPort() {
+    return gridPort;
+  }
+
+  public static void sysOutFailure(String value) {
+    sysOut(value);
+    final String messageOut = getSysOutHeader() + value;
+    if (FILE_LOG == null) {
+      sysOut("FILE_LOG:[" + FILE_LOG + "]" + Constants.NEWLINE + value);
+    } else {
+      FSO.fileWrite(FILE_LOG, messageOut + Constants.TAB, true);
+      FSO.fileWrite(FILE_LOG, "FAILED", true);
+      FSO.fileWrite(FILE_LOG, Constants.NL, true);
+    }
   }
 
   private static void setOverrideUser(String node, String config) {
