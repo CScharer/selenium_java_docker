@@ -26,44 +26,44 @@ public class Marshall {
   @Test
   public void testEventsAllSearch() throws JAXBException {
     String filePathName = "C:\\Workspace\\Data\\Vivit\\Data\\Events\\101.xml";
-    YourMembership_Response yourMembership_Response =
+    YourMembership_Response yourMembershipResponse =
         yourMembership_ResponseUnmarshall(filePathName);
-    Environment.sysOut(yourMembership_Response.toString());
-    Environment.sysOut(yourMembership_Response.getEventsAllSearch().toString());
-    Environment.sysOut(yourMembership_Response.getEventsAllSearch().getResults().toString());
+    Environment.sysOut(yourMembershipResponse.toString());
+    Environment.sysOut(yourMembershipResponse.getEventsAllSearch().toString());
+    Environment.sysOut(yourMembershipResponse.getEventsAllSearch().getResults().toString());
     for (int eventsIndex = 0;
-        eventsIndex < yourMembership_Response.getEventsAllSearch().getResults().getItem().size();
+        eventsIndex < yourMembershipResponse.getEventsAllSearch().getResults().getItem().size();
         eventsIndex++) {
       Item item =
-          yourMembership_Response.getEventsAllSearch().getResults().getItem().get(eventsIndex);
+          yourMembershipResponse.getEventsAllSearch().getResults().getItem().get(eventsIndex);
       Environment.sysOut("Item Index (" + eventsIndex + ")");
       Environment.sysOut(item.toString());
     }
-    String xml = yourMembership_ResponseMarshall(yourMembership_Response, filePathNameNewXML);
+    String xml = yourMembership_ResponseMarshall(yourMembershipResponse, filePathNameNewXML);
   }
 
   @Test
   public void testEventsEventsGet() throws JAXBException {
     String filePathName = "C:\\Workspace\\Data\\Vivit\\Data\\Events\\EventInformation\\1209865.xml";
-    YourMembership_Response yourMembership_Response =
+    YourMembership_Response yourMembershipResponse =
         yourMembership_ResponseUnmarshall(filePathName);
-    Environment.sysOut(yourMembership_Response.toString());
-    Environment.sysOut(yourMembership_Response.getEventsEventGet().toString());
-    String xml = yourMembership_ResponseMarshall(yourMembership_Response, filePathNameNewXML);
+    Environment.sysOut(yourMembershipResponse.toString());
+    Environment.sysOut(yourMembershipResponse.getEventsEventGet().toString());
+    String xml = yourMembership_ResponseMarshall(yourMembershipResponse, filePathNameNewXML);
   }
 
   @Test
   public void testSaEventsEventRegistrationGet() throws JAXBException {
     String filePathName =
         "C:\\Workspace\\Data\\Vivit\\Data\\Events\\Registration\\49170B25-A49F-46F7-98CB-3DA7042D4BB1.xml";
-    YourMembership_Response yourMembership_Response =
+    YourMembership_Response yourMembershipResponse =
         yourMembership_ResponseUnmarshall(filePathName);
-    Environment.sysOut(yourMembership_Response.getSaEventsEventRegistrationGet().toString());
-    String xml = yourMembership_ResponseMarshall(yourMembership_Response, filePathNameNewXML);
+    Environment.sysOut(yourMembershipResponse.getSaEventsEventRegistrationGet().toString());
+    String xml = yourMembership_ResponseMarshall(yourMembershipResponse, filePathNameNewXML);
     Environment.sysOut("TESTING XML CREATION" + Constants.NEWLINE + xml);
     System.out.println(
         "Getting the Phone Number:"
-            + yourMembership_Response
+            + yourMembershipResponse
                 .getSaEventsEventRegistrationGet()
                 .getDataSet()
                 .getPhone()
@@ -76,9 +76,9 @@ public class Marshall {
     JAXBContext jaxbContext = JAXBContext.newInstance(YourMembership_Response.class);
     Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
     File file = new File(filePathNameXML);
-    YourMembership_Response yourMembership_Response =
+    YourMembership_Response yourMembershipResponse =
         (YourMembership_Response) unmarshaller.unmarshal(file);
-    return yourMembership_Response;
+    return yourMembershipResponse;
   }
 
   public String yourMembership_ResponseMarshall(

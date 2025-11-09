@@ -33,7 +33,7 @@ public final class YMAPIMethods {
       "v_Vivit_YMAPI_MethodWithParameters";
   // CJSConstants.PATH_FILES_TEMPLATES
   static final String PATH_TEMPLATES =
-      Environment.FOLDER_DATA + "Templates" + Constants.DELIMETER_PATH;
+      Environment.folderData + "Templates" + Constants.DELIMETER_PATH;
   private static JDBC jdbc = new JDBC("", "QAAuto");
 
   private YMAPIMethods() { // Empty

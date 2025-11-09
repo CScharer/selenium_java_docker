@@ -60,7 +60,7 @@ public class XML {
           + Constants.QUOTE_DOUBLE
           + "?"
           + ENCLOSURE_RIGHT;
-  public static String XPATH_ROOT_NODE = "";
+  public static final String XPATH_ROOT_NODE = "";
   private static int nodeElementCount = 0;
 
   // static

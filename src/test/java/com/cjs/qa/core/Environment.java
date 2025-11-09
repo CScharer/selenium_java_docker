@@ -44,8 +44,8 @@ public class Environment {
           + Constants.DELIMETER_PATH
           + "Environments"
           + IExtension.XML;
-  public static String FOLDER_DATA = Constants.PATH_FILES_DATA + COMPANY + Constants.DELIMETER_PATH;
-  public static String FILE_LOG = FOLDER_DATA + "Log_" + COMPANY + IExtension.LOG;
+  public static String folderData = Constants.PATH_FILES_DATA + COMPANY + Constants.DELIMETER_PATH;
+  public static String fileLog = folderData + "Log_" + COMPANY + IExtension.LOG;
   public static List<String> classExlusionList = Arrays.asList("");
   public static Map<Integer, String> scenarioErrors = new HashMap<>();
   private static String gridHub = null;
@@ -144,60 +144,60 @@ public class Environment {
     project = project.toLowerCase();
     switch (project) {
       case "americanairlines":
-        FOLDER_DATA = AmericanAirlinesEnvironment.FOLDER_DATA;
-        FILE_LOG = AmericanAirlinesEnvironment.FILE_LOG;
+        folderData = AmericanAirlinesEnvironment.folderData;
+        fileLog = AmericanAirlinesEnvironment.fileLog;
         break;
       case "core":
       case "jenkins":
       case "testclasssetup":
         break;
       case "dropbox":
-        FOLDER_DATA = DropboxEnvironment.FOLDER_DATA;
-        FILE_LOG = DropboxEnvironment.FILE_LOG;
+        folderData = DropboxEnvironment.folderData;
+        fileLog = DropboxEnvironment.fileLog;
         break;
       case "everyonesocial":
-        FOLDER_DATA = EveryoneSocialEnvironment.FOLDER_DATA;
-        FILE_LOG = EveryoneSocialEnvironment.FILE_LOG;
+        folderData = EveryoneSocialEnvironment.folderData;
+        fileLog = EveryoneSocialEnvironment.fileLog;
         break;
       case "google":
-        FOLDER_DATA = GoogleEnvironment.FOLDER_DATA;
-        FILE_LOG = GoogleEnvironment.FILE_LOG;
+        folderData = GoogleEnvironment.folderData;
+        fileLog = GoogleEnvironment.fileLog;
         break;
       case "hardees":
-        FOLDER_DATA = HardeesEnvironment.FOLDER_DATA;
-        FILE_LOG = HardeesEnvironment.FILE_LOG;
+        folderData = HardeesEnvironment.folderData;
+        fileLog = HardeesEnvironment.fileLog;
         break;
       case "iadhs":
-        FOLDER_DATA = IaDhsEnvironment.FOLDER_DATA;
-        FILE_LOG = IaDhsEnvironment.FILE_LOG;
+        folderData = IaDhsEnvironment.folderData;
+        fileLog = IaDhsEnvironment.fileLog;
         break;
       case "linkedin":
-        FOLDER_DATA = LinkedInEnvironment.FOLDER_DATA;
-        FILE_LOG = LinkedInEnvironment.FILE_LOG;
+        folderData = LinkedInEnvironment.folderData;
+        fileLog = LinkedInEnvironment.fileLog;
         break;
       case "marlboro":
-        FOLDER_DATA = MarlboroEnvironment.FOLDER_DATA;
-        FILE_LOG = MarlboroEnvironment.FILE_LOG;
+        folderData = MarlboroEnvironment.folderData;
+        fileLog = MarlboroEnvironment.fileLog;
         break;
       case "microsoft":
-        FOLDER_DATA = MicrosoftEnvironment.FOLDER_DATA;
-        FILE_LOG = MarlboroEnvironment.FILE_LOG;
+        folderData = MicrosoftEnvironment.folderData;
+        fileLog = MarlboroEnvironment.fileLog;
         break;
       case "polkcounty":
-        FOLDER_DATA = PolkCountyEnvironment.FOLDER_DATA;
-        FILE_LOG = PolkCountyEnvironment.FILE_LOG;
+        folderData = PolkCountyEnvironment.folderData;
+        fileLog = PolkCountyEnvironment.fileLog;
         break;
       case "united":
-        FOLDER_DATA = UnitedEnvironment.FOLDER_DATA;
-        FILE_LOG = UnitedEnvironment.FILE_LOG;
+        folderData = UnitedEnvironment.folderData;
+        fileLog = UnitedEnvironment.fileLog;
         break;
       case "vivit":
-        FOLDER_DATA = VivitEnvironment.FOLDER_DATA;
-        FILE_LOG = VivitEnvironment.FILE_LOG;
+        folderData = VivitEnvironment.folderData;
+        fileLog = VivitEnvironment.fileLog;
         break;
       case "wellmark":
-        FOLDER_DATA = WellmarkEnvironment.FOLDER_DATA;
-        FILE_LOG = WellmarkEnvironment.FILE_LOG;
+        folderData = WellmarkEnvironment.folderData;
+        fileLog = WellmarkEnvironment.fileLog;
         break;
       default:
         Assert.fail(
@@ -246,7 +246,7 @@ public class Environment {
       stringBuilder.append(value);
       System.out.println(stringBuilder.toString());
       // stringBuilder.append(Constants.NEWLINE)
-      // FSO.fileWrite(FILE_LOG, stringBuilder.toString(), true)
+      // FSO.fileWrite(fileLog, stringBuilder.toString(), true)
     }
   }
 
@@ -301,12 +301,12 @@ public class Environment {
   public static void sysOutFailure(String value) {
     sysOut(value);
     final String messageOut = getSysOutHeader() + value;
-    if (FILE_LOG == null) {
-      sysOut("FILE_LOG:[" + FILE_LOG + "]" + Constants.NEWLINE + value);
+    if (fileLog == null) {
+      sysOut("fileLog:[" + fileLog + "]" + Constants.NEWLINE + value);
     } else {
-      FSO.fileWrite(FILE_LOG, messageOut + Constants.TAB, true);
-      FSO.fileWrite(FILE_LOG, "FAILED", true);
-      FSO.fileWrite(FILE_LOG, Constants.NL, true);
+      FSO.fileWrite(fileLog, messageOut + Constants.TAB, true);
+      FSO.fileWrite(fileLog, "FAILED", true);
+      FSO.fileWrite(fileLog, Constants.NL, true);
     }
   }
 

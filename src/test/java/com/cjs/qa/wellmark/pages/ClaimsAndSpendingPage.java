@@ -202,7 +202,7 @@ public class ClaimsAndSpendingPage extends Page {
     // if (FSO.fileExists(Environment.FILE_CSV))
     // {
     // stringBuilder = sortRecords(stringBuilder)
-    final String fileName = Environment.FOLDER_DATA + "Wellmark" + IExtension.CSV;
+    final String fileName = Environment.folderData + "Wellmark" + IExtension.CSV;
     FSO.fileWrite(fileName, stringBuilder.toString(), false);
     // }
   }

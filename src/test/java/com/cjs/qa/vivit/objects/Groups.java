@@ -31,8 +31,8 @@ public class Groups {
   private String forumsURL;
   private String photoGalleryURL;
   private static boolean isGroupPage = false;
-  public static String BASE_LIST = "Type;PageID;Name;Timing;WallPosts;ChapterURL";
-  public static String EXTENDED_LIST =
+  public static final String BASE_LIST = "Type;PageID;Name;Timing;WallPosts;ChapterURL";
+  public static final String EXTENDED_LIST =
       "GroupDirectoryURL;CalendarURL;BlogsURL;ForumsURL;PhotoGalleryURL";
 
   public Groups() { }

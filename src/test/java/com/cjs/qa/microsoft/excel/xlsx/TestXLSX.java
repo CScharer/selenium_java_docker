@@ -122,13 +122,13 @@ public class TestXLSX {
 
   private void createFontsCells(XLSX excel, String sheetName) throws QAException {
     final int styleListSize = IExcel.CELL_STYLE_LIST.size();
-    // int MAX_COLUMNS = IExcel.MAX_COLUMNS_XLS
-    int MAX_COLUMNS = styleListSize;
-    // int MAX_ROWS = IExcel.MAX_ROWS_XLS
-    int MAX_ROWS = styleListSize;
-    for (int column = 0; column < MAX_COLUMNS; column++) {
+    // int maxColumns = IExcel.MAX_COLUMNS_XLS
+    final int maxColumns = styleListSize;
+    // int maxRows = IExcel.MAX_ROWS_XLS
+    final int maxRows = styleListSize;
+    for (int column = 0; column < maxColumns; column++) {
       final String columnLetter = Convert.fromNumberToLetterExcel((column + 1));
-      for (int row = 0; row < MAX_ROWS; row++) {
+      for (int row = 0; row < maxRows; row++) {
         final int styleIndex = row % styleListSize;
         final XLSXCellStyles xlsxCellStyles = XLSXCellStyles.getStylesList().get(styleIndex);
         final String format = xlsxCellStyles.getStyleName();

@@ -23,7 +23,7 @@ public class BingPage extends Page {
     super(webDriver);
   }
 
-  public static int SEARCH_WAIT_TIME = 1;
+  public static final int SEARCH_WAIT_TIME = 1;
   // public static int SEARCHES_MIN = 34;
   public static By bySearch = By.xpath(".//*[@id='sb_form_go']");
   public static By bycurrentPoints = By.xpath(".//*[@id='id_rc']");
@@ -119,7 +119,7 @@ public class BingPage extends Page {
                 + elapsedTimeMilliseconds
                 + "]");
         searchRequired =
-            (BingPage.currentPoints != currentPoints && search < RewardsPage.SEARCHES_MIN
+            (BingPage.currentPoints != currentPoints && search < RewardsPage.searchesMin
                 || elapsedTimeMilliseconds <= PROCESS_TIME_MILLISECONDS);
       } while (searchRequired);
     } else {
@@ -129,7 +129,7 @@ public class BingPage extends Page {
         search(url);
         currentPoints = getCurrentPoints(search, currentPoints);
         searchRequired =
-            (BingPage.currentPoints != currentPoints || search < RewardsPage.SEARCHES_MIN);
+            (BingPage.currentPoints != currentPoints || search < RewardsPage.searchesMin);
       } while (searchRequired);
     }
   }
@@ -155,7 +155,7 @@ public class BingPage extends Page {
       } else {
         currentPoints += RewardsPage.POINTS_PER_SEACH_PC;
         Environment.sysOut("Rewards Points Not Showing");
-        if (search >= RewardsPage.SEARCHES_MIN) {
+        if (search >= RewardsPage.searchesMin) {
           BingPage.currentPoints = currentPoints;
         }
       }

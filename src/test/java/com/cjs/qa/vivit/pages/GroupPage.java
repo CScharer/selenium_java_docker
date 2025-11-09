@@ -77,22 +77,22 @@ public class GroupPage extends Page {
     final String SYMBOL_ID = "id=";
     try {
       final By groupTitle = By.xpath(".//*[@id='ctl00_PageContent_lblPageSummaryTitle']");
-      String GROUP = "";
+      String groupValue = "";
       final String groupType = group.toUpperCase();
       String expectedTitle = "";
       switch (groupType) {
         case "LUGS":
-          GROUP = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
+          groupValue = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
           expectedTitle = "Vivit Local User Groups";
           break;
         case "SIGS":
-          GROUP = VivitEnvironment.URL_LOGIN + "?page=SIGS";
+          groupValue = VivitEnvironment.URL_LOGIN + "?page=SIGS";
           expectedTitle = "Special Interest Groups";
           break;
         default:
           return;
       }
-      webDriver.get(GROUP);
+      webDriver.get(groupValue);
       final String title = webDriver.findElement(byTitleBar).getText();
       Assert.assertEquals(title, expectedTitle, title);
       sleep(1, 0);
@@ -240,7 +240,7 @@ public class GroupPage extends Page {
 
   public void searchSites() {
     try {
-      final String fileName = Environment.FOLDER_DATA + "searchVivitSites" + IExtension.CSV;
+      final String fileName = Environment.folderData + "searchVivitSites" + IExtension.CSV;
       final String LIGS = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
       final String SIGS = VivitEnvironment.URL_LOGIN + "?page=SIGS";
       final By ligLinks = By.xpath(".//*[@id='CustomPageBody']//a[text()!='contact us today!']");
@@ -321,9 +321,9 @@ public class GroupPage extends Page {
 
   public void validateGroup(String group) {
     // Default
-    final String GROUP = group.toUpperCase();
+    final String groupType = group.toUpperCase();
     String url = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
-    switch (GROUP) {
+    switch (groupType) {
       case "LUGS":
         url = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
         break;
@@ -331,12 +331,12 @@ public class GroupPage extends Page {
         url = VivitEnvironment.URL_LOGIN + "?page=SIGS";
         break;
       default:
-        Environment.sysOut("Unknown group type: " + GROUP + ". Using default LUGS URL.");
+        Environment.sysOut("Unknown group type: " + groupType + ". Using default LUGS URL.");
         break;
     }
     webDriver.get(url);
     final List<WebElement> webElements = webDriver.findElements(byLinksGroups);
-    Environment.sysOut("Total " + GROUP + ":[" + webElements.size() + "]");
+    Environment.sysOut("Total " + groupType + ":[" + webElements.size() + "]");
     StringBuilder stringBuilder = new StringBuilder();
     for (int index = 0; index < webElements.size(); index++) {
       final WebElement webElement = webElements.get(index);
@@ -347,7 +347,7 @@ public class GroupPage extends Page {
         Environment.sysOut(index + ":[" + item + "]");
       }
     }
-    final String fileData = Environment.FOLDER_DATA + group + "-List" + IExtension.TXT;
+    final String fileData = Environment.folderData + group + "-List" + IExtension.TXT;
     String expected = FSO.fileReadAll(fileData);
     expected = expected.replace("CÃ´te d'Ivoire", "Côte d'Ivoire");
     final String actual = stringBuilder.toString();

@@ -268,10 +268,10 @@ public class ContactInfoPage extends Page {
   public void getContactInfoPageData(List<Map<String, String>> linkedInMapList) {
     Environment.sysOut(
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");
-    String BUFFER = JavaHelpers.createBufferString("*", 20, null);
+    final String buffer = JavaHelpers.createBufferString("*", 20, null);
     List<String> sectionList = new ArrayList<>();
     for (int mapIndex = 0; mapIndex < linkedInMapList.size(); mapIndex++) {
-      Environment.sysOut(BUFFER);
+      Environment.sysOut(buffer);
       Environment.sysOut("Processing Record:" + (mapIndex + 1) + " of " + linkedInMapList.size());
       Map<String, String> map = linkedInMapList.get(mapIndex);
       if (JavaHelpers.hasValue(map.get("First Name"))
@@ -285,7 +285,7 @@ public class ContactInfoPage extends Page {
         getData(sectionList, linkedInURL);
       }
     }
-    Environment.sysOut(BUFFER);
+    Environment.sysOut(buffer);
     sectionList.sort(null);
     Environment.sysOut("sectionList:[" + sectionList + "]");
     updateLinkedInTable();
@@ -430,7 +430,7 @@ public class ContactInfoPage extends Page {
       }
       if (!getStringBuilderSQL().toString().equals("")) {
         FSO.fileWrite(
-            LinkedInEnvironment.FILE_LOG,
+            LinkedInEnvironment.fileLog,
             sqlStringBuilder.toString().replaceAll(";", Constants.NEWLINE + ';'),
             false);
         int recordsAffected = Data.getJdbc().executeUpdate(sqlStringBuilder.toString(), false);

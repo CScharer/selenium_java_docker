@@ -612,7 +612,7 @@ public interface ISelenium {
   public default boolean webComboBoxSelect(WebDriver webDriver, String field, String value) {
     boolean match = false;
     int iIndex = 0;
-    Select Dropdown;
+    Select dropdown;
     String sItem = null;
     String[] aItems = null;
     String sMessage = null;
@@ -623,20 +623,20 @@ public interface ISelenium {
     if (oItems.size() == 1) {
       sItem = oItems.get(0).getText();
       aItems = sItem.split(Constants.NEWLINE);
-      Dropdown = new Select(webDriver.findElement(By.name(field)));
-      Dropdown.selectByVisibleText(value);
+      dropdown = new Select(webDriver.findElement(By.name(field)));
+      dropdown.selectByVisibleText(value);
       match = true;
       if (match) {
         return match;
       }
       for (iIndex = 0; iIndex < aItems.length; iIndex++) {
         if (aItems[iIndex].equalsIgnoreCase(value)) {
-          Dropdown = new Select(webDriver.findElement(By.name(field)));
-          Dropdown.selectByIndex((iIndex + 1));
-          final List<WebElement> oItem = Dropdown.getAllSelectedOptions();
+          dropdown = new Select(webDriver.findElement(By.name(field)));
+          dropdown.selectByIndex((iIndex + 1));
+          final List<WebElement> oItem = dropdown.getAllSelectedOptions();
           final String valueActual = oItem.get(0).getText();
           if (!valueActual.equalsIgnoreCase(value)) {
-            Dropdown.selectByVisibleText(value);
+            dropdown.selectByVisibleText(value);
             if (Environment.isLogAll()) {
               sMessage = String.format("Field:[%s], Value[%s]", field, value);
               Environment.sysOut(sMessage);

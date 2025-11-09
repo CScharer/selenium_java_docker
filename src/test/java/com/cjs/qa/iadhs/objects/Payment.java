@@ -36,7 +36,7 @@ public class Payment {
   public static final String STYLE_BORDER =
       "border: 1px solid black; border-collapse: collapse;width: 100%;";
   public static final String FILE_IADHS_PAYMENTS_CUMULATIVE =
-      IaDhsEnvironment.FOLDER_DATA
+      IaDhsEnvironment.folderData
           + "Data"
           + Constants.DELIMETER_PATH
           + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_yyyyMMdd)

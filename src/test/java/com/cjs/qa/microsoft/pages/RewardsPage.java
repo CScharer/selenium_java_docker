@@ -32,7 +32,7 @@ public class RewardsPage extends Page {
   public static final String URL_POINTS_BREAKDOWN =
       "https://account.microsoft" + IExtension.COM + "/rewards/pointsbreakdown";
   public static final String FILE_REPORT =
-      MicrosoftEnvironment.FOLDER_DATA + "MicrosoftRewardsReport" + IExtension.HTML;
+      MicrosoftEnvironment.folderData + "MicrosoftRewardsReport" + IExtension.HTML;
   public static final String FILE_SIGNATURE =
       Constants.PATH_OUTLOOK_SIGNATURES + "MSN" + IExtension.HTML;
   public static final String POINT_GROUPS =
@@ -42,9 +42,9 @@ public class RewardsPage extends Page {
   public static final String SEARCHES_NEEDED_PC = "Microsoft Edge bonus;PC search";
   public static final List<String> SEARCHES_NEEDED_PC_LIST =
       Arrays.asList(SEARCHES_NEEDED_PC.split(Constants.DELIMETER_LIST));
-  public static int HIGHLIGHT_BRIEFLY = 10;
-  public static int SEARCHES_MIN = 34;
-  public static int SEARCH = 1;
+  public static final int HIGHLIGHT_BRIEFLY = 10;
+  public static int searchesMin = 34;
+  public static final int SEARCH = 1;
   protected Selenium selenium = new Selenium(getWebDriver());
   public final By byButtonSignInWithMicrosoft = By.xpath(".//span[.='SIGN IN WITH MICROSOFT']");
   public final By byPointsDailySet =
@@ -718,7 +718,7 @@ public class RewardsPage extends Page {
                 method + " (searchesNeeded)",
                 "Searches Needed",
                 String.valueOf(getSearchesNeeded())));
-    SEARCHES_MIN = getSearchesNeeded();
+    searchesMin = getSearchesNeeded();
     setSearchesRequired((getSearchesNeeded() > 0 && getSearchAttempts() < 2));
     return isSearchesRequired();
   }

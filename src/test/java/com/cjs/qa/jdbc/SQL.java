@@ -23,14 +23,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class SQL {
-  private static String DATABASE_DEFINITION = "QAAuto";
-  private static String TABLE_DOM_USERS = "tblDOM_Users";
-  private static String TABLE_COMPANY = "tblCompany";
-  private static String TABLE_FILENET = "tblDOM_Filenet";
-  private static String TABLE_ENVIRONMENTS = "tblEnvironments";
-  private static String TABLE_PSTAR = "tblDOM_PSTAR_Service_Accounts";
-  private static String TABLE_PSTAR_PDF_COMPARE = "tblPSTAR_PDF_Compare";
-  private static String TABLE_SUBMISSIONLOG = "tblSubmissionLog";
+  private static final String DATABASE_DEFINITION = "QAAuto";
+  private static final String TABLE_DOM_USERS = "tblDOM_Users";
+  private static final String TABLE_COMPANY = "tblCompany";
+  private static final String TABLE_FILENET = "tblDOM_Filenet";
+  private static final String TABLE_ENVIRONMENTS = "tblEnvironments";
+  private static final String TABLE_PSTAR = "tblDOM_PSTAR_Service_Accounts";
+  private static final String TABLE_PSTAR_PDF_COMPARE = "tblPSTAR_PDF_Compare";
+  private static final String TABLE_SUBMISSIONLOG = "tblSubmissionLog";
 
   public int exUpdateDbUserToAdmin(String eMail) {
     String sql =

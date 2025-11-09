@@ -36,7 +36,7 @@ public class UnmarshallYourMembership_Response {
 
   @SuppressWarnings("unchecked")
   private YourMembership_Response get(SOAPMessage soapMessage) throws QAException {
-    YourMembership_Response yourMembership_Response = null;
+    YourMembership_Response yourMembershipResponse = null;
     try {
       for (final Iterator<jakarta.xml.soap.Node> bodyIterator =
               soapMessage.getSOAPBody().getChildElements();
@@ -63,10 +63,10 @@ public class UnmarshallYourMembership_Response {
                 "Error Creating (unmarshaller = context.createUnmarshaller();).", e);
           }
           try {
-            yourMembership_Response = (YourMembership_Response) unmarshaller.unmarshal(node);
+            yourMembershipResponse = (YourMembership_Response) unmarshaller.unmarshal(node);
           } catch (final JAXBException e) {
             throw new QAException(
-                "Error Creating (yourMembership_Response ="
+                "Error Creating (yourMembershipResponse ="
                     + " (YourMembership_Response) unmarshaller.unmarshal(node);).",
                 e);
           }
@@ -79,6 +79,6 @@ public class UnmarshallYourMembership_Response {
               + " bodyIterator.hasNext();)).",
           e);
     }
-    return yourMembership_Response;
+    return yourMembershipResponse;
   }
 }

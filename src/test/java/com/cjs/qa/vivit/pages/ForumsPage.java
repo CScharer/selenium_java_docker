@@ -86,12 +86,12 @@ public class ForumsPage extends Page {
         final String fieldValue = webElement.getText();
         // final String fieldName = mapFields.get(fieldIndex);
         String href = "";
-        String ForumID = "";
+        String forumId = "";
         if (fieldIndex == 0) {
           xPath = "./b/a";
           final WebElement hrefElement = webElement.findElement(By.xpath(xPath));
           href = hrefElement.getAttribute("href");
-          ForumID = href.split("/")[4];
+          forumId = href.split("/")[4];
           // fieldName = mapFields.get(fieldIndex);
         }
         switch (fieldIndex) {
@@ -105,7 +105,7 @@ public class ForumsPage extends Page {
             lastActivity = fieldValue;
             break;
           case 0: // default:
-            forumID = ForumID;
+            forumID = forumId;
             groupName = forumPage;
             forumURL = href;
             name = fieldValue;

@@ -3,8 +3,8 @@ package com.cjs.qa.oracle.api.services;
 import com.cjs.qa.utilities.Constants;
 
 public class OracleConstants {
-  public static boolean EXTRA_LOGGING = false;
-  public static boolean MAPPING = true;
+  public static final boolean EXTRA_LOGGING = false;
+  public static final boolean MAPPING = true;
   public static final String API_BASE = "cjsconsulting"; // Use
   // "cjsconsultingperf"
   // for

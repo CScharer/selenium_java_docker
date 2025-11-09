@@ -60,8 +60,8 @@ public class ParameterHelper {
       String className = stackTraceElement.getClassName();
       parameterHelper =
           new ParameterHelper(className, methodName, JavaHelpers.getCallingLineNumber());
-      Class<?> _class = Class.forName(className);
-      Method[] methodArray = _class.getMethods();
+      Class<?> classRef = Class.forName(className);
+      Method[] methodArray = classRef.getMethods();
       boolean methodFound = false;
       for (int methodIndex = 0; methodIndex < methodArray.length; methodIndex++) {
         Method method = methodArray[methodIndex];
