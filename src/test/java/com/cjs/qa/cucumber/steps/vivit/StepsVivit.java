@@ -164,7 +164,7 @@ public class StepsVivit extends Environment {
       Environment.setEnvironmentVariableValues();
     }
     try {
-      if (mapTest.get("GUI").equals("true")) {
+      if ("true".equals(mapTest.get("GUI"))) {
         setWebDriver(ISelenium.browserProfiling(getStepBrowser(), getScenarioObject()));
         setSelenium(new Selenium(getWebDriver()));
         getSelenium().getSessionInformation();
@@ -194,7 +194,7 @@ public class StepsVivit extends Environment {
     listMapTest.add(mapTest);
     mapListTest.put("Summary", listMapTest);
     if (getScenarioObject().isFailed()) {
-      if (mapTest.get("GUI").equals("true")) {
+      if ("true".equals(mapTest.get("GUI"))) {
         getSelenium().embedScreenshot(getScenarioObject(), getWebDriver());
       }
     }
@@ -216,7 +216,7 @@ public class StepsVivit extends Environment {
     for (final List<?> item : data) {
       final String field = (String) item.get(0);
       final String value = (String) item.get(1);
-      if (!value.equals("")) {
+      if (!value.isEmpty()) {
         switch (field.toLowerCase(Locale.ENGLISH)) {
           case "browser":
             setStepBrowser(value.toUpperCase(Locale.ENGLISH).trim());
@@ -261,7 +261,7 @@ public class StepsVivit extends Environment {
     mapTest.put("Test Name", scenarioName);
     Environment.sysOut("pGiven:[" + scenarioName + "]");
     final String randomNumber = JavaHelpers.generateRandomInteger(1, 10, 2);
-    if (randomNumber.equals("1")) {
+    if ("1".equals(randomNumber)) {
       // throw new Exception(scenarioName);
       // Assert.fail(scenarioName);
       addScenarioError(

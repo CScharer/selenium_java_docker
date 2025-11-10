@@ -1682,7 +1682,7 @@ public class Page extends JavaHelpers {
    * @param value
    */
   protected void setInputField(WebElement webElement, String value) {
-    if (!value.equals("")) {
+    if (!value.isEmpty()) {
       if (Environment.isLogAll()) {
         logFieldName(webElement.toString(), value);
       }
@@ -1699,7 +1699,7 @@ public class Page extends JavaHelpers {
    * @param value
    */
   protected void setRadio(WebElement webElement, String value) {
-    if (!value.equals("")) {
+    if (!value.isEmpty()) {
       if (Environment.isLogAll()) {
         logFieldName(webElement.toString(), value);
       }

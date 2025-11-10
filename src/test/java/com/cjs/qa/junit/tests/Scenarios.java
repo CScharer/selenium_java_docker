@@ -429,7 +429,7 @@ public class Scenarios {
     // sqlStringBuilder.append(" " + JDBCConstants.WHERE + "[Email] = '" +
     // CJSConstants.EMAIL_ADDRESS_GMAIL + "';")
     final String eMailList = jdbc.queryResults(sqlStringBuilder.toString(), "", false);
-    if (!eMailList.equals("")) {
+    if (!eMailList.isEmpty()) {
       Environment.sysOut("eMailList:[" + eMailList + "]");
       final String[] eMails = eMailList.split(Constants.NEWLINE);
       for (String eMail : eMails) {
@@ -878,7 +878,7 @@ public class Scenarios {
     final String year = DateHelpers.getCurrentDateTime("yyyy");
     String month =
         String.format("%02d", (Integer.valueOf(DateHelpers.getCurrentDateTime("MM")) - 1));
-    if (month.equals("0")) {
+    if ("0".equals(month)) {
       month = "12";
     }
     stringBuilder.append(JDBCConstants.WHERE + "[Year_Month]='" + year + month + "' ");
@@ -935,7 +935,7 @@ public class Scenarios {
       final Map<String, String> mapRecord = listResults.get(index);
       Environment.sysOut("mapRecord:[" + mapRecord.toString() + "]");
       for (final String key : fields.keySet()) {
-        if (!stringBuilderRecord.toString().equals("")) {
+        if (stringBuilderRecord.length() > 0) {
           stringBuilderRecord.append("','");
         }
         stringBuilderRecord.append(mapRecord.get(key).replaceAll("'", "''"));

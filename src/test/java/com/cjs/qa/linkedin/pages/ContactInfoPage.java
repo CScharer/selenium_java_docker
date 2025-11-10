@@ -392,7 +392,7 @@ public class ContactInfoPage extends Page {
         String fieldName = (String) entry.getKey();
         String fieldValue = (String) entry.getValue();
         if (!fieldName.equals(Data.FIELD_LINKEDIN_URL)) {
-          if (!stringBuilderData.toString().equals("")) {
+          if (stringBuilderData.length() > 0) {
             stringBuilderData.append(",");
           }
           stringBuilderData.append(
@@ -428,7 +428,7 @@ public class ContactInfoPage extends Page {
             getLinkedInConnectionContactInfoListMap().get(mapIndex);
         appendLinkedInRecord(contactInfoMap);
       }
-      if (!getStringBuilderSQL().toString().equals("")) {
+      if (getStringBuilderSQL().length() > 0) {
         FSO.fileWrite(
             LinkedInEnvironment.FILE_LOG,
             sqlStringBuilder.toString().replaceAll(";", Constants.NEWLINE + ';'),
