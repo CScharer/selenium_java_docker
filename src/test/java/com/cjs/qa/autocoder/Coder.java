@@ -371,7 +371,7 @@ public class Coder {
                   + Constants.QUOTE_DOUBLE
                   + ", "
                   + Constants.QUOTE_DOUBLE
-                  + LABEL_OPTION_CHECKED
+                  + "checked"
                   + Constants.QUOTE_DOUBLE
                   + "),");
           break;

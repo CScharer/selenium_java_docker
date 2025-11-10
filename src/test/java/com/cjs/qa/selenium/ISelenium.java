@@ -609,7 +609,7 @@ public interface ISelenium {
             final String message = String.format("Field:[%s], Value[%s]", field, value);
             Environment.sysOut(message);
           }
-          item = itemList.get(itemIndex).getAttribute(LABEL_OPTION_CHECKED );
+          item = itemList.get(itemIndex).getAttribute("checked");
           if (item == null) {
             itemList.get(itemIndex).click();
           }
