@@ -6,6 +6,7 @@ import com.cjs.qa.wellmark.pages.HomePage;
 import com.cjs.qa.wellmark.pages.LogInPage;
 import com.cjs.qa.wellmark.pages.PopUpPage;
 import com.cjs.qa.wellmark.pages.TempPage;
+import java.time.Duration;
 import org.openqa.selenium.WebDriver;
 
 public class Wellmark {
@@ -18,12 +19,12 @@ public class Wellmark {
 
   public Wellmark(WebDriver webDriver) {
     claimsAndSpendingPage = new ClaimsAndSpendingPage(webDriver);
-    detailsPage = new com.cjs.qa.wellmark.pages.DetailsPage(webDriver);
+    detailsPage = new DetailsPage(webDriver);
     homePage = new HomePage(webDriver);
     logInPage = new LogInPage(webDriver);
     popUpPage = new PopUpPage(webDriver);
     tempPage = new TempPage(webDriver);
-    webDriver.manage().timeouts().pageLoadTimeout(java.time.Duration.ofSeconds(120));
+    webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(120));
   }
 
   public ClaimsAndSpendingPage getClaimsAndSpendingPage() {

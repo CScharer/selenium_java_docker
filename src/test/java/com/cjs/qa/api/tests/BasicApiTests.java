@@ -4,7 +4,6 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 import io.qameta.allure.*;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.logging.log4j.LogManager;
@@ -28,7 +27,7 @@ public class BasicApiTests {
 
   @BeforeClass
   public void setUp() {
-    RestAssured.baseURI = BASE_URL;
+    baseURI = BASE_URL;
     LOGGER.info("========================================");
     LOGGER.info("🌐 API TEST SETUP");
     LOGGER.info("Base URL: {}", BASE_URL);

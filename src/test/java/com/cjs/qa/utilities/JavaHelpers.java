@@ -16,6 +16,8 @@ import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.SecureRandom;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -671,7 +673,8 @@ public class JavaHelpers {
         try {
           Integer.parseInt(caseName.substring(1));
           return value;
-        } catch (final Exception a) { // Empty
+        } catch (final Exception a) {
+          // Intentionally empty - not a numbered test case, continue searching
         }
       }
     }
@@ -695,7 +698,8 @@ public class JavaHelpers {
             return method.getName();
           }
         }
-      } catch (final Exception f) { // Empty
+      } catch (final Exception f) {
+        // Intentionally empty - not a test method, continue searching stack
       }
     }
     return "null";
@@ -1033,10 +1037,10 @@ public class JavaHelpers {
    * @param outputText
    */
   public static void readPDFIntoTextFile(String pdf, String outputText) {
-    try (PDDocument document = Loader.loadPDF(new java.io.File(pdf))) {
+    try (PDDocument document = Loader.loadPDF(new File(pdf))) {
       PDFTextStripper stripper = new PDFTextStripper();
       String text = stripper.getText(document);
-      java.nio.file.Files.write(java.nio.file.Paths.get(outputText), text.getBytes());
+      Files.write(Paths.get(outputText), text.getBytes());
     } catch (final Exception e) {
       Environment.sysOut(e);
     }

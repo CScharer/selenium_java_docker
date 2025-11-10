@@ -586,12 +586,14 @@ public class SeleniumWebDriver {
         getWebDriver().close();
       }
     } catch (final Exception e) {
+      // Intentionally empty - browser may already be closed
     }
     try {
       if (getWebDriver() != null) {
         getWebDriver().quit();
       }
     } catch (final Exception e) {
+      // Intentionally empty - browser may already be terminated
     }
     setWebDriver(null);
   }

@@ -56,6 +56,7 @@ public class Reporting {
         try {
           randomAccessFile.close();
         } catch (final Exception e2) {
+          // Intentionally empty - resource cleanup failure is non-critical
         }
       }
     }

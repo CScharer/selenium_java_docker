@@ -486,7 +486,8 @@ public class Page extends JavaHelpers {
         elapsedTime = System.currentTimeMillis() - startTime;
         webElement = getWebElement(by);
         buttonExists = true;
-      } catch (final Exception e) { // Empty
+      } catch (final Exception e) {
+        // Intentionally empty - retry loop continues until timeout
       }
     } while ((elapsedTime <= ((getTimeoutElement() / 6) * 1000)) && (!buttonExists));
     // Only wait five seconds as these are supposed to be pop-ups
@@ -1239,7 +1240,8 @@ public class Page extends JavaHelpers {
       final Robot robot = new Robot();
       robot.keyPress(KeyEvent.VK_ENTER);
       robot.keyRelease(KeyEvent.VK_ENTER);
-    } catch (final Exception e) { // Empty
+    } catch (final Exception e) {
+      // Intentionally empty - Robot may not be available in headless mode
     }
   }
 
@@ -1248,7 +1250,8 @@ public class Page extends JavaHelpers {
       final Robot robot = new Robot();
       robot.keyPress(KeyEvent.VK_ESCAPE);
       robot.keyRelease(KeyEvent.VK_ESCAPE);
-    } catch (final Exception e) { // Empty
+    } catch (final Exception e) {
+      // Intentionally empty - Robot may not be available in headless mode
     }
   }
 

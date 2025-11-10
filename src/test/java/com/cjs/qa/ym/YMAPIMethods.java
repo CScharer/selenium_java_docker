@@ -488,7 +488,8 @@ public final class YMAPIMethods {
         description = description.trim();
         description = description.replaceAll("'", "''");
         mapValues.put("description", description);
-      } catch (final Exception e2) { // Empty
+      } catch (final Exception e2) {
+        // Intentionally empty - field may not exist in API response
       }
     }
     try {
@@ -498,7 +499,8 @@ public final class YMAPIMethods {
       exampleRequest = exampleRequest.trim();
       exampleRequest = exampleRequest.replaceAll("'", "''");
       mapValues.put("exampleRequest", exampleRequest);
-    } catch (final Exception e) { // Empty
+    } catch (final Exception e) {
+      // Intentionally empty - field may not exist in API response
     }
     try {
       String exampleResponse =
@@ -507,7 +509,8 @@ public final class YMAPIMethods {
       exampleResponse = exampleResponse.trim();
       exampleResponse = exampleResponse.replaceAll("'", "''");
       mapValues.put("exampleResponse", exampleResponse);
-    } catch (final Exception e) { // Empty
+    } catch (final Exception e) {
+      // Intentionally empty - field may not exist in API response
     }
     return mapValues;
   }

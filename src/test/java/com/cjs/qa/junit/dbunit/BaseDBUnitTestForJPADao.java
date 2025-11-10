@@ -74,6 +74,7 @@ public class BaseDBUnitTestForJPADao {
         entityManagerFactory = null;
       }
     } catch (final Exception e) {
+      // Intentionally empty - cleanup failure is non-critical
     }
   }
 

@@ -388,6 +388,7 @@ public class DateHelpers {
       simpleDateFormat.parse(date);
       return true;
     } catch (final ParseException e) {
+      // Intentionally empty - validation method returns false on parse failure
     }
     return false;
   }
@@ -400,6 +401,7 @@ public class DateHelpers {
       simpleDateFormat.parse(date);
       return true;
     } catch (final ParseException e) {
+      // Intentionally empty - validation method returns false on parse failure
     }
     return false;
   }
@@ -411,6 +413,7 @@ public class DateHelpers {
       simpleDateFormat.applyPattern(pattern);
       return simpleDateFormat.format(simpleDateFormat.parse(date)).equals(date);
     } catch (final ParseException e) {
+      // Intentionally empty - validation method returns false on parse failure
     }
     return false;
   }

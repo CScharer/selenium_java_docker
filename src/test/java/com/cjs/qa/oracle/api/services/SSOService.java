@@ -105,7 +105,7 @@ public class SSOService extends WebService {
   public String createEmailExpirationToken(String eMail) {
     final Map<String, String> map = new HashMap<>();
     map.put("API_Method", JavaHelpers.getCurrentMethodName().toString());
-    final UUID guid = java.util.UUID.randomUUID();
+    final UUID guid = UUID.randomUUID();
     final String emailToken = guid.toString();
     final String apiRequest =
         "{ETID: "

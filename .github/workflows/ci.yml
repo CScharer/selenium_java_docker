@@ -43,8 +43,7 @@ jobs:
         run: |
           echo "Running PMD code analysis..."
           ./mvnw pmd:check
-          echo "✅ PMD analysis completed"
-        continue-on-error: true
+          echo "✅ PMD analysis passed"
 
       - name: Upload PMD Report
         if: always()

@@ -6,6 +6,7 @@ import com.cjs.qa.marlboro.pages.SecurityPage;
 import com.cjs.qa.marlboro.pages.SignInPage;
 import com.cjs.qa.marlboro.pages.VerifyInformationInterruptPage;
 import com.cjs.qa.utilities.IExtension;
+import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -46,9 +47,9 @@ public class Marlboro {
   public Marlboro(WebDriver webDriver) {
     earnPointsPage = new EarnPointsPage(webDriver);
     offersAndActivityPage = new OffersAndActivityPage(webDriver);
-    securityPage = new com.cjs.qa.marlboro.pages.SecurityPage(webDriver);
+    securityPage = new SecurityPage(webDriver);
     signInPage = new SignInPage(webDriver);
     verifyInformationInterruptPage = new VerifyInformationInterruptPage(webDriver);
-    webDriver.manage().timeouts().pageLoadTimeout(java.time.Duration.ofSeconds(120));
+    webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(120));
   }
 }

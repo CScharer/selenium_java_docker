@@ -1012,7 +1012,9 @@ public class YMData extends Environment {
         final SimpleDateFormat simpleDateFormatFrom = new SimpleDateFormat(formatFrom);
         date = simpleDateFormatFrom.parse(dateString);
         return simpleDateFormatTo.format(date);
-      } catch (final ParseException e) { // Empty
+      } catch (final ParseException e) {
+        // Try next format in list
+        continue;
       }
     }
     return null;

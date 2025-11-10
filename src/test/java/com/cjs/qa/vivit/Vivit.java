@@ -9,6 +9,7 @@ import com.cjs.qa.vivit.pages.HomePage;
 import com.cjs.qa.vivit.pages.MyMemberProfilePage;
 import com.cjs.qa.vivit.pages.SearchPage;
 import com.cjs.qa.vivit.pages.StaffPage;
+import java.time.Duration;
 import org.openqa.selenium.WebDriver;
 
 public class Vivit {
@@ -26,13 +27,13 @@ public class Vivit {
     blogsPage = new BlogsPage(webDriver);
     bodPage = new BoDPage(webDriver);
     calendarsPage = new CalendarsPage(webDriver);
-    forumsPage = new com.cjs.qa.vivit.pages.ForumsPage(webDriver);
+    forumsPage = new ForumsPage(webDriver);
     groupPage = new GroupPage(webDriver);
     homePage = new HomePage(webDriver);
     myMemberProfilePage = new MyMemberProfilePage(webDriver);
     searchPage = new SearchPage(webDriver);
     staffPage = new StaffPage(webDriver);
-    webDriver.manage().timeouts().pageLoadTimeout(java.time.Duration.ofSeconds(120));
+    webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(120));
   }
 
   public BlogsPage getBlogsPage() {

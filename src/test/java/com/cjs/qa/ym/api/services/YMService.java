@@ -108,6 +108,7 @@ public class YMService {
       try {
         Environment.sysOut(XML.getTag(request, "CallID"));
       } catch (Exception e) {
+        // Intentionally empty - CallID logging is optional
       }
     }
     int responseCode = -1;

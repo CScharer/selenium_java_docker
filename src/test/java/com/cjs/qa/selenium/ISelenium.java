@@ -265,10 +265,12 @@ public interface ISelenium {
     try {
       webDriver.close();
     } catch (final Exception e) {
+      // Intentionally empty - browser may already be closed
     }
     try {
       webDriver.quit();
     } catch (final Exception e) {
+      // Intentionally empty - browser may already be terminated
     }
     webDriver = null;
   }
@@ -284,10 +286,12 @@ public interface ISelenium {
     try {
       webDriver.close();
     } catch (final Exception e) {
+      // Intentionally empty - browser may already be closed
     }
     try {
       webDriver.quit();
     } catch (final Exception e) {
+      // Intentionally empty - browser may already be terminated
     }
     killBrowserProcesses(browser);
   }
@@ -341,6 +345,7 @@ public interface ISelenium {
     try {
       webDriver.manage().window().maximize();
     } catch (final Exception e) {
+      // Intentionally empty - maximize may not be supported in headless/Grid
     }
   }
 
