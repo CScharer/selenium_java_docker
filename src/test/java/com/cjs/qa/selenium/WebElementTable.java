@@ -4,9 +4,13 @@ import com.cjs.qa.core.Environment;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.FSO;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Locale;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -77,7 +81,7 @@ public class WebElementTable extends Page {
   public boolean clickCell(String columnName, int row) {
     populateTableObjects();
     final WebElement webElementRow = getTableRowsList().get(row - 1);
-    final int column = getHeadingsNameLookup().get(columnName.toLowerCase());
+    final int column = getHeadingsNameLookup().get(columnName.toLowerCase(Locale.ENGLISH));
     final WebElement webElementCell = webElementRow.findElement(By.xpath("./td[" + column + "]"));
     highlightWebElement(webElementCell);
     webElementCell.click();
@@ -141,7 +145,7 @@ public class WebElementTable extends Page {
    */
   public String getCellAttribute(int row, String columnName, String attribute) {
     populateTableObjects();
-    return getCellAttribute(row, getHeadingsNameLookup().get(columnName.toLowerCase()), attribute);
+    return getCellAttribute(row, getHeadingsNameLookup().get(columnName.toLowerCase(Locale.ENGLISH)), attribute);
   }
 
   /**
@@ -169,7 +173,7 @@ public class WebElementTable extends Page {
    * @return
    */
   public String getCellText(int row, String columnName) {
-    return getCellText(row, getHeadingsNameLookup().get(columnName.toLowerCase()));
+    return getCellText(row, getHeadingsNameLookup().get(columnName.toLowerCase(Locale.ENGLISH)));
   }
 
   public int getColumnCount() {
@@ -185,7 +189,7 @@ public class WebElementTable extends Page {
     setHeadingMaps();
     int index = -1;
     try {
-      index = getHeadingsNameLookup().get(columnName.toLowerCase());
+      index = getHeadingsNameLookup().get(columnName.toLowerCase(Locale.ENGLISH));
     } catch (final Exception e) {
       Environment.sysOut("getColumnIndex-No Column Found");
     }
@@ -202,7 +206,7 @@ public class WebElementTable extends Page {
     if (caseSensitive) {
       return getHeadingsName().get(columnName);
     } else {
-      return getHeadingsNameLookup().get(columnName.toLowerCase());
+      return getHeadingsNameLookup().get(columnName.toLowerCase(Locale.ENGLISH));
     }
   }
 
@@ -326,7 +330,7 @@ public class WebElementTable extends Page {
       final List<Integer> listRecordsNoMatch = new ArrayList<>();
       final String columnName = keySearch;
       final String valueMatch = map.get(keySearch);
-      final int columnIndex = getHeadingsNameLookup().get(columnName.toLowerCase());
+      final int columnIndex = getHeadingsNameLookup().get(columnName.toLowerCase(Locale.ENGLISH));
       for (final int record : listRecordsSearch) {
         final String cellValue = getCellText(record, columnIndex);
         if (!cellValue.equals(valueMatch)) {
@@ -382,7 +386,7 @@ public class WebElementTable extends Page {
       }
       getHeadingsName().put(columnName, (headingIndex + 1));
       getHeadingsIndex().put((headingIndex + 1), columnName);
-      getHeadingsNameLookup().put(columnName.toLowerCase().trim(), (headingIndex + 1));
+      getHeadingsNameLookup().put(columnName.toLowerCase(Locale.ENGLISH).trim(), (headingIndex + 1));
     }
     setTableHeadingsList(headings);
   }

@@ -17,10 +17,15 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Locale;
 import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -230,7 +235,7 @@ public interface ISelenium {
         "case Node.COMMENT_NODE:comp.name='comment()';break;case Node.ELEMENT_NODE:");
     stringBuilder.append("comp.name=element.nodeName;break;}comp.position=getPos(element);}");
     stringBuilder.append("for (var i=comps.length - 1; i >= 0; i--){comp=comps[i];");
-    stringBuilder.append("xpath += '/' + comp.name.toLowerCase();if (comp.position !== null){");
+    stringBuilder.append("xpath += '/' + comp.name.toLowerCase(Locale.ENGLISH);if (comp.position !== null){");
     stringBuilder.append("xpath += '[' + comp.position + ']';}}return xpath;}");
     stringBuilder.append("return absoluteXPath(arguments[0]);");
     return (String)
@@ -316,7 +321,7 @@ public interface ISelenium {
       Environment.sysOut("browser:[" + browser + "]");
     }
     String processesRunning = null;
-    switch (browser.toLowerCase()) {
+    switch (browser.toLowerCase(Locale.ENGLISH)) {
       case "chrome":
         processesRunning = "Chrome.exe" + Constants.DELIMETER_LIST + "chromedriver.exe";
         break;
@@ -462,7 +467,7 @@ public interface ISelenium {
    */
   static DesiredCapabilities setDesiredCapabilities(String operatingSystem, String browser) {
     DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-    switch (browser.toLowerCase()) {
+    switch (browser.toLowerCase(Locale.ENGLISH)) {
       case "android":
         desiredCapabilities = new DesiredCapabilities();
         break;
@@ -522,7 +527,7 @@ public interface ISelenium {
         desiredCapabilities = new DesiredCapabilities();
         break;
     }
-    switch (operatingSystem.toUpperCase()) {
+    switch (operatingSystem.toUpperCase(Locale.ENGLISH)) {
       case "android":
         desiredCapabilities.setPlatform(Platform.ANDROID);
         break;
@@ -720,7 +725,7 @@ public interface ISelenium {
       final String operatingSystem = System.getProperty("os.name");
       final DesiredCapabilities desiredCapabilities =
           setDesiredCapabilities(operatingSystem, browser);
-      if (browser.toLowerCase().equals("htmlunit")) {
+      if (browser.toLowerCase(Locale.ENGLISH).equals("htmlunit")) {
         webDriver = new HtmlUnitDriver(desiredCapabilities);
         return webDriver;
       }
@@ -751,11 +756,11 @@ public interface ISelenium {
    */
   default WebDriver browserProfiling(WebDriver webDriver, String browser, boolean remote) {
     try {
-      final String operatingSystem = System.getProperty("os.name").toUpperCase();
+      final String operatingSystem = System.getProperty("os.name").toUpperCase(Locale.ENGLISH);
       DesiredCapabilities desiredCapabilities = setDesiredCapabilities(operatingSystem, browser);
       // AppEnvironment.sysOut("desiredCapabilities:[" +
       // desiredCapabilities.toString() + "]");
-      final String sBrowser = browser.toLowerCase();
+      final String sBrowser = browser.toLowerCase(Locale.ENGLISH);
       switch (sBrowser) {
         case "firefox":
           // webDriver = new FirefoxDriver(desiredCapabilities);
@@ -847,7 +852,7 @@ public interface ISelenium {
     try {
       // String STANDARD_FIREFOX = "C:/Users/" + System.getenv("USERNAME")
       // + "/AppData/Local/Mozilla Firefox/firefox.exe";
-      // if (browser.toLowerCase().equals("firefox"))
+      // if (browser.toLowerCase(Locale.ENGLISH).equals("firefox"))
       // {
       // switch (Constants.CURRENT_USER)
       // {
@@ -894,7 +899,7 @@ public interface ISelenium {
       // Loads all the profiles
       // final ProfilesIni profilesIni = new ProfilesIni();
       // FirefoxProfile seleniumProfile = null;
-      switch (browser.toLowerCase()) {
+      switch (browser.toLowerCase(Locale.ENGLISH)) {
         case "chrome":
           // Version 54.0.2840.71 m
           sDriver = Constants.PATH_DRIVERS_LOCAL + "chromedriver.exe";

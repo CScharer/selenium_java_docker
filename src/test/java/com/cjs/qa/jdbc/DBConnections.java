@@ -3,6 +3,7 @@ package com.cjs.qa.jdbc;
 import com.cjs.qa.utilities.CJSConstants;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.IExtension;
+import java.util.Locale;
 
 public class DBConnections {
   private static DBParameters access() {
@@ -107,7 +108,7 @@ public class DBConnections {
   }
 
   public static DBParameters getDBParametersAutoCoder(String environment) {
-    switch (environment.toUpperCase()) {
+    switch (environment.toUpperCase(Locale.ENGLISH)) {
       default:
         final DBParameters parameters = sqLite();
         parameters.setName(Constants.PATH_FILES_DATA_DATABASES + "AutoCoder" + IExtension.SQLITE);
@@ -117,7 +118,7 @@ public class DBConnections {
   }
 
   public static DBParameters getDBParametersAutoCoderExcel(String environment) {
-    switch (environment.toUpperCase()) {
+    switch (environment.toUpperCase(Locale.ENGLISH)) {
       default:
         final DBParameters parameters = sqLite();
         parameters.setName(
@@ -128,35 +129,35 @@ public class DBConnections {
   }
 
   public static DBParameters getDBParametersMSAccess(String environment) {
-    switch (environment.toUpperCase()) {
+    switch (environment.toUpperCase(Locale.ENGLISH)) {
       default:
         return msAccess();
     }
   }
 
   public static DBParameters getDBParametersMSExcel(String environment) {
-    switch (environment.toUpperCase()) {
+    switch (environment.toUpperCase(Locale.ENGLISH)) {
       default:
         return msExcel();
     }
   }
 
   public static DBParameters getDBParametersJira(String environment) {
-    switch (environment.toUpperCase()) {
+    switch (environment.toUpperCase(Locale.ENGLISH)) {
       default:
         return sqlServer();
     }
   }
 
   public static DBParameters getDBParametersQAAuto(String environment) {
-    switch (environment.toUpperCase()) {
+    switch (environment.toUpperCase(Locale.ENGLISH)) {
       default:
         return sqLite();
     }
   }
 
   public static DBParameters getDBParametersQATools(String environment) {
-    switch (environment.toUpperCase()) {
+    switch (environment.toUpperCase(Locale.ENGLISH)) {
       default:
         DBParameters dbParameters = sqLite();
         dbParameters.setName(Constants.PATH_FILES_DATA_DATABASES + "qatools" + IExtension.SQLITE);
@@ -166,7 +167,7 @@ public class DBConnections {
   }
 
   public static DBParameters getDBParametersQaToolsWeb(String environment) {
-    switch (environment.toUpperCase()) {
+    switch (environment.toUpperCase(Locale.ENGLISH)) {
       default:
         return access();
     }

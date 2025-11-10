@@ -22,21 +22,35 @@ import java.security.SecureRandom;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Enumeration;
+import java.util.Locale;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Locale;
 import java.util.Map.Entry;
+import java.util.Locale;
 import java.util.Properties;
+import java.util.Locale;
 import java.util.Random;
+import java.util.Locale;
 import java.util.Set;
+import java.util.Locale;
 // import java.util.regex.Matcher
 // import java.util.regex.Pattern
 import java.util.concurrent.TimeUnit;
+import java.util.Locale;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.pdfbox.Loader;
@@ -743,8 +757,8 @@ public class JavaHelpers {
     String t = iterator.next();
     while (iterator.hasNext()) {
       String t2 = iterator.next();
-      t = t.toLowerCase();
-      t2 = t2.toLowerCase();
+      t = t.toLowerCase(Locale.ENGLISH);
+      t2 = t2.toLowerCase(Locale.ENGLISH);
       if (DateHelpers.compareTo(t, t2) > 0) {
         Environment.sysOut(t + " " + t2);
         return false;
@@ -781,8 +795,8 @@ public class JavaHelpers {
     String t = iterator.next();
     while (iterator.hasNext()) {
       String t2 = iterator.next();
-      t = t.toLowerCase();
-      t2 = t2.toLowerCase();
+      t = t.toLowerCase(Locale.ENGLISH);
+      t2 = t2.toLowerCase(Locale.ENGLISH);
       if (compareTo(t, t2) < 0) {
         Environment.sysOut(t + " " + t2);
         return false;
@@ -829,8 +843,8 @@ public class JavaHelpers {
     String t = iterator.next();
     while (iterator.hasNext()) {
       String t2 = iterator.next();
-      t = t.toLowerCase();
-      t2 = t2.toLowerCase();
+      t = t.toLowerCase(Locale.ENGLISH);
+      t2 = t2.toLowerCase(Locale.ENGLISH);
       if (compareTo(t, t2) > 0) {
         Environment.sysOut(t + " " + t2);
         return false;

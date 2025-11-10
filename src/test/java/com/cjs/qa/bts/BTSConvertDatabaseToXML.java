@@ -6,8 +6,11 @@ import com.cjs.qa.jdbc.JDBCConstants;
 import com.cjs.qa.utilities.FSO;
 import com.cjs.qa.utilities.XML;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Locale;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
@@ -49,7 +52,7 @@ public class BTSConvertDatabaseToXML {
         Environment.sysOut("company:[" + company + "]");
         String companyAbbreviation = (String) company.get("Abbreviation");
         stringBuilder.append(
-            XML.ENCLOSURE_LEFT + companyAbbreviation.toLowerCase() + XML.ENCLOSURE_RIGHT);
+            XML.ENCLOSURE_LEFT + companyAbbreviation.toLowerCase(Locale.ENGLISH) + XML.ENCLOSURE_RIGHT);
         stringBuilder = getWrappedField(stringBuilder, company, "Name");
         stringBuilder = getWrappedField(stringBuilder, company, "Number");
         stringBuilder = getWrappedField(stringBuilder, company, "FilenetSplit");
@@ -85,7 +88,7 @@ public class BTSConvertDatabaseToXML {
             String environmentTag = (String) environment.get("Environment");
             Environment.sysOut("environment:[" + environment + "]");
             stringBuilder.append(
-                XML.ENCLOSURE_LEFT + environmentTag.toLowerCase() + XML.ENCLOSURE_RIGHT);
+                XML.ENCLOSURE_LEFT + environmentTag.toLowerCase(Locale.ENGLISH) + XML.ENCLOSURE_RIGHT);
             stringBuilder = getWrappedField(stringBuilder, environment, "URL");
             sql =
                 JDBCConstants.SELECT_ALL_FROM
@@ -110,7 +113,7 @@ public class BTSConvertDatabaseToXML {
             stringBuilder.append(
                 XML.ENCLOSURE_LEFT
                     + XML.ENCLOSURE_DELIMETER
-                    + environmentTag.toLowerCase()
+                    + environmentTag.toLowerCase(Locale.ENGLISH)
                     + XML.ENCLOSURE_RIGHT);
           }
           stringBuilder.append(
@@ -119,7 +122,7 @@ public class BTSConvertDatabaseToXML {
         stringBuilder.append(
             XML.ENCLOSURE_LEFT
                 + XML.ENCLOSURE_DELIMETER
-                + companyAbbreviation.toLowerCase()
+                + companyAbbreviation.toLowerCase(Locale.ENGLISH)
                 + XML.ENCLOSURE_RIGHT);
       }
       stringBuilder.append(
@@ -192,8 +195,8 @@ public class BTSConvertDatabaseToXML {
     sql = getQueryDataOuterJoin().toString();
     for (Map<String, String> map : queryList) {
       Environment.sysOut("map:[" + map + "]");
-      String companyAbbreviation = map.get("Abbreviation").toLowerCase();
-      String companyEnvironment = map.get("Abbreviation").toLowerCase();
+      String companyAbbreviation = map.get("Abbreviation").toLowerCase(Locale.ENGLISH);
+      String companyEnvironment = map.get("Abbreviation").toLowerCase(Locale.ENGLISH);
       xPath =
           BTSCompanyEnvironmentData.NODE_COMPANY
               + "/"

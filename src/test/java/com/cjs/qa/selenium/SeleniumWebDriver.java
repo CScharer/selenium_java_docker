@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import javax.imageio.ImageIO;
 import org.apache.commons.io.FileUtils;
@@ -224,7 +225,7 @@ public class SeleniumWebDriver {
   public String getExecutableVersion(Capabilities capabilities) {
     String executableVersion = "";
     // (String)capabilities.getCapability("version")
-    switch (getBrowser().toLowerCase()) {
+    switch (getBrowser().toLowerCase(Locale.ENGLISH)) {
       case Browser.EDGE:
         executableVersion = (String) capabilities.getCapability("browserVersion");
         break;
@@ -272,7 +273,7 @@ public class SeleniumWebDriver {
     final StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append(PATH_SCREENSHOTS);
     FileUtil.mkdir(stringBuilder.toString());
-    stringBuilder.append(getBrowser().toLowerCase());
+    stringBuilder.append(getBrowser().toLowerCase(Locale.ENGLISH));
     stringBuilder.append("_");
     stringBuilder.append(getSessionId());
     stringBuilder.append("_");
@@ -342,7 +343,7 @@ public class SeleniumWebDriver {
     if (isRemote()) {
       capabilities = ((RemoteWebDriver) getWebDriver()).getCapabilities();
     } else {
-      switch (getBrowser().toLowerCase()) {
+      switch (getBrowser().toLowerCase(Locale.ENGLISH)) {
         case Browser.EDGE:
           capabilities = ((EdgeDriver) getWebDriver()).getCapabilities();
           break;
@@ -368,7 +369,7 @@ public class SeleniumWebDriver {
         String browser = getBrowser();
         Environment.sysOut("browser:[" + browser + "]");
         final EDriverProperties eDriverProperties =
-            EDriverProperties.fromString(browser.toUpperCase());
+            EDriverProperties.fromString(browser.toUpperCase(Locale.ENGLISH));
         String webDriver = eDriverProperties.getPathDriver();
         Environment.sysOut("webDriver:[" + webDriver + "]");
         String executable = eDriverProperties.getPathBinary();
@@ -438,7 +439,7 @@ public class SeleniumWebDriver {
     final DesiredCapabilities desiredCapabilities =
         setDesiredCapabilities(getOperatingSystem(), getBrowser());
     final EDriverProperties eDriverProperties =
-        EDriverProperties.fromString(getBrowser().toUpperCase());
+        EDriverProperties.fromString(getBrowser().toUpperCase(Locale.ENGLISH));
     try {
       Environment.sysOut(OS_NAME + ":[" + System.getProperty(OS_NAME) + "]");
       setLocalExecutables();
@@ -475,7 +476,7 @@ public class SeleniumWebDriver {
         }
       } else {
 
-        switch (getBrowser().toLowerCase()) {
+        switch (getBrowser().toLowerCase(Locale.ENGLISH)) {
           case Browser.EDGE:
             // WebDriverManager automatically downloads and sets up Edge driver
             WebDriverManager.edgedriver().setup();
@@ -656,9 +657,9 @@ public class SeleniumWebDriver {
    * @return
    */
   private DesiredCapabilities setDesiredCapabilities(String operatingSystem, String browser) {
-    final EDriverProperties eDriverProperties = EDriverProperties.fromString(browser.toUpperCase());
+    final EDriverProperties eDriverProperties = EDriverProperties.fromString(browser.toUpperCase(Locale.ENGLISH));
     DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-    switch (browser.toLowerCase()) {
+    switch (browser.toLowerCase(Locale.ENGLISH)) {
       case "android":
         desiredCapabilities = new DesiredCapabilities();
         break;
@@ -715,7 +716,7 @@ public class SeleniumWebDriver {
         desiredCapabilities = new DesiredCapabilities();
         break;
     }
-    switch (operatingSystem.toLowerCase()) {
+    switch (operatingSystem.toLowerCase(Locale.ENGLISH)) {
       case OS.ANDROID:
         desiredCapabilities.setPlatform(Platform.ANDROID);
         break;
@@ -802,8 +803,8 @@ public class SeleniumWebDriver {
 
   private void setLocalExecutables() {
     final EDriverProperties eDriverProperties =
-        EDriverProperties.fromString(getBrowser().toUpperCase());
-    switch (getBrowser().toLowerCase()) {
+        EDriverProperties.fromString(getBrowser().toUpperCase(Locale.ENGLISH));
+    switch (getBrowser().toLowerCase(Locale.ENGLISH)) {
       case Browser.SAFARI:
         // If you wish for safari to forget session everytime
         // SafariOptions.setUseCleanSession(true); // Removed in Selenium 4
