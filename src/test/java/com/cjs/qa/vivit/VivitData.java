@@ -1075,55 +1075,25 @@ public class VivitData extends Environment {
           int row = 1;
           boolean firstRecord = true;
           for (final String record : records) {
-            if (!record.equals("")) {
-              final String[] values = record.split(Constants.DELIMETER_LIST);
-              for (int index = 0; index < values.length; index++) {
-                String value = values[index];
-                final String columnName = fields[index];
-                if (firstRecord) {
-                  excel.writeCell(sheetName, column, row, value);
-                  excel.setFormatHeading(sheetName, column, row);
-                } else {
-                  switch (columnName) {
-                    case "Count":
-                    case "Year":
-                    case "Month":
-                    case "Day":
-                    case "Last Login":
-                    case "Last Updated":
-                    case "Last Approved":
-                    case "Last Registered":
-                      if (value.equals("null")) {
-                        value = "0";
-                      }
-                      // value = formatNumber(value,
-                      // "###,###,##0")
-                      excel.writeCell(sheetName, column, row, Double.valueOf(value));
-                      break;
-                    case "Percent":
-                      if (value.equals("null")) {
-                        value = "0";
-                      }
-                      if (dynamicQuery.equals("0")) {
-                        value = JavaHelpers.formatNumber(value, "0.0000%");
-                      } else {
-                        value = JavaHelpers.formatNumber(value, "0.00%");
-                      }
-                      excel.writeCell(sheetName, column, row, value);
-                      break;
-                    default:
-                      excel.writeCell(sheetName, column, row, value);
-                      break;
-                  }
-                  // excel.writeCell(sheetName, column, row,
-                  // value)
-                }
-                column++;
-              }
-              firstRecord = false;
-              column = 0;
-              row++;
+            if (record.equals("")) {
+              continue; // Guard clause - skip empty records
             }
+            
+            final String[] values = record.split(Constants.DELIMETER_LIST);
+            for (int index = 0; index < values.length; index++) {
+              String value = values[index];
+              final String columnName = fields[index];
+              
+              if (firstRecord) {
+                writeExcelHeader(excel, sheetName, column, row, value);
+              } else {
+                writeExcelDataCell(excel, sheetName, column, row, columnName, value, dynamicQuery);
+              }
+              column++;
+            }
+            firstRecord = false;
+            column = 0;
+            row++;
           }
           excel.autoSizeColumns(sheetName);
           excel.writeCell(IExcel.SHEET_SUMMARY, 0, 0, excel.readCell(IExcel.SHEET_SUMMARY, 0, 0));
@@ -1140,6 +1110,74 @@ public class VivitData extends Environment {
     jdbc.close();
     if (sendEmail) {
       sendAutomationReport(filePathName);
+    }
+  }
+
+  /**
+   * Write Excel header cell with formatting.
+   * Extracted method to reduce nesting depth.
+   */
+  private static void writeExcelHeader(
+      XLS excel, String sheetName, int column, int row, String value) throws QAException {
+    excel.writeCell(sheetName, column, row, value);
+    excel.setFormatHeading(sheetName, column, row);
+  }
+
+  /**
+   * Write Excel data cell with conditional formatting based on column type.
+   * Extracted method to reduce nesting depth.
+   */
+  private static void writeExcelDataCell(
+      XLS excel,
+      String sheetName,
+      int column,
+      int row,
+      String columnName,
+      String value,
+      String dynamicQuery) throws QAException {
+    switch (columnName) {
+      case "Count":
+      case "Year":
+      case "Month":
+      case "Day":
+      case "Last Login":
+      case "Last Updated":
+      case "Last Approved":
+      case "Last Registered":
+        String numericValue = handleNumericColumn(value);
+        excel.writeCell(sheetName, column, row, Double.valueOf(numericValue));
+        break;
+
+      case "Percent":
+        String percentValue = handlePercentColumn(value, dynamicQuery);
+        excel.writeCell(sheetName, column, row, percentValue);
+        break;
+
+      default:
+        excel.writeCell(sheetName, column, row, value);
+        break;
+    }
+  }
+
+  /**
+   * Handle numeric column values (convert "null" to "0").
+   * Extracted method to reduce nesting depth.
+   */
+  private static String handleNumericColumn(String value) {
+    return value.equals("null") ? "0" : value;
+  }
+
+  /**
+   * Handle percent column values with conditional formatting.
+   * Extracted method to reduce nesting depth.
+   */
+  private static String handlePercentColumn(String value, String dynamicQuery) {
+    final String processedValue = value.equals("null") ? "0" : value;
+
+    if (dynamicQuery.equals("0")) {
+      return JavaHelpers.formatNumber(processedValue, "0.0000%");
+    } else {
+      return JavaHelpers.formatNumber(processedValue, "0.00%");
     }
   }
 

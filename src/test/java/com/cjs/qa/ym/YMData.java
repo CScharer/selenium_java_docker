@@ -895,50 +895,24 @@ public class YMData extends Environment {
               eventRegistrationChildNodeIndex++) {
             Node eventRegistrationChildNode =
                 eventRegistrationChildrenNodeList.item(eventRegistrationChildNodeIndex);
-            if (eventRegistrationChildNode.getNodeType() == Node.ELEMENT_NODE) {
-              final Element eventRegistrationChildElement = (Element) eventRegistrationChildNode;
-              String eventRegistrationNodeName = eventRegistrationChildElement.getNodeName();
-              final String eventRegistrationNodeValue =
-                  eventRegistrationElement
-                      .getElementsByTagName(eventRegistrationNodeName)
-                      .item(0)
-                      .getTextContent();
-              if (!eventRegistrationNodeName.equals("DataSet")) {
-                if (eventRegistrationMap.containsKey(eventRegistrationNodeName)) {
-                  eventRegistrationMap.put(eventRegistrationNodeName, eventRegistrationNodeValue);
-                } else {
-                  sysOut(
-                      "The ["
-                          + eventRegistrationNodeName
-                          + "] item does not exist in the"
-                          + " eventRegistrationMap!!!");
-                }
-              } else {
-                NodeList dataSetChildrenNodeList = eventRegistrationChildNode.getChildNodes();
-                for (int dataSetChildNodeIndex = 0;
-                    dataSetChildNodeIndex < dataSetChildrenNodeList.getLength();
-                    dataSetChildNodeIndex++) {
-                  Node dataSetChildNode = dataSetChildrenNodeList.item(dataSetChildNodeIndex);
-                  if (dataSetChildNode.getNodeType() == Node.ELEMENT_NODE) {
-                    final Element dataSetChildElement = (Element) dataSetChildNode;
-                    String dataSetNodeName = dataSetChildElement.getNodeName();
-                    if (eventRegistrationMap.containsKey(dataSetNodeName)) {
-                      String valueNodeValue =
-                          dataSetChildNode
-                              .getAttributes()
-                              .getNamedItem("ExportValue")
-                              .getNodeValue();
-                      eventRegistrationMap.put(dataSetNodeName, valueNodeValue);
-                    } else {
-                      sysOut(
-                          "The ["
-                              + dataSetNodeName
-                              + "] item does not exist in the"
-                              + " eventRegistrationMap!!!");
-                    }
-                  }
-                }
-              }
+            
+            if (eventRegistrationChildNode.getNodeType() != Node.ELEMENT_NODE) {
+              continue; // Guard clause - skip non-element nodes
+            }
+            
+            final Element eventRegistrationChildElement = (Element) eventRegistrationChildNode;
+            String eventRegistrationNodeName = eventRegistrationChildElement.getNodeName();
+            final String eventRegistrationNodeValue =
+                eventRegistrationElement
+                    .getElementsByTagName(eventRegistrationNodeName)
+                    .item(0)
+                    .getTextContent();
+            
+            if (!eventRegistrationNodeName.equals("DataSet")) {
+              processNonDataSetNode(
+                  eventRegistrationNodeName, eventRegistrationNodeValue, eventRegistrationMap);
+            } else {
+              processDataSetNode(eventRegistrationChildNode, eventRegistrationMap);
             }
           }
           sqlStringBuilder =
@@ -952,6 +926,49 @@ public class YMData extends Environment {
     }
     Environment.sysOut(sqlStringBuilder.toString().split(Constants.NEWLINE).length);
     return sqlStringBuilder;
+  }
+
+  /**
+   * Process non-DataSet nodes in event registration XML.
+   * Extracted method to reduce nesting depth.
+   */
+  private static void processNonDataSetNode(
+      String nodeName, String nodeValue, Map<String, String> eventRegistrationMap) {
+    if (eventRegistrationMap.containsKey(nodeName)) {
+      eventRegistrationMap.put(nodeName, nodeValue);
+    } else {
+      sysOut(
+          "The [" + nodeName + "] item does not exist in the" + " eventRegistrationMap!!!");
+    }
+  }
+
+  /**
+   * Process DataSet child nodes in event registration XML.
+   * Extracted method to reduce nesting depth.
+   */
+  private static void processDataSetNode(Node dataSetParentNode, Map<String, String> eventRegistrationMap) {
+    NodeList dataSetChildrenNodeList = dataSetParentNode.getChildNodes();
+    for (int dataSetChildNodeIndex = 0;
+        dataSetChildNodeIndex < dataSetChildrenNodeList.getLength();
+        dataSetChildNodeIndex++) {
+      Node dataSetChildNode = dataSetChildrenNodeList.item(dataSetChildNodeIndex);
+      
+      if (dataSetChildNode.getNodeType() != Node.ELEMENT_NODE) {
+        continue; // Guard clause - skip non-element nodes
+      }
+      
+      final Element dataSetChildElement = (Element) dataSetChildNode;
+      String dataSetNodeName = dataSetChildElement.getNodeName();
+      
+      if (eventRegistrationMap.containsKey(dataSetNodeName)) {
+        String valueNodeValue =
+            dataSetChildNode.getAttributes().getNamedItem("ExportValue").getNodeValue();
+        eventRegistrationMap.put(dataSetNodeName, valueNodeValue);
+      } else {
+        sysOut(
+            "The [" + dataSetNodeName + "] item does not exist in the" + " eventRegistrationMap!!!");
+      }
+    }
   }
 
   public static StringBuilder importGoToWebinarEventRegistrationIDs() throws Throwable {
