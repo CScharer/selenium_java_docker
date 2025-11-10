@@ -111,13 +111,13 @@ public class VivitData extends Environment {
         stringBuilder.append("DELETE");
       }
       if (fileContents.contains("INSERT INTO")) {
-        if (!stringBuilder.toString().equals("")) {
+        if (!"".equals(stringBuilder.toString())) {
           stringBuilder.append(", ");
         }
         stringBuilder.append("INSERT");
       }
       if (fileContents.contains("UPDATE")) {
-        if (!stringBuilder.toString().equals("")) {
+        if (!"".equals(stringBuilder.toString())) {
           stringBuilder.append(", ");
         }
         stringBuilder.append("UPDATE");
@@ -618,7 +618,7 @@ public class VivitData extends Environment {
    */
   public static int getColumnIndex(List<String> list, String columnName) {
     for (int index = 0; index < list.size(); index++) {
-      if (list.get(index).equals(columnName)) {
+      if (columnName.equals(list.get(index))) {
         return index;
       }
     }
@@ -857,14 +857,14 @@ public class VivitData extends Environment {
     // createReportAutomationStatistics(VivitFoldersFiles.REPORT_XLS_AUTOMATION_S,
     // false)
     String dayTomorrow = DateHelpers.getCurrentDatePlusMinusDays(DateHelpers.FORMAT_D, 1);
-    if (dayTomorrow.equals("1")) {
+    if ("1".equals(dayTomorrow)) {
       VivitData.createReportAutomationStatisticsForPeriod(
           VivitViews.VIVIT_MEMBER_CHANGE_MONTH, VivitFoldersFiles.REPORT_XLS_AUTOMATION_S_MONTH);
       listReports.add(VivitFoldersFiles.REPORT_XLS_AUTOMATION_S_MONTH);
     }
     String yearToday = DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_YYYY);
     String yearTomorrow = DateHelpers.getCurrentDatePlusMinusDays(DateHelpers.FORMAT_YYYY, 1);
-    if (!yearToday.equals(yearTomorrow)) {
+    if (!yearTomorrow.equals(yearToday)) {
       VivitData.createReportAutomationStatisticsForPeriod(
           VivitViews.VIVIT_MEMBER_CHANGE_YEAR, VivitFoldersFiles.REPORT_XLS_AUTOMATION_S_YEAR);
       listReports.add(VivitFoldersFiles.REPORT_XLS_AUTOMATION_S_YEAR);
@@ -956,7 +956,7 @@ public class VivitData extends Environment {
       final String sql = JDBCConstants.SELECT_ALL + JDBCConstants.FROM + "[" + viewName + "]";
       final String data = jdbc.queryResults(sql, Constants.DELIMETER_LIST, true);
       sysOut("data:[" + data + "]");
-      if (!data.equals("")) {
+      if (!"".equals(data)) {
         final String[] records = data.split(Constants.NEWLINE);
         reportMap.put(viewName, String.valueOf((records.length - 1)));
         if (records.length > 1) {
@@ -968,7 +968,7 @@ public class VivitData extends Environment {
           int row = 1;
           boolean firstRecord = true;
           for (final String record : records) {
-            if (!record.equals("")) {
+            if (!"".equals(record)) {
               final String[] values = record.split(Constants.DELIMETER_LIST);
               for (final String value : values) {
                 if (firstRecord) {
@@ -1039,7 +1039,7 @@ public class VivitData extends Environment {
       // }
       final String dynamicQuery = tableMap.get("Dynamic");
       String sql = tableMap.get("Query");
-      if (dynamicQuery.equals("1")) {
+      if ("1".equals(dynamicQuery)) {
         StringBuilder sqlStringBuilder = new StringBuilder();
         sql = getUpdatedQuery(sqlStringBuilder, VivitTables.DOM_VIVIT_MEMBERS, fieldName);
         sqlStringBuilder = new StringBuilder();
@@ -1062,10 +1062,10 @@ public class VivitData extends Environment {
               + sheetLinkName
               + "]");
       final String data = jdbc.queryResults(sql, Constants.DELIMETER_LIST, true);
-      if (!data.equals("")) {
+      if (!"".equals(data)) {
         final String[] records = data.split(Constants.NEWLINE);
         final String[] fields = records[0].split(Constants.DELIMETER_LIST);
-        if (dynamicQuery.equals("0") || (records.length > 1 && records.length < RECORD_LIMIT_100)) {
+        if ("0".equals(dynamicQuery) || (records.length > 1 && records.length < RECORD_LIMIT_100)) {
           sysOut("records.length:[" + records.length + "]");
           sheetLinkIndex++;
           final String sheetName = "S" + JavaHelpers.formatNumber(sheetLinkIndex, "000");
@@ -1075,7 +1075,7 @@ public class VivitData extends Environment {
           int row = 1;
           boolean firstRecord = true;
           for (final String record : records) {
-            if (record.equals("")) {
+            if ("".equals(record)) {
               continue; // Guard clause - skip empty records
             }
             
@@ -1164,7 +1164,7 @@ public class VivitData extends Environment {
    * Extracted method to reduce nesting depth.
    */
   private static String handleNumericColumn(String value) {
-    return value.equals("null") ? "0" : value;
+    return "null".equals(value) ? "0" : value;
   }
 
   /**
@@ -1172,9 +1172,9 @@ public class VivitData extends Environment {
    * Extracted method to reduce nesting depth.
    */
   private static String handlePercentColumn(String value, String dynamicQuery) {
-    final String processedValue = value.equals("null") ? "0" : value;
+    final String processedValue = "null".equals(value) ? "0" : value;
 
-    if (dynamicQuery.equals("0")) {
+    if ("0".equals(dynamicQuery)) {
       return JavaHelpers.formatNumber(processedValue, "0.0000%");
     } else {
       return JavaHelpers.formatNumber(processedValue, "0.00%");
@@ -1497,7 +1497,7 @@ public class VivitData extends Environment {
               + "SUBSTR([h].[Year_Month],1,4)=[y].[Years]";
       final String data = jdbc.queryResults(sql, Constants.DELIMETER_LIST, true);
       sysOut("data:[" + data + "]");
-      if (!data.equals("")) {
+      if (!"".equals(data)) {
         final String[] records = data.split(Constants.NEWLINE);
         final String[] fields = records[0].split(Constants.DELIMETER_LIST);
         if (records.length > 1) {
@@ -1509,7 +1509,7 @@ public class VivitData extends Environment {
           }
           boolean firstRecord = true;
           for (final String record : records) {
-            if (!record.equals("")) {
+            if (!"".equals(record)) {
               final String[] values = record.split(Constants.DELIMETER_LIST);
               for (int index = 0; index < values.length; index++) {
                 final String value = values[index];
@@ -1645,7 +1645,7 @@ public class VivitData extends Environment {
     try {
       mapProcess = CommandLine.runProcess(command, true);
       sysOut("mapProcess:[" + mapProcess + "]");
-      if (!mapProcess.get("status").equals("0")) {
+      if (!"0".equals(mapProcess.get("status"))) {
         Assert.fail("VBScript Did Not Work");
       }
     } catch (final Exception e) {
