@@ -641,8 +641,8 @@ public class JavaHelpers {
   public static String getStackTrace() {
     final StackTraceElement[] stackTraceElements = (new Throwable()).getStackTrace();
     final StringBuilder stringBuilder = new StringBuilder();
-    for (int index = 0; index < stackTraceElements.length; index++) {
-      stringBuilder.append(stackTraceElements[index].toString() + Constants.NL);
+    for (StackTraceElement stackTraceElement : stackTraceElements) {
+      stringBuilder.append(stackTraceElement.toString() + Constants.NL);
     }
     return stringBuilder.toString();
   }
@@ -756,8 +756,8 @@ public class JavaHelpers {
    */
   public static boolean isMethodInStack(String methodName) {
     final StackTraceElement[] stackTraceElements = (new Throwable()).getStackTrace();
-    for (int index = 0; index < stackTraceElements.length; index++) {
-      if (stackTraceElements[index].toString().contains(methodName)) {
+    for (StackTraceElement stackTraceElement : stackTraceElements) {
+      if (stackTraceElement.toString().contains(methodName)) {
         return true;
       }
     }
@@ -814,8 +814,8 @@ public class JavaHelpers {
    */
   public static boolean isSortedInDescending(List<String> iterable) {
     final List<String> listReversed = new ArrayList<>();
-    for (int i = 0; i < iterable.size(); i++) {
-      listReversed.add(iterable.get(i));
+    for (String item : iterable) {
+      listReversed.add(item);
     }
     final Iterator<String> iterator = listReversed.iterator();
     if (!iterator.hasNext()) {
@@ -865,9 +865,9 @@ public class JavaHelpers {
       return false;
     }
     final char[] charNumber = stringNumber.toCharArray();
-    for (int index = 0; index < charNumber.length; index++) {
-      final String character = String.valueOf(charNumber[index]);
-      if (!character.equals(".") && !Character.isDigit(charNumber[index])) {
+    for (char ch : charNumber) {
+      final String character = String.valueOf(ch);
+      if (!character.equals(".") && !Character.isDigit(ch)) {
         return false;
       }
     }

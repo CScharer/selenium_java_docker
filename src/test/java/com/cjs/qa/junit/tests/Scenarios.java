@@ -430,8 +430,7 @@ public class Scenarios {
     if (!eMailList.equals("")) {
       Environment.sysOut("eMailList:[" + eMailList + "]");
       final String[] eMails = eMailList.split(Constants.NEWLINE);
-      for (int index = 0; index < eMails.length; index++) {
-        final String eMail = eMails[index];
+      for (String eMail : eMails) {
         Environment.sysOut("eMail:[" + eMail + "]");
         getDropbox().getSignInPage().signInToVerifyActiveAccount(eMail);
       }
@@ -555,8 +554,7 @@ public class Scenarios {
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     final SoftAssert softAssert = new SoftAssert();
     List<String> browserList = Arrays.asList(ISelenium.BROWSER_DEFAULT, "edge", "firefox", "ie");
-    for (int browserIndex = 0; browserIndex < browserList.size(); browserIndex++) {
-      final String browser = browserList.get(browserIndex);
+    for (String browser : browserList) {
       Environment.sysOut("Validating Browser Version:[" + browser + "]");
       final WebDriverValidation webDriverValidation =
           new WebDriverValidation(getSeleniumWebDriver().getWebDriver());
@@ -565,8 +563,7 @@ public class Scenarios {
     softAssert.assertAll();
     browserList = Arrays.asList(ISelenium.BROWSER_DEFAULT, "edge");
     // browserList = Arrays.asList("ie","firefox")
-    for (int browserIndex = 0; browserIndex < browserList.size(); browserIndex++) {
-      final String browser = browserList.get(browserIndex);
+    for (String browser : browserList) {
       jenkinsWebDriverValidate(browser, softAssert);
     }
     softAssert.assertAll();
@@ -681,12 +678,12 @@ public class Scenarios {
     final PluralSightPage pluralSight = new PluralSightPage(getSeleniumWebDriver().getWebDriver());
     pluralSight.getLoginPage().login();
     FSO.fileDelete(FILE_PATHNAME);
-    for (int index = 0; index < listSessions.size(); index++) {
+    for (String session : listSessions) {
       final String sessionInformation =
-          pluralSight.getSessionPage().getSessionInformation(listSessions.get(index));
+          pluralSight.getSessionPage().getSessionInformation(session);
       FSO.fileWrite(FILE_PATHNAME, sessionInformation, true);
       final String tableOfContents =
-          pluralSight.getTableOfContentsPage().getTableOfContents(listSessions.get(index));
+          pluralSight.getTableOfContentsPage().getTableOfContents(session);
       FSO.fileWrite(FILE_PATHNAME, tableOfContents, true);
       FSO.fileWrite(FILE_PATHNAME, Constants.NEWLINE, true);
       Environment.sysOut(sessionInformation);

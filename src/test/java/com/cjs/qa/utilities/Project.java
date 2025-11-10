@@ -27,9 +27,7 @@ public class Project {
     try {
       if (OSName.startsWith("Windows")) {
         automationPath = "C:/Automation/";
-      } else if (OSName.startsWith("Linux")) {
-        automationPath = "/Automation/";
-      } else if (OSName.startsWith("Mac")) {
+      } else if (OSName.startsWith("Linux") || OSName.startsWith("Mac")) {
         automationPath = "/Automation/";
       } else {
         throw new IOException();

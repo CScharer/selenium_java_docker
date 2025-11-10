@@ -1004,10 +1004,8 @@ public class YMData extends Environment {
   public static String getDateReFormatFromStringDate(String dateString) {
     Date date = null;
     List<String> dateFormatsList = getDateFormatsList();
-    String formatFrom = null;
     final SimpleDateFormat simpleDateFormatTo = new SimpleDateFormat(FORMAT_DATE_WEBINAR);
-    for (int index = 0; index < dateFormatsList.size(); index++) {
-      formatFrom = dateFormatsList.get(index);
+    for (String formatFrom : dateFormatsList) {
       try {
         final SimpleDateFormat simpleDateFormatFrom = new SimpleDateFormat(formatFrom);
         date = simpleDateFormatFrom.parse(dateString);
