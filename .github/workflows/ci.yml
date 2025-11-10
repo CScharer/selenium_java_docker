@@ -33,6 +33,30 @@ jobs:
       - name: Compile project
         run: ./mvnw clean compile test-compile
 
+      - name: Run Checkstyle
+        run: |
+          echo "Running Checkstyle..."
+          ./mvnw checkstyle:check
+          echo "✅ Checkstyle passed: 0 violations"
+
+      - name: Run PMD Analysis
+        run: |
+          echo "Running PMD code analysis..."
+          ./mvnw pmd:check
+          echo "✅ PMD analysis completed"
+        continue-on-error: true
+
+      - name: Upload PMD Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pmd-report
+          path: |
+            target/pmd.xml
+            target/site/pmd.html
+          retention-days: 7
+          if-no-files-found: ignore
+
       - name: Upload compiled classes
         uses: actions/upload-artifact@v4
         with:
@@ -442,8 +466,8 @@ jobs:
           echo "3. Click 'allure-report' to download"
           echo "4. Extract and open index.html"
 
-  code-quality:
-    name: Code Quality Analysis
+  spotbugs-analysis:
+    name: SpotBugs Analysis (Optional)
     runs-on: ubuntu-latest
     needs: build-and-compile
 
@@ -458,42 +482,21 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Run Checkstyle
-        run: |
-          echo "Running Checkstyle..."
-          ./mvnw checkstyle:check
-          echo "✅ Checkstyle passed: target/checkstyle-result.xml"
-
       - name: Run SpotBugs
         run: |
-          echo "Running SpotBugs..."
+          echo "Running SpotBugs static analysis..."
           ./mvnw spotbugs:check
-          echo "✅ SpotBugs passed: target/spotbugsXml.xml"
+          echo "✅ SpotBugs analysis completed"
         continue-on-error: true
 
-      - name: Run PMD
-        run: |
-          echo "Running PMD..."
-          ./mvnw pmd:check
-          echo "✅ PMD passed: target/pmd.xml"
-        continue-on-error: true
-
-      - name: Run dependency analysis
-        run: |
-          echo "Running dependency analysis..."
-          ./mvnw dependency:analyze
-        continue-on-error: true
-
-      - name: Upload code quality reports
+      - name: Upload SpotBugs Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: code-quality-reports
+          name: spotbugs-report
           path: |
-            target/checkstyle-result.xml
             target/spotbugsXml.xml
-            target/pmd.xml
-            target/site/
+            target/site/spotbugs.html
           retention-days: 7
           if-no-files-found: ignore
 
