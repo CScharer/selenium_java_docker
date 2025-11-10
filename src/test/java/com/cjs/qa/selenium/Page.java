@@ -595,7 +595,7 @@ public class Page extends JavaHelpers {
    * @param webElement
    */
   protected void focusOnElement(WebElement webElement) {
-    if (webElement.getTagName().equals("input")) {
+    if ("input".equals(webElement.getTagName())) {
       webElement.sendKeys("");
     } else {
       new Actions(getWebDriver()).moveToElement(webElement).perform();
@@ -726,7 +726,7 @@ public class Page extends JavaHelpers {
         stringBuilder.append(Constants.NL);
       }
     }
-    if (stringBuilder.toString().equals("")) {
+    if ("".equals(stringBuilder.toString())) {
       stringBuilder = new StringBuilder(CJSConstants.EMPTY);
     }
     if (Environment.isLogAll()) {
@@ -843,7 +843,7 @@ public class Page extends JavaHelpers {
    */
   protected String getInputFieldText(WebElement webElement) {
     String value = webElement.getText();
-    if (value.equals("")) {
+    if ("".equals(value)) {
       value = CJSConstants.EMPTY;
     }
     if (Environment.isLogAll()) {
@@ -934,7 +934,7 @@ public class Page extends JavaHelpers {
     while (!name.equals(finish)) {
       final WebElement currentElement = getActiveWebElement();
       name = currentElement.getAttribute("id");
-      if (name.equals("")) {
+      if ("".equals(name)) {
         name = currentElement.getAttribute("name");
       }
       if (!name.equals(finish)) {
@@ -1529,7 +1529,7 @@ public class Page extends JavaHelpers {
    * @param value
    */
   protected void setCheckbox(WebElement webElement, String value) {
-    if (!value.equals("")) {
+    if (!"".equals(value)) {
       if (Environment.isLogAll()) {
         logFieldName(webElement.toString(), value);
       }
@@ -1599,7 +1599,7 @@ public class Page extends JavaHelpers {
     if (Environment.isLogAll()) {
       logFieldName(webElement.toString(), value);
     }
-    if (!value.equals("")) {
+    if (!"".equals(value)) {
       final Select select = new Select(webElement);
       if (value.charAt(0) == '#') {
         int index = Integer.parseInt(value.substring(1));

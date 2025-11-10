@@ -57,7 +57,7 @@ public class Main extends Page {
       sqlStringBuilder.append("FROM [t_DOM_IOW_Arrests];");
       final String capturedArrestsURLs = jdbc.queryResults(sqlStringBuilder.toString(), "", false);
       List<String> listCapturedArrestsURL = new ArrayList<>();
-      if (!capturedArrestsURLs.equals("")) {
+      if (!"".equals(capturedArrestsURLs)) {
         listCapturedArrestsURL = Arrays.asList(capturedArrestsURLs.split(Constants.NEWLINE));
       }
       Environment.sysOut("capturedArrestsURLArray:[" + listCapturedArrestsURL.size() + "]");
@@ -110,7 +110,7 @@ public class Main extends Page {
           }
         }
         Environment.sysOut("mapRecord:[" + mapRecord.toString() + "]");
-        if (!sqlStringBuilder.toString().equals("")) {
+        if (!"".equals(sqlStringBuilder.toString())) {
           try {
             Environment.sysOut(
                 "sqlStringBuilder.toString():["
@@ -125,7 +125,7 @@ public class Main extends Page {
         }
       }
     }
-    if (!sqlStringBuilder.toString().equals("")) {
+    if (!"".equals(sqlStringBuilder.toString())) {
       try {
         Environment.sysOut(
             "sqlStringBuilder.toString():["
@@ -141,15 +141,15 @@ public class Main extends Page {
     sqlStringBuilder.append("SELECT [URL] ");
     sqlStringBuilder.append("FROM [v_IOW_MissingPrisonerURLs];");
     final String missingPrisonerURLs = jdbc.queryResults(sqlStringBuilder.toString(), "", false);
-    List<String> listMissingPrisonerURL = new ArrayList<>();
-    if (!missingPrisonerURLs.equals("")) {
+      List<String> listMissingPrisonerURL = new ArrayList<>();
+    if (!"".equals(missingPrisonerURLs)) {
       listMissingPrisonerURL = Arrays.asList(missingPrisonerURLs.split(Constants.NEWLINE));
     }
     Environment.sysOut("missingPrisonerURLArray:[" + listMissingPrisonerURL.size() + "]");
     sqlStringBuilder = new StringBuilder();
     for (final String missingPrisonerURL : listMissingPrisonerURL) {
       sqlStringBuilder = getArrestRecord(missingPrisonerURL, sqlStringBuilder);
-      if (!sqlStringBuilder.toString().equals("")) {
+      if (!"".equals(sqlStringBuilder.toString())) {
         try {
           Environment.sysOut(
               "sqlStringBuilder.toString():["
@@ -162,7 +162,7 @@ public class Main extends Page {
         }
         sqlStringBuilder = new StringBuilder();
         sqlStringBuilder = getCaseRecord(missingPrisonerURL, sqlStringBuilder, false);
-        if (!sqlStringBuilder.toString().equals("")) {
+        if (!"".equals(sqlStringBuilder.toString())) {
           try {
             Environment.sysOut(
                 "sqlStringBuilder.toString():["
@@ -182,14 +182,14 @@ public class Main extends Page {
     sqlStringBuilder.append("FROM [v_IOW_MissingCaseURLs];");
     final String missingCaseURLs = jdbc.queryResults(sqlStringBuilder.toString(), "", false);
     List<String> listMissingCaseURL = new ArrayList<>();
-    if (!missingCaseURLs.equals("")) {
+    if (!"".equals(missingCaseURLs)) {
       listMissingCaseURL = Arrays.asList(missingCaseURLs.split(Constants.NEWLINE));
     }
     Environment.sysOut("missingCaseURLArray:[" + listMissingCaseURL.size() + "]");
     sqlStringBuilder = new StringBuilder();
     for (final String missingCaseURL : listMissingCaseURL) {
       sqlStringBuilder = getCaseRecord(missingCaseURL, sqlStringBuilder, true);
-      if (!sqlStringBuilder.toString().equals("")) {
+      if (!"".equals(sqlStringBuilder.toString())) {
         try {
           Environment.sysOut(
               "sqlStringBuilder.toString():["
