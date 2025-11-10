@@ -1,5 +1,7 @@
 package com.cjs.qa.utilities;
 
+import java.util.Locale;
+
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import java.io.BufferedReader;

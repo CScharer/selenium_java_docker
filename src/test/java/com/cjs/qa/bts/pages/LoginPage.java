@@ -1,5 +1,7 @@
 package com.cjs.qa.bts.pages;
 
+import java.util.Locale;
+
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.jdbc.SQL;
 import com.cjs.qa.selenium.ISelenium;

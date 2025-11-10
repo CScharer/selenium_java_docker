@@ -1,5 +1,7 @@
 package com.cjs.qa.junit.tests;
 
+import java.util.Locale;
+
 import com.cjs.qa.americanairlines.AmericanAirlines;
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;

@@ -1,5 +1,7 @@
 package com.cjs.qa.selenium;
 
+import java.util.Locale;
+
 import com.cjs.qa.utilities.Constants;
 
 public enum EDriverProperties {

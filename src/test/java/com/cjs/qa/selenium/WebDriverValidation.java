@@ -1,5 +1,7 @@
 package com.cjs.qa.selenium;
 
+import java.util.Locale;
+
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.security.EPasswords;
 import com.cjs.qa.utilities.CJSConstants;

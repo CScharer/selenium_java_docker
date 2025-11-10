@@ -1,5 +1,7 @@
 package com.cjs.qa.jdbc;
 
+import java.util.Locale;
+
 public enum EDBDriver {
   DB2("com.ibm.db2.jcc.DB2Driver", "jdbc:db2://"),
   MICROSOFT("sun.jdbc.odbc.JdbcOdbcDriver", "jdbc:odbc:"),

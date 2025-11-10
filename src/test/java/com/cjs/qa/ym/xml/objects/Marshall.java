@@ -59,7 +59,7 @@ public class Marshall {
     YourMembershipResponse yourMembershipResponse =
         yourMembershipResponseUnmarshall(filePathName);
     Environment.sysOut(yourMembershipResponse.getSaEventsEventRegistrationGet().toString());
-    yourMembershipResponseMarshall(yourMembershipResponse, filePathNameNewXML);
+    String xml = yourMembershipResponseMarshall(yourMembershipResponse, filePathNameNewXML);
     Environment.sysOut("TESTING XML CREATION" + Constants.NEWLINE + xml);
     System.out.println(
         "Getting the Phone Number:"

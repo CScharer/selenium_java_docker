@@ -1,5 +1,7 @@
 package com.cjs.qa.utilities;
 
+import java.util.Locale;
+
 public enum ConfigComponents {
   FRAMEWORK("Framework", "/Framework/", "Framework Configuration"),
   CJS("Core", "/Core/", "Core Configuration");

@@ -1,5 +1,7 @@
 package com.cjs.qa.junit.tests;
 
+import java.util.Locale;
+
 import com.cjs.qa.utilities.AllureHelper;
 import io.qameta.allure.*;
 import java.net.URL;

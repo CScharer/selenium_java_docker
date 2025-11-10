@@ -1,5 +1,7 @@
 package com.cjs.qa.linkedin.pages;
 
+import java.util.Locale;
+
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import com.cjs.qa.linkedin.LinkedInEnvironment;

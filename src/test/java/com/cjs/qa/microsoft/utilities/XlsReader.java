@@ -1,5 +1,7 @@
 package com.cjs.qa.microsoft.utilities;
 
+import java.util.Locale;
+
 import com.cjs.qa.utilities.Constants;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

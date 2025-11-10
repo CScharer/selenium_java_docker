@@ -1,5 +1,7 @@
 package com.cjs.qa.marlboro.pages;
 
+import java.util.Locale;
+
 import com.cjs.qa.marlboro.MarlboroEnvironment;
 import com.cjs.qa.selenium.Page;
 import org.openqa.selenium.By;
