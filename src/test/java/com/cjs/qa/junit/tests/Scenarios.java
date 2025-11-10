@@ -443,15 +443,15 @@ public class Scenarios {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     getEveryoneSocial()
-        .SignInPage
+        .getSignInPage()
         .login(CJSConstants.EMAIL_ADDRESS_VIVIT, EPasswords.EVERYONE_SOCIAL.getValue());
-    getEveryoneSocial().NavigationPage.clickLinkStreamsCompanyStream();
+    getEveryoneSocial().getNavigationPage().clickLinkStreamsCompanyStream();
     getEveryoneSocial().sharePosts();
-    getEveryoneSocial().NavigationPage.clickLinksStreams();
-    getEveryoneSocial().NavigationPage.clickLinksPersonal();
-    getEveryoneSocial().NavigationPage.clickLinksMyStatus();
-    getEveryoneSocial().NavigationPage.clickLinksProfiles();
-    getEveryoneSocial().NavigationPage.clickLinksTools();
+    getEveryoneSocial().getNavigationPage().clickLinksStreams();
+    getEveryoneSocial().getNavigationPage().clickLinksPersonal();
+    getEveryoneSocial().getNavigationPage().clickLinksMyStatus();
+    getEveryoneSocial().getNavigationPage().clickLinksProfiles();
+    getEveryoneSocial().getNavigationPage().clickLinksTools();
   }
 
   public AmericanAirlines getAmericanAirlines() {

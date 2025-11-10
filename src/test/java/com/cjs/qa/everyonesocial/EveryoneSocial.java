@@ -16,30 +16,66 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class EveryoneSocial {
-  public CompanyStreamPage CompanyStreamPage;
-  public CulturePage CulturePage;
-  public CustomerStoriesCaseStudiesPage CustomerStoriesCaseStudiesPage;
-  public EventsPage EventsPage;
-  public MicroFocusPage MicroFocusPage;
-  public NavigationPage NavigationPage;
-  public ProductLaunchesPage ProductLaunchesPage;
-  public SignInPage SignInPage;
-  public TechBeaconPage TechBeaconPage;
+  private CompanyStreamPage companyStreamPage;
+  private CulturePage culturePage;
+  private CustomerStoriesCaseStudiesPage customerStoriesCaseStudiesPage;
+  private EventsPage eventsPage;
+  private MicroFocusPage microFocusPage;
+  private NavigationPage navigationPage;
+  private ProductLaunchesPage productLaunchesPage;
+  private SignInPage signInPage;
+  private TechBeaconPage techBeaconPage;
   private WebDriver webDriver = null;
+
+  public CompanyStreamPage getCompanyStreamPage() {
+    return companyStreamPage;
+  }
+
+  public CulturePage getCulturePage() {
+    return culturePage;
+  }
+
+  public CustomerStoriesCaseStudiesPage getCustomerStoriesCaseStudiesPage() {
+    return customerStoriesCaseStudiesPage;
+  }
+
+  public EventsPage getEventsPage() {
+    return eventsPage;
+  }
+
+  public MicroFocusPage getMicroFocusPage() {
+    return microFocusPage;
+  }
+
+  public NavigationPage getNavigationPage() {
+    return navigationPage;
+  }
+
+  public ProductLaunchesPage getProductLaunchesPage() {
+    return productLaunchesPage;
+  }
+
+  public SignInPage getSignInPage() {
+    return signInPage;
+  }
+
+  public TechBeaconPage getTechBeaconPage() {
+    return techBeaconPage;
+  }
 
   public EveryoneSocial() { }
 
   public EveryoneSocial(WebDriver webDriver) {
     setWebDriver(webDriver);
-    CompanyStreamPage = new CompanyStreamPage(webDriver);
-    CulturePage = new CulturePage(webDriver);
-    CustomerStoriesCaseStudiesPage = new CustomerStoriesCaseStudiesPage(webDriver);
-    EventsPage = new EventsPage(webDriver);
-    MicroFocusPage = new MicroFocusPage(webDriver);
-    NavigationPage = new NavigationPage(webDriver);
-    ProductLaunchesPage = new ProductLaunchesPage(webDriver);
-    SignInPage = new SignInPage(webDriver);
-    TechBeaconPage = new TechBeaconPage(webDriver);
+    companyStreamPage = new CompanyStreamPage(webDriver);
+    culturePage = new CulturePage(webDriver);
+    customerStoriesCaseStudiesPage = new CustomerStoriesCaseStudiesPage(webDriver);
+    eventsPage = new EventsPage(webDriver);
+    microFocusPage = new MicroFocusPage(webDriver);
+    navigationPage = new NavigationPage(webDriver);
+    productLaunchesPage = new ProductLaunchesPage(webDriver);
+    signInPage = new SignInPage(webDriver);
+    techBeaconPage = new TechBeaconPage(webDriver);
     webDriver.manage().timeouts().pageLoadTimeout(java.time.Duration.ofSeconds(120));
   }
 
@@ -67,19 +103,19 @@ public class EveryoneSocial {
 
   public void clickButtonCancel() {
     By byCancel = By.xpath(".//*[@id='sharePanel']//button[.='Cancel']");
-    CompanyStreamPage.getWebDriver().findElement(byCancel).click();
+    getCompanyStreamPage().getWebDriver().findElement(byCancel).click();
   }
 
   public void clickButtonFinish() {
     By byFinish = By.xpath(".//*[@id='sharePanel']//button[.='Finish']");
-    CompanyStreamPage.getWebDriver().findElement(byFinish).click();
+    getCompanyStreamPage().getWebDriver().findElement(byFinish).click();
   }
 
   public boolean sharePosts() {
     List<WebElement> webElementListShared = webElementListShare();
     for (WebElement webElement : webElementListShared) {
-      CompanyStreamPage.scrollToElement(webElement);
-      CompanyStreamPage.flashCurrentElement(webElement, 20);
+      getCompanyStreamPage().scrollToElement(webElement);
+      getCompanyStreamPage().flashCurrentElement(webElement, 20);
     }
     List<WebElement> webElementListShare = webElementListShare();
     for (WebElement webElement : webElementListShare) {
@@ -88,8 +124,8 @@ public class EveryoneSocial {
       // JavaHelpers.sleep(3);
       // clickButtonFinish();
       // JavaHelpers.sleep(3);
-      CompanyStreamPage.scrollToElement(webElement);
-      CompanyStreamPage.flashCurrentElement(webElement, 20);
+      getCompanyStreamPage().scrollToElement(webElement);
+      getCompanyStreamPage().flashCurrentElement(webElement, 20);
     }
 
     JavaHelpers.sleep(3);

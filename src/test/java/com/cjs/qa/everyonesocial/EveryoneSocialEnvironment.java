@@ -21,8 +21,12 @@ public class EveryoneSocialEnvironment extends Environment {
   public static final String URL_MY_PAGE =
       URL_BASE + "/enterprise_clients/hpe-christopher-scharer/company/24541";
   public static final String URL_LOGIN = URL_BASE + "/enterprise-login";
-  public final List<String> classExlusionList =
+  private final List<String> classExlusionList =
       JavaHelpers.getExclusions(this.getClass().getPackage().getName());
+
+  public List<String> getClassExlusionList() {
+    return classExlusionList;
+  }
 
   public EveryoneSocialEnvironment() { // Empty
   }
