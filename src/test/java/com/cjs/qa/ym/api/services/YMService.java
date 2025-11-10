@@ -108,7 +108,10 @@ public class YMService {
       try {
         Environment.sysOut(XML.getTag(request, "CallID"));
       } catch (Exception e) {
-        // Intentionally empty - CallID logging is optional
+        // CallID logging is optional - continue without it
+        if (Environment.isLogAll()) {
+          Environment.sysOut("CallID not available");
+        }
       }
     }
     int responseCode = -1;

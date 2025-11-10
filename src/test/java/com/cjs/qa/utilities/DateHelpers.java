@@ -388,9 +388,9 @@ public class DateHelpers {
       simpleDateFormat.parse(date);
       return true;
     } catch (final ParseException e) {
-      // Intentionally empty - validation method returns false on parse failure
+      // Parse failed - return false per validation contract
+      return false;
     }
-    return false;
   }
 
   public static boolean validateTimeFormat(String date, String pattern) {
@@ -401,9 +401,9 @@ public class DateHelpers {
       simpleDateFormat.parse(date);
       return true;
     } catch (final ParseException e) {
-      // Intentionally empty - validation method returns false on parse failure
+      // Parse failed - return false per validation contract
+      return false;
     }
-    return false;
   }
 
   public static boolean validateTimeFormatStrictly(String date, String pattern) {
@@ -413,9 +413,9 @@ public class DateHelpers {
       simpleDateFormat.applyPattern(pattern);
       return simpleDateFormat.format(simpleDateFormat.parse(date)).equals(date);
     } catch (final ParseException e) {
-      // Intentionally empty - validation method returns false on parse failure
+      // Parse failed - return false per validation contract
+      return false;
     }
-    return false;
   }
 
   public static int stringToMonth(String m) {
