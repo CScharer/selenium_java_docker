@@ -266,13 +266,11 @@ public class Reports {
   }
 
   public static String getLogStatus(String report) {
-    final String status =
-        "dateTimeStamp:["
+    return "dateTimeStamp:["
             + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_US_STANDARD_DATE_TIME + ".SSS")
             + "], "
             + report
             + Constants.NEWLINE;
-    return status;
   }
 
   private static void setColumnsIndex(String columns) {

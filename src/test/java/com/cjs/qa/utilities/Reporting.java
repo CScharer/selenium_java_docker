@@ -13,13 +13,11 @@ import java.util.Map;
 
 public class Reporting {
   public static String getLogStatus(String report) {
-    final String status =
-        "dateTimeStamp:["
+    return "dateTimeStamp:["
             + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_US_STANDARD_DATE_TIME + ".SSS")
             + "], "
             + report
             + Constants.NEWLINE;
-    return status;
   }
 
   public static synchronized void updateReportExcel(

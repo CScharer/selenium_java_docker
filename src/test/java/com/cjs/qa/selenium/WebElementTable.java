@@ -130,8 +130,7 @@ public class WebElementTable extends Page {
     final List<WebElement> listWebElementCells = webElement.findElements(By.xpath(getxPathCells()));
     final WebElement webElementCell = listWebElementCells.get(columnIndex - 1);
     highlightWebElement(webElementCell);
-    final String cellAttribute = webElementCell.getAttribute(attribute);
-    return cellAttribute;
+    return webElementCell.getAttribute(attribute);
   }
 
   /**
@@ -161,8 +160,7 @@ public class WebElementTable extends Page {
     final List<WebElement> listWebElementCells = webElement.findElements(By.xpath(getxPathCells()));
     final WebElement webElementCell = listWebElementCells.get(columnIndex - 1);
     highlightWebElement(webElementCell);
-    final String cellText = webElementCell.getText();
-    return cellText;
+    return webElementCell.getText();
   }
 
   /**

@@ -182,8 +182,7 @@ public class XML {
   public static NodeList getNodeList(String xml, String xPath) throws Exception {
     final Document document = createDocument(xml);
     final XPathExpression xpathExpression = XPATH.compile(xPath);
-    final NodeList nodes = (NodeList) xpathExpression.evaluate(document, XPathConstants.NODESET);
-    return nodes;
+    return (NodeList) xpathExpression.evaluate(document, XPathConstants.NODESET);
   }
 
   /**

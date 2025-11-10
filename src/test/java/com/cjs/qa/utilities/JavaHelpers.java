@@ -611,8 +611,7 @@ public class JavaHelpers {
    */
   public static int getMonitorCount() {
     GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
-    GraphicsDevice[] screenDeviceArray = graphicsEnvironment.getScreenDevices();
-    return screenDeviceArray.length;
+    return graphicsEnvironment.getScreenDevices().length;
   }
 
   /**

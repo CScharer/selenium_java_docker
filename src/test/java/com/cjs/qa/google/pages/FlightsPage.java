@@ -270,8 +270,7 @@ public class FlightsPage extends Page {
   public String getFlightAirline(WebElement recordFlight) {
     By by = By.xpath(".//div[contains(@class,'gws-flights-results__carriers')]/span/span/span");
     WebElement webElement = recordFlight.findElement(by);
-    String value = webElement.getText();
-    return value;
+    return webElement.getText();
   }
 
   public String getFlightAirlineOtherInfo(WebElement recordFlight) {
@@ -289,38 +288,33 @@ public class FlightsPage extends Page {
   public String getFlightDuration(WebElement recordFlight) {
     By by = By.xpath(".//div[contains(@class,'gws-flights-results__duration')]");
     WebElement webElement = recordFlight.findElement(by);
-    String value = webElement.getText();
-    return value;
+    return webElement.getText();
   }
 
   public String getFlightPrice(WebElement recordFlight) {
     By by = By.xpath(".//div[contains(@class,'gws-flights-results__price')]");
     WebElement webElement = recordFlight.findElement(by);
-    String value = webElement.getText();
-    return value;
+    return webElement.getText();
   }
 
   public String getFlightStops(WebElement recordFlight) {
     By by = By.xpath(".//div[contains(@class,'gws-flights-results__stops')]//div/span");
     WebElement webElement = recordFlight.findElement(by);
-    String value = webElement.getText();
-    return value;
+    return webElement.getText();
   }
 
   public String getFlightTimeArrive(WebElement recordFlight) {
     By by = By.xpath(".//div[contains(@class,'gws-flights-results__times')]/div/span/span/span");
     List<WebElement> webElementList = recordFlight.findElements(by);
     WebElement webElement = webElementList.get(1);
-    String value = webElement.getText();
-    return value;
+    return webElement.getText();
   }
 
   public String getFlightTimeDepart(WebElement recordFlight) {
     By by = By.xpath(".//div[contains(@class,'gws-flights-results__times')]/div/span/span/span");
     List<WebElement> webElementList = recordFlight.findElements(by);
     WebElement webElement = webElementList.get(0);
-    String value = webElement.getText();
-    return value;
+    return webElement.getText();
   }
 
   public String getDriveMiles() {
@@ -390,8 +384,7 @@ public class FlightsPage extends Page {
     stringBuilderAddress.append(airportMap.get("State"));
     stringBuilderAddress.append(" ");
     stringBuilderAddress.append(airportMap.get("Zip"));
-    String address = stringBuilderAddress.toString().replaceAll("  ", "");
-    return address;
+    return stringBuilderAddress.toString().replaceAll("  ", "");
   }
 
   private static String getURLDrive(

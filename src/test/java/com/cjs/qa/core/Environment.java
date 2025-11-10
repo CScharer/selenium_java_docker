@@ -87,9 +87,8 @@ public class Environment {
     // int rowSummary = (excel.getRowCount(IExcel.SHEET_SUMMARY) + 1)
     int rowSummary = (excel.getSheetCount() - (defaultSheetCount - 1));
     excel.close();
-    final String sheetNameFailure = JavaHelpers.formatNumber(rowSummary, "000");
+    return JavaHelpers.formatNumber(rowSummary, "000");
     // + "_" + policy;
-    return sheetNameFailure;
   }
 
   public static String getComputerName() {

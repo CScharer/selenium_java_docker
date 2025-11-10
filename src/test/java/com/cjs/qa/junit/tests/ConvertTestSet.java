@@ -17,8 +17,7 @@ public class ConvertTestSet {
   }
 
   private static List<List<String>> getList() {
-    final List<List<String>> listList =
-        Arrays.asList(
+    return Arrays.asList(
             Arrays.asList("One", "1"),
             Arrays.asList("Two", "2"),
             Arrays.asList("Three", ""),
@@ -29,7 +28,6 @@ public class ConvertTestSet {
             Arrays.asList("Eight", "8"),
             Arrays.asList("Nine", "9"),
             Arrays.asList("Ten", "10"));
-    return listList;
   }
 
   private static Map<String, String> getMap() {

@@ -75,8 +75,7 @@ public class XlsReader {
       return 0;
     } else {
       sheet = workbook.getSheetAt(index);
-      final int number = sheet.getLastRowNum() + 1;
-      return number;
+      return sheet.getLastRowNum() + 1;
     }
   }
 

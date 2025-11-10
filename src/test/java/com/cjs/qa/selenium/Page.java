@@ -998,8 +998,7 @@ public class Page extends JavaHelpers {
    */
   public int getVerticalScrollBarPosition() {
     final String script = "return window.pageYOffset;";
-    final long value = (long) executeJavaScript(script);
-    return (int) value;
+    return (int) (long) executeJavaScript(script);
   }
 
   /**
@@ -1952,15 +1951,13 @@ public class Page extends JavaHelpers {
   protected WebElement waitForElementExists(final String selector, long timeout) {
     final Wait<WebDriver> webDriverWait =
         new WebDriverWait(getWebDriver(), java.time.Duration.ofSeconds(timeout));
-    final WebElement webElement =
-        webDriverWait.until(
+    return webDriverWait.until(
             new Function<WebDriver, WebElement>() {
               @Override
               public WebElement apply(WebDriver driver) {
                 return driver.findElement(By.cssSelector(selector));
               }
             });
-    return webElement;
   }
 
   /**

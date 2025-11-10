@@ -610,15 +610,13 @@ public class FSO {
    * @return
    */
   public static FileFilter setFileFilter(String extension) {
-    final FileFilter fileFilter =
-        new FileFilter() {
+    return new FileFilter() {
           @Override
           public boolean accept(File fileName) {
             return fileName.isFile()
                 && fileName.getName().toLowerCase().endsWith(extension.toLowerCase());
           }
         };
-    return fileFilter;
   }
 
   public static String[] sortByLastModified(List<String> filePathNameList, boolean ascending) {

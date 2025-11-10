@@ -76,9 +76,7 @@ public class Marshall {
     JAXBContext jaxbContext = JAXBContext.newInstance(YourMembershipResponse.class);
     Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
     File file = new File(filePathNameXML);
-    YourMembershipResponse yourMembershipResponse =
-        (YourMembershipResponse) unmarshaller.unmarshal(file);
-    return yourMembershipResponse;
+    return (YourMembershipResponse) unmarshaller.unmarshal(file);
   }
 
   public String yourMembershipResponseMarshall(
