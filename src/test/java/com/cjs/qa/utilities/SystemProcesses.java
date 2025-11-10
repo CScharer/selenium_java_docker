@@ -17,7 +17,7 @@ import org.junit.Assert;
 
 public class SystemProcesses {
   private static JDBC jdbc = new JDBC("", "");
-  public static final String FILE_DATA_CSV = Environment.folderData + "Data" + IExtension.CSV;
+  public static final String FILE_DATA_CSV = Environment.getFolderData() + "Data" + IExtension.CSV;
   public static final String USERID = "CHRIS";
   public static final String SYSTEM = "CScharer-Laptop-EA92K856";
   public static final String FORMAT = "CSV";
@@ -35,7 +35,7 @@ public class SystemProcesses {
       createBackupTable("t_Core_Processes");
       SQL.execute(JDBCConstants.DELETE_FROM + "[t_Core_Processes]");
       for (final String processType : LIST_PROCESS_TYPE) {
-        final String fileData = Environment.folderData + "Process_" + processType + EXTENSION;
+        final String fileData = Environment.getFolderData() + "Process_" + processType + EXTENSION;
         String command =
             "CMD /C TASKLIST /S "
                 + SYSTEM

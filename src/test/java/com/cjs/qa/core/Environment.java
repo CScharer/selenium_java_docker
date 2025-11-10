@@ -37,22 +37,22 @@ public class Environment {
   public static final String COMPANY = "Core";
   public static final String EMAIL_SIGNATURE =
       FSO.fileReadAll(Constants.PATH_OUTLOOK_SIGNATURES + "MSN" + IExtension.HTM);
-  public static boolean environmentSet = false;
+  private static boolean environmentSet = false;
   public static final String FILE_CONFIG =
       Constants.PATH_ROOT
           + "Configurations"
           + Constants.DELIMETER_PATH
           + "Environments"
           + IExtension.XML;
-  public static String folderData = Constants.PATH_FILES_DATA + COMPANY + Constants.DELIMETER_PATH;
-  public static String fileLog = folderData + "Log_" + COMPANY + IExtension.LOG;
-  public static List<String> classExlusionList = Arrays.asList("");
-  public static Map<Integer, String> scenarioErrors = new HashMap<>();
+  private static String folderData = Constants.PATH_FILES_DATA + COMPANY + Constants.DELIMETER_PATH;
+  private static String fileLog = folderData + "Log_" + COMPANY + IExtension.LOG;
+  private static List<String> classExlusionList = Arrays.asList("");
+  private static Map<Integer, String> scenarioErrors = new HashMap<>();
   private static String gridHub = null;
   private static String gridPort = null;
   public static final String FILE_CONFIG_XML = FSO.fileReadAll(FILE_CONFIG);
   public static final String CURRENT_USER = Constants.CURRENT_USER;
-  public static SoftAssert softAssert = new SoftAssert();
+  private static SoftAssert softAssert = new SoftAssert();
   private static boolean overrideUser = false;
   private static String browser = ISelenium.BROWSER_DEFAULT;
   private static String company = "CJS";
@@ -74,11 +74,11 @@ public class Environment {
   }
 
   public void addScenarioError(String error) {
-    Environment.scenarioErrors.put((Environment.scenarioErrors.size() + 1), error);
+    Environment.getScenarioErrors().put((Environment.getScenarioErrors().size() + 1), error);
   }
 
   public static void clearScenarioErrors() {
-    Environment.scenarioErrors = new HashMap<>();
+    Environment.setScenarioErrors(new HashMap<>());
   }
 
   public static String getSheetFailure(String filePathName, int defaultSheetCount, String policy)
@@ -144,60 +144,60 @@ public class Environment {
     project = project.toLowerCase();
     switch (project) {
       case "americanairlines":
-        folderData = AmericanAirlinesEnvironment.folderData;
-        fileLog = AmericanAirlinesEnvironment.fileLog;
+        setFolderData(AmericanAirlinesEnvironment.FOLDER_DATA);
+        setFileLog(AmericanAirlinesEnvironment.FILE_LOG);
         break;
       case "core":
       case "jenkins":
       case "testclasssetup":
         break;
       case "dropbox":
-        folderData = DropboxEnvironment.folderData;
-        fileLog = DropboxEnvironment.fileLog;
+        setFolderData(DropboxEnvironment.FOLDER_DATA);
+        setFileLog(DropboxEnvironment.FILE_LOG);
         break;
       case "everyonesocial":
-        folderData = EveryoneSocialEnvironment.folderData;
-        fileLog = EveryoneSocialEnvironment.fileLog;
+        setFolderData(EveryoneSocialEnvironment.FOLDER_DATA);
+        setFileLog(EveryoneSocialEnvironment.FILE_LOG);
         break;
       case "google":
-        folderData = GoogleEnvironment.folderData;
-        fileLog = GoogleEnvironment.fileLog;
+        setFolderData(GoogleEnvironment.FOLDER_DATA);
+        setFileLog(GoogleEnvironment.FILE_LOG);
         break;
       case "hardees":
-        folderData = HardeesEnvironment.folderData;
-        fileLog = HardeesEnvironment.fileLog;
+        setFolderData(HardeesEnvironment.FOLDER_DATA);
+        setFileLog(HardeesEnvironment.FILE_LOG);
         break;
       case "iadhs":
-        folderData = IaDhsEnvironment.folderData;
-        fileLog = IaDhsEnvironment.fileLog;
+        setFolderData(IaDhsEnvironment.FOLDER_DATA);
+        setFileLog(IaDhsEnvironment.FILE_LOG);
         break;
       case "linkedin":
-        folderData = LinkedInEnvironment.folderData;
-        fileLog = LinkedInEnvironment.fileLog;
+        setFolderData(LinkedInEnvironment.FOLDER_DATA);
+        setFileLog(LinkedInEnvironment.FILE_LOG);
         break;
       case "marlboro":
-        folderData = MarlboroEnvironment.folderData;
-        fileLog = MarlboroEnvironment.fileLog;
+        setFolderData(MarlboroEnvironment.FOLDER_DATA);
+        setFileLog(MarlboroEnvironment.FILE_LOG);
         break;
       case "microsoft":
-        folderData = MicrosoftEnvironment.folderData;
-        fileLog = MarlboroEnvironment.fileLog;
+        setFolderData(MicrosoftEnvironment.FOLDER_DATA);
+        setFileLog(MarlboroEnvironment.FILE_LOG);
         break;
       case "polkcounty":
-        folderData = PolkCountyEnvironment.folderData;
-        fileLog = PolkCountyEnvironment.fileLog;
+        setFolderData(PolkCountyEnvironment.FOLDER_DATA);
+        setFileLog(PolkCountyEnvironment.FILE_LOG);
         break;
       case "united":
-        folderData = UnitedEnvironment.folderData;
-        fileLog = UnitedEnvironment.fileLog;
+        setFolderData(UnitedEnvironment.FOLDER_DATA);
+        setFileLog(UnitedEnvironment.FILE_LOG);
         break;
       case "vivit":
-        folderData = VivitEnvironment.folderData;
-        fileLog = VivitEnvironment.fileLog;
+        setFolderData(VivitEnvironment.FOLDER_DATA);
+        setFileLog(VivitEnvironment.FILE_LOG);
         break;
       case "wellmark":
-        folderData = WellmarkEnvironment.folderData;
-        fileLog = WellmarkEnvironment.fileLog;
+        setFolderData(WellmarkEnvironment.FOLDER_DATA);
+        setFileLog(WellmarkEnvironment.FILE_LOG);
         break;
       default:
         Assert.fail(
@@ -608,5 +608,33 @@ public class Environment {
 
   public static boolean isLogSQL() {
     return logSQL;
+  }
+
+  public static String getFolderData() {
+    return folderData;
+  }
+
+  public static void setFolderData(String value) {
+    folderData = value;
+  }
+
+  public static String getFileLog() {
+    return fileLog;
+  }
+
+  public static void setFileLog(String value) {
+    fileLog = value;
+  }
+
+  public static Map<Integer, String> getScenarioErrors() {
+    return scenarioErrors;
+  }
+
+  public static void setScenarioErrors(Map<Integer, String> value) {
+    scenarioErrors = value;
+  }
+
+  public static SoftAssert getSoftAssert() {
+    return softAssert;
   }
 }

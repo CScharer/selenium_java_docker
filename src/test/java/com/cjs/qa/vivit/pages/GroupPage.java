@@ -244,7 +244,7 @@ public class GroupPage extends Page {
 
   public void searchSites() {
     try {
-      final String fileName = Environment.folderData + "searchVivitSites" + IExtension.CSV;
+      final String fileName = Environment.getFolderData() + "searchVivitSites" + IExtension.CSV;
       final String LIGS = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
       final String SIGS = VivitEnvironment.URL_LOGIN + "?page=SIGS";
       final By ligLinks = By.xpath(".//*[@id='CustomPageBody']//a[text()!='contact us today!']");
@@ -351,10 +351,10 @@ public class GroupPage extends Page {
         Environment.sysOut(index + ":[" + item + "]");
       }
     }
-    final String fileData = Environment.folderData + group + "-List" + IExtension.TXT;
+    final String fileData = Environment.getFolderData() + group + "-List" + IExtension.TXT;
     String expected = FSO.fileReadAll(fileData);
     expected = expected.replace("CÃ´te d'Ivoire", "Côte d'Ivoire");
     final String actual = stringBuilder.toString();
-    Environment.softAssert.assertEquals(expected, actual, group);
+    Environment.getSoftAssert().assertEquals(expected, actual, group);
   }
 }

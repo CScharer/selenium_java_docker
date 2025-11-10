@@ -16,7 +16,7 @@ public class ScenarioErrors {
   }
 
   public void add(String error) {
-    getErrors().put((Environment.scenarioErrors.size() + 1), error);
+    getErrors().put((Environment.getScenarioErrors().size() + 1), error);
   }
 
   public static void clear() {

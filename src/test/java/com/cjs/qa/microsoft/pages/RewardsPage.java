@@ -32,7 +32,7 @@ public class RewardsPage extends Page {
   public static final String URL_POINTS_BREAKDOWN =
       "https://account.microsoft" + IExtension.COM + "/rewards/pointsbreakdown";
   public static final String FILE_REPORT =
-      MicrosoftEnvironment.folderData + "MicrosoftRewardsReport" + IExtension.HTML;
+      MicrosoftEnvironment.FOLDER_DATA + "MicrosoftRewardsReport" + IExtension.HTML;
   public static final String FILE_SIGNATURE =
       Constants.PATH_OUTLOOK_SIGNATURES + "MSN" + IExtension.HTML;
   public static final String POINT_GROUPS =

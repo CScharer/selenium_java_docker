@@ -8,7 +8,7 @@ import com.cjs.qa.utilities.IExtension;
 
 public final class VivitFoldersFiles {
   public static final String PATH_DATA =
-      VivitEnvironment.folderData + "Data" + Constants.DELIMETER_PATH;
+      VivitEnvironment.FOLDER_DATA + "Data" + Constants.DELIMETER_PATH;
   public static final String PATH_DATA_TODAY =
       PATH_DATA
           + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_yyyyMMdd)
@@ -92,10 +92,10 @@ public final class VivitFoldersFiles {
           + "Report_Treasurer_Monthly_"
           + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_MMM)
           + IExtension.XLS;
-  public static final String BAT = VivitEnvironment.folderData + "AddChartsBar" + IExtension.BAT;
+  public static final String BAT = VivitEnvironment.FOLDER_DATA + "AddChartsBar" + IExtension.BAT;
   public static final String BATRUN =
-      VivitEnvironment.folderData + "AddChartsBarRun" + IExtension.BAT;
-  public static final String VBS = VivitEnvironment.folderData + "AddChartsBar" + IExtension.BAT;
+      VivitEnvironment.FOLDER_DATA + "AddChartsBarRun" + IExtension.BAT;
+  public static final String VBS = VivitEnvironment.FOLDER_DATA + "AddChartsBar" + IExtension.BAT;
   public static final String LOGO_SOURCE =
       CJSConstants.PATH_FILES_TEMPLATES + "VivitLogoSource" + IExtension.TXT;
 

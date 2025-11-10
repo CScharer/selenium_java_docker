@@ -192,6 +192,6 @@ public class _SanboxPage extends Page {
     // Assert.assertSame(getPageTitle() + " validatePage", expected, actual);
     // hardAssert.assertSame(actual, expected, getPageTitle() + "
     // validatePage");
-    Environment.softAssert.assertEquals(actual, expected, getPageTitle() + "validatePage");
+    Environment.getSoftAssert().assertEquals(actual, expected, getPageTitle() + "validatePage");
   }
 }

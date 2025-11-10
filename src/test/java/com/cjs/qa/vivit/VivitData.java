@@ -147,7 +147,7 @@ public class VivitData extends Environment {
 
   @Test
   public void createStandardTables() throws QAException {
-    final String fileStandardTable = folderData + "StandardTable" + IExtension.HTML;
+    final String fileStandardTable = getFolderData() + "StandardTable" + IExtension.HTML;
     HTML html =
         new HTML(
             fileStandardTable,

@@ -128,11 +128,11 @@ public class EarnPointsPage extends Page {
   public void earnPoints(Marlboro marlboro, Map<String, String> mapUser) throws QAException {
     setMarlboro(marlboro);
     setMapUser(mapUser);
-    double fileLogCount = FSO.filesGetCount(MarlboroEnvironment.folderData, IExtension.LOG);
-    String filePathNameSource = MarlboroEnvironment.fileLog;
+    double fileLogCount = FSO.filesGetCount(MarlboroEnvironment.FOLDER_DATA, IExtension.LOG);
+    String filePathNameSource = MarlboroEnvironment.FILE_LOG;
     String extentionNew = JavaHelpers.formatNumber(fileLogCount, "000");
     String filePathNameDestination =
-        MarlboroEnvironment.fileLog.replace(IExtension.LOG, "_" + extentionNew + IExtension.LOG);
+        MarlboroEnvironment.FILE_LOG.replace(IExtension.LOG, "_" + extentionNew + IExtension.LOG);
     if (FSO.fileExists(filePathNameSource)) {
       FSO.fileCopy(filePathNameSource, filePathNameDestination);
       FSO.fileDelete(filePathNameSource);
@@ -272,7 +272,7 @@ public class EarnPointsPage extends Page {
     Environment.sysOut("Searches Made:[" + getSearches() + "]");
     messageData = messageData.replaceAll("], ", "]\t");
     FSO.fileWrite(
-        MarlboroEnvironment.fileLog, messageFile + "\t" + messageData + Constants.NEWLINE, true);
+        MarlboroEnvironment.FILE_LOG, messageFile + "\t" + messageData + Constants.NEWLINE, true);
     if (!failed) {
       // Environment.sysOut("Points Earned:" + getLabelPointsEarned());
       checkCodesEnteredThisMonth();

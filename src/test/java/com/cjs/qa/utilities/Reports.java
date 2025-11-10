@@ -172,19 +172,19 @@ public class Reports {
           // "See Sheet (" + sheetNameFailure + ")",
           excel.addLink(
               sheetNameFailure, 0, 0, "DOCUMENT", sheetNameSummary, hyperlinkSheetSummary);
-          for (final Integer key : Environment.scenarioErrors.keySet()) {
+          for (final Integer key : Environment.getScenarioErrors().keySet()) {
             final int rowSheetFailure = (excel.getRowCount(sheetNameFailure) + 1);
             excel.writeCell(
                 sheetNameFailure, 0, rowSheetFailure, "Failure (" + String.valueOf(key) + ")");
             excel.autoSizeColumn(sheetNameFailure, 0);
             excel.setCellAlignment(sheetNameFailure, 0, 0);
             excel.writeCell(
-                sheetNameFailure, 1, rowSheetFailure, Environment.scenarioErrors.get(key));
+                sheetNameFailure, 1, rowSheetFailure, Environment.getScenarioErrors().get(key));
             excel.autoSizeColumn(sheetNameFailure, 1);
             excel.setCellAlignment(sheetNameFailure, 1, 0);
             excel.setCellWrap(sheetNameFailure, 1, 0, true);
             scenarioObject.log(
-                "Scenario Failure (" + key + "): " + Environment.scenarioErrors.get(key));
+                "Scenario Failure (" + key + "): " + Environment.getScenarioErrors().get(key));
           }
           writeFailureData(excel, sheetNameFailure, mapListTest, "Policy");
           writeFailureData(excel, sheetNameFailure, mapListTest, "Product");

@@ -155,7 +155,7 @@ public class Steps_Vivit extends Environment {
     mapTest.put("Session ID", sessionId);
     Environment.sysOut("User Name:[" + Constants.CURRENT_USER + "]");
     Environment.sysOut("mapTest:" + mapTest.toString() + " Starting...");
-    if (Environment.environmentSet) {
+    if (Environment.isEnvironmentSet()) {
       Environment.setEnvironmentVariableValues();
     }
     try {
@@ -266,7 +266,7 @@ public class Steps_Vivit extends Environment {
               + Constants.NEWLINE
               + mapTest.toString().replaceAll(", ", Constants.NEWLINE));
     }
-    Assert.assertTrue(Environment.scenarioErrors.size() == 0);
+    Assert.assertTrue(Environment.getScenarioErrors().size() == 0);
     // webDriver.get(VivitEnvironment.URL_LOGIN);
   }
 

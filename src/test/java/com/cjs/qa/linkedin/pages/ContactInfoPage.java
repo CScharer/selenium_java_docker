@@ -430,7 +430,7 @@ public class ContactInfoPage extends Page {
       }
       if (!getStringBuilderSQL().toString().equals("")) {
         FSO.fileWrite(
-            LinkedInEnvironment.fileLog,
+            LinkedInEnvironment.FILE_LOG,
             sqlStringBuilder.toString().replaceAll(";", Constants.NEWLINE + ';'),
             false);
         int recordsAffected = Data.getJdbc().executeUpdate(sqlStringBuilder.toString(), false);
