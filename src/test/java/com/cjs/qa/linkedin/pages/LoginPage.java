@@ -112,7 +112,7 @@ public class LoginPage extends Page {
   public void load() throws QAException {
     maximizeWindow();
     Environment.sysOut("Loading:[" + LinkedInEnvironment.URL_LOGIN + "]");
-    webDriver.get(LinkedInEnvironment.URL_LOGIN);
+    getWebDriver().get(LinkedInEnvironment.URL_LOGIN);
   }
 
   public void loadAlternate() throws QAException {
@@ -121,7 +121,7 @@ public class LoginPage extends Page {
     String url =
         LinkedInEnvironment.URL_LOGIN + "uas/login?trk=guest_homepage-basic_nav-header-signin";
     Environment.sysOut("Loading:[" + url + "]");
-    webDriver.get(url);
+    getWebDriver().get(url);
   }
 
   // SWITCHES POPULATE

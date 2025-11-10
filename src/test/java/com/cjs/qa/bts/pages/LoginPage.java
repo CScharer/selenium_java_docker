@@ -32,7 +32,7 @@ public class LoginPage extends Page {
     sURL = SQL.getURL(company, environment);
     sUserName = SQL.getUserName(company, environment);
     if (sURL != null) {
-      webDriver.get(sURL);
+      getWebDriver().get(sURL);
       if (getTitle().toString() == getLoginTitle().toString()) {
         setEditUserName(sUserName);
         switch (sUserName.toLowerCase()) {
@@ -153,6 +153,6 @@ public class LoginPage extends Page {
     Assert.assertSame(getPageTitle() + " validatePage", expected, actual);
   }
   // public void openBrowser(String company, String environment) {
-  // webDriver.get("http://bts-blda/policystarweb/login.faces");
+  // getWebDriver().get("http://bts-blda/policystarweb/login.faces");
   // }
 }

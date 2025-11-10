@@ -90,7 +90,7 @@ public class SignInPage extends Page {
   public void clickButtonLogin() {
     clickObject(getByButtonLogin());
     By byEndTour = By.xpath(".//button[.='End Tour']");
-    if (objectExists(byEndTour, new Page(webDriver).TIMEOUT_ELEMENT)) {
+    if (objectExists(byEndTour, new Page(getWebDriver()).getTimeoutElement())) {
       clickObject(byEndTour);
     }
   }
@@ -106,7 +106,7 @@ public class SignInPage extends Page {
   public void load() throws QAException {
     maximizeWindow();
     Environment.sysOut("Loading:[" + EveryoneSocialEnvironment.URL_LOGIN + "]");
-    webDriver.get(EveryoneSocialEnvironment.URL_LOGIN);
+    getWebDriver().get(EveryoneSocialEnvironment.URL_LOGIN);
     captureScreenshot();
   }
 

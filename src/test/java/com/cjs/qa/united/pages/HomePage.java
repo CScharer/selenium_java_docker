@@ -28,6 +28,6 @@ public class HomePage extends Page {
   public void load() {
     maximizeWindow();
     Environment.sysOut("Loading:[" + UnitedEnvironment.URL_LOGIN + "]");
-    webDriver.get(UnitedEnvironment.URL_LOGIN);
+    getWebDriver().get(UnitedEnvironment.URL_LOGIN);
   }
 }

@@ -29,7 +29,7 @@ public class DetailsPage extends Page {
     getListSection().add("YourResp");
     for (final String section : getListSection()) {
       final By labels = By.xpath(".//*[@id='" + section + "']/..//tr/th");
-      final List<WebElement> elements = webDriver.findElements(labels);
+      final List<WebElement> elements = getWebDriver().findElements(labels);
       for (int index = 0; index < elements.size(); index++) {
         final WebElement elementLabel = elements.get(index);
         stringBuilder.append(elementLabel.getText());

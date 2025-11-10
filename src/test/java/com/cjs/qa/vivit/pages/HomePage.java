@@ -57,7 +57,7 @@ public class HomePage extends Page {
             ".//*[@id=':1.menuBody']/table/tbody/tr/td/a/div//span[2][not(contains(.,'Select"
                 + " Language'))]");
     StringBuilder stringBuilder = new StringBuilder("Languages Supported:");
-    List<WebElement> webElementList = webDriver.findElements(byLanguages);
+    List<WebElement> webElementList = getWebDriver().findElements(byLanguages);
     List<String> languagesSupportedList = new ArrayList<>();
     for (WebElement webElement : webElementList) {
       if (!stringBuilder.toString().equals("")) {
@@ -86,7 +86,7 @@ public class HomePage extends Page {
         attempt++;
         Environment.sysOut(JavaHelpers.getCurrentMethodName() + " attempt " + attempt);
         if (attempt > 0) {
-          webDriver.get(VivitEnvironment.URL_LOGIN);
+          getWebDriver().get(VivitEnvironment.URL_LOGIN);
         }
         webElement = getWebElement(byLogo);
         logoSource = webElement.getAttribute("src");
@@ -113,7 +113,7 @@ public class HomePage extends Page {
     do {
       attempt++;
       try {
-        webDriver.get(VivitEnvironment.URL_LOGIN);
+        getWebDriver().get(VivitEnvironment.URL_LOGIN);
         JavaHelpers.sleep(2);
         Environment.sysOut(JavaHelpers.getCurrentMethodName() + " attempt " + attempt);
         linkSignInClick();

@@ -23,6 +23,6 @@ public class SignInPage extends Page {
   public void load() throws QAException {
     maximizeWindow();
     Environment.sysOut("Loading:[" + GoogleEnvironment.URL_LOGIN + "]");
-    webDriver.get(GoogleEnvironment.URL_LOGIN);
+    getWebDriver().get(GoogleEnvironment.URL_LOGIN);
   }
 }

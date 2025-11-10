@@ -123,9 +123,9 @@ public class ClaimsAndSpendingPage extends Page {
     waitPageLoaded();
     sleep(1);
     final List<String> headings = new ArrayList<>();
-    webDriver.findElements(byType);
+    getWebDriver().findElements(byType);
     final List<WebElement> headingElements =
-        webDriver.findElements(
+        getWebDriver().findElements(
             By.xpath(byType.toString().replace(BY_XPATH, "") + "/tr[" + 1 + "]/th/a"));
     Environment.sysOut(headingElements.toString());
     for (int indexHeading = 0; indexHeading < headingElements.size(); indexHeading++) {
@@ -147,7 +147,7 @@ public class ClaimsAndSpendingPage extends Page {
     Assert.assertEquals("Headings " + type, listHeadings, headings);
     String xPath = byType.toString().replace(BY_XPATH, "") + "/tr";
     Environment.sysOut("xPath:" + xPath);
-    final List<WebElement> rowElements = webDriver.findElements(By.xpath(xPath));
+    final List<WebElement> rowElements = getWebDriver().findElements(By.xpath(xPath));
     for (int indexRecord = 2; indexRecord <= rowElements.size(); indexRecord++) {
       final Map<String, String> recordMap = getHeadingMap();
       for (int index = 0; index < listHeadings.size(); index++) {
@@ -164,7 +164,7 @@ public class ClaimsAndSpendingPage extends Page {
                 + "]"
                 + listTypes.get(index);
         // Environment.sysOut("xPath:" + xPath)
-        final WebElement cell = webDriver.findElement(By.xpath(xPath));
+        final WebElement cell = getWebDriver().findElement(By.xpath(xPath));
         // Environment.sysOut(cell.toString())
         final String value = cell.getText().trim();
         Environment.sysOut(listHeadings.get((index)) + ":[" + value + "]");

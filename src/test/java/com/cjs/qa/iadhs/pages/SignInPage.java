@@ -43,7 +43,7 @@ public class SignInPage extends Page {
   public void load() throws QAException {
     maximizeWindow();
     Environment.sysOut("Loading:[" + IaDhsEnvironment.URL_LOGIN + "]");
-    webDriver.get(IaDhsEnvironment.URL_LOGIN);
+    getWebDriver().get(IaDhsEnvironment.URL_LOGIN);
   }
 
   public void signIn(String userName, String password) throws QAException {

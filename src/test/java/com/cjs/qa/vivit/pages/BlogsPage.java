@@ -64,13 +64,13 @@ public class BlogsPage extends Page {
   }
 
   private void getBlogs(String url, String blogPage) {
-    webDriver.get(url);
-    String urlActual = webDriver.getCurrentUrl();
+    getWebDriver().get(url);
+    String urlActual = getWebDriver().getCurrentUrl();
     if (!url.equalsIgnoreCase(urlActual)) {
       Environment.sysOut(
           "blogPage:[" + blogPage + "], [" + url + "] DOES NOT EQUAL [" + urlActual + "]");
     }
-    final List<WebElement> listBlogRecords = webDriver.findElements(byTableBlogs);
+    final List<WebElement> listBlogRecords = getWebDriver().findElements(byTableBlogs);
     final Map<Integer, String> mapFields = new HashMap<>();
     for (int record = 0; record < listBlogRecords.size(); record++) {
       final WebElement elementRecord = listBlogRecords.get(record);

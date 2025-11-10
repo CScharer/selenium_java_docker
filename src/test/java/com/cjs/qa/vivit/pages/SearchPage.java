@@ -37,17 +37,17 @@ public class SearchPage extends Page {
       // IExtension.COM + "/?page=HallofFame");
       // for (final String url : urls) {
       // VivitEnvironment.sysOut("Searching:[" + url + "]");
-      // webDriver.get(url);
+      // getWebDriver().get(url);
       // }
-      webDriver.get(LIGS);
+      getWebDriver().get(LIGS);
       sleep(1, 0);
-      List<WebElement> links = webDriver.findElements(ligLinks);
+      List<WebElement> links = getWebDriver().findElements(ligLinks);
       for (int index = 0; index < links.size(); index++) {
         final WebElement element = links.get(index);
         final String url = element.getAttribute("href");
         VivitEnvironment.sysOut("Clicking:[" + url + "]");
         clickObject(element);
-        final List<WebElement> webElements = webDriver.findElements(hrefLinks);
+        final List<WebElement> webElements = getWebDriver().findElements(hrefLinks);
         for (WebElement webElement : webElements) {
           final String leaderName = webElement.getText();
           final String href = webElement.getAttribute("href");
@@ -58,20 +58,20 @@ public class SearchPage extends Page {
           Environment.sysOut("Href:[" + href + "]");
         }
         if (index < links.size()) {
-          webDriver.get(LIGS);
+          getWebDriver().get(LIGS);
           sleep(1, 0);
-          links = webDriver.findElements(ligLinks);
+          links = getWebDriver().findElements(ligLinks);
         }
       }
-      webDriver.get(SIGS);
+      getWebDriver().get(SIGS);
       sleep(1, 0);
-      links = webDriver.findElements(sigLinks);
+      links = getWebDriver().findElements(sigLinks);
       for (int index = 0; index < links.size(); index++) {
         final WebElement element = links.get(index);
         final String url = element.getAttribute("href");
         VivitEnvironment.sysOut("Clicking:[" + url + "]");
         clickObject(element);
-        final List<WebElement> webElements = webDriver.findElements(hrefLinks);
+        final List<WebElement> webElements = getWebDriver().findElements(hrefLinks);
         for (WebElement webElement : webElements) {
           final String leaderName = webElement.getText();
           final String href = webElement.getAttribute("href");
@@ -82,9 +82,9 @@ public class SearchPage extends Page {
           Environment.sysOut("Href:[" + href + "]");
         }
         if (index < links.size()) {
-          webDriver.get(SIGS);
+          getWebDriver().get(SIGS);
           sleep(1, 0);
-          webDriver.findElements(sigLinks);
+          getWebDriver().findElements(sigLinks);
         }
       }
       final StringBuilder stringBuilderCSV = new StringBuilder();
@@ -116,8 +116,8 @@ public class SearchPage extends Page {
         Environment.sysOut("Unknown group type: " + GROUP + ". Using default LUGS URL.");
         break;
     }
-    webDriver.get(url);
-    final List<WebElement> webElements = webDriver.findElements(linksGroups);
+    getWebDriver().get(url);
+    final List<WebElement> webElements = getWebDriver().findElements(linksGroups);
     Environment.sysOut("Total " + GROUP + ":[" + webElements.size() + "]");
     StringBuilder stringBuilder = new StringBuilder();
     for (int index = 0; index < webElements.size(); index++) {

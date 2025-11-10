@@ -63,7 +63,7 @@ public class CasePaymentsPage extends Page {
   public void getLastPayment() throws Throwable {
     List<String> headingList = validateHeadingList();
     // Only get the most recent payment.
-    List<WebElement> lastPaymentWebElementList = webDriver.findElements(getLastPaymentBy());
+    List<WebElement> lastPaymentWebElementList = getWebDriver().findElements(getLastPaymentBy());
     getRecordWebElementsPayment(headingList, lastPaymentWebElementList);
     getPayment().append(getPaymentList());
   }
@@ -72,7 +72,7 @@ public class CasePaymentsPage extends Page {
     final int RECORDS_CHECK_MAX = 3;
     List<String> headingList = validateHeadingList();
     List<WebElement> previousPaymentRecordsWebElementList =
-        webDriver.findElements(getPreviousPaymentRecordsBy());
+        getWebDriver().findElements(getPreviousPaymentRecordsBy());
     int recordsCheck = (previousPaymentRecordsWebElementList.size() - 1);
     if (recordsCheck > RECORDS_CHECK_MAX) {
       recordsCheck = RECORDS_CHECK_MAX;
@@ -82,7 +82,7 @@ public class CasePaymentsPage extends Page {
         previousPaymentRecordsWebElementListIndex--) {
       WebElement previousPaymentRecordsWebElement =
           previousPaymentRecordsWebElementList.get(previousPaymentRecordsWebElementListIndex);
-      highlightCurrentElementBriefly(previousPaymentRecordsWebElement, FLASH_MILLISECONDS);
+      highlightCurrentElementBriefly(previousPaymentRecordsWebElement, getFlashMilliseconds());
       List<WebElement> previousPaymentWebElementList =
           previousPaymentRecordsWebElement.findElements(By.xpath(".//a[2]"));
       getRecordWebElementsPayment(headingList, previousPaymentWebElementList);
@@ -119,7 +119,7 @@ public class CasePaymentsPage extends Page {
     List<WebElement> headingWebElementList;
     do {
       JavaHelpers.sleep(3);
-      headingWebElementList = webDriver.findElements(getHeadingsBy());
+      headingWebElementList = getWebDriver().findElements(getHeadingsBy());
       headingCount = headingWebElementList.size();
       Environment.sysOut("Heading Count:[" + headingCount + "]");
     } while (headingCount == 0);
@@ -130,7 +130,7 @@ public class CasePaymentsPage extends Page {
       WebElement headingWebElement = headingWebElementList.get(headingWebElementIndex);
       if (headingWebElementIndex == 0) {
         scrollToElement(headingWebElement);
-        highlightCurrentElementBriefly(headingWebElement, FLASH_MILLISECONDS);
+        highlightCurrentElementBriefly(headingWebElement, getFlashMilliseconds());
       }
       String heading = headingWebElement.getText();
       Environment.sysOut("heading:[" + heading + "]");

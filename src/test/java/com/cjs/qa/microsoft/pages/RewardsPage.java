@@ -120,7 +120,7 @@ public class RewardsPage extends Page {
     // refresh();
     final By byPointsBreakdown =
         By.xpath(XPAPTH_USER_BANNER + "//span/ng-transclude[.='Points breakdown']/..");
-    objectExistsRefresh(byPointsBreakdown, 3, TIMEOUT_ELEMENT);
+    objectExistsRefresh(byPointsBreakdown, 3, getTimeoutElement());
     final WebElement webElementPointsBreakdown = getWebDriver().findElement(byPointsBreakdown);
     scrollToElement(webElementPointsBreakdown);
     highlightCurrentElementBriefly(webElementPointsBreakdown, HIGHLIGHT_BRIEFLY);

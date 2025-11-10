@@ -30,18 +30,18 @@ public class AbstractPage implements ISelenium { // extends Page {
       // Default Browser
       this.browser = ISelenium.BROWSER_DEFAULT;
       this.webDriver = selenium.browserProfiling(this.webDriver, this.browser, true);
-      this.webDriver.get("http://www.Vivit-Worldwide.org");
+      this.getWebDriver().get("http://www.Vivit-Worldwide.org");
     }
   }
 
   protected void selectDropdown(By findBy, String selection) {
-    final Select Dropdown = new Select(this.webDriver.findElement(findBy));
+    final Select Dropdown = new Select(this.getWebDriver().findElement(findBy));
     Dropdown.selectByVisibleText(selection);
   }
 
   protected void setEdit(By byLocator, String value) {
     Environment.sysOut("Object:" + byLocator.toString());
-    final WebElement element = webDriver.findElement(byLocator);
+    final WebElement element = getWebDriver().findElement(byLocator);
     final WebDriverWait wait = new WebDriverWait(this.webDriver, java.time.Duration.ofSeconds(10));
     wait.until(ExpectedConditions.elementToBeClickable(element));
     Environment.sysOut("Displayed:" + element.isDisplayed());
@@ -51,7 +51,7 @@ public class AbstractPage implements ISelenium { // extends Page {
   }
 
   public void waitHard(int value) {
-    webDriver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(value));
+    getWebDriver().manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(value));
   }
 
   protected WebElement waitClickable(WebElement element) {
@@ -62,7 +62,7 @@ public class AbstractPage implements ISelenium { // extends Page {
   }
 
   protected void verifyTitle(String value) {
-    final String title = this.webDriver.getTitle();
+    final String title = this.getWebDriver().getTitle();
     Assert.assertEquals(value, title);
   }
 }

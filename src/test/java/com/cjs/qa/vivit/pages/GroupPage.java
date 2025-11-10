@@ -96,11 +96,11 @@ public class GroupPage extends Page {
         default:
           return;
       }
-      webDriver.get(groupValue);
-      final String title = webDriver.findElement(byTitleBar).getText();
+      getWebDriver().get(groupValue);
+      final String title = getWebDriver().findElement(byTitleBar).getText();
       Assert.assertEquals(title, expectedTitle, title);
       sleep(1, 0);
-      final List<WebElement> links = webDriver.findElements(byLinksGroups);
+      final List<WebElement> links = getWebDriver().findElements(byLinksGroups);
       final List<String> chapterURLList = new ArrayList<>();
       for (int index = 0; index < links.size(); index++) {
         final WebElement element = links.get(index);
@@ -122,7 +122,7 @@ public class GroupPage extends Page {
         final String pageID = chapterURL;
         VivitEnvironment.sysOut("get:[" + chapterURL + "]");
         final Stopwatch stopwatch = Stopwatch.createStarted();
-        webDriver.get(chapterURL);
+        getWebDriver().get(chapterURL);
         stopwatch.stop();
         final long lElapsedTime = stopwatch.elapsed(TimeUnit.MILLISECONDS);
         String elapsedTime = String.valueOf(lElapsedTime) + "ms";
@@ -134,13 +134,13 @@ public class GroupPage extends Page {
                 + "]");
         stopwatch.reset();
         final List<WebElement> wallPostElements =
-            webDriver.findElements(By.xpath("//div[@class='WallPost']"));
+            getWebDriver().findElements(By.xpath("//div[@class='WallPost']"));
         String wallPosts = String.valueOf(wallPostElements.size());
         String groupName = "";
-        // final String currentURL = webDriver.getCurrentUrl();
+        // final String currentURL = getWebDriver().getCurrentUrl();
         // if(currentURL.equalsIgnoreCase(chapterURL))
         if (objectExists(groupTitle, Environment.getTimeOutElement())) {
-          final WebElement webElementGroup = webDriver.findElement(groupTitle);
+          final WebElement webElementGroup = getWebDriver().findElement(groupTitle);
           highlightCurrentElement(webElementGroup);
           groupName = webElementGroup.getText();
           switch (groupType) {
@@ -161,7 +161,7 @@ public class GroupPage extends Page {
             final By byElement = mapByGroupURLsBy.get(keyBy);
             String objectURL = null;
             if (objectExists(byElement, 1)) {
-              final WebElement webElement = webDriver.findElement(byElement);
+              final WebElement webElement = getWebDriver().findElement(byElement);
               highlightCurrentElement(webElement);
               objectURL = webElement.getAttribute("href");
               // "https://www.vivit-worldwide.org" + objectURL;
@@ -186,7 +186,7 @@ public class GroupPage extends Page {
         Environment.sysOut("groupName:[" + groupName + "]");
         // Get the labels/hrefs links of the Groups.
         final By hrefLinks = By.xpath(".//*[@id='ctl00_PageContent_tdZone2']/table/tbody/tr/td/b");
-        final List<WebElement> webElements = webDriver.findElements(hrefLinks);
+        final List<WebElement> webElements = getWebDriver().findElements(hrefLinks);
         for (WebElement webElement : webElements) {
           // Need to verify this so there's no unhandled error.
           highlightCurrentElement(webElement);
@@ -261,17 +261,17 @@ public class GroupPage extends Page {
       // IExtension.COM + "/?page=HallofFame");
       // for (final String url : urls) {
       // VivitEnvironment.sysOut("Searching:[" + url + "]");
-      // webDriver.get(url);
+      // getWebDriver().get(url);
       // }
-      webDriver.get(LIGS);
+      getWebDriver().get(LIGS);
       sleep(1, 0);
-      List<WebElement> links = webDriver.findElements(ligLinks);
+      List<WebElement> links = getWebDriver().findElements(ligLinks);
       for (int index = 0; index < links.size(); index++) {
         final WebElement element = links.get(index);
         final String url = element.getAttribute("href");
         VivitEnvironment.sysOut("Clicking:[" + url + "]");
         clickObject(element);
-        final List<WebElement> webElements = webDriver.findElements(hrefLinks);
+        final List<WebElement> webElements = getWebDriver().findElements(hrefLinks);
         for (WebElement webElement : webElements) {
           final String leaderName = webElement.getText();
           final String href = webElement.getAttribute("href");
@@ -281,20 +281,20 @@ public class GroupPage extends Page {
               "Leader Type:[" + leaderType + "], Leader:[" + leaderName + "], Href:[" + href + "]");
         }
         if (index < links.size()) {
-          webDriver.get(LIGS);
+          getWebDriver().get(LIGS);
           sleep(1, 0);
-          links = webDriver.findElements(ligLinks);
+          links = getWebDriver().findElements(ligLinks);
         }
       }
-      webDriver.get(SIGS);
+      getWebDriver().get(SIGS);
       sleep(1, 0);
-      links = webDriver.findElements(sigLinks);
+      links = getWebDriver().findElements(sigLinks);
       for (int index = 0; index < links.size(); index++) {
         final WebElement element = links.get(index);
         final String url = element.getAttribute("href");
         VivitEnvironment.sysOut("Clicking:[" + url + "]");
         clickObject(element);
-        final List<WebElement> webElements = webDriver.findElements(hrefLinks);
+        final List<WebElement> webElements = getWebDriver().findElements(hrefLinks);
         for (WebElement webElement : webElements) {
           final String leaderName = webElement.getText();
           final String href = webElement.getAttribute("href");
@@ -304,9 +304,9 @@ public class GroupPage extends Page {
               "Leader Type:[" + leaderType + "], Leader:[" + leaderName + "], Href:[" + href + "]");
         }
         if (index < links.size()) {
-          webDriver.get(SIGS);
+          getWebDriver().get(SIGS);
           sleep(1, 0);
-          webDriver.findElements(sigLinks);
+          getWebDriver().findElements(sigLinks);
         }
       }
       final StringBuilder stringBuilderCSV = new StringBuilder();
@@ -338,8 +338,8 @@ public class GroupPage extends Page {
         Environment.sysOut("Unknown group type: " + groupType + ". Using default LUGS URL.");
         break;
     }
-    webDriver.get(url);
-    final List<WebElement> webElements = webDriver.findElements(byLinksGroups);
+    getWebDriver().get(url);
+    final List<WebElement> webElements = getWebDriver().findElements(byLinksGroups);
     Environment.sysOut("Total " + groupType + ":[" + webElements.size() + "]");
     StringBuilder stringBuilder = new StringBuilder();
     for (int index = 0; index < webElements.size(); index++) {

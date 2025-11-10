@@ -47,7 +47,7 @@ public class LogInPage extends Page {
   public boolean load() throws QAException {
     maximizeWindow();
     Environment.sysOut("Loading:[" + WellmarkEnvironment.URL_LOGIN + "]");
-    webDriver.get(WellmarkEnvironment.URL_LOGIN);
+    getWebDriver().get(WellmarkEnvironment.URL_LOGIN);
     // sleep(5);
     // return objectExists(buttonSignInWithMicrosoft);
     return true;

@@ -179,7 +179,7 @@ public class SurveyPage extends Page {
   public void optionsSatisfactionSelect() throws QAException {
     final String xPath = "//td[@class='Opt4 inputtyperbloption']";
     final By optionsSatisfaction = By.xpath(xPath);
-    final List<WebElement> webElements = webDriver.findElements(optionsSatisfaction);
+    final List<WebElement> webElements = getWebDriver().findElements(optionsSatisfaction);
     for (final WebElement webElement : webElements) {
       clickObject(webElement);
     }
@@ -242,7 +242,7 @@ public class SurveyPage extends Page {
   public void load() throws QAException {
     maximizeWindow();
     Environment.sysOut("Loading:[" + HardeesEnvironment.URL_LOGIN + "]");
-    webDriver.get(HardeesEnvironment.URL_LOGIN);
+    getWebDriver().get(HardeesEnvironment.URL_LOGIN);
   }
 
   public void populate() throws QAException {

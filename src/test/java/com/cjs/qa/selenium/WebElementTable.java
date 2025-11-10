@@ -277,7 +277,7 @@ public class WebElementTable extends Page {
    * @return
    */
   private WebElement getTable(String xpath) {
-    return webDriver.findElement(By.xpath(xpath));
+    return getWebDriver().findElement(By.xpath(xpath));
   }
 
   /**
@@ -292,7 +292,7 @@ public class WebElementTable extends Page {
    */
   public void highlightWebElement(WebElement webElement) {
     if (highlightObjects) {
-      new Page(webDriver).highlightCurrentElement(webElement);
+      new Page(getWebDriver()).highlightCurrentElement(webElement);
     }
   }
 

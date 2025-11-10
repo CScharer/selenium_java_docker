@@ -54,14 +54,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class Page extends JavaHelpers {
   // May need to update as new webDriverWait returns boolean.
-  String currentUser;
+  private String currentUser;
   public static final String PATH_DELIMETER = "//";
   public static final String LABEL_THE_VALUE = "The value [";
   public static final String LABEL_OPTION_CHECKED = "checked";
   public static final String LABEL_OPTION_UNCHECKED = "unchecked";
   // red;deeppink;fuchsia
   public static final String BORDER_COLOR = "deeppink";
-  public final String SCRIPT_GET_ELEMENT_BORDER =
+  private final String scriptGetElementBorder =
       "var element = arguments[0];if (element.currentStyle) {var style ="
           + " element.currentStyle;var border = style['borderTopWidth'] + ' ' +"
           + " style['borderTopStyle'] + ' ' + style['borderTopColor'] + ';' +"
@@ -86,7 +86,7 @@ public class Page extends JavaHelpers {
           + BORDER_COLOR
           + "';"
           + "return border;";
-  public final String SCRIPT_UNHIGHLIGHT_ELEMENT =
+  private final String scriptUnhighlightElement =
       "var element = arguments[0];"
           + "var borders = arguments[1].split(';');"
           + "element.style.borderTop = borders[0];"
@@ -94,13 +94,13 @@ public class Page extends JavaHelpers {
           + "element.style.borderBottom = borders[2];"
           + "element.style.borderLeft = borders[3];";
   // public final boolean SCROLL_TO_OBJECT = false
-  public final String FORMAT_SCREENSHOT_NUMBER = "000000";
-  public final int FLASH_MILLISECONDS = 25;
+  private final String formatScreenshotNumber = "000000";
+  private final int flashMilliseconds = 25;
   private WebElement previousWebElement = null;
   private String previousBorder = null;
-  public int TIMEOUT_ELEMENT = Environment.getTimeOutElement();
-  public boolean LOG_ALL = Environment.isLogAll();
-  protected WebDriver webDriver;
+  private int timeoutElement = Environment.getTimeOutElement();
+  private boolean logAll = Environment.isLogAll();
+  private WebDriver webDriver;
   private int screenshotCounter = 1;
   private SeleniumWebDriverEventListener seleniumWebDriverEventListener =
       new SeleniumWebDriverEventListener();
@@ -113,6 +113,30 @@ public class Page extends JavaHelpers {
     EventFiringDecorator<WebDriver> eventFiringWebDriver =
         new EventFiringDecorator<>(seleniumWebDriverEventListener);
     setWebDriver(eventFiringWebDriver.decorate(getWebDriver()));
+  }
+
+  private String getScriptGetElementBorder() {
+    return scriptGetElementBorder;
+  }
+
+  private String getScriptUnhighlightElement() {
+    return scriptUnhighlightElement;
+  }
+
+  private String getFormatScreenshotNumber() {
+    return formatScreenshotNumber;
+  }
+
+  public int getFlashMilliseconds() {
+    return flashMilliseconds;
+  }
+
+  public int getTimeoutElement() {
+    return timeoutElement;
+  }
+
+  private boolean isLogAll() {
+    return logAll;
   }
 
   public WebElement getPreviousWebElement() {
@@ -210,9 +234,9 @@ public class Page extends JavaHelpers {
       // remember the new webElement
       setPreviousWebElement(webElement);
       // setPreviousBorder((String)
-      // (executeJavaScript(SCRIPT_GET_ELEMENT_BORDER, webElement)))
+      // (executeJavaScript(getScriptGetElementBorder(), webElement)))
       if (getWebDriver() instanceof JavascriptExecutor) {
-        setPreviousBorder((String) executeJavaScript(SCRIPT_GET_ELEMENT_BORDER, webElement));
+        setPreviousBorder((String) executeJavaScript(getScriptGetElementBorder(), webElement));
       }
       return true;
     } catch (final Exception e) {
@@ -252,11 +276,11 @@ public class Page extends JavaHelpers {
     if (getPreviousWebElement() != null) {
       try {
         // if there already is a highlighted element, un-highlight it
-        // executeJavaScript(SCRIPT_UNHIGHLIGHT_ELEMENT,
+        // executeJavaScript(getScriptUnhighlightElement(),
         // getPreviousWebElement(), getPreviousBorder())
         if (webDriver instanceof JavascriptExecutor) {
           executeJavaScript(
-              SCRIPT_UNHIGHLIGHT_ELEMENT, getPreviousWebElement(), getPreviousBorder());
+              getScriptUnhighlightElement(), getPreviousWebElement(), getPreviousBorder());
           success = true;
         }
       } catch (final StaleElementReferenceException ignored) {
@@ -316,7 +340,7 @@ public class Page extends JavaHelpers {
     stringBuilder.append(title);
     stringBuilder.append("_");
     stringBuilder.append(
-        JavaHelpers.formatNumber(getScreenshotCounter(), FORMAT_SCREENSHOT_NUMBER));
+        JavaHelpers.formatNumber(getScreenshotCounter(), getFormatScreenshotNumber()));
     stringBuilder.append(".png");
     String filePathName = stringBuilder.toString();
     Environment.sysOut("File Name:[" + filePathName + "]");
@@ -464,7 +488,7 @@ public class Page extends JavaHelpers {
         buttonExists = true;
       } catch (final Exception e) { // Empty
       }
-    } while ((elapsedTime <= ((TIMEOUT_ELEMENT / 6) * 1000)) && (!buttonExists));
+    } while ((elapsedTime <= ((getTimeoutElement() / 6) * 1000)) && (!buttonExists));
     // Only wait five seconds as these are supposed to be pop-ups
     if (buttonExists) {
       clickObject(webElement);
@@ -647,7 +671,7 @@ public class Page extends JavaHelpers {
             + " '' + parseInt(rect.top), '' + parseInt(rect.width), '' +"
             + " parseInt(rect.height) ]";
     final List<String> bounds = (List<String>) executeJavaScript(script, webElement);
-    if (LOG_ALL) {
+    if (isLogAll()) {
       logFieldNameTagNameValue(webElement.toString(), webElement.getTagName(), bounds.toString());
     }
     return bounds;
@@ -1157,7 +1181,7 @@ public class Page extends JavaHelpers {
    * @return
    */
   protected boolean objectExists(By by) {
-    return objectExists(by, TIMEOUT_ELEMENT);
+    return objectExists(by, getTimeoutElement());
   }
 
   /**
@@ -1366,7 +1390,7 @@ public class Page extends JavaHelpers {
     }
     if (Environment.isHighlightObjects()) {
       for (int iFlash = 1; iFlash <= 3; iFlash++) {
-        flashCurrentElement(webElement, FLASH_MILLISECONDS);
+        flashCurrentElement(webElement, getFlashMilliseconds());
       }
     } else {
       highlightCurrentElement(webElement);
@@ -1886,7 +1910,7 @@ public class Page extends JavaHelpers {
    */
   protected WebElement waitClickable(WebElement webElement) {
     final WebDriverWait webDriverWait =
-        new WebDriverWait(getWebDriver(), java.time.Duration.ofSeconds(TIMEOUT_ELEMENT));
+        new WebDriverWait(getWebDriver(), java.time.Duration.ofSeconds(getTimeoutElement()));
     webElement = webDriverWait.until(ExpectedConditions.elementToBeClickable(webElement));
     return webElement;
   }
@@ -1898,13 +1922,13 @@ public class Page extends JavaHelpers {
   protected WebElement waitExists(By by) {
     // May need to update as new webDriverWait returns boolean.
     final WebDriverWait webDriverWait =
-        new WebDriverWait(getWebDriver(), java.time.Duration.ofSeconds(TIMEOUT_ELEMENT));
+        new WebDriverWait(getWebDriver(), java.time.Duration.ofSeconds(getTimeoutElement()));
     return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(by));
   }
 
   public void waitForAlert() {
     final Wait<WebDriver> webDriverWait =
-        new WebDriverWait(getWebDriver(), java.time.Duration.ofSeconds(TIMEOUT_ELEMENT));
+        new WebDriverWait(getWebDriver(), java.time.Duration.ofSeconds(getTimeoutElement()));
     webDriverWait.until(ExpectedConditions.alertIsPresent());
   }
 
@@ -1955,7 +1979,7 @@ public class Page extends JavaHelpers {
    * @param expectedText
    */
   protected void waitForTextInWebElement(WebElement webElement, String expectedText) {
-    new WebDriverWait(getWebDriver(), java.time.Duration.ofSeconds(TIMEOUT_ELEMENT))
+    new WebDriverWait(getWebDriver(), java.time.Duration.ofSeconds(getTimeoutElement()))
         .until(ExpectedConditions.textToBePresentInElement(webElement, expectedText));
   }
 
@@ -1990,7 +2014,7 @@ public class Page extends JavaHelpers {
   public boolean waitForXpath(String xpath) {
     try {
       final WebDriverWait webDriverWait =
-          new WebDriverWait(getWebDriver(), java.time.Duration.ofSeconds(TIMEOUT_ELEMENT));
+          new WebDriverWait(getWebDriver(), java.time.Duration.ofSeconds(getTimeoutElement()));
       webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
       return true;
     } catch (final Exception e) {

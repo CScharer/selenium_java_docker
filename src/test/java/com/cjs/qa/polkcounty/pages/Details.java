@@ -20,7 +20,7 @@ public class Details extends Page {
   private final By byNoResults = By.xpath(".//*[@id='ctl00_ContentPlaceHolder1_noResults']");
 
   public StringBuilder getArrestRecord(String url, StringBuilder sqlStringBuilder) {
-    webDriver.get(url);
+    getWebDriver().get(url);
     Map<String, String> inmateRecordMap = new HashMap<>();
     if (objectExists(byNoResults, 3)) {
       inmateRecordMap.putAll(getInmateNameDateMap());
@@ -47,7 +47,7 @@ public class Details extends Page {
       String value = "";
       if (key.equals("Name")) {
         // webElement =
-        // webDriver.findElement(By.xpath(".//*[@id='inmateNameDate']/tbody/tr[2]/th[text()[contains(.,'"
+        // getWebDriver().findElement(By.xpath(".//*[@id='inmateNameDate']/tbody/tr[2]/th[text()[contains(.,'"
         // + key + "')]]/../td"));
         value =
             getLabel(
@@ -57,7 +57,7 @@ public class Details extends Page {
                         + "')]]/../td"));
       } else {
         // webElement =
-        // webDriver.findElement(By.xpath(".//*[@id='inmateNameDate']/tbody/tr/th[text()[contains(.,'"
+        // getWebDriver().findElement(By.xpath(".//*[@id='inmateNameDate']/tbody/tr/th[text()[contains(.,'"
         // + key + "')]]/../td"));
         value =
             getLabel(
@@ -74,7 +74,7 @@ public class Details extends Page {
     for (final String key : inmateProfileMap.keySet()) {
       // Environment.sysOut("key:[" + key + "]");
       // webElement =
-      // webDriver.findElement(By.xpath(".//*[@id='inmateProfile']/tbody/tr/th[text()[contains(.,'"
+      // getWebDriver().findElement(By.xpath(".//*[@id='inmateProfile']/tbody/tr/th[text()[contains(.,'"
       // + key + "')]]/../td"));
       final String value =
           getLabel(
@@ -90,7 +90,7 @@ public class Details extends Page {
       // Environment.sysOut("key:[" + key + "]");
 
       // webElement =
-      // webDriver.findElement(By.xpath(".//*[@id='inmateAddress']/strong[text()[contains(.,'"
+      // getWebDriver().findElement(By.xpath(".//*[@id='inmateAddress']/strong[text()[contains(.,'"
       // + key + "')]]/.."));
       String value =
           getLabel(
@@ -107,7 +107,7 @@ public class Details extends Page {
     for (final String key : inmateHoldingLocationMap.keySet()) {
       // Environment.sysOut("key:[" + key + "]");
       // webElement =
-      // webDriver.findElement(By.xpath(".//*[@id='holdingLocation']/strong[text()[contains(.,'"
+      // getWebDriver().findElement(By.xpath(".//*[@id='holdingLocation']/strong[text()[contains(.,'"
       // + key + "')]]/.."));
       String value =
           getLabel(
@@ -141,11 +141,11 @@ public class Details extends Page {
             ".//*[@id='inmateNameDate']/tbody/tr[1]/th[text()[contains(.,'Offender/Name"
                 + " ID')]]/../td");
     if (refreshURL) {
-      webDriver.get(url);
+      getWebDriver().get(url);
     }
     String offenderNameID = "MISSING";
     if (objectExists(byInmateNameDate, 3)) {
-      final WebElement element = webDriver.findElement(byInmateNameDate);
+      final WebElement element = getWebDriver().findElement(byInmateNameDate);
       offenderNameID = element.getText();
     }
     final List<String> mapRecordList = new ArrayList<>();
@@ -164,7 +164,7 @@ public class Details extends Page {
       return sqlStringBuilder;
     }
     final List<WebElement> rowElements =
-        webDriver.findElements(
+        getWebDriver().findElements(
             By.xpath(".//*[@id='ctl00_ContentPlaceHolder1_gvCharges']/tbody/tr"));
     int row = 0;
     for (final WebElement rowElement : rowElements) {

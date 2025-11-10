@@ -74,7 +74,7 @@ public class ContactInfoPage extends Page {
   }
 
   public List<WebElement> getWebElementSectionList() {
-    return webDriver.findElements(
+    return getWebDriver().findElements(
         By.xpath(".//div[@class='pv-profile-section__section-info section-info']/section"));
   }
 
@@ -280,7 +280,7 @@ public class ContactInfoPage extends Page {
         String linkedInURL = map.get(Data.FIELD_LINKEDIN_URL);
         String linkedInURLDetailContactInfo =
             LinkedIn.LINKEDIN_URL + linkedInURL + "/detail/contact-info";
-        webDriver.get(linkedInURLDetailContactInfo);
+        getWebDriver().get(linkedInURLDetailContactInfo);
         LinkedIn.sleepRandom(2, 4, 250, 750);
         getData(sectionList, linkedInURL);
       }

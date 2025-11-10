@@ -21,7 +21,7 @@ public class TableOfContentsPage extends Page {
   public void expandTableOfContentNodes() {
     List<WebElement> webElements;
     do {
-      webElements = webDriver.findElements(By.xpath("//*[contains(@class,'icon-drop-down')]"));
+      webElements = getWebDriver().findElements(By.xpath("//*[contains(@class,'icon-drop-down')]"));
       if (!webElements.isEmpty()) {
         final int index = (webElements.size() - 1);
         final WebElement webElement = webElements.get(index);
@@ -32,14 +32,14 @@ public class TableOfContentsPage extends Page {
 
   public String getTableOfContents(String url) {
     // url += "/table-of-contents";
-    // webDriver.get(url);
-    final List<WebElement> webElements = webDriver.findElements(By.xpath(".//h3/a"));
+    // getWebDriver().get(url);
+    final List<WebElement> webElements = getWebDriver().findElements(By.xpath(".//h3/a"));
     url = webElements.get(0).getAttribute("href");
-    webDriver.get(url);
+    getWebDriver().get(url);
     JavaHelpers.sleep(3);
     expandTableOfContentNodes();
     final StringBuilder stringBuilder = new StringBuilder(Constants.NEWLINE);
-    final List<WebElement> listSections = webDriver.findElements(bySection);
+    final List<WebElement> listSections = getWebDriver().findElements(bySection);
     for (int indexSection = 0; indexSection < listSections.size(); indexSection++) {
       final WebElement webElementSection = listSections.get(indexSection);
       final List<WebElement> listHeadings2 = webElementSection.findElements(byHeading2);

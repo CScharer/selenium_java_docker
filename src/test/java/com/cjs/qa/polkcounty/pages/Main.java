@@ -27,7 +27,7 @@ public class Main extends Page {
   public void load() {
     maximizeWindow();
     Environment.sysOut("Loading:[" + PolkCountyEnvironment.URL_LOGIN + "]");
-    webDriver.get(PolkCountyEnvironment.URL_LOGIN);
+    getWebDriver().get(PolkCountyEnvironment.URL_LOGIN);
   }
 
   public void getInmatesOnTheWeb(boolean captureNew) {
@@ -46,7 +46,7 @@ public class Main extends Page {
     if (captureNew) {
       load();
       String sTotalInmates =
-          webDriver
+          getWebDriver()
               .findElement(By.xpath(".//*[@id='ctl00_ContentPlaceHolder1_lblTotal']"))
               .getText();
       sTotalInmates = sTotalInmates.substring((sTotalInmates.indexOf("=") + 1)).trim();
@@ -63,7 +63,7 @@ public class Main extends Page {
       Environment.sysOut("capturedArrestsURLArray:[" + listCapturedArrestsURL.size() + "]");
       sqlStringBuilder = new StringBuilder();
       final List<WebElement> rowElements =
-          webDriver.findElements(
+          getWebDriver().findElements(
               By.xpath(".//*[@id='ctl00_ContentPlaceHolder1_gvInmates']/tbody/tr"));
       for (int indexRow = 0; indexRow < rowElements.size(); indexRow++) {
         final WebElement rowElement = rowElements.get(indexRow);
@@ -207,7 +207,7 @@ public class Main extends Page {
   }
 
   private StringBuilder getArrestRecord(String url, StringBuilder sqlStringBuilder) {
-    webDriver.get(url);
+    getWebDriver().get(url);
     Map<String, String> inmateRecordMap = new HashMap<>();
     if (objectExists(byNoResults, 3)) {
       inmateRecordMap.putAll(getInmateNameDateMap());
@@ -312,11 +312,11 @@ public class Main extends Page {
             ".//*[@id='inmateNameDate']/tbody/tr[1]/th[text()[contains(.,'Offender/Name"
                 + " ID')]]/../td");
     if (refreshURL) {
-      webDriver.get(url);
+      getWebDriver().get(url);
     }
     String offenderNameID = "MISSING";
     if (objectExists(byInmateNameDate, 3)) {
-      final WebElement element = webDriver.findElement(byInmateNameDate);
+      final WebElement element = getWebDriver().findElement(byInmateNameDate);
       offenderNameID = element.getText();
     }
     final List<String> listMapRecord = new ArrayList<>();
@@ -335,7 +335,7 @@ public class Main extends Page {
       return sqlStringBuilder;
     }
     final List<WebElement> rowElements =
-        webDriver.findElements(
+        getWebDriver().findElements(
             By.xpath(".//*[@id='ctl00_ContentPlaceHolder1_gvCharges']/tbody/tr"));
     int row = 0;
     for (final WebElement rowElement : rowElements) {

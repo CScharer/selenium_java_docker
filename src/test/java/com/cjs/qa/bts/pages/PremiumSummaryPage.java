@@ -102,7 +102,7 @@ public class PremiumSummaryPage extends Page {
 
   public String getSubHeaders() {
     String subHeaderText = "";
-    final List<WebElement> elements = webDriver.findElements(subHeaders);
+    final List<WebElement> elements = getWebDriver().findElements(subHeaders);
     for (final WebElement element : elements) {
       if (element.getText().contains("$")) {
         subHeaderText +=
@@ -129,7 +129,7 @@ public class PremiumSummaryPage extends Page {
 
   public void clickAllButtons() {
     final List<WebElement> allButtons =
-        webDriver.findElements(By.xpath(".//*[@id='productsPanel']/*/div/div[1]/button"));
+        getWebDriver().findElements(By.xpath(".//*[@id='productsPanel']/*/div/div[1]/button"));
     for (final WebElement we : allButtons) {
       clickObject(we);
     }

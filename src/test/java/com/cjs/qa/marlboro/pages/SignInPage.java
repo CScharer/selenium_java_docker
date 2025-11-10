@@ -91,16 +91,16 @@ public class SignInPage extends Page {
   }
 
   public void imageAccountClick() throws QAException {
-    // webDriver.get(MarlboroEnvironment.URL_BASE +
+    // getWebDriver().get(MarlboroEnvironment.URL_BASE +
     // "/pages/my-account/profile-page"
     // + IExtension.HTML);
-    final List<WebElement> webElements = webDriver.findElements(getImageAccount());
+    final List<WebElement> webElements = getWebDriver().findElements(getImageAccount());
     final WebElement imageAccount = webElements.get(1);
     clickObject(imageAccount);
   }
 
   public void linkLogOutClick() throws QAException {
-    final List<WebElement> webElements = webDriver.findElements(getLinkLogOut());
+    final List<WebElement> webElements = getWebDriver().findElements(getLinkLogOut());
     final WebElement linkLogOut = webElements.get(0);
     clickObject(linkLogOut);
   }
@@ -121,7 +121,7 @@ public class SignInPage extends Page {
   public void load() throws QAException {
     maximizeWindow();
     Environment.sysOut("Loading:[" + MarlboroEnvironment.URL_LOGIN + "]");
-    webDriver.get(MarlboroEnvironment.URL_LOGIN);
+    getWebDriver().get(MarlboroEnvironment.URL_LOGIN);
   }
 
   public void wrapUp() throws QAException {

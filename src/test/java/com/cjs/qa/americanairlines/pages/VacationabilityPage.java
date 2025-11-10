@@ -93,7 +93,7 @@ public class VacationabilityPage extends Page {
   public void load() throws QAException {
     maximizeWindow();
     Environment.sysOut("Loading:[" + AmericanAirlinesEnvironment.URL_LOGIN + "]");
-    webDriver.get(AmericanAirlinesEnvironment.URL_LOGIN);
+    getWebDriver().get(AmericanAirlinesEnvironment.URL_LOGIN);
     int waits = 0;
     do {
       waits++;

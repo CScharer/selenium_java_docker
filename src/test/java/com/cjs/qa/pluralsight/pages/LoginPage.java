@@ -28,7 +28,7 @@ public class LoginPage extends Page {
   }
 
   public void login() {
-    webDriver.get(DEFAULT_URL);
+    getWebDriver().get(DEFAULT_URL);
     final String userName = "tgenzen";
     final String password = "C@Training";
     editUserNameSet(userName);

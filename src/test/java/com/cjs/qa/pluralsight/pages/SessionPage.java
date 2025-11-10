@@ -19,19 +19,19 @@ public class SessionPage extends Page {
       By.xpath(".//*[@id='ps-main']//p[@class='course-hero__excerpt']");
 
   public String getSessionInstructor() throws QAException {
-    return webDriver.findElement(bySessionInstructor).getText();
+    return getWebDriver().findElement(bySessionInstructor).getText();
   }
 
   public String getSessionTitle() throws QAException {
-    return webDriver.findElement(bySessionTitle).getText();
+    return getWebDriver().findElement(bySessionTitle).getText();
   }
 
   public String getSessionSynopsis() throws QAException {
-    return webDriver.findElement(bySessionSynopsis).getText();
+    return getWebDriver().findElement(bySessionSynopsis).getText();
   }
 
   public String getSessionInformation(String sessionURL) throws QAException {
-    webDriver.get(sessionURL);
+    getWebDriver().get(sessionURL);
     JavaHelpers.sleep(3);
     final StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append(getSessionTitle());

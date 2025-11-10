@@ -76,7 +76,7 @@ public class LoginAlternatePage extends Page {
 
   public void setEditEmail(String value) {
     // setEdit(getByEditEmail(), value);
-    WebElement webElement = webDriver.findElement(getByEditEmail());
+    WebElement webElement = getWebDriver().findElement(getByEditEmail());
     webElement.clear();
     webElement.sendKeys(value);
   }
@@ -95,19 +95,19 @@ public class LoginAlternatePage extends Page {
 
   public void setEditPassword(String value) {
     // setEditPassword(getByEditPassword(), value);
-    WebElement webElement = webDriver.findElement(getByEditPassword());
+    WebElement webElement = getWebDriver().findElement(getByEditPassword());
     webElement.clear();
     webElement.sendKeys(value);
   }
 
   public void clickButtonSignIn() {
     // clickObject(getByButtonSignIn());
-    webDriver.findElement(getByButtonSignIn()).click();
+    getWebDriver().findElement(getByButtonSignIn()).click();
   }
 
   public void clickButtonSubmit() {
     // clickObject(getByButtonSubmit());
-    webDriver.findElement(getByButtonSubmit()).click();
+    getWebDriver().findElement(getByButtonSubmit()).click();
   }
 
   public boolean isButtonSubmitDisplayed() {
@@ -121,7 +121,7 @@ public class LoginAlternatePage extends Page {
   public void load() throws QAException {
     maximizeWindow();
     Environment.sysOut("Loading:[" + LinkedInEnvironment.URL_LOGIN + "]");
-    webDriver.get(LinkedInEnvironment.URL_LOGIN);
+    getWebDriver().get(LinkedInEnvironment.URL_LOGIN);
   }
 
   // SWITCHES POPULATE

@@ -110,7 +110,7 @@ public class ConnectionsPage extends Page {
       return null;
     }
     List<WebElement> webElementList =
-        webDriver.findElements(By.xpath(".//div[@class='mn-connection-card__details']"));
+        getWebDriver().findElements(By.xpath(".//div[@class='mn-connection-card__details']"));
     if (webElementList.size() == 1) {
       WebElement webElement = webElementList.get(0);
       WebElement webElementHREF = webElement.findElement(By.xpath("./a"));

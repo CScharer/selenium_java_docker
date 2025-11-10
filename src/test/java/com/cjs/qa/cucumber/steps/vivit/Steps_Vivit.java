@@ -267,32 +267,32 @@ public class Steps_Vivit extends Environment {
               + mapTest.toString().replaceAll(", ", Constants.NEWLINE));
     }
     Assert.assertTrue(Environment.getScenarioErrors().size() == 0);
-    // webDriver.get(VivitEnvironment.URL_LOGIN);
+    // getWebDriver().get(VivitEnvironment.URL_LOGIN);
   }
 
   @And("^pAnd$")
   public void pAnd() throws Throwable {
     Environment.sysOut("pAnd");
-    // webDriver.get("http://www.vivit-worldwide.org/page/2017board");
+    // getWebDriver().get("http://www.vivit-worldwide.org/page/2017board");
   }
 
   @But("^pBut$")
   public void pBut() throws Throwable {
     Environment.sysOut("pBut");
-    // webDriver.get("http://www.vivit-worldwide.org/staff/");
+    // getWebDriver().get("http://www.vivit-worldwide.org/staff/");
   }
 
   @When("^pWhen$")
   public void pWhen() throws Throwable {
     Environment.sysOut("pWhen");
-    // webDriver.get("http://www.vivit-worldwide.org/?page=Local_Chapters");
+    // getWebDriver().get("http://www.vivit-worldwide.org/?page=Local_Chapters");
   }
 
   @Then("^pThen$")
   public void pThen() throws Throwable {
     Environment.sysOut("pThen");
-    // webDriver.get("http://www.vivit-worldwide.org/?page=LocalUserGroups");
-    // webDriver.get("http://www.vivit-worldwide.org/?page=SIGS");
+    // getWebDriver().get("http://www.vivit-worldwide.org/?page=LocalUserGroups");
+    // getWebDriver().get("http://www.vivit-worldwide.org/?page=SIGS");
   }
 
   @Given("^Board of Directors Page \"([^\"]*)\" \"([^\"]*)\"$")
@@ -300,7 +300,7 @@ public class Steps_Vivit extends Environment {
     mapTest.put("Scenario Name", scenarioName);
     Environment.sysOut(
         "board_of_Directors_Page-scenarioName;[" + scenarioName + "], url:[" + url + "]");
-    webDriver.get(url);
+    getWebDriver().get(url);
   }
 
   @Then(
@@ -349,7 +349,7 @@ public class Steps_Vivit extends Environment {
   public void staff_Page(String scenarioName, String url) throws Throwable {
     Environment.sysOut("staff_Page-scenarioName;[" + scenarioName + "], url:[" + url + "]");
     mapTest.put("Scenario Name", scenarioName);
-    webDriver.get(url);
+    getWebDriver().get(url);
   }
 
   @Then("^Staff Member \"([^\"]*)\" Exists \"([^\"]*)\", \"([^\"]*)\"$")

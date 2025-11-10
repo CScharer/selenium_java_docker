@@ -147,7 +147,7 @@ public class SignInPage extends Page {
   public void load() throws QAException {
     maximizeWindow();
     Environment.sysOut("Loading:[" + DropboxEnvironment.URL_LOGIN + "]");
-    webDriver.get(DropboxEnvironment.URL_LOGIN);
+    getWebDriver().get(DropboxEnvironment.URL_LOGIN);
     // int waits = 0;
     // do
     // {

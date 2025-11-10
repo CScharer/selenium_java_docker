@@ -157,11 +157,11 @@ public class BingPage extends Page {
       BingPage.setCurrentPoints(currentPoints);
     }
     objectExistsRefresh(getBySearch(), 5, 3);
-    WebElement webElement = webDriver.findElement(getBySearch());
+    WebElement webElement = getWebDriver().findElement(getBySearch());
     hoverObject(getBySearch());
     String text = "Rewards";
     if (objectExists(getBycurrentPoints(), 1)) {
-      webElement = webDriver.findElement(getBycurrentPoints());
+      webElement = getWebDriver().findElement(getBycurrentPoints());
       hoverObject(getBycurrentPoints());
       text = webElement.getText();
     }
@@ -195,7 +195,7 @@ public class BingPage extends Page {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     final By links = By.xpath(xpathLinks);
-    final List<WebElement> searchLinks = webDriver.findElements(links);
+    final List<WebElement> searchLinks = getWebDriver().findElements(links);
     if (searchLinks.isEmpty()) {
       return;
     }
@@ -232,7 +232,7 @@ public class BingPage extends Page {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     MicrosoftEnvironment.sysOut("Searching:[" + url + "]");
-    webDriver.get(url);
+    getWebDriver().get(url);
     sleep(SEARCH_WAIT_TIME);
     // By audioSound = By.xpath(".//audio[@data-dobid='aud']/../input")
     // By audioSound = By.xpath("*//span[@jsaction='dob.p']")
@@ -267,12 +267,12 @@ public class BingPage extends Page {
             URL_VIVIT_YM + IExtension.COM + "/?page=HallofFame");
     for (final String url : urls) {
       MicrosoftEnvironment.sysOut("Searching:[" + url + "]");
-      webDriver.get(url);
+      getWebDriver().get(url);
       sleep(SEARCH_WAIT_TIME);
     }
-    webDriver.get(LUGS);
+    getWebDriver().get(LUGS);
     sleep(5);
-    List<WebElement> links = webDriver.findElements(lugLinks);
+    List<WebElement> links = getWebDriver().findElements(lugLinks);
     for (int index = 0; index < links.size(); index++) {
       final WebElement element = links.get(index);
       final String url = element.getAttribute("href");
@@ -281,14 +281,14 @@ public class BingPage extends Page {
       sleep(SEARCH_WAIT_TIME);
       tabCloseExtras();
       if (index < links.size()) {
-        webDriver.get(LUGS);
+        getWebDriver().get(LUGS);
         sleep(5);
-        links = webDriver.findElements(lugLinks);
+        links = getWebDriver().findElements(lugLinks);
       }
     }
-    webDriver.get(SIGS);
+    getWebDriver().get(SIGS);
     sleep(5);
-    links = webDriver.findElements(sigLinks);
+    links = getWebDriver().findElements(sigLinks);
     for (int index = 0; index < links.size(); index++) {
       final WebElement element = links.get(index);
       final String url = element.getAttribute("href");
@@ -297,9 +297,9 @@ public class BingPage extends Page {
       sleep(SEARCH_WAIT_TIME);
       tabCloseExtras();
       if (index < links.size()) {
-        webDriver.get(SIGS);
+        getWebDriver().get(SIGS);
         sleep(5);
-        webDriver.findElements(sigLinks);
+        getWebDriver().findElements(sigLinks);
       }
     }
     // http://www.vivit-worldwide.org/?page=LocalUserGroups

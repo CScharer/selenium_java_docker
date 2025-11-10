@@ -28,34 +28,34 @@ public class Selenium extends Page implements ISelenium {
   }
 
   public void getSessionInformation() {
-    if (webDriver instanceof RemoteWebDriver) {
-      setCapabilities(((RemoteWebDriver) webDriver).getCapabilities());
-      setSessionId(((RemoteWebDriver) webDriver).getSessionId());
-    } else if (webDriver instanceof ChromeDriver) {
-      setCapabilities(((ChromeDriver) webDriver).getCapabilities());
-      setSessionId(((ChromeDriver) webDriver).getSessionId());
-    } else if (webDriver instanceof EdgeDriver) {
-      setCapabilities(((EdgeDriver) webDriver).getCapabilities());
-      setSessionId(((EdgeDriver) webDriver).getSessionId());
-    } else if (webDriver instanceof FirefoxDriver) {
-      setCapabilities(((FirefoxDriver) webDriver).getCapabilities());
-      setSessionId(((FirefoxDriver) webDriver).getSessionId());
-    } else if (webDriver instanceof InternetExplorerDriver) {
-      setCapabilities(((InternetExplorerDriver) webDriver).getCapabilities());
-      setSessionId(((InternetExplorerDriver) webDriver).getSessionId());
-    } else if (webDriver instanceof PhantomJSDriver) {
-      setCapabilities(((PhantomJSDriver) webDriver).getCapabilities());
-      setSessionId(((PhantomJSDriver) webDriver).getSessionId());
-    } else if (webDriver instanceof HtmlUnitDriver) {
-      setCapabilities(((RemoteWebDriver) webDriver).getCapabilities());
-      setSessionId(((RemoteWebDriver) webDriver).getSessionId());
-    } else if (webDriver instanceof RemoteWebDriver) {
-      setCapabilities(((RemoteWebDriver) webDriver).getCapabilities());
-      setSessionId(((RemoteWebDriver) webDriver).getSessionId());
-    } else if (webDriver instanceof SafariDriver) {
-      setCapabilities(((SafariDriver) webDriver).getCapabilities());
-      setSessionId(((SafariDriver) webDriver).getSessionId());
-    } // else if (webDriver instanceof OperaDriver)
+    if (getWebDriver() instanceof RemoteWebDriver) {
+      setCapabilities(((RemoteWebDriver) getWebDriver()).getCapabilities());
+      setSessionId(((RemoteWebDriver) getWebDriver()).getSessionId());
+    } else if (getWebDriver() instanceof ChromeDriver) {
+      setCapabilities(((ChromeDriver) getWebDriver()).getCapabilities());
+      setSessionId(((ChromeDriver) getWebDriver()).getSessionId());
+    } else if (getWebDriver() instanceof EdgeDriver) {
+      setCapabilities(((EdgeDriver) getWebDriver()).getCapabilities());
+      setSessionId(((EdgeDriver) getWebDriver()).getSessionId());
+    } else if (getWebDriver() instanceof FirefoxDriver) {
+      setCapabilities(((FirefoxDriver) getWebDriver()).getCapabilities());
+      setSessionId(((FirefoxDriver) getWebDriver()).getSessionId());
+    } else if (getWebDriver() instanceof InternetExplorerDriver) {
+      setCapabilities(((InternetExplorerDriver) getWebDriver()).getCapabilities());
+      setSessionId(((InternetExplorerDriver) getWebDriver()).getSessionId());
+    } else if (getWebDriver() instanceof PhantomJSDriver) {
+      setCapabilities(((PhantomJSDriver) getWebDriver()).getCapabilities());
+      setSessionId(((PhantomJSDriver) getWebDriver()).getSessionId());
+    } else if (getWebDriver() instanceof HtmlUnitDriver) {
+      setCapabilities(((RemoteWebDriver) getWebDriver()).getCapabilities());
+      setSessionId(((RemoteWebDriver) getWebDriver()).getSessionId());
+    } else if (getWebDriver() instanceof RemoteWebDriver) {
+      setCapabilities(((RemoteWebDriver) getWebDriver()).getCapabilities());
+      setSessionId(((RemoteWebDriver) getWebDriver()).getSessionId());
+    } else if (getWebDriver() instanceof SafariDriver) {
+      setCapabilities(((SafariDriver) getWebDriver()).getCapabilities());
+      setSessionId(((SafariDriver) getWebDriver()).getSessionId());
+    } // else if (getWebDriver() instanceof OperaDriver)
     {
       // setCapabilities(((OperaDriver) webDriver).getCapabilities());
       // setSessionId(((OperaDriver) webDriver).getSessionId());

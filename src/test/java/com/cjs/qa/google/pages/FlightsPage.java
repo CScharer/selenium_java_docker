@@ -45,12 +45,12 @@ public class FlightsPage extends Page {
 
   public List<WebElement> getBestDepartingFlightsList() {
     scrollToElement(BEST_DEPARTING_FLIGHTS);
-    return webDriver.findElements(BEST_DEPARTING_FLIGHTS_BY);
+    return getWebDriver().findElements(BEST_DEPARTING_FLIGHTS_BY);
   }
 
   public List<WebElement> getOtherDepartingFlightsList() {
     scrollToElement(OTHER_DEPARTING_FLIGHTS);
-    return webDriver.findElements(OTHER_DEPARTING_FLIGHTS_BY);
+    return getWebDriver().findElements(OTHER_DEPARTING_FLIGHTS_BY);
   }
 
   public void getFlightsOld(
@@ -85,7 +85,7 @@ public class FlightsPage extends Page {
       if (airportFrom.equals(airportTo)) {
         String addressFrom = getURLAddress(airportMap, airportTo);
         String url = getURLDrive(addressFrom, airportTo);
-        webDriver.get(url);
+        getWebDriver().get(url);
         JavaHelpers.sleep(2);
         String miles = getDriveMiles();
         String duration = getDriveTime();
@@ -105,7 +105,7 @@ public class FlightsPage extends Page {
         if (!excel.sheetExists(sheetName)) {
           excel.createSheet(sheetName);
         }
-        webDriver.get(url);
+        getWebDriver().get(url);
         JavaHelpers.sleep(2);
         if (excel.getRowCount(sheetName) < 1) {
           excel.createHeadings(sheetName, HEADINGS_FLIGHT);
@@ -194,7 +194,7 @@ public class FlightsPage extends Page {
     String airportFrom = driverMap.get("Airport");
     String addressFrom = getURLAddress(driverMap, airportTo);
     String url = getURLDrive(addressFrom, airportTo);
-    webDriver.get(url);
+    getWebDriver().get(url);
     JavaHelpers.sleep(2);
     String miles = getDriveMiles();
     String duration = getDriveTime();
@@ -217,7 +217,7 @@ public class FlightsPage extends Page {
       throws Throwable {
     String url = getURLFlight(airportFrom, airportTo, dateDepartTo, dateDepartFrom);
     Environment.sysOut("url:[" + url + "]");
-    webDriver.get(url);
+    getWebDriver().get(url);
     JavaHelpers.sleep(2);
     List<Flight> flightList = new ArrayList<>();
     List<WebElement> flightWebElementList = getBestDepartingFlightsList();
@@ -327,7 +327,7 @@ public class FlightsPage extends Page {
     By by =
         By.xpath(
             ".//*[@id='section-directions-trip-0']//div[contains(@class,'section-directions-trip-distance')]/div");
-    List<WebElement> webElementList = webDriver.findElements(by);
+    List<WebElement> webElementList = getWebDriver().findElements(by);
     String value = "";
     for (WebElement webElement : webElementList) {
       value = webElement.getText();
@@ -347,7 +347,7 @@ public class FlightsPage extends Page {
     By by =
         By.xpath(
             ".//*[@id='section-directions-trip-0']//div[contains(@class,'section-directions-trip-duration')]/span[1]");
-    List<WebElement> webElementList = webDriver.findElements(by);
+    List<WebElement> webElementList = getWebDriver().findElements(by);
     String value = "";
     for (WebElement webElement : webElementList) {
       value = webElement.getText();

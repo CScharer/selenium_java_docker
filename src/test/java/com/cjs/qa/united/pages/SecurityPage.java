@@ -34,7 +34,7 @@ public class SecurityPage extends Page {
     if (Environment.isLogAll()) {
       Environment.sysOut("({Field}" + by.toString() + ", {Value}" + value + ");");
     }
-    final WebElement webElement = webDriver.findElement(by);
+    final WebElement webElement = getWebDriver().findElement(by);
     final Select Dropdown = new Select(webElement);
     final List<WebElement> list = webElement.findElements(By.xpath("./option"));
     final Iterator<WebElement> iterator = list.iterator();
@@ -48,7 +48,7 @@ public class SecurityPage extends Page {
   }
 
   public void answerSecurityQuestions() throws QAException {
-    while (!webDriver.getCurrentUrl().contains("security")) {
+    while (!getWebDriver().getCurrentUrl().contains("security")) {
       sleep(1);
     }
     JavaHelpers.sleep(1);
@@ -64,7 +64,7 @@ public class SecurityPage extends Page {
     }
     Environment.sysOut("answersMap:[" + answersMap.toString() + "]");
     List<WebElement> questionsWebElementList =
-        webDriver.findElements(By.xpath(".//*[@id='authQuestionsForm']/div/fieldset/legend"));
+        getWebDriver().findElements(By.xpath(".//*[@id='authQuestionsForm']/div/fieldset/legend"));
     for (int indexWebElement = 0;
         indexWebElement < questionsWebElementList.size();
         indexWebElement++) {

@@ -147,8 +147,8 @@ public class _BTSCrosswordChallengePage extends Page {
     // sURL
     // =
     // "http://crossword.info/btsclientservices/June_2016_a";
-    webDriver.get(sURL);
-    final String actual = webDriver.getTitle();
+    getWebDriver().get(sURL);
+    final String actual = getWebDriver().getTitle();
     if (actual.equals("Web Page Restricted")) {
       clickbuttonContinue();
     }
@@ -163,7 +163,7 @@ public class _BTSCrosswordChallengePage extends Page {
   public void getGridSquares() {
     for (int iGridSquare = SQAUARE_MIN; iGridSquare <= SQAUARE_MAX; iGridSquare++) {
       final WebElement oDiv =
-          webDriver.findElement(By.xpath(".//*[@id='game']//div[" + iGridSquare + "]"));
+          getWebDriver().findElement(By.xpath(".//*[@id='game']//div[" + iGridSquare + "]"));
       final String sClass = oDiv.getAttribute("class");
       if (sClass.equals("GridSquare Let")) {
         mapGridSquares.put(iGridSquare, "");
@@ -178,13 +178,13 @@ public class _BTSCrosswordChallengePage extends Page {
     Environment.sysOut(sLetter);
     solvePuzzle(sLetter);
     Environment.sysOut(mapGridSquares.toString());
-    webDriver.navigate().refresh();
+    getWebDriver().navigate().refresh();
     sleep(1);
   }
 
   protected boolean isElementPresent(By by) {
     try {
-      webDriver.findElement(by);
+      getWebDriver().findElement(by);
       return true;
     } catch (final Exception e) {
       return false;
@@ -195,12 +195,12 @@ public class _BTSCrosswordChallengePage extends Page {
     for (final String sGridSquare : lGridSquares) {
       final int iGridSquare = Integer.valueOf(sGridSquare);
       final WebElement oDiv =
-          webDriver.findElement(By.xpath(".//*[@id='game']//div[" + iGridSquare + "]"));
+          getWebDriver().findElement(By.xpath(".//*[@id='game']//div[" + iGridSquare + "]"));
       // final JavascriptExecutor js = (JavascriptExecutor) webDriver;
       // js.executeScript("arguments[0].innerText = '" + letter + "'",
       // oSpan);
       final WebElement oSpan = oDiv.findElement(By.xpath("./p/span"));
-      ((JavascriptExecutor) webDriver)
+      ((JavascriptExecutor) getWebDriver())
           .executeScript("arguments[0].innerText = '" + sLetter + "'", oSpan);
     }
     clickbuttonCheck();
@@ -219,9 +219,9 @@ public class _BTSCrosswordChallengePage extends Page {
     for (final String sGridSquare : lGridSquares) {
       final int iGridSquare = Integer.valueOf(sGridSquare);
       final WebElement oDiv =
-          webDriver.findElement(By.xpath(".//*[@id='game']//div[" + iGridSquare + "]"));
+          getWebDriver().findElement(By.xpath(".//*[@id='game']//div[" + iGridSquare + "]"));
       final WebElement oSpan = oDiv.findElement(By.xpath("./p/span"));
-      ((JavascriptExecutor) webDriver)
+      ((JavascriptExecutor) getWebDriver())
           .executeScript(
               "arguments[0].innerText = '" + mapGridSquares.get(iGridSquare) + "'", oSpan);
     }
