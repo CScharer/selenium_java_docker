@@ -25,12 +25,28 @@ public class BingPage extends Page {
 
   public static final int SEARCH_WAIT_TIME = 1;
   // public static int SEARCHES_MIN = 34;
-  public static By bySearch = By.xpath(".//*[@id='sb_form_go']");
-  public static By bycurrentPoints = By.xpath(".//*[@id='id_rc']");
-  static int currentPoints = -1;
+  private static By bySearch = By.xpath(".//*[@id='sb_form_go']");
+  private static By bycurrentPoints = By.xpath(".//*[@id='id_rc']");
+  private static int currentPoints = -1;
   private int SEARCH = 1;
   private static int searchesMade = 0;
   private static List<String> wordsList = null;
+
+  public static By getBySearch() {
+    return bySearch;
+  }
+
+  public static By getBycurrentPoints() {
+    return bycurrentPoints;
+  }
+
+  public static int getCurrentPoints() {
+    return currentPoints;
+  }
+
+  public static void setCurrentPoints(int points) {
+    currentPoints = points;
+  }
 
   public static int getSearchesMade() {
     return searchesMade;
@@ -104,7 +120,7 @@ public class BingPage extends Page {
         search(url);
         search++;
         setSearchesMade(search);
-        currentPoints = getCurrentPoints(search, currentPoints);
+        currentPoints = getCurrentPointsValue(search, currentPoints);
         if (SELECT_LINK) {
           clickFirstLink(".//*[@id='b_results']//a[not(contains(@href,'search?'))]", badHREFList);
         }
@@ -119,7 +135,7 @@ public class BingPage extends Page {
                 + elapsedTimeMilliseconds
                 + "]");
         searchRequired =
-            (BingPage.currentPoints != currentPoints && search < RewardsPage.searchesMin
+            (BingPage.getCurrentPoints() != currentPoints && search < RewardsPage.getSearchesMin()
                 || elapsedTimeMilliseconds <= PROCESS_TIME_MILLISECONDS);
       } while (searchRequired);
     } else {
@@ -127,26 +143,26 @@ public class BingPage extends Page {
         search++;
         url = searchValue + String.valueOf(search);
         search(url);
-        currentPoints = getCurrentPoints(search, currentPoints);
+        currentPoints = getCurrentPointsValue(search, currentPoints);
         searchRequired =
-            (BingPage.currentPoints != currentPoints || search < RewardsPage.searchesMin);
+            (BingPage.getCurrentPoints() != currentPoints || search < RewardsPage.getSearchesMin());
       } while (searchRequired);
     }
   }
 
-  private int getCurrentPoints(int search, int currentPoints) {
+  private int getCurrentPointsValue(int search, int currentPoints) {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
-    if (BingPage.currentPoints != currentPoints) {
-      BingPage.currentPoints = currentPoints;
+    if (BingPage.getCurrentPoints() != currentPoints) {
+      BingPage.setCurrentPoints(currentPoints);
     }
-    objectExistsRefresh(bySearch, 5, 3);
-    WebElement webElement = webDriver.findElement(bySearch);
-    hoverObject(bySearch);
+    objectExistsRefresh(getBySearch(), 5, 3);
+    WebElement webElement = webDriver.findElement(getBySearch());
+    hoverObject(getBySearch());
     String text = "Rewards";
-    if (objectExists(bycurrentPoints, 1)) {
-      webElement = webDriver.findElement(bycurrentPoints);
-      hoverObject(bycurrentPoints);
+    if (objectExists(getBycurrentPoints(), 1)) {
+      webElement = webDriver.findElement(getBycurrentPoints());
+      hoverObject(getBycurrentPoints());
       text = webElement.getText();
     }
     if (text != null) {
@@ -155,8 +171,8 @@ public class BingPage extends Page {
       } else {
         currentPoints += RewardsPage.POINTS_PER_SEACH_PC;
         Environment.sysOut("Rewards Points Not Showing");
-        if (search >= RewardsPage.searchesMin) {
-          BingPage.currentPoints = currentPoints;
+        if (search >= RewardsPage.getSearchesMin()) {
+          BingPage.setCurrentPoints(currentPoints);
         }
       }
     }
@@ -164,7 +180,7 @@ public class BingPage extends Page {
         "search:["
             + search
             + "], BingPage.currentPoints:["
-            + BingPage.currentPoints
+            + BingPage.getCurrentPoints()
             + "], currentPoints:["
             + currentPoints
             + "]");

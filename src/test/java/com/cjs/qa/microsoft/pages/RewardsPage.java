@@ -43,16 +43,40 @@ public class RewardsPage extends Page {
   public static final List<String> SEARCHES_NEEDED_PC_LIST =
       Arrays.asList(SEARCHES_NEEDED_PC.split(Constants.DELIMETER_LIST));
   public static final int HIGHLIGHT_BRIEFLY = 10;
-  public static int searchesMin = 34;
+  private static int searchesMin = 34;
   public static final int SEARCH = 1;
-  protected Selenium selenium = new Selenium(getWebDriver());
-  public final By byButtonSignInWithMicrosoft = By.xpath(".//span[.='SIGN IN WITH MICROSOFT']");
-  public final By byPointsDailySet =
+  private Selenium selenium = new Selenium(getWebDriver());
+  private final By byButtonSignInWithMicrosoft = By.xpath(".//span[.='SIGN IN WITH MICROSOFT']");
+  private final By byPointsDailySet =
       By.xpath(".//*[@id='daily-sets']/mee-card-group[1]/div/mee-card");
-  public final By byPointsMoreActivities = By.xpath(".//*[@id='more-activities']/div/mee-card");
-  public final By byPointsAvailableSneakPeek =
+  private final By byPointsMoreActivities = By.xpath(".//*[@id='more-activities']/div/mee-card");
+  private final By byPointsAvailableSneakPeek =
       By.xpath(".//*[@id='daily-sets']/mee-card-group[2]/div/mee-card");
   public static final String XPAPTH_USER_BANNER = ".//*[@id='userBanner']";
+
+  public static int getSearchesMin() {
+    return searchesMin;
+  }
+
+  protected Selenium getSelenium() {
+    return selenium;
+  }
+
+  private By getByButtonSignInWithMicrosoft() {
+    return byButtonSignInWithMicrosoft;
+  }
+
+  private By getByPointsDailySet() {
+    return byPointsDailySet;
+  }
+
+  private By getByPointsMoreActivities() {
+    return byPointsMoreActivities;
+  }
+
+  private By getByPointsAvailableSneakPeek() {
+    return byPointsAvailableSneakPeek;
+  }
   private final MicrosoftReport microsoftReport = new MicrosoftReport();
   private boolean searchesRequired = true;
   private int searchesNeeded = 0;
@@ -113,8 +137,8 @@ public class RewardsPage extends Page {
   public void clickSignInWithMicrosoftButton() throws QAException {
     Environment.sysOut(
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");
-    if (objectExists(byButtonSignInWithMicrosoft)) {
-      clickObject(byButtonSignInWithMicrosoft);
+    if (objectExists(getByButtonSignInWithMicrosoft())) {
+      clickObject(getByButtonSignInWithMicrosoft());
     }
   }
 
@@ -455,7 +479,7 @@ public class RewardsPage extends Page {
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     scrollToTop();
     final String method = JavaHelpers.getCurrentMethodName();
-    final By byPoints = byPointsDailySet;
+    final By byPoints = getByPointsDailySet();
     final List<WebElement> cardList = getWebDriver().findElements(byPoints);
     final List<PointsCard> pointsCardList = new ArrayList<>();
     for (int cardIndex = 0; cardIndex < cardList.size(); cardIndex++) {
@@ -473,7 +497,7 @@ public class RewardsPage extends Page {
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     scrollToTop();
     final String method = JavaHelpers.getCurrentMethodName();
-    final By byPoints = byPointsMoreActivities;
+    final By byPoints = getByPointsMoreActivities();
     final List<WebElement> cardList = getWebDriver().findElements(byPoints);
     final List<PointsCard> pointsCardList = new ArrayList<>();
     for (int cardIndex = 0; cardIndex < cardList.size(); cardIndex++) {
@@ -491,7 +515,7 @@ public class RewardsPage extends Page {
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     scrollToTop();
     final String method = JavaHelpers.getCurrentMethodName();
-    final By byPoints = byPointsAvailableSneakPeek;
+    final By byPoints = getByPointsAvailableSneakPeek();
     final By bySneakPeekAtTomorrowsSet =
         By.xpath(
             ".//span[.="

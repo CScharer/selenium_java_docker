@@ -26,8 +26,8 @@ public class DailyPollQuizPages extends RewardsPage {
   private final By byAnswerCorrectMessageLabel = By.xpath(".//*[@id='rqcorrectAns']");
   private final By byAnswerWrongMessageLabel = By.xpath(".//*[@id='wrongAnswerMessage']");
 
-  String pointsAvailable;
-  int answersNeeded;
+  private String pointsAvailable;
+  private int answersNeeded;
 
   /**
    * @param webDriver
@@ -409,9 +409,9 @@ public class DailyPollQuizPages extends RewardsPage {
             + "], Points Earned:["
             + pointEarned
             + "], Answers Needed: ["
-            + answersNeeded
+            + getAnswersNeeded()
             + "]");
-    return answersNeeded;
+    return getAnswersNeeded();
   }
 
   public void setAnswersNeeded(int answersNeeded) {

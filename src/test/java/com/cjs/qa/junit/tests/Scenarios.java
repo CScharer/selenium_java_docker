@@ -778,23 +778,23 @@ public class Scenarios {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     try {
-      if (getMicrosoft().RewardsPage.load()) {
-        getMicrosoft().RewardsPage.clickSignInWithMicrosoftButton();
-        getMicrosoft().SignInPage.login();
-        getMicrosoft().RewardsPage.load();
+      if (getMicrosoft().getRewardsPage().load()) {
+        getMicrosoft().getRewardsPage().clickSignInWithMicrosoftButton();
+        getMicrosoft().getSignInPage().login();
+        getMicrosoft().getRewardsPage().load();
       }
-      // getMicrosoft().RewardsPage.getPoints10CardsAvailable()
-      // getMicrosoft().BingPage.searchRandomSites(true)
-      // getMicrosoft().RewardsPage.getPoints20Info()
+      // getMicrosoft().getRewardsPage().getPoints10CardsAvailable()
+      // getMicrosoft().getBingPage().searchRandomSites(true)
+      // getMicrosoft().getRewardsPage().getPoints20Info()
       int searches = 0;
-      while (getMicrosoft().RewardsPage.isSearchesRequired() && searches < 2) {
-        getMicrosoft().BingPage.searchRandomSites(true);
-        getMicrosoft().RewardsPage.getPoints20Info();
+      while (getMicrosoft().getRewardsPage().isSearchesRequired() && searches < 2) {
+        getMicrosoft().getBingPage().searchRandomSites(true);
+        getMicrosoft().getRewardsPage().getPoints20Info();
         searches++;
       }
-      getMicrosoft().RewardsPage.getPoints10CardsAvailable();
-      getMicrosoft().RewardsPage.createReport();
-      getMicrosoft().RewardsPage.sendReport();
+      getMicrosoft().getRewardsPage().getPoints10CardsAvailable();
+      getMicrosoft().getRewardsPage().createReport();
+      getMicrosoft().getRewardsPage().sendReport();
     } catch (Throwable throwable) {
       throw new QAException(throwable);
     }

@@ -7,11 +7,31 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class SignInPage extends Page {
-  final By CheckboxKeepMeSignedIn = By.xpath(".//input[@name='KMSI']");
-  final By editEmail = By.xpath(".//input[@name='loginfmt']");
-  final By editPassword = By.xpath(".//input[@name='passwd']");
-  final By buttonNext = By.xpath(".//input[@value='Next']");
-  final By buttonSignIn = By.xpath(".//input[@value='Sign in']");
+  private final By checkboxKeepMeSignedIn = By.xpath(".//input[@name='KMSI']");
+  private final By editEmail = By.xpath(".//input[@name='loginfmt']");
+  private final By editPassword = By.xpath(".//input[@name='passwd']");
+  private final By buttonNext = By.xpath(".//input[@value='Next']");
+  private final By buttonSignIn = By.xpath(".//input[@value='Sign in']");
+
+  private By getCheckboxKeepMeSignedIn() {
+    return checkboxKeepMeSignedIn;
+  }
+
+  private By getEditEmail() {
+    return editEmail;
+  }
+
+  private By getEditPassword() {
+    return editPassword;
+  }
+
+  private By getButtonNext() {
+    return buttonNext;
+  }
+
+  private By getButtonSignIn() {
+    return buttonSignIn;
+  }
 
   /**
    * @param webDriver
@@ -21,14 +41,14 @@ public class SignInPage extends Page {
   }
 
   public void buttonNextClick() {
-    if (objectExists(buttonNext)) {
-      clickObject(buttonNext);
+    if (objectExists(getButtonNext())) {
+      clickObject(getButtonNext());
     }
   }
 
   public void buttonSignInClick() {
-    if (objectExists(buttonSignIn)) {
-      clickObject(buttonSignIn);
+    if (objectExists(getButtonSignIn())) {
+      clickObject(getButtonSignIn());
     }
   }
 
@@ -36,8 +56,8 @@ public class SignInPage extends Page {
    * @param value
    */
   public void checkboxKeepMeSignedInSet(String value) {
-    if (objectExists(CheckboxKeepMeSignedIn)) {
-      setCheckbox(CheckboxKeepMeSignedIn, value);
+    if (objectExists(getCheckboxKeepMeSignedIn())) {
+      setCheckbox(getCheckboxKeepMeSignedIn(), value);
     }
   }
 
@@ -45,8 +65,8 @@ public class SignInPage extends Page {
    * @param value
    */
   public void editEmailSet(String value) {
-    if (objectExists(editEmail)) {
-      setEdit(editEmail, value);
+    if (objectExists(getEditEmail())) {
+      setEdit(getEditEmail(), value);
     }
   }
 
@@ -54,8 +74,8 @@ public class SignInPage extends Page {
    * @param value
    */
   public void editPasswordSet(String value) {
-    if (objectExists(editPassword)) {
-      setEdit(editPassword, value);
+    if (objectExists(getEditPassword())) {
+      setEdit(getEditPassword(), value);
     }
   }
 

@@ -9,7 +9,7 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class XLSXCellFonts {
-  public static List<XLSXCellFonts> fontsList = new ArrayList<>();
+  private static List<XLSXCellFonts> fontsList = new ArrayList<>();
   private Font fontObject;
   private String fontName;
 

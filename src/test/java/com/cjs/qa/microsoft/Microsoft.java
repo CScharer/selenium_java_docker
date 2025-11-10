@@ -6,14 +6,26 @@ import com.cjs.qa.microsoft.pages.SignInPage;
 import org.openqa.selenium.WebDriver;
 
 public class Microsoft {
-  public BingPage BingPage;
-  public RewardsPage RewardsPage;
-  public SignInPage SignInPage;
+  private BingPage bingPage;
+  private RewardsPage rewardsPage;
+  private SignInPage signInPage;
+
+  public BingPage getBingPage() {
+    return bingPage;
+  }
+
+  public RewardsPage getRewardsPage() {
+    return rewardsPage;
+  }
+
+  public SignInPage getSignInPage() {
+    return signInPage;
+  }
 
   public Microsoft(WebDriver webDriver) {
-    BingPage = new BingPage(webDriver);
-    RewardsPage = new RewardsPage(webDriver);
-    SignInPage = new SignInPage(webDriver);
+    bingPage = new BingPage(webDriver);
+    rewardsPage = new RewardsPage(webDriver);
+    signInPage = new SignInPage(webDriver);
     webDriver.manage().timeouts().pageLoadTimeout(java.time.Duration.ofSeconds(120));
   }
 }

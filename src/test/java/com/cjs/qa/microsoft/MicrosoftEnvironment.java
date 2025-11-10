@@ -21,8 +21,12 @@ public class MicrosoftEnvironment extends Environment {
       "https://account." + COMPANY + IExtension.COM + "/rewards/dashboard?refd=www.google.com";
   public static final String URL_LOGIN =
       "https://account." + COMPANY + IExtension.COM + "/rewards/?refd=www.google.com";
-  public final List<String> classExlusionList =
+  private final List<String> classExlusionList =
       JavaHelpers.getExclusions(this.getClass().getPackage().getName());
+
+  public List<String> getClassExlusionList() {
+    return classExlusionList;
+  }
 
   public MicrosoftEnvironment() { // Empty
   }

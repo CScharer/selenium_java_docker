@@ -17,8 +17,16 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 public class XLSBarChart extends XLS {
-  String fileName = "";
-  String sheet = "";
+  private String fileName = "";
+  private String sheet = "";
+
+  public String getFileName() {
+    return fileName;
+  }
+
+  public String getSheet() {
+    return sheet;
+  }
 
   public XLSBarChart(String fileName, String sheet) throws IOException, QAException {
     super(fileName, sheet);

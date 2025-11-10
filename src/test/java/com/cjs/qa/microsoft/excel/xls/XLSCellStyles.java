@@ -14,7 +14,7 @@ public class XLSCellStyles {
   public static final int CELL_STYLE_INDEX_START = 21;
   public static final int CELL_STYLE_INDEX_DEFINED =
       (CELL_STYLE_INDEX_START + IExcel.CELL_STYLE_DEFINED_COUNT);
-  public static List<XLSCellStyles> stylesList = new ArrayList<>();
+  private static List<XLSCellStyles> stylesList = new ArrayList<>();
   private Integer styleIndex;
   private String styleName;
   private CellStyle styleObject;
