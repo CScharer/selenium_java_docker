@@ -24,8 +24,16 @@ public class SurveyPage extends Page {
   private final By editCN6 = By.xpath(".//*[@id='CN6']");
   private final By buttonStart = By.xpath(".//*[@id='NextButton']");
   private final By buttonNext = buttonStart; // By.xpath(".//*[@id='NextButton']");
-  final By CheckboxAgree = By.xpath("");
-  final By labelThankYou = By.xpath("");
+  private final By checkboxAgree = By.xpath("");
+  private final By labelThankYou = By.xpath("");
+
+  private By getCheckboxAgree() {
+    return checkboxAgree;
+  }
+
+  private By getLabelThankYou() {
+    return labelThankYou;
+  }
 
   private By getEditCN1() {
     return editCN1;
@@ -220,7 +228,7 @@ public class SurveyPage extends Page {
   }
 
   public void setCheckboxAgree(String value) throws QAException {
-    setCheckbox(CheckboxAgree, value);
+    setCheckbox(getCheckboxAgree(), value);
   }
 
   public void buttonStartClick() throws QAException {

@@ -10,29 +10,49 @@ public class VerifyInformationInterruptPage extends Page {
     super(webDriver);
   }
 
-  final String URL_VERIFYINFORMATION =
+  private final String urlVerifyInformation =
       MarlboroEnvironment.URL_BASE + "/marlboro/Security/VerifyInformationInterrupt";
-  final By CheckboxCigarettes = By.xpath(".//span[.='Cigarettes']/../div/span");
-  final By DropdownRegularBrand =
+  private final By checkboxCigarettes = By.xpath(".//span[.='Cigarettes']/../div/span");
+  private final By dropdownRegularBrand =
       By.xpath(
           "//div[@data-orgtext][contains(text(),'What is your regular brand of"
               + " cigarettes, that is, the brand you buy most often?')]/../span/select");
-  By optionRegularBrand =
+  private By optionRegularBrand =
       By.xpath(
           ".//div[.='Please tell us about your regular"
               + " brand.']/..//label[contains(text(),'Non-Menthol')]/..");
-  By DropdownRegularBrandNonMenthol =
+  private By dropdownRegularBrandNonMenthol =
       By.xpath(
           "//div[@data-orgtext][contains(text(),'What Non-Menthol pack do you buy most"
               + " often?')]/../span/select");
-  final By buttonNext = By.xpath(".//*[@id='verifyinfoInterruptnxtBtn']");
+  private final By buttonNext = By.xpath(".//*[@id='verifyinfoInterruptnxtBtn']");
+
+  private By getCheckboxCigarettes() {
+    return checkboxCigarettes;
+  }
+
+  private By getDropdownRegularBrand() {
+    return dropdownRegularBrand;
+  }
+
+  private By getDropdownRegularBrandNonMenthol() {
+    return dropdownRegularBrandNonMenthol;
+  }
+
+  private By getButtonNext() {
+    return buttonNext;
+  }
+
+  private String getUrlVerifyInformation() {
+    return urlVerifyInformation;
+  }
 
   public void CheckboxCigarettesSet(String value) {
-    setCheckbox(CheckboxCigarettes, value);
+    setCheckbox(getCheckboxCigarettes(), value);
   }
 
   public void DropdownRegularBrandSelect(String value) {
-    selectDropdown(DropdownRegularBrand, value);
+    selectDropdown(getDropdownRegularBrand(), value);
   }
 
   public void optionRegularBrandSelect(String value) {
@@ -45,15 +65,15 @@ public class VerifyInformationInterruptPage extends Page {
   }
 
   public void DropdownRegularBrandNonMentholSelect(String value) {
-    selectDropdown(DropdownRegularBrandNonMenthol, value);
+    selectDropdown(getDropdownRegularBrandNonMenthol(), value);
   }
 
   public void buttonNextClick() {
-    clickObject(buttonNext);
+    clickObject(getButtonNext());
   }
 
   public void PopulatePage() {
-    if (!webDriver.getCurrentUrl().toLowerCase().equals(URL_VERIFYINFORMATION.toLowerCase())) {
+    if (!webDriver.getCurrentUrl().toLowerCase().equals(getUrlVerifyInformation().toLowerCase())) {
       return;
     }
     // CheckboxCigarettesSet("checked");
