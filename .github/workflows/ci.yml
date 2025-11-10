@@ -120,7 +120,7 @@ jobs:
           echo "Starting smoke tests..."
           echo "Grid URL: $SELENIUM_REMOTE_URL"
           
-          ./mvnw test -DsuiteXmlFile=testng-smoke-suite.xml -Dmaven.test.failure.ignore=true
+          ./mvnw test -DsuiteXmlFile=testng-smoke-suite.xml
           
           echo "Smoke tests completed"
 
@@ -129,6 +129,9 @@ jobs:
         run: |
           echo "🔥 Smoke Test Results:"
           echo "  Test XML files: $(find target/surefire-reports -name "TEST-*.xml" 2>/dev/null | wc -l)"
+          
+          TOTAL_FAILURES=0
+          TOTAL_ERRORS=0
           
           if [ -d "target/surefire-reports" ]; then
             echo ""
@@ -139,11 +142,37 @@ jobs:
             for xml in target/surefire-reports/TEST-*.xml; do
               if [ -f "$xml" ]; then
                 echo "Report: $xml"
-                grep -E 'tests=|failures=|errors=|skipped=' "$xml" | head -1 || true
+                
+                FAILURES=$(grep -oP 'failures="\K[0-9]+' "$xml" | head -1 || echo "0")
+                ERRORS=$(grep -oP 'errors="\K[0-9]+' "$xml" | head -1 || echo "0")
+                TESTS=$(grep -oP 'tests="\K[0-9]+' "$xml" | head -1 || echo "0")
+                
+                echo "  Tests: $TESTS, Failures: $FAILURES, Errors: $ERRORS"
+                
+                TOTAL_FAILURES=$((TOTAL_FAILURES + FAILURES))
+                TOTAL_ERRORS=$((TOTAL_ERRORS + ERRORS))
               fi
             done
+            
+            echo ""
+            echo "═══════════════════════════════════════════"
+            echo "Total Failures: $TOTAL_FAILURES"
+            echo "Total Errors: $TOTAL_ERRORS"
+            echo "═══════════════════════════════════════════"
+            
+            if [ "$TOTAL_FAILURES" -gt "0" ] || [ "$TOTAL_ERRORS" -gt "0" ]; then
+              echo ""
+              echo "❌ SMOKE TESTS FAILED!"
+              echo "   Failures: $TOTAL_FAILURES"
+              echo "   Errors: $TOTAL_ERRORS"
+              exit 1
+            else
+              echo ""
+              echo "✅ ALL SMOKE TESTS PASSED!"
+            fi
           else
             echo "⚠️  No surefire-reports directory found"
+            exit 1
           fi
 
   selenium-grid-tests:
@@ -250,7 +279,7 @@ jobs:
           BROWSER: ${{ matrix.browser }}
         run: |
           echo "Starting Grid tests with ${{ matrix.browser }}..."
-          ./mvnw test -DsuiteXmlFile=testng-ci-suite.xml -Dmaven.test.failure.ignore=true
+          ./mvnw test -DsuiteXmlFile=testng-ci-suite.xml
           echo "Grid tests completed"
 
       - name: Verify test results
@@ -262,16 +291,50 @@ jobs:
           echo "  Screenshots: $(find target/allure-results -name "*.png" 2>/dev/null | wc -l) images"
           echo "  Total Allure files: $(find target/allure-results -type f 2>/dev/null | wc -l)"
           
+          TOTAL_FAILURES=0
+          TOTAL_ERRORS=0
+          TOTAL_TESTS=0
+          
           if [ -d "target/surefire-reports" ]; then
             echo ""
             echo "Test Execution Summary:"
             for xml in target/surefire-reports/TEST-*.xml; do
               if [ -f "$xml" ]; then
                 echo "  $(basename $xml):"
-                grep -E '<testsuite' "$xml" | grep -oE '(tests|failures|errors|skipped|time)="[^"]*"' | tr '\n' ' ' | sed 's/^/    /' || true
-                echo ""
+                
+                FAILURES=$(grep -oP 'failures="\K[0-9]+' "$xml" | head -1 || echo "0")
+                ERRORS=$(grep -oP 'errors="\K[0-9]+' "$xml" | head -1 || echo "0")
+                TESTS=$(grep -oP 'tests="\K[0-9]+' "$xml" | head -1 || echo "0")
+                
+                echo "    Tests: $TESTS, Failures: $FAILURES, Errors: $ERRORS"
+                
+                TOTAL_TESTS=$((TOTAL_TESTS + TESTS))
+                TOTAL_FAILURES=$((TOTAL_FAILURES + FAILURES))
+                TOTAL_ERRORS=$((TOTAL_ERRORS + ERRORS))
               fi
             done
+            
+            echo ""
+            echo "═══════════════════════════════════════════"
+            echo "Browser: ${{ matrix.browser }}"
+            echo "Total Tests: $TOTAL_TESTS"
+            echo "Total Failures: $TOTAL_FAILURES"
+            echo "Total Errors: $TOTAL_ERRORS"
+            echo "═══════════════════════════════════════════"
+            
+            if [ "$TOTAL_FAILURES" -gt "0" ] || [ "$TOTAL_ERRORS" -gt "0" ]; then
+              echo ""
+              echo "❌ GRID TESTS FAILED (${{ matrix.browser }})!"
+              echo "   Failures: $TOTAL_FAILURES"
+              echo "   Errors: $TOTAL_ERRORS"
+              exit 1
+            else
+              echo ""
+              echo "✅ ALL GRID TESTS PASSED (${{ matrix.browser }})!"
+            fi
+          else
+            echo "⚠️  No surefire-reports directory found"
+            exit 1
           fi
       
       - name: Upload test results
@@ -397,24 +460,28 @@ jobs:
 
       - name: Run Checkstyle
         run: |
+          echo "Running Checkstyle..."
           ./mvnw checkstyle:check
-          echo "📊 Checkstyle report: target/checkstyle-result.xml"
-        continue-on-error: true
+          echo "✅ Checkstyle passed: target/checkstyle-result.xml"
 
       - name: Run SpotBugs
         run: |
+          echo "Running SpotBugs..."
           ./mvnw spotbugs:check
-          echo "🐛 SpotBugs report: target/spotbugsXml.xml"
+          echo "✅ SpotBugs passed: target/spotbugsXml.xml"
         continue-on-error: true
 
       - name: Run PMD
         run: |
+          echo "Running PMD..."
           ./mvnw pmd:check
-          echo "📋 PMD report: target/pmd.xml"
+          echo "✅ PMD passed: target/pmd.xml"
         continue-on-error: true
 
       - name: Run dependency analysis
-        run: ./mvnw dependency:analyze
+        run: |
+          echo "Running dependency analysis..."
+          ./mvnw dependency:analyze
         continue-on-error: true
 
       - name: Upload code quality reports
