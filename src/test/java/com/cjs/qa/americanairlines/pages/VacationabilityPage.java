@@ -79,7 +79,7 @@ public class VacationabilityPage extends Page {
     setEdit(getEditAANumber(), value);
   }
 
-  public void CheckboxAgreeSet(String value) throws QAException {
+  public void checkboxAgreeSet(String value) throws QAException {
     setCheckbox(getCheckboxAgree(), value);
   }
 
@@ -107,7 +107,7 @@ public class VacationabilityPage extends Page {
     // editLastNameSet("Scharer");
     // editEmailSet(CJSConstants.EMAIL_ADDRESS_MSN);
     // editAANumber("7L86P34");
-    // CheckboxAgreeSet("checked");
+    // checkboxAgreeSet("checked");
     // buttonRegisterClick();
   }
 }

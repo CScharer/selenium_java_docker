@@ -7,7 +7,7 @@ import org.junit.runner.Description;
 public class RTest extends RStep {
   private String testName;
   private String testStatus;
-  private List<RStep> RStep = new ArrayList<>();
+  private List<RStep> rStep = new ArrayList<>();
 
   public RTest(String stepName, String stepStatus) {
     super(stepName, stepStatus);
@@ -25,7 +25,7 @@ public class RTest extends RStep {
   }
 
   public List<RStep> getRStep() {
-    return RStep;
+    return rStep;
   }
 
   public String getTestName() {
@@ -36,8 +36,8 @@ public class RTest extends RStep {
     return testStatus;
   }
 
-  public void setRStep(List<RStep> rStep) {
-    RStep = rStep;
+  public void setRStep(List<RStep> rStepList) {
+    this.rStep = rStepList;
   }
 
   public void setTestName(String testName) {

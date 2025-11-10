@@ -17,28 +17,28 @@ public class CopyPolicyPage extends Page {
     super(webDriver);
   }
 
-  private final String NODE_COPYPOLICY = "form1:copyPolicy:";
-  private final By editEffectiveDate = By.id(NODE_COPYPOLICY + "effectiveDtBI");
-  // private By DropdownEffectiveDate = By.id(NODE_COPYPOLICY + "termBI");
-  private final By DropdownTerm = By.id(NODE_COPYPOLICY + "termBI");
-  private final By DropdownRenewalTerm = By.id(NODE_COPYPOLICY + "renewalTermBI");
-  private final By editExpirationDate = By.id(NODE_COPYPOLICY + "expirationDtBI");
-  private final By editReleaseDate = By.id(NODE_COPYPOLICY + "releaseDtBI");
-  private final By DropdownCorporation = By.id(NODE_COPYPOLICY + "corporationBI");
-  private final By DropdownCompany = By.id(NODE_COPYPOLICY + "policyCompanyBI");
-  private final By DropdownPolicyType = By.id(NODE_COPYPOLICY + "policyProductBI");
-  private final By DropdownProgram = By.id(NODE_COPYPOLICY + "policyProgramBI");
-  private final By DropdownPolicyState = By.id(NODE_COPYPOLICY + "policyStateBI");
-  private final By CheckboxRenewalPolicy = By.id(NODE_COPYPOLICY + "targetRenewalPolicy");
-  private final By CheckboxUseCurrentRateRules = By.id(NODE_COPYPOLICY + "currentRules");
-  private final By CheckboxRetainBaseNumber = By.id(NODE_COPYPOLICY + "retainBaseNbrBI");
-  private final By CheckboxUserEnteredPolicyNumber = By.id(NODE_COPYPOLICY + "userEnteredPolNbrBI");
-  private final By editCopyFromPolicyNumber = By.id(NODE_COPYPOLICY + "sourcePolicyNbrId");
-  private final By editCopyToPolicyNumber = By.id(NODE_COPYPOLICY + "targetPolicyNbrId");
+  private final String nodeCopyPolicy = "form1:copyPolicy:";
+  private final By editEffectiveDate = By.id(nodeCopyPolicy + "effectiveDtBI");
+  // private By dropdownEffectiveDate = By.id(nodeCopyPolicy + "termBI");
+  private final By dropdownTerm = By.id(nodeCopyPolicy + "termBI");
+  private final By dropdownRenewalTerm = By.id(nodeCopyPolicy + "renewalTermBI");
+  private final By editExpirationDate = By.id(nodeCopyPolicy + "expirationDtBI");
+  private final By editReleaseDate = By.id(nodeCopyPolicy + "releaseDtBI");
+  private final By dropdownCorporation = By.id(nodeCopyPolicy + "corporationBI");
+  private final By dropdownCompany = By.id(nodeCopyPolicy + "policyCompanyBI");
+  private final By dropdownPolicyType = By.id(nodeCopyPolicy + "policyProductBI");
+  private final By dropdownProgram = By.id(nodeCopyPolicy + "policyProgramBI");
+  private final By dropdownPolicyState = By.id(nodeCopyPolicy + "policyStateBI");
+  private final By checkboxRenewalPolicy = By.id(nodeCopyPolicy + "targetRenewalPolicy");
+  private final By checkboxUseCurrentRateRules = By.id(nodeCopyPolicy + "currentRules");
+  private final By checkboxRetainBaseNumber = By.id(nodeCopyPolicy + "retainBaseNbrBI");
+  private final By checkboxUserEnteredPolicyNumber = By.id(nodeCopyPolicy + "userEnteredPolNbrBI");
+  private final By editCopyFromPolicyNumber = By.id(nodeCopyPolicy + "sourcePolicyNbrId");
+  private final By editCopyToPolicyNumber = By.id(nodeCopyPolicy + "targetPolicyNbrId");
   // private By ExistingProductsInformationCheckbox() { }
-  private final By buttonDelete = By.id(NODE_COPYPOLICY + "DelBtn");
-  private final By buttonCopy = By.id(NODE_COPYPOLICY + "copyBtn");
-  private final By buttonCancel = By.id(NODE_COPYPOLICY + "cancelBtn");
+  private final By buttonDelete = By.id(nodeCopyPolicy + "DelBtn");
+  private final By buttonCopy = By.id(nodeCopyPolicy + "copyBtn");
+  private final By buttonCancel = By.id(nodeCopyPolicy + "cancelBtn");
   private final By buttonCopySuccess = By.xpath("*//button[@type='button']//span[.='OK']");
   private final By buttonPendingChangesOK = By.xpath(".//*/span[.='OK']");
   private final String pageTitle = "CopyPolicyPage";
@@ -57,11 +57,11 @@ public class CopyPolicyPage extends Page {
   }
 
   public String getDropdownTerm() {
-    return getDropdown(DropdownTerm);
+    return getDropdown(dropdownTerm);
   }
 
   public String getDropdownRenewalTerm() {
-    return getDropdown(DropdownRenewalTerm);
+    return getDropdown(dropdownRenewalTerm);
   }
 
   public String getEditExpirationDate() {
@@ -73,39 +73,39 @@ public class CopyPolicyPage extends Page {
   }
 
   public String getDropdownCorporation() {
-    return getDropdown(DropdownCorporation);
+    return getDropdown(dropdownCorporation);
   }
 
   public String getDropdownCompany() {
-    return getDropdown(DropdownCompany);
+    return getDropdown(dropdownCompany);
   }
 
   public String getDropdownPolicyType() {
-    return getDropdown(DropdownPolicyType);
+    return getDropdown(dropdownPolicyType);
   }
 
   public String getDropdownProgram() {
-    return getDropdown(DropdownProgram);
+    return getDropdown(dropdownProgram);
   }
 
   public String getDropdownPolicyState() {
-    return getDropdown(DropdownPolicyState);
+    return getDropdown(dropdownPolicyState);
   }
 
   public String getCheckboxRenewalPolicy() {
-    return getCheckbox(CheckboxRenewalPolicy);
+    return getCheckbox(checkboxRenewalPolicy);
   }
 
   public String getCheckboxUseCurrentRateRules() {
-    return getCheckbox(CheckboxUseCurrentRateRules);
+    return getCheckbox(checkboxUseCurrentRateRules);
   }
 
   public String getCheckboxRetainBaseNumber() {
-    return getCheckbox(CheckboxRetainBaseNumber);
+    return getCheckbox(checkboxRetainBaseNumber);
   }
 
   public String getCheckboxUserEnteredPolicyNumber() {
-    return getCheckbox(CheckboxUserEnteredPolicyNumber);
+    return getCheckbox(checkboxUserEnteredPolicyNumber);
   }
 
   public String getEditCopyFromPolicyNumber() {
@@ -122,11 +122,11 @@ public class CopyPolicyPage extends Page {
   }
 
   public void selectDropdownTerm(String value) {
-    selectDropdown(DropdownTerm, value);
+    selectDropdown(dropdownTerm, value);
   }
 
   public void selectDropdownRenewalTerm(String value) {
-    selectDropdown(DropdownRenewalTerm, value);
+    selectDropdown(dropdownRenewalTerm, value);
   }
 
   public void setEditExpirationDate(String value) {
@@ -138,55 +138,55 @@ public class CopyPolicyPage extends Page {
   }
 
   public void selectDropdownCorporation(String value) {
-    selectDropdown(DropdownCorporation, value);
+    selectDropdown(dropdownCorporation, value);
   }
 
   public void selectDropdownCompany(String value) {
-    selectDropdown(DropdownCompany, value);
+    selectDropdown(dropdownCompany, value);
   }
 
   public void selectDropdownPolicyType(String value) {
-    selectDropdown(DropdownPolicyType, value);
+    selectDropdown(dropdownPolicyType, value);
   }
 
   public void selectDropdownProgram(String value) {
-    selectDropdown(DropdownProgram, value);
+    selectDropdown(dropdownProgram, value);
   }
 
   public void selectDropdownPolicyState(String value) {
-    selectDropdown(DropdownPolicyState, value);
+    selectDropdown(dropdownPolicyState, value);
   }
 
   public void toggleCheckboxRenewalPolicy() {
-    toggleCheckbox(CheckboxRenewalPolicy);
+    toggleCheckbox(checkboxRenewalPolicy);
   }
 
   public void setCheckboxRenewalPolicy(String value) {
-    setCheckbox(CheckboxRenewalPolicy, value);
+    setCheckbox(checkboxRenewalPolicy, value);
   }
 
   public void toggleCheckboxUseCurrentRateRules() {
-    toggleCheckbox(CheckboxUseCurrentRateRules);
+    toggleCheckbox(checkboxUseCurrentRateRules);
   }
 
   public void setCheckboxUseCurrentRateRules(String value) {
-    setCheckbox(CheckboxUseCurrentRateRules, value);
+    setCheckbox(checkboxUseCurrentRateRules, value);
   }
 
   public void toggleCheckboxRetainBaseNumber() {
-    toggleCheckbox(CheckboxRetainBaseNumber);
+    toggleCheckbox(checkboxRetainBaseNumber);
   }
 
   public void setCheckboxRetainBaseNumber(String value) {
-    setCheckbox(CheckboxRetainBaseNumber, value);
+    setCheckbox(checkboxRetainBaseNumber, value);
   }
 
   public void toggleCheckboxUserEnteredPolicyNumber() {
-    toggleCheckbox(CheckboxUserEnteredPolicyNumber);
+    toggleCheckbox(checkboxUserEnteredPolicyNumber);
   }
 
   public void setCheckboxUserEnteredPolicyNumber(String value) {
-    setCheckbox(CheckboxUserEnteredPolicyNumber, value);
+    setCheckbox(checkboxUserEnteredPolicyNumber, value);
   }
 
   public void setEditCopyFromPolicyNumber(String value) {
@@ -200,7 +200,7 @@ public class CopyPolicyPage extends Page {
   public void verifyFromPolicyAndToPolicyAreCorrect() {
     final String copyFromPolicyNum = getEdit(editCopyFromPolicyNumber);
     final String copyToPolicyNum = getEdit(editCopyToPolicyNumber);
-    if (getWebElement(CheckboxRetainBaseNumber).isSelected()) {
+    if (getWebElement(checkboxRetainBaseNumber).isSelected()) {
       Assert.assertEquals(copyFromPolicyNum, copyToPolicyNum);
     } else {
       Assert.assertNotSame(copyFromPolicyNum, copyToPolicyNum);

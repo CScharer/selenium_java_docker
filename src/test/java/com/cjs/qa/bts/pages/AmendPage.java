@@ -17,20 +17,20 @@ public class AmendPage extends Page {
   }
 
   // DECLARATIONS
-  // private final String NODE_AMENDFORM = ".//*[@id='amendForm:amendPanel']";
+  // private final String nodeAmendForm = ".//*[@id='amendForm:amendPanel']";
   private final By editPolicyEffectiveDate = By.id("amendForm:policyOriginalEfftDt");
   private final By editPolicyExpirationDate = By.id("amendForm:policyExpDtDisp");
   private final By optionAmendmentType = By.id("amendForm:amendOpt");
-  private final By DropdownExistingAmendment = By.id("amendForm:openAmendment");
+  private final By dropdownExistingAmendment = By.id("amendForm:openAmendment");
   private final By editAmendDescription = By.id("amendForm:amendmentDesc");
   private final By editAmendEffectiveDate = By.id("amendForm:effectiveDt");
   private final By editAmendExpirationDate = By.id("amendForm:expirationDt");
-  private final By DropdownAvailable = By.id("amendForm:avlAmendReasons");
-  private final By DropdownSelected = By.id("amendForm:amendReasons");
+  private final By dropdownAvailable = By.id("amendForm:avlAmendReasons");
+  private final By dropdownSelected = By.id("amendForm:amendReasons");
   private final By editAmendReasonText = By.id("amendForm:amendReasonText");
-  private final By DropdownPrintCopies = By.id("amendForm:printCopies");
-  private final By CheckboxApplyToRenewal = By.id("amendForm:applyToRenewal']/..");
-  private final By CheckboxAutoDeleteUnissuedAmendment =
+  private final By dropdownPrintCopies = By.id("amendForm:printCopies");
+  private final By checkboxApplyToRenewal = By.id("amendForm:applyToRenewal']/..");
+  private final By checkboxAutoDeleteUnissuedAmendment =
       By.id("amendForm:autoDeleteUnissuedAmend']/..");
   private final By optionApplyType = By.id("amendForm:applyWaiveRule");
   private final By buttonAdd = By.id("amendForm:btnRight");
@@ -70,7 +70,7 @@ public class AmendPage extends Page {
   }
 
   public String getDropdownExistingAmendment() {
-    return getDropdown(DropdownExistingAmendment);
+    return getDropdown(dropdownExistingAmendment);
   }
 
   public String getEditAmendEffectiveDate() {
@@ -82,11 +82,11 @@ public class AmendPage extends Page {
   }
 
   public String getDropdownAvailable() {
-    return getDropdown(DropdownAvailable);
+    return getDropdown(dropdownAvailable);
   }
 
   public String getDropdownSelected() {
-    return getDropdown(DropdownSelected);
+    return getDropdown(dropdownSelected);
   }
 
   public String getEditAmendReasonText() {
@@ -94,15 +94,15 @@ public class AmendPage extends Page {
   }
 
   public String getDropdownPrintCopies() {
-    return getDropdown(DropdownPrintCopies);
+    return getDropdown(dropdownPrintCopies);
   }
 
   public String getCheckboxApplyToRenewal() {
-    return getCheckbox(CheckboxApplyToRenewal);
+    return getCheckbox(checkboxApplyToRenewal);
   }
 
   public String getCheckboxAutoDeleteUnissuedAmendment() {
-    return getCheckbox(CheckboxAutoDeleteUnissuedAmendment);
+    return getCheckbox(checkboxAutoDeleteUnissuedAmendment);
   }
 
   public String getOptionApplyType() {
@@ -123,7 +123,7 @@ public class AmendPage extends Page {
   }
 
   public void selectDropdownExistingAmendment(String value) {
-    selectDropdownWithPartialText(DropdownExistingAmendment, value);
+    selectDropdownWithPartialText(dropdownExistingAmendment, value);
   }
 
   public void setEditAmendDescription(String value) {
@@ -139,11 +139,11 @@ public class AmendPage extends Page {
   }
 
   public void selectDropdownAvailable(String value) {
-    selectDropdown(DropdownAvailable, value);
+    selectDropdown(dropdownAvailable, value);
   }
 
   public void selectDropdownSelected(String value) {
-    selectDropdown(DropdownSelected, value);
+    selectDropdown(dropdownSelected, value);
   }
 
   public void setEditAmendReasonText(String value) {
@@ -151,23 +151,23 @@ public class AmendPage extends Page {
   }
 
   public void selectDropdownPrintCopies(String value) {
-    selectDropdown(DropdownPrintCopies, value);
+    selectDropdown(dropdownPrintCopies, value);
   }
 
   public void toggleCheckboxApplyToRenewal() {
-    toggleCheckbox(CheckboxApplyToRenewal);
+    toggleCheckbox(checkboxApplyToRenewal);
   }
 
   public void setCheckboxApplyToRenewal(String value) {
-    setCheckbox(CheckboxApplyToRenewal, value);
+    setCheckbox(checkboxApplyToRenewal, value);
   }
 
   public void toggleCheckboxAutoDeleteUnissuedAmendment() {
-    toggleCheckbox(CheckboxAutoDeleteUnissuedAmendment);
+    toggleCheckbox(checkboxAutoDeleteUnissuedAmendment);
   }
 
   public void setCheckboxAutoDeleteUnissuedAmendment(String value) {
-    setCheckbox(CheckboxAutoDeleteUnissuedAmendment, value);
+    setCheckbox(checkboxAutoDeleteUnissuedAmendment, value);
   }
 
   public void selectOptionApplyType(String value) {

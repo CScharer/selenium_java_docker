@@ -17,17 +17,17 @@ public class BuildPolicyPage extends Page {
   }
 
   // DECLARATIONS
-  private final By CheckboxRenewalPolicy = By.id("renewalPolicyBI");
+  private final By checkboxRenewalPolicy = By.id("renewalPolicyBI");
   private final By editEffectiveDate = By.id("policyBuildTitleTxtId");
-  private final By DropdownTerm = By.id("termBI");
-  private final By DropdownRenewalTerm = By.id("renewalTermBI");
+  private final By dropdownTerm = By.id("termBI");
+  private final By dropdownRenewalTerm = By.id("renewalTermBI");
   private final By editExpirationDate = By.id("expirationDtBI");
-  private final By DropdownRatingCompany = By.id("policyCompanyBI");
-  private final By DropdownIssuingCompany = By.id("policyProductBI");
-  private final By DropdownProgram = By.id("policyProgramBI");
-  private final By DropdownPrimaryState = By.id("policyStateBI");
+  private final By dropdownRatingCompany = By.id("policyCompanyBI");
+  private final By dropdownIssuingCompany = By.id("policyProductBI");
+  private final By dropdownProgram = By.id("policyProgramBI");
+  private final By dropdownPrimaryState = By.id("policyStateBI");
   private final By editReleaseDate = By.id("releaseDtBI");
-  private final By CheckboxUserEnteredPolicyNumber = By.id("userEnteredPolicyBI");
+  private final By checkboxUserEnteredPolicyNumber = By.id("userEnteredPolicyBI");
   private final By editPolicyNumber = By.id("policyNbrBI");
   private final By editSequenceNumber = By.id("policyNbrSeqBI");
   private final By buttonSave = By.id("button1");
@@ -44,7 +44,7 @@ public class BuildPolicyPage extends Page {
 
   // METHODS GET
   public String getCheckboxRenewalPolicy() {
-    return getCheckbox(CheckboxRenewalPolicy);
+    return getCheckbox(checkboxRenewalPolicy);
   }
 
   public String getEditEffectiveDate() {
@@ -52,11 +52,11 @@ public class BuildPolicyPage extends Page {
   }
 
   public String getDropdownTerm() {
-    return getDropdown(DropdownTerm);
+    return getDropdown(dropdownTerm);
   }
 
   public String getDropdownRenewalTerm() {
-    return getDropdown(DropdownRenewalTerm);
+    return getDropdown(dropdownRenewalTerm);
   }
 
   public String getEditExpirationDate() {
@@ -64,19 +64,19 @@ public class BuildPolicyPage extends Page {
   }
 
   public String getDropdownRatingCompany() {
-    return getDropdown(DropdownRatingCompany);
+    return getDropdown(dropdownRatingCompany);
   }
 
   public String getDropdownIssuingCompany() {
-    return getDropdown(DropdownIssuingCompany);
+    return getDropdown(dropdownIssuingCompany);
   }
 
   public String getDropdownProgram() {
-    return getDropdown(DropdownProgram);
+    return getDropdown(dropdownProgram);
   }
 
   public String getDropdownPrimaryState() {
-    return getDropdown(DropdownPrimaryState);
+    return getDropdown(dropdownPrimaryState);
   }
 
   public String getEditReleaseDate() {
@@ -84,7 +84,7 @@ public class BuildPolicyPage extends Page {
   }
 
   public String getCheckboxUserEnteredPolicyNumber() {
-    return getCheckbox(CheckboxUserEnteredPolicyNumber);
+    return getCheckbox(checkboxUserEnteredPolicyNumber);
   }
 
   public String getEditPolicyNumber() {
@@ -97,11 +97,11 @@ public class BuildPolicyPage extends Page {
 
   // METHODS SET
   public void toggleCheckboxRenewalPolicy() {
-    toggleCheckbox(CheckboxRenewalPolicy);
+    toggleCheckbox(checkboxRenewalPolicy);
   }
 
   public void setCheckboxRenewalPolicy(String value) {
-    setCheckbox(CheckboxRenewalPolicy, value);
+    setCheckbox(checkboxRenewalPolicy, value);
   }
 
   public void setEditEffectiveDate(String value) {
@@ -109,11 +109,11 @@ public class BuildPolicyPage extends Page {
   }
 
   public void selectDropdownTerm(String value) {
-    selectDropdown(DropdownTerm, value);
+    selectDropdown(dropdownTerm, value);
   }
 
   public void selectDropdownRenewalTerm(String value) {
-    selectDropdown(DropdownRenewalTerm, value);
+    selectDropdown(dropdownRenewalTerm, value);
   }
 
   public void setEditExpirationDate(String value) {
@@ -121,19 +121,19 @@ public class BuildPolicyPage extends Page {
   }
 
   public void selectDropdownRatingCompany(String value) {
-    selectDropdown(DropdownRatingCompany, value);
+    selectDropdown(dropdownRatingCompany, value);
   }
 
   public void selectDropdownIssuingCompany(String value) {
-    selectDropdown(DropdownIssuingCompany, value);
+    selectDropdown(dropdownIssuingCompany, value);
   }
 
   public void selectDropdownProgram(String value) {
-    selectDropdown(DropdownProgram, value);
+    selectDropdown(dropdownProgram, value);
   }
 
   public void selectDropdownPrimaryState(String value) {
-    selectDropdown(DropdownPrimaryState, value);
+    selectDropdown(dropdownPrimaryState, value);
   }
 
   public void setEditReleaseDate(String value) {
@@ -141,11 +141,11 @@ public class BuildPolicyPage extends Page {
   }
 
   public void toggleCheckboxUserEnteredPolicyNumber() {
-    toggleCheckbox(CheckboxUserEnteredPolicyNumber);
+    toggleCheckbox(checkboxUserEnteredPolicyNumber);
   }
 
   public void setCheckboxUserEnteredPolicyNumber(String value) {
-    setCheckbox(CheckboxUserEnteredPolicyNumber, value);
+    setCheckbox(checkboxUserEnteredPolicyNumber, value);
   }
 
   public void setEditPolicyNumber(String value) {

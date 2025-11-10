@@ -9,13 +9,13 @@ public class RateLeftNavPage extends Page {
     super(webDriver);
   }
 
-  private final String NODE_PROCESSEDERRS =
+  private final String nodeProcessedErrs =
       ".//*[@id='form1:viewNavigationMenu:navigationMenuLevel1:";
   private final By linkManageProducts =
-      By.xpath(NODE_PROCESSEDERRS + "5:navigationMenuItem:menuLinkSubmittable']/span");
+      By.xpath(nodeProcessedErrs + "5:navigationMenuItem:menuLinkSubmittable']/span");
 
   // private final By linkInusrableInterestSummary =
-  // By.xpath(NODE_PROCESSEDERRS +
+  // By.xpath(nodeProcessedErrs +
   // "4:navigationMenuItem:menuCommandSubmittable']/span")
 
   public void clickLinkManageProducts() {

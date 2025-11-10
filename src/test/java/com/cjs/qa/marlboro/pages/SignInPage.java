@@ -66,7 +66,7 @@ public class SignInPage extends Page {
     clickObject(getButtonEnter());
   }
 
-  public void CheckboxRememberUsernameSet(String value) throws QAException {
+  public void checkboxRememberUsernameSet(String value) throws QAException {
     setCheckbox(getCheckboxRememberUsername(), value);
   }
 
@@ -114,7 +114,7 @@ public class SignInPage extends Page {
     // editDateOfBirthMonthSet(mapUser.get("Month"));
     // editDateOfBirthDaySet(mapUser.get("Day"));
     // editDateOfBirthYearSet(mapUser.get("Year"));
-    // CheckboxRememberUsernameSet("unchecked");
+    // checkboxRememberUsernameSet("unchecked");
     buttonEnterClick();
   }
 

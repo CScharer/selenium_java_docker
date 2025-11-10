@@ -17,7 +17,7 @@ public class SearchRightNav extends Page {
   private final By linkMassNotes = By.xpath(".//*[@id='requestLinkForMassNotes']");
   private final By linkViewExportRequests = By.xpath(".//*[@id='requestLinkExportRequest']");
   private final By linkQueriesTools = By.xpath(".//*[@id='requestLinkQueriesTools']");
-  private final By DropdownTestStatus = By.xpath(".//*[@id='modeBI']");
+  private final By dropdownTestStatus = By.xpath(".//*[@id='modeBI']");
 
   // METHODS SET
   public void toggleSidebarRight() {
@@ -49,6 +49,6 @@ public class SearchRightNav extends Page {
   }
 
   public void selectDropdownTestStatus(String value) {
-    selectDropdown(DropdownTestStatus, value);
+    selectDropdown(dropdownTestStatus, value);
   }
 }

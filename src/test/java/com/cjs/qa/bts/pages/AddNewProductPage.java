@@ -17,11 +17,11 @@ public class AddNewProductPage extends Page {
   }
 
   // DECLARATIONS
-  private final By DropdownProduct = By.id("productId");
-  private final By DropdownProgram = By.id("programId");
-  private final By DropdownRatingCompany =
+  private final By dropdownProduct = By.id("productId");
+  private final By dropdownProgram = By.id("programId");
+  private final By dropdownRatingCompany =
       By.id(".//*[@id='addProductForm']/div[3]/div[1]/div[2]/div[1]/div[4]/div[1]/div/select");
-  private final By DropdownState = By.id("stateCode");
+  private final By dropdownState = By.id("stateCode");
   private final By buttonAdd = By.id("");
   private final By buttonAddProductCoverages = By.id("");
   private final String pageTitle = "AddNewProductPage";
@@ -36,36 +36,36 @@ public class AddNewProductPage extends Page {
 
   // METHODS GET
   public String getDropdownProduct() {
-    return getDropdown(DropdownProduct);
+    return getDropdown(dropdownProduct);
   }
 
   public String getDropdownProgram() {
-    return getDropdown(DropdownProgram);
+    return getDropdown(dropdownProgram);
   }
 
   public String getDropdownRatingCompany() {
-    return getDropdown(DropdownRatingCompany);
+    return getDropdown(dropdownRatingCompany);
   }
 
   public String getDropdownState() {
-    return getDropdown(DropdownState);
+    return getDropdown(dropdownState);
   }
 
   // METHODS SET
   public void selectDropdownProduct(String value) {
-    selectDropdown(DropdownProduct, value);
+    selectDropdown(dropdownProduct, value);
   }
 
   public void selectDropdownProgram(String value) {
-    selectDropdown(DropdownProgram, value);
+    selectDropdown(dropdownProgram, value);
   }
 
   public void selectDropdownRatingCompany(String value) {
-    selectDropdown(DropdownRatingCompany, value);
+    selectDropdown(dropdownRatingCompany, value);
   }
 
   public void selectDropdownState(String value) {
-    selectDropdown(DropdownState, value);
+    selectDropdown(dropdownState, value);
   }
 
   public void clickButtonAdd(String value) {

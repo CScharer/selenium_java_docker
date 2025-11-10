@@ -11,11 +11,11 @@ public class PremiumSummaryRightNav extends Page {
   }
 
   // DECLARATIONS
-  // private final String NODE_FORM1ADMIN = "form1:adminFunctions:";
-  // private final String NODE_POLICYISSUANCE = NODE_FORM1ADMIN +
+  // private final String nodeForm1Admin = "form1:adminFunctions:";
+  // private final String nodePolicyIssuance = nodeForm1Admin +
   // "policyIssuanceFunctions:";
-  // private final String NODE_NAVIGATIONMENU = ":navigationMenuItem:";
-  // private final String NODE_MENUCSUBMIT = "menuCommandSubmittable";
+  // private final String nodeNavigationMenu = ":navigationMenuItem:";
+  // private final String nodeMenuCsubmit = "menuCommandSubmittable";
   private final By sidebarRightOpen = By.xpath(".//*[@id='outer-east-open-btn']");
   private final By sidebarRightClose = By.xpath(".//*[@'outer-east-close-btn']");
   private final By linkExitPolicySearch = By.xpath(".//*[@id='requestLinkSearch1']");

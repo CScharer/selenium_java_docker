@@ -10,40 +10,40 @@ public class RateRightNav extends Page {
   }
 
   // DECLARATIONS
-  private final String NODE_FORM1ADMIN = "form1:adminFunctions:";
-  private final String NODE_POLICYISSUANCE = NODE_FORM1ADMIN + "policyIssuanceFunctions:";
-  private final String NODE_NAVIGATIONMENU = ":navigationMenuItem:";
-  private final String NODE_MENUCSUBMIT = "menuCommandSubmittable";
+  private final String nodeForm1Admin = "form1:adminFunctions:";
+  private final String nodePolicyIssuance = nodeForm1Admin + "policyIssuanceFunctions:";
+  private final String nodeNavigationMenu = ":navigationMenuItem:";
+  private final String nodeMenuCsubmit = "menuCommandSubmittable";
   private final By sidebarRight = By.xpath(".//*[@id='outer-east-open-btn']");
   private final By linkExitPolicySearch = By.xpath(".//*[@id='requestLinkExitPolicy']");
   private final By linkChangeDates = By.xpath(".//*[@id='requestLinkChangeDates']");
   private final By linkPolicyErrors = By.xpath(".//*[@id='policyErrorsLink']");
   private final By linkPolicyViews =
-      By.xpath(".//*[@id='" + NODE_FORM1ADMIN + "panelGroupButtonForPolicyViews']/a");
+      By.xpath(".//*[@id='" + nodeForm1Admin + "panelGroupButtonForPolicyViews']/a");
   private final By linkEdit =
       By.xpath(
-          ".//*[@id='" + NODE_POLICYISSUANCE + "0" + NODE_NAVIGATIONMENU + NODE_MENUCSUBMIT + "']");
+          ".//*[@id='" + nodePolicyIssuance + "0" + nodeNavigationMenu + nodeMenuCsubmit + "']");
   private final By linkValidate =
       By.xpath(
-          ".//*[@id='" + NODE_POLICYISSUANCE + "1" + NODE_NAVIGATIONMENU + NODE_MENUCSUBMIT + "']");
+          ".//*[@id='" + nodePolicyIssuance + "1" + nodeNavigationMenu + nodeMenuCsubmit + "']");
   private final By linkRate =
       By.xpath(
-          ".//*[@id='" + NODE_POLICYISSUANCE + "2" + NODE_NAVIGATIONMENU + NODE_MENUCSUBMIT + "']");
+          ".//*[@id='" + nodePolicyIssuance + "2" + nodeNavigationMenu + nodeMenuCsubmit + "']");
   private final By linkBind =
       By.xpath(
-          ".//*[@id='" + NODE_POLICYISSUANCE + "3" + NODE_NAVIGATIONMENU + NODE_MENUCSUBMIT + "']");
+          ".//*[@id='" + nodePolicyIssuance + "3" + nodeNavigationMenu + nodeMenuCsubmit + "']");
   private final By linkIssue =
       By.xpath(
-          ".//*[@id='" + NODE_POLICYISSUANCE + "4" + NODE_NAVIGATIONMENU + NODE_MENUCSUBMIT + "']");
+          ".//*[@id='" + nodePolicyIssuance + "4" + nodeNavigationMenu + nodeMenuCsubmit + "']");
   private final By linkRequestPrint =
       By.xpath(
-          ".//*[@id='" + NODE_POLICYISSUANCE + "5" + NODE_NAVIGATIONMENU + "menuLinkSubmittable']");
+          ".//*[@id='" + nodePolicyIssuance + "5" + nodeNavigationMenu + "menuLinkSubmittable']");
   private final By linkTerritoryInformation =
-      By.xpath(".//*[@id='" + NODE_FORM1ADMIN + "terrInfoLink']");
+      By.xpath(".//*[@id='" + nodeForm1Admin + "terrInfoLink']");
   private final By linkClientInformation =
-      By.xpath(".//*[@id='" + NODE_FORM1ADMIN + "clientViewLink']");
+      By.xpath(".//*[@id='" + nodeForm1Admin + "clientViewLink']");
   private final By linkPayorDetails =
-      By.xpath(".//*[@id='" + NODE_FORM1ADMIN + "payorDetailsLink']");
+      By.xpath(".//*[@id='" + nodeForm1Admin + "payorDetailsLink']");
 
   // METHODS SET
   public void toggleSidebarRight() {

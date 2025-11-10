@@ -81,7 +81,7 @@ public class SignInPage extends Page {
     }
   }
 
-  public void CheckboxRememberMeSet(String value) throws QAException {
+  public void checkboxRememberMeSet(String value) throws QAException {
     if (objectExists(getCheckboxRememberMe())) {
       setCheckbox(getCheckboxRememberMeInput(), value);
     }
@@ -167,9 +167,9 @@ public class SignInPage extends Page {
     editEmailSet(eMail);
     editPasswordSet(EPasswords.DROPBOX.getValue());
     if (eMail.equalsIgnoreCase(CJSConstants.EMAIL_ADDRESS_MSN)) {
-      CheckboxRememberMeSet("checked");
+      checkboxRememberMeSet("checked");
     } else {
-      CheckboxRememberMeSet("unchecked");
+      checkboxRememberMeSet("unchecked");
     }
     // buttonSignInRegularClick();
   }

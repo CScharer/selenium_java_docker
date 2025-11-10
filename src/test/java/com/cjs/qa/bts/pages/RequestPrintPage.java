@@ -16,21 +16,21 @@ public class RequestPrintPage extends Page {
     super(webDriver);
   }
 
-  private final String NODE_REQUEST_PRINT = "form1:requestPrint:";
-  private final By DropdownReports = By.id(NODE_REQUEST_PRINT + "reportId");
-  private final By DropdownEffectiveDate = By.id(NODE_REQUEST_PRINT + "effectiveDtId");
-  private final By DropdownProcessedDate = By.id(NODE_REQUEST_PRINT + "processedDt");
-  private final By CheckboxPullPrint = By.id(NODE_REQUEST_PRINT + "printPolicyId:pullPrint");
-  private final By CheckboxPrintWorkSheets =
-      By.id(NODE_REQUEST_PRINT + "printPolicyId:printWorksheet");
-  private final By DropdownPrinter = By.id(NODE_REQUEST_PRINT + "printPolicyId:printer");
-  private final By CheckboxSPLPrint = By.id(NODE_REQUEST_PRINT + "printPolicyId:splPrint");
-  private final By buttonPrint = By.id(NODE_REQUEST_PRINT + "buttonOk");
-  private final By buttonCancel = By.id(NODE_REQUEST_PRINT + "cancelBtn");
+  private final String nodeRequestPrint = "form1:requestPrint:";
+  private final By dropdownReports = By.id(nodeRequestPrint + "reportId");
+  private final By dropdownEffectiveDate = By.id(nodeRequestPrint + "effectiveDtId");
+  private final By dropdownProcessedDate = By.id(nodeRequestPrint + "processedDt");
+  private final By checkboxPullPrint = By.id(nodeRequestPrint + "printPolicyId:pullPrint");
+  private final By checkboxPrintWorkSheets =
+      By.id(nodeRequestPrint + "printPolicyId:printWorksheet");
+  private final By dropdownPrinter = By.id(nodeRequestPrint + "printPolicyId:printer");
+  private final By checkboxSPLPrint = By.id(nodeRequestPrint + "printPolicyId:splPrint");
+  private final By buttonPrint = By.id(nodeRequestPrint + "buttonOk");
+  private final By buttonCancel = By.id(nodeRequestPrint + "cancelBtn");
   private final By buttonMinimizeTransactionInformation =
-      By.id(NODE_REQUEST_PRINT + "heading3form1:requestPrint:heading3");
+      By.id(nodeRequestPrint + "heading3form1:requestPrint:heading3");
   private final By buttonMinimizePrintOptions =
-      By.id(NODE_REQUEST_PRINT + "printPolicyId:printheading");
+      By.id(nodeRequestPrint + "printPolicyId:printheading");
   private final String pageTitle = "RequestPrintPage";
 
   private String getPageTitle() {
@@ -43,74 +43,74 @@ public class RequestPrintPage extends Page {
 
   // METHODS GET
   public String getDropdownReports() {
-    return getDropdown(DropdownReports);
+    return getDropdown(dropdownReports);
   }
 
   public String getDropdownEffectiveDate() {
-    return getDropdown(DropdownEffectiveDate);
+    return getDropdown(dropdownEffectiveDate);
   }
 
   public String getDropdownProcessedDate() {
-    return getDropdown(DropdownProcessedDate);
+    return getDropdown(dropdownProcessedDate);
   }
 
   public String getCheckboxPullPrint() {
-    return getCheckbox(CheckboxPullPrint);
+    return getCheckbox(checkboxPullPrint);
   }
 
   public String getCheckboxPrintWorksheets() {
-    return getCheckbox(CheckboxPrintWorkSheets);
+    return getCheckbox(checkboxPrintWorkSheets);
   }
 
   public String getDropdownPrinter() {
-    return getDropdown(DropdownPrinter);
+    return getDropdown(dropdownPrinter);
   }
 
   public String getCheckboxSPLPrint() {
-    return getCheckbox(CheckboxSPLPrint);
+    return getCheckbox(checkboxSPLPrint);
   }
 
   // METHODS SET
   public void selectDropdownReports(String value) {
-    selectDropdown(DropdownReports, value);
+    selectDropdown(dropdownReports, value);
   }
 
   public void selectDropdownEffectiveDate(String value) {
     sleep(200);
-    selectDropdownWithPartialText(DropdownEffectiveDate, value);
+    selectDropdownWithPartialText(dropdownEffectiveDate, value);
   }
 
   public void selectDropdownProcessedDate(String value) {
     sleep(200);
-    selectDropdownWithPartialText(DropdownProcessedDate, value);
+    selectDropdownWithPartialText(dropdownProcessedDate, value);
   }
 
   public void toggleCheckboxPullPrint() {
-    clickObject(CheckboxPullPrint);
+    clickObject(checkboxPullPrint);
   }
 
   public void setCheckboxPullPrint(String value) {
-    setCheckbox(CheckboxPullPrint, value);
+    setCheckbox(checkboxPullPrint, value);
   }
 
   public void toggleCheckboxPrintWorkSheets() {
-    clickObject(CheckboxPrintWorkSheets);
+    clickObject(checkboxPrintWorkSheets);
   }
 
   public void setCheckboxPrintWorksheets(String value) {
-    setCheckbox(CheckboxPrintWorkSheets, value);
+    setCheckbox(checkboxPrintWorkSheets, value);
   }
 
   public void selectDropdownPrinter(String value) {
-    selectDropdown(DropdownPrinter, value);
+    selectDropdown(dropdownPrinter, value);
   }
 
   public void toggleCheckboxSPLPrint() {
-    clickObject(CheckboxSPLPrint);
+    clickObject(checkboxSPLPrint);
   }
 
   public void setCheckboxSPLPrint(String value) {
-    setCheckbox(CheckboxSPLPrint, value);
+    setCheckbox(checkboxSPLPrint, value);
   }
 
   // BUTTONS

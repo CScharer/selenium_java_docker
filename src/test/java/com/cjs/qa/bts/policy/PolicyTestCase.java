@@ -4,7 +4,7 @@ import com.cjs.qa.core.Environment;
 import org.junit.Test;
 
 public class PolicyTestCase {
-  private void PolicyTestCase() { // Empty
+  private PolicyTestCase() { // Private constructor
   }
 
   @Test

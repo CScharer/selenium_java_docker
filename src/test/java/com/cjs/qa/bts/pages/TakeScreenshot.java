@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.Augmenter;
 
 public class TakeScreenshot {
-  public void Screenshot(String browser, WebDriver webDriver) {
+  public void screenshot(String browser, WebDriver webDriver) {
     final WebDriver augmentedDriver = new Augmenter().augment(webDriver);
     final File screenshot = ((TakesScreenshot) augmentedDriver).getScreenshotAs(OutputType.FILE);
     try {

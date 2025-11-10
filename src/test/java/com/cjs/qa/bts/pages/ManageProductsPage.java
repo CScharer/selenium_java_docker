@@ -12,10 +12,10 @@ public class ManageProductsPage extends Page {
   private final By buttonDeleteProductList = By.id("deleteButton");
   private final By buttonAddNewProductAdd = By.id("addProductBtn");
   private final By buttonAddNewProductAddProductCoveragegs = By.id("addProductCvgBtn");
-  private final By DropdownProduct = By.id("productId");
-  private final By DropdownProgram = By.id("programId");
-  private final By DropdownRatingCompany = By.id("addProductForm");
-  private final By DropdownState = By.id("stateCode");
+  private final By dropdownProduct = By.id("productId");
+  private final By dropdownProgram = By.id("programId");
+  private final By dropdownRatingCompany = By.id("addProductForm");
+  private final By dropdownState = By.id("stateCode");
   private final String pageTitle = "ManageProductsPage";
 
   private String getPageTitle() {
@@ -39,18 +39,18 @@ public class ManageProductsPage extends Page {
   }
 
   public void selectDropdownProduct(String value) {
-    selectDropdown(DropdownProduct, value);
+    selectDropdown(dropdownProduct, value);
   }
 
   public void selectDropdownProgram(String value) {
-    selectDropdown(DropdownProgram, value);
+    selectDropdown(dropdownProgram, value);
   }
 
   public void selectDropdownRatingCompany(String value) {
-    selectDropdown(DropdownRatingCompany, value);
+    selectDropdown(dropdownRatingCompany, value);
   }
 
   public void selectDropdownState(String value) {
-    selectDropdown(DropdownState, value);
+    selectDropdown(dropdownState, value);
   }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 public class RTestRun extends RTestSet {
   private String testRunName;
   private String testRunStatus;
-  private List<RTestSet> RTestSet = new ArrayList<>();
+  private List<RTestSet> rTestSet = new ArrayList<>();
 
   public RTestRun(String stepName, String stepStatus) {
     super(stepName, stepStatus);
@@ -23,7 +23,7 @@ public class RTestRun extends RTestSet {
   }
 
   public List<RTestSet> getRTestSet() {
-    return RTestSet;
+    return rTestSet;
   }
 
   public String getTestRunName() {
@@ -34,8 +34,8 @@ public class RTestRun extends RTestSet {
     return testRunStatus;
   }
 
-  public void setRTestSet(List<RTestSet> rTestSet) {
-    RTestSet = rTestSet;
+  public void setRTestSet(List<RTestSet> rTestSetList) {
+    this.rTestSet = rTestSetList;
   }
 
   public void setTestRunName(String testRunName) {

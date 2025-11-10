@@ -21,20 +21,20 @@ public class RatePage extends Page {
   private String getPageTitle() {
     return pageTitle;
   }
-  private final String NODE_PROCESSEDERRS = ".//*[@id='form1:cplProcessedResults:cplProcessedErrs:";
-  private final By labelCustomStatusMsg = By.xpath(NODE_PROCESSEDERRS + "customStatusMsg']");
-  private final By labelPrintStatus = By.xpath(NODE_PROCESSEDERRS + "processTransactionStatus']");
+  private final String nodeProcessedErrs = ".//*[@id='form1:cplProcessedResults:cplProcessedErrs:";
+  private final By labelCustomStatusMsg = By.xpath(nodeProcessedErrs + "customStatusMsg']");
+  private final By labelPrintStatus = By.xpath(nodeProcessedErrs + "processTransactionStatus']");
   private final By toggleResults =
-      By.xpath(NODE_PROCESSEDERRS + "cplProcessedErrorsTable']/div[1]/span[1]/button");
-  private final By labelPolicyTotal = By.xpath(NODE_PROCESSEDERRS + "overviewTotM']");
+      By.xpath(nodeProcessedErrs + "cplProcessedErrorsTable']/div[1]/span[1]/button");
+  private final By labelPolicyTotal = By.xpath(nodeProcessedErrs + "overviewTotM']");
   private final By labelCommercialAuto =
-      By.xpath(NODE_PROCESSEDERRS + "productsTableEx1:0:overviewTotM1']");
+      By.xpath(nodeProcessedErrs + "productsTableEx1:0:overviewTotM1']");
   private final By labelAgriculturalOutput =
-      By.xpath(NODE_PROCESSEDERRS + "productsTableEx1:1:overviewTotM1']");
+      By.xpath(nodeProcessedErrs + "productsTableEx1:1:overviewTotM1']");
   private final By labelGeneralLiability =
-      By.xpath(NODE_PROCESSEDERRS + "productsTableEx1:2:overviewTotM1']");
+      By.xpath(nodeProcessedErrs + "productsTableEx1:2:overviewTotM1']");
   private final By labelPolicywideCoverages =
-      By.xpath(NODE_PROCESSEDERRS + "productsTableEx1:3:overviewTotM1']");
+      By.xpath(nodeProcessedErrs + "productsTableEx1:3:overviewTotM1']");
   private final By buttonRateNow =
       By.xpath(".//*[@id='form1:cplProcessedResults:flashScreenRateButton']");
 

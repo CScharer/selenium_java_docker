@@ -32,9 +32,9 @@ public class WebElementTableTestSet {
   private SeleniumWebDriver seleniumWebDriver;
   private String methodName = null;
   private WebElementTable webElementTable = null;
-  private final String PATH_OUTPUT =
+  private final String pathOutput =
       Constants.PATH_FILES_DATA + this.getClass().getName() + Constants.DELIMETER_PATH;
-  private final String BOXOFFICE_MOJO_DATE =
+  private final String boxOfficeMojoDate =
       DateHelpers.getCurrentDatePlusMinusDays("YYYY-MM-dd", -2);
 
   @Before
@@ -57,7 +57,7 @@ public class WebElementTableTestSet {
   }
 
   private String getBoxOfficeMojoDate() {
-    return BOXOFFICE_MOJO_DATE;
+    return boxOfficeMojoDate;
   }
 
   private String getMethodName() {
@@ -65,7 +65,7 @@ public class WebElementTableTestSet {
   }
 
   private String getPathOutput() {
-    return PATH_OUTPUT;
+    return pathOutput;
   }
 
   private SeleniumWebDriver getSeleniumWebDriver() {

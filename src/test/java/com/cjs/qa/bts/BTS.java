@@ -4,17 +4,17 @@ import com.cjs.qa.bts.pages.AddNewAddressClientPage;
 import com.cjs.qa.bts.pages.AddNewPolicyPage;
 import com.cjs.qa.bts.pages.AddNewProductPage;
 import com.cjs.qa.bts.pages.AdminFunctionsPage;
-import com.cjs.qa.bts.pages.BI_AdvantagePage;
-import com.cjs.qa.bts.pages.BI_AgencyInformationPage;
-import com.cjs.qa.bts.pages.BI_BasicInfoPage;
-import com.cjs.qa.bts.pages.BI_BillingInformationPage;
-import com.cjs.qa.bts.pages.BI_BillingPage;
-import com.cjs.qa.bts.pages.BI_ButtonsPage;
-import com.cjs.qa.bts.pages.BI_LeftNav;
-import com.cjs.qa.bts.pages.BI_MiscellaneousInformationPage;
-import com.cjs.qa.bts.pages.BI_RightNav;
-import com.cjs.qa.bts.pages.BI_TerrorismPage;
-import com.cjs.qa.bts.pages.BI_UnderwritingPage;
+import com.cjs.qa.bts.pages.BiAdvantagePage;
+import com.cjs.qa.bts.pages.BiAgencyInformationPage;
+import com.cjs.qa.bts.pages.BiBasicInfoPage;
+import com.cjs.qa.bts.pages.BiBillingInformationPage;
+import com.cjs.qa.bts.pages.BiBillingPage;
+import com.cjs.qa.bts.pages.BiButtonsPage;
+import com.cjs.qa.bts.pages.BiLeftNav;
+import com.cjs.qa.bts.pages.BiMiscellaneousInformationPage;
+import com.cjs.qa.bts.pages.BiRightNav;
+import com.cjs.qa.bts.pages.BiTerrorismPage;
+import com.cjs.qa.bts.pages.BiUnderwritingPage;
 import com.cjs.qa.bts.pages.CPLResultsPage;
 import com.cjs.qa.bts.pages.CopyPolicyPage;
 import com.cjs.qa.bts.pages.IssuePage;
@@ -38,29 +38,29 @@ import com.cjs.qa.bts.pages.SearchRightNav;
 import com.cjs.qa.bts.pages.SidbarAdminFunctionsPage;
 import com.cjs.qa.bts.pages.SidbarReferenceMaterialsPage;
 import com.cjs.qa.bts.pages.Sidebar;
-import com.cjs.qa.bts.pages._BTSCrosswordChallengePage;
+import com.cjs.qa.bts.pages.BtsCrosswordChallengePage;
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.utilities.SoftAssert;
 import org.openqa.selenium.WebDriver;
 
 public class BTS {
   private SoftAssert softAssert;
-  private _BTSCrosswordChallengePage btsCrosswordChallengePage;
+  private BtsCrosswordChallengePage btsCrosswordChallengePage;
   private AddNewAddressClientPage addNewAddressClientPage;
   private AddNewPolicyPage addNewPolicyPage;
   private AddNewProductPage addNewProductPage;
   private AdminFunctionsPage adminFunctionsPage;
-  private BI_AdvantagePage biAdvantagePage;
-  private BI_AgencyInformationPage biAgencyInformationPage;
-  private BI_BasicInfoPage biBasicInfoPage;
-  private BI_BillingInformationPage biBillingInformationPage;
-  private BI_BillingPage biBillingPage;
-  private BI_ButtonsPage biButtonsPage;
-  private BI_LeftNav biLeftNav;
-  private BI_MiscellaneousInformationPage biMiscellaneousInformationPage;
-  private BI_RightNav biRightNav;
-  private BI_TerrorismPage biTerrorismPage;
-  private BI_UnderwritingPage biUnderwritingPage;
+  private BiAdvantagePage biAdvantagePage;
+  private BiAgencyInformationPage biAgencyInformationPage;
+  private BiBasicInfoPage biBasicInfoPage;
+  private BiBillingInformationPage biBillingInformationPage;
+  private BiBillingPage biBillingPage;
+  private BiButtonsPage biButtonsPage;
+  private BiLeftNav biLeftNav;
+  private BiMiscellaneousInformationPage biMiscellaneousInformationPage;
+  private BiRightNav biRightNav;
+  private BiTerrorismPage biTerrorismPage;
+  private BiUnderwritingPage biUnderwritingPage;
   private CopyPolicyPage copyPolicyPage;
   private CPLResultsPage cplResultsPage;
   private IssuePage issuePage;
@@ -89,7 +89,7 @@ public class BTS {
     return softAssert;
   }
 
-  public _BTSCrosswordChallengePage getBtsCrosswordChallengePage() {
+  public BtsCrosswordChallengePage getBtsCrosswordChallengePage() {
     return btsCrosswordChallengePage;
   }
 
@@ -109,47 +109,47 @@ public class BTS {
     return adminFunctionsPage;
   }
 
-  public BI_AdvantagePage getBiAdvantagePage() {
+  public BiAdvantagePage getBiAdvantagePage() {
     return biAdvantagePage;
   }
 
-  public BI_AgencyInformationPage getBiAgencyInformationPage() {
+  public BiAgencyInformationPage getBiAgencyInformationPage() {
     return biAgencyInformationPage;
   }
 
-  public BI_BasicInfoPage getBiBasicInfoPage() {
+  public BiBasicInfoPage getBiBasicInfoPage() {
     return biBasicInfoPage;
   }
 
-  public BI_BillingInformationPage getBiBillingInformationPage() {
+  public BiBillingInformationPage getBiBillingInformationPage() {
     return biBillingInformationPage;
   }
 
-  public BI_BillingPage getBiBillingPage() {
+  public BiBillingPage getBiBillingPage() {
     return biBillingPage;
   }
 
-  public BI_ButtonsPage getBiButtonsPage() {
+  public BiButtonsPage getBiButtonsPage() {
     return biButtonsPage;
   }
 
-  public BI_LeftNav getBiLeftNav() {
+  public BiLeftNav getBiLeftNav() {
     return biLeftNav;
   }
 
-  public BI_MiscellaneousInformationPage getBiMiscellaneousInformationPage() {
+  public BiMiscellaneousInformationPage getBiMiscellaneousInformationPage() {
     return biMiscellaneousInformationPage;
   }
 
-  public BI_RightNav getBiRightNav() {
+  public BiRightNav getBiRightNav() {
     return biRightNav;
   }
 
-  public BI_TerrorismPage getBiTerrorismPage() {
+  public BiTerrorismPage getBiTerrorismPage() {
     return biTerrorismPage;
   }
 
-  public BI_UnderwritingPage getBiUnderwritingPage() {
+  public BiUnderwritingPage getBiUnderwritingPage() {
     return biUnderwritingPage;
   }
 
@@ -247,22 +247,22 @@ public class BTS {
 
   public BTS(WebDriver webDriver) {
     softAssert = new SoftAssert();
-    btsCrosswordChallengePage = new _BTSCrosswordChallengePage(webDriver);
+    btsCrosswordChallengePage = new BtsCrosswordChallengePage(webDriver);
     addNewAddressClientPage = new AddNewAddressClientPage(webDriver);
     addNewPolicyPage = new AddNewPolicyPage(webDriver);
     addNewProductPage = new AddNewProductPage(webDriver);
     adminFunctionsPage = new AdminFunctionsPage(webDriver);
-    biAdvantagePage = new BI_AdvantagePage(webDriver);
-    biAgencyInformationPage = new BI_AgencyInformationPage(webDriver);
-    biBasicInfoPage = new BI_BasicInfoPage(webDriver);
-    biBillingInformationPage = new BI_BillingInformationPage(webDriver);
-    biBillingPage = new BI_BillingPage(webDriver);
-    biButtonsPage = new BI_ButtonsPage(webDriver);
-    biLeftNav = new BI_LeftNav(webDriver);
-    biMiscellaneousInformationPage = new BI_MiscellaneousInformationPage(webDriver);
-    biRightNav = new BI_RightNav(webDriver);
-    biTerrorismPage = new BI_TerrorismPage(webDriver);
-    biUnderwritingPage = new BI_UnderwritingPage(webDriver);
+    biAdvantagePage = new BiAdvantagePage(webDriver);
+    biAgencyInformationPage = new BiAgencyInformationPage(webDriver);
+    biBasicInfoPage = new BiBasicInfoPage(webDriver);
+    biBillingInformationPage = new BiBillingInformationPage(webDriver);
+    biBillingPage = new BiBillingPage(webDriver);
+    biButtonsPage = new BiButtonsPage(webDriver);
+    biLeftNav = new BiLeftNav(webDriver);
+    biMiscellaneousInformationPage = new BiMiscellaneousInformationPage(webDriver);
+    biRightNav = new BiRightNav(webDriver);
+    biTerrorismPage = new BiTerrorismPage(webDriver);
+    biUnderwritingPage = new BiUnderwritingPage(webDriver);
     copyPolicyPage = new CopyPolicyPage(webDriver);
     cplResultsPage = new CPLResultsPage(webDriver);
     issuePage = new IssuePage(webDriver);

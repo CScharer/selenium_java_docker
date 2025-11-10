@@ -14,10 +14,10 @@ public class Item {
   }
 
   @XmlElement(name = "EventID")
-  private String EventID;
+  private String eventId;
 
   public String getEventID() {
-    return EventID;
+    return eventId;
   }
 
   @XmlElement(name = "EventDate")

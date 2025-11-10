@@ -15,7 +15,7 @@ public class SearchPage extends Page {
 
   private final By editPolicyNumber = By.id("policyNumber");
   private final By editSequenceNumber = By.id("sequenceNumber");
-  private final By CheckboxIncludeAllPolicies = By.id("includeAllPolicies");
+  private final By checkboxIncludeAllPolicies = By.id("includeAllPolicies");
   private final By editFirstName = By.id("firstName");
   private final By editLastName = By.id("lastName");
   private final By editBusinessName = By.id("businessName");
@@ -32,7 +32,7 @@ public class SearchPage extends Page {
   private final By imagePrimaryLogo = By.xpath("//div[@class='primary-logo']");
   private final By buttonSearch = By.id("searchButton");
   private final By buttonClear = By.id("clearButton");
-  private final By DropdownLogin =
+  private final By dropdownLogin =
       By.xpath("//button[contains(@class,'btn-primary')][@data-toggle='Dropdown']");
   private final String pageTitle = "SearchPage";
 
@@ -73,7 +73,7 @@ public class SearchPage extends Page {
   }
 
   public void toggleCheckboxIncludeAllPolicies() {
-    clickObject(CheckboxIncludeAllPolicies);
+    clickObject(checkboxIncludeAllPolicies);
   }
 
   public void clickButtonAddClientAndPolicy() {
@@ -105,10 +105,10 @@ public class SearchPage extends Page {
   }
 
   public void clickDropdownLogin() {
-    clickObject(DropdownLogin);
+    clickObject(dropdownLogin);
   }
 
-  public void SelectSearchResults(String value) {
+  public void selectSearchResults(String value) {
     clickObject(By.partialLinkText(value));
   }
 

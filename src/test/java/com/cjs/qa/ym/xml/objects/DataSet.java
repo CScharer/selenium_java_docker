@@ -5,101 +5,101 @@ import com.cjs.qa.ym.xml.objects.dataset.*;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-// import com.cjs.qa.ym.xml.objects.dataset.strEmail;
+// import com.cjs.qa.ym.xml.objects.dataset.StrEmail;
 
 @XmlRootElement(name = "DataSet")
 public class DataSet {
   @XmlElement(name = "strEmail")
-  private strEmail email;
+  private StrEmail email;
 
-  public strEmail getEmail() {
+  public StrEmail getEmail() {
     return email;
   }
 
   @XmlElement(name = "strAddress1")
-  private strAddress1 address1;
+  private StrAddress1 address1;
 
-  public strAddress1 getAddress1() {
+  public StrAddress1 getAddress1() {
     return address1;
   }
 
   @XmlElement(name = "strAddress2")
-  private strAddress2 address2;
+  private StrAddress2 address2;
 
-  public strAddress2 getAddress2() {
+  public StrAddress2 getAddress2() {
     return address2;
   }
 
   @XmlElement(name = "strCity")
-  private strCity city;
+  private StrCity city;
 
-  public strCity getCity() {
+  public StrCity getCity() {
     return city;
   }
 
   @XmlElement(name = "strLocation")
-  private strLocation location;
+  private StrLocation location;
 
-  public strLocation getLocation() {
+  public StrLocation getLocation() {
     return location;
   }
 
   @XmlElement(name = "strPostalCode")
-  private strPostalCode postalCode;
+  private StrPostalCode postalCode;
 
-  public strPostalCode getPostalCode() {
+  public StrPostalCode getPostalCode() {
     return postalCode;
   }
 
   @XmlElement(name = "strCountry")
-  private strCountry country;
+  private StrCountry country;
 
-  public strCountry getCountry() {
+  public StrCountry getCountry() {
     return country;
   }
 
   @XmlElement(name = "strPhone")
-  private strPhone phone;
+  private StrPhone phone;
 
-  public strPhone getPhone() {
+  public StrPhone getPhone() {
     return phone;
   }
 
   @XmlElement(name = "strWorkTitle")
-  private strWorkTitle workTitle;
+  private StrWorkTitle workTitle;
 
-  public strWorkTitle getWorkTitle() {
+  public StrWorkTitle getWorkTitle() {
     return workTitle;
   }
 
   @XmlElement(name = "strEmployerName")
-  private strEmployerName employerName;
+  private StrEmployerName employerName;
 
-  public strEmployerName getEmployerName() {
+  public StrEmployerName getEmployerName() {
     return employerName;
   }
 
   @XmlElement(name = "Custom_JobLevel")
-  private Custom_JobLevel custom_JobLevel;
+  private CustomJobLevel customJobLevel;
 
-  public Custom_JobLevel getCustom_JobLevel() {
-    return custom_JobLevel;
+  public CustomJobLevel getCustomJobLevel() {
+    return customJobLevel;
   }
 
   @XmlElement(name = "Custom_JobFunction")
-  private Custom_JobFunction custom_JobFunction;
+  private CustomJobFunction customJobFunction;
 
-  public Custom_JobFunction getCustom_JobFunction() {
-    return custom_JobFunction;
+  public CustomJobFunction getCustomJobFunction() {
+    return customJobFunction;
   }
 
   @XmlElement(name = "Custom_MayHPEemailyouofferssupportdatesandeventnews")
-  private Custom_MayHPEemailyouofferssupportdatesandeventnews
-      custom_MayHPEemailyouofferssupportdatesandeventnews;
+  private CustomMayHpeEmailYouOffersSupportDatesAndEventNews
+      customMayHpeEmailYouOffersSupportDatesAndEventNews;
 
-  public Custom_MayHPEemailyouofferssupportdatesandeventnews
-      getCustom_MayHPEemailyouofferssupportdatesandeventnews() {
-    return custom_MayHPEemailyouofferssupportdatesandeventnews;
+  public CustomMayHpeEmailYouOffersSupportDatesAndEventNews
+      getCustomMayHpeEmailYouOffersSupportDatesAndEventNews() {
+    return customMayHpeEmailYouOffersSupportDatesAndEventNews;
   }
 
   @Override
@@ -115,11 +115,11 @@ public class DataSet {
     stringBuilder.append("Phone:" + getPhone() + Constants.NEWLINE);
     stringBuilder.append("Work Title:" + getWorkTitle() + Constants.NEWLINE);
     stringBuilder.append("Employer Name:" + getEmployerName() + Constants.NEWLINE);
-    stringBuilder.append("Custom_Job Level:" + getCustom_JobLevel() + Constants.NEWLINE);
-    stringBuilder.append("Custom_Job Function:" + getCustom_JobFunction() + Constants.NEWLINE);
+    stringBuilder.append("Custom_Job Level:" + getCustomJobLevel() + Constants.NEWLINE);
+    stringBuilder.append("Custom_Job Function:" + getCustomJobFunction() + Constants.NEWLINE);
     stringBuilder.append(
         "Custom_May HPE emailyouofferssupportdatesandeventnews:"
-            + getCustom_MayHPEemailyouofferssupportdatesandeventnews()
+            + getCustomMayHpeEmailYouOffersSupportDatesAndEventNews()
             + Constants.NEWLINE);
     return stringBuilder.toString();
   }

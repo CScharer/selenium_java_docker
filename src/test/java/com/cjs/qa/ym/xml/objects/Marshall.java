@@ -26,8 +26,8 @@ public class Marshall {
   @Test
   public void testEventsAllSearch() throws JAXBException {
     String filePathName = "C:\\Workspace\\Data\\Vivit\\Data\\Events\\101.xml";
-    YourMembership_Response yourMembershipResponse =
-        yourMembership_ResponseUnmarshall(filePathName);
+    YourMembershipResponse yourMembershipResponse =
+        yourMembershipResponseUnmarshall(filePathName);
     Environment.sysOut(yourMembershipResponse.toString());
     Environment.sysOut(yourMembershipResponse.getEventsAllSearch().toString());
     Environment.sysOut(yourMembershipResponse.getEventsAllSearch().getResults().toString());
@@ -39,27 +39,27 @@ public class Marshall {
       Environment.sysOut("Item Index (" + eventsIndex + ")");
       Environment.sysOut(item.toString());
     }
-    String xml = yourMembership_ResponseMarshall(yourMembershipResponse, filePathNameNewXML);
+    String xml = yourMembershipResponseMarshall(yourMembershipResponse, filePathNameNewXML);
   }
 
   @Test
   public void testEventsEventsGet() throws JAXBException {
     String filePathName = "C:\\Workspace\\Data\\Vivit\\Data\\Events\\EventInformation\\1209865.xml";
-    YourMembership_Response yourMembershipResponse =
-        yourMembership_ResponseUnmarshall(filePathName);
+    YourMembershipResponse yourMembershipResponse =
+        yourMembershipResponseUnmarshall(filePathName);
     Environment.sysOut(yourMembershipResponse.toString());
     Environment.sysOut(yourMembershipResponse.getEventsEventGet().toString());
-    String xml = yourMembership_ResponseMarshall(yourMembershipResponse, filePathNameNewXML);
+    String xml = yourMembershipResponseMarshall(yourMembershipResponse, filePathNameNewXML);
   }
 
   @Test
   public void testSaEventsEventRegistrationGet() throws JAXBException {
     String filePathName =
         "C:\\Workspace\\Data\\Vivit\\Data\\Events\\Registration\\49170B25-A49F-46F7-98CB-3DA7042D4BB1.xml";
-    YourMembership_Response yourMembershipResponse =
-        yourMembership_ResponseUnmarshall(filePathName);
+    YourMembershipResponse yourMembershipResponse =
+        yourMembershipResponseUnmarshall(filePathName);
     Environment.sysOut(yourMembershipResponse.getSaEventsEventRegistrationGet().toString());
-    String xml = yourMembership_ResponseMarshall(yourMembershipResponse, filePathNameNewXML);
+    String xml = yourMembershipResponseMarshall(yourMembershipResponse, filePathNameNewXML);
     Environment.sysOut("TESTING XML CREATION" + Constants.NEWLINE + xml);
     System.out.println(
         "Getting the Phone Number:"
@@ -70,20 +70,20 @@ public class Marshall {
                 .getValue());
   }
 
-  public YourMembership_Response yourMembership_ResponseUnmarshall(String filePathName)
+  public YourMembershipResponse yourMembershipResponseUnmarshall(String filePathName)
       throws JAXBException {
     createFixedXMLFile(filePathName);
-    JAXBContext jaxbContext = JAXBContext.newInstance(YourMembership_Response.class);
+    JAXBContext jaxbContext = JAXBContext.newInstance(YourMembershipResponse.class);
     Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
     File file = new File(filePathNameXML);
-    YourMembership_Response yourMembershipResponse =
-        (YourMembership_Response) unmarshaller.unmarshal(file);
+    YourMembershipResponse yourMembershipResponse =
+        (YourMembershipResponse) unmarshaller.unmarshal(file);
     return yourMembershipResponse;
   }
 
-  public String yourMembership_ResponseMarshall(
-      YourMembership_Response yourMembershipResponse, String filePathName) throws JAXBException {
-    JAXBContext jaxbContext = JAXBContext.newInstance(YourMembership_Response.class);
+  public String yourMembershipResponseMarshall(
+      YourMembershipResponse yourMembershipResponse, String filePathName) throws JAXBException {
+    JAXBContext jaxbContext = JAXBContext.newInstance(YourMembershipResponse.class);
     Marshaller marshaller = jaxbContext.createMarshaller();
     marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
     String xml = null;

@@ -1062,7 +1062,7 @@ public class Scenarios {
   }
 
   @Test
-  public void vivit_Test() throws Throwable {
+  public void vivitTest() throws Throwable {
     // VivitData.createReportHTMLTestInformation(getSeleniumWebDriver());
     getSeleniumWebDriver().killBrowser();
     // YMData.push();
@@ -1073,7 +1073,7 @@ public class Scenarios {
   }
 
   @Test
-  public void vivit_CreateYMAPIMapping() throws Throwable {
+  public void vivitCreateYmapiMapping() throws Throwable {
     Assert.fail("This has already created the tables.");
     YMAPIMethods.createMapping(getSeleniumWebDriver().getWebDriver());
   }

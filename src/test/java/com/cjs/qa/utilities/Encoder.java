@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class Encoder {
-  private final String CHARACTERS26 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  private final String CHARACTERS52 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  private final String characters26 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  private final String characters52 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   private String characterSet;
 
   public Encoder(String base) {
@@ -21,10 +21,10 @@ public class Encoder {
   private void setCharacterSet(String base) {
     switch (base) {
       case "52":
-        setCharacterSet(CHARACTERS52);
+        setCharacterSet(characters52);
         break;
       default:
-        setCharacterSet(CHARACTERS26);
+        setCharacterSet(characters26);
         break;
     }
   }

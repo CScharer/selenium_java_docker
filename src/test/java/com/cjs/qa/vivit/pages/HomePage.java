@@ -30,7 +30,7 @@ public class HomePage extends Page {
     clickObject(buttonSignIn);
   }
 
-  public void CheckboxRememberMeSet(String value) {
+  public void checkboxRememberMeSet(String value) {
     setCheckbox(checkboxRememberMe, value);
   }
 
@@ -119,7 +119,7 @@ public class HomePage extends Page {
         linkSignInClick();
         editEmailSet(eMail);
         editPasswordSet(password);
-        CheckboxRememberMeSet(rememberMe);
+        checkboxRememberMeSet(rememberMe);
         buttonSignInClick();
         success = true;
       } catch (Exception e) {

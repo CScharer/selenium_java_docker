@@ -9,7 +9,7 @@ public class AdminFunctionsPage extends Page {
     super(webDriver);
   }
 
-  private final By DropdownTestStatus = By.id("modeBI");
+  private final By dropdownTestStatus = By.id("modeBI");
   private final By linkExitPolicy = By.id("requestLinkSearch1");
   private final By linkScheduledProcesses = By.id("requestLinkScheduleProcess");
   private final By linkWebServices = By.id("requestLinkForWebServices");
@@ -51,6 +51,6 @@ public class AdminFunctionsPage extends Page {
   }
 
   public void selectDropdownTestStatus(String value) {
-    selectDropdown(DropdownTestStatus, value);
+    selectDropdown(dropdownTestStatus, value);
   }
 }

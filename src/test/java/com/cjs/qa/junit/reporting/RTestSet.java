@@ -6,7 +6,7 @@ import java.util.List;
 public class RTestSet extends RScenario {
   private String testSetName;
   private String testSetStatus;
-  private List<RScenario> RScenario = new ArrayList<>();
+  private List<RScenario> rScenario = new ArrayList<>();
 
   public RTestSet(String stepName, String stepStatus) {
     super(stepName, stepStatus);
@@ -19,7 +19,7 @@ public class RTestSet extends RScenario {
   }
 
   public List<RScenario> getRScenario() {
-    return RScenario;
+    return rScenario;
   }
 
   public RScenario cRScenario() {
@@ -34,8 +34,8 @@ public class RTestSet extends RScenario {
     return testSetStatus;
   }
 
-  public void setRScenario(List<RScenario> rScenario) {
-    RScenario = rScenario;
+  public void setRScenario(List<RScenario> rScenarioList) {
+    this.rScenario = rScenarioList;
   }
 
   public void setTestSetName(String testSetName) {

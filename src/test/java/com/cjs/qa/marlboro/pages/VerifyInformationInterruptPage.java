@@ -47,11 +47,11 @@ public class VerifyInformationInterruptPage extends Page {
     return urlVerifyInformation;
   }
 
-  public void CheckboxCigarettesSet(String value) {
+  public void checkboxCigarettesSet(String value) {
     setCheckbox(getCheckboxCigarettes(), value);
   }
 
-  public void DropdownRegularBrandSelect(String value) {
+  public void dropdownRegularBrandSelect(String value) {
     selectDropdown(getDropdownRegularBrand(), value);
   }
 
@@ -64,7 +64,7 @@ public class VerifyInformationInterruptPage extends Page {
     clickObject(optionRegularBrand);
   }
 
-  public void DropdownRegularBrandNonMentholSelect(String value) {
+  public void dropdownRegularBrandNonMentholSelect(String value) {
     selectDropdown(getDropdownRegularBrandNonMenthol(), value);
   }
 
@@ -72,14 +72,14 @@ public class VerifyInformationInterruptPage extends Page {
     clickObject(getButtonNext());
   }
 
-  public void PopulatePage() {
+  public void populatePage() {
     if (!getWebDriver().getCurrentUrl().toLowerCase().equals(getUrlVerifyInformation().toLowerCase())) {
       return;
     }
-    // CheckboxCigarettesSet("checked");
-    DropdownRegularBrandSelect("Marlboro");
+    // checkboxCigarettesSet("checked");
+    dropdownRegularBrandSelect("Marlboro");
     optionRegularBrandSelect("Non-Menthol");
-    DropdownRegularBrandNonMentholSelect("Marlboro Gold Pack");
+    dropdownRegularBrandNonMentholSelect("Marlboro Gold Pack");
     buttonNextClick();
   }
 }

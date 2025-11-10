@@ -9,12 +9,12 @@ public class IssuePageLeftNav extends Page {
     super(webDriver);
   }
 
-  // private final String NODE_PROCESSEDERRS =
+  // private final String nodeProcessedErrs =
   // ".//*[@id='form1:viewNavigationMenu:navigationMenuLevel1:"
   private final By linkPremiumSummary = By.linkText("Premium Summary");
   private final By linkPolicyActivity = By.linkText("Policy Activity");
 
-  // .xpath(NODE_PROCESSEDERRS +
+  // .xpath(nodeProcessedErrs +
   // "11:navigationMenuItem:menuLinkSubmittable']/span");
   public void clickLinkPremiumSummary() {
     while (!(isDisplayed(linkPremiumSummary))) { }

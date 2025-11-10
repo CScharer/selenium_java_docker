@@ -18,12 +18,12 @@ public class AddNewAddressClientPage extends Page {
   }
 
   // DECLARATIONS
-  private final By DropdownType = By.id("form1:availableList:clientBusinessTypeOneMenu");
-  private final By DropdownOwner = By.id("form1:availableList:ownerTypeMenu");
+  private final By dropdownType = By.id("form1:availableList:clientBusinessTypeOneMenu");
+  private final By dropdownOwner = By.id("form1:availableList:ownerTypeMenu");
   private final By editName1 = By.id("form1:availableList:businessNameAddCli");
-  private final By DropdownName1Type = By.id("form1:availableList:nameType1");
+  private final By dropdownName1Type = By.id("form1:availableList:nameType1");
   private final By editName2 = By.id("form1:availableList:businessName2AddCli");
-  private final By DropdownName2Type = By.id("form1:availableList:nameType2");
+  private final By dropdownName2Type = By.id("form1:availableList:nameType2");
   private final By optionPrimary = By.id("form1:availableList:radio1");
   private final By editFirstName = By.id("form1:availableList:firstNameAddCli");
   private final By editLastName = By.id("form1:availableList:lastNameAddCli");
@@ -32,8 +32,8 @@ public class AddNewAddressClientPage extends Page {
   private final By editAddrLine2 = By.id("form1:availableList:addressPanelId:addrLine2Id");
   private final By editAddrLine3 = By.id("form1:availableList:addressPanelId:addrLine3Id");
   private final By editAddrLine4 = By.id("form1:availableList:addressPanelId:addrLine4Id");
-  private final By DropdownCountry = By.id("form1:availableList:addressPanelId:countryId");
-  private final By DropdownState = By.id("form1:availableList:addressPanelId:stateId");
+  private final By dropdownCountry = By.id("form1:availableList:addressPanelId:countryId");
+  private final By dropdownState = By.id("form1:availableList:addressPanelId:stateId");
   private final By editCity = By.id("form1:availableList:addressPanelId:cityDisplay");
   private final By editCounty = By.id("form1:availableList:addressPanelId:countyDisplay");
   private final By editPostalCode = By.id("form1:availableList:addressPanelId:postalCodeId");
@@ -55,11 +55,11 @@ public class AddNewAddressClientPage extends Page {
 
   // METHODS GET
   public String getDropdownType() {
-    return getDropdown(DropdownType);
+    return getDropdown(dropdownType);
   }
 
   public String getDropdownOwner() {
-    return getDropdown(DropdownOwner);
+    return getDropdown(dropdownOwner);
   }
 
   public String getEditName1() {
@@ -67,7 +67,7 @@ public class AddNewAddressClientPage extends Page {
   }
 
   public String getDropdownName1Type() {
-    return getDropdown(DropdownName1Type);
+    return getDropdown(dropdownName1Type);
   }
 
   public String getEditName2() {
@@ -75,7 +75,7 @@ public class AddNewAddressClientPage extends Page {
   }
 
   public String getDropdownName2Type() {
-    return getDropdown(DropdownName2Type);
+    return getDropdown(dropdownName2Type);
   }
 
   public String getOptionPrimary() {
@@ -111,11 +111,11 @@ public class AddNewAddressClientPage extends Page {
   }
 
   public String getDropdownCountry() {
-    return getDropdown(DropdownCountry);
+    return getDropdown(dropdownCountry);
   }
 
   public String getDropdownState() {
-    return getDropdown(DropdownState);
+    return getDropdown(dropdownState);
   }
 
   public String getEditCity() {
@@ -132,11 +132,11 @@ public class AddNewAddressClientPage extends Page {
 
   // METHODS SET
   public void selectDropdownType(String value) {
-    selectDropdown(DropdownType, value);
+    selectDropdown(dropdownType, value);
   }
 
   public void selectDropdownOwner(String value) {
-    selectDropdown(DropdownOwner, value);
+    selectDropdown(dropdownOwner, value);
   }
 
   public void setEditName1(String value) {
@@ -144,7 +144,7 @@ public class AddNewAddressClientPage extends Page {
   }
 
   public void selectDropdownName1Type(String value) {
-    selectDropdown(DropdownName1Type, value);
+    selectDropdown(dropdownName1Type, value);
   }
 
   public void setEditName2(String value) {
@@ -152,7 +152,7 @@ public class AddNewAddressClientPage extends Page {
   }
 
   public void selectDropdownName2Type(String value) {
-    selectDropdown(DropdownName2Type, value);
+    selectDropdown(dropdownName2Type, value);
   }
 
   public void selectOptionPrimary(String value) {
@@ -188,11 +188,11 @@ public class AddNewAddressClientPage extends Page {
   }
 
   public void selectDropdownCountry(String value) {
-    selectDropdown(DropdownCountry, value);
+    selectDropdown(dropdownCountry, value);
   }
 
   public void selectDropdownState(String value) {
-    selectDropdown(DropdownState, value);
+    selectDropdown(dropdownState, value);
   }
 
   public void setEditCity(String value) {

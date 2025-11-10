@@ -10,14 +10,14 @@ public class IssuePage extends Page {
   }
 
   // DECLERATIONS
-  private final String NODE_Form1PrintPolicy = "form1:printPolicyId:";
-  private final String NODE_Form1ProcessedResults = "form1:cplProcessedResults:";
-  private final By CheckboxPullPrint = By.id(NODE_Form1PrintPolicy + "pullPrint");
-  private final By CheckboxPrintWorksheets = By.id(NODE_Form1PrintPolicy + "printWorksheet");
-  private final By DropdownPrinter = By.id(NODE_Form1PrintPolicy + "printer");
+  private final String nodeForm1PrintPolicy = "form1:printPolicyId:";
+  private final String nodeForm1ProcessedResults = "form1:cplProcessedResults:";
+  private final By checkboxPullPrint = By.id(nodeForm1PrintPolicy + "pullPrint");
+  private final By checkboxPrintWorksheets = By.id(nodeForm1PrintPolicy + "printWorksheet");
+  private final By dropdownPrinter = By.id(nodeForm1PrintPolicy + "printer");
   private final By buttonIssueNow = By.xpath(".//input[@value='Issue Now']");
-  // id(NODE_Form1ProcessedResults + "flashScreenRateButton");
-  private final By buttonIssueLater = By.id(NODE_Form1ProcessedResults + "buttonLater");
+  // id(nodeForm1ProcessedResults + "flashScreenRateButton");
+  private final By buttonIssueLater = By.id(nodeForm1ProcessedResults + "buttonLater");
   private final String pageTitle = "IssuePage";
 
   private String getPageTitle() {
@@ -26,15 +26,15 @@ public class IssuePage extends Page {
 
   // METHODS SET
   public void toggleCheckboxPullPrint() {
-    clickObject(CheckboxPullPrint);
+    clickObject(checkboxPullPrint);
   }
 
   public void toggleCheckboxPrintWorksheets() {
-    clickObject(CheckboxPrintWorksheets);
+    clickObject(checkboxPrintWorksheets);
   }
 
   public String getDropdownPrinter() {
-    return getDropdown(DropdownPrinter);
+    return getDropdown(dropdownPrinter);
   }
 
   public void clickButtonIssueNow() {
