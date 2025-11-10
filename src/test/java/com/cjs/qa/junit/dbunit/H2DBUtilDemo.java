@@ -47,13 +47,13 @@ public class H2DBUtilDemo extends BaseDBUnitTestForJPADao {
       orderEntityTable.addRow(currentOrderRow);
     }
     dataSet.addTable(orderEntityTable);
-    DatabaseOperation.INSERT.execute(iDatabaseConnection, dataSet);
+    DatabaseOperation.INSERT.execute(getiDatabaseConnection(), dataSet);
   }
 
   @After
   public void testTeardown() throws Exception {
     Environment.sysOut("TearDown-Test Method:[" + getTestName() + "]");
-    DatabaseOperation.DELETE.execute(iDatabaseConnection, dataSet);
+    DatabaseOperation.DELETE.execute(getiDatabaseConnection(), dataSet);
   }
 
   @AfterClass

@@ -22,10 +22,26 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 
 public class BaseDBUnitTestForJPADao {
-  protected static EntityManagerFactory entityManagerFactory = null;
-  protected static IDatabaseConnection iDatabaseConnection = null;
+  private static EntityManagerFactory entityManagerFactory = null;
+  private static IDatabaseConnection iDatabaseConnection = null;
 
-  protected EntityManager entityManager = null;
+  private EntityManager entityManager = null;
+
+  protected static EntityManagerFactory getEntityManagerFactory() {
+    return entityManagerFactory;
+  }
+
+  protected static IDatabaseConnection getiDatabaseConnection() {
+    return iDatabaseConnection;
+  }
+
+  protected EntityManager getEntityManager() {
+    return entityManager;
+  }
+
+  protected void setEntityManager(EntityManager entityManager) {
+    this.entityManager = entityManager;
+  }
 
   @BeforeClass
   public static void setupTestClass() throws Exception {
@@ -63,16 +79,16 @@ public class BaseDBUnitTestForJPADao {
 
   @Before
   public void baseSetup() throws Exception {
-    entityManager = entityManagerFactory.createEntityManager();
+    setEntityManager(entityManagerFactory.createEntityManager());
   }
 
   @After
   public void baseTeardown() throws Exception {
-    if (entityManager != null) {
-      if (entityManager.isOpen()) {
-        entityManager.close();
+    if (getEntityManager() != null) {
+      if (getEntityManager().isOpen()) {
+        getEntityManager().close();
       }
-      entityManager = null;
+      setEntityManager(null);
     }
   }
 }

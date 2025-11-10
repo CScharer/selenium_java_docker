@@ -34,14 +34,66 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.CDATASection;
 
 public class WebService {
-  SOAPConnectionFactory soapConnectionFactory = null;
-  SOAPConnection soapConnection = null;
-  String url = null;
-  public static String xml = null;
-  public static String requestName = null;
-  public static String responseName = null;
-  public static String fileRequest = Constants.PATH_FILES_XML + "request" + IExtension.XML;
-  public static String fileResponse = Constants.PATH_FILES_XML + "response" + IExtension.XML;
+  private SOAPConnectionFactory soapConnectionFactory = null;
+  private SOAPConnection soapConnection = null;
+  private String url = null;
+  private static String xml = null;
+  private static String requestName = null;
+  private static String responseName = null;
+  private static String fileRequest = Constants.PATH_FILES_XML + "request" + IExtension.XML;
+  private static String fileResponse = Constants.PATH_FILES_XML + "response" + IExtension.XML;
+
+  private SOAPConnectionFactory getSoapConnectionFactory() {
+    return soapConnectionFactory;
+  }
+
+  private SOAPConnection getSoapConnection() {
+    return soapConnection;
+  }
+
+  private String getUrl() {
+    return url;
+  }
+
+  private static String getXml() {
+    return xml;
+  }
+
+  private static void setXml(String value) {
+    xml = value;
+  }
+
+  private static String getRequestName() {
+    return requestName;
+  }
+
+  private static void setRequestName(String value) {
+    requestName = value;
+  }
+
+  private static String getResponseName() {
+    return responseName;
+  }
+
+  private static void setResponseName(String value) {
+    responseName = value;
+  }
+
+  private static String getFileRequest() {
+    return fileRequest;
+  }
+
+  private static void setFileRequest(String value) {
+    fileRequest = value;
+  }
+
+  private static String getFileResponse() {
+    return fileResponse;
+  }
+
+  private static void setFileResponse(String value) {
+    fileResponse = value;
+  }
 
   public WebService() {
     try {
@@ -139,10 +191,10 @@ public class WebService {
 
   public static String getAPIXMLRequest(Policy policy, SOAPMessage soapMessage) {
     try {
-      xml = getSOAPMessageValue(soapMessage, false);
-      fileRequest = Constants.PATH_FILES_XML + policy.policy + "request" + IExtension.XML;
+      setXml(getSOAPMessageValue(soapMessage, false));
+      setFileRequest(Constants.PATH_FILES_XML + policy.policy + "request" + IExtension.XML);
       final String fileTemp =
-          fileRequest.replace(
+          getFileRequest().replace(
               "request",
               policy.dateTimeStamp
                   + "_"
@@ -153,12 +205,12 @@ public class WebService {
                   + policy.policy
                   + "_"
                   + "request");
-      // FSO.fileWrite(fileRequest, xml, false);
-      FSO.fileWrite(fileTemp, xml, false);
-      // requestName = XML.getBodyFirstChildName(fileRequest);
-      // requestName = XML.getBodyFirstChildName(fileTemp);
+      // FSO.fileWrite(getFileRequest(), getXml(), false);
+      FSO.fileWrite(fileTemp, getXml(), false);
+      // setRequestName(XML.getBodyFirstChildName(getFileRequest()));
+      // setRequestName(XML.getBodyFirstChildName(fileTemp));
       final String fileOut =
-          fileRequest.replace(
+          getFileRequest().replace(
               "request",
               policy.dateTimeStamp
                   + "_"
@@ -168,13 +220,13 @@ public class WebService {
                   + "_"
                   + policy.policy
                   + "_"
-                  + requestName
+                  + getRequestName()
                   + "_request");
-      FSO.fileWrite(fileOut, xml, false);
+      FSO.fileWrite(fileOut, getXml(), false);
     } catch (final Exception e) {
       Environment.sysOut(e);
     }
-    return xml;
+    return getXml();
   }
 
   public static Map<String, String> getAPIXMLResponse(String url, String apiRequest) {
@@ -193,17 +245,17 @@ public class WebService {
 
   public static String getAPIXMLResponse(Policy policy, String url, SOAPMessage soapMessage) {
     getAPIXMLRequest(policy, soapMessage);
-    xml = null;
+    setXml(null);
     try {
       writeSOAPMessageToOutputStream(soapMessage);
       final SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
       final SOAPConnection soapConnection = soapConnectionFactory.createConnection();
       final SOAPMessage soapMessageResponse = soapConnection.call(soapMessage, url);
       // Process the SOAP Response
-      xml = getSOAPMessageValue(soapMessageResponse, false);
-      fileResponse = Constants.PATH_FILES_XML + policy.policy + "response" + IExtension.XML;
+      setXml(getSOAPMessageValue(soapMessageResponse, false));
+      setFileResponse(Constants.PATH_FILES_XML + policy.policy + "response" + IExtension.XML);
       final String fileTemp =
-          fileResponse.replace(
+          getFileResponse().replace(
               "response",
               policy.dateTimeStamp
                   + "_"
@@ -214,12 +266,12 @@ public class WebService {
                   + policy.policy
                   + "_"
                   + "response");
-      // FSO.fileWrite(fileResponse, xml, false);
-      FSO.fileWrite(fileTemp, xml, false);
-      // responseName = XML.getBodyFirstChildName(fileResponse);
-      // responseName = XML.getBodyFirstChildName(fileTemp);
+      // FSO.fileWrite(getFileResponse(), getXml(), false);
+      FSO.fileWrite(fileTemp, getXml(), false);
+      // setResponseName(XML.getBodyFirstChildName(getFileResponse()));
+      // setResponseName(XML.getBodyFirstChildName(fileTemp));
       final String fileOut =
-          fileResponse.replace(
+          getFileResponse().replace(
               "response",
               policy.dateTimeStamp
                   + "_"
@@ -229,13 +281,13 @@ public class WebService {
                   + "_"
                   + policy.policy
                   + "_"
-                  + responseName
+                  + getResponseName()
                   + "_response");
-      FSO.fileWrite(fileOut, xml, false);
+      FSO.fileWrite(fileOut, getXml(), false);
     } catch (final Exception e) {
       Environment.sysOut(e);
     }
-    return xml;
+    return getXml();
   }
 
   public static Map<String, String> getAPIXMLResponse(
@@ -432,7 +484,7 @@ public class WebService {
   }
 
   public static String getSOAPMessageValue(SOAPMessage soapMessage, boolean maskPassword) {
-    xml = null;
+    setXml(null);
     try {
       final TransformerFactory transformerFactory = TransformerFactory.newInstance();
       final Transformer transformer = transformerFactory.newTransformer();
@@ -446,28 +498,28 @@ public class WebService {
       final StreamResult streamResult = new StreamResult(stringWriter);
       transformer.transform(source, streamResult);
       final StringBuffer stringBuffer = stringWriter.getBuffer();
-      xml = stringBuffer.toString();
-      xml = xmlReplaceSpecialCharacters(xml, false);
+      setXml(stringBuffer.toString());
+      setXml(xmlReplaceSpecialCharacters(getXml(), false));
       if (maskPassword) {
         String prePW = "<password>";
         String postPW = "</password>";
-        if (xml.contains(prePW)) {
-          final String prePassword = xml.substring(0, (xml.indexOf(prePW) + prePW.length()));
-          final String postPassword = xml.substring(xml.indexOf(postPW), xml.length());
-          xml = prePassword + "**********" + postPassword;
+        if (getXml().contains(prePW)) {
+          final String prePassword = getXml().substring(0, (getXml().indexOf(prePW) + prePW.length()));
+          final String postPassword = getXml().substring(getXml().indexOf(postPW), getXml().length());
+          setXml(prePassword + "**********" + postPassword);
         }
         prePW = "<fnetPassword>";
         postPW = "</fnetPassword>";
-        if (xml.contains(prePW)) {
-          final String prePassword = xml.substring(0, (xml.indexOf(prePW) + prePW.length()));
-          final String postPassword = xml.substring(xml.indexOf(postPW), xml.length());
-          xml = prePassword + "**********" + postPassword;
+        if (getXml().contains(prePW)) {
+          final String prePassword = getXml().substring(0, (getXml().indexOf(prePW) + prePW.length()));
+          final String postPassword = getXml().substring(getXml().indexOf(postPW), getXml().length());
+          setXml(prePassword + "**********" + postPassword);
         }
       }
-      // Environment.sysOut("response:[" + xml + "]");
+      // Environment.sysOut("response:[" + getXml() + "]");
     } catch (final Exception e) {
       Environment.sysOut(e);
     }
-    return xml;
+    return getXml();
   }
 }

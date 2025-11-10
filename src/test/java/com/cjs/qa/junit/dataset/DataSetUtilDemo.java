@@ -61,13 +61,13 @@ public class DataSetUtilDemo extends BaseDBUnitTestForJPADao {
         ClassLoader.getSystemResourceAsStream(DataFiles.XLS_DATA_SET);
     dataSet = new XlsDataSet(inputStreamXls);
 
-    DatabaseOperation.INSERT.execute(iDatabaseConnection, dataSet);
+    DatabaseOperation.INSERT.execute(getiDatabaseConnection(), dataSet);
   }
 
   @After
   public void testTeardown() throws Exception {
     Environment.sysOut("TearDown-Test Method:[" + getTestName() + "]");
-    DatabaseOperation.DELETE.execute(iDatabaseConnection, dataSet);
+    DatabaseOperation.DELETE.execute(getiDatabaseConnection(), dataSet);
   }
 
   @AfterClass

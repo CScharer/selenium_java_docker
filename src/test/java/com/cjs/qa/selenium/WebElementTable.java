@@ -12,8 +12,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class WebElementTable extends Page {
-  public final String COLUMN_NAME_PREFIX = "#";
+  private final String columnNamePrefix = "#";
   private boolean highlightObjects = false;
+
+  private String getColumnNamePrefix() {
+    return columnNamePrefix;
+  }
   private boolean resetTable = false;
   private String xPathTable = ".//center/table/tbody//table";
   private String xpathHeadings = "./thead/tr/th";
@@ -91,7 +95,7 @@ public class WebElementTable extends Page {
     for (final int key : getHeadingsIndex().keySet()) {
       String heading = getHeadingsIndex().get(key);
       if (heading.equals("")) {
-        heading = COLUMN_NAME_PREFIX + key;
+        heading = getColumnNamePrefix() + key;
       }
       heading = prepareForCSV(heading);
       stringBuilderHeadings.append(heading + ",");
@@ -375,7 +379,7 @@ public class WebElementTable extends Page {
       highlightWebElement(webElement);
       String columnName = webElement.getText();
       if (columnName.equals("")) {
-        columnName = COLUMN_NAME_PREFIX + String.valueOf((headingIndex + 1));
+        columnName = getColumnNamePrefix() + String.valueOf((headingIndex + 1));
       }
       getHeadingsName().put(columnName, (headingIndex + 1));
       getHeadingsIndex().put((headingIndex + 1), columnName);
