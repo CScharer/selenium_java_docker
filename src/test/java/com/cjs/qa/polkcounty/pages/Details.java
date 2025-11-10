@@ -45,7 +45,7 @@ public class Details extends Page {
     for (final String key : inmateNameDateMap.keySet()) {
       // Environment.sysOut("key:[" + key + "]");
       String value = "";
-      if (key.equals("Name")) {
+      if ("Name".equals(key)) {
         // webElement =
         // getWebDriver().findElement(By.xpath(".//*[@id='inmateNameDate']/tbody/tr[2]/th[text()[contains(.,'"
         // + key + "')]]/../td"));
@@ -177,10 +177,10 @@ public class Details extends Page {
         String value = columnElement.getText();
         switch (column) {
           case 1:
-            if (value.equals("Case #")) {
+            if ("Case #".equals(value)) {
               break;
             }
-            if (value.equals("")) {
+            if (value.isEmpty()) {
               value = "-" + row;
             }
             mapRecord.put("Case #", value);
@@ -194,7 +194,7 @@ public class Details extends Page {
           case 4:
             mapRecord.put("Bond Type", value);
             mapRecord.put("URL", url);
-            if (!mapRecord.get("Case #").equals("Case #")) {
+            if (!"Case #".equals(mapRecord.get("Case #"))) {
               // final String recordCount = jdbc.queryResults(
               // JDBCConstants.SELECT_ALL_FROM +
               // "[t_DOM_IOW_Cases] " + JDBCConstants.WHERE

@@ -88,7 +88,7 @@ public class WebElementTableTestSet {
     // dataTable = Convert.toDataTable(Arrays.asList(Arrays.asList("I1",
     // mapData.get("I1")), Arrays.asList("I2", mapData.get("I2"))))
     DataTable dataTable = null;
-    if (getMethodName().equals("tBoxOfficeSearch")) {
+    if ("tBoxOfficeSearch".equals(getMethodName())) {
       switch (record) {
         case 1:
           dataTable =
@@ -296,7 +296,7 @@ public class WebElementTableTestSet {
       case "testBoxOfficeMojo34":
         final String[] aDays = getMethodName().split("_");
         final String days = aDays[1];
-        if (days.equals("0")) {
+        if ("0".equals(days)) {
           url =
               "http://www.boxofficemojo"
                   + IExtension.COM
@@ -318,7 +318,7 @@ public class WebElementTableTestSet {
                   + "&p="
                   + IExtension.HTML;
         }
-        if (days.equals("1")) {
+        if ("1".equals(days)) {
           xPathTable = ".//*[@id='body']/center/center/table/tbody/tr[2]/td/table";
           xPathHeadings = ".//tr[@bgcolor='#dcdcdc']/td/font";
           xPathRows = ".//tr[@bgcolor!='#dcdcdc']";
@@ -404,7 +404,7 @@ public class WebElementTableTestSet {
       final String columnName = getWebElementTable().getColumnName(columnIndex);
       listValues = getWebElementTable().getColumnValues(columnIndex);
       Environment.sysOut("listValues (" + columnName + "):[" + listValues.toString() + "]");
-      if (columnName.equals("")) {
+      if (columnName.isEmpty()) {
         Environment.sysOut("listValues (" + columnName + "):[]");
       } else {
         listValues = getWebElementTable().getColumnValues(columnName);

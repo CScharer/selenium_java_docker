@@ -339,7 +339,7 @@ public class XLSX implements IExcel {
       final String[] columns = record.split(",");
       for (int columnIndex = 0; columnIndex < columns.length; columnIndex++) {
         final String cellValue = columns[columnIndex];
-        if (!cellValue.equals("")) {
+        if (!cellValue.isEmpty()) {
           setWorkCell(row.createCell(columnIndex));
           setCellValue(cellValue);
         }
@@ -956,7 +956,7 @@ public class XLSX implements IExcel {
   }
 
   public String writeCell(String sheetName, int column, int row, Object value) throws QAException {
-    if (value.equals("")) {
+    if ("".equals(value)) {
       return String.valueOf(value);
     }
     if (!sheetExists(sheetName)) {
@@ -977,7 +977,7 @@ public class XLSX implements IExcel {
 
   public String writeCellFormula(String sheetName, int column, int row, String value)
       throws QAException {
-    if (value.equals("")) {
+    if (value.isEmpty()) {
       return String.valueOf(value);
     }
     if (!sheetExists(sheetName)) {

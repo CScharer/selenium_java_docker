@@ -266,7 +266,7 @@ public class CompanyEnvironmentSetup extends Environment {
     StringBuilder stringBuilder = new StringBuilder(cNL);
     // User Data
     stringBuilder.append("User Name:[" + cED.getUserName() + "]" + cNL);
-    if (cED.getUserPassword().equals("")) {
+    if (cED.getUserPassword().isEmpty()) {
       stringBuilder.append("User Password:[" + cED.getUserPassword() + "]" + cNL);
     } else {
       stringBuilder.append("User Password:[********]" + cNL);
@@ -279,7 +279,7 @@ public class CompanyEnvironmentSetup extends Environment {
     stringBuilder.append("Hub Host:[" + cED.getHubHost() + "]" + cNL);
     stringBuilder.append("Hub Port:[" + cED.getHubPort() + "]" + cNL);
     stringBuilder.append("Hub User Name:[" + cED.getHubUserName() + "]" + cNL);
-    if (cED.getHubUserAccessKey().equals("")) {
+    if (cED.getHubUserAccessKey().isEmpty()) {
       stringBuilder.append("Hub User Access Key:[" + cED.getHubUserAccessKey() + "]" + cNL);
     } else {
       stringBuilder.append("Hub User Access Key:[********]" + cNL);
