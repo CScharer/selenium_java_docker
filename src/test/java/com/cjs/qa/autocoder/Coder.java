@@ -23,8 +23,6 @@ import org.junit.Test;
 public class Coder {
   private static JDBC jdbc = new JDBC("", "AutoCoderExcel");
   public static final String COMMENT = "// ";
-  protected static final List<String> TYPES_INPUT =
-      Arrays.asList("Checkbox;Dropdown;Edit;Option;RadioButton".split(Constants.DELIMETER_LIST));
   private static final String METHOD_NAME_POPULATE = "populatePage";
   private static final String METHOD_NAME_VALIDATE = "validatePage";
   private static final String CASE_NOT_DEFINED = "Case Not Defined";
@@ -36,6 +34,13 @@ public class Coder {
   private static final String LABEL_EDIT = "Edit";
   private static final String LABEL_OPTION = "Option";
   private static final String LABEL_RADIOBUTTON = "RadioButton";
+  protected static final List<String> TYPES_INPUT = List.of(
+      LABEL_CHECKBOX,
+      LABEL_DROPDOWN,
+      LABEL_EDIT,
+      LABEL_OPTION,
+      LABEL_RADIOBUTTON
+  );
 
   @Test
   public void testCodeCreation() throws QAException, Exception {

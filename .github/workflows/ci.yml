@@ -616,7 +616,7 @@ jobs:
       - name: Run Checkstyle
         run: |
           echo "Running Checkstyle static analysis..."
-          ./mvnw code-quality:check
+          ./mvnw checkstyle:check
           echo "✅ Checkstyle analysis completed"
         continue-on-error: true
 
@@ -624,10 +624,10 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: code-quality-report
+          name: checkstyle-report
           path: |
-            target/code-qualityXml.xml
-            target/site/code-quality.html
+            target/checkstyle-result.xml
+            target/site/checkstyle.html
           retention-days: 7
           if-no-files-found: ignore
 
