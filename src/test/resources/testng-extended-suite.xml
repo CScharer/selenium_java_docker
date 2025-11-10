@@ -22,5 +22,17 @@
             <class name="com.cjs.qa.junit.tests.AdvancedFeaturesTests"/>
         </classes>
     </test>
+    
+    <test name="Mobile Browser Tests" preserve-order="true">
+        <classes>
+            <class name="com.cjs.qa.junit.tests.mobile.MobileBrowserTests"/>
+        </classes>
+    </test>
+    
+    <test name="Responsive Design Tests" preserve-order="true">
+        <classes>
+            <class name="com.cjs.qa.junit.tests.mobile.ResponsiveDesignTests"/>
+        </classes>
+    </test>
 </suite>
 
