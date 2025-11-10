@@ -145,32 +145,6 @@ public class BTSConvertDatabaseToXML {
     return stringBuilder;
   }
 
-  private StringBuilder getQueryDataInnerJoin() {
-    StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append(JDBCConstants.SELECT);
-    stringBuilder.append("[c].[Abbreviation],");
-    stringBuilder.append("[c].[Name],");
-    stringBuilder.append("[c].[Number],");
-    stringBuilder.append("[c].[FilenetSplit],");
-    stringBuilder.append("[a].[Service_Account],");
-    stringBuilder.append("[a].[Password],");
-    stringBuilder.append("[a].[Password_Java],");
-    stringBuilder.append("[e].[Environment],");
-    stringBuilder.append("[e].[URL],");
-    stringBuilder.append("[d].[Server],");
-    stringBuilder.append("[d].[PortNumber],");
-    stringBuilder.append("[d].[Instance],");
-    stringBuilder.append("[d].[Database] ");
-    stringBuilder.append(JDBCConstants.FROM + "[tblCompany] [c] ");
-    stringBuilder.append(JDBCConstants.INNER_JOIN + "[tblDOM_PSTAR_Service_Accounts] [a] ");
-    stringBuilder.append(JDBCConstants.ON + "[c].[Abbreviation]=[a].[Abbreviation] ");
-    stringBuilder.append(JDBCConstants.INNER_JOIN + "[tblEnvironments] [e] ");
-    stringBuilder.append(JDBCConstants.ON + "[a].[Abbreviation]=[e].[Abbreviation] ");
-    stringBuilder.append(JDBCConstants.INNER_JOIN + "[tblDOM_DBPolicy] [d] ");
-    stringBuilder.append(JDBCConstants.ON + "[e].[Abbreviation]=[d].[Company];");
-    return stringBuilder;
-  }
-
   private StringBuilder getQueryDataOuterJoin() {
     // When developed this was not supported by sqlite.
     StringBuilder stringBuilder = new StringBuilder();

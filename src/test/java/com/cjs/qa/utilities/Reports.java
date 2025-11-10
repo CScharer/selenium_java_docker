@@ -37,7 +37,7 @@ public class Reports {
   private static Map<String, Integer> resultColumns = null;
   private static final FSO FSO = new FSO();
 
-  private static synchronized void updateReport(File filePathName, byte[] byteArray)
+  public static synchronized void updateReport(File filePathName, byte[] byteArray)
       throws IOException {
     FileChannel fileChannel = null;
     try {
@@ -265,7 +265,7 @@ public class Reports {
     return map;
   }
 
-  private static String getLogStatus(String report) {
+  public static String getLogStatus(String report) {
     final String status =
         "dateTimeStamp:["
             + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_US_STANDARD_DATE_TIME + ".SSS")

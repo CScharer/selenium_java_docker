@@ -72,7 +72,7 @@ public class XML {
     Environment.sysOut(XPathConstants.NODESET.toString());
     final String sXpath = "";
     try {
-      final XPathExpression xpathExpression = XPATH.compile(sXpath);
+      XPATH.compile(sXpath);
     } catch (final Exception e) {
       Environment.sysOut(e);
     }

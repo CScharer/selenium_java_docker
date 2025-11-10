@@ -301,7 +301,7 @@ public class AdvancedFeaturesTests {
 
     Allure.step("Measure element find time");
     startTime = System.currentTimeMillis();
-    WebElement searchBox = driver.findElement(By.name("q"));
+    driver.findElement(By.name("q"));
     endTime = System.currentTimeMillis();
     long findTime = endTime - startTime;
 

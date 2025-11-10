@@ -23,7 +23,7 @@ public class MavenTestSet {
     return stringBuffer;
   }
 
-  private FSO getFso() {
+  public FSO getFso() {
     return fso;
   }
 

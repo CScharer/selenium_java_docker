@@ -45,7 +45,7 @@ public class PremiumSummaryPage extends Page {
       By.xpath(".//*[@id='productsPanel']/div[5]/div/div[@class='table']/div/..");
   private final String pageTitle = "PremiumSummaryPage";
 
-  private String getPageTitle() {
+  public String getPageTitle() {
     return pageTitle;
   }
 

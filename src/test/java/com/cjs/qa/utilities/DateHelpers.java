@@ -955,12 +955,10 @@ public class DateHelpers {
     int index1 = date1.indexOf(DELIMETER);
     int index2 = date1.lastIndexOf(DELIMETER);
     final int mmDate1 = Integer.parseInt(date1.substring(0, index1));
-    final int ddDate1 = Integer.parseInt(date1.substring(index1 + 1, index2));
     final int yyyyDate1 = Integer.parseInt(date1.substring(index2 + 1));
     index1 = date2.indexOf(DELIMETER);
     index2 = date2.lastIndexOf(DELIMETER);
     final int mmDate2 = Integer.parseInt(date2.substring(0, index1));
-    final int ddDate2 = Integer.parseInt(date2.substring(index1 + 1, index2));
     final int yyyyDate2 = Integer.parseInt(date2.substring(index2 + 1));
     if (yyyyDate1 < yyyyDate2) {
       return true;
@@ -985,12 +983,10 @@ public class DateHelpers {
     int index1 = date1.indexOf(DELIMETER);
     int index2 = date1.lastIndexOf(DELIMETER);
     final int mmDate1 = Integer.parseInt(date1.substring(0, index1));
-    final int ddDate1 = Integer.parseInt(date1.substring(index1 + 1, index2));
     final int yyyyDate1 = Integer.parseInt(date1.substring(index2 + 1));
     index1 = date2.indexOf(DELIMETER);
     index2 = date2.lastIndexOf(DELIMETER);
     final int mmDate2 = Integer.parseInt(date2.substring(0, index1));
-    final int ddDate2 = Integer.parseInt(date2.substring(index1 + 1, index2));
     final int yyyyDate2 = Integer.parseInt(date2.substring(index2 + 1));
     if (yyyyDate1 > yyyyDate2) {
       return true;
@@ -1013,11 +1009,11 @@ public class DateHelpers {
   public static boolean isValidDate(String date) {
     final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_DD_MMM_YYYY);
     try {
-      final Date date1compare = simpleDateFormat.parse(date);
-      final Date date2compare = simpleDateFormat.parse(date);
+      simpleDateFormat.parse(date);
+      return true;
     } catch (final ParseException e) {
       e.printStackTrace();
+      return false;
     }
-    return true;
   }
 }

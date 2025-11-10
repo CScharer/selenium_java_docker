@@ -20,7 +20,7 @@ public class IssuePage extends Page {
   private final By buttonIssueLater = By.id(nodeForm1ProcessedResults + "buttonLater");
   private final String pageTitle = "IssuePage";
 
-  private String getPageTitle() {
+  public String getPageTitle() {
     return pageTitle;
   }
 

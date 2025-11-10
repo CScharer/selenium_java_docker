@@ -116,7 +116,7 @@ public class MicrosoftReport {
     return stringBuilder.toString();
   }
 
-  private String getReportPoints() {
+  public String getReportPoints() {
     final StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append(getReportHeader("Points (Dashboard)", RewardsInfo.getReportFieldList()));
     stringBuilder.append(RewardsInfo.toReport());

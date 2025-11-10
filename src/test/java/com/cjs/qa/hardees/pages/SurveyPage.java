@@ -31,7 +31,7 @@ public class SurveyPage extends Page {
     return checkboxAgree;
   }
 
-  private By getLabelThankYou() {
+  public By getLabelThankYou() {
     return labelThankYou;
   }
 

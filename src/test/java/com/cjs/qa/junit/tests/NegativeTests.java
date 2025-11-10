@@ -79,8 +79,7 @@ public class NegativeTests {
 
     try {
       // Try to find an element that doesn't exist
-      WebElement nonExistent =
-          driver.findElement(By.id("this-element-definitely-does-not-exist-12345"));
+      driver.findElement(By.id("this-element-definitely-does-not-exist-12345"));
       LOGGER.error("Element was found (unexpected!)");
     } catch (NoSuchElementException e) {
       LOGGER.info("Correctly caught NoSuchElementException");

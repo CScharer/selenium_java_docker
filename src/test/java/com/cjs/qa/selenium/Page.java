@@ -426,7 +426,7 @@ public class Page extends JavaHelpers {
   /**
    * @param by
    */
-  private void clickMethodsOther(By by) {
+  protected void clickMethodsOther(By by) {
     // WebElement webElement = waitExists(by)
     // Method Primary
     // webElement.click()
@@ -1940,7 +1940,7 @@ public class Page extends JavaHelpers {
    * @param timeout
    * @return
    */
-  private WebElement waitForElementExists(final String selector, long timeout) {
+  protected WebElement waitForElementExists(final String selector, long timeout) {
     final Wait<WebDriver> webDriverWait =
         new WebDriverWait(getWebDriver(), java.time.Duration.ofSeconds(timeout));
     final WebElement webElement =

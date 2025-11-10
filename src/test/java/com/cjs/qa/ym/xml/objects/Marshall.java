@@ -39,7 +39,7 @@ public class Marshall {
       Environment.sysOut("Item Index (" + eventsIndex + ")");
       Environment.sysOut(item.toString());
     }
-    String xml = yourMembershipResponseMarshall(yourMembershipResponse, filePathNameNewXML);
+    yourMembershipResponseMarshall(yourMembershipResponse, filePathNameNewXML);
   }
 
   @Test
@@ -49,7 +49,7 @@ public class Marshall {
         yourMembershipResponseUnmarshall(filePathName);
     Environment.sysOut(yourMembershipResponse.toString());
     Environment.sysOut(yourMembershipResponse.getEventsEventGet().toString());
-    String xml = yourMembershipResponseMarshall(yourMembershipResponse, filePathNameNewXML);
+    yourMembershipResponseMarshall(yourMembershipResponse, filePathNameNewXML);
   }
 
   @Test
@@ -59,7 +59,7 @@ public class Marshall {
     YourMembershipResponse yourMembershipResponse =
         yourMembershipResponseUnmarshall(filePathName);
     Environment.sysOut(yourMembershipResponse.getSaEventsEventRegistrationGet().toString());
-    String xml = yourMembershipResponseMarshall(yourMembershipResponse, filePathNameNewXML);
+    yourMembershipResponseMarshall(yourMembershipResponse, filePathNameNewXML);
     Environment.sysOut("TESTING XML CREATION" + Constants.NEWLINE + xml);
     System.out.println(
         "Getting the Phone Number:"

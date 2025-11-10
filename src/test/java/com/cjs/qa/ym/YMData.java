@@ -1529,7 +1529,6 @@ public class YMData extends Environment {
     //
     // C:\Workspace\Data\Vivit\Data\20190316\YM\Events\1.xml
     String fileName = "C:\\Workspace\\Data\\Vivit\\Data\\20190316\\YM\\Events\\1.xml";
-    String xml = "";
     final UnmarshallYourMembershipResponse unmarshallYourMembershipResponse =
         new UnmarshallYourMembershipResponse();
     final YourMembershipResponse yourMembership_Response =

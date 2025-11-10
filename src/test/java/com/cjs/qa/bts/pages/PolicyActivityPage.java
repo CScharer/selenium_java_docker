@@ -14,7 +14,7 @@ public class PolicyActivityPage extends Page {
   private final By exitPolicySearch = By.xpath(".//*[@id='requestLinkSearch1']");
   private final String pageTitle = "Genesys - Policy Activity";
 
-  private String getPageTitle() {
+  public String getPageTitle() {
     return pageTitle;
   }
 

@@ -49,9 +49,9 @@ public class PowerPoint {
       }
     }
     //
-    // adding slides to the slodeshow
-    final XSLFSlide xslfSlide1 = xmlSlideShow.createSlide();
-    final XSLFSlide xslfSlide2 = xmlSlideShow.createSlide();
+    // adding slides to the slideshow
+    xmlSlideShow.createSlide();
+    xmlSlideShow.createSlide();
     // saving the changes
     fileOutputStream = new FileOutputStream(file);
     xmlSlideShow.write(fileOutputStream);

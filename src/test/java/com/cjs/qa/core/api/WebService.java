@@ -43,18 +43,6 @@ public class WebService {
   private static String fileRequest = Constants.PATH_FILES_XML + "request" + IExtension.XML;
   private static String fileResponse = Constants.PATH_FILES_XML + "response" + IExtension.XML;
 
-  private SOAPConnectionFactory getSoapConnectionFactory() {
-    return soapConnectionFactory;
-  }
-
-  private SOAPConnection getSoapConnection() {
-    return soapConnection;
-  }
-
-  private String getUrl() {
-    return url;
-  }
-
   private static String getXml() {
     return xml;
   }
@@ -67,16 +55,8 @@ public class WebService {
     return requestName;
   }
 
-  private static void setRequestName(String value) {
-    requestName = value;
-  }
-
   private static String getResponseName() {
     return responseName;
-  }
-
-  private static void setResponseName(String value) {
-    responseName = value;
   }
 
   private static String getFileRequest() {
@@ -373,7 +353,6 @@ public class WebService {
     final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
     try {
       soapMessage.writeTo(byteArrayOutputStream);
-      final String soapMessageString = byteArrayOutputStream.toString();
       Environment.sysOut(getSOAPMessageValue(soapMessage, true));
     } catch (SOAPException | IOException e) {
       Environment.sysOut(e);

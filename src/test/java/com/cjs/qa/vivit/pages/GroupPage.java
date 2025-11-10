@@ -32,7 +32,7 @@ public class GroupPage extends Page {
   private final List<String> listGroupLeaders = new ArrayList<>();
   private final By byTitleBar = By.xpath(".//*[@id='SpTitleBar']");
 
-  private List<String> getListGroupLeaders() {
+  public List<String> getListGroupLeaders() {
     return listGroupLeaders;
   }
 

@@ -24,7 +24,6 @@ public class AuthNamespace extends GTWebinarService {
   }
 
   public Map<String, String> oauth(String credentials) throws Throwable {
-    String url = URL_GT + "oauth/access_token";
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append(Constants.nlTab(0, 0) + "{");
     stringBuilder.append(Constants.nlTab(1, 1) + "\"grant_type\":\"" + "password" + "\",");

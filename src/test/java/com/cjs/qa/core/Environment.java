@@ -208,26 +208,6 @@ public class Environment {
     }
   }
 
-  private static String getStackInfo() {
-    String stack = null;
-    final StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-    for (final StackTraceElement stackTraceElement : stackTraceElements) {
-      final String className = stackTraceElement.getClassName();
-      if (!classExlusionList.contains(className) && className.contains(".Pages")) {
-        stack =
-            stackTraceElement.getFileName()
-                + Constants.DELIMETER_LIST
-                + stackTraceElement.getMethodName()
-                + Constants.DELIMETER_LIST
-                + "Line ("
-                + stackTraceElement.getLineNumber()
-                + ")";
-        break;
-      }
-    }
-    return stack;
-  }
-
   private static String getSysOutHeader() {
     return DateHelpers.getCurrentDateAndTime()
         + Constants.DELIMETER_LIST

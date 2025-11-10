@@ -800,9 +800,8 @@ public class SeleniumWebDriver {
         EDriverProperties.fromString(getBrowser().toUpperCase());
     switch (getBrowser().toLowerCase()) {
       case Browser.SAFARI:
-        final SafariOptions safariOptions = new SafariOptions();
         // If you wish for safari to forget session everytime
-        // safariOptions.setUseCleanSession(true); // Removed in Selenium 4
+        // SafariOptions.setUseCleanSession(true); // Removed in Selenium 4
         setWebDriver(new SafariDriver());
         break;
       case Browser.CHROME:

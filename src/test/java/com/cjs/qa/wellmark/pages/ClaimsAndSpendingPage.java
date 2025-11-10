@@ -226,7 +226,7 @@ public class ClaimsAndSpendingPage extends Page {
     return record;
   }
 
-  private StringBuilder sortRecords(StringBuilder stringBuilder) throws QAException {
+  public StringBuilder sortRecords(StringBuilder stringBuilder) throws QAException {
     // This sorts on the string value to the dates will not sort properly.
     final String[] records = stringBuilder.toString().split(Constants.NEWLINE);
     final String headings = records[0];

@@ -1992,7 +1992,7 @@ public class VivitData extends Environment {
     if (brokenLinksListMap.size() == 1) {
       // stringBuilder.append("<tbody>")
       stringBuilder.append("<tr>");
-      for (final Entry entry : fieldNameMap.entrySet()) {
+      for (int i = 0; i < fieldNameMap.size(); i++) {
         stringBuilder.append(
             "<td style="
                 + Constants.QUOTE_DOUBLE
@@ -2094,7 +2094,6 @@ public class VivitData extends Environment {
                   + "border: 1px solid black; border-collapse: collapse;"
                   + Constants.QUOTE_DOUBLE
                   + ">");
-          final int key = (int) entry.getKey();
           final String value = (String) entry.getValue();
           stringBuilder.append(value);
           stringBuilder.append("</td>");
@@ -2106,7 +2105,7 @@ public class VivitData extends Environment {
     if (databaseChangesListMap.size() == 1) {
       // stringBuilder.append("<tbody>")
       stringBuilder.append("<tr>");
-      for (final Entry entry : fieldNameMap.entrySet()) {
+      for (int i = 0; i < fieldNameMap.size(); i++) {
         stringBuilder.append(
             "<td style="
                 + Constants.QUOTE_DOUBLE
@@ -2207,7 +2206,6 @@ public class VivitData extends Environment {
                   + "border: 1px solid black; border-collapse: collapse;"
                   + Constants.QUOTE_DOUBLE
                   + ">");
-          final int key = (int) entry.getKey();
           final String value = (String) entry.getValue();
           stringBuilder.append(value);
           stringBuilder.append("</td>");
@@ -2219,7 +2217,7 @@ public class VivitData extends Environment {
     if (testInformationListMap.size() == 1) {
       // stringBuilder.append("<tbody>")
       stringBuilder.append("<tr>");
-      for (final Entry entry : fieldNameMap.entrySet()) {
+      for (int i = 0; i < fieldNameMap.size(); i++) {
         stringBuilder.append(
             "<td style="
                 + Constants.QUOTE_DOUBLE
@@ -2520,7 +2518,7 @@ public class VivitData extends Environment {
     if (gtwEventsListMap.size() == 1) {
       // stringBuilder.append("<tbody>")
       stringBuilder.append("<tr>");
-      for (final Entry entry : fieldNameMap.entrySet()) {
+      for (int i = 0; i < fieldNameMap.size(); i++) {
         stringBuilder.append(
             "<td style="
                 + Constants.QUOTE_DOUBLE
@@ -2655,7 +2653,7 @@ public class VivitData extends Environment {
     if (gtwEventAttendeesListMap.size() == 1) {
       // stringBuilder.append("<tbody>")
       stringBuilder.append("<tr>");
-      for (final Entry entry : fieldNameMap.entrySet()) {
+      for (int i = 0; i < fieldNameMap.size(); i++) {
         stringBuilder.append(
             "<td style="
                 + Constants.QUOTE_DOUBLE
@@ -2796,7 +2794,7 @@ public class VivitData extends Environment {
     if (gtwEventRegistrationListMap.size() == 1) {
       // stringBuilder.append("<tbody>")
       stringBuilder.append("<tr>");
-      for (final Entry entry : fieldNameMap.entrySet()) {
+      for (int i = 0; i < fieldNameMap.size(); i++) {
         stringBuilder.append(
             "<td style="
                 + Constants.QUOTE_DOUBLE

@@ -85,7 +85,7 @@ public class XlsReader {
     int index = 0;
     while (!error) {
       try {
-        final XSSFSheet s = workbook.getSheetAt(index);
+        workbook.getSheetAt(index);
         index++;
       } catch (final Exception e) {
         // e.printStackTrace();

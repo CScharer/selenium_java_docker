@@ -22,7 +22,7 @@ public class FormsPage extends Page {
   private final By buttonUpdateReprint = By.xpath(".//*[@id='form1:forms:printBtn']");
   private final String pageTitle = "FormsPage";
 
-  private String getPageTitle() {
+  public String getPageTitle() {
     return pageTitle;
   }
 

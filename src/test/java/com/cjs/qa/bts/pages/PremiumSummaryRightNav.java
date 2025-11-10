@@ -30,7 +30,7 @@ public class PremiumSummaryRightNav extends Page {
   // METHODS
   public boolean isSidebarOpen() {
     try {
-      final WebElement element = getWebElement(sidebarRightClose);
+      getWebElement(sidebarRightClose);
       return true;
     } catch (final Exception e) {
       return false;
