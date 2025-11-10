@@ -97,6 +97,7 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
         <secretmanager.version>2.48.0</secretmanager.version>
 		<selenium.version>4.26.0</selenium.version>
 		<webdrivermanager.version>5.9.2</webdrivermanager.version>
+		<appium.version>9.3.0</appium.version>
 		<allure.version>2.25.0</allure.version>
 		<aspectj.version>1.9.22</aspectj.version>
 
@@ -538,6 +539,12 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-support</artifactId>
 			<version>${selenium-support.version}</version>
+		</dependency>
+		<!-- Appium for Mobile Testing -->
+		<dependency>
+			<groupId>io.appium</groupId>
+			<artifactId>java-client</artifactId>
+			<version>${appium.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.xerial</groupId>
