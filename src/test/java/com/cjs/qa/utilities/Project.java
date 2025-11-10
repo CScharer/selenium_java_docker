@@ -21,7 +21,7 @@ public class Project {
   /**
    * @return Absolute path to Automation folder
    */
-  private static final String pathAutomation() {
+  private static String pathAutomation() {
     String automationPath = "";
     final String OSName = System.getProperty("os.name");
     try {
@@ -45,7 +45,7 @@ public class Project {
   /**
    * @return Absolute path to Automation Workspace
    */
-  public static final String pathWorkspace() {
+  public static String pathWorkspace() {
     String directoryFolder = transformPath(pathAutomation() + "BTS/");
     FSO.folderCreate(directoryFolder);
     return directoryFolder;
@@ -54,7 +54,7 @@ public class Project {
   /**
    * @return Absolute path to Automation Repository
    */
-  public static final String pathRepository(String filePath) {
+  public static String pathRepository(String filePath) {
     String directoryFolder = transformPath(pathAutomation() + "repository/" + filePath);
     FSO.folderCreate(directoryFolder);
     return directoryFolder;

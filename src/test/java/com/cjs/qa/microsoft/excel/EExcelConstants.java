@@ -14,7 +14,7 @@ public enum EExcelConstants {
 
   private int value;
 
-  private EExcelConstants(int value) {
+  EExcelConstants(int value) {
     this.value = value;
   }
 

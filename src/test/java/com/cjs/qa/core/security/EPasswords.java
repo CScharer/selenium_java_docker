@@ -35,7 +35,7 @@ public enum EPasswords {
 
   private final String secretKey;
 
-  private EPasswords(String secretKey) {
+  EPasswords(String secretKey) {
     this.secretKey = secretKey;
   }
 

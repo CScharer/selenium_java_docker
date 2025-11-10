@@ -59,23 +59,23 @@ import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.Select;
 
 public interface ISelenium {
-  public static final String BROWSER_DEFAULT = "chrome";
-  public static final String SELENIUM_GRID_HUB_NAME = "CSCHARER-LAPTOP";
-  public static final int SELENIUM_GRID_HUB_NAMEPORT = 4444;
-  public static final String SELENIUM_GRID_HUB =
+  String BROWSER_DEFAULT = "chrome";
+  String SELENIUM_GRID_HUB_NAME = "CSCHARER-LAPTOP";
+  int SELENIUM_GRID_HUB_NAMEPORT = 4444;
+  String SELENIUM_GRID_HUB =
       "http://"
           + SELENIUM_GRID_HUB_NAME
           + ":"
           + String.valueOf(SELENIUM_GRID_HUB_NAMEPORT)
           + "/wd/hub";
-  public static final String FIELD_NOT_CODED = " Field is NOT Coded or the Name is Incorrect!";
-  public static final String PATH_SCREENSHOTS = "./target/reports/Screenshots/";
+  String FIELD_NOT_CODED = " Field is NOT Coded or the Name is Incorrect!";
+  String PATH_SCREENSHOTS = "./target/reports/Screenshots/";
 
   /**
    * @param webDriver
    * @param filePathName
    */
-  public default void captureScreenshot(WebDriver webDriver, String filePathName) {
+  default void captureScreenshot(WebDriver webDriver, String filePathName) {
     if (Environment.isLogAll()) {
       Environment.sysOut("webDriver:[" + webDriver.toString() + "]");
     }
@@ -91,7 +91,7 @@ public interface ISelenium {
    * @param scenarioObject
    * @param fileName
    */
-  public default void cukeAttachFile(Scenario scenarioObject, String fileName) {
+  default void cukeAttachFile(Scenario scenarioObject, String fileName) {
     // This is not working yet.
     try {
       scenarioObject.attach(
@@ -105,7 +105,7 @@ public interface ISelenium {
    * @param scenarioObject
    * @param webDriver
    */
-  public default void embedScreenshot(Scenario scenarioObject, WebDriver webDriver) {
+  default void embedScreenshot(Scenario scenarioObject, WebDriver webDriver) {
     if (Environment.isLogAll()) {
       Environment.sysOut(
           "scenarioObject.ID:["
@@ -151,7 +151,7 @@ public interface ISelenium {
    * @param byType
    * @return
    */
-  public static String getWebElementXPath(
+  static String getWebElementXPath(
       List<Integer> parentList, WebElement webElement, String byType) throws QAException {
     final String webElementString = webElement.toString();
     // [[[[RemoteWebDriver: MicrosoftEdge on ANY
@@ -193,7 +193,7 @@ public interface ISelenium {
 
   // http://stackoverflow" + IExtension.COM +
   // "/questions/10660291/highlight-elements-in-webdriver-during-runtime
-  public static String getAbsoluteXPath(WebDriver webDriver, WebElement element) {
+  static String getAbsoluteXPath(WebDriver webDriver, WebElement element) {
     final StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("function absoluteXPath(element){");
     stringBuilder.append("var comp, comps=[];");
@@ -261,7 +261,7 @@ public interface ISelenium {
   /**
    * @param webDriver
    */
-  public default void killBrowser(WebDriver webDriver) {
+  default void killBrowser(WebDriver webDriver) {
     try {
       webDriver.close();
     } catch (final Exception e) {
@@ -279,7 +279,7 @@ public interface ISelenium {
    * @param webDriver
    * @param browser
    */
-  public default void killBrowser(WebDriver webDriver, String browser) {
+  default void killBrowser(WebDriver webDriver, String browser) {
     if (Environment.isLogAll()) {
       Environment.sysOut("browser:[" + browser + "], driver:[" + webDriver.toString() + "]");
     }
@@ -299,7 +299,7 @@ public interface ISelenium {
   /**
    * @param browser
    */
-  public static void killBrowserProcesses(String browser) {
+  static void killBrowserProcesses(String browser) {
     if (Environment.isLogAll()) {
       Environment.sysOut("browser:[" + browser + "]");
     }
@@ -341,7 +341,7 @@ public interface ISelenium {
   /**
    * @param webDriver
    */
-  public default void maximize(WebDriver webDriver) {
+  default void maximize(WebDriver webDriver) {
     try {
       webDriver.manage().window().maximize();
     } catch (final Exception e) {
@@ -413,7 +413,7 @@ public interface ISelenium {
   // scrollToElement(webDriver, By.xpath(xPath));
   // }
 
-  public static ChromeOptions setChromeOptions() {
+  static ChromeOptions setChromeOptions() {
     final ChromeOptions chromeOptions = new ChromeOptions();
     final ChromeOptions desiredCapabilities = new ChromeOptions();
     final Map<String, Object> mapPeferences = new HashMap<>();
@@ -445,7 +445,7 @@ public interface ISelenium {
    * @param browser
    * @return
    */
-  public static DesiredCapabilities setDesiredCapabilities(String operatingSystem, String browser) {
+  static DesiredCapabilities setDesiredCapabilities(String operatingSystem, String browser) {
     DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
     switch (browser.toLowerCase()) {
       case "android":
@@ -570,7 +570,7 @@ public interface ISelenium {
    * @param values
    * @return
    */
-  public default boolean webCheckboxSelect(WebDriver webDriver, String field, String values) {
+  default boolean webCheckboxSelect(WebDriver webDriver, String field, String values) {
     boolean matchAll = true;
     boolean match = false;
     if (Environment.isLogAll()) {
@@ -614,7 +614,7 @@ public interface ISelenium {
    * @param value
    * @return
    */
-  public default boolean webComboBoxSelect(WebDriver webDriver, String field, String value) {
+  default boolean webComboBoxSelect(WebDriver webDriver, String field, String value) {
     boolean match = false;
     int iIndex = 0;
     Select dropdown;
@@ -671,7 +671,7 @@ public interface ISelenium {
    * @param scenario
    * @return
    */
-  public static WebDriver browserProfiling(String browser, Scenario scenario) {
+  static WebDriver browserProfiling(String browser, Scenario scenario) {
     WebDriver webDriver = null;
     try {
       final String operatingSystem = "Windows 10";
@@ -699,7 +699,7 @@ public interface ISelenium {
    * @param remote
    * @return
    */
-  public static WebDriver browserProfiling(String browser, boolean remote) {
+  static WebDriver browserProfiling(String browser, boolean remote) {
     WebDriver webDriver = null;
     try {
       final String operatingSystem = System.getProperty("os.name");
@@ -734,7 +734,7 @@ public interface ISelenium {
    * @param remote
    * @return
    */
-  public default WebDriver browserProfiling(WebDriver webDriver, String browser, boolean remote) {
+  default WebDriver browserProfiling(WebDriver webDriver, String browser, boolean remote) {
     try {
       final String operatingSystem = System.getProperty("os.name").toUpperCase();
       DesiredCapabilities desiredCapabilities = setDesiredCapabilities(operatingSystem, browser);
@@ -827,7 +827,7 @@ public interface ISelenium {
    * @param browser
    * @return
    */
-  public static WebDriver browserProfiling(WebDriver webDriver, String browser) {
+  static WebDriver browserProfiling(WebDriver webDriver, String browser) {
     killBrowserProcesses(browser);
     try {
       // String STANDARD_FIREFOX = "C:/Users/" + System.getenv("USERNAME")
@@ -996,7 +996,7 @@ public interface ISelenium {
    * @param webDriver
    * @param fileName
    */
-  public default void saveScreenshot(WebDriver webDriver, String fileName) {
+  default void saveScreenshot(WebDriver webDriver, String fileName) {
     String sMessage = null;
     final String screenshotCounter =
         DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_DATE_TIME_STAMP);
@@ -1019,7 +1019,7 @@ public interface ISelenium {
    * @param functionName
    * @return
    */
-  public default boolean webPageGetObjects(
+  default boolean webPageGetObjects(
       WebDriver webDriver, WebElement elementParent, String functionName) {
     String sMessage = null;
     if (Environment.isLogAll()) {

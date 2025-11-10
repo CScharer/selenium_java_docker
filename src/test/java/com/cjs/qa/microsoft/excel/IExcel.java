@@ -14,34 +14,34 @@ import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.DataFormatter;
 
 public interface IExcel {
-  public static final String FORMAT_NAME_BOLD = "Bold";
-  public static final String FORMAT_NAME_HEADING = "Heading";
-  public static final String FORMAT_NAME_HYPERLINK = "Hyperlink";
-  public static final String FORMAT_NAME_NORMAL = "Normal";
-  public static final String FORMAT_NAME_PASS = "Pass";
-  public static final String FORMAT_NAME_FAIL = "Fail";
-  public static final String FORMAT_NAME_SECTION = "Section";
-  public static final String FORMAT_NAME_STATUS = "Status";
+  String FORMAT_NAME_BOLD = "Bold";
+  String FORMAT_NAME_HEADING = "Heading";
+  String FORMAT_NAME_HYPERLINK = "Hyperlink";
+  String FORMAT_NAME_NORMAL = "Normal";
+  String FORMAT_NAME_PASS = "Pass";
+  String FORMAT_NAME_FAIL = "Fail";
+  String FORMAT_NAME_SECTION = "Section";
+  String FORMAT_NAME_STATUS = "Status";
   //
-  public static final String FORMAT_NAME_NUMBER = "Number";
-  public static final String FORMAT_NAME_NUMBERPERCENT = "NumberPercent";
-  public static final String FORMAT_NAME_PERCENT = "Percent";
+  String FORMAT_NAME_NUMBER = "Number";
+  String FORMAT_NAME_NUMBERPERCENT = "NumberPercent";
+  String FORMAT_NAME_PERCENT = "Percent";
   //
-  public static final String PREFIX_CREATE_CELL_FONT = "createCellFont";
-  public static final String PREFIX_CREATE_CELL_STYLE = "createCellStyle";
+  String PREFIX_CREATE_CELL_FONT = "createCellFont";
+  String PREFIX_CREATE_CELL_STYLE = "createCellStyle";
   // EExcelConstants.CELL_STYLES_XLS.getValue()
-  public static final int CELL_STYLE_DEFINED_COUNT = 11;
+  int CELL_STYLE_DEFINED_COUNT = 11;
   // 255
-  public static final int MAX_COLUMNS_XLS = EExcelConstants.MAX_COLUMNS_XLS.getValue();
+  int MAX_COLUMNS_XLS = EExcelConstants.MAX_COLUMNS_XLS.getValue();
   // 16383
-  public static final int MAX_COLUMNS_XLSX = EExcelConstants.MAX_COLUMNS_XLSX.getValue();
+  int MAX_COLUMNS_XLSX = EExcelConstants.MAX_COLUMNS_XLSX.getValue();
   // 65536
-  public static final int MAX_ROWS_XLS = EExcelConstants.MAX_ROWS_XLS.getValue();
+  int MAX_ROWS_XLS = EExcelConstants.MAX_ROWS_XLS.getValue();
   // 1048576
-  public static final int MAX_ROWS_XLSX = EExcelConstants.MAX_ROWS_XLSX.getValue();
-  public static final List<String> CELL_STYLE_LIST =
+  int MAX_ROWS_XLSX = EExcelConstants.MAX_ROWS_XLSX.getValue();
+  List<String> CELL_STYLE_LIST =
       Arrays.asList("Bold", "Heading", "Hyperlink", "Normal", "Pass", "Fail", "Section", "Status");
-  public static final List<String> COLORS_ALLOWED =
+  List<String> COLORS_ALLOWED =
       Arrays.asList(
           "aqua",
           "black",
@@ -91,16 +91,16 @@ public interface IExcel {
           "violet",
           "white",
           "yellow");
-  public static final String SHEET_COUNTS = "Counts";
-  public static final String SHEET_DEFAULT = "Sheet1";
-  public static final String SHEET_SUMMARY = "Summary";
-  public static final int DEFAULT_INDEX = 0;
-  public static final int MAX_CELL_HEIGHT = 409;
-  public static final int MAX_CELL_WIDTH = 255;
-  public static final int MAX_SHEET_NAME_LENGTH = 31;
-  public static final DataFormatter DATA_FORMATTER = new DataFormatter();
+  String SHEET_COUNTS = "Counts";
+  String SHEET_DEFAULT = "Sheet1";
+  String SHEET_SUMMARY = "Summary";
+  int DEFAULT_INDEX = 0;
+  int MAX_CELL_HEIGHT = 409;
+  int MAX_CELL_WIDTH = 255;
+  int MAX_SHEET_NAME_LENGTH = 31;
+  DataFormatter DATA_FORMATTER = new DataFormatter();
 
-  public static String getFileType(String fileName) {
+  static String getFileType(String fileName) {
     Environment.sysOut("fileCheck:[" + fileName + "]");
     final String fileNameExtension = "." + FilenameUtils.getExtension(fileName);
     if (fileNameExtension.equalsIgnoreCase(IExtension.XLS)) {
@@ -112,7 +112,7 @@ public interface IExcel {
     return null;
   }
 
-  public static short getFontColorIndex(String color) {
+  static short getFontColorIndex(String color) {
     switch (color.toLowerCase()) {
       case "aqua":
         return HSSFColor.HSSFColorPredefined.AQUA.getIndex();
@@ -215,7 +215,7 @@ public interface IExcel {
     }
   }
 
-  public static HyperlinkType getHyperlinkType(String hyperlinkType) {
+  static HyperlinkType getHyperlinkType(String hyperlinkType) {
     switch (hyperlinkType.toLowerCase()) {
       case "document":
         return HyperlinkType.DOCUMENT;
@@ -231,7 +231,7 @@ public interface IExcel {
     }
   }
 
-  public static XLS updateSummarySheetXLS(
+  static XLS updateSummarySheetXLS(
       String filePathName, String sheetName, String sheetLinkName) throws IOException, QAException {
     final XLS excel = new XLS(filePathName, SHEET_SUMMARY);
     final String hyperlinkSheetSummary = "'" + SHEET_SUMMARY + "'!A1";
@@ -255,7 +255,7 @@ public interface IExcel {
     return excel;
   }
 
-  public static XLSX updateSummarySheetXLSX(
+  static XLSX updateSummarySheetXLSX(
       String filePathName, String sheetName, String sheetLinkName) throws IOException, QAException {
     final XLSX excel = new XLSX(filePathName, SHEET_SUMMARY);
     final String hyperlinkSheetSummary = "'" + SHEET_SUMMARY + "'!A1";

@@ -45,7 +45,7 @@ public enum EDriverProperties {
   private String pathDriver;
   private String pathBinary;
 
-  private EDriverProperties(String webdriver, String path, String pathBinary) {
+  EDriverProperties(String webdriver, String path, String pathBinary) {
     this.webdriverType = webdriver;
     this.pathDriver = path;
     this.pathBinary = pathBinary;

@@ -22,7 +22,7 @@ public enum EIssueType {
   PRINT_SUB_TASK("Print Sub-task");
   private String value;
 
-  private EIssueType(String value) {
+  EIssueType(String value) {
     this.value = value;
   }
 

@@ -8,7 +8,7 @@ public enum ConfigComponents {
   private String path;
   private String description;
 
-  private ConfigComponents(String component, String path, String description) {
+  ConfigComponents(String component, String path, String description) {
     this.component = component;
     this.path = path;
     this.description = description;

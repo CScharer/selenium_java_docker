@@ -144,7 +144,7 @@ public enum ColorsRGB {
   YELLOWGREEN("RGB(154, 205, 50)");
   private String value;
 
-  private ColorsRGB(String value) {
+  ColorsRGB(String value) {
     this.value = value;
   }
 

@@ -3,7 +3,7 @@ package com.cjs.qa.utilities;
 import java.net.HttpURLConnection;
 
 public interface IHTTP {
-  public static String getResponseValue(int httpResponseCode) {
+  static String getResponseValue(int httpResponseCode) {
     switch (httpResponseCode) {
       case HttpURLConnection.HTTP_ACCEPTED:
         return "HTTP_ACCEPTED";

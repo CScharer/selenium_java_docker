@@ -56,7 +56,7 @@ public enum EColorIndex {
 
   private short value;
 
-  private EColorIndex(short value) {
+  EColorIndex(short value) {
     this.value = value;
   }
 

@@ -9,7 +9,7 @@ public enum EPriority {
   BLOCKER("Blocker");
   private String value;
 
-  private EPriority(String value) {
+  EPriority(String value) {
     this.value = value;
   }
 

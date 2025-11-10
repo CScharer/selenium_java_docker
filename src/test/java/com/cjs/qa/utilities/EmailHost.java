@@ -8,7 +8,7 @@ public enum EmailHost {
   VIVIT("smtp.office365" + IExtension.COM);
   private String value;
 
-  private EmailHost(String value) {
+  EmailHost(String value) {
     this.value = value;
   }
 

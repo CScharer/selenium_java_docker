@@ -11,7 +11,7 @@ public enum EDBDriver {
   private String jdbcDriver;
   private String urlPrefix;
 
-  private EDBDriver(String jdbcDriver, String urlPrefix) {
+  EDBDriver(String jdbcDriver, String urlPrefix) {
     this.jdbcDriver = jdbcDriver;
     this.urlPrefix = urlPrefix;
   }

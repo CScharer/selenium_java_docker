@@ -7,7 +7,7 @@ public enum Log {
 
   private boolean value;
 
-  private Log(boolean value) {
+  Log(boolean value) {
     this.value = value;
   }
 

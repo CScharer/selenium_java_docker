@@ -149,7 +149,7 @@ public enum ColorsHEX {
   VIVIT_PURPLE("#41395f");
   private String value;
 
-  private ColorsHEX(String value) {
+  ColorsHEX(String value) {
     this.value = value;
   }
 

@@ -5,7 +5,7 @@ public enum EComponent {
   BATF("Berkley Automated Testing Framework (BATF)");
   private String value;
 
-  private EComponent(String value) {
+  EComponent(String value) {
     this.value = value;
   }
 
