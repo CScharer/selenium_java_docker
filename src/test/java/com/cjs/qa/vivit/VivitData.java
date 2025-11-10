@@ -2820,23 +2820,23 @@ public class VivitData extends Environment {
       // + Constants.QUOTE_DOUBLE + Constants.QUOTE_DOUBLE +
       // "<Values><Value>Chief
       // Information Officer</Value></Values></CustomFieldResponse>"
-      YMData.getYmApi().Sa_PeopleNamespace.updateMemberData(sqlStringBuilder, xml);
+      YMData.getYmApi().getSaPeopleNamespace().updateMemberData(sqlStringBuilder, xml);
       // StringBuilder sqlStringBuilder = new StringBuilder()
       // String xml = ""
       // // Export from YMAPI & Import to Database
       // // Events
       // sqlStringBuilder =
-      // YMData.getYmApi().EventsNamespace.getAllDataEvents(sqlStringBuilder)
+      // YMData.getYmApi().getEventsNamespace().getAllDataEvents(sqlStringBuilder)
       // // Events
-      // mapResults = YMData.getYmApi().Sa_EventsNamespace.allGetIDs(null,
+      // mapResults = YMData.getYmApi().getSaEventsNamespace().allGetIDs(null,
       // null, null,
       // null, null)
       // xml = mapResults.get("xml")
       // sqlStringBuilder =
-      // YMData.getYmApi().Sa_EventsNamespace.getEventSQL(xml)
+      // YMData.getYmApi().getSaEventsNamespace().getEventSQL(xml)
       // // importDataMembers(VivitTables.DOM_VIVIT_MEMBERS)
       // Abandon YMAPI Session
-      mapResults = YMData.getYmApi().SessionNamespace.abandon();
+      mapResults = YMData.getYmApi().getSessionNamespace().abandon();
       sysOut("mapResults:[" + mapResults.toString() + "]");
     } catch (final Exception e) {
       sysOut(e);

@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Custom_JobFunction")
 public class Custom_JobFunction {
   @XmlAttribute(name = "ExportValue")
-  protected String exportValue;
+  private String exportValue;
 
   public String getExportValue() {
     return exportValue;

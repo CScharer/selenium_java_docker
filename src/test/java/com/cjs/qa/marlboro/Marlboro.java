@@ -12,19 +12,43 @@ import org.openqa.selenium.WebDriver;
 public class Marlboro {
   public static final String URL_OFFERS =
       MarlboroEnvironment.URL_BASE + "/pages/offers" + IExtension.HTML;
-  public EarnPointsPage EarnPointsPage;
-  public OffersAndActivityPage OffersAndActivityPage;
-  public SecurityPage SecurityPage;
-  public SignInPage SignInPage;
-  public VerifyInformationInterruptPage VerifyInformationInterruptPage;
-  By imageAccount = By.xpath("//i[contains(@class,'icon-account')]");
+  private EarnPointsPage earnPointsPage;
+  private OffersAndActivityPage offersAndActivityPage;
+  private SecurityPage securityPage;
+  private SignInPage signInPage;
+  private VerifyInformationInterruptPage verifyInformationInterruptPage;
+  private By imageAccount = By.xpath("//i[contains(@class,'icon-account')]");
+
+  public EarnPointsPage getEarnPointsPage() {
+    return earnPointsPage;
+  }
+
+  public OffersAndActivityPage getOffersAndActivityPage() {
+    return offersAndActivityPage;
+  }
+
+  public SecurityPage getSecurityPage() {
+    return securityPage;
+  }
+
+  public SignInPage getSignInPage() {
+    return signInPage;
+  }
+
+  public VerifyInformationInterruptPage getVerifyInformationInterruptPage() {
+    return verifyInformationInterruptPage;
+  }
+
+  public By getImageAccount() {
+    return imageAccount;
+  }
 
   public Marlboro(WebDriver webDriver) {
-    EarnPointsPage = new EarnPointsPage(webDriver);
-    OffersAndActivityPage = new OffersAndActivityPage(webDriver);
-    SecurityPage = new com.cjs.qa.marlboro.pages.SecurityPage(webDriver);
-    SignInPage = new SignInPage(webDriver);
-    VerifyInformationInterruptPage = new VerifyInformationInterruptPage(webDriver);
+    earnPointsPage = new EarnPointsPage(webDriver);
+    offersAndActivityPage = new OffersAndActivityPage(webDriver);
+    securityPage = new com.cjs.qa.marlboro.pages.SecurityPage(webDriver);
+    signInPage = new SignInPage(webDriver);
+    verifyInformationInterruptPage = new VerifyInformationInterruptPage(webDriver);
     webDriver.manage().timeouts().pageLoadTimeout(java.time.Duration.ofSeconds(120));
   }
 }

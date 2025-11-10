@@ -34,100 +34,100 @@ public class YMAPIDebug {
     Environment.sysOut("mapResults:]" + mapResults.toString() + "]");
     // Auth Namespace
     mapResults =
-        ymAPI.AuthNamespace.authenticate(mapCScharer.get("userID"), mapCScharer.get("password"));
+        ymAPI.getAuthNamespace().authenticate(mapCScharer.get("userID"), mapCScharer.get("password"));
     mapResults =
-        ymAPI.AuthNamespace.createToken(
+        ymAPI.getAuthNamespace().createToken(
             mapCScharer.get("userID"),
             mapCScharer.get("password"),
             true,
             mapCScharer.get("vivitURL"));
     // Convert Namespace
-    mapResults = ymAPI.ConvertNamespace.toEasternTime(dateTimeCurrent, "-5");
+    mapResults = ymAPI.getConvertNamespace().toEasternTime(dateTimeCurrent, "-5");
     // Events Namespace
-    mapResults = ymAPI.EventsNamespace.allSearch("Symposium", 100, 1);
-    mapResults = ymAPI.EventsNamespace.eventAttendeesGet(0);
-    mapResults = ymAPI.EventsNamespace.eventGet(0);
+    mapResults = ymAPI.getEventsNamespace().allSearch("Symposium", 100, 1);
+    mapResults = ymAPI.getEventsNamespace().eventAttendeesGet(0);
+    mapResults = ymAPI.getEventsNamespace().eventGet(0);
     // Feeds Namespace
-    mapResults = ymAPI.FeedsNamespace.feedGet("NOW", "25", "1");
-    mapResults = ymAPI.FeedsNamespace.get();
+    mapResults = ymAPI.getFeedsNamespace().feedGet("NOW", "25", "1");
+    mapResults = ymAPI.getFeedsNamespace().get();
     // Member Namespace
-    mapResults = ymAPI.MemberNamespace.certificationsGet(true);
+    mapResults = ymAPI.getMemberNamespace().certificationsGet(true);
     mapResults =
-        ymAPI.MemberNamespace.certificationsJournalGet(
+        ymAPI.getMemberNamespace().certificationsJournalGet(
             true, "startDate", "entryID", "certificationID", 100, 1);
-    mapResults = ymAPI.MemberNamespace.commerceStoreGetOrderIDs("timestamp", "status");
-    mapResults = ymAPI.MemberNamespace.commerceStoreOrderGet("invoiceID");
+    mapResults = ymAPI.getMemberNamespace().commerceStoreGetOrderIDs("timestamp", "status");
+    mapResults = ymAPI.getMemberNamespace().commerceStoreOrderGet("invoiceID");
     mapResults =
-        ymAPI.MemberNamespace.connectionApprove(
+        ymAPI.getMemberNamespace().connectionApprove(
             Integer.valueOf(mapCScharer.get("webSiteMemberID")), true);
-    mapResults = ymAPI.MemberNamespace.isAuthenticated();
-    mapResults = ymAPI.MemberNamespace.mediaGalleryUpload("albumID", "caption", true, true);
-    mapResults = ymAPI.MemberNamespace.messagesGetInbox(100, 1);
-    mapResults = ymAPI.MemberNamespace.messagesGetSent(100, 1);
-    mapResults = ymAPI.MemberNamespace.messagesMessageRead("messageID");
-    mapResults = ymAPI.MemberNamespace.messagesMessageSend("iD", "subject", "body");
+    mapResults = ymAPI.getMemberNamespace().isAuthenticated();
+    mapResults = ymAPI.getMemberNamespace().mediaGalleryUpload("albumID", "caption", true, true);
+    mapResults = ymAPI.getMemberNamespace().messagesGetInbox(100, 1);
+    mapResults = ymAPI.getMemberNamespace().messagesGetSent(100, 1);
+    mapResults = ymAPI.getMemberNamespace().messagesMessageRead("messageID");
+    mapResults = ymAPI.getMemberNamespace().messagesMessageSend("iD", "subject", "body");
     mapResults =
-        ymAPI.MemberNamespace.passwordInitializeReset(
+        ymAPI.getMemberNamespace().passwordInitializeReset(
             mapCScharer.get("userID"), mapCScharer.get("emailAddress"));
     mapResults =
-        ymAPI.MemberNamespace.passwordUpdate(
+        ymAPI.getMemberNamespace().passwordUpdate(
             "resetToken", mapCScharer.get("password"), mapCScharer.get("password"));
-    mapResults = ymAPI.MemberNamespace.profileGet();
-    mapResults = ymAPI.MemberNamespace.profileGetMini();
-    mapResults = ymAPI.MemberNamespace.wallPost("iD", "postText");
+    mapResults = ymAPI.getMemberNamespace().profileGet();
+    mapResults = ymAPI.getMemberNamespace().profileGetMini();
+    mapResults = ymAPI.getMemberNamespace().wallPost("iD", "postText");
     // Members Namespace
-    mapResults = ymAPI.MembersNamespace.connectionsCategoriesGet("iD");
-    mapResults = ymAPI.MembersNamespace.connectionsGet("iD", "categoryID", 100, 1);
-    mapResults = ymAPI.MembersNamespace.mediaGalleryAlbumsGet("iD");
-    mapResults = ymAPI.MembersNamespace.mediaGalleryGet("iD", "albumID", 100, 1);
-    mapResults = ymAPI.MembersNamespace.mediaGalleryItemGet("iD", "itemID");
-    mapResults = ymAPI.MembersNamespace.wallGet("iD", 100, 1);
+    mapResults = ymAPI.getMembersNamespace().connectionsCategoriesGet("iD");
+    mapResults = ymAPI.getMembersNamespace().connectionsGet("iD", "categoryID", 100, 1);
+    mapResults = ymAPI.getMembersNamespace().mediaGalleryAlbumsGet("iD");
+    mapResults = ymAPI.getMembersNamespace().mediaGalleryGet("iD", "albumID", 100, 1);
+    mapResults = ymAPI.getMembersNamespace().mediaGalleryItemGet("iD", "itemID");
+    mapResults = ymAPI.getMembersNamespace().wallGet("iD", 100, 1);
     // People Namespace
-    mapResults = ymAPI.PeopleNamespace.allSearch("Scharer", "25", "1");
-    mapResults = ymAPI.PeopleNamespace.profileGet(mapCScharer.get("apiGUID"));
+    mapResults = ymAPI.getPeopleNamespace().allSearch("Scharer", "25", "1");
+    mapResults = ymAPI.getPeopleNamespace().profileGet(mapCScharer.get("apiGUID"));
     // Namespace
     mapResults =
-        ymAPI.Sa_AuthNamespace.authenticate(
+        ymAPI.getSaAuthNamespace().authenticate(
             mapCScharer.get("userID"),
             mapCScharer.get("password"),
             mapCScharer.get("passwordHash"));
     // Sa.Certifications Namespace
-    mapResults = ymAPI.Sa_CertificationsNamespace.allGet(true);
-    mapResults = ymAPI.Sa_CertificationsNamespace.creditTypesAllGet();
+    mapResults = ymAPI.getSaCertificationsNamespace().allGet(true);
+    mapResults = ymAPI.getSaCertificationsNamespace().creditTypesAllGet();
     // Sa.Commerce Namespace
-    mapResults = ymAPI.Sa_CommerceNamespace.storeOrderGet("invoiceID");
-    mapResults = ymAPI.Sa_CommerceNamespace.productGet("productID");
-    mapResults = ymAPI.Sa_CommerceNamespace.productsAllGetIDs("productName", "productType");
+    mapResults = ymAPI.getSaCommerceNamespace().storeOrderGet("invoiceID");
+    mapResults = ymAPI.getSaCommerceNamespace().productGet("productID");
+    mapResults = ymAPI.getSaCommerceNamespace().productsAllGetIDs("productName", "productType");
     // Sa.Events Namespace
     mapResults =
-        ymAPI.Sa_EventsNamespace.allGetIDs(
+        ymAPI.getSaEventsNamespace().allGetIDs(
             ymInceptionDate, dateTimeCurrent, "name", null, ymInceptionDate);
-    mapResults = ymAPI.Sa_EventsNamespace.eventGet(0);
-    mapResults = ymAPI.Sa_EventsNamespace.eventRegistrationGet("registrationID", "badgeNumber");
-    mapResults = ymAPI.Sa_EventsNamespace.eventRegistrationsGetIDs(0, null);
+    mapResults = ymAPI.getSaEventsNamespace().eventGet(0);
+    mapResults = ymAPI.getSaEventsNamespace().eventRegistrationGet("registrationID", "badgeNumber");
+    mapResults = ymAPI.getSaEventsNamespace().eventRegistrationsGetIDs(0, null);
     // Sa.Export Namespace
-    mapResults = ymAPI.Sa_ExportNamespace.allInvoiceItems(false, ymInceptionDate);
-    mapResults = ymAPI.Sa_ExportNamespace.careerOpenings(false, ymInceptionDate);
-    mapResults = ymAPI.Sa_ExportNamespace.donationsTransactions(false, ymInceptionDate);
-    mapResults = ymAPI.Sa_ExportNamespace.donationsInvoiceItems(false, ymInceptionDate);
-    mapResults = ymAPI.Sa_ExportNamespace.duesTransactions(false, ymInceptionDate);
-    mapResults = ymAPI.Sa_ExportNamespace.duesInvoiceItems(false, ymInceptionDate);
+    mapResults = ymAPI.getSaExportNamespace().allInvoiceItems(false, ymInceptionDate);
+    mapResults = ymAPI.getSaExportNamespace().careerOpenings(false, ymInceptionDate);
+    mapResults = ymAPI.getSaExportNamespace().donationsTransactions(false, ymInceptionDate);
+    mapResults = ymAPI.getSaExportNamespace().donationsInvoiceItems(false, ymInceptionDate);
+    mapResults = ymAPI.getSaExportNamespace().duesTransactions(false, ymInceptionDate);
+    mapResults = ymAPI.getSaExportNamespace().duesInvoiceItems(false, ymInceptionDate);
     mapResults =
-        ymAPI.Sa_ExportNamespace.eventRegistrations(
+        ymAPI.getSaExportNamespace().eventRegistrations(
             false, "eventID", "sessionIDs", "productID", "All", "lastName", true);
-    mapResults = ymAPI.Sa_ExportNamespace.financeBatch(false, "batchID");
-    mapResults = ymAPI.Sa_ExportNamespace.members(false, true, ymInceptionDate);
-    mapResults = ymAPI.Sa_ExportNamespace.exportDataMembers(ymInceptionDate);
-    mapResults = ymAPI.Sa_ExportNamespace.membersGroups(false, ymInceptionDate);
-    mapResults = ymAPI.Sa_ExportNamespace.exportDataMemberGroups(ymInceptionDate);
-    mapResults = ymAPI.Sa_ExportNamespace.storeOrders(false, ymInceptionDate);
-    mapResults = ymAPI.Sa_ExportNamespace.storeInvoiceItems(false, ymInceptionDate);
-    mapResults = ymAPI.Sa_ExportNamespace.status("exportID");
+    mapResults = ymAPI.getSaExportNamespace().financeBatch(false, "batchID");
+    mapResults = ymAPI.getSaExportNamespace().members(false, true, ymInceptionDate);
+    mapResults = ymAPI.getSaExportNamespace().exportDataMembers(ymInceptionDate);
+    mapResults = ymAPI.getSaExportNamespace().membersGroups(false, ymInceptionDate);
+    mapResults = ymAPI.getSaExportNamespace().exportDataMemberGroups(ymInceptionDate);
+    mapResults = ymAPI.getSaExportNamespace().storeOrders(false, ymInceptionDate);
+    mapResults = ymAPI.getSaExportNamespace().storeInvoiceItems(false, ymInceptionDate);
+    mapResults = ymAPI.getSaExportNamespace().status("exportID");
     // Sa.Finance Namespace
-    mapResults = ymAPI.Sa_FinanceNamespace.batchCreate("", dateTimeCurrent, false);
-    mapResults = ymAPI.Sa_FinanceNamespace.batchesGet(ymInceptionDate, "startBatchID");
+    mapResults = ymAPI.getSaFinanceNamespace().batchCreate("", dateTimeCurrent, false);
+    mapResults = ymAPI.getSaFinanceNamespace().batchesGet(ymInceptionDate, "startBatchID");
     mapResults =
-        ymAPI.Sa_FinanceNamespace.invoicePaymentCreate(
+        ymAPI.getSaFinanceNamespace().invoicePaymentCreate(
             "invoiceNo",
             "amount",
             "type",
@@ -150,7 +150,7 @@ public class YMAPIDebug {
             "internalNotes");
     // Sa.Groups Namespace
     mapResults =
-        ymAPI.Sa_GroupsNamespace.groupCreate(
+        ymAPI.getSaGroupsNamespace().groupCreate(
             "groupCode",
             "typeID",
             "name",
@@ -169,9 +169,9 @@ public class YMAPIDebug {
             "shortDescription",
             "welcomeContent");
     mapResults =
-        ymAPI.Sa_GroupsNamespace.groupGetMembershipLog("groupID", ymInceptionDate, "itemID");
+        ymAPI.getSaGroupsNamespace().groupGetMembershipLog("groupID", ymInceptionDate, "itemID");
     mapResults =
-        ymAPI.Sa_GroupsNamespace.groupUpdate(
+        ymAPI.getSaGroupsNamespace().groupUpdate(
             "groupID",
             "groupCode",
             "typeID",
@@ -190,18 +190,18 @@ public class YMAPIDebug {
             "emailOptionsMember",
             "shortDescription",
             "welcomeContent");
-    mapResults = ymAPI.Sa_GroupsNamespace.groupTypesGet();
+    mapResults = ymAPI.getSaGroupsNamespace().groupTypesGet();
     // Sa.Member Namespace
-    mapResults = ymAPI.Sa_MemberNamespace.certificationsGet("iD", true);
+    mapResults = ymAPI.getSaMemberNamespace().certificationsGet("iD", true);
     mapResults =
-        ymAPI.Sa_MemberNamespace.certificationsJournalGet(
+        ymAPI.getSaMemberNamespace().certificationsJournalGet(
             "iD", true, ymInceptionDate, "entryID", "certificationID", 100, 1);
     // Sa.Members Namespace
-    mapResults = ymAPI.Sa_MembersNamespace.allGetIDs(ymInceptionDate, 0, "");
-    mapResults = ymAPI.Sa_MembersNamespace.allMemberTypesGet();
-    mapResults = ymAPI.Sa_MembersNamespace.allRecentActivity();
+    mapResults = ymAPI.getSaMembersNamespace().allGetIDs(ymInceptionDate, 0, "");
+    mapResults = ymAPI.getSaMembersNamespace().allMemberTypesGet();
+    mapResults = ymAPI.getSaMembersNamespace().allRecentActivity();
     mapResults =
-        ymAPI.Sa_MembersNamespace.certificationsJournalEntryCreate(
+        ymAPI.getSaMembersNamespace().certificationsJournalEntryCreate(
             "iD",
             "cEUsEarned",
             "",
@@ -211,30 +211,30 @@ public class YMAPIDebug {
             "",
             "scorePercent",
             "creditTypeCode");
-    mapResults = ymAPI.Sa_MembersNamespace.commerceStoreGetOrderIDs("iD", ymInceptionDate, "Open");
-    mapResults = ymAPI.Sa_MembersNamespace.eventsEventRegistrationGet("eventID", "iD");
+    mapResults = ymAPI.getSaMembersNamespace().commerceStoreGetOrderIDs("iD", ymInceptionDate, "Open");
+    mapResults = ymAPI.getSaMembersNamespace().eventsEventRegistrationGet("eventID", "iD");
     mapResults =
-        ymAPI.Sa_MembersNamespace.groupsAdd(
+        ymAPI.getSaMembersNamespace().groupsAdd(
             "iD", "groupCode", (Boolean) null, (Boolean) null, (Boolean) null, "");
     mapResults =
-        ymAPI.Sa_MembersNamespace.groupsRemove(
+        ymAPI.getSaMembersNamespace().groupsRemove(
             "iD", "groupCode", (Boolean) null, (Boolean) null, "");
-    mapResults = ymAPI.Sa_MembersNamespace.profileCreate(true);
-    mapResults = ymAPI.Sa_MembersNamespace.referralsGet("iD", ymInceptionDate);
-    mapResults = ymAPI.Sa_MembersNamespace.subAccountsGet("iD", ymInceptionDate);
+    mapResults = ymAPI.getSaMembersNamespace().profileCreate(true);
+    mapResults = ymAPI.getSaMembersNamespace().referralsGet("iD", ymInceptionDate);
+    mapResults = ymAPI.getSaMembersNamespace().subAccountsGet("iD", ymInceptionDate);
     // Sa.NonMembers Namespace
-    mapResults = ymAPI.Sa_NonMembersNamespace.allGetIDs(ymInceptionDate, 0, "");
-    mapResults = ymAPI.Sa_NonMembersNamespace.profileCreate();
+    mapResults = ymAPI.getSaNonMembersNamespace().allGetIDs(ymInceptionDate, 0, "");
+    mapResults = ymAPI.getSaNonMembersNamespace().profileCreate();
     // Sa.People Namespace
-    mapResults = ymAPI.Sa_PeopleNamespace.allGetIDs(ymInceptionDate, 0, "");
+    mapResults = ymAPI.getSaPeopleNamespace().allGetIDs(ymInceptionDate, 0, "");
     mapResults =
-        ymAPI.Sa_PeopleNamespace.profileFindID("importID", "constituentID", 0, "username", "email");
-    mapResults = ymAPI.Sa_PeopleNamespace.profileGet("iD");
-    mapResults = ymAPI.Sa_PeopleNamespace.profileGroupsGet("iD");
-    mapResults = ymAPI.Sa_PeopleNamespace.profileUpdate("iD", "");
+        ymAPI.getSaPeopleNamespace().profileFindID("importID", "constituentID", 0, "username", "email");
+    mapResults = ymAPI.getSaPeopleNamespace().profileGet("iD");
+    mapResults = ymAPI.getSaPeopleNamespace().profileGroupsGet("iD");
+    mapResults = ymAPI.getSaPeopleNamespace().profileUpdate("iD", "");
     // Session Namespace
-    mapResults = ymAPI.SessionNamespace.create(true);
-    mapResults = ymAPI.SessionNamespace.ping();
-    mapResults = ymAPI.SessionNamespace.abandon();
+    mapResults = ymAPI.getSessionNamespace().create(true);
+    mapResults = ymAPI.getSessionNamespace().ping();
+    mapResults = ymAPI.getSessionNamespace().abandon();
   }
 }

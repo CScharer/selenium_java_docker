@@ -18,8 +18,8 @@ public class SessionNamespace extends YMService {
   }
 
   public static final int TIMEOUT_SESSION = 20;
-  public static String sessionID = null;
-  public static long timeSessionStart = 0;
+  private static String sessionID = null;
+  private static long timeSessionStart = 0;
 
   // public static int callID = 0
 

@@ -724,27 +724,27 @@ public class Scenarios {
     Environment.sysOut("listMapUsers:[" + listMapUsers.toString() + "]");
     for (final Map<String, String> mapUser : listMapUsers) {
       Environment.sysOut("mapUser:[" + mapUser.toString() + "]");
-      getMarlboro().SignInPage.populate(mapUser);
+      getMarlboro().getSignInPage().populate(mapUser);
       JavaHelpers.sleep(3);
-      // getMarlboro().SecurityPage.buttonNotNowClick()
-      // getMarlboro().VerifyInformationInterruptPage.PopulatePage()
+      // getMarlboro().getSecurityPage().buttonNotNowClick()
+      // getMarlboro().getVerifyInformationInterruptPage().PopulatePage()
       getSeleniumWebDriver().getWebDriver().get(Marlboro.URL_OFFERS);
-      if (getMarlboro().OffersAndActivityPage.labelCouponInTheMailValidate()) {
+      if (getMarlboro().getOffersAndActivityPage().labelCouponInTheMailValidate()) {
         softAssert.assertEquals(
             "THANK YOU FOR YOUR REQUEST.",
-            getMarlboro().OffersAndActivityPage.getlabelMessage(),
+            getMarlboro().getOffersAndActivityPage().getlabelMessage(),
             mapUser.get("UserName"));
         JavaHelpers.sleep(2);
       } else {
-        getMarlboro().OffersAndActivityPage.collectCoupons();
+        getMarlboro().getOffersAndActivityPage().collectCoupons();
         JavaHelpers.sleep(2);
         softAssert.assertEquals(
             "THANK YOU FOR YOUR REQUEST.",
-            getMarlboro().OffersAndActivityPage.getlabelMessage(),
+            getMarlboro().getOffersAndActivityPage().getlabelMessage(),
             mapUser.get("UserName"));
       }
-      getMarlboro().SignInPage.wrapUp();
-      // getMarlboro().OffersAndActivityPage.buttonLogOutClick()
+      getMarlboro().getSignInPage().wrapUp();
+      // getMarlboro().getOffersAndActivityPage().buttonLogOutClick()
       JavaHelpers.sleep(2);
     }
     softAssert.assertAll();
@@ -767,9 +767,9 @@ public class Scenarios {
     Environment.sysOut("listMapUsers:[" + listMapUsers.toString() + "]");
     for (final Map<String, String> mapUser : listMapUsers) {
       Environment.sysOut("mapUser:[" + mapUser.toString() + "]");
-      getMarlboro().SignInPage.populate(mapUser);
+      getMarlboro().getSignInPage().populate(mapUser);
       JavaHelpers.sleep(3);
-      getMarlboro().EarnPointsPage.earnPoints(getMarlboro(), mapUser);
+      getMarlboro().getEarnPointsPage().earnPoints(getMarlboro(), mapUser);
     }
   }
 

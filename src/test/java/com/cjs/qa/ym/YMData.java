@@ -320,7 +320,7 @@ public class YMData extends Environment {
       setYmApi(new YMAPI());
     }
     Map<String, String> resultsMap =
-        getYmApi().Sa_ExportNamespace.exportDataMemberGroups(dateTimeFrom);
+        getYmApi().getSaExportNamespace().exportDataMemberGroups(dateTimeFrom);
     sysOut("mapResults:[" + resultsMap.toString() + "]");
   }
 
@@ -336,7 +336,7 @@ public class YMData extends Environment {
     if (getYmApi() == null) {
       setYmApi(new YMAPI());
     }
-    Map<String, String> resultsMap = getYmapi().Sa_ExportNamespace.exportDataMembers(dateTimeFrom);
+    Map<String, String> resultsMap = getYmapi().getSaExportNamespace().exportDataMembers(dateTimeFrom);
     sysOut("mapResults:[" + resultsMap.toString() + "]");
   }
 
@@ -362,7 +362,7 @@ public class YMData extends Environment {
             setYmApi(new YMAPI());
           }
           Map<String, String> eventAttendeeMap =
-              getYmapi().EventsNamespace.eventAttendeesGet(Integer.parseInt(eventID));
+              getYmapi().getEventsNamespace().eventAttendeesGet(Integer.parseInt(eventID));
           xml = eventAttendeeMap.get("xml");
           FSO.fileWrite(filePathName, xml, false);
         }
@@ -387,7 +387,7 @@ public class YMData extends Environment {
             setYmApi(new YMAPI());
           }
           Map<String, String> eventInformationMap =
-              getYmapi().EventsNamespace.eventGet(Integer.parseInt(eventID));
+              getYmapi().getEventsNamespace().eventGet(Integer.parseInt(eventID));
           xml = eventInformationMap.get("xml");
           FSO.fileWrite(filePathName, xml, false);
         }
@@ -413,7 +413,7 @@ public class YMData extends Environment {
           }
           Map<String, String> eventInformationMap =
               getYmApi()
-                  .Sa_EventsNamespace
+                  .getSaEventsNamespace()
                   .eventRegistrationsGetIDs(Integer.parseInt(eventID), null);
           xml = eventInformationMap.get("xml");
           FSO.fileWrite(filePathName, xml, false);
@@ -440,7 +440,7 @@ public class YMData extends Environment {
             setYmApi(new YMAPI());
           }
           Map<String, String> eventInformationMap =
-              getYmapi().Sa_EventsNamespace.eventRegistrationGet(registrationID, "");
+              getYmapi().getSaEventsNamespace().eventRegistrationGet(registrationID, "");
           xml = eventInformationMap.get("xml");
           FSO.fileWrite(filePathName, xml, false);
         }
@@ -471,7 +471,7 @@ public class YMData extends Environment {
           }
           Map<String, String> mapResults =
               getYmapi()
-                  .EventsNamespace
+                  .getEventsNamespace()
                   .allSearch(getEventNameSearch(), EventsNamespace.PAGES_MAX, pageRecordStart);
           xml = mapResults.get("xml");
           FSO.fileWrite(filePathName, xml, false);
@@ -1215,7 +1215,7 @@ public class YMData extends Environment {
       }
     } while (!success);
     if (getYmapi() != null) {
-      Map<String, String> resultsMap = getYmapi().SessionNamespace.abandon();
+      Map<String, String> resultsMap = getYmapi().getSessionNamespace().abandon();
       sysOut(VivitData.LABEL_RESULTS_MAP + resultsMap.toString() + "]");
     }
   }
@@ -1479,23 +1479,23 @@ public class YMData extends Environment {
       setYmApi(new YMAPI());
     }
     Map<String, String> apiMap = new HashMap<>();
-    // getYmApi().EventsNamespace.eventGet(Integer.parseInt(EVENTID_TEST));
+    // getYmApi().getEventsNamespace().eventGet(Integer.parseInt(EVENTID_TEST));
     // 1209865
-    // apiMap = getYmApi().EventsNamespace.eventGet(1207192);
+    // apiMap = getYmApi().getEventsNamespace().eventGet(1207192);
     // apiMap =
-    // getYmApi().EventsNamespace.eventAttendeesGet(Integer.parseInt(EVENTID_TEST));
+    // getYmApi().getEventsNamespace().eventAttendeesGet(Integer.parseInt(EVENTID_TEST));
     // apiMap =
-    // getYmApi().Sa_EventsNamespace.eventRegistrationsGetIDs(Integer.parseInt(EVENTID_TEST),
+    // getYmApi().getSaEventsNamespace().eventRegistrationsGetIDs(Integer.parseInt(EVENTID_TEST),
     // null);
     // apiMap =
-    // getYmApi().Sa_EventsNamespace.eventRegistrationGet("6D507875-6CDC-4E26-ACA4-50C302106A76",
+    // getYmApi().getSaEventsNamespace().eventRegistrationGet("6D507875-6CDC-4E26-ACA4-50C302106A76",
     // "");
     apiMap =
         getYmApi()
-            .Sa_EventsNamespace
+            .getSaEventsNamespace()
             .eventRegistrationGet("A53E0C69-6554-49C5-87A1-EED72921F115", "");
     String xml = apiMap.get("xml");
-    getYmApi().SessionNamespace.abandon();
+    getYmApi().getSessionNamespace().abandon();
     xml = XML.formatPretty(xml);
     // FSO.fileWrite(VivitFoldersFiles.PATH_DATA_TODAY + "test.xml", xml,
     // false);

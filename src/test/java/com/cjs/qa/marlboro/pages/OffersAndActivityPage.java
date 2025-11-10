@@ -13,40 +13,72 @@ public class OffersAndActivityPage extends Page {
     super(webDriver);
   }
 
-  final String URL_OFFERS = MarlboroEnvironment.URL_BASE + "/marlboro/my-marlboro/offers";
-  final By button3DollarsOffACarton = By.xpath(".//span[contains(text(),'$3 Off a Carton')]");
+  private final String urlOffers = MarlboroEnvironment.URL_BASE + "/marlboro/my-marlboro/offers";
+  private final By button3DollarsOffACarton = By.xpath(".//span[contains(text(),'$3 Off a Carton')]");
   // final By buttonClaimYours =
   // By.xpath(".//*[@id='container']//span[.='CLAIM YOURS']");
-  final By buttonGetYoursByMail =
+  private final By buttonGetYoursByMail =
       By.xpath(
           ".//div[@class='image-cta-link']//div[@class='inner-content']/button"
               + "/i[contains(@class,'btn-ctaIcon')]/../..");
-  final By buttonCOUPONS =
+  private final By buttonCOUPONS =
       By.xpath(".//li[contains(@class,'menu-list-desk')]/a[@data-dtmtext='COUPONS']");
-  final By buttonSubmit = By.xpath(".//*[@id='cpn-submit']");
-  final By buttonLogOut = By.xpath(".//*[@id='logout']/span");
-  final By labelMessage = By.xpath(".//div[@class='coupon-heading']/h6");
-  final By labelThanks =
+  private final By buttonSubmit = By.xpath(".//*[@id='cpn-submit']");
+  private final By buttonLogOut = By.xpath(".//*[@id='logout']/span");
+  private final By labelMessage = By.xpath(".//div[@class='coupon-heading']/h6");
+  private final By labelThanks =
       By.xpath(".//div[@class='coupon-heading']/h6[.='THANK YOU FOR YOUR REQUEST.']");
-  final By labelCouponInTheMail =
+  private final By labelCouponInTheMail =
       By.xpath(
           ".//div[@class='coupon-heading']/h6[.='LOOKS LIKE YOUR MONTHLY COUPON IS"
               + " ALREADY IN THE MAIL.']");
 
+  private By getButton3DollarsOffACarton() {
+    return button3DollarsOffACarton;
+  }
+
+  private By getButtonGetYoursByMail() {
+    return buttonGetYoursByMail;
+  }
+
+  private By getButtonCOUPONS() {
+    return buttonCOUPONS;
+  }
+
+  private By getButtonSubmit() {
+    return buttonSubmit;
+  }
+
+  private By getButtonLogOut() {
+    return buttonLogOut;
+  }
+
+  private By getLabelMessage() {
+    return labelMessage;
+  }
+
+  private By getLabelThanks() {
+    return labelThanks;
+  }
+
+  private By getLabelCouponInTheMail() {
+    return labelCouponInTheMail;
+  }
+
   public void button3DollarsOffACartonClick() throws QAException {
     scrollToTop();
-    scrollElementIntoView(getWebElement(button3DollarsOffACarton));
+    scrollElementIntoView(getWebElement(getButton3DollarsOffACarton()));
     scrollUp(250);
     Environment.setScrollToObject(false);
-    clickObject(button3DollarsOffACarton);
+    clickObject(getButton3DollarsOffACarton());
     Environment.setScrollToObject(true);
   }
 
   public void buttonGetYoursByMailClick() throws QAException {
-    clickObject(buttonGetYoursByMail);
+    clickObject(getButtonGetYoursByMail());
     boolean waitingVideo = true;
     do {
-      if (objectExists(button3DollarsOffACarton)) {
+      if (objectExists(getButton3DollarsOffACarton())) {
         waitingVideo = false;
       }
 
@@ -54,20 +86,20 @@ public class OffersAndActivityPage extends Page {
   }
 
   public void buttonCOUPONSClick() throws QAException {
-    clickObject(buttonCOUPONS);
+    clickObject(getButtonCOUPONS());
   }
 
   public void buttonSubmitClick() throws QAException {
     scrollToTop();
-    scrollElementIntoView(getWebElement(button3DollarsOffACarton));
+    scrollElementIntoView(getWebElement(getButton3DollarsOffACarton()));
     scrollUp(250);
     Environment.setScrollToObject(false);
-    clickObject(buttonSubmit);
+    clickObject(getButtonSubmit());
     Environment.setScrollToObject(true);
   }
 
   public void buttonLogOutClick() throws QAException {
-    clickObject(buttonLogOut);
+    clickObject(getButtonLogOut());
   }
 
   public void collectCoupons() throws QAException {
@@ -83,8 +115,8 @@ public class OffersAndActivityPage extends Page {
   public String getlabelMessage() throws QAException {
     String message = "";
     WebElement webElement = null;
-    if (objectExists(labelMessage, 3)) {
-      webElement = getWebElement(labelMessage);
+    if (objectExists(getLabelMessage(), 3)) {
+      webElement = getWebElement(getLabelMessage());
       message = webElement.getText();
     }
     final By labelMessage = By.xpath(".//div[@class='error-page']/p[2]/span");
@@ -96,13 +128,13 @@ public class OffersAndActivityPage extends Page {
   }
 
   public boolean labelThanksValidate() throws QAException {
-    return objectExists(labelThanks, 3);
+    return objectExists(getLabelThanks(), 3);
   }
 
   public boolean labelCouponInTheMailValidate() throws QAException {
     boolean collected = false;
-    if (objectExists(labelCouponInTheMail, 3)) {
-      final WebElement webElement = getWebElement(labelCouponInTheMail);
+    if (objectExists(getLabelCouponInTheMail(), 3)) {
+      final WebElement webElement = getWebElement(getLabelCouponInTheMail());
       collected = webElement.isDisplayed();
     }
     return collected;

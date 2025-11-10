@@ -16,55 +16,91 @@ public class SignInPage extends Page {
     super(webDriver);
   }
 
-  final By editUserName = By.xpath(".//*[@id='UserName']");
-  final By editPassword = By.xpath(".//*[@id='Password']");
-  final By editDateOfBirthMonth = By.xpath(".//*[@id='DateOfBirthMonth']");
-  final By editDateOfBirthDay = By.xpath(".//*[@id='DateOfBirthDay']");
-  final By editDateOfBirthYear = By.xpath(".//*[@id='DateOfBirthYear']");
-  final By CheckboxRememberUsername = By.xpath(".//*[@id='rememberUsername']");
-  final By buttonEnter = By.xpath(".//*[@id='loginBtn']");
-  final By imageAccount = By.xpath(".//a[@data-dtmtext='Account Logo']");
-  final By linkLogOut = By.xpath(".//a[contains(text(),'LOG OUT')]");
+  private final By editUserName = By.xpath(".//*[@id='UserName']");
+  private final By editPassword = By.xpath(".//*[@id='Password']");
+  private final By editDateOfBirthMonth = By.xpath(".//*[@id='DateOfBirthMonth']");
+  private final By editDateOfBirthDay = By.xpath(".//*[@id='DateOfBirthDay']");
+  private final By editDateOfBirthYear = By.xpath(".//*[@id='DateOfBirthYear']");
+  private final By checkboxRememberUsername = By.xpath(".//*[@id='rememberUsername']");
+  private final By buttonEnter = By.xpath(".//*[@id='loginBtn']");
+  private final By imageAccount = By.xpath(".//a[@data-dtmtext='Account Logo']");
+  private final By linkLogOut = By.xpath(".//a[contains(text(),'LOG OUT')]");
+
+  private By getEditUserName() {
+    return editUserName;
+  }
+
+  private By getEditPassword() {
+    return editPassword;
+  }
+
+  private By getEditDateOfBirthMonth() {
+    return editDateOfBirthMonth;
+  }
+
+  private By getEditDateOfBirthDay() {
+    return editDateOfBirthDay;
+  }
+
+  private By getEditDateOfBirthYear() {
+    return editDateOfBirthYear;
+  }
+
+  private By getCheckboxRememberUsername() {
+    return checkboxRememberUsername;
+  }
+
+  private By getButtonEnter() {
+    return buttonEnter;
+  }
+
+  private By getImageAccount() {
+    return imageAccount;
+  }
+
+  private By getLinkLogOut() {
+    return linkLogOut;
+  }
 
   public void buttonEnterClick() throws QAException {
-    clickObject(buttonEnter);
+    clickObject(getButtonEnter());
   }
 
   public void CheckboxRememberUsernameSet(String value) throws QAException {
-    setCheckbox(CheckboxRememberUsername, value);
+    setCheckbox(getCheckboxRememberUsername(), value);
   }
 
   public void editUserNameSet(String value) throws QAException {
-    setEdit(editUserName, value);
+    setEdit(getEditUserName(), value);
   }
 
   public void editPasswordSet(String value) throws QAException {
-    setEditPassword(editPassword, value);
+    setEditPassword(getEditPassword(), value);
   }
 
   public void editDateOfBirthMonthSet(String value) throws QAException {
-    setEdit(editDateOfBirthMonth, value);
+    setEdit(getEditDateOfBirthMonth(), value);
   }
 
   public void editDateOfBirthDaySet(String value) throws QAException {
-    setEdit(editDateOfBirthDay, value);
+    setEdit(getEditDateOfBirthDay(), value);
   }
 
   public void editDateOfBirthYearSet(String value) throws QAException {
-    setEdit(editDateOfBirthYear, value);
+    setEdit(getEditDateOfBirthYear(), value);
   }
 
   public void imageAccountClick() throws QAException {
     // webDriver.get(MarlboroEnvironment.URL_BASE +
     // "/pages/my-account/profile-page"
     // + IExtension.HTML);
-    final List<WebElement> webElements = webDriver.findElements(imageAccount);
+    final List<WebElement> webElements = webDriver.findElements(getImageAccount());
     final WebElement imageAccount = webElements.get(1);
     clickObject(imageAccount);
   }
 
   public void linkLogOutClick() throws QAException {
-    final List<WebElement> webElements = webDriver.findElements(linkLogOut);
+    final List<WebElement> webElements = webDriver.findElements(getLinkLogOut());
     final WebElement linkLogOut = webElements.get(0);
     clickObject(linkLogOut);
   }
@@ -72,7 +108,7 @@ public class SignInPage extends Page {
   public void populate(Map<String, String> mapUser) throws QAException {
     do {
       load();
-    } while (!objectExists(editUserName, 1));
+    } while (!objectExists(getEditUserName(), 1));
     editUserNameSet(mapUser.get("UserName"));
     editPasswordSet(EPasswords.MARLBORO.getValue());
     // editDateOfBirthMonthSet(mapUser.get("Month"));

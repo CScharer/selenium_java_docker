@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "strEmployerName")
 public class strEmployerName {
   @XmlAttribute(name = "ExportValue")
-  protected String exportValue;
+  private String exportValue;
 
   public String getExportValue() {
     return exportValue;

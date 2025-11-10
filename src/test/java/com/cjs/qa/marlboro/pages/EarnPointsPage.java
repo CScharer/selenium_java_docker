@@ -27,13 +27,33 @@ public class EarnPointsPage extends Page {
       Arrays.asList(CHARACTERS.split(Constants.DELIMETER_LIST));
   public static final String STATUS_FAILED = "FAILED";
   public static final String STATUS_PASSED = "PASSED";
-  public final By labelPointsEarned = By.xpath(".//div[@class='points-container']");
-  public final By labelCodesEntered = By.xpath(".//div[@class='added-code-text']/p");
-  public final By labelErrorMessage = By.xpath(".//div[@class='err-msg']/p");
-  public final By editPackCode = By.xpath(".//input[@name='snumber']");
-  public final By buttonSubmit = By.xpath(".//button[@type='button'][.='Submit']");
+  private final By labelPointsEarned = By.xpath(".//div[@class='points-container']");
+  private final By labelCodesEntered = By.xpath(".//div[@class='added-code-text']/p");
+  private final By labelErrorMessage = By.xpath(".//div[@class='err-msg']/p");
+  private final By editPackCode = By.xpath(".//input[@name='snumber']");
+  private final By buttonSubmit = By.xpath(".//button[@type='button'][.='Submit']");
   private final Map<Integer, String> characterMap = new HashMap<>();
   private final Map<Integer, Integer> indexMap = new HashMap<>();
+
+  private By getLabelPointsEarned() {
+    return labelPointsEarned;
+  }
+
+  private By getLabelCodesEntered() {
+    return labelCodesEntered;
+  }
+
+  private By getLabelErrorMessage() {
+    return labelErrorMessage;
+  }
+
+  private By getEditPackCode() {
+    return editPackCode;
+  }
+
+  private By getButtonSubmit() {
+    return buttonSubmit;
+  }
   private Map<Integer, Integer> indexStartMap =
       getHashMapFromFile(MarlboroEnvironment.FILE_INDEXES);
   private Marlboro marlboro = null;
@@ -69,7 +89,7 @@ public class EarnPointsPage extends Page {
   }
 
   public void buttonSubmitClick() throws QAException {
-    clickObject(buttonSubmit);
+    clickObject(getButtonSubmit());
   }
 
   private Map<Integer, Integer> getHashMapFromFile(String filePathName) {
@@ -96,7 +116,7 @@ public class EarnPointsPage extends Page {
 
   public void checkCodesEnteredThisMonth() throws QAException {
     final int codesPerMonthMax = 30;
-    String codesEnteredThisMonthLabel = getLabelCodesEntered();
+    String codesEnteredThisMonthLabel = getLabelCodesEnteredText();
     Environment.sysOut("Codes Entered:" + codesEnteredThisMonthLabel);
     String[] codesEnteredThisMonthArray = codesEnteredThisMonthLabel.split(" ");
     int codesEnteredThisMonth = Integer.valueOf(codesEnteredThisMonthArray[2]);
@@ -174,21 +194,21 @@ public class EarnPointsPage extends Page {
   }
 
   public void editPackCodeSet(String value) {
-    setEdit(editPackCode, value);
+    setEdit(getEditPackCode(), value);
   }
 
-  public String getLabelCodesEntered() throws QAException {
-    WebElement webElement = getWebElement(labelCodesEntered);
+  public String getLabelCodesEnteredText() throws QAException {
+    WebElement webElement = getWebElement(getLabelCodesEntered());
     return webElement.getText();
   }
 
-  public String getLabelPointsEarned() throws QAException {
-    WebElement webElement = getWebElement(labelPointsEarned);
+  public String getLabelPointsEarnedText() throws QAException {
+    WebElement webElement = getWebElement(getLabelPointsEarned());
     return webElement.getText();
   }
 
-  public String getLabelErrorMessage() throws QAException {
-    WebElement webElement = getWebElement(labelErrorMessage);
+  public String getLabelErrorMessageText() throws QAException {
+    WebElement webElement = getWebElement(getLabelErrorMessage());
     return webElement.getText();
   }
 
@@ -229,16 +249,16 @@ public class EarnPointsPage extends Page {
         refresh();
       }
       editPackCodeSet(packCode);
-      String packCodeActual = getWebDriver().findElement(editPackCode).getAttribute("value");
+      String packCodeActual = getWebDriver().findElement(getEditPackCode()).getAttribute("value");
       if (!packCode.equals(packCodeActual)) {
         throw new QAException(
             "The Pack Code [" + packCode + "] does NOT match [" + packCodeActual + "]");
       }
       buttonSubmitClick();
       JavaHelpers.sleep(5);
-      objectExists(editPackCode, 1);
-      if (objectExists(labelErrorMessage)) {
-        messageSys = getLabelErrorMessage();
+      objectExists(getEditPackCode(), 1);
+      if (objectExists(getLabelErrorMessage())) {
+        messageSys = getLabelErrorMessageText();
         messageFile = STATUS_FAILED;
       } else {
         messageSys = STATUS_PASSED;
