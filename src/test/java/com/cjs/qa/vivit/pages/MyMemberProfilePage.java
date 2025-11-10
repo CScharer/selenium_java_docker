@@ -335,7 +335,7 @@ public class MyMemberProfilePage extends Page {
     for (final List<?> item : data) {
       final String field = (String) item.get(0);
       final String value = (String) item.get(1);
-      if (!value.equals("")) {
+      if (!value.isEmpty()) {
         switch (field.toLowerCase(Locale.ENGLISH)) {
           case "email":
             setEditEmail(value);
@@ -452,7 +452,7 @@ public class MyMemberProfilePage extends Page {
     for (final List<?> item : listData) {
       final String field = (String) item.get(0);
       String value = (String) item.get(1);
-      if (!value.equals("")) {
+      if (!value.isEmpty()) {
         if (VivitEnvironment.isLogAll()) {
           VivitEnvironment.sysOut("{Field}" + field + ", {Value}" + value);
         }

@@ -391,7 +391,7 @@ public class ContactInfoPage extends Page {
       for (Entry entry : map.entrySet()) {
         String fieldName = (String) entry.getKey();
         String fieldValue = (String) entry.getValue();
-        if (!fieldName.equals(Data.FIELD_LINKEDIN_URL)) {
+        if (!Data.FIELD_LINKEDIN_URL.equals(fieldName)) {
           if (stringBuilderData.length() > 0) {
             stringBuilderData.append(",");
           }
@@ -399,7 +399,7 @@ public class ContactInfoPage extends Page {
               "[" + fieldName + "]='" + fieldValue.replaceAll("'", "''") + "'");
         }
       }
-      if (!stringBuilderData.toString().equals("")) {
+      if (!stringBuilderData.toString().isEmpty()) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("UPDATE [" + Data.TABLE_LINKEDIN + "] ");
         stringBuilder.append("SET ");

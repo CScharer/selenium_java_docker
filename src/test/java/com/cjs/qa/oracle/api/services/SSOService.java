@@ -37,7 +37,7 @@ public class SSOService extends WebService {
    */
   public String apiAddProject(String userName, String eMail, String applicationAbbreviation) {
     Map<String, String> map = new HashMap<>();
-    if ((userName == null) || userName.equals("")) {
+    if ((userName == null) || userName.isEmpty()) {
       userName = eMail.substring(0, eMail.indexOf("@"));
     }
     Map<String, String> oAuthenticate = new HashMap<>();
@@ -250,7 +250,7 @@ public class SSOService extends WebService {
         json += line;
       }
       oBufferedReader.close();
-      if (!responseCode.equals("200")) {
+      if (!"200".equals(responseCode)) {
         System.out.println(responseCode);
         System.out.println(responseMessage);
       }
@@ -368,7 +368,7 @@ public class SSOService extends WebService {
       boolean addAlternateEMail) {
     final Map<String, String> map = new HashMap<>();
     map.put("API_Method", JavaHelpers.getCurrentMethodName().toString());
-    if (name.equals("")) {
+    if (name.isEmpty()) {
       name = encoder.getEncodedValue("");
     }
     final String eMail = name + CJSConstants.MAILDOMAIN_GMAIL;

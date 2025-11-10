@@ -187,7 +187,7 @@ public class SystemProcesses {
             listFieldsProcessGrouped.add(fieldName);
           }
         }
-        if (fieldName.equals(PRIMARY_KEY_PROCESS)) {
+        if (PRIMARY_KEY_PROCESS.equals(fieldName)) {
           sqlStringBuilder.append(
               Constants.nlTab(1, 1)
                   + "`"
@@ -220,7 +220,7 @@ public class SystemProcesses {
             + "DEFAULT (null),");
     for (int listIndex = 0; listIndex < listFieldsProcessGrouped.size(); listIndex++) {
       final String fieldName = listFieldsProcessGrouped.get(listIndex);
-      if (fieldName.equals(PRIMARY_KEY_PROCESS)) {
+      if (PRIMARY_KEY_PROCESS.equals(fieldName)) {
         sqlStringBuilder.append(
             Constants.nlTab(1, 1)
                 + "`"

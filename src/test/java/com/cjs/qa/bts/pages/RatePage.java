@@ -102,7 +102,7 @@ public class RatePage extends Page {
   // for (List<?> item : data) {
   // String field = (String) item.get(0);
   // String value = (String) item.get(1);
-  // if (!value.equals("")) {
+  // if (!value.isEmpty()) {
   // sysOut("({Field}" + field + ", {Value}" + value + ");");
   // switch (field.toLowerCase(Locale.ENGLISH)) {
   // case "field1":
@@ -128,7 +128,7 @@ public class RatePage extends Page {
     for (final List<?> item : data) {
       final String field = (String) item.get(0);
       final String value = (String) item.get(1);
-      if (!value.equals("")) {
+      if (!value.isEmpty()) {
         expected.put(field, value);
         switch (field.toLowerCase(Locale.ENGLISH)) {
           case "policy total":

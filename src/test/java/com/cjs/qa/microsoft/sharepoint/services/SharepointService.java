@@ -125,7 +125,7 @@ public class SharepointService {
       httpURLConnection.setDoOutput(true);
       // httpURLConnection.setInstanceFollowRedirects(false);
       httpURLConnection.setInstanceFollowRedirects(true);
-      if (!requestMethod.equals("")) {
+      if (!requestMethod.isEmpty()) {
         httpURLConnection.setRequestMethod(requestMethod);
       }
       httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");

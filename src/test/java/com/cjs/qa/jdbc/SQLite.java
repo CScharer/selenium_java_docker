@@ -38,7 +38,7 @@ public class SQLite {
     stringBuilder.append(JDBCConstants.CREATE_TABLE + "'<TABLE_NAME>' (");
     for (String field : fields) {
       stringBuilder.append("'" + field + "' TEXT NOT NULL");
-      if (!field.equals("Premium")) {
+      if (!"Premium".equals(field)) {
         stringBuilder.append(",");
       }
     }
@@ -66,7 +66,7 @@ public class SQLite {
     stringBuilder.append(JDBCConstants.LEFT_JOIN + "[<TABLE_RIGHT>] tr ");
     for (int index = 0; index < fields.size(); index++) {
       final String field = fields.get(index);
-      if (!field.equals("Premium")) {
+      if (!"Premium".equals(field)) {
         if (index == 0) {
           stringBuilder.append(JDBCConstants.ON + "tl.[" + field + "] = tr.[" + field + "]");
         } else {

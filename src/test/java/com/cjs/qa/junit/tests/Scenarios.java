@@ -572,7 +572,7 @@ public class Scenarios {
   }
 
   private void jenkinsWebDriverValidate(String browser, SoftAssert softAssert) throws Throwable {
-    if (!browser.equalsIgnoreCase(ISelenium.BROWSER_DEFAULT)) {
+    if (!ISelenium.BROWSER_DEFAULT.equalsIgnoreCase(browser)) {
       setSeleniumWebDriver(
           new SeleniumWebDriver(browser, Environment.isRunRemote(), null, null, null));
     }

@@ -86,13 +86,13 @@ public class SoftAssert {
           stringBuilderDeleted.append(value + Constants.NEWLINE);
         }
       }
-      if (!stringBuilderAdded.toString().equals("")) {
+      if (!stringBuilderAdded.toString().isEmpty()) {
         // failureMap.put(key + "[Added]",
         // stringBuilderAdded.toString());
         failureMap.put(
             key + "[Exists in Actual; but Missing from Expected]", stringBuilderAdded.toString());
       }
-      if (!stringBuilderDeleted.toString().equals("")) {
+      if (!stringBuilderDeleted.toString().isEmpty()) {
         // failureMap.put(key + "[Deleted]",
         // stringBuilderDeleted.toString());
         failureMap.put(

@@ -267,8 +267,8 @@ public class EarnPointsPage extends Page {
         failed = false;
       }
       Environment.sysOut(messageSys + ", " + messageData);
-    } while (messageFile.equals(STATUS_FAILED)
-        && !messageSys.equals("The code you entered is not valid."));
+    } while (STATUS_FAILED.equals(messageFile)
+        && !"The code you entered is not valid.".equals(messageSys));
     setSearches(getSearches() + 1);
     Environment.sysOut("Searches Made:[" + getSearches() + "]");
     messageData = messageData.replaceAll("], ", "]\t");

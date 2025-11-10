@@ -729,7 +729,7 @@ public class JavaHelpers {
    * @return
    */
   public static boolean hasValue(String value) {
-    return (value != null && !value.equals(""));
+    return (value != null && !value.isEmpty());
   }
 
   /**
@@ -886,7 +886,7 @@ public class JavaHelpers {
     final char[] charNumber = stringNumber.toCharArray();
     for (char ch : charNumber) {
       final String character = String.valueOf(ch);
-      if (!character.equals(".") && !Character.isDigit(ch)) {
+      if (!".".equals(character) && !Character.isDigit(ch)) {
         return false;
       }
     }

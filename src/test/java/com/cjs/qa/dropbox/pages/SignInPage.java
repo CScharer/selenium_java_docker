@@ -168,7 +168,7 @@ public class SignInPage extends Page {
     buttonSignInClick();
     editEmailSet(eMail);
     editPasswordSet(EPasswords.DROPBOX.getValue());
-    if (eMail.equalsIgnoreCase(CJSConstants.EMAIL_ADDRESS_MSN)) {
+    if (CJSConstants.EMAIL_ADDRESS_MSN.equalsIgnoreCase(eMail)) {
       checkboxRememberMeSet("checked");
     } else {
       checkboxRememberMeSet("unchecked");

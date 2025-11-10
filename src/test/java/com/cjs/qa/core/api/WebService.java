@@ -119,7 +119,7 @@ public class WebService {
       httpURLConnection = (HttpURLConnection) oURL.openConnection();
       httpURLConnection.setDoOutput(true);
       httpURLConnection.setInstanceFollowRedirects(false);
-      if (!requestMethod.equals("")) {
+      if (!requestMethod.isEmpty()) {
         httpURLConnection.setRequestMethod(requestMethod);
       }
       httpURLConnection.setRequestProperty("Content-Type", "application/json");
@@ -304,7 +304,7 @@ public class WebService {
       httpURLConnection = (HttpURLConnection) oURL.openConnection();
       httpURLConnection.setDoOutput(true);
       httpURLConnection.setInstanceFollowRedirects(false);
-      if (!requestMethod.equals("")) {
+      if (!requestMethod.isEmpty()) {
         httpURLConnection.setRequestMethod(requestMethod);
       }
       // httpURLConnection.setRequestProperty("Content-Type",

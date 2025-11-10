@@ -127,7 +127,7 @@ public class Reports {
       final String sheetNameFailure =
           Environment.getSheetFailure(
               filePathName, DEFAULT_SHEET_COUNT, mapSummary.get("Policy Control"));
-      if (mapSummary.get("Status").equals("passed")) {
+      if ("passed".equals(mapSummary.get("Status"))) {
         updateCount(excel, "Passed");
         if (writeData) {
           mapSummary.put("Error(s)", "N/A-See Sheet (" + sheetNameFailure + ")");
@@ -328,7 +328,7 @@ public class Reports {
         row = (excel.getRowCount(sheetName) + 1);
         final Map<String, String> mapData = listMapSection.get(indexRecord);
         final String action = mapData.get("Action");
-        if (!action.equals("Match")) {
+        if (!"Match".equals(action)) {
           for (final String fieldName : fieldNames) {
             column = resultColumns.get(fieldName);
             final String fieldValue = mapData.get(fieldName);

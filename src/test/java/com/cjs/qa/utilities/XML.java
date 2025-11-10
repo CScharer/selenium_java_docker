@@ -261,14 +261,14 @@ public class XML {
       if (parent.equals(rootDescendant)) {
         break;
       }
-      if (descendants.equals("")) {
+      if (descendants.isEmpty()) {
         descendants += getNodeDescendantNames(nodeParent, rootDescendant, parent);
         return descendants;
       } else {
         descendants += "~" + getNodeDescendantNames(nodeParent, rootDescendant, parent);
         return descendants;
       }
-    } while (!parent.equals("InsurancePolicyXML"));
+    } while (!"InsurancePolicyXML".equals(parent));
     return descendants;
   }
 
@@ -302,7 +302,7 @@ public class XML {
    */
   public static void traverseNodes(Node node, String nodeName) {
     String nodeNameT = "";
-    // if (nodeName.equals(""))
+    // if (nodeName.isEmpty())
     // {
     nodeNameT = node.getNodeName();
     // } else

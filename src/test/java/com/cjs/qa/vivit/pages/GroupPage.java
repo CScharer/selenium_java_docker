@@ -347,7 +347,7 @@ public class GroupPage extends Page {
       final WebElement webElement = webElements.get(index);
       highlightCurrentElement(webElement);
       final String item = webElement.getText();
-      if (!item.trim().equals("")) {
+      if (!item.trim().isEmpty()) {
         stringBuilder.append(item + Constants.NEWLINE);
         Environment.sysOut(index + ":[" + item + "]");
       }

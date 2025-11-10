@@ -1621,7 +1621,7 @@ public class Page extends JavaHelpers {
         select.selectByIndex(index);
       } else {
         boolean itemFound = false;
-        if (value.equalsIgnoreCase(CJSConstants.EMPTY)) {
+        if (CJSConstants.EMPTY.equalsIgnoreCase(value)) {
           value = "";
         }
         if (bCaseSensitive) {
@@ -1687,7 +1687,7 @@ public class Page extends JavaHelpers {
         logFieldName(webElement.toString(), value);
       }
       webElement.clear();
-      if (!value.equalsIgnoreCase(CJSConstants.EMPTY)) {
+      if (!CJSConstants.EMPTY.equalsIgnoreCase(value)) {
         webElement.sendKeys(value);
       }
       // logFieldName(webElement.toString(), value)

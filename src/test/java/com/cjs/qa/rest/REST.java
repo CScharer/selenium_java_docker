@@ -37,7 +37,7 @@ public class REST {
       httpURLConnection.setDoInput(true);
       httpURLConnection.setDoOutput(true);
       httpURLConnection.setInstanceFollowRedirects(false);
-      if (!requestMethod.equals("")) {
+      if (!requestMethod.isEmpty()) {
         httpURLConnection.setRequestMethod(requestMethod);
       }
       if (JavaHelpers.hasValue(credentials)) {

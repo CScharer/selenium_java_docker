@@ -242,7 +242,7 @@ public class StepsVivit extends Environment {
         Environment.sysOut(field + ":[" + value + "]");
       }
     }
-    // if (browser.equals(""))
+    // if (browser.isEmpty())
     // {
     // browser = Environment.getStepBrowser();
     // webDriver = selenium.browserProfiling(webDriver, browser,

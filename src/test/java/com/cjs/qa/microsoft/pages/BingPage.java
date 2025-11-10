@@ -115,7 +115,7 @@ public class BingPage extends Page {
         url = searchValue + String.valueOf(search);
         if (getWordsList().size() >= search) {
           String word = getWordsList().get(search - 1).replaceAll(Constants.SYMBOL_TRADEMARK, "");
-          if (!word.equals("")) {
+          if (!word.isEmpty()) {
             url = searchValue + word;
           }
         }
@@ -168,7 +168,7 @@ public class BingPage extends Page {
       text = webElement.getText();
     }
     if (text != null) {
-      if (!text.equals("Rewards")) {
+      if (!"Rewards".equals(text)) {
         currentPoints = Integer.valueOf(text);
       } else {
         currentPoints += RewardsPage.POINTS_PER_SEACH_PC;

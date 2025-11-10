@@ -34,7 +34,7 @@ public class WebDriverUtils {
   }
 
   public void takeScreenshotDesktop(String path, String name, String extension) {
-    if (path.equals("")) {
+    if (path.isEmpty()) {
       path = pathScreenshots;
     }
     final GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -63,10 +63,10 @@ public class WebDriverUtils {
   }
 
   public void takeScreenshot(String path, String name, String extension) {
-    if (path.equals("")) {
+    if (path.isEmpty()) {
       path = pathScreenshots;
     }
-    if (extension.equals("")) {
+    if (extension.isEmpty()) {
       extension = "png";
     }
     final Encoder encoder = new Encoder("");

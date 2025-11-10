@@ -97,7 +97,7 @@ public class AddNewPolicyPage extends Page {
   }
 
   public void enterPolicyNum(String policyNum, String policyNumSeq) {
-    if (getCheckbox(checkboxUserEnteredPolicyNum).equals("checked")) {
+    if ("checked".equals(getCheckbox(checkboxUserEnteredPolicyNum))) {
       setEdit(editPolicyNum, policyNum);
       clickObject(clickOffDate);
       setEdit(editPolicyNumSeq, policyNumSeq);

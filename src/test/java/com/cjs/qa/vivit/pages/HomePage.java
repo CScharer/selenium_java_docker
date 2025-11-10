@@ -60,7 +60,7 @@ public class HomePage extends Page {
     List<WebElement> webElementList = getWebDriver().findElements(byLanguages);
     List<String> languagesSupportedList = new ArrayList<>();
     for (WebElement webElement : webElementList) {
-      if (!stringBuilder.toString().equals("")) {
+      if (!stringBuilder.toString().isEmpty()) {
         stringBuilder.append(Constants.NEWLINE);
       }
       languagesSupportedList.add(webElement.getText());

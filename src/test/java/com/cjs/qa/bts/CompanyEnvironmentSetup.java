@@ -90,9 +90,8 @@ public class CompanyEnvironmentSetup extends Environment {
         // Set the Access Key automatically for the default HubUserName.
         if (JavaHelpers.hasValue(getHubUserName())) {
           getCompanyEnvironmentData().setHubUserName(getHubUserName());
-          if (getCompanyEnvironmentData()
-              .getHubUserName()
-              .equalsIgnoreCase(SauceUtils.DEFAULT_HOST)) {
+          if (SauceUtils.DEFAULT_HOST.equalsIgnoreCase(
+              getCompanyEnvironmentData().getHubUserName())) {
             getCompanyEnvironmentData().setHubUserAccessKey(SauceUtils.DEFAULT_ACCESS_KEY);
           }
         }
@@ -102,9 +101,8 @@ public class CompanyEnvironmentSetup extends Environment {
         } else {
           if (JavaHelpers.hasValue(getHubUserName())) {
             getCompanyEnvironmentData().setHubUserName(getHubUserName());
-            if (getCompanyEnvironmentData()
-                .getHubUserName()
-                .equalsIgnoreCase(SauceUtils.DEFAULT_HOST)) {
+            if (SauceUtils.DEFAULT_HOST.equalsIgnoreCase(
+                getCompanyEnvironmentData().getHubUserName())) {
               setHubUserAccessKey(SauceUtils.DEFAULT_ACCESS_KEY);
               setHubParentTunnel(SauceUtils.DEFAULT_PARENT_TUNNEL);
               setHubTunnelIdentifier(SauceUtils.DEFAULT_TUNNEL_IDENTIFIER);

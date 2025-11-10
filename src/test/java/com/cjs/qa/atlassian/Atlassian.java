@@ -85,7 +85,7 @@ public class Atlassian {
       } catch (final Exception e) {
         e.printStackTrace();
       }
-      if (map.get("status").equals("0")) {
+      if ("0".equals(map.get("status"))) {
         Environment.sysOut("PASS!!! map:" + map.toString());
       } else {
         Environment.sysOut("FAIL!!! map:" + map.toString());

@@ -35,7 +35,7 @@ public class SaMembersNamespace extends YMService {
             + ">");
     stringBuilder.append(Constants.nlTab(1, 2) + "<Timestamp>" + timestamp + "</Timestamp>");
     stringBuilder.append(Constants.nlTab(1, 2) + "<WebsiteID>" + websiteID + "</WebsiteID>");
-    if (!groups.equals("")) {
+    if (!groups.isEmpty()) {
       stringBuilder.append(Constants.nlTab(1, 2) + "<Groups>" + groups + "</Groups>");
     }
     stringBuilder.append(Constants.nlTab(1, 1) + YMAPI.LABEL_CALL_METHOD_SUFFIX);

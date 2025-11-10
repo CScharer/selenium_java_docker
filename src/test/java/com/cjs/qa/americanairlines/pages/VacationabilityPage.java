@@ -107,7 +107,7 @@ public class VacationabilityPage extends Page {
     // editLastNameSet("Scharer");
     // editEmailSet(CJSConstants.EMAIL_ADDRESS_MSN);
     // editAANumber("7L86P34");
-    // checkboxAgreeSet("checked");
+    // checkboxAgreeSet(LABEL_OPTION_CHECKED);
     // buttonRegisterClick();
   }
 }

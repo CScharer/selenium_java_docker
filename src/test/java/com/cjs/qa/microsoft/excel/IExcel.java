@@ -105,10 +105,10 @@ public interface IExcel {
   static String getFileType(String fileName) {
     Environment.sysOut("fileCheck:[" + fileName + "]");
     final String fileNameExtension = "." + FilenameUtils.getExtension(fileName);
-    if (fileNameExtension.equalsIgnoreCase(IExtension.XLS)) {
+    if (IExtension.XLS.equalsIgnoreCase(fileNameExtension)) {
       return IExtension.XLS;
     }
-    if (fileNameExtension.equalsIgnoreCase(IExtension.XLSX)) {
+    if (IExtension.XLSX.equalsIgnoreCase(fileNameExtension)) {
       return IExtension.XLSX;
     }
     return null;

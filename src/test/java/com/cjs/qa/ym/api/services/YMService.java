@@ -122,7 +122,7 @@ public class YMService {
       httpURLConnection = (HttpURLConnection) oURL.openConnection();
       httpURLConnection.setDoOutput(true);
       httpURLConnection.setInstanceFollowRedirects(false);
-      if (!requestMethod.equals("")) {
+      if (!requestMethod.isEmpty()) {
         httpURLConnection.setRequestMethod(requestMethod);
       }
       httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -163,7 +163,7 @@ public class YMService {
       }
       dataOutputStream.close();
       httpURLConnection.disconnect();
-      if (!XML.getTag(xml, "ErrCode").equals("0")) {
+      if (!"0".equals(XML.getTag(xml, "ErrCode"))) {
         String message = JavaHelpers.getCallingMethodName() + ":" + XML.getTag(xml, "ErrDesc");
         throw new QAException(message);
       }

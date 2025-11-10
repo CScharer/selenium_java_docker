@@ -297,7 +297,7 @@ public class Data {
   public static StringBuilder updateRecords(StringBuilder sqlStringBuilder) throws Throwable {
     Environment.sysOut(
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");
-    if (!sqlStringBuilder.toString().equals("")) {
+    if (!sqlStringBuilder.toString().isEmpty()) {
       int recordsAffected = getJdbc().executeUpdate(sqlStringBuilder.toString(), false);
       String message =
           Constants.NEWLINE + sqlStringBuilder.toString().replaceAll(";", Constants.NEWLINE);

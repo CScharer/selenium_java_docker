@@ -83,7 +83,7 @@
 **Pattern:**
 ```java
 variable.equals("constant")  → "constant".equals(variable)
-variable.equals("")         → variable.isEmpty() // for Strings
+variable.isEmpty()         → variable.isEmpty() // for Strings
 ```
 
 **Batches:**
@@ -722,8 +722,8 @@ These require significant refactoring or are false positives:
 *Files Fixed (9 files):*
 
 **1. VivitData.java (18 violations → 0)** [Commit: a0e5d61]
-- !data.equals("") → !"".equals(data) [4 instances]
-- !record.equals("") → !"".equals(record) [4 instances]
+- !data.isEmpty() → !"".equals(data) [4 instances]
+- !record.isEmpty() → !"".equals(record) [4 instances]
 - dynamicQuery.equals("1") → "1".equals(dynamicQuery) [2]
 - dynamicQuery.equals("0") → "0".equals(dynamicQuery) [2]
 - value.equals("null") → "null".equals(value) [2]
@@ -732,27 +732,27 @@ These require significant refactoring or are false positives:
 - mapProcess.get("status").equals("0") → "0".equals(...)
 
 **2. Main.java (12 violations → 0)** [Commit: 0c2fc30]
-- !capturedArrestsURLs.equals("") → !"".equals(...)
-- !sqlStringBuilder.toString().equals("") → !"".equals(...) [5x]
-- !missingPrisonerURLs.equals("") → !"".equals(...)
-- !missingCaseURLs.equals("") → !"".equals(...)
+- !capturedArrestsURLs.isEmpty() → !"".equals(...)
+- !sqlStringBuilder.toString().isEmpty() → !"".equals(...) [5x]
+- !missingPrisonerURLs.isEmpty() → !"".equals(...)
+- !missingCaseURLs.isEmpty() → !"".equals(...)
 
 **3. Page.java (6 violations → 0)** [Commit: 0c2fc30]
 - webElement.getTagName().equals("input") → "input".equals(...)
-- stringBuilder.toString().equals("") → "".equals(...)
-- value.equals("") → "".equals(value) [2x]
-- name.equals("") → "".equals(name)
-- !value.equals("") → !"".equals(value) [2x]
+- stringBuilder.toString().isEmpty() → "".equals(...)
+- value.isEmpty() → "".equals(value) [2x]
+- name.isEmpty() → "".equals(name)
+- !value.isEmpty() → !"".equals(value) [2x]
 
 **4. Coder.java (2 violations → 0)** [Commit: bac0fd7]
 - pagePopulate.equals("true") → "true".equals(pagePopulate)
 - pageValidate.equals("true") → "true".equals(pageValidate)
 
 **5. SQL.java (6 violations → 0)** [Commit: bac0fd7]
-- !stringBuilderFields.toString().equals("") → !"".equals(...) [2x]
-- !stringBuilderValues.toString().equals("") → !"".equals(...)
-- !environment.equals("") → !"".equals(environment)
-- !company.equals("") → !"".equals(company) [2x]
+- !stringBuilderFields.toString().isEmpty() → !"".equals(...) [2x]
+- !stringBuilderValues.toString().isEmpty() → !"".equals(...)
+- !environment.isEmpty() → !"".equals(environment)
+- !company.isEmpty() → !"".equals(company) [2x]
 
 **6. HTML.java (6 violations → 0)** [Commit: bac0fd7]
 - mapReport.get("Contractor").equals("Cumulative") → "Cumulative".equals(...) [3x]
@@ -763,27 +763,27 @@ These require significant refactoring or are false positives:
 - fieldName.equals("Mem Usage") → "Mem Usage".equals(fieldName)
 
 **8. JDBC.java (5 violations → 0)** [Commit: bac0fd7]
-- !environment.equals("") → !"".equals(environment)
-- !database.equals("") → !"".equals(database)
-- !stringBuilderHeadings.toString().equals("") → !"".equals(...)
-- !stringBuilderColumns.toString().equals("") → !"".equals(...)
-- !stringBuilderColumn.toString().equals("") → !"".equals(...)
+- !environment.isEmpty() → !"".equals(environment)
+- !database.isEmpty() → !"".equals(database)
+- !stringBuilderHeadings.toString().isEmpty() → !"".equals(...)
+- !stringBuilderColumns.toString().isEmpty() → !"".equals(...)
+- !stringBuilderColumn.toString().isEmpty() → !"".equals(...)
 
 **9. BtsCrosswordChallengePage.java (5 violations → 0)** [Commit: bac0fd7]
-- !values.equals("") → !"".equals(values)
-- startLetter.equals("") → "".equals(startLetter)
+- !values.isEmpty() → !"".equals(values)
+- startLetter.isEmpty() → "".equals(startLetter)
 - actual.equals("Web Page Restricted") → "Web Page Restricted".equals(actual)
 - sClass.equals("GridSquare Let") → "GridSquare Let".equals(sClass)
-- mapGridSquares.get(i).equals("") → "".equals(...)
+- mapGridSquares.get(i).isEmpty() → "".equals(...)
 
 **10. YMData.java (4 violations → 0)** [Commit: bac0fd7]
-- !sqlStringBuilder.toString().equals("") → !"".equals(...) [2x]
+- !sqlStringBuilder.toString().isEmpty() → !"".equals(...) [2x]
 - !attendeeNodeName.equals("DataSet") → !"DataSet".equals(...)
 - !eventRegistrationNodeName.equals("DataSet") → !"DataSet".equals(...)
 
 **11. YMAPIMethods.java (3 violations → 0)** [Commit: bac0fd7]
 - parameterPType.equals("Call Arguments") → "Call Arguments".equals(...) [2x]
-- !stringBuilderArguments.toString().equals("") → !"".equals(...) [2x]
+- !stringBuilderArguments.toString().isEmpty() → !"".equals(...) [2x]
 
 **EmptyCatchBlock: 23 → 18 (5 more fixed with actual code)**
 
@@ -1615,7 +1615,7 @@ Total Files Modified: 160+
 - Extracted `writeExcelDataCell()` method (data cell with conditional formatting)
 - Extracted `handleNumericColumn()` method (null → "0" conversion)
 - Extracted `handlePercentColumn()` method (percent formatting with precision)
-- Added guard clause (`if (record.equals("")) continue;`)
+- Added guard clause (`if (record.isEmpty()) continue;`)
 - Used ternary operators for simple null checks
 - Reduced nesting: 5 levels → 2 levels maximum
 
@@ -7206,12 +7206,12 @@ switch (field) {
 **Example 3: InnerAssignment Clarity Fix**
 ```java
 // BEFORE - Hard to Debug
-if (descendants.equals("")) {
+if (descendants.isEmpty()) {
   return descendants += getNodeDescendantNames(...);  // ❌ Assignment in return
 }
 
 // AFTER - Clear Intent
-if (descendants.equals("")) {
+if (descendants.isEmpty()) {
   descendants += getNodeDescendantNames(...);  // ✅ Assignment
   return descendants;                           // ✅ Return
 }

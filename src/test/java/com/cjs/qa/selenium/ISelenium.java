@@ -2,6 +2,7 @@ package com.cjs.qa.selenium;
 
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
+import com.cjs.qa.selenium.Page;
 import com.cjs.qa.utilities.CommandLine;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.DateHelpers;
@@ -607,7 +608,7 @@ public interface ISelenium {
             final String message = String.format("Field:[%s], Value[%s]", field, value);
             Environment.sysOut(message);
           }
-          item = itemList.get(itemIndex).getAttribute("checked");
+          item = itemList.get(itemIndex).getAttribute(LABEL_OPTION_CHECKED );
           if (item == null) {
             itemList.get(itemIndex).click();
           }
@@ -725,7 +726,7 @@ public interface ISelenium {
       final String operatingSystem = System.getProperty("os.name");
       final DesiredCapabilities desiredCapabilities =
           setDesiredCapabilities(operatingSystem, browser);
-      if (browser.toLowerCase(Locale.ENGLISH).equals("htmlunit")) {
+      if ("htmlunit".equals(browser.toLowerCase(Locale.ENGLISH))) {
         webDriver = new HtmlUnitDriver(desiredCapabilities);
         return webDriver;
       }
@@ -800,7 +801,7 @@ public interface ISelenium {
           break;
         default:
           if (remote) {
-            if (sBrowser.equals("firefox")) {
+            if ("firefox".equals(sBrowser)) {
               System.setProperty(
                   "webdriver.gecko.driver", Constants.PATH_DRIVERS_LOCAL + "geckodriver.exe");
               // File profileDirectory = new File("C:/Temp/");
@@ -1067,8 +1068,8 @@ public interface ISelenium {
       final String elementHref = element.attr("href");
       final String elementText = element.text();
       /*
-       * if (element.hasAttr("id") && elementText.equals("") &&
-       * elementHref.equals("")) { sb.append(elementID + Constants.TAB +
+       * if (element.hasAttr("id") && elementText.isEmpty() &&
+       * elementHref.isEmpty()) { sb.append(elementID + Constants.TAB +
        * elementName + Constants.TAB + elementHref + Constants.TAB +
        * elementText + Constants.NEWLINE); }
        */

@@ -99,7 +99,7 @@ public class WebElementTable extends Page {
     final int rowCount = getRowCount();
     for (final int key : getHeadingsIndex().keySet()) {
       String heading = getHeadingsIndex().get(key);
-      if (heading.equals("")) {
+      if (heading.isEmpty()) {
         heading = getColumnNamePrefix() + key;
       }
       heading = prepareForCSV(heading);
@@ -381,7 +381,7 @@ public class WebElementTable extends Page {
       final WebElement webElement = headings.get(headingIndex);
       highlightWebElement(webElement);
       String columnName = webElement.getText();
-      if (columnName.equals("")) {
+      if (columnName.isEmpty()) {
         columnName = getColumnNamePrefix() + String.valueOf((headingIndex + 1));
       }
       getHeadingsName().put(columnName, (headingIndex + 1));

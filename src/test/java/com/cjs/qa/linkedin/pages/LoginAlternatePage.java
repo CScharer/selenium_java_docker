@@ -132,7 +132,7 @@ public class LoginAlternatePage extends Page {
     for (List<?> item : list) {
       String field = (String) item.get(0);
       String value = (String) item.get(1);
-      if (!value.equals("")) {
+      if (!value.isEmpty()) {
         Environment.sysOut("{Field}" + field + ", {Value}" + value);
         switch (field.toLowerCase(Locale.ENGLISH)) {
           case "email":
@@ -158,7 +158,7 @@ public class LoginAlternatePage extends Page {
     for (List<?> item : list) {
       String field = (String) item.get(0);
       String value = (String) item.get(1);
-      if (!value.equals("")) {
+      if (!value.isEmpty()) {
         Environment.sysOut("{Field}" + field + ", {Value}" + value);
         expected.put(field, value);
         switch (field.toLowerCase(Locale.ENGLISH)) {

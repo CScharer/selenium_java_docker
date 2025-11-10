@@ -318,10 +318,10 @@ public class Payment {
         if (appendedDistribDateList.contains(mapReport.get(LBLHEADING_PAYMENT_DISTRIB))) {
           lastPayment = true;
         }
-        if (field.equals(LBLHEADING_PAYMENT_AMOUNT)) {
+        if (LBLHEADING_PAYMENT_AMOUNT.equals(field)) {
           value = JavaHelpers.formatNumber(value, "$#,##0.00");
         }
-        if (field.equals("Index") && value.contains("~All")) {
+        if ("Index".equals(field) && value.contains("~All")) {
           totalRow = true;
         }
         if (totalRow) {

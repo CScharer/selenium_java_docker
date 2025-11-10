@@ -124,7 +124,7 @@ public class BitcoinTestSet {
     stringBuilder.append("'" + bitcoin.getRateFloat() + "');");
     stringBuilder.append(Constants.NEWLINE);
     stringBuilderSQL.append(stringBuilder.toString());
-    if (!stringBuilderSQL.toString().equals("")
+    if (!stringBuilderSQL.toString().isEmpty()
         && stringBuilderSQL.toString().split(Constants.NEWLINE).length >= 1) {
       int recordsAffected = getJdbc().executeUpdate(stringBuilderSQL.toString(), false);
       Environment.sysOut("recordsAffected:[" + recordsAffected + "]");

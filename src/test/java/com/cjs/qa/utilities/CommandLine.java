@@ -79,7 +79,7 @@ public class CommandLine {
     String command = "cmd /C jps";
     final Map<String, String> mapProcess = runProcess(command, true);
     String status = mapProcess.get("status");
-    if (status.equals("0")) {
+    if ("0".equals(status)) {
       String processes = mapProcess.get("lines").toString();
       List<String> jpsProcessList = Arrays.asList(processes.split(Constants.NEWLINE));
       for (String jpsProcess : jpsProcessList) {
@@ -185,7 +185,7 @@ public class CommandLine {
     final StringBuilder stringBuilder = new StringBuilder();
     String line;
     while ((line = bufferedReader.readLine()) != null) {
-      if (!stringBuilder.toString().equals("")) {
+      if (!stringBuilder.toString().isEmpty()) {
         stringBuilder.append(Constants.NEWLINE);
       }
       stringBuilder.append(line);

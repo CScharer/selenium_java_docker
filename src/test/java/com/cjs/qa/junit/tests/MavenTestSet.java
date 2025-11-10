@@ -105,7 +105,7 @@ public class MavenTestSet {
     final Map<String, String> mapResults = CommandLine.runProcess(command, true);
     final String status = mapResults.get("status");
     stringBuilder.append(newLine("status:" + mapResults.get("status")));
-    if (status.equals("0")) {
+    if ("0".equals(status)) {
       final String projectFolder =
           projectPath.substring((projectPath.lastIndexOf(Constants.DELIMETER_PATH) + 1));
       stringBuilder.append(newLine(parseResultsFile(resultsPathFile, projectFolder)));

@@ -1330,7 +1330,7 @@ public class VivitData extends Environment {
         ParameterHelper.getParameters(
             Arrays.asList(Arrays.asList("overideMonthDay", overideMonthDay))));
     final String monthDay = DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_DD);
-    if (!monthDay.equals(REPORT_DAY_BILLABLE_HOURS) && !overideMonthDay) {
+    if (!REPORT_DAY_BILLABLE_HOURS.equals(monthDay) && !overideMonthDay) {
       return;
     }
     JDBC jdbc = new JDBC("", DATABASE_DEFINITION);
@@ -1395,7 +1395,7 @@ public class VivitData extends Environment {
                 Arrays.asList(LABEL_SEND_EMAIL, sendEmail),
                 Arrays.asList("overideMonthDay", overideMonthDay))));
     final String monthDay = DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_DD);
-    if (!monthDay.equals(REPORT_DAY_TREASURER) && !overideMonthDay) {
+    if (!REPORT_DAY_TREASURER.equals(monthDay) && !overideMonthDay) {
       return;
     }
     FSO.fileDelete(VivitFoldersFiles.REPORT_XLS_AUTOMATION_T);
@@ -3099,7 +3099,7 @@ public class VivitData extends Environment {
     // For each table update the tables with the exception of the Calendars
     // table which only has Current.
     for (String table : tableArray) {
-      if (!table.equalsIgnoreCase("Calendars")) {
+      if (!"Calendars".equalsIgnoreCase(table)) {
         VivitData.dropAndCreateBackUpTables(table);
         String queryDeletePrevious =
             JDBCConstants.DELETE_FROM + "[" + VivitTables.PREFIX + table + LABEL_PREVIOUS + "];";

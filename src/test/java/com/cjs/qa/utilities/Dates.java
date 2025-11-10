@@ -69,7 +69,7 @@ public class Dates {
   }
 
   public String addOneYear(String date) {
-    if (!(date.equals(""))) {
+    if (!(date.isEmpty())) {
       String temp = date;
       int loc = temp.indexOf("/");
       String monthDay = temp.substring(0, loc) + "/";

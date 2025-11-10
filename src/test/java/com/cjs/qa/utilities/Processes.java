@@ -70,7 +70,7 @@ public class Processes {
     } else {
       stringBuilder.append(ProcessUtil.HEADINGS.replaceAll(Constants.DELIMETER_LIST, ", "));
       for (ProcessUtil processUtil : getProcessList()) {
-        if (!stringBuilder.toString().equals("")) {
+        if (!stringBuilder.toString().isEmpty()) {
           stringBuilder.append(Constants.NEWLINE);
         }
         stringBuilder.append("[" + processUtil.getImageName() + "]");

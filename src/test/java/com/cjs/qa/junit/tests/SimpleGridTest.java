@@ -37,7 +37,7 @@ public class SimpleGridTest {
     
     // Check if headless mode is requested (default: true)
     String headlessProperty = System.getProperty("headless", "true");
-    boolean isHeadless = !headlessProperty.equalsIgnoreCase("false");
+    boolean isHeadless = !"false".equalsIgnoreCase(headlessProperty);
     
     if (isHeadless) {
       options.addArguments("--headless");

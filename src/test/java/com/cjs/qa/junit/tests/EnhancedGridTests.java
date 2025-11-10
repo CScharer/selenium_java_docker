@@ -47,7 +47,7 @@ public class EnhancedGridTests {
 
     // Check if headless mode is requested (default: true)
     String headlessProperty = System.getProperty("headless", "true");
-    boolean isHeadless = !headlessProperty.equalsIgnoreCase("false");
+    boolean isHeadless = !"false".equalsIgnoreCase(headlessProperty);
 
     if ("firefox".equalsIgnoreCase(browser)) {
       FirefoxOptions options = new FirefoxOptions();

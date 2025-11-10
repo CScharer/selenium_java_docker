@@ -138,7 +138,7 @@ public class RequestPrintPage extends Page {
     for (final List<?> item : data) {
       final String field = (String) item.get(0);
       String value = (String) item.get(1);
-      if (!value.equals("")) {
+      if (!value.isEmpty()) {
         if (Environment.isLogAll()) {
           Environment.sysOut("({Field}" + field + ", {Value}" + value + ");");
         }
@@ -183,7 +183,7 @@ public class RequestPrintPage extends Page {
     for (final List<?> item : data) {
       final String field = (String) item.get(0);
       String value = (String) item.get(1);
-      if (!value.equals("")) {
+      if (!value.isEmpty()) {
         if (Environment.isLogAll()) {
           Environment.sysOut("({Field}" + field + ", {Value}" + value + ");");
         }
