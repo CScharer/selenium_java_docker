@@ -42,6 +42,7 @@ public class AmendPage extends Page {
   private String getPageTitle() {
     return pageTitle;
   }
+
   private final By iFrame = By.xpath(".//*/iframe");
 
   public void verifyPage() {

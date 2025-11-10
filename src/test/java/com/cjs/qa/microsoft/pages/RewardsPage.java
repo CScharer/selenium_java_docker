@@ -77,6 +77,7 @@ public class RewardsPage extends Page {
   private By getByPointsAvailableSneakPeek() {
     return byPointsAvailableSneakPeek;
   }
+
   private final MicrosoftReport microsoftReport = new MicrosoftReport();
   private boolean searchesRequired = true;
   private int searchesNeeded = 0;

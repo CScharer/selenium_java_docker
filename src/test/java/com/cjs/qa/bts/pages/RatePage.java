@@ -21,6 +21,7 @@ public class RatePage extends Page {
   private String getPageTitle() {
     return pageTitle;
   }
+
   private final String nodeProcessedErrs = ".//*[@id='form1:cplProcessedResults:cplProcessedErrs:";
   private final By labelCustomStatusMsg = By.xpath(nodeProcessedErrs + "customStatusMsg']");
   private final By labelPrintStatus = By.xpath(nodeProcessedErrs + "processTransactionStatus']");

@@ -54,6 +54,7 @@ public class EarnPointsPage extends Page {
   private By getButtonSubmit() {
     return buttonSubmit;
   }
+
   private Map<Integer, Integer> indexStartMap =
       getHashMapFromFile(MarlboroEnvironment.FILE_INDEXES);
   private Marlboro marlboro = null;

@@ -30,6 +30,7 @@ public class SearchResultsPage extends Page {
   private String getPageTitle() {
     return pageTitle;
   }
+
   private final By releaseLock =
       By.xpath(
           "html/body/div[4]/div[2]/div/div[1]/div[2]/div[1]/div[2]/ul/li/div/div[3]/a[1]/i[2]");

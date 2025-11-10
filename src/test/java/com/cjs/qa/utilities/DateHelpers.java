@@ -15,45 +15,45 @@ import org.junit.Test;
 
 public class DateHelpers {
   public static final String DELIMETER = "/";
-  public static final String FORMAT_dd_MMM_yyyy = "dd-MMM-yyyy";
-  public static final String FORMAT_yyyyMMdd = "yyyyMMdd";
-  public static final String FORMAT_yyyy_MM_dd = "yyyy-MM-dd";
+  public static final String FORMAT_DD_MMM_YYYY = "dd-MMM-yyyy";
+  public static final String FORMAT_YYYY_MM_DD_COMPACT = "yyyyMMdd";
+  public static final String FORMAT_YYYY_MM_DD = "yyyy-MM-dd";
   public static final String FORMAT_EEEE = "EEEE";
   public static final String FORMAT_MMMM = "MMMM";
   public static final String FORMAT_MMM = "MMM";
   public static final String FORMAT_MM = "MM";
-  public static final String FORMAT_MMddyy = "MMddyy";
+  public static final String FORMAT_MM_DD_YY = "MMddyy";
   public static final String FORMAT_M = "M";
-  public static final String FORMAT_dd = "dd";
-  public static final String FORMAT_d = "d";
+  public static final String FORMAT_DD = "dd";
+  public static final String FORMAT_D = "d";
   public static final String FORMAT_HH = "HH";
   public static final String FORMAT_H = "H";
   public static final String FORMAT_KK = "KK";
-  public static final String FORMAT_kk = "kk";
-  public static final String FORMAT_mm = "mm";
-  public static final String FORMAT_m = "m";
+  public static final String FORMAT_KK_LOWER = "kk";
+  public static final String FORMAT_MM_LOWER = "mm";
+  public static final String FORMAT_M_LOWER = "m";
   public static final String FORMAT_SSS = "SSS";
-  public static final String FORMAT_ss = "ss";
-  public static final String FORMAT_s = "s";
-  public static final String FORMAT_yyyy = "yyyy";
-  public static final String FORMAT_yyMMddHHmmss = "yyMMddHHmmss";
-  public static final String FORMAT_yy = "yy";
-  public static final String FORMAT_y = "y";
+  public static final String FORMAT_SS = "ss";
+  public static final String FORMAT_S = "s";
+  public static final String FORMAT_YYYY = "yyyy";
+  public static final String FORMAT_YY_MM_DD_HH_MM_SS = "yyMMddHHmmss";
+  public static final String FORMAT_YY = "yy";
+  public static final String FORMAT_Y = "y";
   public static final String FORMAT_YYMMDD = "yyMMdd";
   public static final String FORMAT_US_STANDARD_DATE =
-      FORMAT_MM + DELIMETER + FORMAT_dd + DELIMETER + FORMAT_yyyy;
+      FORMAT_MM + DELIMETER + FORMAT_DD + DELIMETER + FORMAT_YYYY;
   public static final String FORMAT_US_STANDARD_TIME =
-      FORMAT_HH + ":" + FORMAT_mm + ":" + FORMAT_ss;
+      FORMAT_HH + ":" + FORMAT_MM_LOWER + ":" + FORMAT_SS;
   public static final String FORMAT_US_STANDARD_DATE_TIME =
       FORMAT_US_STANDARD_DATE + " " + FORMAT_US_STANDARD_TIME;
   public static final String FORMAT_DATE_TIME_STAMP =
-      FORMAT_yyyy
+      FORMAT_YYYY
           + FORMAT_MM
-          + FORMAT_dd
+          + FORMAT_DD
           + "_"
           + FORMAT_HH
-          + FORMAT_mm
-          + FORMAT_ss
+          + FORMAT_MM_LOWER
+          + FORMAT_SS
           + "."
           + FORMAT_SSS;
 
@@ -102,14 +102,14 @@ public class DateHelpers {
       final LocalDateTime now = LocalDateTime.of(year, month, day, hour, minute, second);
       LocalDateTime then = null;
       switch (changeType) {
-        case FORMAT_s:
+        case FORMAT_S:
           if (add) {
             then = now.plusSeconds(value);
           } else {
             then = now.minusSeconds(value);
           }
           return then.format(dateTimeFormatter);
-        case FORMAT_m:
+        case FORMAT_M_LOWER:
           if (add) {
             then = now.plusMinutes(value);
           } else {
@@ -130,14 +130,14 @@ public class DateHelpers {
             then = now.minusMonths(value);
           }
           return then.format(dateTimeFormatter);
-        case FORMAT_y:
+        case FORMAT_Y:
           if (add) {
             then = now.plusYears(value);
           } else {
             then = now.minusYears(value);
           }
           return then.format(dateTimeFormatter);
-        case FORMAT_d:
+        case FORMAT_D:
         default:
           if (add) {
             then = now.plusDays(value);
@@ -157,29 +157,29 @@ public class DateHelpers {
     final String now = DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_US_STANDARD_DATE_TIME);
     Environment.sysOut(now);
     Environment.sysOut(
-        FORMAT_y + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_y, 1, FORMAT_yyyy));
+        FORMAT_Y + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_Y, 1, FORMAT_YYYY));
     Environment.sysOut(
         FORMAT_M + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_M, 1, FORMAT_MM));
     Environment.sysOut(
-        FORMAT_d + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_d, 1, FORMAT_dd));
+        FORMAT_D + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_D, 1, FORMAT_DD));
     Environment.sysOut(
         FORMAT_H + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_H, 1, FORMAT_HH));
     Environment.sysOut(
-        FORMAT_m + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_m, 1, FORMAT_mm));
+        FORMAT_M_LOWER + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_M_LOWER, 1, FORMAT_MM_LOWER));
     Environment.sysOut(
-        FORMAT_s + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_s, 1, FORMAT_ss));
+        FORMAT_S + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_S, 1, FORMAT_SS));
     Environment.sysOut(
-        FORMAT_y + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_y, -1, FORMAT_yyyy));
+        FORMAT_Y + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_Y, -1, FORMAT_YYYY));
     Environment.sysOut(
         FORMAT_M + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_M, -1, FORMAT_MM));
     Environment.sysOut(
-        FORMAT_d + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_d, -1, FORMAT_dd));
+        FORMAT_D + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_D, -1, FORMAT_DD));
     Environment.sysOut(
         FORMAT_H + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_H, -1, FORMAT_HH));
     Environment.sysOut(
-        FORMAT_m + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_m, -1, FORMAT_mm));
+        FORMAT_M_LOWER + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_M_LOWER, -1, FORMAT_MM_LOWER));
     Environment.sysOut(
-        FORMAT_s + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_s, -1, FORMAT_ss));
+        FORMAT_S + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_S, -1, FORMAT_SS));
   }
 
   public static String getDatePlusMinusDays(String date, Integer days, String format) {
@@ -233,12 +233,12 @@ public class DateHelpers {
 
   /** Gets the current time in the following format: HH:mm */
   public static String getCurrentTime() {
-    return getCurrentDateTime(FORMAT_HH + ":" + FORMAT_mm);
+    return getCurrentDateTime(FORMAT_HH + ":" + FORMAT_MM_LOWER);
   }
 
   /** Gets the currentDate in the general format: MM/yyyy */
   public static String getCurrentMonthFourDigitYear() {
-    return getCurrentDateTime(FORMAT_MM + DELIMETER + FORMAT_yyyy);
+    return getCurrentDateTime(FORMAT_MM + DELIMETER + FORMAT_YYYY);
   }
 
   /**
@@ -249,7 +249,7 @@ public class DateHelpers {
    * @return
    */
   public static int compareTo(String date1, String date2) {
-    final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_dd_MMM_yyyy);
+    final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_DD_MMM_YYYY);
     try {
       final Date date1compare = simpleDateFormat.parse(date1);
       final Date date2compare = simpleDateFormat.parse(date2);
@@ -282,7 +282,7 @@ public class DateHelpers {
 
   /** Format of yyMMddHHmmss */
   public static String getTimeStamp() {
-    return getCurrentDateTime(FORMAT_yyMMddHHmmss);
+    return getCurrentDateTime(FORMAT_YY_MM_DD_HH_MM_SS);
   }
 
   /**
@@ -311,22 +311,22 @@ public class DateHelpers {
 
   public static String getDateFromUnix(String date) {
     final long unixDate = Long.parseLong(date);
-    final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_yyyyMMdd);
+    final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_YYYY_MM_DD_COMPACT);
     return simpleDateFormat.format(unixDate);
   }
 
   /** Format of dd-MMM-yyyy */
   public static String getCurrentCJSDate() {
-    return getCurrentDateTime(FORMAT_dd_MMM_yyyy);
+    return getCurrentDateTime(FORMAT_DD_MMM_YYYY);
   }
 
   public static boolean validateCJSDateFormat(String date) {
-    final String pattern = FORMAT_dd_MMM_yyyy;
+    final String pattern = FORMAT_DD_MMM_YYYY;
     return validateTimeFormat(date, pattern);
   }
 
   public static boolean validateDocDateFormat(String date) {
-    final String pattern = FORMAT_MMM + " " + FORMAT_dd + ", " + FORMAT_yyyy;
+    final String pattern = FORMAT_MMM + " " + FORMAT_DD + ", " + FORMAT_YYYY;
     return validateTimeFormat(date, pattern);
   }
 
@@ -334,19 +334,19 @@ public class DateHelpers {
     final String pattern =
         FORMAT_EEEE
             + ", "
-            + FORMAT_dd_MMM_yyyy
+            + FORMAT_DD_MMM_YYYY
             + " "
             + FORMAT_KK
             + ":"
-            + FORMAT_mm
+            + FORMAT_MM_LOWER
             + ":"
-            + FORMAT_ss
+            + FORMAT_SS
             + " a";
     return validateTimeFormat(date, pattern);
   }
 
   public static String getCurrentDateAllNumbers() {
-    return getCurrentDateTime(FORMAT_MMddyy);
+    return getCurrentDateTime(FORMAT_MM_DD_YY);
   }
 
   public static String getCurrentDayOfTheWeek() {
@@ -354,11 +354,11 @@ public class DateHelpers {
   }
 
   public static String getCurrentNumberDayOfTheMonth() {
-    return getCurrentDateTime(FORMAT_dd);
+    return getCurrentDateTime(FORMAT_DD);
   }
 
   public static String getCurrentMonthYear() {
-    return getCurrentDateTime(FORMAT_MM + DELIMETER + FORMAT_yy);
+    return getCurrentDateTime(FORMAT_MM + DELIMETER + FORMAT_YY);
   }
 
   public static String getCurrentMonth() {
@@ -366,12 +366,12 @@ public class DateHelpers {
   }
 
   public static boolean validateDateSignedFormat(String date) {
-    final String pattern = FORMAT_dd_MMM_yyyy + " " + FORMAT_HH + ":" + FORMAT_MM + " a";
+    final String pattern = FORMAT_DD_MMM_YYYY + " " + FORMAT_HH + ":" + FORMAT_MM + " a";
     return validateTimeFormatLeniently(date, pattern);
   }
 
   public static boolean validateViewMessagesDateFormat(String date) {
-    final String pattern = FORMAT_dd_MMM_yyyy + " " + FORMAT_US_STANDARD_TIME + " a";
+    final String pattern = FORMAT_DD_MMM_YYYY + " " + FORMAT_US_STANDARD_TIME + " a";
     return validateTimeFormatLeniently(date, pattern);
   }
 
@@ -456,8 +456,8 @@ public class DateHelpers {
    */
   public static String getDateAfterXDays(int days) {
     try {
-      final String date = DateHelpers.getCurrentDateTime(FORMAT_dd_MMM_yyyy);
-      final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_dd_MMM_yyyy);
+      final String date = DateHelpers.getCurrentDateTime(FORMAT_DD_MMM_YYYY);
+      final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_DD_MMM_YYYY);
       final Calendar c = Calendar.getInstance();
       c.setTime(simpleDateFormat.parse(date));
       c.add(Calendar.DATE, days);
@@ -477,8 +477,8 @@ public class DateHelpers {
    */
   public static String getDateAfterXDays(int days, String format) {
     try {
-      final String date = DateHelpers.getCurrentDateTime(FORMAT_dd_MMM_yyyy);
-      final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_dd_MMM_yyyy);
+      final String date = DateHelpers.getCurrentDateTime(FORMAT_DD_MMM_YYYY);
+      final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_DD_MMM_YYYY);
       final Calendar c = Calendar.getInstance();
       c.setTime(simpleDateFormat.parse(date));
       c.add(Calendar.DATE, days);
@@ -510,7 +510,7 @@ public class DateHelpers {
   }
 
   public static boolean validateVDRFormat(String date) {
-    final String pattern = FORMAT_MMM + "-" + FORMAT_yy;
+    final String pattern = FORMAT_MMM + "-" + FORMAT_YY;
     return validateTimeFormat(date, pattern);
   }
 
@@ -551,11 +551,11 @@ public class DateHelpers {
 
   // returns the hour 1-24
   public static String getHour() {
-    return getCurrentDateTime(FORMAT_kk);
+    return getCurrentDateTime(FORMAT_KK_LOWER);
   }
 
   public static String getMinute() {
-    return getCurrentDateTime(FORMAT_mm);
+    return getCurrentDateTime(FORMAT_MM_LOWER);
   }
 
   public static String getMonthAfterXDays(int days) {
@@ -574,8 +574,8 @@ public class DateHelpers {
 
   public static String getYearAfterXDays(int days) {
     try {
-      final String date = DateHelpers.getCurrentDateTime(FORMAT_dd_MMM_yyyy);
-      final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_dd_MMM_yyyy);
+      final String date = DateHelpers.getCurrentDateTime(FORMAT_DD_MMM_YYYY);
+      final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_DD_MMM_YYYY);
       final Calendar c = Calendar.getInstance();
       c.setTime(simpleDateFormat.parse(date));
       c.add(Calendar.DATE, days);
@@ -587,7 +587,7 @@ public class DateHelpers {
   }
 
   public static String firstOfTheMonth() {
-    return "01-" + getCurrentDateTime(FORMAT_MMM + "-" + FORMAT_yyyy);
+    return "01-" + getCurrentDateTime(FORMAT_MMM + "-" + FORMAT_YYYY);
   }
 
   public static int getDaysInMonth(String date) {
@@ -604,7 +604,7 @@ public class DateHelpers {
   }
 
   public static String endOfTheMonthv2() {
-    final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_dd_MMM_yyyy);
+    final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_DD_MMM_YYYY);
     final Calendar calendar = Calendar.getInstance();
     calendar.setTime(new Date());
     calendar.add(Calendar.MONTH, 1);
@@ -621,7 +621,7 @@ public class DateHelpers {
    */
   public static String addOneYear(String date) {
     try {
-      final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_dd_MMM_yyyy);
+      final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_DD_MMM_YYYY);
       final Calendar calendar = Calendar.getInstance();
       calendar.setTime(simpleDateFormat.parse(date));
       calendar.add(Calendar.YEAR, 1);
@@ -634,7 +634,7 @@ public class DateHelpers {
 
   public static String addDays(String date, int numberOfDays) {
     try {
-      final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_dd_MMM_yyyy);
+      final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_DD_MMM_YYYY);
       final Calendar calendar = Calendar.getInstance();
       calendar.setTime(simpleDateFormat.parse(date));
       calendar.add(Calendar.DAY_OF_YEAR, numberOfDays);
@@ -660,7 +660,7 @@ public class DateHelpers {
 
   public static String addMonths(String date, int numberOfMonths) {
     try {
-      final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_dd_MMM_yyyy);
+      final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_DD_MMM_YYYY);
       final Calendar calendar = Calendar.getInstance();
       calendar.setTime(simpleDateFormat.parse(date));
       calendar.add(Calendar.MONTH, 1 * numberOfMonths);
@@ -672,17 +672,17 @@ public class DateHelpers {
   }
 
   public static String getDB2Date() {
-    return getCurrentDateTime(FORMAT_yyyy_MM_dd);
+    return getCurrentDateTime(FORMAT_YYYY_MM_DD);
   }
 
   public static boolean validateDB2Date(String date) {
-    final String pattern = FORMAT_yyyy_MM_dd;
+    final String pattern = FORMAT_YYYY_MM_DD;
     return validateTimeFormat(date, pattern);
   }
 
   public static boolean isWeekday(String date) {
     try {
-      final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_dd_MMM_yyyy);
+      final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_DD_MMM_YYYY);
       final Calendar calendar = Calendar.getInstance();
       calendar.setTime(simpleDateFormat.parse(date));
       final int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
@@ -696,7 +696,7 @@ public class DateHelpers {
   }
 
   public static String getMondayXWeeksFromDate(String date, int x) {
-    final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_dd_MMM_yyyy);
+    final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_DD_MMM_YYYY);
     final Calendar calendar = Calendar.getInstance();
     try {
       calendar.setTime(simpleDateFormat.parse(date));
@@ -771,15 +771,15 @@ public class DateHelpers {
   }
 
   public static String convertDB2DateToBTSDate(String date) {
-    return convertDate(date, FORMAT_yyyy_MM_dd, FORMAT_dd_MMM_yyyy);
+    return convertDate(date, FORMAT_YYYY_MM_DD, FORMAT_DD_MMM_YYYY);
   }
 
   public static String convertBTSDateToDB2Date(String date) {
-    return convertDate(date, FORMAT_dd_MMM_yyyy, FORMAT_yyyy_MM_dd);
+    return convertDate(date, FORMAT_DD_MMM_YYYY, FORMAT_YYYY_MM_DD);
   }
 
   public static String getCurrentYear() {
-    return getCurrentDateTime(FORMAT_yyyy);
+    return getCurrentDateTime(FORMAT_YYYY);
   }
 
   public static String getYearAfterXYears(int years) {
@@ -788,11 +788,11 @@ public class DateHelpers {
   }
 
   public static String convertDateToAllNumbers(String date) {
-    return convertDate(date, FORMAT_dd_MMM_yyyy, FORMAT_MMddyy);
+    return convertDate(date, FORMAT_DD_MMM_YYYY, FORMAT_MM_DD_YY);
   }
 
   public static String convertDateToCsvusFormat(String date) {
-    return convertDate(date, FORMAT_dd_MMM_yyyy, FORMAT_US_STANDARD_DATE);
+    return convertDate(date, FORMAT_DD_MMM_YYYY, FORMAT_US_STANDARD_DATE);
   }
 
   public static String getDateAfterXBusinessDays(int days) {
@@ -805,7 +805,7 @@ public class DateHelpers {
         i++;
       }
     }
-    final SimpleDateFormat form = new SimpleDateFormat(FORMAT_dd_MMM_yyyy);
+    final SimpleDateFormat form = new SimpleDateFormat(FORMAT_DD_MMM_YYYY);
     return form.format(calendar.getTime());
   }
 
@@ -855,11 +855,11 @@ public class DateHelpers {
   }
 
   public static String convertServerDateToBTSDate(String date) {
-    return convertDate(date, FORMAT_US_STANDARD_DATE, FORMAT_dd_MMM_yyyy);
+    return convertDate(date, FORMAT_US_STANDARD_DATE, FORMAT_DD_MMM_YYYY);
   }
 
   public static String getMonthEndDateAfterXMonths(int months) {
-    final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_dd_MMM_yyyy);
+    final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_DD_MMM_YYYY);
     final Calendar calendar = Calendar.getInstance();
     calendar.setTime(new Date());
     if (months == 0) {
@@ -1008,7 +1008,7 @@ public class DateHelpers {
    * @return
    */
   public static boolean isValidDate(String date) {
-    final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_dd_MMM_yyyy);
+    final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_DD_MMM_YYYY);
     try {
       final Date date1compare = simpleDateFormat.parse(date);
       final Date date2compare = simpleDateFormat.parse(date);

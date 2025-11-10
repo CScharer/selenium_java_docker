@@ -1452,8 +1452,8 @@ public class YMData extends Environment {
   }
 
   public static void stubAttendeeUpdateMe() throws Throwable {
-    String otherday = DateHelpers.getCurrentDatePlusMinusDays(DateHelpers.FORMAT_yyyyMMdd, -1);
-    String today = DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_yyyyMMdd);
+    String otherday = DateHelpers.getCurrentDatePlusMinusDays(DateHelpers.FORMAT_YYYY_MM_DD_COMPACT, -1);
+    String today = DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_YYYY_MM_DD_COMPACT);
     String filePathNameSource =
         VivitFoldersFiles.PATH_API_DATA_YM_EVENT_ATTENDEES.replace(today, otherday)
             + EVENTID_TEST

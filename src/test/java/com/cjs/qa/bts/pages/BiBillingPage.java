@@ -9,7 +9,7 @@ public class BiBillingPage extends Page {
     super(webDriver);
   }
 
-  private final By NumberOfGroupMembers = By.id("NUM_GRP_MBR");
+  private final By numberOfGroupMembers = By.id("NUM_GRP_MBR");
   private final By buttonFrame = By.id("billing-title");
   private final String pageTitle = "BI_BillingPage";
 
@@ -22,7 +22,7 @@ public class BiBillingPage extends Page {
   }
 
   public void enterNumberOfGroupMembers(String value) {
-    setEdit(NumberOfGroupMembers, value);
+    setEdit(numberOfGroupMembers, value);
   }
 
   public void toggleFrame() {

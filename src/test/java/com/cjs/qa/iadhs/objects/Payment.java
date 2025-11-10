@@ -39,7 +39,7 @@ public class Payment {
       IaDhsEnvironment.FOLDER_DATA
           + "Data"
           + Constants.DELIMETER_PATH
-          + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_yyyyMMdd)
+          + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_YYYY_MM_DD_COMPACT)
           + "_IA DHS Child Support Payments"
           + IExtension.XLS;
   public static final String REPORT_IADHS_PAYMENTS_CUMULATIVE =

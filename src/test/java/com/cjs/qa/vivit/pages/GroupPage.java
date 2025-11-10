@@ -35,6 +35,7 @@ public class GroupPage extends Page {
   private List<String> getListGroupLeaders() {
     return listGroupLeaders;
   }
+
   private final By byLinksGroups = By.xpath("//*[@id='CustomPageBody']//a[text()!='contact us today!']");
 
   public void getGroupPageData() throws Throwable {

@@ -3,7 +3,7 @@ package com.cjs.qa.bts.policy;
 import com.cjs.qa.core.Environment;
 import org.junit.Test;
 
-public class PolicyTestCase {
+public final class PolicyTestCase {
   private PolicyTestCase() { // Private constructor
   }
 

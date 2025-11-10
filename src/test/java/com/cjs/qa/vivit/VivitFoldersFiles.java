@@ -11,7 +11,7 @@ public final class VivitFoldersFiles {
       VivitEnvironment.FOLDER_DATA + "Data" + Constants.DELIMETER_PATH;
   public static final String PATH_DATA_TODAY =
       PATH_DATA
-          + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_yyyyMMdd)
+          + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_YYYY_MM_DD_COMPACT)
           + Constants.DELIMETER_PATH;
   public static final String PATH_API_DATA_YM = PATH_DATA_TODAY + "YM" + Constants.DELIMETER_PATH;
   public static final String PATH_API_DATA_GTW = PATH_DATA_TODAY + "GTW" + Constants.DELIMETER_PATH;
@@ -23,7 +23,7 @@ public final class VivitFoldersFiles {
       PATH_DATA
           + "Flights"
           + Constants.DELIMETER_PATH
-          + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_yyyyMMdd)
+          + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_YYYY_MM_DD_COMPACT)
           + IExtension.XLS;
   // API YM Data Import into Database
   public static final String DATA_YMAPI_DATA =

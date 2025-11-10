@@ -15,7 +15,7 @@ import org.openqa.selenium.WebElement;
 public class BtsCrosswordChallengePage extends Page {
   private final Map<Integer, String> mapGridSquares = new HashMap<>();
   private String[] lGridSquares = null;
-  private final String ALPHABET = "A;B;C;D;E;F;G;H;I;J;K;L;M;N;O;P;Q;R;S;T;U;V;W;X;Y;Z";
+  private static final String ALPHABET = "A;B;C;D;E;F;G;H;I;J;K;L;M;N;O;P;Q;R;S;T;U;V;W;X;Y;Z";
   private final int squareMin = 4;
   private final int squareMax = 628;
   private final LocalDateTime now = LocalDateTime.now();

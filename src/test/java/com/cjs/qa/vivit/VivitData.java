@@ -188,7 +188,7 @@ public class VivitData extends Environment {
       throws Throwable { // Delete backup files older than 3 days old.
     sysOut(Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     sysOut(ParameterHelper.getParameters(Arrays.asList(Arrays.asList())));
-    final String formatDate = DateHelpers.FORMAT_yyyyMMdd;
+    final String formatDate = DateHelpers.FORMAT_YYYY_MM_DD_COMPACT;
     final String date =
         DateHelpers.getCurrentDatePlusMinusDays(formatDate, (DAYS_TO_KEEP_BACKUPS * -1));
     final String folderName = VivitFoldersFiles.PATH_DATA + date;
@@ -237,8 +237,8 @@ public class VivitData extends Environment {
     StringBuilder sqlStringBuilder = new StringBuilder();
     String datePreviousBackUp =
         DateHelpers.getCurrentDatePlusMinusDays(
-            DateHelpers.FORMAT_yyyyMMdd, (DAYS_TO_KEEP_BACKUPS * -1));
-    final String dateCurrentBackUp = DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_yyyyMMdd);
+            DateHelpers.FORMAT_YYYY_MM_DD_COMPACT, (DAYS_TO_KEEP_BACKUPS * -1));
+    final String dateCurrentBackUp = DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_YYYY_MM_DD_COMPACT);
     String tableName = VivitTables.PREFIX + tableGroupName;
     // Drop the old backup table.
     String tableNameBackUpPrevious = tableName + "_" + datePreviousBackUp;
@@ -856,14 +856,14 @@ public class VivitData extends Environment {
     listReports.add(VivitFoldersFiles.DATA_YMAPI_DATA);
     // createReportAutomationStatistics(VivitFoldersFiles.REPORT_XLS_AUTOMATION_S,
     // false)
-    String dayTomorrow = DateHelpers.getCurrentDatePlusMinusDays(DateHelpers.FORMAT_d, 1);
+    String dayTomorrow = DateHelpers.getCurrentDatePlusMinusDays(DateHelpers.FORMAT_D, 1);
     if (dayTomorrow.equals("1")) {
       VivitData.createReportAutomationStatisticsForPeriod(
           VivitViews.VIVIT_MEMBER_CHANGE_MONTH, VivitFoldersFiles.REPORT_XLS_AUTOMATION_S_MONTH);
       listReports.add(VivitFoldersFiles.REPORT_XLS_AUTOMATION_S_MONTH);
     }
-    String yearToday = DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_yyyy);
-    String yearTomorrow = DateHelpers.getCurrentDatePlusMinusDays(DateHelpers.FORMAT_yyyy, 1);
+    String yearToday = DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_YYYY);
+    String yearTomorrow = DateHelpers.getCurrentDatePlusMinusDays(DateHelpers.FORMAT_YYYY, 1);
     if (!yearToday.equals(yearTomorrow)) {
       VivitData.createReportAutomationStatisticsForPeriod(
           VivitViews.VIVIT_MEMBER_CHANGE_YEAR, VivitFoldersFiles.REPORT_XLS_AUTOMATION_S_YEAR);
@@ -1289,7 +1289,7 @@ public class VivitData extends Environment {
     sysOut(
         ParameterHelper.getParameters(
             Arrays.asList(Arrays.asList("overideMonthDay", overideMonthDay))));
-    final String monthDay = DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_dd);
+    final String monthDay = DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_DD);
     if (!monthDay.equals(REPORT_DAY_BILLABLE_HOURS) && !overideMonthDay) {
       return;
     }
@@ -1354,7 +1354,7 @@ public class VivitData extends Environment {
             Arrays.asList(
                 Arrays.asList(LABEL_SEND_EMAIL, sendEmail),
                 Arrays.asList("overideMonthDay", overideMonthDay))));
-    final String monthDay = DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_dd);
+    final String monthDay = DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_DD);
     if (!monthDay.equals(REPORT_DAY_TREASURER) && !overideMonthDay) {
       return;
     }

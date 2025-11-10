@@ -18,6 +18,7 @@ public class WebElementTable extends Page {
   private String getColumnNamePrefix() {
     return columnNamePrefix;
   }
+
   private boolean resetTable = false;
   private String xPathTable = ".//center/table/tbody//table";
   private String xpathHeadings = "./thead/tr/th";
