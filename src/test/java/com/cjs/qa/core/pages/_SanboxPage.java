@@ -61,8 +61,8 @@ public class _SanboxPage extends Page {
   //
   // DECLARATIONS
   private final By buttonButton = By.id("Button");
-  private final By CheckboxCheckbox = By.id("Checkbox");
-  private final By DropdownDropdown = By.id("Dropdown");
+  private final By checkboxCheckbox = By.id("Checkbox");
+  private final By dropdownDropdown = By.id("Dropdown");
   private final By editEdit = By.id("Edit");
   private final By labelLabel = By.id("Label");
   private final By linkLink = By.id("Link");
@@ -79,11 +79,11 @@ public class _SanboxPage extends Page {
 
   // METHODS GET
   public String getCheckboxCheckbox() {
-    return getCheckbox(CheckboxCheckbox);
+    return getCheckbox(checkboxCheckbox);
   }
 
   public String getDropdownDropdown() {
-    return getDropdown(DropdownDropdown);
+    return getDropdown(dropdownDropdown);
   }
 
   public String getEditEdit() {
@@ -104,15 +104,15 @@ public class _SanboxPage extends Page {
   }
 
   public void toggleCheckboxCheckbox() {
-    toggleCheckbox(CheckboxCheckbox);
+    toggleCheckbox(checkboxCheckbox);
   }
 
   public void setCheckboxCheckbox(String value) {
-    setCheckbox(CheckboxCheckbox, value);
+    setCheckbox(checkboxCheckbox, value);
   }
 
   public void selectDropdownDropdown(String value) {
-    selectDropdown(DropdownDropdown, value);
+    selectDropdown(dropdownDropdown, value);
   }
 
   public void setEditEdit(String value) {

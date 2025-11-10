@@ -12,7 +12,7 @@ public class LoginPage extends Page {
 
   private final By editMileagePlusNumber = By.xpath(".//*[@id='loginFormModel.login']");
   private final By editPassword = By.xpath(".//*[@id='loginFormModel.password']");
-  private final By CheckboxRememberMe =
+  private final By checkboxRememberMe =
       By.xpath(".//*[@id='loginFormModel']//input[@id='saveCredentials']");
   // loginFormModel.rememberMe
   private final By buttonSignIn = By.xpath(".//*[@id='loginFormModel']/button");
@@ -25,8 +25,8 @@ public class LoginPage extends Page {
     setEditPassword(editPassword, value);
   }
 
-  public void CheckboxRememberMeSet(String value) throws QAException {
-    setCheckbox(CheckboxRememberMe, value);
+  public void checkboxRememberMeSet(String value) throws QAException {
+    setCheckbox(checkboxRememberMe, value);
   }
 
   public void buttonSignInClick() throws QAException {

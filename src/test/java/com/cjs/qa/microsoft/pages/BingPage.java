@@ -28,7 +28,7 @@ public class BingPage extends Page {
   private static By bySearch = By.xpath(".//*[@id='sb_form_go']");
   private static By bycurrentPoints = By.xpath(".//*[@id='id_rc']");
   private static int currentPoints = -1;
-  private int SEARCH = 1;
+  private int search = 1;
   private static int searchesMade = 0;
   private static List<String> wordsList = null;
 
@@ -85,8 +85,8 @@ public class BingPage extends Page {
     int currentPoints = 0;
     int search = 1;
     String searchValue = "";
-    SEARCH = SEARCH * -1;
-    if (SEARCH == 1) {
+    search = search * -1;
+    if (search == 1) {
       searchValue = "http://www.bing" + IExtension.COM + "/search?q=search+";
     } else {
       searchValue = "http://www.bing" + IExtension.COM + "/search?q=";

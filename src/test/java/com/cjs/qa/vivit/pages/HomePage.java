@@ -14,7 +14,7 @@ import org.openqa.selenium.WebElement;
 
 public class HomePage extends Page {
   private final By byLogo = By.xpath(".//*[@id='logo']/img");
-  private final By CheckboxRememberMe = By.xpath(".//*[@id='rememberme']");
+  private final By checkboxRememberMe = By.xpath(".//*[@id='rememberme']");
   private final By buttonSignIn =
       By.xpath(".//*[@id='ctl00_PageContent_MainLogin']//input[@value='Sign In']");
   private final By buttonSignOut = By.xpath(".//*[@id='itoolbar']/a[.='Sign Out']");
@@ -31,7 +31,7 @@ public class HomePage extends Page {
   }
 
   public void CheckboxRememberMeSet(String value) {
-    setCheckbox(CheckboxRememberMe, value);
+    setCheckbox(checkboxRememberMe, value);
   }
 
   public void clickButtonSignOut() {

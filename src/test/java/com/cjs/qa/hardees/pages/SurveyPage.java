@@ -15,7 +15,7 @@ public class SurveyPage extends Page {
     super(webDriver);
   }
 
-  private final String NODE_ROOT = ".//*[@id='surveyQuestions']";
+  private final String nodeRoot = ".//*[@id='surveyQuestions']";
   private final By editCN1 = By.xpath(".//*[@id='CN1']");
   private final By editCN2 = By.xpath(".//*[@id='CN2']");
   private final By editCN3 = By.xpath(".//*[@id='CN3']");
@@ -92,8 +92,8 @@ public class SurveyPage extends Page {
   }
 
   public void optionDidYouVisistTheMcDonaldsLocatedAtSelect(String value) throws QAException {
-    String xPath = NODE_ROOT;
-    // By optionDidYouVisit = By.xpath(NODE_ROOT);
+    String xPath = nodeRoot;
+    // By optionDidYouVisit = By.xpath(nodeRoot);
     switch (value) {
       case "No":
         xPath +=
@@ -118,8 +118,8 @@ public class SurveyPage extends Page {
   }
 
   public void optionOrderTypeSelect(String value) throws QAException {
-    String xPath = NODE_ROOT;
-    // By optionOrderType = By.xpath(NODE_ROOT);
+    String xPath = nodeRoot;
+    // By optionOrderType = By.xpath(nodeRoot);
     switch (value) {
       case "Carry out:":
       case "Dine-in":
@@ -138,8 +138,8 @@ public class SurveyPage extends Page {
   }
 
   public void optionOverallSatisfactionSelect(String value) throws QAException {
-    String xPath = NODE_ROOT;
-    // By optionOverallSatisfaction = By.xpath(NODE_ROOT);
+    String xPath = nodeRoot;
+    // By optionOverallSatisfaction = By.xpath(nodeRoot);
     switch (value) {
       case "Highly Satisfied":
         xPath +=
@@ -186,9 +186,9 @@ public class SurveyPage extends Page {
   }
 
   public void optionDidYouExerienceAProblemDuringYourVisitSelect(String value) throws QAException {
-    String xPath = NODE_ROOT;
+    String xPath = nodeRoot;
     // By optionDidYouExerienceAProblemDuringYourVisit =
-    // By.xpath(NODE_ROOT);
+    // By.xpath(nodeRoot);
     switch (value) {
       case "No":
         xPath +=
@@ -207,9 +207,9 @@ public class SurveyPage extends Page {
   }
 
   public void optionWereYouAskedToPullForwardSelect(String value) throws QAException {
-    String xPath = NODE_ROOT;
+    String xPath = nodeRoot;
     // By optionWereYouAskedToPullForward =
-    // By.xpath(NODE_ROOT);
+    // By.xpath(nodeRoot);
     switch (value) {
       case "No":
         xPath +=
