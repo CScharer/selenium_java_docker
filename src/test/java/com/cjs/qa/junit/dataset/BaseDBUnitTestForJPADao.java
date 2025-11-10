@@ -75,6 +75,9 @@ public class BaseDBUnitTestForJPADao {
       }
     } catch (final Exception e) {
       // Intentionally empty - cleanup failure is non-critical
+      if (Environment.isLogAll()) {
+        Environment.sysOut("Cleanup failure (non-critical): " + e.getMessage());
+      }
     }
   }
 

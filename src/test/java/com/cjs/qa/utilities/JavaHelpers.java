@@ -675,6 +675,9 @@ public class JavaHelpers {
           return value;
         } catch (final Exception a) {
           // Intentionally empty - not a numbered test case, continue searching
+          if (Environment.isLogAll()) {
+            Environment.sysOut("Not a numbered test case, continuing search");
+          }
         }
       }
     }
@@ -700,6 +703,9 @@ public class JavaHelpers {
         }
       } catch (final Exception f) {
         // Intentionally empty - not a test method, continue searching stack
+        if (Environment.isLogAll()) {
+          Environment.sysOut("Not a test method, continuing stack search");
+        }
       }
     }
     return "null";

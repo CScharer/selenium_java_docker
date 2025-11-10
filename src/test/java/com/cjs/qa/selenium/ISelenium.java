@@ -266,11 +266,17 @@ public interface ISelenium {
       webDriver.close();
     } catch (final Exception e) {
       // Intentionally empty - browser may already be closed
+      if (Environment.isLogAll()) {
+        Environment.sysOut("Browser close failed (expected if already closed)");
+      }
     }
     try {
       webDriver.quit();
     } catch (final Exception e) {
       // Intentionally empty - browser may already be terminated
+      if (Environment.isLogAll()) {
+        Environment.sysOut("Browser quit failed (expected if already terminated)");
+      }
     }
     webDriver = null;
   }
@@ -287,11 +293,17 @@ public interface ISelenium {
       webDriver.close();
     } catch (final Exception e) {
       // Intentionally empty - browser may already be closed
+      if (Environment.isLogAll()) {
+        Environment.sysOut("Browser close failed (expected if already closed)");
+      }
     }
     try {
       webDriver.quit();
     } catch (final Exception e) {
       // Intentionally empty - browser may already be terminated
+      if (Environment.isLogAll()) {
+        Environment.sysOut("Browser quit failed (expected if already terminated)");
+      }
     }
     killBrowserProcesses(browser);
   }
@@ -346,6 +358,9 @@ public interface ISelenium {
       webDriver.manage().window().maximize();
     } catch (final Exception e) {
       // Intentionally empty - maximize may not be supported in headless/Grid
+      if (Environment.isLogAll()) {
+        Environment.sysOut("Maximize not supported (expected in headless/Grid mode)");
+      }
     }
   }
 

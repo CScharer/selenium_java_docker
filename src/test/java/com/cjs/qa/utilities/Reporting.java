@@ -57,6 +57,9 @@ public class Reporting {
           randomAccessFile.close();
         } catch (final Exception e2) {
           // Intentionally empty - resource cleanup failure is non-critical
+          if (Environment.isLogAll()) {
+            Environment.sysOut("Resource cleanup failure (non-critical)");
+          }
         }
       }
     }

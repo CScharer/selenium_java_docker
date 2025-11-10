@@ -490,6 +490,9 @@ public final class YMAPIMethods {
         mapValues.put("description", description);
       } catch (final Exception e2) {
         // Intentionally empty - field may not exist in API response
+        if (Environment.isLogAll()) {
+          Environment.sysOut("Description field not found in API response (optional)");
+        }
       }
     }
     try {
@@ -501,6 +504,9 @@ public final class YMAPIMethods {
       mapValues.put("exampleRequest", exampleRequest);
     } catch (final Exception e) {
       // Intentionally empty - field may not exist in API response
+      if (Environment.isLogAll()) {
+        Environment.sysOut("Example Request field not found in API response (optional)");
+      }
     }
     try {
       String exampleResponse =
@@ -511,6 +517,9 @@ public final class YMAPIMethods {
       mapValues.put("exampleResponse", exampleResponse);
     } catch (final Exception e) {
       // Intentionally empty - field may not exist in API response
+      if (Environment.isLogAll()) {
+        Environment.sysOut("Example Response field not found in API response (optional)");
+      }
     }
     return mapValues;
   }

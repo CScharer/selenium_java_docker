@@ -488,6 +488,9 @@ public class Page extends JavaHelpers {
         buttonExists = true;
       } catch (final Exception e) {
         // Intentionally empty - retry loop continues until timeout
+        if (Environment.isLogAll()) {
+          Environment.sysOut("Element not found yet, retrying...");
+        }
       }
     } while ((elapsedTime <= ((getTimeoutElement() / 6) * 1000)) && (!buttonExists));
     // Only wait five seconds as these are supposed to be pop-ups
@@ -1242,6 +1245,9 @@ public class Page extends JavaHelpers {
       robot.keyRelease(KeyEvent.VK_ENTER);
     } catch (final Exception e) {
       // Intentionally empty - Robot may not be available in headless mode
+      if (Environment.isLogAll()) {
+        Environment.sysOut("Robot Enter not available (expected in headless mode)");
+      }
     }
   }
 
@@ -1252,6 +1258,9 @@ public class Page extends JavaHelpers {
       robot.keyRelease(KeyEvent.VK_ESCAPE);
     } catch (final Exception e) {
       // Intentionally empty - Robot may not be available in headless mode
+      if (Environment.isLogAll()) {
+        Environment.sysOut("Robot ESC not available (expected in headless mode)");
+      }
     }
   }
 

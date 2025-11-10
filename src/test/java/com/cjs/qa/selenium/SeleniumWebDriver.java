@@ -586,6 +586,9 @@ public class SeleniumWebDriver {
       }
     } catch (final Exception e) {
       // Intentionally empty - browser may already be closed
+      if (Environment.isLogAll()) {
+        Environment.sysOut("Browser close failed (expected if already closed)");
+      }
     }
     try {
       if (getWebDriver() != null) {
@@ -593,6 +596,9 @@ public class SeleniumWebDriver {
       }
     } catch (final Exception e) {
       // Intentionally empty - browser may already be terminated
+      if (Environment.isLogAll()) {
+        Environment.sysOut("Browser quit failed (expected if already terminated)");
+      }
     }
     setWebDriver(null);
   }
