@@ -19,8 +19,12 @@ public class BlogsPage extends Page {
     super(webDriver);
   }
 
-  public String BLOGS_URL_COMMUNITY = "https://www.vivit-worldwide.org/members/blogs.asp";
+  private String blogsUrlCommunity = "https://www.vivit-worldwide.org/members/blogs.asp";
   private final By byTableBlogs = By.xpath(".//*[@id='SpContent_Container']/form/table/tbody/tr");
+
+  private String getBlogsUrlCommunity() {
+    return blogsUrlCommunity;
+  }
 
   public void getBlogData() throws Throwable {
     Environment.sysOut(
@@ -51,7 +55,7 @@ public class BlogsPage extends Page {
                 + "]");
       }
     }
-    getBlogs(BLOGS_URL_COMMUNITY, "Community");
+    getBlogs(getBlogsUrlCommunity(), "Community");
     List<StringBuilder> sqlStringBuilderList = new ArrayList<>();
     sqlStringBuilderList.add(new StringBuilder("Blogs"));
     sqlStringBuilderList.add(Blogs.appendRecords());

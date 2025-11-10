@@ -64,7 +64,7 @@ public class VivitAPIDatabase {
             + ">");
     stringBuilder.append("<thead>");
     stringBuilder.append("<tr>");
-    for (final String fieldName : VivitAPIDatabaseUpdates.fieldList) {
+    for (final String fieldName : VivitAPIDatabaseUpdates.getFieldList()) {
       stringBuilder.append(
           "<th style="
               + Constants.QUOTE_DOUBLE

@@ -15,15 +15,19 @@ public class DetailsPage extends Page {
 
   // List<String> sectionList = new Arrays.asList("PatientInfo",
   // "FinancialSum","ClaimSum","YourResp");
-  List<String> listSection = new ArrayList<>();
+  private List<String> listSection = new ArrayList<>();
+
+  private List<String> getListSection() {
+    return listSection;
+  }
 
   public void getData() {
     final StringBuilder stringBuilder = new StringBuilder();
-    listSection.add("PatientInfo");
-    listSection.add("FinancialSum");
-    listSection.add("ClaimSum");
-    listSection.add("YourResp");
-    for (final String section : listSection) {
+    getListSection().add("PatientInfo");
+    getListSection().add("FinancialSum");
+    getListSection().add("ClaimSum");
+    getListSection().add("YourResp");
+    for (final String section : getListSection()) {
       final By labels = By.xpath(".//*[@id='" + section + "']/..//tr/th");
       final List<WebElement> elements = webDriver.findElements(labels);
       for (int index = 0; index < elements.size(); index++) {

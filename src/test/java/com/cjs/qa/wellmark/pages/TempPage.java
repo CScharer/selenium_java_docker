@@ -12,5 +12,9 @@ public class TempPage extends Page {
   }
 
   private final By linksULR = By.xpath(".//*[@id='post-18078']//li/a[@href]");
-  List<String> listLinks = new ArrayList<>();
+  private List<String> listLinks = new ArrayList<>();
+
+  private List<String> getListLinks() {
+    return listLinks;
+  }
 }

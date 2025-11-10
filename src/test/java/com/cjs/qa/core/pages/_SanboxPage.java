@@ -67,10 +67,14 @@ public class _SanboxPage extends Page {
   private final By labelLabel = By.id("Label");
   private final By linkLink = By.id("Link");
   private final By optionOption = By.id("Option");
-  public final String PAGE_TITLE = "Core - CreateCucumberCodePage";
+  private final String pageTitle = "Core - CreateCucumberCodePage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   // METHODS GET
@@ -185,9 +189,9 @@ public class _SanboxPage extends Page {
         actual.put(field, value);
       }
     }
-    // Assert.assertSame(PAGE_TITLE + " validatePage", expected, actual);
-    // hardAssert.assertSame(actual, expected, PAGE_TITLE + "
+    // Assert.assertSame(getPageTitle() + " validatePage", expected, actual);
+    // hardAssert.assertSame(actual, expected, getPageTitle() + "
     // validatePage");
-    Environment.softAssert.assertEquals(actual, expected, PAGE_TITLE + "validatePage");
+    Environment.softAssert.assertEquals(actual, expected, getPageTitle() + "validatePage");
   }
 }

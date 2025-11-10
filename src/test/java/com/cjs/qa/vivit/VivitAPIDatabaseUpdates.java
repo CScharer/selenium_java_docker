@@ -6,7 +6,12 @@ import java.util.List;
 
 @Deprecated
 public class VivitAPIDatabaseUpdates {
-  public static List<String> fieldList = Arrays.asList("API Method", "Table", "Field", "Action");
+  private static List<String> fieldList = Arrays.asList("API Method", "Table", "Field", "Action");
+
+  public static List<String> getFieldList() {
+    return fieldList;
+  }
+
   private String apiMethod;
   private String tableName;
   private String fieldName;

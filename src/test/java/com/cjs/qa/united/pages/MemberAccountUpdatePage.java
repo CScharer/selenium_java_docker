@@ -12,10 +12,10 @@ public class MemberAccountUpdatePage extends Page {
     super(webDriver);
   }
 
-  final String NODE_LABEL = "/*[@id='divContactInfo']/section";
-  private final By labelAddress = By.xpath("./" + NODE_LABEL + "/h3[.='Address']/../div");
-  private final By labelEmailAddress = By.xpath("./" + NODE_LABEL + "/h3[.='Email address']/../div");
-  private final By labelPhoneNumber = By.xpath("./" + NODE_LABEL + "/h3[.='Phone number']/../div");
+  private final String nodeLabel = "/*[@id='divContactInfo']/section";
+  private final By labelAddress = By.xpath("./" + nodeLabel + "/h3[.='Address']/../div");
+  private final By labelEmailAddress = By.xpath("./" + nodeLabel + "/h3[.='Email address']/../div");
+  private final By labelPhoneNumber = By.xpath("./" + nodeLabel + "/h3[.='Phone number']/../div");
   private final By buttonAcceptAndSubmit = By.xpath(".//*[@id='btnAccept']");
   private final By buttonAcceptAndUpdateLater = By.xpath(".//*[@id='btnUpdateLater']");
 

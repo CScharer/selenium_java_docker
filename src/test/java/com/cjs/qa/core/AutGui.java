@@ -4,10 +4,14 @@ import com.cjs.qa.utilities.SoftAssert;
 import org.openqa.selenium.WebDriver;
 
 public class AutGui {
-  public SoftAssert SoftAssert;
+  private SoftAssert softAssert;
+
+  public SoftAssert getSoftAssert() {
+    return softAssert;
+  }
 
   public AutGui(WebDriver webDriver) {
-    SoftAssert = new SoftAssert();
+    softAssert = new SoftAssert();
     webDriver
         .manage()
         .timeouts()

@@ -29,8 +29,12 @@ public class GroupPage extends Page {
     super(webDriver);
   }
 
-  final List<String> listGroupLeaders = new ArrayList<>();
+  private final List<String> listGroupLeaders = new ArrayList<>();
   private final By byTitleBar = By.xpath(".//*[@id='SpTitleBar']");
+
+  private List<String> getListGroupLeaders() {
+    return listGroupLeaders;
+  }
   private final By byLinksGroups = By.xpath("//*[@id='CustomPageBody']//a[text()!='contact us today!']");
 
   public void getGroupPageData() throws Throwable {

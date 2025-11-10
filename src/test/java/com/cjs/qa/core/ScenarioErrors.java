@@ -5,14 +5,18 @@ import java.util.Map;
 import org.junit.Assert;
 
 public class ScenarioErrors {
-  public static Map<Integer, String> errors = new HashMap<>();
+  private static Map<Integer, String> errors = new HashMap<>();
+
+  public static Map<Integer, String> getErrors() {
+    return errors;
+  }
 
   public void assertErrors(String message) {
-    Assert.assertTrue(message, errors.size() == 0);
+    Assert.assertTrue(message, getErrors().size() == 0);
   }
 
   public void add(String error) {
-    errors.put((Environment.scenarioErrors.size() + 1), error);
+    getErrors().put((Environment.scenarioErrors.size() + 1), error);
   }
 
   public static void clear() {

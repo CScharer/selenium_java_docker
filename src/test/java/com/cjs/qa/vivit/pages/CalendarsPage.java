@@ -18,8 +18,12 @@ public class CalendarsPage extends Page {
     super(webDriver);
   }
 
-  public String CALENDAR_URL_COMMUNITY = "https://www.vivit-worldwide.org/events/event_list.asp";
+  private String calendarUrlCommunity = "https://www.vivit-worldwide.org/events/event_list.asp";
   private final By byTableCalendars = By.xpath(".//*[@id='EventList']/tbody/tr/td[1]/div");
+
+  private String getCalendarUrlCommunity() {
+    return calendarUrlCommunity;
+  }
 
   public void getCalendarData() throws Throwable {
     Environment.sysOut(
@@ -50,7 +54,7 @@ public class CalendarsPage extends Page {
                 + "]");
       }
     }
-    getCalendars(CALENDAR_URL_COMMUNITY, "Community");
+    getCalendars(getCalendarUrlCommunity(), "Community");
     List<StringBuilder> sqlStringBuilderList = new ArrayList<>();
     sqlStringBuilderList.add(new StringBuilder("Calendars"));
     sqlStringBuilderList.add(Calendars.appendRecords());
