@@ -30,10 +30,10 @@ public class JDBC {
   private ResultSetMetaData resultSetMetaData = null;
 
   public JDBC(String environment, String database) {
-    if (!environment.equals("")) {
+    if (!"".equals(environment)) {
       setEnvironment(environment);
     }
-    if (!database.equals("")) {
+    if (!"".equals(database)) {
       setDatabase(database);
     }
     Environment.sysOut(
@@ -516,7 +516,7 @@ public class JDBC {
       StringBuilder stringBuilderHeadings = new StringBuilder();
       if (includeColumnNames) {
         for (int index = 1; index < (columns + 1); index++) {
-          if (!stringBuilderHeadings.toString().equals("") && (columns < (columns + 1))) {
+          if (!"".equals(stringBuilderHeadings.toString()) && (columns < (columns + 1))) {
             stringBuilderHeadings.append(delimeter);
           }
           stringBuilderHeadings.append(resultSetMetaData.getColumnName(index));
@@ -525,11 +525,11 @@ public class JDBC {
       StringBuilder stringBuilderColumn = new StringBuilder();
       StringBuilder stringBuilderColumns = new StringBuilder();
       while (resultSet.next()) {
-        if (!stringBuilderColumns.toString().equals("")) {
+        if (!"".equals(stringBuilderColumns.toString())) {
           stringBuilderColumns.append(Constants.NEWLINE);
         }
         for (int index = 1; index <= columns; index++) {
-          if (!stringBuilderColumn.toString().equals("")) {
+          if (!"".equals(stringBuilderColumn.toString())) {
             stringBuilderColumn.append(delimeter);
           }
           stringBuilderColumn.append(resultSet.getString(index));

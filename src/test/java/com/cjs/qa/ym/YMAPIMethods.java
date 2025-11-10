@@ -151,7 +151,7 @@ public final class YMAPIMethods {
       StringBuilder stringBuilderArguments = new StringBuilder();
       for (final Map<String, String> mapMethodParameters : listMapMethodParameters) {
         final String parameterPType = mapMethodParameters.get("PType");
-        if (parameterPType.equals("Call Arguments")) {
+        if ("Call Arguments".equals(parameterPType)) {
           final String paramterCall = mapMethodParameters.get("Name:1");
           // final String parameterType =
           // mapMethodParameters.get("Type")
@@ -182,7 +182,7 @@ public final class YMAPIMethods {
             default:
               break;
           }
-          if (!stringBuilderArguments.toString().equals("")) {
+          if (!"".equals(stringBuilderArguments.toString())) {
             stringBuilderArguments.append(",");
           }
           String paramterName =
@@ -264,7 +264,7 @@ public final class YMAPIMethods {
         StringBuilder stringBuilderArguments = new StringBuilder();
         for (final Map<String, String> mapMethodParameters : listMapMethodParameters) {
           final String parameterPType = mapMethodParameters.get("PType");
-          if (parameterPType.equals("Call Arguments")) {
+          if ("Call Arguments".equals(parameterPType)) {
             final String paramterCall = mapMethodParameters.get("Name:1");
             // final String parameterType =
             // mapMethodParameters.get("Type")
@@ -293,7 +293,7 @@ public final class YMAPIMethods {
               default:
                 break;
             }
-            if (!stringBuilderArguments.toString().equals("")) {
+            if (!"".equals(stringBuilderArguments.toString())) {
               stringBuilderArguments.append(",");
             }
             final String paramterName =

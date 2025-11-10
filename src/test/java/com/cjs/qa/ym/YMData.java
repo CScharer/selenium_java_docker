@@ -106,7 +106,7 @@ public class YMData extends Environment {
           SQL.appendStringBuilderSQLInsertRecord(
               VivitTables.VIVIT_DATABASE_CHANGES, sqlStringBuilder, fieldNameMap);
     }
-    if (!sqlStringBuilder.toString().equals("")) {
+    if (!"".equals(sqlStringBuilder.toString())) {
       SQL.executeVivit(LABEL_INSERT_INTO, JavaHelpers.getCurrentMethodName(), sqlStringBuilder);
     }
     return true;
@@ -770,7 +770,7 @@ public class YMData extends Environment {
               String attendeeNodeName = attendeeChildElement.getNodeName();
               final String attendeeNodeValue =
                   attendeeElement.getElementsByTagName(attendeeNodeName).item(0).getTextContent();
-              if (!attendeeNodeName.equals("DataSet")) {
+              if (!"DataSet".equals(attendeeNodeName)) {
                 attendeeMap.put(attendeeNodeName, attendeeNodeValue);
               } else {
                 NodeList dataSetChildrenNodeList = attendeeChildNode.getChildNodes();
@@ -908,7 +908,7 @@ public class YMData extends Environment {
                     .item(0)
                     .getTextContent();
             
-            if (!eventRegistrationNodeName.equals("DataSet")) {
+            if (!"DataSet".equals(eventRegistrationNodeName)) {
               processNonDataSetNode(
                   eventRegistrationNodeName, eventRegistrationNodeValue, eventRegistrationMap);
             } else {
@@ -1395,7 +1395,7 @@ public class YMData extends Environment {
           SQL.appendStringBuilderSQLInsertRecord(
               VivitTables.VIVIT_DATABASE_CHANGES, sqlStringBuilder, fieldNameMap);
     }
-    if (!sqlStringBuilder.toString().equals("")) {
+    if (!"".equals(sqlStringBuilder.toString())) {
       SQL.executeVivit(LABEL_INSERT_INTO, JavaHelpers.getCurrentMethodName(), sqlStringBuilder);
     }
     return true;

@@ -85,7 +85,7 @@ public class SystemProcesses {
                   final String field = listField.get(fieldIndex);
                   {
                     final String value = mapRecord.get(field).replaceAll("'", "''");
-                    if (field.equals("Mem Usage")) {
+                    if ("Mem Usage".equals(field)) {
                       sqlStringBuilder.append(field + "_" + processType + "]='" + value + "'");
                     } else {
                       sqlStringBuilder.append(field + "]='" + value + "'");
@@ -179,7 +179,7 @@ public class SystemProcesses {
       for (int listIndex = 0; listIndex < listFieldsProcess.size(); listIndex++) {
         final String fieldName = listFieldsProcess.get(listIndex);
         if (!LIST_FIELDS_PROCESS_STANDARD.contains(fieldName)) {
-          if (fieldName.equals("Mem Usage")) {
+          if ("Mem Usage".equals(fieldName)) {
             listFieldsProcessGrouped.add(fieldName + "_" + processType);
           } else {
             listFieldsProcessGrouped.add(fieldName);

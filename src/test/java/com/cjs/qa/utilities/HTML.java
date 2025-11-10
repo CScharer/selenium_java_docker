@@ -223,7 +223,7 @@ public class HTML {
             break;
         }
         String value = mapReport.get(field);
-        if (mapReport.get("Contractor").equals("Cumulative")) {
+        if ("Cumulative".equals(mapReport.get("Contractor"))) {
           stringBuilderTable.append(
               "<td style="
                   + Constants.QUOTE_DOUBLE
@@ -234,7 +234,7 @@ public class HTML {
                   + Constants.QUOTE_DOUBLE
                   + ">");
         }
-        if (mapReport.get("Contractor").equals("Annual")) {
+        if ("Annual".equals(mapReport.get("Contractor"))) {
           stringBuilderTable.append(
               "<td style="
                   + Constants.QUOTE_DOUBLE
@@ -245,8 +245,8 @@ public class HTML {
                   + Constants.QUOTE_DOUBLE
                   + ">");
         }
-        if (!mapReport.get("Contractor").equals("Cumulative")
-            && !mapReport.get("Contractor").equals("Annual")) {
+        if (!"Cumulative".equals(mapReport.get("Contractor"))
+            && !"Annual".equals(mapReport.get("Contractor"))) {
           stringBuilderTable.append(
               "<td style="
                   + Constants.QUOTE_DOUBLE
@@ -304,8 +304,8 @@ public class HTML {
         if (fontRed) {
           stringBuilderTable.append("</font>");
         }
-        if (mapReport.get("Contractor").equals("Cumulative")
-            || mapReport.get("Contractor").equals("Annual")) {
+        if ("Cumulative".equals(mapReport.get("Contractor"))
+            || "Annual".equals(mapReport.get("Contractor"))) {
           stringBuilderTable.append("</td>");
         } else {
           stringBuilderTable.append("</td>");

@@ -403,7 +403,7 @@ public class Coder {
       String name = mapRecord.get(mapFields.get("Name"));
       String pagePopulate = mapRecord.get(mapFields.get("PagePopulate"));
       String methodName = RegularExpression.getOnlyAlphaNumericCharacters(name);
-      if (pagePopulate.equals("true")) {
+      if ("true".equals(pagePopulate)) {
         stringBuilder.append(getPageCasePopulate(type, name, methodName));
       }
     }
@@ -416,7 +416,7 @@ public class Coder {
       String name = mapRecord.get(mapFields.get("Name"));
       String pageValidate = mapRecord.get(mapFields.get("PageValidate"));
       String methodName = RegularExpression.getOnlyAlphaNumericCharacters(name);
-      if (pageValidate.equals("true")) {
+      if ("true".equals(pageValidate)) {
         stringBuilder.append(getPageCaseValidate(type, name, methodName));
       }
     }

@@ -121,7 +121,7 @@ public class SQL {
       String key = (String) entry.getKey();
       String value = (String) entry.getValue();
       key = key.trim();
-      if (!stringBuilderFields.toString().equals("")) {
+      if (!"".equals(stringBuilderFields.toString())) {
         stringBuilderFields.append(",");
         stringBuilderValues.append(",");
       }
@@ -158,7 +158,7 @@ public class SQL {
     final List<String> listSQLs = new ArrayList<>();
     for (int index = 0; index < listFields.size(); index++) {
       final String listField = listFields.get(index);
-      if (!stringBuilderFields.toString().equals("")) {
+      if (!"".equals(stringBuilderFields.toString())) {
         stringBuilderFields.append(",");
       }
       stringBuilderFields.append("[" + listField + "]");
@@ -177,7 +177,7 @@ public class SQL {
         } else {
           value = recordData[index];
         }
-        if (!stringBuilderValues.toString().equals("")) {
+        if (!"".equals(stringBuilderValues.toString())) {
           stringBuilderValues.append(",");
         }
         if (value == null) {
@@ -544,7 +544,7 @@ public class SQL {
             + "].[Environment]='"
             + environment
             + "'";
-    if (!environment.equals("")) {
+    if (!"".equals(environment)) {
       sql +=
           " " + JDBCConstants.AND + "[" + TABLE_ENVIRONMENTS + "].[Abbreviation]='" + company + "'";
     }
@@ -619,7 +619,7 @@ public class SQL {
             + "].[Environment]='"
             + environment
             + "'";
-    if (!company.equals("")) {
+    if (!"".equals(company)) {
       sql +=
           " " + JDBCConstants.AND + "[" + TABLE_ENVIRONMENTS + "].[Abbreviation]='" + company + "'";
     }
@@ -655,7 +655,7 @@ public class SQL {
             + "].[Environment]='"
             + environment
             + "'";
-    if (!company.equals("")) {
+    if (!"".equals(company)) {
       sql +=
           " " + JDBCConstants.AND + "[" + TABLE_ENVIRONMENTS + "].[Abbreviation]='" + company + "'";
     }

@@ -79,12 +79,12 @@ public class BtsCrosswordChallengePage extends Page {
     navigateCrosswordURL(sYear, sMonth);
     getGridSquares();
     String startLetter = "";
-    if (!values.equals("")) {
+    if (!"".equals(values)) {
       startLetter = populateFromFailure(values);
     }
     Environment.sysOut("startLetter:" + startLetter);
     for (final String letter : letters) {
-      if (startLetter.equals("")) {
+      if ("".equals(startLetter)) {
         // Do normal process.
         getCrosswordLetter(letter);
       } else {
@@ -149,7 +149,7 @@ public class BtsCrosswordChallengePage extends Page {
     // "http://crossword.info/btsclientservices/June_2016_a";
     getWebDriver().get(sURL);
     final String actual = getWebDriver().getTitle();
-    if (actual.equals("Web Page Restricted")) {
+    if ("Web Page Restricted".equals(actual)) {
       clickbuttonContinue();
     }
     verifyPage(sYear, sMonth);
@@ -165,7 +165,7 @@ public class BtsCrosswordChallengePage extends Page {
       final WebElement oDiv =
           getWebDriver().findElement(By.xpath(".//*[@id='game']//div[" + iGridSquare + "]"));
       final String sClass = oDiv.getAttribute("class");
-      if (sClass.equals("GridSquare Let")) {
+      if ("GridSquare Let".equals(sClass)) {
         mapGridSquares.put(iGridSquare, "");
       }
     }
@@ -206,7 +206,7 @@ public class BtsCrosswordChallengePage extends Page {
     clickbuttonCheck();
     for (final String sGridSquare : lGridSquares) {
       final int iGridSquare = Integer.valueOf(sGridSquare);
-      if (mapGridSquares.get(iGridSquare).equals("")) {
+      if ("".equals(mapGridSquares.get(iGridSquare))) {
         if (isElementPresent(
             By.xpath(".//*[@id='game']//div[" + iGridSquare + "][not(*/div[.='X'])]"))) {
           mapGridSquares.put(iGridSquare, sLetter);
