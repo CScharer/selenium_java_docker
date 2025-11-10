@@ -183,7 +183,6 @@ public class XlsReader {
         return cell.getStringCellValue();
       } else if ((cell.getCellType() == CellType.NUMERIC)
           || (cell.getCellType() == CellType.FORMULA)) {
-        final String cellText = String.valueOf(cell.getNumericCellValue());
         /*
          * if (XSSFDateUtil.isCellDateFormatted(cell)) { //format in
          * form of M/D/YY double d = cell.getNumericCellValue();
@@ -191,12 +190,12 @@ public class XlsReader {
          * Calendar cal =Calendar.getInstance();
          * cal.setTime(XSSFDateUtil.getJavaDate(d)); cellText =
          * (String.valueOf(cal.get(Calendar.YEAR))).substring(2);
-         * cellText = cal.get(Calendar.MONTH)+1 + “/” +
-         * cal.get(Calendar.DAY_OF_MONTH) + “/” + cellText;
+         * cellText = cal.get(Calendar.MONTH)+1 + "/" +
+         * cal.get(Calendar.DAY_OF_MONTH) + "/" + cellText;
          *
          * //System.out.println(cellText); }
          */
-        return cellText;
+        return String.valueOf(cell.getNumericCellValue());
       } else if (cell.getCellType() == CellType.BLANK) {
         return "";
       } else {

@@ -57,8 +57,7 @@ public class ODBCExcel {
     try {
       // String dir = System.getProperty("user.dir");
       Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-      final Connection oConnection =
-          DriverManager.getConnection(
+      return DriverManager.getConnection(
               "jdbc:odbc:Driver={Microsoft Excel Driver (*"
                   + IExtension.XLS
                   + ", *"
@@ -69,7 +68,6 @@ public class ODBCExcel {
                   + IExtension.XLSB
                   + ")};Dbq="
                   + database);
-      return oConnection;
     } catch (ClassNotFoundException | SQLException oException) {
       JOptionPane.showMessageDialog(null, "Problem connecting to database [" + database + "]");
       System.out.println(oException.getMessage());

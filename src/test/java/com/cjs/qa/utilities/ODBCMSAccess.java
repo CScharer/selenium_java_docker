@@ -103,8 +103,7 @@ public class ODBCMSAccess {
     try {
       // String dir = System.getProperty("user.dir");
       Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-      final Connection connection = DriverManager.getConnection("jdbc:ucanaccess://" + database);
-      return connection;
+      return DriverManager.getConnection("jdbc:ucanaccess://" + database);
     } catch (ClassNotFoundException | SQLException oException) {
       JOptionPane.showMessageDialog(null, "Problem connecting to database [" + database + "]");
       System.out.println(oException.getMessage());

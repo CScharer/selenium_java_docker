@@ -1301,8 +1301,7 @@ public class EntityService extends WebService {
   public String getCurrentYearMinusYears(int years) {
     final DateFormat dateFormat = new SimpleDateFormat("yyyy");
     final Date date = new Date();
-    final String year = String.valueOf(Integer.valueOf(dateFormat.format(date)) - years);
-    return year;
+    return String.valueOf(Integer.valueOf(dateFormat.format(date)) - years);
   }
 
   /**
@@ -1758,15 +1757,13 @@ public class EntityService extends WebService {
     final String s01 = "515";
     final String s02 = String.format("%03d", Integer.valueOf(getRandomNumberString(1, 999)));
     final String s03 = String.format("%04d", Integer.valueOf(getRandomNumberString(1, 9999)));
-    final String taxID = s01 + "-" + s02 + "-" + s03;
-    return taxID;
+    return s01 + "-" + s02 + "-" + s03;
   }
 
   public String getRandomTaxId() {
     final String s01 = String.format("%03d", Integer.valueOf(getRandomNumberString(1, 999)));
     final String s02 = String.format("%02d", Integer.valueOf(getRandomNumberString(1, 99)));
     final String s03 = String.format("%04d", Integer.valueOf(getRandomNumberString(1, 9999)));
-    final String taxID = s01 + "-" + s02 + "-" + s03;
-    return taxID;
+    return s01 + "-" + s02 + "-" + s03;
   }
 }

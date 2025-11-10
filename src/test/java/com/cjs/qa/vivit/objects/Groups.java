@@ -53,13 +53,11 @@ public class Groups {
   }
 
   public static List<String> getBaseList() {
-    List<String> groupBaseList = Arrays.asList(BASE_LIST.split(Constants.DELIMETER_LIST));
-    return groupBaseList;
+    return Arrays.asList(BASE_LIST.split(Constants.DELIMETER_LIST));
   }
 
   public static List<String> getExtendedList() {
-    List<String> groupBaseList = Arrays.asList(EXTENDED_LIST.split(Constants.DELIMETER_LIST));
-    return groupBaseList;
+    return Arrays.asList(EXTENDED_LIST.split(Constants.DELIMETER_LIST));
   }
 
   public static boolean isGroupPage() {

@@ -56,9 +56,7 @@ public class AbstractPage implements ISelenium {
 
   protected WebElement waitClickable(WebElement element) {
     final WebDriverWait wait = new WebDriverWait(this.webDriver, java.time.Duration.ofSeconds(10));
-    final WebElement clickableElement =
-        wait.until(ExpectedConditions.elementToBeClickable(element));
-    return clickableElement;
+    return wait.until(ExpectedConditions.elementToBeClickable(element));
   }
 
   protected void verifyTitle(String value) {

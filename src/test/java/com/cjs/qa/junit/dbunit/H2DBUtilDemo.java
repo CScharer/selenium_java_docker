@@ -62,8 +62,7 @@ public class H2DBUtilDemo extends BaseDBUnitTestForJPADao {
   }
 
   private Object[][] createOrderSourceRows() {
-    final Object[][] orderSourceRows =
-        new Object[][] {
+    return new Object[][] {
           new Object[] {
             1,
             "so",
@@ -86,12 +85,10 @@ public class H2DBUtilDemo extends BaseDBUnitTestForJPADao {
             new DateTime().withYear(2013).withMonthOfYear(1).withDayOfMonth(1).toDate()
           }
         };
-    return orderSourceRows;
   }
 
   private Object[][] createOrderRowData() {
-    final Object[][] orderRows =
-        new Object[][] {
+    return new Object[][] {
           // Refernce the web order.
           new Object[] {
             1,
@@ -117,7 +114,6 @@ public class H2DBUtilDemo extends BaseDBUnitTestForJPADao {
             1
           }
         };
-    return orderRows;
   }
 
   @Test

@@ -51,7 +51,10 @@ public class OdbcMsAccess64 {
                   + Constants.DELIMETER_LIST,
               "",
               "");
-      return oConnection;
+      return DriverManager.getConnection(
+              "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=" + database,
+              "",
+              "");
     } catch (ClassNotFoundException | SQLException oException) {
       JOptionPane.showMessageDialog(null, "Problem connecting to database [" + database + "]");
       Environment.sysOut(oException.getMessage());

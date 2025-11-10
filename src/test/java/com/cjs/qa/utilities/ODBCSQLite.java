@@ -72,8 +72,7 @@ public class ODBCSQLite {
     try {
       // String dir = System.getProperty("user.dir");
       Class.forName("org" + IExtension.SQLITE + IExtension.JDBC);
-      final Connection oConnection = DriverManager.getConnection("jdbc:sqlite:" + database);
-      return oConnection;
+      return DriverManager.getConnection("jdbc:sqlite:" + database);
     } catch (ClassNotFoundException | SQLException oException) {
       JOptionPane.showMessageDialog(null, "Problem connecting to database [" + database + "]");
       System.out.println(oException.getMessage());

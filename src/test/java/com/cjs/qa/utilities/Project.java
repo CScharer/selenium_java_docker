@@ -65,8 +65,7 @@ public class Project {
       Environment.sysOut("Backslash is not allowed in path!");
       return null;
     } else {
-      final String convertedSubPath = subPath.replace("/", fileSeperator);
-      return convertedSubPath;
+      return subPath.replace("/", fileSeperator);
     }
   }
 
