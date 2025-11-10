@@ -77,6 +77,7 @@ public class ResponsiveDesignTests {
         {new Dimension(375, 667), "iPhone SE"},
         {new Dimension(390, 844), "iPhone 13"},
         {new Dimension(393, 852), "iPhone 14 Pro"},
+        {new Dimension(412, 892), "Google Pixel 9"},
         {new Dimension(768, 1024), "iPad Portrait"},
         {new Dimension(1024, 768), "iPad Landscape"},
         {new Dimension(1366, 768), "Desktop (Small)"},

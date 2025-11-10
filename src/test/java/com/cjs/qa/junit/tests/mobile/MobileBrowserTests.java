@@ -76,7 +76,8 @@ public class MobileBrowserTests {
     return new Object[][] {
         {MobileDevice.IPHONE_14_PRO},
         {MobileDevice.SAMSUNG_GALAXY_S21},
-        {MobileDevice.PIXEL_7}
+        {MobileDevice.PIXEL_7},
+        {MobileDevice.PIXEL_9}
     };
   }
 
