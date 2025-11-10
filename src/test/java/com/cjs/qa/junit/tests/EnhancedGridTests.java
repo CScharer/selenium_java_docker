@@ -39,7 +39,7 @@ public class EnhancedGridTests {
     }
 
     LOGGER.info("\n========================================");
-    LOGGER.info("Test Browser: {}", browser.toUpperCase());
+    LOGGER.info("Test Browser: {}", browser.toUpperCase(Locale.ENGLISH));
     LOGGER.info("Grid URL: {}", gridUrl);
     LOGGER.info("========================================");
 
@@ -69,7 +69,7 @@ public class EnhancedGridTests {
 
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-    LOGGER.info("✅ {} browser initialized\n", currentBrowser.toUpperCase());
+    LOGGER.info("✅ {} browser initialized\n", currentBrowser.toUpperCase(Locale.ENGLISH));
   }
 
   @Test(priority = 1, description = "Verify Google homepage loads correctly")
@@ -292,7 +292,7 @@ public class EnhancedGridTests {
         LOGGER.info("⏭️  Test skipped");
       }
 
-      LOGGER.info("\nClosing {} browser...", currentBrowser.toUpperCase());
+      LOGGER.info("\nClosing {} browser...", currentBrowser.toUpperCase(Locale.ENGLISH));
       driver.quit();
       LOGGER.info("Browser closed successfully");
       LOGGER.info("========================================\n");

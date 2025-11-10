@@ -26,9 +26,13 @@ import com.cjs.qa.wellmark.WellmarkEnvironment;
 import io.cucumber.java.Scenario;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Locale;
 import org.apache.log4j.BasicConfigurator;
 import org.junit.Assert;
 
@@ -94,9 +98,9 @@ public class Environment {
   public static String getComputerName() {
     final Map<String, String> env = System.getenv();
     if (env.containsKey("COMPUTERNAME")) {
-      return env.get("COMPUTERNAME").toUpperCase();
+      return env.get("COMPUTERNAME").toUpperCase(Locale.ENGLISH);
     } else if (env.containsKey("HOSTNAME")) {
-      return env.get("HOSTNAME").toUpperCase();
+      return env.get("HOSTNAME").toUpperCase(Locale.ENGLISH);
     } else {
       return "Unknown Computer";
     }
@@ -140,7 +144,7 @@ public class Environment {
 
   public static void setEnvironmentFileStructure(String project) {
     sysOut("Setting Environment File Structure for the [" + project + "] Project");
-    project = project.toLowerCase();
+    project = project.toLowerCase(Locale.ENGLISH);
     switch (project) {
       case "americanairlines":
         setFolderData(AmericanAirlinesEnvironment.FOLDER_DATA);

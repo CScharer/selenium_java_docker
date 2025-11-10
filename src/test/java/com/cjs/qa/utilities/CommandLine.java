@@ -8,12 +8,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Locale;
 import java.util.Map.Entry;
+import java.util.Locale;
 import java.util.Scanner;
+import java.util.Locale;
 import org.junit.Test;
 
 public class CommandLine {
@@ -138,8 +145,8 @@ public class CommandLine {
   public static boolean isProcessRunning(String processName) throws IOException {
     final ProcessBuilder processBuilder = new ProcessBuilder(TASKLIST + ".exe");
     final Process process = processBuilder.start();
-    final String tasksList = getInputStream(process.getInputStream()).toLowerCase();
-    return tasksList.contains(processName.toLowerCase());
+    final String tasksList = getInputStream(process.getInputStream()).toLowerCase(Locale.ENGLISH);
+    return tasksList.contains(processName.toLowerCase(Locale.ENGLISH));
   }
 
   public static boolean isProcessRunningNoException(String processRunning) {
@@ -150,8 +157,8 @@ public class CommandLine {
           new BufferedReader(new InputStreamReader(process.getInputStream()));
       String line;
       while ((line = bufferedReader.readLine()) != null) {
-        line = line.toLowerCase();
-        if (line.contains(processRunning.toLowerCase())) {
+        line = line.toLowerCase(Locale.ENGLISH);
+        if (line.contains(processRunning.toLowerCase(Locale.ENGLISH))) {
           if (Environment.isLogAll()) {
             Environment.sysOut(line);
           }

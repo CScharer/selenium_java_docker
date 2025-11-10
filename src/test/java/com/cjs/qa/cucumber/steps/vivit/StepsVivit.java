@@ -20,10 +20,15 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Locale;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
@@ -212,22 +217,22 @@ public class StepsVivit extends Environment {
       final String field = (String) item.get(0);
       final String value = (String) item.get(1);
       if (!value.equals("")) {
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "browser":
-            setStepBrowser(value.toUpperCase().trim());
+            setStepBrowser(value.toUpperCase(Locale.ENGLISH).trim());
             // setStepBrowser(Environment.getStepBrowser());
             mapTest.put("Browser", getStepBrowser());
             break;
           case "company":
-            final String company = value.toUpperCase().trim();
+            final String company = value.toUpperCase(Locale.ENGLISH).trim();
             mapTest.put("Company", company);
             break;
           case "lob":
-            final String lob = value.toUpperCase().trim();
+            final String lob = value.toUpperCase(Locale.ENGLISH).trim();
             mapTest.put("LOB", lob);
             break;
           case "environment":
-            final String environment = value.toUpperCase().trim();
+            final String environment = value.toUpperCase(Locale.ENGLISH).trim();
             mapTest.put("Environment", environment);
             break;
           default:

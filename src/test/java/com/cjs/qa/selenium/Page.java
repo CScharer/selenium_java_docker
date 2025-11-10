@@ -15,11 +15,17 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
+import java.util.Locale;
 import java.util.function.Function;
+import java.util.Locale;
 import javax.swing.JEditorPane;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
@@ -1511,7 +1517,7 @@ public class Page extends JavaHelpers {
     if (Environment.isLogAll()) {
       logFieldName(by.toString(), value);
     }
-    switch (value.toLowerCase()) {
+    switch (value.toLowerCase(Locale.ENGLISH)) {
       case LABEL_OPTION_CHECKED:
         if (!getCheckbox(by).equals(value)) {
           toggleCheckbox(by);
@@ -1556,7 +1562,7 @@ public class Page extends JavaHelpers {
       logFieldName(webElements.toString(), value);
     }
     for (final WebElement webElement : webElements) {
-      switch (value.toLowerCase()) {
+      switch (value.toLowerCase(Locale.ENGLISH)) {
         case LABEL_OPTION_CHECKED:
           if (!getCheckbox(webElement).equals(value)) {
             toggleCheckbox(webElement);
@@ -1623,7 +1629,7 @@ public class Page extends JavaHelpers {
         } else {
           final String[] itemArray = webElement.getText().split(Constants.NL);
           for (final String item : itemArray) {
-            if (item.equalsIgnoreCase(value.toUpperCase())) {
+            if (item.equalsIgnoreCase(value.toUpperCase(Locale.ENGLISH))) {
               select.selectByVisibleText(item);
               itemFound = true;
               break;

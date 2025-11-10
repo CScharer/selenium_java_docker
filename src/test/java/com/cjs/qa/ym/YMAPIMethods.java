@@ -10,11 +10,17 @@ import com.cjs.qa.utilities.FSO;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.ym.api.services.YMService;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Locale;
 import java.util.Map.Entry;
+import java.util.Locale;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -131,7 +137,7 @@ public final class YMAPIMethods {
       // listMethod.get((listMethod.size() - 1))
       String methodName = method.replace(namespace + ".", "");
       methodName = methodName.replace(".", "");
-      methodName = methodName.substring(0, 1).toLowerCase() + methodName.substring(1);
+      methodName = methodName.substring(0, 1).toLowerCase(Locale.ENGLISH) + methodName.substring(1);
       String methodDescription = "Description: " + mapMethod.get(LABEL_DESCRIPTION);
       methodDescription = methodDescription.replaceAll(Constants.NEWLINE, Constants.NEWLINE + "//");
       final String methodURL = "URL: " + mapMethod.get("URL");
@@ -186,7 +192,7 @@ public final class YMAPIMethods {
             stringBuilderArguments.append(",");
           }
           String paramterName =
-              paramterCall.substring(0, 1).toLowerCase() + paramterCall.substring(1);
+              paramterCall.substring(0, 1).toLowerCase(Locale.ENGLISH) + paramterCall.substring(1);
           paramterName = paramterName.replace(" ", "");
           stringBuilderArguments.append(parameterDeclarationType + " " + paramterName);
           stringBuilderCallParameters.append(
@@ -240,7 +246,7 @@ public final class YMAPIMethods {
             Arrays.asList(callMethod.split(Constants.DELIMETER_PATH + "."));
         final String methodNameSpace = listMethod.get(0) + "Namespace";
         String methodName = listMethod.get((listMethod.size() - 1));
-        methodName = methodName.substring(0, 1).toLowerCase() + methodName.substring(1);
+        methodName = methodName.substring(0, 1).toLowerCase(Locale.ENGLISH) + methodName.substring(1);
         final String methodDescription = mapMethod.get(LABEL_DESCRIPTION);
         final String methodURL = mapMethod.get("URL");
         newTemplateYMAPIClass =
@@ -297,7 +303,7 @@ public final class YMAPIMethods {
               stringBuilderArguments.append(",");
             }
             final String paramterName =
-                paramterCall.substring(0, 1).toLowerCase() + paramterCall.substring(1);
+                paramterCall.substring(0, 1).toLowerCase(Locale.ENGLISH) + paramterCall.substring(1);
             stringBuilderArguments.append(parameterDeclarationType + " " + paramterName);
             stringBuilderCallParameters.append(
                 Constants.nlTab(1, 2)

@@ -17,10 +17,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Locale;
 import java.util.Map.Entry;
+import java.util.Locale;
 
 public class SQL {
   private static final String DATABASE_DEFINITION = "QAAuto";
@@ -476,7 +481,7 @@ public class SQL {
             + "UPPER(["
             + TABLE_COMPANY
             + "].[Abbreviation]) = '"
-            + company.toUpperCase()
+            + company.toUpperCase(Locale.ENGLISH)
             + "';";
     String companyNumber = "";
     final JDBC jdbc = new JDBC("", DATABASE_DEFINITION);
@@ -494,7 +499,7 @@ public class SQL {
   // "] " +
   // JDBCConstants.WHERE + "UPPER([" + TABLE_COMPANY +
   // "].[Abbreviation]) =
-  // '" + company.toUpperCase() + "';"
+  // '" + company.toUpperCase(Locale.ENGLISH) + "';"
   // String filenetSplit = null
   // final JDBC jdbc = new JDBC("", DATABASE_DEFINITION)
   // final ResultSet resultSet = jdbc.queryResults(sql)
@@ -573,7 +578,7 @@ public class SQL {
     sql += "c.[Abbreviation] = p.[Abbreviation] ";
     sql += "LEFT JOIN [" + TABLE_FILENET + "] f " + JDBCConstants.ON;
     sql += "c.[FilenetSplit] = f.[FilenetSplit] ";
-    sql += JDBCConstants.WHERE + "c.[Abbreviation]='" + company.toUpperCase() + "';";
+    sql += JDBCConstants.WHERE + "c.[Abbreviation]='" + company.toUpperCase(Locale.ENGLISH) + "';";
     final ResultSet resultSet = jdbc.queryResults(sql);
     map.put("FilenetSplit", resultSet.getString("FilenetSplit"));
     Environment.sysOut("FilenetSplit:[" + map.get("FilenetSplit") + "]");
@@ -760,7 +765,7 @@ public class SQL {
             + "LOWER(["
             + TABLE_DOM_USERS
             + "].[EMail])='"
-            + eMail.toLowerCase()
+            + eMail.toLowerCase(Locale.ENGLISH)
             + "' "
             + JDBCConstants.AND
             + "["
@@ -770,7 +775,7 @@ public class SQL {
     // JDBCConstants.SELECT+"[QATOOLS_USERS_AUTHORIZED].[EMail]
     // FROM
     // [QATOOLS_USERS_AUTHORIZED] WHERE
-    // LOWER([QATOOLS_USERS_AUTHORIZED].[EMail])='" + eMail.toLowerCase() +
+    // LOWER([QATOOLS_USERS_AUTHORIZED].[EMail])='" + eMail.toLowerCase(Locale.ENGLISH) +
     // "';"
     final JDBC jdbc = new JDBC("", DATABASE_DEFINITION);
     final ResultSet resultSet = jdbc.queryResults(sql);
