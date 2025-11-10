@@ -65,8 +65,7 @@ public class CalendarsPage extends Page {
   private void getCalendars(String url, String calendarPage) {
     getWebDriver().get(url);
     final List<WebElement> listCalendarRecords = getWebDriver().findElements(byTableCalendars);
-    for (int record = 0; record < listCalendarRecords.size(); record++) {
-      final WebElement elementRecord = listCalendarRecords.get(record);
+    for (WebElement elementRecord : listCalendarRecords) {
       String xPath = "./span/a";
       WebElement webElement = elementRecord.findElement(By.xpath(xPath));
       highlightCurrentElement(webElement);

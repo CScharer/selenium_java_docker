@@ -411,8 +411,7 @@ public class JDBC {
     List<String> headingList = Arrays.asList("Type", "Name", "Field");
     excel.createHeadings(sheetName, headingList);
     int recordIndex = 0;
-    for (int objectIndex = 0; objectIndex < tableViewListMap.size(); objectIndex++) {
-      Map<String, String> tableViewMap = tableViewListMap.get(objectIndex);
+    for (Map<String, String> tableViewMap : tableViewListMap) {
       String objectType = tableViewMap.get("type");
       String objectName = tableViewMap.get("name");
       List<String> fieldNameList = jdbc.getFieldNamesList(objectName);

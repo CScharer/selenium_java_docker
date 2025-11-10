@@ -156,8 +156,7 @@ public class SQL {
     StringBuilder stringBuilderFields = new StringBuilder();
     StringBuilder stringBuilderValues = new StringBuilder();
     final List<String> listSQLs = new ArrayList<>();
-    for (int index = 0; index < listFields.size(); index++) {
-      final String listField = listFields.get(index);
+    for (String listField : listFields) {
       if (!"".equals(stringBuilderFields.toString())) {
         stringBuilderFields.append(",");
       }

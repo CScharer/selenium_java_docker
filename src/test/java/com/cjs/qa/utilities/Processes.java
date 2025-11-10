@@ -18,10 +18,10 @@ public class Processes {
     String data = CommandLine.executeCommand(command);
     if (!data.contains(NO_RESULTS)) {
       List<String> records = Arrays.asList(data.split(Constants.NL));
-      for (int indexRecord = 0; indexRecord < records.size(); indexRecord++) {
+      for (String recordRaw : records) {
         // if (indexRecord > 1)
         // {
-        String record = records.get(indexRecord).replaceAll(" +", " ");
+        String record = recordRaw.replaceAll(" +", " ");
         // String[] columns = record.split(" ");
         String[] columns = record.split("\",\"");
         String imageName = columns[0].replaceAll("\"", "");

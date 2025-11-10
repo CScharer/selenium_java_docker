@@ -630,8 +630,8 @@ public class Page extends JavaHelpers {
         final String sObjectSubType = sObject.substring(0, sObject.indexOf(':'));
         final String sObjectSubTypes = sObject.substring(sObject.indexOf(':') + 1);
         final String[] sObjectType = sObjectSubTypes.split(Constants.DELIMETER_LIST);
-        for (int iObject = 0; iObject < sObjectType.length; iObject++) {
-          xpath = PATH_DELIMETER + sObjectSubType + "[@type='" + sObjectType[iObject] + "']";
+        for (String objectType : sObjectType) {
+          xpath = PATH_DELIMETER + sObjectSubType + "[@type='" + objectType + "']";
           listFields.add("XPATH:" + xpath);
           listFields.addAll(getAllFieldsType(xpath));
         }
@@ -781,8 +781,8 @@ public class Page extends JavaHelpers {
     String idString = "";
     String id = "";
     String returnID = "";
-    for (int i = 0; i < arIDs.length; i++) {
-      idString = arIDs[i];
+    for (String currentIdString : arIDs) {
+      idString = currentIdString;
       id = idString.substring(0, idString.indexOf(Constants.QUOTE_DOUBLE));
       // Environment.sysOut(sID)
       if (id.contains(wildCard)) {

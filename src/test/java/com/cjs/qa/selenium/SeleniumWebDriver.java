@@ -177,8 +177,7 @@ public class SeleniumWebDriver {
     final List<File> listFile = new ArrayList<>();
     final int columns = 1;
     final int rows = listFiles.size();
-    for (int index = 0; index < listFiles.size(); index++) {
-      final String filePathName = listFiles.get(index);
+    for (String filePathName : listFiles) {
       listFile.add(new File(filePathName));
     }
     final BufferedImage bufferedImageSample = ImageIO.read(listFile.get(0));

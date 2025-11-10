@@ -30,8 +30,7 @@ public class DetailsPage extends Page {
     for (final String section : getListSection()) {
       final By labels = By.xpath(".//*[@id='" + section + "']/..//tr/th");
       final List<WebElement> elements = getWebDriver().findElements(labels);
-      for (int index = 0; index < elements.size(); index++) {
-        final WebElement elementLabel = elements.get(index);
+      for (WebElement elementLabel : elements) {
         stringBuilder.append(elementLabel.getText());
         stringBuilder.append(Constants.DELIMETER_LIST);
         final WebElement elementValue = elementLabel.findElement(By.xpath("./../td/span"));

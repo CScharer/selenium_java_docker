@@ -113,10 +113,9 @@ public class StaffPage extends Page {
     final List<WebElement> webElementList =
         getWebDriver()
             .findElements(
-                By.xpath(
-                    ".//*[@id='SpContent_Container']/table/tbody/tr/td/b/a[contains(@href,'id=')]"));
-    for (int rowIndex = 0; rowIndex < webElementList.size(); rowIndex++) {
-      final WebElement webElement = webElementList.get(rowIndex);
+            By.xpath(
+                ".//*[@id='SpContent_Container']/table/tbody/tr/td/b/a[contains(@href,'id=')]"));
+    for (WebElement webElement : webElementList) {
       final String url = webElement.getAttribute("href");
       final StaffDetails staffDetails = new StaffDetails(url);
       staffDetailsList.add(staffDetails);

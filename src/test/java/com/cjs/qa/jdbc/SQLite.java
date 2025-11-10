@@ -36,8 +36,7 @@ public class SQLite {
     final Connection connection = SQL.createDatabaseSQLite(pathFileName);
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append(JDBCConstants.CREATE_TABLE + "'<TABLE_NAME>' (");
-    for (int index = 0; index < fields.size(); index++) {
-      final String field = fields.get(index);
+    for (String field : fields) {
       stringBuilder.append("'" + field + "' TEXT NOT NULL");
       if (!field.equals("Premium")) {
         stringBuilder.append(",");
