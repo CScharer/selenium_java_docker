@@ -83,7 +83,7 @@ public class SignInPage extends Page {
     editEmailSet(CJSConstants.EMAIL_ADDRESS_MSN);
     buttonNextClick();
     editPasswordSet(EPasswords.EMAIL_MSN.getValue());
-    checkboxKeepMeSignedInSet("checked");
+    checkboxKeepMeSignedInSet(LABEL_OPTION_CHECKED);
     buttonSignInClick();
   }
 

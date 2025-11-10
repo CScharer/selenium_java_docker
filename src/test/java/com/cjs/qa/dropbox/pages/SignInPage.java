@@ -95,12 +95,12 @@ public class SignInPage extends Page {
       Environment.sysOut("({Field}" + getCheckboxRememberMe().toString() + ", {Value}" + value + ");");
     }
     switch (value.toLowerCase(Locale.ENGLISH)) {
-      case "checked":
+      case LABEL_OPTION_CHECKED:
         if (getCheckbox(getCheckboxRememberMeInput()) != value) {
           getWebDriver().findElement(getCheckboxRememberMe()).click();
         }
         break;
-      case "unchecked":
+      case LABEL_OPTION_UNCHECKED:
         if (getCheckbox(getCheckboxRememberMeInput()) != value) {
           getWebDriver().findElement(getCheckboxRememberMe()).click();
         }
@@ -124,9 +124,9 @@ public class SignInPage extends Page {
     String value;
     value = getWebDriver().findElement(by).getAttribute("aria-checked");
     if ("false".equals(value)) {
-      value = "unchecked";
+      value = LABEL_OPTION_UNCHECKED;
     } else {
-      value = "checked";
+      value = LABEL_OPTION_CHECKED;
     }
     if (Environment.isLogAll()) {
       Environment.sysOut("({Field}" + by.toString() + ", {Value}" + value + ");");
@@ -169,9 +169,9 @@ public class SignInPage extends Page {
     editEmailSet(eMail);
     editPasswordSet(EPasswords.DROPBOX.getValue());
     if (CJSConstants.EMAIL_ADDRESS_MSN.equalsIgnoreCase(eMail)) {
-      checkboxRememberMeSet("checked");
+      checkboxRememberMeSet(LABEL_OPTION_CHECKED);
     } else {
-      checkboxRememberMeSet("unchecked");
+      checkboxRememberMeSet(LABEL_OPTION_UNCHECKED);
     }
     // buttonSignInRegularClick();
   }

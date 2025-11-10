@@ -601,6 +601,7 @@ public interface ISelenium {
     final List<WebElement> itemList = webDriver.findElements(By.name(field));
     // Environment.sysOut("Total " + field + "(s) " + itemList.size());
     for (final String value : valueArray) {
+      // NOPMD - ForLoopCanBeForeach: Requires itemList.get(index) multiple times
       for (int itemIndex = 0; itemIndex < itemList.size(); itemIndex++) {
         String item = itemList.get(itemIndex).getAttribute("value");
         if (item.trim().equals(value)) {

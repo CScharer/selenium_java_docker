@@ -8,6 +8,7 @@ import com.cjs.qa.jdbc.JDBC;
 import com.cjs.qa.jdbc.JDBCConstants;
 import com.cjs.qa.jdbc.SQL;
 import com.cjs.qa.microsoft.excel.xls.XLS;
+import com.cjs.qa.selenium.Page;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.FSO;
 import com.cjs.qa.utilities.IExtension;
@@ -370,7 +371,7 @@ public class Coder {
                   + Constants.QUOTE_DOUBLE
                   + ", "
                   + Constants.QUOTE_DOUBLE
-                  + "checked"
+                  + LABEL_OPTION_CHECKED
                   + Constants.QUOTE_DOUBLE
                   + "),");
           break;

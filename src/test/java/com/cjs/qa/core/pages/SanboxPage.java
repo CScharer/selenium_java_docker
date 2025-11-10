@@ -19,7 +19,7 @@ public class SanboxPage extends Page {
 
   // TABLE DEF
   // DataTable table = Convert.toDataTable(Arrays.asList(
-  // Arrays.asList("Checkbox", "checked"),
+  // Arrays.asList("Checkbox", LABEL_OPTION_CHECKED),
   // Arrays.asList("Dropdown", "Dropdown"),
   // Arrays.asList("Edit", "Edit"),
   // Arrays.asList("Option", "Option")));

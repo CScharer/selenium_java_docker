@@ -38,6 +38,7 @@ public class UnmarshallYourMembershipResponse {
   private YourMembershipResponse get(SOAPMessage soapMessage) throws QAException {
     YourMembershipResponse yourMembershipResponse = null;
     try {
+      // NOPMD - ForLoopCanBeForeach: Iterator pattern is optimal for SOAP XML parsing
       for (final Iterator<jakarta.xml.soap.Node> bodyIterator =
               soapMessage.getSOAPBody().getChildElements();
           bodyIterator.hasNext();) {

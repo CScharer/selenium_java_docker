@@ -114,7 +114,7 @@ public class SignInPage extends Page {
     // editDateOfBirthMonthSet(mapUser.get("Month"));
     // editDateOfBirthDaySet(mapUser.get("Day"));
     // editDateOfBirthYearSet(mapUser.get("Year"));
-    // checkboxRememberUsernameSet("unchecked");
+    // checkboxRememberUsernameSet(LABEL_OPTION_UNCHECKED);
     buttonEnterClick();
   }
 

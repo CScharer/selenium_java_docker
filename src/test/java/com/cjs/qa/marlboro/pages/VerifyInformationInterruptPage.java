@@ -78,7 +78,7 @@ public class VerifyInformationInterruptPage extends Page {
     if (!getWebDriver().getCurrentUrl().toLowerCase(Locale.ENGLISH).equals(getUrlVerifyInformation().toLowerCase(Locale.ENGLISH))) {
       return;
     }
-    // checkboxCigarettesSet("checked");
+    // checkboxCigarettesSet(LABEL_OPTION_CHECKED);
     dropdownRegularBrandSelect("Marlboro");
     optionRegularBrandSelect("Non-Menthol");
     dropdownRegularBrandNonMentholSelect("Marlboro Gold Pack");

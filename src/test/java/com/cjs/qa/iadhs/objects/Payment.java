@@ -241,6 +241,7 @@ public class Payment {
     stringBuilderReport.append(Constants.nlTab(1, tab++) + "<body>");
     StringBuilder stringBuilderTable = new StringBuilder();
     boolean firstRecord = false;
+    // NOPMD - ForLoopCanBeForeach: Complex loop requires index for multiple operations
     for (int mapReportIndex = 0; mapReportIndex < listMapReport.size(); mapReportIndex++) {
     // for (Map<String, String> mapReport : listMapReport)
       Map<String, String> mapReport = listMapReport.get(mapReportIndex);

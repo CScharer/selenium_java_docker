@@ -216,7 +216,7 @@ public class CopyPolicyPage extends Page {
     final List<WebElement> elements =
         getWebElements(
             By.xpath(".//input[@type='Checkbox'][starts-with(@id,'form1:copyPolicy:table1')]"));
-    setCheckboxes(elements, "checked");
+    setCheckboxes(elements, LABEL_OPTION_CHECKED);
   }
 
   public void clickButtonDelete() {
