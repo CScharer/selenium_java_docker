@@ -43,7 +43,11 @@ public class PremiumSummaryPage extends Page {
   private final By buttonExportExcel = By.xpath(NODE_ViewPort + "/div[2]/div/a/span");
   private final By subHeaders =
       By.xpath(".//*[@id='productsPanel']/div[5]/div/div[@class='table']/div/..");
-  public final String PAGE_TITLE = "PremiumSummaryPage";
+  private final String pageTitle = "PremiumSummaryPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   // METHODS GET TEXT
   public List<String> getPolicyInformation() {

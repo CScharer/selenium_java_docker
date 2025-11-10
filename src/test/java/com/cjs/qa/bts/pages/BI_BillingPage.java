@@ -11,10 +11,14 @@ public class BI_BillingPage extends Page {
 
   private final By NumberOfGroupMembers = By.id("NUM_GRP_MBR");
   private final By buttonFrame = By.id("billing-title");
-  public final String PAGE_TITLE = "BI_BillingPage";
+  private final String pageTitle = "BI_BillingPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   public void EnterNumberOfGroupMembers(String value) {

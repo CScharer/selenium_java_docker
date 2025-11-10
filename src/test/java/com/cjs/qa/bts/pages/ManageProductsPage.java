@@ -16,10 +16,14 @@ public class ManageProductsPage extends Page {
   private final By DropdownProgram = By.id("programId");
   private final By DropdownRatingCompany = By.id("addProductForm");
   private final By DropdownState = By.id("stateCode");
-  public final String PAGE_TITLE = "ManageProductsPage";
+  private final String pageTitle = "ManageProductsPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   public void clickButtonDeleteProductList() {

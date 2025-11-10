@@ -35,10 +35,14 @@ public class BI_BasicInfoPage extends Page {
   private final By CheckboxMultiPolicy = By.id("multiPolicy");
   private final By editMultiPolicyDiscount = By.id("multiPolicyDiscount");
   private final By buttonFrame = By.id("basicInformation-title");
-  public final String PAGE_TITLE = "BI_BasicInfoPage";
+  private final String pageTitle = "BI_BasicInfoPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   public String getBasicInformation() {
@@ -395,6 +399,6 @@ public class BI_BasicInfoPage extends Page {
         actual.put(field, value);
       }
     }
-    Assert.assertSame(PAGE_TITLE + " validatePage", expected, actual);
+    Assert.assertSame(getPageTitle() + " validatePage", expected, actual);
   }
 }

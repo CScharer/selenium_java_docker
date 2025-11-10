@@ -16,10 +16,14 @@ public class AdminFunctionsPage extends Page {
   private final By linkMassNotes = By.id("requestLinkForMassNotes");
   private final By linkViewExportRequests = By.id("requestLinkExportRequest");
   private final By linkQueriesTools = By.id("requestLinkQueriesTools");
-  public final String PAGE_TITLE = "AdminFunctionsPage";
+  private final String pageTitle = "AdminFunctionsPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   public void clickLinkExitPolicy() {

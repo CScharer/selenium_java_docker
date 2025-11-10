@@ -31,10 +31,14 @@ public class AddNewPolicyPage extends Page {
   private final By buttonCancel = By.id(NODE_POLICY + "button2");
   private final By clickOffDate = By.id(NODE_POLICY + "buildPolicyGrp");
   private final By editPolicyNumSeq = By.id(NODE_POLICY + "policyNbrSeqBI");
-  public final String PAGE_TITLE = "AddNewPolicyPage";
+  private final String pageTitle = "AddNewPolicyPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   public void toggleCheckboxRenewalPolicy() {

@@ -1,1 +1,285 @@
-package com.cjs.qa.bts.pages;import com.cjs.qa.core.Environment;import com.cjs.qa.selenium.ISelenium;import com.cjs.qa.selenium.Page;import io.cucumber.datatable.DataTable;import java.util.HashMap;import java.util.List;import java.util.Map;import org.junit.Assert;import org.openqa.selenium.By;import org.openqa.selenium.WebDriver;public class BuildPolicyPage extends Page {  public BuildPolicyPage(WebDriver webDriver) {    super(webDriver);  }  // DECLARATIONS  private final By CheckboxRenewalPolicy = By.id("renewalPolicyBI");  private final By editEffectiveDate = By.id("policyBuildTitleTxtId");  private final By DropdownTerm = By.id("termBI");  private final By DropdownRenewalTerm = By.id("renewalTermBI");  private final By editExpirationDate = By.id("expirationDtBI");  private final By DropdownRatingCompany = By.id("policyCompanyBI");  private final By DropdownIssuingCompany = By.id("policyProductBI");  private final By DropdownProgram = By.id("policyProgramBI");  private final By DropdownPrimaryState = By.id("policyStateBI");  private final By editReleaseDate = By.id("releaseDtBI");  private final By CheckboxUserEnteredPolicyNumber = By.id("userEnteredPolicyBI");  private final By editPolicyNumber = By.id("policyNbrBI");  private final By editSequenceNumber = By.id("policyNbrSeqBI");  private final By buttonSave = By.id("button1");  private final By buttonCancel = By.id("button2");  public final String PAGE_TITLE = "BuildPolicyPage";  public void verifyPage() {    verifyTitle(PAGE_TITLE);  }  // METHODS GET  public String getCheckboxRenewalPolicy() {    return getCheckbox(CheckboxRenewalPolicy);  }  public String getEditEffectiveDate() {    return getEdit(editEffectiveDate);  }  public String getDropdownTerm() {    return getDropdown(DropdownTerm);  }  public String getDropdownRenewalTerm() {    return getDropdown(DropdownRenewalTerm);  }  public String getEditExpirationDate() {    return getEdit(editExpirationDate);  }  public String getDropdownRatingCompany() {    return getDropdown(DropdownRatingCompany);  }  public String getDropdownIssuingCompany() {    return getDropdown(DropdownIssuingCompany);  }  public String getDropdownProgram() {    return getDropdown(DropdownProgram);  }  public String getDropdownPrimaryState() {    return getDropdown(DropdownPrimaryState);  }  public String getEditReleaseDate() {    return getEdit(editReleaseDate);  }  public String getCheckboxUserEnteredPolicyNumber() {    return getCheckbox(CheckboxUserEnteredPolicyNumber);  }  public String getEditPolicyNumber() {    return getEdit(editPolicyNumber);  }  public String getEditSequenceNumber() {    return getEdit(editSequenceNumber);  }  // METHODS SET  public void toggleCheckboxRenewalPolicy() {    toggleCheckbox(CheckboxRenewalPolicy);  }  public void setCheckboxRenewalPolicy(String value) {    setCheckbox(CheckboxRenewalPolicy, value);  }  public void setEditEffectiveDate(String value) {    setEdit(editEffectiveDate, value);  }  public void selectDropdownTerm(String value) {    selectDropdown(DropdownTerm, value);  }  public void selectDropdownRenewalTerm(String value) {    selectDropdown(DropdownRenewalTerm, value);  }  public void setEditExpirationDate(String value) {    setEdit(editExpirationDate, value);  }  public void selectDropdownRatingCompany(String value) {    selectDropdown(DropdownRatingCompany, value);  }  public void selectDropdownIssuingCompany(String value) {    selectDropdown(DropdownIssuingCompany, value);  }  public void selectDropdownProgram(String value) {    selectDropdown(DropdownProgram, value);  }  public void selectDropdownPrimaryState(String value) {    selectDropdown(DropdownPrimaryState, value);  }  public void setEditReleaseDate(String value) {    setEdit(editReleaseDate, value);  }  public void toggleCheckboxUserEnteredPolicyNumber() {    toggleCheckbox(CheckboxUserEnteredPolicyNumber);  }  public void setCheckboxUserEnteredPolicyNumber(String value) {    setCheckbox(CheckboxUserEnteredPolicyNumber, value);  }  public void setEditPolicyNumber(String value) {    setEdit(editPolicyNumber, value);  }  public void setEditSequenceNumber(String value) {    setEdit(editSequenceNumber, value);  }  public void clickButtonSave() {    clickObject(buttonSave);  }  public void clickButtonCancel() {    clickObject(buttonCancel);  }  // SWITCHES POPULATE  public void populatePage(DataTable table) {    final List<List<String>> data = table.asLists();    for (final List<?> item : data) {      final String field = (String) item.get(0);      final String value = (String) item.get(1);      if (!value.equals("")) {        if (Environment.isLogAll()) {          Environment.sysOut("({Field}" + field + ", {Value}" + value + ");");        }        switch (field.toLowerCase()) {          case "renewal policy":            setCheckboxRenewalPolicy(value);            break;          case "effective date":            setEditEffectiveDate(value);            break;          case "term":            selectDropdownTerm(value);            break;          case "renewal term":            selectDropdownRenewalTerm(value);            break;          case "expiration date":            setEditExpirationDate(value);            break;          case "rating company":            selectDropdownRatingCompany(value);            break;          case "issuing company":            selectDropdownIssuingCompany(value);            break;          case "program":            selectDropdownProgram(value);            break;          case "primary state":            selectDropdownPrimaryState(value);            break;          case "release date":            setEditReleaseDate(value);            break;          case "user entered policy #":            setCheckboxUserEnteredPolicyNumber(value);            break;          case "policy #":            setEditPolicyNumber(value);            break;          case "sequence #":            setEditSequenceNumber(value);            break;          default:            Environment.sysOut("[" + field + "]" + ISelenium.FIELD_NOT_CODED);            break;        }      }    }  }  // SWITCHES VALIDATE  public void validatePage(DataTable table) {    final Map<String, String> expected = new HashMap<>();    final Map<String, String> actual = new HashMap<>();    final List<List<String>> data = table.asLists();    for (final List<?> item : data) {      final String field = (String) item.get(0);      String value = (String) item.get(1);      if (!value.equals("")) {        expected.put(field, value);        switch (field.toLowerCase()) {          case "renewal policy":            value = getCheckboxRenewalPolicy();            break;          case "effective date":            value = getEditEffectiveDate();            break;          case "term":            value = getDropdownTerm();            break;          case "renewal term":            value = getDropdownRenewalTerm();            break;          case "expiration date":            value = getEditExpirationDate();            break;          case "rating company":            value = getDropdownRatingCompany();            break;          case "issuing company":            value = getDropdownIssuingCompany();            break;          case "program":            value = getDropdownProgram();            break;          case "primary state":            value = getDropdownPrimaryState();            break;          case "release date":            value = getEditReleaseDate();            break;          case "user entered policy #":            value = getCheckboxUserEnteredPolicyNumber();            break;          case "policy #":            value = getEditPolicyNumber();            break;          case "sequence #":            value = getEditSequenceNumber();            break;          default:            value = "[" + field + "]" + ISelenium.FIELD_NOT_CODED;            Environment.sysOut(value);            break;        }        actual.put(field, value);      }    }    Assert.assertSame(PAGE_TITLE + " validatePage", expected, actual);  }}
+package com.cjs.qa.bts.pages;
+
+import com.cjs.qa.core.Environment;
+import com.cjs.qa.selenium.ISelenium;
+import com.cjs.qa.selenium.Page;
+import io.cucumber.datatable.DataTable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class BuildPolicyPage extends Page {
+  public BuildPolicyPage(WebDriver webDriver) {
+    super(webDriver);
+  }
+
+  // DECLARATIONS
+  private final By CheckboxRenewalPolicy = By.id("renewalPolicyBI");
+  private final By editEffectiveDate = By.id("policyBuildTitleTxtId");
+  private final By DropdownTerm = By.id("termBI");
+  private final By DropdownRenewalTerm = By.id("renewalTermBI");
+  private final By editExpirationDate = By.id("expirationDtBI");
+  private final By DropdownRatingCompany = By.id("policyCompanyBI");
+  private final By DropdownIssuingCompany = By.id("policyProductBI");
+  private final By DropdownProgram = By.id("policyProgramBI");
+  private final By DropdownPrimaryState = By.id("policyStateBI");
+  private final By editReleaseDate = By.id("releaseDtBI");
+  private final By CheckboxUserEnteredPolicyNumber = By.id("userEnteredPolicyBI");
+  private final By editPolicyNumber = By.id("policyNbrBI");
+  private final By editSequenceNumber = By.id("policyNbrSeqBI");
+  private final By buttonSave = By.id("button1");
+  private final By buttonCancel = By.id("button2");
+  private final String pageTitle = "BuildPolicyPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
+
+  public void verifyPage() {
+    verifyTitle(getPageTitle());
+  }
+
+  // METHODS GET
+  public String getCheckboxRenewalPolicy() {
+    return getCheckbox(CheckboxRenewalPolicy);
+  }
+
+  public String getEditEffectiveDate() {
+    return getEdit(editEffectiveDate);
+  }
+
+  public String getDropdownTerm() {
+    return getDropdown(DropdownTerm);
+  }
+
+  public String getDropdownRenewalTerm() {
+    return getDropdown(DropdownRenewalTerm);
+  }
+
+  public String getEditExpirationDate() {
+    return getEdit(editExpirationDate);
+  }
+
+  public String getDropdownRatingCompany() {
+    return getDropdown(DropdownRatingCompany);
+  }
+
+  public String getDropdownIssuingCompany() {
+    return getDropdown(DropdownIssuingCompany);
+  }
+
+  public String getDropdownProgram() {
+    return getDropdown(DropdownProgram);
+  }
+
+  public String getDropdownPrimaryState() {
+    return getDropdown(DropdownPrimaryState);
+  }
+
+  public String getEditReleaseDate() {
+    return getEdit(editReleaseDate);
+  }
+
+  public String getCheckboxUserEnteredPolicyNumber() {
+    return getCheckbox(CheckboxUserEnteredPolicyNumber);
+  }
+
+  public String getEditPolicyNumber() {
+    return getEdit(editPolicyNumber);
+  }
+
+  public String getEditSequenceNumber() {
+    return getEdit(editSequenceNumber);
+  }
+
+  // METHODS SET
+  public void toggleCheckboxRenewalPolicy() {
+    toggleCheckbox(CheckboxRenewalPolicy);
+  }
+
+  public void setCheckboxRenewalPolicy(String value) {
+    setCheckbox(CheckboxRenewalPolicy, value);
+  }
+
+  public void setEditEffectiveDate(String value) {
+    setEdit(editEffectiveDate, value);
+  }
+
+  public void selectDropdownTerm(String value) {
+    selectDropdown(DropdownTerm, value);
+  }
+
+  public void selectDropdownRenewalTerm(String value) {
+    selectDropdown(DropdownRenewalTerm, value);
+  }
+
+  public void setEditExpirationDate(String value) {
+    setEdit(editExpirationDate, value);
+  }
+
+  public void selectDropdownRatingCompany(String value) {
+    selectDropdown(DropdownRatingCompany, value);
+  }
+
+  public void selectDropdownIssuingCompany(String value) {
+    selectDropdown(DropdownIssuingCompany, value);
+  }
+
+  public void selectDropdownProgram(String value) {
+    selectDropdown(DropdownProgram, value);
+  }
+
+  public void selectDropdownPrimaryState(String value) {
+    selectDropdown(DropdownPrimaryState, value);
+  }
+
+  public void setEditReleaseDate(String value) {
+    setEdit(editReleaseDate, value);
+  }
+
+  public void toggleCheckboxUserEnteredPolicyNumber() {
+    toggleCheckbox(CheckboxUserEnteredPolicyNumber);
+  }
+
+  public void setCheckboxUserEnteredPolicyNumber(String value) {
+    setCheckbox(CheckboxUserEnteredPolicyNumber, value);
+  }
+
+  public void setEditPolicyNumber(String value) {
+    setEdit(editPolicyNumber, value);
+  }
+
+  public void setEditSequenceNumber(String value) {
+    setEdit(editSequenceNumber, value);
+  }
+
+  public void clickButtonSave() {
+    clickObject(buttonSave);
+  }
+
+  public void clickButtonCancel() {
+    clickObject(buttonCancel);
+  }
+
+  // SWITCHES POPULATE
+  public void populatePage(DataTable table) {
+    final List<List<String>> data = table.asLists();
+    for (final List<?> item : data) {
+      final String field = (String) item.get(0);
+      final String value = (String) item.get(1);
+      if (!value.equals("")) {
+        if (Environment.isLogAll()) {
+          Environment.sysOut("({Field}" + field + ", {Value}" + value + ");");
+        }
+        switch (field.toLowerCase()) {
+          case "renewal policy":
+            setCheckboxRenewalPolicy(value);
+            break;
+          case "effective date":
+            setEditEffectiveDate(value);
+            break;
+          case "term":
+            selectDropdownTerm(value);
+            break;
+          case "renewal term":
+            selectDropdownRenewalTerm(value);
+            break;
+          case "expiration date":
+            setEditExpirationDate(value);
+            break;
+          case "rating company":
+            selectDropdownRatingCompany(value);
+            break;
+          case "issuing company":
+            selectDropdownIssuingCompany(value);
+            break;
+          case "program":
+            selectDropdownProgram(value);
+            break;
+          case "primary state":
+            selectDropdownPrimaryState(value);
+            break;
+          case "release date":
+            setEditReleaseDate(value);
+            break;
+          case "user entered policy #":
+            setCheckboxUserEnteredPolicyNumber(value);
+            break;
+          case "policy #":
+            setEditPolicyNumber(value);
+            break;
+          case "sequence #":
+            setEditSequenceNumber(value);
+            break;
+          default:
+            Environment.sysOut("[" + field + "]" + ISelenium.FIELD_NOT_CODED);
+            break;
+        }
+      }
+    }
+  }
+
+  // SWITCHES VALIDATE
+  public void validatePage(DataTable table) {
+    final Map<String, String> expected = new HashMap<>();
+    final Map<String, String> actual = new HashMap<>();
+    final List<List<String>> data = table.asLists();
+    for (final List<?> item : data) {
+      final String field = (String) item.get(0);
+      String value = (String) item.get(1);
+      if (!value.equals("")) {
+        expected.put(field, value);
+        switch (field.toLowerCase()) {
+          case "renewal policy":
+            value = getCheckboxRenewalPolicy();
+            break;
+          case "effective date":
+            value = getEditEffectiveDate();
+            break;
+          case "term":
+            value = getDropdownTerm();
+            break;
+          case "renewal term":
+            value = getDropdownRenewalTerm();
+            break;
+          case "expiration date":
+            value = getEditExpirationDate();
+            break;
+          case "rating company":
+            value = getDropdownRatingCompany();
+            break;
+          case "issuing company":
+            value = getDropdownIssuingCompany();
+            break;
+          case "program":
+            value = getDropdownProgram();
+            break;
+          case "primary state":
+            value = getDropdownPrimaryState();
+            break;
+          case "release date":
+            value = getEditReleaseDate();
+            break;
+          case "user entered policy #":
+            value = getCheckboxUserEnteredPolicyNumber();
+            break;
+          case "policy #":
+            value = getEditPolicyNumber();
+            break;
+          case "sequence #":
+            value = getEditSequenceNumber();
+            break;
+          default:
+            value = "[" + field + "]" + ISelenium.FIELD_NOT_CODED;
+            Environment.sysOut(value);
+            break;
+        }
+        actual.put(field, value);
+      }
+    }
+    Assert.assertSame(getPageTitle() + " validatePage", expected, actual);
+  }
+}

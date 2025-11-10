@@ -24,10 +24,14 @@ public class AddNewProductPage extends Page {
   private final By DropdownState = By.id("stateCode");
   private final By buttonAdd = By.id("");
   private final By buttonAddProductCoverages = By.id("");
-  public final String PAGE_TITLE = "AddNewProductPage";
+  private final String pageTitle = "AddNewProductPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   // METHODS GET
@@ -134,6 +138,6 @@ public class AddNewProductPage extends Page {
         actual.put(field, value);
       }
     }
-    Assert.assertSame(PAGE_TITLE + " validatePage", expected, actual);
+    Assert.assertSame(getPageTitle() + " validatePage", expected, actual);
   }
 }

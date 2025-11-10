@@ -44,88 +44,248 @@ import com.cjs.qa.utilities.SoftAssert;
 import org.openqa.selenium.WebDriver;
 
 public class BTS {
-  public SoftAssert SoftAssert;
-  public _BTSCrosswordChallengePage _BTSCrosswordChallengePage;
-  public AddNewAddressClientPage AddNewAddressClientPage;
-  public AddNewPolicyPage AddNewPolicyPage;
-  public AddNewProductPage AddNewProductPage;
-  public AdminFunctionsPage AdminFunctionsPage;
-  public BI_AdvantagePage BI_AdvantagePage;
-  public BI_AgencyInformationPage BI_AgencyInformationPage;
-  public BI_BasicInfoPage BI_BasicInfoPage;
-  public BI_BillingInformationPage BI_BillingInformationPage;
-  public BI_BillingPage BI_BillingPage;
-  public BI_ButtonsPage BI_ButtonsPage;
-  public BI_LeftNav BI_LeftNav;
-  public BI_MiscellaneousInformationPage BI_MiscellaneousInformationPage;
-  public BI_RightNav BI_RightNav;
-  public BI_TerrorismPage BI_TerrorismPage;
-  public BI_UnderwritingPage BI_UnderwritingPage;
-  public CopyPolicyPage CopyPolicyPage;
-  public CPLResultsPage CPLResultsPage;
-  public IssuePage IssuePage;
-  public IssuePageLeftNav IssuePageLeftNav;
-  public LoginPage LoginPage;
-  public ManageProductsPage ManageProductsPage;
-  public ManageProductsRightNav ManageProductsRightNav;
-  public NamedInsuredsPage NamedInsuredsPage;
-  public PolicyIssuancePage PolicyIssuancePage;
-  public PremiumSummaryPage PremiumSummaryPage;
-  public PremiumSummaryRightNav PremiumSummaryRightNav;
-  public RatePage RatePage;
-  public RateLeftNavPage RateLeftNavPage;
-  public RateRightNav RateRightNav;
-  public ReferenceMaterialsPage ReferenceMaterialsPage;
-  public RequestPrintPage RequestPrintPage;
-  public RequestPrintRightNav RequestPrintRightNav;
-  public SearchPage SearchPage;
-  public SearchResultsPage SearchResultsPage;
-  public SearchRightNav SearchRightNav;
-  public Sidebar Sidebar;
-  public SidbarAdminFunctionsPage SidbarAdminFunctionsPage;
-  public SidbarReferenceMaterialsPage SidbarReferenceMaterialsPage;
+  private SoftAssert softAssert;
+  private _BTSCrosswordChallengePage btsCrosswordChallengePage;
+  private AddNewAddressClientPage addNewAddressClientPage;
+  private AddNewPolicyPage addNewPolicyPage;
+  private AddNewProductPage addNewProductPage;
+  private AdminFunctionsPage adminFunctionsPage;
+  private BI_AdvantagePage biAdvantagePage;
+  private BI_AgencyInformationPage biAgencyInformationPage;
+  private BI_BasicInfoPage biBasicInfoPage;
+  private BI_BillingInformationPage biBillingInformationPage;
+  private BI_BillingPage biBillingPage;
+  private BI_ButtonsPage biButtonsPage;
+  private BI_LeftNav biLeftNav;
+  private BI_MiscellaneousInformationPage biMiscellaneousInformationPage;
+  private BI_RightNav biRightNav;
+  private BI_TerrorismPage biTerrorismPage;
+  private BI_UnderwritingPage biUnderwritingPage;
+  private CopyPolicyPage copyPolicyPage;
+  private CPLResultsPage cplResultsPage;
+  private IssuePage issuePage;
+  private IssuePageLeftNav issuePageLeftNav;
+  private LoginPage loginPage;
+  private ManageProductsPage manageProductsPage;
+  private ManageProductsRightNav manageProductsRightNav;
+  private NamedInsuredsPage namedInsuredsPage;
+  private PolicyIssuancePage policyIssuancePage;
+  private PremiumSummaryPage premiumSummaryPage;
+  private PremiumSummaryRightNav premiumSummaryRightNav;
+  private RatePage ratePage;
+  private RateLeftNavPage rateLeftNavPage;
+  private RateRightNav rateRightNav;
+  private ReferenceMaterialsPage referenceMaterialsPage;
+  private RequestPrintPage requestPrintPage;
+  private RequestPrintRightNav requestPrintRightNav;
+  private SearchPage searchPage;
+  private SearchResultsPage searchResultsPage;
+  private SearchRightNav searchRightNav;
+  private Sidebar sidebar;
+  private SidbarAdminFunctionsPage sidbarAdminFunctionsPage;
+  private SidbarReferenceMaterialsPage sidbarReferenceMaterialsPage;
+
+  public SoftAssert getSoftAssert() {
+    return softAssert;
+  }
+
+  public _BTSCrosswordChallengePage getBtsCrosswordChallengePage() {
+    return btsCrosswordChallengePage;
+  }
+
+  public AddNewAddressClientPage getAddNewAddressClientPage() {
+    return addNewAddressClientPage;
+  }
+
+  public AddNewPolicyPage getAddNewPolicyPage() {
+    return addNewPolicyPage;
+  }
+
+  public AddNewProductPage getAddNewProductPage() {
+    return addNewProductPage;
+  }
+
+  public AdminFunctionsPage getAdminFunctionsPage() {
+    return adminFunctionsPage;
+  }
+
+  public BI_AdvantagePage getBiAdvantagePage() {
+    return biAdvantagePage;
+  }
+
+  public BI_AgencyInformationPage getBiAgencyInformationPage() {
+    return biAgencyInformationPage;
+  }
+
+  public BI_BasicInfoPage getBiBasicInfoPage() {
+    return biBasicInfoPage;
+  }
+
+  public BI_BillingInformationPage getBiBillingInformationPage() {
+    return biBillingInformationPage;
+  }
+
+  public BI_BillingPage getBiBillingPage() {
+    return biBillingPage;
+  }
+
+  public BI_ButtonsPage getBiButtonsPage() {
+    return biButtonsPage;
+  }
+
+  public BI_LeftNav getBiLeftNav() {
+    return biLeftNav;
+  }
+
+  public BI_MiscellaneousInformationPage getBiMiscellaneousInformationPage() {
+    return biMiscellaneousInformationPage;
+  }
+
+  public BI_RightNav getBiRightNav() {
+    return biRightNav;
+  }
+
+  public BI_TerrorismPage getBiTerrorismPage() {
+    return biTerrorismPage;
+  }
+
+  public BI_UnderwritingPage getBiUnderwritingPage() {
+    return biUnderwritingPage;
+  }
+
+  public CopyPolicyPage getCopyPolicyPage() {
+    return copyPolicyPage;
+  }
+
+  public CPLResultsPage getCplResultsPage() {
+    return cplResultsPage;
+  }
+
+  public IssuePage getIssuePage() {
+    return issuePage;
+  }
+
+  public IssuePageLeftNav getIssuePageLeftNav() {
+    return issuePageLeftNav;
+  }
+
+  public LoginPage getLoginPage() {
+    return loginPage;
+  }
+
+  public ManageProductsPage getManageProductsPage() {
+    return manageProductsPage;
+  }
+
+  public ManageProductsRightNav getManageProductsRightNav() {
+    return manageProductsRightNav;
+  }
+
+  public NamedInsuredsPage getNamedInsuredsPage() {
+    return namedInsuredsPage;
+  }
+
+  public PolicyIssuancePage getPolicyIssuancePage() {
+    return policyIssuancePage;
+  }
+
+  public PremiumSummaryPage getPremiumSummaryPage() {
+    return premiumSummaryPage;
+  }
+
+  public PremiumSummaryRightNav getPremiumSummaryRightNav() {
+    return premiumSummaryRightNav;
+  }
+
+  public RatePage getRatePage() {
+    return ratePage;
+  }
+
+  public RateLeftNavPage getRateLeftNavPage() {
+    return rateLeftNavPage;
+  }
+
+  public RateRightNav getRateRightNav() {
+    return rateRightNav;
+  }
+
+  public ReferenceMaterialsPage getReferenceMaterialsPage() {
+    return referenceMaterialsPage;
+  }
+
+  public RequestPrintPage getRequestPrintPage() {
+    return requestPrintPage;
+  }
+
+  public RequestPrintRightNav getRequestPrintRightNav() {
+    return requestPrintRightNav;
+  }
+
+  public SearchPage getSearchPage() {
+    return searchPage;
+  }
+
+  public SearchResultsPage getSearchResultsPage() {
+    return searchResultsPage;
+  }
+
+  public SearchRightNav getSearchRightNav() {
+    return searchRightNav;
+  }
+
+  public Sidebar getSidebar() {
+    return sidebar;
+  }
+
+  public SidbarAdminFunctionsPage getSidbarAdminFunctionsPage() {
+    return sidbarAdminFunctionsPage;
+  }
+
+  public SidbarReferenceMaterialsPage getSidbarReferenceMaterialsPage() {
+    return sidbarReferenceMaterialsPage;
+  }
 
   public BTS(WebDriver webDriver) {
-    SoftAssert = new SoftAssert();
-    _BTSCrosswordChallengePage = new _BTSCrosswordChallengePage(webDriver);
-    AddNewAddressClientPage = new AddNewAddressClientPage(webDriver);
-    AddNewPolicyPage = new AddNewPolicyPage(webDriver);
-    AddNewProductPage = new AddNewProductPage(webDriver);
-    AdminFunctionsPage = new AdminFunctionsPage(webDriver);
-    BI_AdvantagePage = new BI_AdvantagePage(webDriver);
-    BI_AgencyInformationPage = new BI_AgencyInformationPage(webDriver);
-    BI_BasicInfoPage = new BI_BasicInfoPage(webDriver);
-    BI_BillingInformationPage = new BI_BillingInformationPage(webDriver);
-    BI_BillingPage = new BI_BillingPage(webDriver);
-    BI_ButtonsPage = new BI_ButtonsPage(webDriver);
-    BI_LeftNav = new BI_LeftNav(webDriver);
-    BI_MiscellaneousInformationPage = new BI_MiscellaneousInformationPage(webDriver);
-    BI_RightNav = new BI_RightNav(webDriver);
-    BI_TerrorismPage = new BI_TerrorismPage(webDriver);
-    BI_UnderwritingPage = new BI_UnderwritingPage(webDriver);
-    CopyPolicyPage = new CopyPolicyPage(webDriver);
-    CPLResultsPage = new CPLResultsPage(webDriver);
-    IssuePage = new IssuePage(webDriver);
-    IssuePageLeftNav = new IssuePageLeftNav(webDriver);
-    LoginPage = new LoginPage(webDriver);
-    ManageProductsPage = new ManageProductsPage(webDriver);
-    ManageProductsRightNav = new ManageProductsRightNav(webDriver);
-    NamedInsuredsPage = new NamedInsuredsPage(webDriver);
-    PolicyIssuancePage = new PolicyIssuancePage(webDriver);
-    PremiumSummaryPage = new PremiumSummaryPage(webDriver);
-    PremiumSummaryRightNav = new PremiumSummaryRightNav(webDriver);
-    RatePage = new RatePage(webDriver);
-    RateLeftNavPage = new RateLeftNavPage(webDriver);
-    RateRightNav = new RateRightNav(webDriver);
-    ReferenceMaterialsPage = new ReferenceMaterialsPage(webDriver);
-    RequestPrintPage = new RequestPrintPage(webDriver);
-    RequestPrintRightNav = new RequestPrintRightNav(webDriver);
-    SearchPage = new SearchPage(webDriver);
-    SearchResultsPage = new SearchResultsPage(webDriver);
-    SearchRightNav = new SearchRightNav(webDriver);
-    Sidebar = new Sidebar(webDriver);
-    SidbarAdminFunctionsPage = new SidbarAdminFunctionsPage(webDriver);
-    SidbarReferenceMaterialsPage = new SidbarReferenceMaterialsPage(webDriver);
+    softAssert = new SoftAssert();
+    btsCrosswordChallengePage = new _BTSCrosswordChallengePage(webDriver);
+    addNewAddressClientPage = new AddNewAddressClientPage(webDriver);
+    addNewPolicyPage = new AddNewPolicyPage(webDriver);
+    addNewProductPage = new AddNewProductPage(webDriver);
+    adminFunctionsPage = new AdminFunctionsPage(webDriver);
+    biAdvantagePage = new BI_AdvantagePage(webDriver);
+    biAgencyInformationPage = new BI_AgencyInformationPage(webDriver);
+    biBasicInfoPage = new BI_BasicInfoPage(webDriver);
+    biBillingInformationPage = new BI_BillingInformationPage(webDriver);
+    biBillingPage = new BI_BillingPage(webDriver);
+    biButtonsPage = new BI_ButtonsPage(webDriver);
+    biLeftNav = new BI_LeftNav(webDriver);
+    biMiscellaneousInformationPage = new BI_MiscellaneousInformationPage(webDriver);
+    biRightNav = new BI_RightNav(webDriver);
+    biTerrorismPage = new BI_TerrorismPage(webDriver);
+    biUnderwritingPage = new BI_UnderwritingPage(webDriver);
+    copyPolicyPage = new CopyPolicyPage(webDriver);
+    cplResultsPage = new CPLResultsPage(webDriver);
+    issuePage = new IssuePage(webDriver);
+    issuePageLeftNav = new IssuePageLeftNav(webDriver);
+    loginPage = new LoginPage(webDriver);
+    manageProductsPage = new ManageProductsPage(webDriver);
+    manageProductsRightNav = new ManageProductsRightNav(webDriver);
+    namedInsuredsPage = new NamedInsuredsPage(webDriver);
+    policyIssuancePage = new PolicyIssuancePage(webDriver);
+    premiumSummaryPage = new PremiumSummaryPage(webDriver);
+    premiumSummaryRightNav = new PremiumSummaryRightNav(webDriver);
+    ratePage = new RatePage(webDriver);
+    rateLeftNavPage = new RateLeftNavPage(webDriver);
+    rateRightNav = new RateRightNav(webDriver);
+    referenceMaterialsPage = new ReferenceMaterialsPage(webDriver);
+    requestPrintPage = new RequestPrintPage(webDriver);
+    requestPrintRightNav = new RequestPrintRightNav(webDriver);
+    searchPage = new SearchPage(webDriver);
+    searchResultsPage = new SearchResultsPage(webDriver);
+    searchRightNav = new SearchRightNav(webDriver);
+    sidebar = new Sidebar(webDriver);
+    sidbarAdminFunctionsPage = new SidbarAdminFunctionsPage(webDriver);
+    sidbarReferenceMaterialsPage = new SidbarReferenceMaterialsPage(webDriver);
     webDriver
         .manage()
         .timeouts()

@@ -17,10 +17,14 @@ public class BI_BillingInformationPage extends Page {
   private final By DropdownDepositType = By.id("depositType");
   private final By editDepositPercent = By.id("depositPercent");
   private final By buttonFrame = By.id("billingInformation-title");
-  public final String PAGE_TITLE = "BI_BillingInformationPage";
+  private final String pageTitle = "BI_BillingInformationPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   public void setEditBillingAccountNumber(String value) {

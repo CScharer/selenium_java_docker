@@ -43,10 +43,14 @@ public class AddNewAddressClientPage extends Page {
   private final By buttonAdd = By.id("form1:availableList:addressPanelId:btnAdd");
   private final By buttonDelete = By.id("form1:availableList:addressPanelId:btnDelete");
   private final By buttonSave = By.id("form1:availableList:addressPanelId:btnSave");
-  public final String PAGE_TITLE = "AddNewAddressClientPage";
+  private final String pageTitle = "AddNewAddressClientPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   // METHODS GET
@@ -376,6 +380,6 @@ public class AddNewAddressClientPage extends Page {
       }
     }
     actual.put("~", null);
-    Assert.assertEquals(PAGE_TITLE + " validatePage", expected, actual);
+    Assert.assertEquals(getPageTitle() + " validatePage", expected, actual);
   }
 }

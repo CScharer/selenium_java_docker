@@ -18,7 +18,11 @@ public class IssuePage extends Page {
   private final By buttonIssueNow = By.xpath(".//input[@value='Issue Now']");
   // id(NODE_Form1ProcessedResults + "flashScreenRateButton");
   private final By buttonIssueLater = By.id(NODE_Form1ProcessedResults + "buttonLater");
-  public final String PAGE_TITLE = "IssuePage";
+  private final String pageTitle = "IssuePage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   // METHODS SET
   public void toggleCheckboxPullPrint() {

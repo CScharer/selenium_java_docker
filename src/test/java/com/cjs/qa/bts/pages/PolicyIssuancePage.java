@@ -15,10 +15,14 @@ public class PolicyIssuancePage extends Page {
   private final By buttonBind = By.id("BindBind");
   private final By buttonIssue = By.id("form1:cplProcessedResults:buttonRate");
   private final By buttonRequestPrint = By.id("requestPrintLink");
-  public final String PAGE_TITLE = "PolicyIssuancePage";
+  private final String pageTitle = "PolicyIssuancePage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   public void clickButtonEdit() {

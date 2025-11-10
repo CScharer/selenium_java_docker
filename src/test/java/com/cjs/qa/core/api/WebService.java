@@ -192,17 +192,17 @@ public class WebService {
   public static String getAPIXMLRequest(Policy policy, SOAPMessage soapMessage) {
     try {
       setXml(getSOAPMessageValue(soapMessage, false));
-      setFileRequest(Constants.PATH_FILES_XML + policy.policy + "request" + IExtension.XML);
+      setFileRequest(Constants.PATH_FILES_XML + policy.getPolicy() + "request" + IExtension.XML);
       final String fileTemp =
           getFileRequest().replace(
               "request",
-              policy.dateTimeStamp
+              policy.getDateTimeStamp()
                   + "_"
                   + Environment.getComputerName()
                   + "_"
                   + Environment.CURRENT_USER
                   + "_"
-                  + policy.policy
+                  + policy.getPolicy()
                   + "_"
                   + "request");
       // FSO.fileWrite(getFileRequest(), getXml(), false);
@@ -212,13 +212,13 @@ public class WebService {
       final String fileOut =
           getFileRequest().replace(
               "request",
-              policy.dateTimeStamp
+              policy.getDateTimeStamp()
                   + "_"
-                  + policy.computerName
+                  + policy.getComputerName()
                   + "_"
-                  + policy.userName
+                  + policy.getUserName()
                   + "_"
-                  + policy.policy
+                  + policy.getPolicy()
                   + "_"
                   + getRequestName()
                   + "_request");
@@ -253,17 +253,17 @@ public class WebService {
       final SOAPMessage soapMessageResponse = soapConnection.call(soapMessage, url);
       // Process the SOAP Response
       setXml(getSOAPMessageValue(soapMessageResponse, false));
-      setFileResponse(Constants.PATH_FILES_XML + policy.policy + "response" + IExtension.XML);
+      setFileResponse(Constants.PATH_FILES_XML + policy.getPolicy() + "response" + IExtension.XML);
       final String fileTemp =
           getFileResponse().replace(
               "response",
-              policy.dateTimeStamp
+              policy.getDateTimeStamp()
                   + "_"
                   + Environment.getComputerName()
                   + "_"
                   + Environment.CURRENT_USER
                   + "_"
-                  + policy.policy
+                  + policy.getPolicy()
                   + "_"
                   + "response");
       // FSO.fileWrite(getFileResponse(), getXml(), false);
@@ -273,13 +273,13 @@ public class WebService {
       final String fileOut =
           getFileResponse().replace(
               "response",
-              policy.dateTimeStamp
+              policy.getDateTimeStamp()
                   + "_"
                   + Environment.getComputerName()
                   + "_"
                   + Environment.CURRENT_USER
                   + "_"
-                  + policy.policy
+                  + policy.getPolicy()
                   + "_"
                   + getResponseName()
                   + "_response");

@@ -33,7 +33,7 @@ public class LoginPage extends Page {
     sUserName = SQL.getUserName(company, environment);
     if (sURL != null) {
       webDriver.get(sURL);
-      if (getTitle().toString() == LOGIN_TITLE.toString()) {
+      if (getTitle().toString() == getLoginTitle().toString()) {
         setEditUserName(sUserName);
         switch (sUserName.toLowerCase()) {
           case "btsqa":
@@ -62,11 +62,20 @@ public class LoginPage extends Page {
   private final By editUserName = By.id("username");
   private final By editPassword = By.id("password");
   private final By buttonSubmit = By.id("//button[.='Submit']");
-  public final String PAGE_TITLE = "LoginPage";
-  public final String LOGIN_TITLE = "Login";
+  private final String pageTitle = "LoginPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
+
+  private final String loginTitle = "Login";
+
+  private String getLoginTitle() {
+    return loginTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   public void setEditUserName(String value) {
@@ -141,7 +150,7 @@ public class LoginPage extends Page {
         }
       }
     }
-    Assert.assertSame(PAGE_TITLE + " validatePage", expected, actual);
+    Assert.assertSame(getPageTitle() + " validatePage", expected, actual);
   }
   // public void openBrowser(String company, String environment) {
   // webDriver.get("http://bts-blda/policystarweb/login.faces");

@@ -8,7 +8,7 @@ import com.cjs.qa.utilities.JavaHelpers;
 import org.junit.Test;
 
 public class CompanyEnvironmentSetup extends Environment {
-  public CompanyEnvironmentData companyEnvironmentData = null;
+  private CompanyEnvironmentData companyEnvironmentData = null;
   private String userName = null;
   private String userPasword = null;
   private String browserName = null;

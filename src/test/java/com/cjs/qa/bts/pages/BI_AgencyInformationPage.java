@@ -17,10 +17,14 @@ public class BI_AgencyInformationPage extends Page {
   private final By editProducerCode = By.id("producerCode");
   private final By DropdownProducerName = By.id("producerName");
   private final By buttonFrame = By.id("agencyInformation-title");
-  public final String PAGE_TITLE = "BI_AgencyInformationPage";
+  private final String pageTitle = "BI_AgencyInformationPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   public void selectDropdownBranch(String value) {

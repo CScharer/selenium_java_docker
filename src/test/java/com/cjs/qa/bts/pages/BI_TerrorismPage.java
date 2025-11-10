@@ -15,10 +15,14 @@ public class BI_TerrorismPage extends Page {
   private final By editTerrorismFireFollowingPremium = By.id("TRSM_FF_PREM");
   private final By editOtherActsOfTerrorism = By.id("TRSM_OTH_PREM");
   private final By buttonFrame = By.id("terrorism-title");
-  public final String PAGE_TITLE = "BI_TerrorismPage";
+  private final String pageTitle = "BI_TerrorismPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   public void selectDropdownDoesTerrorismApply(String value) {

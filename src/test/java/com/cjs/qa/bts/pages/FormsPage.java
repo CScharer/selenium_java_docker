@@ -20,7 +20,11 @@ public class FormsPage extends Page {
       By.xpath(NODE_Forms1 + "forms:variableDataBtnGroup']/div[6]/input");
   private final By buttonDelete = By.xpath(NODE_Forms1 + "forms:deleteBtn']");
   private final By buttonUpdateReprint = By.xpath(".//*[@id='form1:forms:printBtn']");
-  public final String PAGE_TITLE = "FormsPage";
+  private final String pageTitle = "FormsPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   // METHODS
   public void clickButtonOptionalForms() {

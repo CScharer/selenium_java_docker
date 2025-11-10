@@ -31,10 +31,14 @@ public class RequestPrintPage extends Page {
       By.id(NODE_REQUEST_PRINT + "heading3form1:requestPrint:heading3");
   private final By buttonMinimizePrintOptions =
       By.id(NODE_REQUEST_PRINT + "printPolicyId:printheading");
-  public final String PAGE_TITLE = "RequestPrintPage";
+  private final String pageTitle = "RequestPrintPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   // METHODS GET
@@ -213,6 +217,6 @@ public class RequestPrintPage extends Page {
         actual.put(field, value);
       }
     }
-    Assert.assertSame(PAGE_TITLE + " validatePage", expected, actual);
+    Assert.assertSame(getPageTitle() + " validatePage", expected, actual);
   }
 }

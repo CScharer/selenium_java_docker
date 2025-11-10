@@ -37,11 +37,15 @@ public class AmendPage extends Page {
   private final By buttonRemove = By.id("amendForm:btnLeft");
   private final By buttonOK = By.id("amendForm:buttonOk");
   private final By buttonCancel = By.id("amendForm:cancelBtn");
-  public final String PAGE_TITLE = "AmendPage";
+  private final String pageTitle = "AmendPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
   private final By iFrame = By.xpath(".//*/iframe");
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   public void switchIFrame() {
@@ -326,6 +330,6 @@ public class AmendPage extends Page {
         actual.put(field, value);
       }
     }
-    Assert.assertSame(PAGE_TITLE + " validatePage", expected, actual);
+    Assert.assertSame(getPageTitle() + " validatePage", expected, actual);
   }
 }

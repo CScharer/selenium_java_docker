@@ -22,10 +22,14 @@ public class NamedInsuredsPage extends Page {
   private final By buttonDelete = By.id(NODE_FORM1 + "deleteNamedInsBtn");
   private final By buttonCreateNewNameSeq = By.id(NODE_FORM1 + "crteNameSeqButton");
   private final By buttonAddExistNameSeq = By.id(NODE_FORM1 + "addExistNSeqButton");
-  public final String PAGE_TITLE = "NamedInsuredsPage";
+  private final String pageTitle = "NamedInsuredsPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   // METHODS SET
@@ -97,6 +101,6 @@ public class NamedInsuredsPage extends Page {
         actual.put(field, value);
       }
     }
-    Assert.assertSame(PAGE_TITLE + " validatePage", expected, actual);
+    Assert.assertSame(getPageTitle() + " validatePage", expected, actual);
   }
 }

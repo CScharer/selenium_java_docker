@@ -9,10 +9,14 @@ public class CPLResultsPage extends Page {
     super(webDriver);
   }
 
-  public final String PAGE_TITLE = "CPLResultsPage";
+  private final String pageTitle = "CPLResultsPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   private final By buttonClose = By.xpath("html/body/div[8]/div[1]/a/span");

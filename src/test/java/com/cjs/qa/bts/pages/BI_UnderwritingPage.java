@@ -60,10 +60,14 @@ public class BI_UnderwritingPage extends Page {
   private final By CheckboxRapidRenewal = By.id("RPD_RNL");
   private final By editSupportingPolicies = By.id("SUP_POL");
   private final By buttonFrame = By.id("underwriting-title");
-  public final String PAGE_TITLE = "BI_UnderwritingPage";
+  private final String pageTitle = "BI_UnderwritingPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   // METHODS GET
@@ -720,6 +724,6 @@ public class BI_UnderwritingPage extends Page {
         actual.put(field, value);
       }
     }
-    Assert.assertSame(PAGE_TITLE + " validatePage", expected, actual);
+    Assert.assertSame(getPageTitle() + " validatePage", expected, actual);
   }
 }

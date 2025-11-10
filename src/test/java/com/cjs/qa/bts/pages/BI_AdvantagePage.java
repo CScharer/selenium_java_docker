@@ -22,10 +22,14 @@ public class BI_AdvantagePage extends Page {
   private final By editNumberOfLossesProperty = By.id("NUM_LOSE_PROP");
   private final By editNumberOfEmployees = By.id("NUM_EMP");
   private final By buttonFrame = By.id("advantage-title");
-  public final String PAGE_TITLE = "BI_AdvantagePage";
+  private final String pageTitle = "BI_AdvantagePage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   public void setEditYearBusinessStarted(String value) {

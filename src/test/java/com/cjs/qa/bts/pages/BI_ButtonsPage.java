@@ -15,10 +15,14 @@ public class BI_ButtonsPage extends Page {
   private final By buttonQuickScroll = By.id("quickScroll");
   private final By buttonOpenCloseLeftNav =
       By.xpath("html/body/div[1]/nav/div/div[1]/div[1]/button");
-  public final String PAGE_TITLE = "BI_ButtonsPage";
+  private final String pageTitle = "BI_ButtonsPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   public void clickButtonSave() {

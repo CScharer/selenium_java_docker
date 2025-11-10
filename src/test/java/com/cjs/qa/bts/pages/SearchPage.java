@@ -34,10 +34,14 @@ public class SearchPage extends Page {
   private final By buttonClear = By.id("clearButton");
   private final By DropdownLogin =
       By.xpath("//button[contains(@class,'btn-primary')][@data-toggle='Dropdown']");
-  public final String PAGE_TITLE = "SearchPage";
+  private final String pageTitle = "SearchPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   public void setEditPolicyNumber(String value) {

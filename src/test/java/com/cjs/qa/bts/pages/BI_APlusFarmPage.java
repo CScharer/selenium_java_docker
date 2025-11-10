@@ -21,10 +21,14 @@ public class BI_APlusFarmPage extends Page {
   private final By DropdownSelectthePriorPolicyPrefix = By.id("PRI_POL_PRE");
   private final By editEnterthePriorPolicyNumber = By.id("PRI_POL_NUM");
   private final By editEnterthePriorPolicyMod = By.id("PRI_POL_MOD");
-  public final String PAGE_TITLE = "BI_APlusFarmPage";
+  private final String pageTitle = "BI_APlusFarmPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   // METHODS GET
@@ -109,6 +113,6 @@ public class BI_APlusFarmPage extends Page {
         actual.put(field, value);
       }
     }
-    Assert.assertSame(PAGE_TITLE + " validatePage", expected, actual);
+    Assert.assertSame(getPageTitle() + " validatePage", expected, actual);
   }
 }

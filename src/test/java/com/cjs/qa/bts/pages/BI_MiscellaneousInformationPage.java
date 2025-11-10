@@ -23,10 +23,14 @@ public class BI_MiscellaneousInformationPage extends Page {
   private final By editNationalAccountIndicator = By.id("nationalAccountIndicator");
   private final By DropdownReportingCompany = By.id("reportingCompany");
   private final By buttonFrame = By.id("miscInformation-title");
-  public final String PAGE_TITLE = "BI_MiscellaneousInformationPage";
+  private final String pageTitle = "BI_MiscellaneousInformationPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   public void toggleCheckboxPackageModification() {

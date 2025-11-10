@@ -41,10 +41,14 @@ public class CopyPolicyPage extends Page {
   private final By buttonCancel = By.id(NODE_COPYPOLICY + "cancelBtn");
   private final By buttonCopySuccess = By.xpath("*//button[@type='button']//span[.='OK']");
   private final By buttonPendingChangesOK = By.xpath(".//*/span[.='OK']");
-  public final String PAGE_TITLE = "CopyPolicyPage";
+  private final String pageTitle = "CopyPolicyPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   // METHODS GET
@@ -365,6 +369,6 @@ public class CopyPolicyPage extends Page {
         actual.put(field, value);
       }
     }
-    Assert.assertSame(PAGE_TITLE + " validatePage", expected, actual);
+    Assert.assertSame(getPageTitle() + " validatePage", expected, actual);
   }
 }

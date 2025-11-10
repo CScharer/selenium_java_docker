@@ -16,7 +16,11 @@ public class RatePage extends Page {
     super(webDriver);
   }
 
-  public final String PAGE_TITLE = "RatePage";
+  private final String pageTitle = "RatePage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
   private final String NODE_PROCESSEDERRS = ".//*[@id='form1:cplProcessedResults:cplProcessedErrs:";
   private final By labelCustomStatusMsg = By.xpath(NODE_PROCESSEDERRS + "customStatusMsg']");
   private final By labelPrintStatus = By.xpath(NODE_PROCESSEDERRS + "processTransactionStatus']");
@@ -145,6 +149,6 @@ public class RatePage extends Page {
         }
       }
     }
-    Assert.assertSame(PAGE_TITLE + " validatePage", expected, actual);
+    Assert.assertSame(getPageTitle() + " validatePage", expected, actual);
   }
 }

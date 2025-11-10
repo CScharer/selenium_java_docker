@@ -4,12 +4,36 @@ import com.cjs.qa.core.Environment;
 import com.cjs.qa.utilities.DateHelpers;
 
 public class Policy {
-  public String userName = null;
-  public String computerName = null;
-  public String policy = null;
-  public String policyNumber = null;
-  public String sequenceNumber = null;
-  public String dateTimeStamp = DateHelpers.getCurrentDateAndTime();
+  private String userName = null;
+  private String computerName = null;
+  private String policy = null;
+  private String policyNumber = null;
+  private String sequenceNumber = null;
+  private String dateTimeStamp = DateHelpers.getCurrentDateAndTime();
+
+  public String getUserName() {
+    return userName;
+  }
+
+  public String getComputerName() {
+    return computerName;
+  }
+
+  public String getPolicy() {
+    return policy;
+  }
+
+  public String getPolicyNumber() {
+    return policyNumber;
+  }
+
+  public String getSequenceNumber() {
+    return sequenceNumber;
+  }
+
+  public String getDateTimeStamp() {
+    return dateTimeStamp;
+  }
 
   public static void main(String[] args) { }
 

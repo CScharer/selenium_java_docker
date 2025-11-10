@@ -20,10 +20,14 @@ public class BI_CollectorCarPage extends Page {
   private final By CheckboxPolicyManuallyEntered = By.id("SRC_BUS");
   private final By editReferral = By.id("REFRL");
   private final By DropdownException = By.id("EXCPTN");
-  public final String PAGE_TITLE = "BI_CollectorCarPage";
+  private final String pageTitle = "BI_CollectorCarPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   // METHODS GET
@@ -112,6 +116,6 @@ public class BI_CollectorCarPage extends Page {
         actual.put(field, value);
       }
     }
-    Assert.assertSame(PAGE_TITLE + " validatePage", expected, actual);
+    Assert.assertSame(getPageTitle() + " validatePage", expected, actual);
   }
 }

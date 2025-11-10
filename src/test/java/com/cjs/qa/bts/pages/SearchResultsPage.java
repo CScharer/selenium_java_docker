@@ -25,13 +25,17 @@ public class SearchResultsPage extends Page {
   // By.xpath("html/body/div[4]/div[2]/div/div[1]/div[2]/div[1]/div[2]/ul/li/div/div[1]/ul/li[10]/a/div[2]")
   private final By buttonInquireOnPrompt = By.xpath(".//*[@id='btn-ok']");
   // private final By PolicyToPolicy = By.linkText("Policy To Policy");
-  public final String PAGE_TITLE = "SearchResultsPage";
+  private final String pageTitle = "SearchResultsPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
   private final By releaseLock =
       By.xpath(
           "html/body/div[4]/div[2]/div/div[1]/div[2]/div[1]/div[2]/ul/li/div/div[3]/a[1]/i[2]");
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
     //// h2[@ng-show='loadingResults']
   }
 

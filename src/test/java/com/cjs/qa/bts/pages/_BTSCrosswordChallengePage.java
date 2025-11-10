@@ -19,10 +19,10 @@ public class _BTSCrosswordChallengePage extends Page {
   private final int SQAUARE_MIN = 4;
   private final int SQAUARE_MAX = 628;
   private final LocalDateTime now = LocalDateTime.now();
-  public String sYear = String.valueOf(now.getYear());
+  private String sYear = String.valueOf(now.getYear());
   // public String sMonth =
   // now.format(DateTimeFormatter.ofPattern("MMMM",Locale.ENGLISH));
-  public String sMonth = "November";
+  private String sMonth = "November";
   private final String sScreenShot =
       "C:"
           + Constants.DELIMETER_PATH
@@ -34,7 +34,7 @@ public class _BTSCrosswordChallengePage extends Page {
           + "_"
           + sMonth
           + ".png";
-  public final String[] letters = ALPHABET.split(Constants.DELIMETER_LIST);
+  private final String[] letters = ALPHABET.split(Constants.DELIMETER_LIST);
 
   public _BTSCrosswordChallengePage(WebDriver webDriver) {
     super(webDriver);
@@ -47,7 +47,7 @@ public class _BTSCrosswordChallengePage extends Page {
   private final By editName = By.xpath("html/body/div[1]/form/div/table/tbody/tr[1]/td[2]/input");
   private final By editEmail = By.xpath("html/body/div[1]/form/div/table/tbody/tr[2]/td[2]/input");
   private final By buttonOK = By.xpath("html/body/div[1]/form/div/table/tbody/tr[3]/td/input");
-  public String sPageTitle = "Take the Challenge";
+  private String sPageTitle = "Take the Challenge";
 
   public void clickbuttonContinue() {
     clickObject(buttonContinue);

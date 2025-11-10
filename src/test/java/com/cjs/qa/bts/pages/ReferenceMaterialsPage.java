@@ -12,10 +12,14 @@ public class ReferenceMaterialsPage extends Page {
   private final By linkTerritoryInformation = By.id("terrInfoLink");
   private final By linkClientInformation = By.id("clientViewLink");
   private final By linkPayorDetails = By.id("payorViewLink");
-  public final String PAGE_TITLE = "ReferenceMaterialsPage";
+  private final String pageTitle = "ReferenceMaterialsPage";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   public void clickLinkTerritoryInformation() {

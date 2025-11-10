@@ -30,10 +30,14 @@ public class BI_LeftNav extends Page {
   private final By buttonNotes = By.id("notesId");
   private final By buttonPolicyDocuments = By.id("policyDocumentsId");
   private final By buttonExportExcel = By.xpath(".//*[@id='viewport']/div[2]/div/a/span");
-  public final String PAGE_TITLE = "BI_LeftNav";
+  private final String pageTitle = "BI_LeftNav";
+
+  private String getPageTitle() {
+    return pageTitle;
+  }
 
   public void verifyPage() {
-    verifyTitle(PAGE_TITLE);
+    verifyTitle(getPageTitle());
   }
 
   public void clickButtonBasicInformation() {
