@@ -39,7 +39,9 @@ public class ResponsiveDesignTests {
 
   private WebDriver driver;
   private static final String GRID_URL = System.getProperty("selenium.grid.url",
-      "http://selenium-hub:4444/wd/hub");
+      System.getenv("SELENIUM_REMOTE_URL") != null 
+          ? System.getenv("SELENIUM_REMOTE_URL")
+          : "http://localhost:4444/wd/hub");
 
   @BeforeMethod
   public void setUp() {

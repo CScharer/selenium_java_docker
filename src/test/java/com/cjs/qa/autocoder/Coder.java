@@ -506,12 +506,12 @@ public class Coder {
             + " + ISelenium.FIELD_NOT_CODED);");
     stringBuilder.append(Constants.nlTab(1, 5) + LABEL_BREAK);
     stringBuilder.append(Constants.nlTab(1, 4) + "}");
-    if (methodName.equals(METHOD_NAME_VALIDATE)) {
+    if (METHOD_NAME_VALIDATE.equals(methodName)) {
       stringBuilder.append(Constants.nlTab(1, 4) + "actual.put(field, value);");
     }
     stringBuilder.append(Constants.nlTab(1, 3) + "}");
     stringBuilder.append(Constants.nlTab(1, 2) + "}");
-    if (methodName.equals(METHOD_NAME_VALIDATE)) {
+    if (METHOD_NAME_VALIDATE.equals(methodName)) {
       stringBuilder.append(
           Constants.nlTab(1, 2)
               + "Assert.assertSame(this.getClass().getName() + "
@@ -526,14 +526,14 @@ public class Coder {
 
   private static String getPagePre(String methodName) {
     StringBuilder stringBuilder = new StringBuilder();
-    if (methodName.equals(METHOD_NAME_POPULATE)) {
+    if (METHOD_NAME_POPULATE.equals(methodName)) {
       stringBuilder.append(Constants.nlTab(1, 1) + COMMENT + "SWITCHES POPULATE");
     } else {
       stringBuilder.append(Constants.nlTab(1, 1) + COMMENT + "SWITCHES VALIDATE");
     }
     stringBuilder.append(
         Constants.nlTab(1, 1) + "public void " + methodName + "(DataTable dataTable) {");
-    if (methodName.equals(METHOD_NAME_VALIDATE)) {
+    if (METHOD_NAME_VALIDATE.equals(methodName)) {
       stringBuilder.append(
           Constants.nlTab(1, 2) + "Map<String, String> expected = new HashMap<>();");
       stringBuilder.append(Constants.nlTab(1, 2) + "Map<String, String> actual = new HashMap<>();");
@@ -560,7 +560,7 @@ public class Coder {
             + Constants.QUOTE_DOUBLE
             + " + value"
             + ");");
-    if (methodName.equals(METHOD_NAME_VALIDATE)) {
+    if (METHOD_NAME_VALIDATE.equals(methodName)) {
       stringBuilder.append(Constants.nlTab(1, 4) + "expected.put(field, value);");
     }
     stringBuilder.append(Constants.nlTab(1, 4) + "switch (field.toLowerCase(Locale.ENGLISH)) {");
