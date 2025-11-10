@@ -127,8 +127,7 @@ public class DailyPollQuizPages extends RewardsPage {
             ".//div[@id='currentQuestionContainer']//div[@class='rq_button']//*[@type='button']");
     answersList = new ArrayList<>();
     final List<WebElement> webElements = getWebDriver().findElements(byXPath);
-    for (int index = 0; index < webElements.size(); index++) {
-      WebElement webElement = webElements.get(index);
+    for (WebElement webElement : webElements) {
       webElement = scrollToElementAndHighlightBriefly(webElement);
       final Answers answers = new Answers();
       answersList.add(answers);

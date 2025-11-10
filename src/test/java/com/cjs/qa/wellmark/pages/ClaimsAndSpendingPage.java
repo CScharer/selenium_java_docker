@@ -237,9 +237,9 @@ public class ClaimsAndSpendingPage extends Page {
       list.add(records[index]);
     }
     Collections.sort(list);
-    for (int index = 0; index < list.size(); index++) {
+    for (String item : list) {
       stringBuilder.append(Constants.NEWLINE);
-      stringBuilder.append(list.get(index));
+      stringBuilder.append(item);
       // if (index < (arrayList.size() - 1))
       // {
       // stringBuilder.append(Constants.NEWLINE)

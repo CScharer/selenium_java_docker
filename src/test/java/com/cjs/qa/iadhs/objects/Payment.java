@@ -102,8 +102,7 @@ public class Payment {
       return;
     }
     List<String> appendedDistribDateList = new ArrayList<>();
-    for (int paymentIndex = 0; paymentIndex < paymentList.size(); paymentIndex++) {
-      Payment payment = paymentList.get(paymentIndex);
+    for (Payment payment : paymentList) {
       Environment.sysOut("paymentList:[" + payment.toString() + "]");
       Map<String, String> paymentMap = payment.getPaymentMap();
       String paymentDistribDate = paymentMap.get(LBLHEADING_PAYMENT_DISTRIB);

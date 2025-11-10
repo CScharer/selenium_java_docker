@@ -554,8 +554,7 @@ public class RewardsPage extends Page {
       throws QAException {
     Environment.sysOut(
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");
-    for (int pointsCardIndex = 0; pointsCardIndex < pointsCardList.size(); pointsCardIndex++) {
-      final PointsCard pointsCard = pointsCardList.get(pointsCardIndex);
+    for (PointsCard pointsCard : pointsCardList) {
       if (!pointsCard.isCollected()) {
       // if (pointsCard.isCollected())
         final int pointsAvailable = pointsCard.getPointsTop();

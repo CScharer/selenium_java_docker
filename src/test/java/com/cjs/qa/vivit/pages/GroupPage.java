@@ -103,8 +103,7 @@ public class GroupPage extends Page {
       sleep(1, 0);
       final List<WebElement> links = getWebDriver().findElements(byLinksGroups);
       final List<String> chapterURLList = new ArrayList<>();
-      for (int index = 0; index < links.size(); index++) {
-        final WebElement element = links.get(index);
+      for (WebElement element : links) {
         final String urlPage = element.getAttribute("href");
         chapterURLList.add(urlPage);
       }
@@ -118,8 +117,7 @@ public class GroupPage extends Page {
         stringBuilder.append(chapterURL);
       }
       Environment.sysOut("urls:[" + stringBuilder.toString() + "]");
-      for (int indexChapterURL = 0; indexChapterURL < chapterURLList.size(); indexChapterURL++) {
-        final String chapterURL = chapterURLList.get(indexChapterURL);
+      for (String chapterURL : chapterURLList) {
         final String pageID = chapterURL;
         VivitEnvironment.sysOut("get:[" + chapterURL + "]");
         final Stopwatch stopwatch = Stopwatch.createStarted();

@@ -63,8 +63,7 @@ public class ParameterHelper {
       Class<?> classRef = Class.forName(className);
       Method[] methodArray = classRef.getMethods();
       boolean methodFound = false;
-      for (int methodIndex = 0; methodIndex < methodArray.length; methodIndex++) {
-        Method method = methodArray[methodIndex];
+      for (Method method : methodArray) {
         String methodArrayName = method.getName();
         if (methodArrayName.equals(methodName)) {
           Class<?> declaringClass = method.getDeclaringClass();
@@ -183,9 +182,8 @@ public class ParameterHelper {
         int parameterCount = parameterHelper.getParameterList().size();
         // The first local variable represents the "this" object if the
         // method is not static!
-        for (int variableIndex = 0; variableIndex < localVariableNodeList.size(); variableIndex++) {
+        for (LocalVariableNode localVariableNode : localVariableNodeList) {
           parameterFieldMap = getParameterFields();
-          LocalVariableNode localVariableNode = localVariableNodeList.get(variableIndex);
           if (!parameterHelper.containsName(localVariableNode.name)) {
             parameterFieldMap.put("name", localVariableNode.name);
             parameterFieldMap.put("type", localVariableNode.desc);

@@ -69,8 +69,7 @@ public class ForumsPage extends Page {
   private void getForums(String url, String forumPage) {
     getWebDriver().get(url);
     final List<WebElement> listForumRecords = getWebDriver().findElements(byTableForums);
-    for (int record = 0; record < listForumRecords.size(); record++) {
-      final WebElement elementRecord = listForumRecords.get(record);
+    for (WebElement elementRecord : listForumRecords) {
       String xPath = "./td";
       final List<WebElement> listWebElements = elementRecord.findElements(By.xpath(xPath));
       String groupName = null;

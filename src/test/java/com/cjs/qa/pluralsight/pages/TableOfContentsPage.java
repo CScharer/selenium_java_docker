@@ -43,8 +43,7 @@ public class TableOfContentsPage extends Page {
     for (int indexSection = 0; indexSection < listSections.size(); indexSection++) {
       final WebElement webElementSection = listSections.get(indexSection);
       final List<WebElement> listHeadings2 = webElementSection.findElements(byHeading2);
-      for (int indexHeadings2 = 0; indexHeadings2 < listHeadings2.size(); indexHeadings2++) {
-        final WebElement webElement2 = listHeadings2.get(indexHeadings2);
+      for (WebElement webElement2 : listHeadings2) {
         final String heading2 = webElement2.getText();
         // stringBuilder.append(Constants.TAB);
         stringBuilder.append(heading2);

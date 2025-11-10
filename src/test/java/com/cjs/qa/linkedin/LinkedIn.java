@@ -89,8 +89,7 @@ public class LinkedIn {
     String urlConnections = LinkedInEnvironment.URL_LOGIN + "mynetwork/invite-connect/connections/";
     webDriver.get(urlConnections);
     StringBuilder sqlStringBuilder = new StringBuilder();
-    for (int mapIndex = 0; mapIndex < linkedInMapList.size(); mapIndex++) {
-      Map<String, String> map = linkedInMapList.get(mapIndex);
+    for (Map<String, String> map : linkedInMapList) {
       if (JavaHelpers.hasValue(map.get("First Name"))
           && JavaHelpers.hasValue(map.get("Last Name"))) {
         connectionsPage.setEditSearchbyname(

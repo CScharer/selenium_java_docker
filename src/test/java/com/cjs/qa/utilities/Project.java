@@ -25,10 +25,11 @@ public class Project {
     String automationPath = "";
     final String OSName = System.getProperty("os.name");
     try {
-      if (OSName.startsWith("Windows")) {
-        automationPath = "C:/Automation/";
-      } else if (OSName.startsWith("Linux") || OSName.startsWith("Mac")) {
+      if (OSName.startsWith("Linux") || OSName.startsWith("Mac")) {
         automationPath = "/Automation/";
+      }
+      else if (OSName.startsWith("Windows")) {
+        automationPath = "C:/Automation/";
       } else {
         throw new IOException();
       }
