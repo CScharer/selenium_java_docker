@@ -12,7 +12,7 @@ public class ScenarioErrors {
   }
 
   public void assertErrors(String message) {
-    Assert.assertTrue(message, getErrors().size() == 0);
+    Assert.assertEquals(message, 0, getErrors().size());
   }
 
   public void add(String error) {

@@ -80,7 +80,7 @@ public class RoleManagementService extends WebService {
                 .length());
     roleId = roleId.substring(0, roleId.indexOf(","));
     System.out.println("Role ID:[" + roleId + "]");
-    Assert.assertFalse("Role ID:[" + roleId + "]", roleId == null);
+    Assert.assertNotNull("Role ID:[" + roleId + "]", roleId);
     return roleId;
   }
 
@@ -193,7 +193,7 @@ public class RoleManagementService extends WebService {
     System.out.println("oPhones:" + oPhones);
     System.out.println("oCompanyInfo:" + oCompanyInfo);
     System.out.println("Organization ID:[" + organizationId + "]");
-    Assert.assertFalse("Organization ID:[" + organizationId + "]", organizationId == null);
+    Assert.assertNotNull("Organization ID:[" + organizationId + "]", organizationId);
     // return organizationId;
     return map;
   }

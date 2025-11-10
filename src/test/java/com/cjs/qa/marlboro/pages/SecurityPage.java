@@ -23,7 +23,7 @@ public class SecurityPage extends Page {
   private final By buttonEnterPin = By.xpath(".//*[@id='btnEnterPin']");
 
   public void editSetPin(String pin) {
-    Assert.assertTrue("Pin is not 5 characters in length.", pin.length() == 5);
+    Assert.assertEquals("Pin is not 5 characters in length.", 5, pin.length());
     for (int index = 0; index < 4; index++) {
       final By editPin = By.xpath(".//*[@id='createPin_pin" + (index + 1) + "']");
       final String value = pin.substring(index, index);

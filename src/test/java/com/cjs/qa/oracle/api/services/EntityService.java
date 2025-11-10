@@ -912,7 +912,7 @@ public class EntityService extends WebService {
     Environment.sysOut("oPhones:" + oPhones);
     Environment.sysOut("oCompanyInfo:" + oCompanyInfo);
     Environment.sysOut("Organization ID:[" + organizationId + "]");
-    Assert.assertFalse("Organization ID:[" + organizationId + "]", organizationId == null);
+    Assert.assertNotNull("Organization ID:[" + organizationId + "]", organizationId);
     return organizationId;
   }
 
@@ -1010,7 +1010,7 @@ public class EntityService extends WebService {
                 .length());
     organizationId = organizationId.substring(0, organizationId.indexOf(","));
     Environment.sysOut("Organization ID:[" + organizationId + "]");
-    Assert.assertFalse("Organization ID:[" + organizationId + "]", organizationId == null);
+    Assert.assertNotNull("Organization ID:[" + organizationId + "]", organizationId);
     return organizationId;
   }
 

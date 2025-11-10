@@ -266,7 +266,7 @@ public class StepsVivit extends Environment {
               + Constants.NEWLINE
               + mapTest.toString().replaceAll(", ", Constants.NEWLINE));
     }
-    Assert.assertTrue(Environment.getScenarioErrors().size() == 0);
+    Assert.assertEquals(0, Environment.getScenarioErrors().size());
     // getWebDriver().get(VivitEnvironment.URL_LOGIN);
   }
 
