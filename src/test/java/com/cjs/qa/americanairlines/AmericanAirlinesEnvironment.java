@@ -25,7 +25,4 @@ public class AmericanAirlinesEnvironment extends Environment {
   public List<String> getClassExlusionList() {
     return classExlusionList;
   }
-
-  public AmericanAirlinesEnvironment() { // Empty
-  }
 }

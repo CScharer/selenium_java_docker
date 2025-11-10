@@ -17,8 +17,6 @@ public class MavenTestSet {
   private String stringBuffer = JavaHelpers.createBufferString("*", 100, "") + Constants.NEWLINE;
   private FSO fso = new FSO();
 
-  public MavenTestSet() { }
-
   private String getStringBuffer() {
     return stringBuffer;
   }

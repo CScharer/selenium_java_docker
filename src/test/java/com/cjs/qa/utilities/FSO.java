@@ -33,9 +33,6 @@ public class FSO {
   public static final int URL_TIMEOUT_CONNECTION = SECONDS_MINUTES_10;
   public static final int URL_TIMEOUT_READ = SECONDS_MINUTES_05;
 
-  public FSO() { // Empty
-  }
-
   @Test
   public void testFilesFolders() {
     // String pathTest = Constants.PATH_PROJECT + "src\\test\\java\\"

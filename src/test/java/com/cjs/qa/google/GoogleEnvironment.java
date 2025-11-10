@@ -21,9 +21,6 @@ public class GoogleEnvironment extends Environment {
   private final List<String> classExlusionList =
       JavaHelpers.getExclusions(this.getClass().getPackage().getName());
 
-  public GoogleEnvironment() { // Empty
-  }
-
   public List<String> getClassExlusionList() {
     return classExlusionList;
   }

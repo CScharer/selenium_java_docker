@@ -26,7 +26,4 @@ public class MarlboroEnvironment extends Environment {
   public List<String> getClassExlusionList() {
     return classExlusionList;
   }
-
-  public MarlboroEnvironment() { // Empty
-  }
 }

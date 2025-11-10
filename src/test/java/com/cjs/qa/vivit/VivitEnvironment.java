@@ -24,9 +24,6 @@ public class VivitEnvironment extends Environment {
   private final List<String> classExlusionList =
       JavaHelpers.getExclusions(this.getClass().getPackage().getName());
 
-  public VivitEnvironment() { // Empty
-  }
-
   public List<String> getClassExlusionList() {
     return classExlusionList;
   }

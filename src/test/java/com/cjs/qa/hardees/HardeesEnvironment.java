@@ -24,7 +24,4 @@ public class HardeesEnvironment extends Environment {
   public List<String> getClassExlusionList() {
     return classExlusionList;
   }
-
-  public HardeesEnvironment() { // Empty
-  }
 }

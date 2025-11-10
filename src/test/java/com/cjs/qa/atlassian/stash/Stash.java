@@ -6,8 +6,6 @@ public class Stash {
 
   private String url = "stash" + Atlassian.getDomain();
 
-  public Stash() { }
-
   public String getUrl() {
     return url;
   }

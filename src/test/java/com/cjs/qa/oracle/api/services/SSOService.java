@@ -29,8 +29,6 @@ public class SSOService extends WebService {
           + OracleConstants.API_SSO_VERSION_MINOR;
   private final Encoder encoder = new Encoder("");
 
-  public SSOService() { }
-
   /**
    * @param userName
    * @param eMail

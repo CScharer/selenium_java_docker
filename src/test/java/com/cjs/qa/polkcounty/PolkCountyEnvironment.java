@@ -22,9 +22,6 @@ public class PolkCountyEnvironment extends Environment {
   private final List<String> classExlusionList =
       JavaHelpers.getExclusions(this.getClass().getPackage().getName());
 
-  public PolkCountyEnvironment() { // Empty
-  }
-
   public List<String> getClassExlusionList() {
     return classExlusionList;
   }

@@ -24,7 +24,4 @@ public class DropboxEnvironment extends Environment {
   public List<String> getClassExlusionList() {
     return classExlusionList;
   }
-
-  public DropboxEnvironment() { // Empty
-  }
 }

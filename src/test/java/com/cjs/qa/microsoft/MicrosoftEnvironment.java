@@ -27,7 +27,4 @@ public class MicrosoftEnvironment extends Environment {
   public List<String> getClassExlusionList() {
     return classExlusionList;
   }
-
-  public MicrosoftEnvironment() { // Empty
-  }
 }

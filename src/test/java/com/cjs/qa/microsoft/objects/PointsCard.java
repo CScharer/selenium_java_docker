@@ -116,8 +116,6 @@ public class PointsCard {
   private int pointsTop = -1;
   private String pointsBottom = "0 points";
 
-  public PointsCard() { }
-
   public String getDescription() {
     return description;
   }

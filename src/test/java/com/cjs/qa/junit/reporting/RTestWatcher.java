@@ -11,8 +11,6 @@ import org.junit.runners.model.Statement;
 public class RTestWatcher implements TestRule {
   private final RTestRun rTestRun = new RTestRun(null, null);
 
-  public RTestWatcher() { }
-
   @Rule
   public TestWatcher testWatcher =
       new TestWatcher() {

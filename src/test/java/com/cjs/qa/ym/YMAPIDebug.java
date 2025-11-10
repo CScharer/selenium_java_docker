@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class YMAPIDebug {
-  public YMAPIDebug() { }
 
   public void runTests() throws Throwable {
     final String dateTimeCurrent =

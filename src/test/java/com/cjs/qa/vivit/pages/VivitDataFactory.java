@@ -17,9 +17,6 @@ import java.util.Map;
 public class VivitDataFactory {
   private static final String LABEL_EMAIL_ADDRESS = "Email_Address";
 
-  public VivitDataFactory() { // Empty
-  }
-
   public DataTable getBio(String columnName, String columnValue) {
     Environment.sysOut(
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");

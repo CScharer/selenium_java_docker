@@ -24,9 +24,6 @@ public class UnitedEnvironment extends Environment {
   private final List<String> classExlusionList =
       JavaHelpers.getExclusions(this.getClass().getPackage().getName());
 
-  public UnitedEnvironment() { // Empty
-  }
-
   public List<String> getClassExlusionList() {
     return classExlusionList;
   }

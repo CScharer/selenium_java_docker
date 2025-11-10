@@ -25,7 +25,4 @@ public class IaDhsEnvironment extends Environment {
   public List<String> getClassExlusionList() {
     return classExlusionList;
   }
-
-  public IaDhsEnvironment() { // Empty
-  }
 }

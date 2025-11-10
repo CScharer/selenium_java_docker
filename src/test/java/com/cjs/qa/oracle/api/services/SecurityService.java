@@ -19,8 +19,6 @@ public class SecurityService extends WebService {
           + "/"
           + OracleConstants.API_ORG_VERSION_MINOR;
 
-  public SecurityService() { }
-
   /**
    * @param ssoUserTokenId
    * @param organizationName

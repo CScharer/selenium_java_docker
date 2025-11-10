@@ -21,9 +21,6 @@ public class LinkedInEnvironment extends Environment {
   private final List<String> classExlusionList =
       JavaHelpers.getExclusions(this.getClass().getPackage().getName());
 
-  public LinkedInEnvironment() { // Empty
-  }
-
   public List<String> getClassExlusionList() {
     return classExlusionList;
   }

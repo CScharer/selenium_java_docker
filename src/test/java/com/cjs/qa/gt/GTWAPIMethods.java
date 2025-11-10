@@ -13,9 +13,6 @@ import org.junit.Test;
 public class GTWAPIMethods {
   public static final String GTW_METHOD_TABLE = "t_DOM_GTWNamespaces-Methods";
 
-  public GTWAPIMethods() { // Empty
-  }
-
   @Test
   public void createGTWNamespaceClasses() {
     JDBC jdbc = null;

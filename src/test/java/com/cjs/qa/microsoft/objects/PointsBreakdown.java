@@ -89,8 +89,6 @@ public class PointsBreakdown {
   private int pointsAvailable = -1;
   private int pointsEarned = -1;
 
-  public PointsBreakdown() { }
-
   public String getGroup() {
     return group;
   }

@@ -10,8 +10,6 @@ import org.junit.Assert;
 public class ExampleService extends WebService {
   private final String baseAPIExample = "http://jsonplaceholder.typicode" + IExtension.COM;
 
-  public ExampleService() { }
-
   /**
    * @param ssoUserTokenId
    * @return

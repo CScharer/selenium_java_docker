@@ -3,7 +3,6 @@ package com.cjs.qa.oracle.api.services;
 import com.cjs.qa.core.api.WebService;
 
 public class OracleDynamicVariables extends WebService {
-  public OracleDynamicVariables() { }
 
   public static String getFirstName(String eMailName) {
     String name = eMailName;

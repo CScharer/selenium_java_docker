@@ -6,8 +6,6 @@ public class Confluence {
 
   private String url = "confluence" + Atlassian.getDomain();
 
-  public Confluence() { }
-
   public String getUrl() {
     return url;
   }

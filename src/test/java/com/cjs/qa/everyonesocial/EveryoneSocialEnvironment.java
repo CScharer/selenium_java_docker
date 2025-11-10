@@ -27,7 +27,4 @@ public class EveryoneSocialEnvironment extends Environment {
   public List<String> getClassExlusionList() {
     return classExlusionList;
   }
-
-  public EveryoneSocialEnvironment() { // Empty
-  }
 }
