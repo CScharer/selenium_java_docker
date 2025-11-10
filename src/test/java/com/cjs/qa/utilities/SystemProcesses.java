@@ -75,7 +75,7 @@ public class SystemProcesses {
               final Map<String, String> mapRecord = records.get(recordIndex);
               if (recordIndex == 0) {
                 for (final String key : mapRecord.keySet()) {
-                  if (!key.equals("DateTimeStamp") && !LIST_FIELDS_PROCESS_STANDARD.contains(key)) {
+                  if (!"DateTimeStamp".equals(key) && !LIST_FIELDS_PROCESS_STANDARD.contains(key)) {
                     listField.add(key);
                   }
                 }

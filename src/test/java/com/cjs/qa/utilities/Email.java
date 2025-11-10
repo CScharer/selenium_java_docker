@@ -146,11 +146,11 @@ public final class Email {
         default:
           break;
       }
-      if (!eMailAddresses.equals("")) {
+      if (!eMailAddresses.isEmpty()) {
         final String[] eMailAddress = eMailAddresses.split(",");
         final InternetAddress[] addressTO = new InternetAddress[eMailAddress.length];
         for (int index = 0; index < eMailAddress.length; index++) {
-          if (!(eMailAddress[index].equals(""))) {
+          if (!eMailAddress[index].isEmpty()) {
             addressTO[index] = new InternetAddress(eMailAddress[index]);
           }
         }
@@ -223,7 +223,7 @@ public final class Email {
             parameters.get(LABEL_BODY), StandardCharsets.UTF_8.toString(), "html");
         final Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(messageBodyPart);
-        if (!attachment.equals("")) { // Part two is attachment
+        if (!attachment.isEmpty()) { // Part two is attachment
           // No delimited list passed in.
           if (attachment.indexOf(Constants.DELIMETER_LIST) == -1) {
             messageBodyPart = new MimeBodyPart();

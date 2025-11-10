@@ -31,7 +31,7 @@ public final class Convert {
     final List<List<String>> listListNew = new ArrayList<>();
     for (final List<?> item : listList) {
       final String value = (String) item.get(1);
-      if (includeEmptyValues || !value.equals("")) {
+      if (includeEmptyValues || !value.isEmpty()) {
         final List<String> list = new ArrayList<>();
         final String key = (String) item.get(0);
         list.add(key);
@@ -52,7 +52,7 @@ public final class Convert {
     final List<List<String>> data = dataTable.asLists();
     for (final List<?> record : data) {
       final String value = (String) record.get(1);
-      if (includeEmptyValues || !value.equals("")) {
+      if (includeEmptyValues || !value.isEmpty()) {
         final String key = (String) record.get(0);
         map.put(key, value);
       }
@@ -150,7 +150,7 @@ public final class Convert {
     final List<List<String>> listList = new ArrayList<>();
     for (final Entry entry : map.entrySet()) {
       final String value = (String) entry.getValue();
-      if (!value.equals("") || includeEmptyValues) {
+      if (!value.isEmpty() || includeEmptyValues) {
         final List<String> list = new ArrayList<>();
         final String key = (String) entry.getKey();
         list.add(key);

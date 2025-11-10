@@ -123,7 +123,7 @@ public class SignInPage extends Page {
   protected String getCheckbox(By by) {
     String value;
     value = getWebDriver().findElement(by).getAttribute("aria-checked");
-    if (value.equals("false")) {
+    if ("false".equals(value)) {
       value = "unchecked";
     } else {
       value = "checked";
