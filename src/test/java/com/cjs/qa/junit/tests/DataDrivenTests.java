@@ -144,7 +144,7 @@ public class DataDrivenTests {
 
     Allure.step("Verify title contains expected text");
     Assert.assertTrue(
-        title.toLowerCase().contains(expectedTitleFragment.toLowerCase()),
+        title.toLowerCase(Locale.ENGLISH).contains(expectedTitleFragment.toLowerCase(Locale.ENGLISH)),
         "Title should contain '" + expectedTitleFragment + "'");
 
     Allure.step("Verify URL is correct");

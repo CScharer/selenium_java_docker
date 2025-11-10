@@ -245,7 +245,7 @@ public class CopyPolicyPage extends Page {
         if (Environment.isLogAll()) {
           Environment.sysOut("({Field}" + field + ", {Value}" + value + ");");
         }
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "effective date":
             setEditEffectiveDate(value);
             break;
@@ -312,7 +312,7 @@ public class CopyPolicyPage extends Page {
       String value = (String) item.get(1);
       if (!value.equals("")) {
         expected.put(field, value);
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "effective date":
             value = getEditEffectiveDate();
             break;

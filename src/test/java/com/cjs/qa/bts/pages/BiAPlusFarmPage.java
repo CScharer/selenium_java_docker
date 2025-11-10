@@ -64,7 +64,7 @@ public class BiAPlusFarmPage extends Page {
       final String field = (String) item.get(0);
       final String value = (String) item.get(1);
       if (!value.equals("")) {
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "select the prior policy prefix":
             selectDropdownSelectthePriorPolicyPrefix(value);
             break;
@@ -95,7 +95,7 @@ public class BiAPlusFarmPage extends Page {
           Environment.sysOut("({Field}" + field + ", {Value}" + value + ");");
         }
         expected.put(field, value);
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "select the prior policy prefix":
             value = getDropdownSelectthePriorPolicyPrefix();
             break;

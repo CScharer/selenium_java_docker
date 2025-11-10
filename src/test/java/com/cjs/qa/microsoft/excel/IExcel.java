@@ -113,7 +113,7 @@ public interface IExcel {
   }
 
   static short getFontColorIndex(String color) {
-    switch (color.toLowerCase()) {
+    switch (color.toLowerCase(Locale.ENGLISH)) {
       case "aqua":
         return HSSFColor.HSSFColorPredefined.AQUA.getIndex();
       case "black":
@@ -216,7 +216,7 @@ public interface IExcel {
   }
 
   static HyperlinkType getHyperlinkType(String hyperlinkType) {
-    switch (hyperlinkType.toLowerCase()) {
+    switch (hyperlinkType.toLowerCase(Locale.ENGLISH)) {
       case "document":
         return HyperlinkType.DOCUMENT;
       case "email":

@@ -45,7 +45,7 @@ public class XLSX implements IExcel {
   private Cell workCell = null;
 
   public XLSX(String fileName, String sheetName) throws QAException, IOException {
-    final String fileNameExtensionExpected = "." + this.getClass().getSimpleName().toLowerCase();
+    final String fileNameExtensionExpected = "." + this.getClass().getSimpleName().toLowerCase(Locale.ENGLISH);
     setFileName(fileName);
     Environment.sysOut("fileName:[" + getFileName() + "], sheet:" + sheetName + "]");
     if (!JavaHelpers.hasValue(sheetName)) {
@@ -730,7 +730,7 @@ public class XLSX implements IExcel {
     if (!columnExists(sheet, column, row)) {
       return false;
     }
-    if (!IExcel.COLORS_ALLOWED.contains(color.toLowerCase())) {
+    if (!IExcel.COLORS_ALLOWED.contains(color.toLowerCase(Locale.ENGLISH))) {
       return false;
     }
     setWorkCell(getWorkRow().getCell(column));
@@ -753,7 +753,7 @@ public class XLSX implements IExcel {
     if (!columnExists(sheet, column, row)) {
       return false;
     }
-    if (!IExcel.COLORS_ALLOWED.contains(color.toLowerCase())) {
+    if (!IExcel.COLORS_ALLOWED.contains(color.toLowerCase(Locale.ENGLISH))) {
       return false;
     }
     setWorkCell(getWorkRow().getCell(column));

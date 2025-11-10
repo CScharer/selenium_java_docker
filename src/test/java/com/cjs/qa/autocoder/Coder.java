@@ -431,7 +431,7 @@ public class Coder {
           Constants.nlTab(1, 4)
               + "case "
               + Constants.QUOTE_DOUBLE
-              + name.toLowerCase()
+              + name.toLowerCase(Locale.ENGLISH)
               + Constants.QUOTE_DOUBLE
               + ":");
       String methodCall = "";
@@ -468,7 +468,7 @@ public class Coder {
           Constants.nlTab(1, 4)
               + "case "
               + Constants.QUOTE_DOUBLE
-              + name.toLowerCase()
+              + name.toLowerCase(Locale.ENGLISH)
               + Constants.QUOTE_DOUBLE
               + " :");
       stringBuilder.append(Constants.nlTab(1, 5) + "value = get" + type + methodName + "();");
@@ -561,7 +561,7 @@ public class Coder {
     if (methodName.equals(METHOD_NAME_VALIDATE)) {
       stringBuilder.append(Constants.nlTab(1, 4) + "expected.put(field, value);");
     }
-    stringBuilder.append(Constants.nlTab(1, 4) + "switch (field.toLowerCase()) {");
+    stringBuilder.append(Constants.nlTab(1, 4) + "switch (field.toLowerCase(Locale.ENGLISH)) {");
     return stringBuilder.toString();
   }
 }

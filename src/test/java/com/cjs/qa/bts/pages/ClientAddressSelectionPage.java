@@ -55,7 +55,7 @@ public class ClientAddressSelectionPage extends Page {
         if (Environment.isLogAll()) {
           Environment.sysOut("({Field}" + field + ", {Value}" + value + ");");
         }
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           default:
             Environment.sysOut("[" + field + "]" + ISelenium.FIELD_NOT_CODED);
             break;
@@ -74,7 +74,7 @@ public class ClientAddressSelectionPage extends Page {
       String value = (String) item.get(1);
       if (!value.equals("")) {
         expected.put(field, value);
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           default:
             value = "[" + field + "]" + ISelenium.FIELD_NOT_CODED;
             Environment.sysOut(value);

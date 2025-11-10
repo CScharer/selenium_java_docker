@@ -450,7 +450,7 @@ public class BiUnderwritingPage extends Page {
         if (Environment.isLogAll()) {
           Environment.sysOut("({Field}" + field + ", {Value}" + value + ");");
         }
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "sic code":
             setEditSICCode(value);
             break;
@@ -592,7 +592,7 @@ public class BiUnderwritingPage extends Page {
       String value = (String) item.get(1);
       if (!value.equals("")) {
         expected.put(field, value);
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "sic code":
             value = getEditSICCode();
             break;

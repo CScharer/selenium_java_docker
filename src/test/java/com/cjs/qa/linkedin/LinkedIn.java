@@ -16,7 +16,7 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 
 public class LinkedIn {
-  public static final String LINKEDIN_URL = LinkedInEnvironment.URL_LOGIN.toLowerCase() + "in/";
+  public static final String LINKEDIN_URL = LinkedInEnvironment.URL_LOGIN.toLowerCase(Locale.ENGLISH) + "in/";
   private ConnectionsPage connectionsPage;
   private ContactInfoPage contactInfoPage;
   private HomePage homePage;
@@ -97,7 +97,7 @@ public class LinkedIn {
         sleepRandom(2, 4, 250, 750);
         String href = connectionsPage.getUserHREF();
         if (JavaHelpers.hasValue(href)) {
-          href = href.toLowerCase();
+          href = href.toLowerCase(Locale.ENGLISH);
           if (href.contains(LINKEDIN_URL)) {
             // href = href.substring(href.indexOf(LINKEDIN_URL))
             href = href.replaceAll(LINKEDIN_URL, "");

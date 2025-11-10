@@ -140,7 +140,7 @@ public class RequestPrintPage extends Page {
         if (Environment.isLogAll()) {
           Environment.sysOut("({Field}" + field + ", {Value}" + value + ");");
         }
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "reports":
             selectDropdownReports(value);
             break;
@@ -186,7 +186,7 @@ public class RequestPrintPage extends Page {
           Environment.sysOut("({Field}" + field + ", {Value}" + value + ");");
         }
         expected.put(field, value);
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "reports":
             value = getDropdownReports();
             break;
