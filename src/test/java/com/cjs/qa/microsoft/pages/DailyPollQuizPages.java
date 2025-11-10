@@ -53,7 +53,7 @@ public class DailyPollQuizPages extends RewardsPage {
     webElement = scrollToElementAndHighlightBriefly(byQuestionID);
     Environment.sysOut("Question: [" + webElement.getText() + "]");
     boolean ordering = false;
-    if (webElement.getText().toLowerCase().contains("order")) {
+    if (webElement.getText().toLowerCase(Locale.ENGLISH).contains("order")) {
       Environment.sysOut("Ordering Items");
       ordering = true;
     }
@@ -176,7 +176,7 @@ public class DailyPollQuizPages extends RewardsPage {
   public void getDailyPollQuizPoints(PointsCard pointsCard) throws QAException {
     Environment.sysOut(
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");
-    switch (pointsCard.getGroup().toLowerCase()) {
+    switch (pointsCard.getGroup().toLowerCase(Locale.ENGLISH)) {
       case "daily poll":
         getDailyPollPoints(pointsCard);
         break;

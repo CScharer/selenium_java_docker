@@ -134,7 +134,7 @@ public class SanboxPage extends Page {
       final String field = (String) item.get(0);
       final String value = (String) item.get(1);
       if (!value.equals("")) {
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "Checkbox":
             setCheckboxCheckbox(value);
             break;
@@ -165,7 +165,7 @@ public class SanboxPage extends Page {
       String value = (String) item.get(1);
       if (!value.equals("")) {
         expected.put(field, value);
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "Checkbox":
             value = getCheckboxCheckbox();
             break;

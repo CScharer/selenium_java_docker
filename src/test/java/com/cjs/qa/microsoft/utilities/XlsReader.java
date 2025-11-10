@@ -407,7 +407,7 @@ public class XlsReader {
   public boolean isSheetExist(String sheetName) {
     int sheetIndex = workbook.getSheetIndex(sheetName);
     if (sheetIndex == -1) {
-      sheetIndex = workbook.getSheetIndex(sheetName.toUpperCase());
+      sheetIndex = workbook.getSheetIndex(sheetName.toUpperCase(Locale.ENGLISH));
       return sheetIndex != -1;
     } else {
       return true;

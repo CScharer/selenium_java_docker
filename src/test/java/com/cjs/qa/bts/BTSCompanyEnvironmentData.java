@@ -209,7 +209,7 @@ public class BTSCompanyEnvironmentData {
       return null;
     }
     final String value = nodeList.item(0).getNodeValue();
-    if (xPath.toLowerCase().contains("password")) {
+    if (xPath.toLowerCase(Locale.ENGLISH).contains("password")) {
       Environment.sysOut(
           nodeList.getLength() + " Records Found For:[" + xPath + "] using Value[***Password***]");
     } else {

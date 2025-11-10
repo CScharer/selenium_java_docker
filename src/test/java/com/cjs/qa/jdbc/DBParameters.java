@@ -15,7 +15,7 @@ public class DBParameters {
   private String connectionString;
 
   public DBParameters(String type) {
-    setType(type.toUpperCase());
+    setType(type.toUpperCase(Locale.ENGLISH));
     final EDBDriver eDBDriver = EDBDriver.fromString(getType());
     setJdbcDriver(eDBDriver.getJdbcDriver());
     setUrlPrefix(eDBDriver.getUrlPrefix());

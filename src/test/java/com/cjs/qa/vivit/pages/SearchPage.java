@@ -103,7 +103,7 @@ public class SearchPage extends Page {
 
   public void validateGroup(String group) {
     // Default
-    final String GROUP = group.toUpperCase();
+    final String GROUP = group.toUpperCase(Locale.ENGLISH);
     String url = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
     switch (GROUP) {
       case "LUGS":

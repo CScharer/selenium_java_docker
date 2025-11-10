@@ -73,7 +73,7 @@ public class VerifyInformationInterruptPage extends Page {
   }
 
   public void populatePage() {
-    if (!getWebDriver().getCurrentUrl().toLowerCase().equals(getUrlVerifyInformation().toLowerCase())) {
+    if (!getWebDriver().getCurrentUrl().toLowerCase(Locale.ENGLISH).equals(getUrlVerifyInformation().toLowerCase(Locale.ENGLISH))) {
       return;
     }
     // checkboxCigarettesSet("checked");

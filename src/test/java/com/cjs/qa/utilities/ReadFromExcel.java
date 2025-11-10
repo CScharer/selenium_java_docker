@@ -6,7 +6,7 @@ public class ReadFromExcel {
 
   public void whichTestType(String type) {
 
-    switch (type.toLowerCase()) {
+    switch (type.toLowerCase(Locale.ENGLISH)) {
       case "policyverification":
         // go to policyVerification class to do all the things
         break;

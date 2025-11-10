@@ -65,7 +65,7 @@ public class ConnectionsPage extends Page {
       String value = (String) item.get(1);
       if (!value.equals("")) {
         Environment.sysOut("{Field}" + field + ", {Value}" + value);
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "search by name":
             setEditSearchbyname(value);
             break;
@@ -89,7 +89,7 @@ public class ConnectionsPage extends Page {
       if (!value.equals("")) {
         Environment.sysOut("{Field}" + field + ", {Value}" + value);
         expected.put(field, value);
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "search by name":
             value = getEditSearchbyname();
             break;

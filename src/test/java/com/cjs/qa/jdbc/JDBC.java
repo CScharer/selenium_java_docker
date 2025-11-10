@@ -42,7 +42,7 @@ public class JDBC {
             + "], Environment:["
             + getEnvironment()
             + "]");
-    switch (getDatabase().toLowerCase()) {
+    switch (getDatabase().toLowerCase(Locale.ENGLISH)) {
       case "autocoder":
         dbParameters = DBConnections.getDBParametersAutoCoder(environment);
         break;

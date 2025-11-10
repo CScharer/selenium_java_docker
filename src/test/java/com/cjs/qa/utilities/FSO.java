@@ -614,7 +614,7 @@ public class FSO {
           @Override
           public boolean accept(File fileName) {
             return fileName.isFile()
-                && fileName.getName().toLowerCase().endsWith(extension.toLowerCase());
+                && fileName.getName().toLowerCase(Locale.ENGLISH).endsWith(extension.toLowerCase(Locale.ENGLISH));
           }
         };
   }

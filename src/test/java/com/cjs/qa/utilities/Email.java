@@ -80,7 +80,7 @@ public final class Email {
     parameters.put(LABEL_SUBJECT, subject);
     parameters.put(LABEL_BODY, body);
     parameters.put(LABEL_ATTACHMENT, attachment);
-    from = from.toLowerCase();
+    from = from.toLowerCase(Locale.ENGLISH);
     parameters.put(LABEL_MAIL_DOMAIN, from.substring(from.indexOf('@') + 1));
     switch (parameters.get(LABEL_MAIL_DOMAIN)) {
       case "aol" + IExtension.COM:

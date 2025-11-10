@@ -98,7 +98,7 @@ public class BoDPage extends Page {
           Environment.sysOut("{Field}" + field + ", {Value}" + value);
         }
         mapExpected.put(field, value);
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "name":
             value = getLabelName(value);
             break;

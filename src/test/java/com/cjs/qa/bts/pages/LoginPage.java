@@ -35,7 +35,7 @@ public class LoginPage extends Page {
       getWebDriver().get(sURL);
       if (getTitle().toString() == getLoginTitle().toString()) {
         setEditUserName(sUserName);
-        switch (sUserName.toLowerCase()) {
+        switch (sUserName.toLowerCase(Locale.ENGLISH)) {
           case "btsqa":
             sPassword = "welcome";
             break;
@@ -113,7 +113,7 @@ public class LoginPage extends Page {
         if (Environment.isLogAll()) {
           Environment.sysOut(field + ": [" + value + "]");
         }
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "username":
             setEditUserName(value);
             break;
@@ -137,7 +137,7 @@ public class LoginPage extends Page {
       final String value = (String) item.get(1);
       if (!value.equals("")) {
         expected.put(field, value);
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "username":
             actual.put(field, getEditUserName());
             break;

@@ -194,7 +194,7 @@ public class Scenarios {
     Environment.setEnvironmentFileStructure(methodTest);
     getJenkinsInfo();
     setSeleniumWebDriver(new SeleniumWebDriver(null, Environment.isRunRemote(), null, null, null));
-    methodTest = methodTest.toLowerCase();
+    methodTest = methodTest.toLowerCase(Locale.ENGLISH);
     switch (methodTest) {
       case "americanairlines":
         setAmericanAirlines(new AmericanAirlines(getSeleniumWebDriver().getWebDriver()));

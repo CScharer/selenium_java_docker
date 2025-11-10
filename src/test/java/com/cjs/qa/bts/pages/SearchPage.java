@@ -137,7 +137,7 @@ public class SearchPage extends Page {
         if (Environment.isLogAll()) {
           Environment.sysOut("({Field}" + field + ", {Value}" + value + ");");
         }
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "policy number":
             setEditPolicyNumber(value);
             break;

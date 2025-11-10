@@ -334,7 +334,7 @@ public class MyMemberProfilePage extends Page {
       final String field = (String) item.get(0);
       final String value = (String) item.get(1);
       if (!value.equals("")) {
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "email":
             setEditEmail(value);
             break;
@@ -455,7 +455,7 @@ public class MyMemberProfilePage extends Page {
           VivitEnvironment.sysOut("{Field}" + field + ", {Value}" + value);
         }
         mapExpected.put(field, value);
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "email":
             value = getEditEmail();
             break;

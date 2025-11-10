@@ -132,7 +132,7 @@ public class LoginPage extends Page {
       String value = (String) item.get(1);
       if (!value.equals("")) {
         Environment.sysOut("{Field}" + field + ", {Value}" + value);
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "email":
             setEditEmail(value);
             break;
@@ -159,7 +159,7 @@ public class LoginPage extends Page {
       if (!value.equals("")) {
         Environment.sysOut("{Field}" + field + ", {Value}" + value);
         expected.put(field, value);
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "email":
             value = getEditEmail();
             break;

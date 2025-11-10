@@ -63,7 +63,7 @@ public class StaffPage extends Page {
       final String field = (String) item.get(0);
       final String value = (String) item.get(1);
       if (!value.equals("")) {
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           default:
             Environment.sysOut("[" + field + "]" + ISelenium.FIELD_NOT_CODED);
             break;
@@ -85,7 +85,7 @@ public class StaffPage extends Page {
           Environment.sysOut("{Field}" + field + ", {Value}" + value);
         }
         expected.put(field, value);
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "name-title":
             value = getLabelNameTitle();
             break;

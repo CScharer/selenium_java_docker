@@ -64,7 +64,7 @@ public enum EDriverProperties {
    * @return corresponding enum, or null
    */
   public static <T extends Enum<T>> T getEnumFromString(Class<T> c, String string) {
-    return Enum.valueOf(c, string.trim().toUpperCase());
+    return Enum.valueOf(c, string.trim().toUpperCase(Locale.ENGLISH));
   }
 
   public String getWebDriverType() {

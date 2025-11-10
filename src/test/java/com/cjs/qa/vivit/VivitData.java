@@ -2263,7 +2263,7 @@ public class VivitData extends Environment {
     testInformationMap.put(1, "WebDriver Version");
     final EDriverProperties eDriverProperties =
         EDriverProperties.fromString(
-            seleniumWebDriver.getCapabilities().getBrowserName().toUpperCase());
+            seleniumWebDriver.getCapabilities().getBrowserName().toUpperCase(Locale.ENGLISH));
     String webDriver = eDriverProperties.getPathDriver();
     testInformationMap.put(2, seleniumWebDriver.getWebDriverVersion(webDriver));
     testInformationListMap.add(new HashMap<>(testInformationMap));

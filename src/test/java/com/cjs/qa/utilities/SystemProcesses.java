@@ -21,7 +21,7 @@ public class SystemProcesses {
   public static final String USERID = "CHRIS";
   public static final String SYSTEM = "CScharer-Laptop-EA92K856";
   public static final String FORMAT = "CSV";
-  public static final String EXTENSION = "." + FORMAT.toLowerCase();
+  public static final String EXTENSION = "." + FORMAT.toLowerCase(Locale.ENGLISH);
   public static final String PRIMARY_KEY_PROCESS = "PID";
   public static final List<String> LIST_PROCESS_TYPE =
       Arrays.asList("M;SVC;APPS;V".split(Constants.DELIMETER_LIST));

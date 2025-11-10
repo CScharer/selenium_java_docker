@@ -92,7 +92,7 @@ public class SignInPage extends Page {
     if (Environment.isLogAll()) {
       Environment.sysOut("({Field}" + getCheckboxRememberMe().toString() + ", {Value}" + value + ");");
     }
-    switch (value.toLowerCase()) {
+    switch (value.toLowerCase(Locale.ENGLISH)) {
       case "checked":
         if (getCheckbox(getCheckboxRememberMeInput()) != value) {
           getWebDriver().findElement(getCheckboxRememberMe()).click();

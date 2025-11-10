@@ -50,7 +50,7 @@ public class WebDriverValidation {
     String driverReleaseActual = "";
     String driverVersionActual = "";
     StringBuilder bodyStringBuilder;
-    switch (browser.toLowerCase()) {
+    switch (browser.toLowerCase(Locale.ENGLISH)) {
       case "chrome":
         String command =
             "cmd /C wmic datafile where name=\"C:\\Program Files"

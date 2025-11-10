@@ -51,7 +51,7 @@ public class ColorPalette {
   }
 
   public String toCode(List<ColorPalette> colorPaletteList, String type) {
-    type = type.toUpperCase();
+    type = type.toUpperCase(Locale.ENGLISH);
     final StringBuilder stringBuilder = new StringBuilder();
     final List<String> names = new ArrayList<>();
     stringBuilder.append("public enum Colors" + type);

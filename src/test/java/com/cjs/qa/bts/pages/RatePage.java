@@ -102,7 +102,7 @@ public class RatePage extends Page {
   // String value = (String) item.get(1);
   // if (!value.equals("")) {
   // sysOut("({Field}" + field + ", {Value}" + value + ");");
-  // switch (field.toLowerCase()) {
+  // switch (field.toLowerCase(Locale.ENGLISH)) {
   // case "field1":
   // setEdit1(value);
   // break;
@@ -128,7 +128,7 @@ public class RatePage extends Page {
       final String value = (String) item.get(1);
       if (!value.equals("")) {
         expected.put(field, value);
-        switch (field.toLowerCase()) {
+        switch (field.toLowerCase(Locale.ENGLISH)) {
           case "policy total":
             actual.put(field, getLabelPolicyTotal());
             break;

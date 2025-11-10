@@ -7,8 +7,8 @@ public class Constants {
   public static final String DELIMETER_PATH = System.getProperty("file.separator");
   private static final String FS = DELIMETER_PATH;
   public static final String PATH_LOCAL = "C:" + FS;
-  // System.getenv("USERNAME").toUpperCase()
-  public static final String CURRENT_USER = System.getProperty("user.name").toUpperCase();
+  // System.getenv("USERNAME").toUpperCase(Locale.ENGLISH)
+  public static final String CURRENT_USER = System.getProperty("user.name").toUpperCase(Locale.ENGLISH);
   public static final String PATH_TEMP = System.getProperty("java.io.tmpdir");
   public static final String PATH_TEMP_WINDOWS = PATH_LOCAL + "WINDOWS" + FS + "TEMP" + FS;
   public static final String PATH_CURRENT_USER = PATH_LOCAL + "Users" + FS + CURRENT_USER + FS;

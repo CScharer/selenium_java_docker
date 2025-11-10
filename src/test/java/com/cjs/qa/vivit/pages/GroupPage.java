@@ -83,7 +83,7 @@ public class GroupPage extends Page {
     try {
       final By groupTitle = By.xpath(".//*[@id='ctl00_PageContent_lblPageSummaryTitle']");
       String groupValue = "";
-      final String groupType = group.toUpperCase();
+      final String groupType = group.toUpperCase(Locale.ENGLISH);
       String expectedTitle = "";
       switch (groupType) {
         case "LUGS":
@@ -324,7 +324,7 @@ public class GroupPage extends Page {
 
   public void validateGroup(String group) {
     // Default
-    final String groupType = group.toUpperCase();
+    final String groupType = group.toUpperCase(Locale.ENGLISH);
     String url = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
     switch (groupType) {
       case "LUGS":

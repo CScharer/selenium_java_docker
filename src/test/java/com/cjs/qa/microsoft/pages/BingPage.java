@@ -205,7 +205,7 @@ public class BingPage extends Page {
       href = element.getAttribute("href");
       boolean hrefBad = false;
       for (final String badHREF : badHREFList) {
-        if (href.toLowerCase().contains(badHREF.toLowerCase())) {
+        if (href.toLowerCase(Locale.ENGLISH).contains(badHREF.toLowerCase(Locale.ENGLISH))) {
           hrefBad = true;
           break;
         }

@@ -57,7 +57,7 @@ public class ExcelStatisticalTestSet {
       final int rows = excel.getRowCount(SHEET_NAME);
       for (int row = 1; row < rows; row++) {
         String methodName = excel.readCell(SHEET_NAME, 0, row);
-        methodName = methodName.toLowerCase();
+        methodName = methodName.toLowerCase(Locale.ENGLISH);
         final double timing = Double.parseDouble(excel.readCell(SHEET_NAME, 1, row));
         Environment.sysOut("methodName:[" + methodName + "], timing:[" + timing + "]");
         if (excelTiming.getMethodCallsMap().get(methodName) == null) {
