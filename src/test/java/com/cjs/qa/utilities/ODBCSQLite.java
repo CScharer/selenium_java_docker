@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 public class ODBCSQLite {
 
   public static void main(String[] args) {
-    final List<String> lFields =
+    final List<String> fields =
         Arrays.asList(
             "SubmissionID",
             "Company",
@@ -40,22 +40,22 @@ public class ODBCSQLite {
                 + "BTS"
                 + IExtension.SQLITE)) {
       if (oConnection != null) {
-        try (Statement oStatement = oConnection.createStatement();
-            ResultSet oResultSet =
-                oStatement.executeQuery(
+        try (Statement statement = oConnection.createStatement();
+            ResultSet resultSet =
+                statement.executeQuery(
                     JDBCConstants.SELECT_ALL_FROM
                         + "Core "
                         + JDBCConstants.WHERE
                         + "SubmissionTime > '2016-04-15 12:00:00.000000' "
                         + JDBCConstants.ORDER_BY
                         + "SubmissionTime DESC")) {
-          while (oResultSet.next()) {
-            for (int iField = 0; iField < lFields.size(); iField++) {
-              final String sField = lFields.get(iField);
-              if (iField < (lFields.size() - 1)) {
-                System.out.print(sField + ":[" + oResultSet.getString(sField) + "]");
+          while (resultSet.next()) {
+            for (int fieldIndex = 0; fieldIndex < fields.size(); fieldIndex++) {
+              final String field = fields.get(fieldIndex);
+              if (fieldIndex < (fields.size() - 1)) {
+                System.out.print(field + ":[" + resultSet.getString(field) + "]");
               } else {
-                System.out.println(sField + ":[" + oResultSet.getString(sField) + "]");
+                System.out.println(field + ":[" + resultSet.getString(field) + "]");
               }
             }
           }
@@ -83,9 +83,9 @@ public class ODBCSQLite {
   }
 
   public boolean execute(Connection oConnection, String sSQL) {
-    try (Statement oStatement = oConnection.createStatement();
-        ResultSet oResultSet = oStatement.executeQuery(sSQL)) {
-      System.out.println(oResultSet.toString());
+    try (Statement statement = oConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sSQL)) {
+      System.out.println(resultSet.toString());
     } catch (final Exception oException) {
       System.out.println(oException.getMessage());
       oException.printStackTrace();

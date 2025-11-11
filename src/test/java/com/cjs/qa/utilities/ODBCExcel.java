@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 public class ODBCExcel {
   public static void main(String[] args) {
-    final String sDatabase =
+    final String database =
         System.getProperty("user.dir")
             + Constants.DELIMETER_PATH
             + "target"
@@ -21,12 +21,12 @@ public class ODBCExcel {
             + Constants.DELIMETER_PATH
             + "urls"
             + IExtension.XLS;
-    final List<String> lFields = Arrays.asList("company", "abbreviation", "environment", "url");
-    try (Connection oConnection = connectDb(sDatabase)) {
-      if (oConnection != null) {
-        try (Statement oStatement = oConnection.createStatement();
-            ResultSet oResultSet =
-                oStatement.executeQuery(
+    final List<String> fields = Arrays.asList("company", "abbreviation", "environment", "url");
+    try (Connection connection = connectDb(database)) {
+      if (connection != null) {
+        try (Statement statement = connection.createStatement();
+            ResultSet resultSet =
+                statement.executeQuery(
                     JDBCConstants.SELECT_ALL_FROM
                         + "urls "
                         + JDBCConstants.WHERE
@@ -35,13 +35,13 @@ public class ODBCExcel {
                         + "[companyAbbreviation] = 'AIC') "
                         + JDBCConstants.AND
                         + "[environment] = 'INT'")) {
-          while (oResultSet.next()) {
-            for (int iField = 0; iField < lFields.size(); iField++) {
-              final String sField = lFields.get(iField);
-              if (iField < (lFields.size() - 1)) {
-                System.out.print(sField + ":[" + oResultSet.getString(sField) + "]");
+          while (resultSet.next()) {
+            for (int fieldIndex = 0; fieldIndex < fields.size(); fieldIndex++) {
+              final String field = fields.get(fieldIndex);
+              if (fieldIndex < (fields.size() - 1)) {
+                System.out.print(field + ":[" + resultSet.getString(field) + "]");
               } else {
-                System.out.println(sField + ":[" + oResultSet.getString(sField) + "]");
+                System.out.println(field + ":[" + resultSet.getString(field) + "]");
               }
             }
           }
@@ -78,9 +78,9 @@ public class ODBCExcel {
   }
 
   public boolean execute(Connection oConnection, String sSQL) {
-    try (Statement oStatement = oConnection.createStatement();
-        ResultSet oResultSet = oStatement.executeQuery(sSQL)) {
-      System.out.println(oResultSet.toString());
+    try (Statement statement = oConnection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sSQL)) {
+      System.out.println(resultSet.toString());
     } catch (final Exception oException) {
       System.out.println(oException.getMessage());
       oException.printStackTrace();
