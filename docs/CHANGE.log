@@ -1,5 +1,41 @@
 # CHANGE LOG
 
+## [2025-11-11 03:00:00 CST] [c12d115b] - CloseResource Compilation Fixes (3 files)
+
+### Overview
+**COMPILATION ERROR FIXES!** Fixed out-of-scope resource references in 3 files after CloseResource try-with-resources conversions. All compilation errors resolved!
+
+### Files Fixed
+
+**YMService.java** [77046cea]
+- Removed out-of-scope `dataOutputStream.close()` calls (lines 159, 165)
+- Moved `httpURLConnection.disconnect()` to finally block
+- Fixed compilation error from try-with-resources conversion
+
+**SharepointService.java** [d1f227c9]
+- Removed out-of-scope `dataOutputStream.close()` calls (lines 163, 169)
+- Removed duplicate `httpURLConnection.disconnect()` calls
+- Moved connection cleanup to finally block
+
+**SOAP.java** [c12d115b]
+- Converted `BufferedReader` to try-with-resources
+- Converted `FileReader` to try-with-resources
+- Removed manual `.close()` from finally block
+- Both resources now properly auto-closed
+
+### Impact
+- ✅ Zero compilation errors
+- ✅ All 412 source files compile successfully
+- ✅ Build: SUCCESS
+- ✅ All resources properly managed with try-with-resources
+
+### Verification
+- ✅ Docker build: SUCCESS
+- ✅ All source files compile
+- ✅ Zero errors
+
+---
+
 ## [2025-11-11 02:30:00 CST] [0da0f574] - PMD CloseResource: 100% COMPLETE! (77/77) 🎉
 
 ### Overview
