@@ -68,7 +68,7 @@ public class SaEventsNamespace extends YMService {
             eventMap.put(key, value);
           }
           Environment.sysOut("eventMap:[" + eventMap.toString() + "]");
-          xpath = XPATH_ROOT + "/SessionGroups/SessionGroup";
+          xpath = xpathRoot + "/SessionGroups/SessionGroup";
           final NodeList nodesSessionGroup = XML.getNodeList(sXML, xpath);
           for (int indexSessionGroup = 0;
               indexSessionGroup < nodesSessionGroup.getLength();
@@ -78,7 +78,7 @@ public class SaEventsNamespace extends YMService {
             final String groupName = elementSessionGroup.getAttribute("Name");
             final String groupID = elementSessionGroup.getAttribute("ID");
             xpath =
-                XPATH_ROOT
+                xpathRoot
                     + "/SessionGroups/SessionGroup"
                     + "[@ID='"
                     + groupID
@@ -101,7 +101,7 @@ public class SaEventsNamespace extends YMService {
               Environment.sysOut("sessionMap:[" + sessionMap.toString() + "]");
             }
           }
-          xpath = XPATH_ROOT + "/UngroupedSessions/Session";
+          xpath = xpathRoot + "/UngroupedSessions/Session";
           final NodeList nodesUngroupedSession = XML.getNodeList(sXML, xpath);
           for (int indexUngroupedSession = 0;
               indexUngroupedSession < nodesUngroupedSession.getLength();

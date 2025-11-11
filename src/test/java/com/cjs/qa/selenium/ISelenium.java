@@ -809,7 +809,7 @@ public interface ISelenium {
           break;
         default:
           if (remote) {
-            if ("firefox".equals(sBrowser)) {
+            if ("firefox".equals(browserLowercase)) {
               System.setProperty(
                   "webdriver.gecko.driver", Constants.PATH_DRIVERS_LOCAL + "geckodriver.exe");
               // File profileDirectory = new File("C:/Temp/");

@@ -125,7 +125,7 @@ public class XLSBarChartExample {
       clientAnchor.setCol1(4);
       clientAnchor.setRow1(5);
       /* Invoke createPicture and pass the anchor point and ID */
-      final HSSFPicture pictureXLS = patriarchXLS.createPicture(clientAnchor, my_picture_id);
+      final HSSFPicture pictureXLS = patriarchXLS.createPicture(clientAnchor, myPictureId);
       /* Call resize method, which resizes the image */
       pictureXLS.resize();
       /* Write changes to the workbook */

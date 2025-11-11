@@ -91,7 +91,7 @@ public class ODBCMSAccess {
             }
             // System.out.println(map.toString());
           }
-          System.out.println(iRecords + " records");
+          System.out.println(recordCount + " records");
         }
       }
     } catch (final Exception oException) {
