@@ -104,7 +104,9 @@ public class XML {
     Document document = null;
     final DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
     final DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-    document = documentBuilder.parse(new InputSource(new StringReader(xml)));
+    try (StringReader stringReader = new StringReader(xml)) {
+      document = documentBuilder.parse(new InputSource(stringReader));
+    }
     document.getDocumentElement().normalize();
     return document;
   }
@@ -386,9 +388,9 @@ public class XML {
       xml = xml.replaceAll("&amp;", "&");
       xml = xml.replaceAll("&", "&amp;");
     }
-    final InputSource inputSource = new InputSource(new StringReader(xml));
     Element element;
-    try {
+    try (StringReader stringReader = new StringReader(xml)) {
+      final InputSource inputSource = new InputSource(stringReader);
       element =
           DocumentBuilderFactory.newInstance()
               .newDocumentBuilder()
@@ -489,21 +491,24 @@ public class XML {
    */
   public static void transformFromString(String xsl, String input, String filePathOutput) {
     System.out.println("Creating [" + filePathOutput + "] using string inputs");
-    final StreamSource streamSourceXSL = new StreamSource(new StringReader(xsl));
-    final StreamSource streamSourceIn = new StreamSource(new StringReader(input));
-    final StreamResult streamResultOut = new StreamResult(new File(filePathOutput));
-    final TransformerFactory transformerFactory = TransformerFactory.newInstance();
-    Transformer transformer;
-    try {
-      transformer = transformerFactory.newTransformer(streamSourceXSL);
+    try (StringReader xslReader = new StringReader(xsl);
+        StringReader inputReader = new StringReader(input)) {
+      final StreamSource streamSourceXSL = new StreamSource(xslReader);
+      final StreamSource streamSourceIn = new StreamSource(inputReader);
+      final StreamResult streamResultOut = new StreamResult(new File(filePathOutput));
+      final TransformerFactory transformerFactory = TransformerFactory.newInstance();
+      Transformer transformer;
       try {
-        transformer.transform(streamSourceIn, streamResultOut);
-        System.out.println("Created [" + filePathOutput + "] using string inputs");
-      } catch (final TransformerException e) {
+        transformer = transformerFactory.newTransformer(streamSourceXSL);
+        try {
+          transformer.transform(streamSourceIn, streamResultOut);
+          System.out.println("Created [" + filePathOutput + "] using string inputs");
+        } catch (final TransformerException e) {
+          e.printStackTrace();
+        }
+      } catch (final TransformerConfigurationException e) {
         e.printStackTrace();
       }
-    } catch (final TransformerConfigurationException e) {
-      e.printStackTrace();
     }
   }
 
