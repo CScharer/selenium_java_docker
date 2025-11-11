@@ -21,12 +21,12 @@ public class OdbcMsAccess64 {
                 + "qatoolsweb"
                 + IExtension.MDB)) {
       if (oConnection != null) {
-        try (Statement oStatement = oConnection.createStatement();
-            ResultSet oResultSet =
-                oStatement.executeQuery(JDBCConstants.SELECT_ALL_FROM + "[tblSubmissionLog]")) {
-          while (oResultSet.next()) {
-            // Environment.sysOut(oResultSet.getString(1));
-            Environment.sysOut("SubmissionID:" + oResultSet.getString("SubmissionID"));
+        try (Statement statement = oConnection.createStatement();
+            ResultSet resultSet =
+                statement.executeQuery(JDBCConstants.SELECT_ALL_FROM + "[tblSubmissionLog]")) {
+          while (resultSet.next()) {
+            // Environment.sysOut(resultSet.getString(1));
+            Environment.sysOut("SubmissionID:" + resultSet.getString("SubmissionID"));
           }
         }
       }

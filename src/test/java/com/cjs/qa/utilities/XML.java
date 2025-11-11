@@ -389,8 +389,10 @@ public class XML {
       xml = xml.replaceAll("&", "&amp;");
     }
     Element element;
+    // Added to resolve Cursor breakage.
+    InputSource inputSource = new InputSource("");
     try (StringReader stringReader = new StringReader(xml)) {
-      final InputSource inputSource = new InputSource(stringReader);
+      inputSource = new InputSource(stringReader);
       element =
           DocumentBuilderFactory.newInstance()
               .newDocumentBuilder()

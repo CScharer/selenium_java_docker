@@ -53,9 +53,9 @@ public class ODBCMSAccess {
                     + "Automation"
                     + Constants.DELIMETER_PATH
                     + "BTS.sqlite");
-        String sSQL = JDBCConstants.DELETE_FROM + "[Core];";
-        odbcSQLite.executeUpdate(connectionSQLite, sSQL);
-        int iRecords = 0;
+        String sql = JDBCConstants.DELETE_FROM + "[Core];";
+        odbcSQLite.executeUpdate(connectionSQLite, sql);
+        int recordCount = 0;
         try (Statement statement = connection.createStatement();
             ResultSet resultSet =
                 statement.executeQuery(
@@ -65,29 +65,29 @@ public class ODBCMSAccess {
                         + "[SubmissionID]")) {
           while (resultSet.next()) {
             // System.out.println(oResultSet.getString(1));
-            final StringBuilder oStringBuilderPre = new StringBuilder();
-            oStringBuilderPre.append(JDBCConstants.INSERT_INTO + "[Core] (");
-            final StringBuilder oStringBuilderValues = new StringBuilder();
-            for (int iField = 0; iField < listFields.size(); iField++) {
-              final String sField = listFields.get(iField);
-              final String sValue = resultSet.getString(sField);
+            final StringBuilder sqlPre = new StringBuilder();
+            sqlPre.append(JDBCConstants.INSERT_INTO + "[Core] (");
+            final StringBuilder sqlValues = new StringBuilder();
+            for (int fieldIndex = 0; fieldIndex < listFields.size(); fieldIndex++) {
+              final String field = listFields.get(fieldIndex);
+              final String value = resultSet.getString(field);
               // map.put("SubmissionID",
-              // oResultSet.getString("SubmissionID"));
-              // map.put(sField, sValue);
-              if (sValue != null) {
-                if (iField == (listFields.size() - 1)) {
-                  oStringBuilderPre.append("[" + sField + "]) VALUES (");
-                  oStringBuilderValues.append("'" + sValue + "');");
+              // resultSet.getString("SubmissionID"));
+              // map.put(field, value);
+              if (value != null) {
+                if (fieldIndex == (listFields.size() - 1)) {
+                  sqlPre.append("[" + field + "]) VALUES (");
+                  sqlValues.append("'" + value + "');");
                 } else {
-                  oStringBuilderPre.append("[" + sField + "], ");
-                  oStringBuilderValues.append("'" + sValue + "', ");
+                  sqlPre.append("[" + field + "], ");
+                  sqlValues.append("'" + value + "', ");
                 }
               }
             }
-            sSQL = oStringBuilderPre.toString() + oStringBuilderValues.toString();
-            iRecords += odbcSQLite.executeUpdate(connectionSQLite, sSQL);
-            if ((iRecords % 100) == 0) {
-              System.out.println(iRecords + " records");
+            sql = sqlPre.toString() + sqlValues.toString();
+            recordCount += odbcSQLite.executeUpdate(connectionSQLite, sql);
+            if ((recordCount % 100) == 0) {
+              System.out.println(recordCount + " records");
             }
             // System.out.println(map.toString());
           }
