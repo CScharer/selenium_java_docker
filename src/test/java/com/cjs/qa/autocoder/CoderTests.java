@@ -10,7 +10,7 @@ import com.cjs.qa.jdbc.SQL;
 import com.cjs.qa.microsoft.excel.xls.XLS;
 import com.cjs.qa.selenium.Page;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.RegularExpression;
 import java.util.Arrays;
@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import org.junit.Test;
 
-public class Coder {
+public class CoderTests {
   private static JDBC jdbc = new JDBC("", "AutoCoderExcel");
     public static final String COMMENT = "// ";
   private static final String METHOD_NAME_POPULATE = "populatePage";
@@ -47,7 +47,7 @@ public class Coder {
     String pageName = "ConnectionsPage";
     String code = createCode(pageName);
     String fileNamePath = jdbc.getDbParameters().getName().replace(IExtension.SQLITE, IExtension.JAVA);
-    FSO.fileWrite(fileNamePath, code, false);
+    FSOTests.fileWrite(fileNamePath, code, false);
   }
 
   private static void getRecordsFromExcel(String pageName) throws QAException, Exception {

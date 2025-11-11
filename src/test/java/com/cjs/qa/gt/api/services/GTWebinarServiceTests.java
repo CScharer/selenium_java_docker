@@ -11,7 +11,8 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class GTWebinarService {
+@SuppressWarnings("PMD.ClassNamingConventions")
+public class GTWebinarServiceTests {
   public static final String USER_ID = "jill.vivit@yahoo.com";
   public static final String PASSWORD = "vivitrules1";
   public static final String API_CONSUMER_KEY = "WGhbDnxCGUwKNABGKeymjoII4gqalCa3";
@@ -32,7 +33,7 @@ public class GTWebinarService {
     Environment.sysOut("Testing!");
   }
 
-  public GTWebinarService() {
+  public GTWebinarServiceTests() {
     if (!serviceActive) {
       try {
         final HttpURLConnection httpUrlConnection =
@@ -92,7 +93,7 @@ public class GTWebinarService {
   }
 
   public static void setAccessToken(String accessToken) {
-    GTWebinarService.accessToken = accessToken;
+    GTWebinarServiceTests.accessToken = accessToken;
   }
 
   public static String getAccountKey() {
@@ -100,6 +101,6 @@ public class GTWebinarService {
   }
 
   public static void setAccountKey(String accountKey) {
-    GTWebinarService.accountKey = accountKey;
+    GTWebinarServiceTests.accountKey = accountKey;
   }
 }

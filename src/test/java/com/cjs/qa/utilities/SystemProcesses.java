@@ -37,7 +37,7 @@ public class SystemProcesses {
 
   public static void check() {
     try {
-      final String dateTimeStamp = DateHelpers.getCurrentDateAndTime();
+      final String dateTimeStamp = DateHelpersTests.getCurrentDateAndTime();
       createBackupTable("t_Core_Processes");
       SQL.execute(JDBCConstants.DELETE_FROM + "[t_Core_Processes]");
       for (final String processType : LIST_PROCESS_TYPE) {
@@ -56,7 +56,7 @@ public class SystemProcesses {
         command = "CMD /C TASKLIST /" + processType + " /FO:" + FORMAT + ">" + fileData;
         command = "CMD /C TASKLIST /" + processType + " /FO:" + FORMAT + ">" + FILE_DATA_CSV;
         Environment.sysOut("command:[" + command + "]");
-        final Map<String, String> mapResults = CommandLine.runProcess(command, true);
+        final Map<String, String> mapResults = CommandLineTests.runProcess(command, true);
         Environment.sysOut("mapResults:[" + mapResults.toString() + "]");
         final String tableName = "t_Core_Processes_" + processType;
         final List<String> fieldsList = FIELDS_PROCESS_MAP.get(processType);
@@ -304,7 +304,7 @@ public class SystemProcesses {
           SQL.execute(stringBuilder.toString());
           records = null;
       }
-      FSO.fileDelete(FILE_DATA_CSV);
+      FSOTests.fileDelete(FILE_DATA_CSV);
     } catch (final Exception e) {
       Environment.sysOut(e);
     }

@@ -15,8 +15,8 @@ import com.cjs.qa.polkcounty.PolkCountyEnvironment;
 import com.cjs.qa.selenium.ISelenium;
 import com.cjs.qa.united.UnitedEnvironment;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.DateHelpers;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.DateHelpersTests;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
 import com.cjs.qa.utilities.SoftAssert;
@@ -40,7 +40,7 @@ public class Environment {
   public static final String NOT_FOUND_USING_DEFAULT = " NOT FOUND.  USING DEFAULT-";
   public static final String COMPANY = "Core";
   public static final String EMAIL_SIGNATURE =
-      FSO.fileReadAll(Constants.PATH_OUTLOOK_SIGNATURES + "MSN" + IExtension.HTM);
+      FSOTests.fileReadAll(Constants.PATH_OUTLOOK_SIGNATURES + "MSN" + IExtension.HTM);
   private static boolean environmentSet = false;
   public static final String FILE_CONFIG =
       Constants.PATH_ROOT
@@ -54,7 +54,7 @@ public class Environment {
   private static Map<Integer, String> scenarioErrors = new HashMap<>();
   private static String gridHub = null;
   private static String gridPort = null;
-  public static final String FILE_CONFIG_XML = FSO.fileReadAll(FILE_CONFIG);
+  public static final String FILE_CONFIG_XML = FSOTests.fileReadAll(FILE_CONFIG);
   public static final String CURRENT_USER = Constants.CURRENT_USER;
   private static SoftAssert softAssert = new SoftAssert();
   private static boolean overrideUser = false;
@@ -212,7 +212,7 @@ public class Environment {
   }
 
   private static String getSysOutHeader() {
-    return DateHelpers.getCurrentDateAndTime()
+    return DateHelpersTests.getCurrentDateAndTime()
         + Constants.DELIMETER_LIST
         + Constants.CURRENT_USER
         + Constants.DELIMETER_LIST
@@ -229,7 +229,7 @@ public class Environment {
       stringBuilder.append(value);
       System.out.println(stringBuilder.toString());
       // stringBuilder.append(Constants.NEWLINE)
-      // FSO.fileWrite(fileLog, stringBuilder.toString(), true)
+      // FSOTests.fileWrite(fileLog, stringBuilder.toString(), true)
     }
   }
 
@@ -287,9 +287,9 @@ public class Environment {
     if (fileLog == null) {
       sysOut("fileLog:[" + fileLog + "]" + Constants.NEWLINE + value);
     } else {
-      FSO.fileWrite(fileLog, messageOut + Constants.TAB, true);
-      FSO.fileWrite(fileLog, "FAILED", true);
-      FSO.fileWrite(fileLog, Constants.NL, true);
+      FSOTests.fileWrite(fileLog, messageOut + Constants.TAB, true);
+      FSOTests.fileWrite(fileLog, "FAILED", true);
+      FSOTests.fileWrite(fileLog, Constants.NL, true);
     }
   }
 

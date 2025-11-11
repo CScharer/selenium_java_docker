@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 
-public class AtlassianTestSet {
+public class AtlassianTests {
   @Test
   public void addTestCucumberScenario() {
     final Project project = new Project("QSDT");

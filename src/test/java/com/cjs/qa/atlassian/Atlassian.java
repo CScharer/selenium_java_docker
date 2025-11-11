@@ -9,10 +9,10 @@ import com.cjs.qa.atlassian.jira.Project;
 import com.cjs.qa.atlassian.stash.Stash;
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.utilities.CJSConstants;
-import com.cjs.qa.utilities.CommandLine;
+import com.cjs.qa.utilities.CommandLineTests;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.DateHelpers;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.DateHelpersTests;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
 import java.util.Map;
@@ -32,7 +32,7 @@ public class Atlassian {
     setConfluence(new Confluence());
     setCrowd(new Crowd());
     final Project project = new Project("QSDT");
-    final String dateTimeStamp = DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_DATE_TIME_STAMP);
+    final String dateTimeStamp = DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_DATE_TIME_STAMP);
     final Issue issue =
         new Issue(
             "TEST_" + dateTimeStamp,
@@ -56,7 +56,7 @@ public class Atlassian {
       final String jsonPath = Constants.PATH_PROJECT + "JSON" + Constants.DELIMETER_PATH;
       FileUtils.mkdir(jsonPath);
       final String fileJSON = jsonPath + atlassian.getJira().getIssue().getSummary() + ".json";
-      FSO.fileWrite(fileJSON, json, false);
+      FSOTests.fileWrite(fileJSON, json, false);
       final StringBuilder stringBuilder =
           new StringBuilder("cmd /C " + Constants.QUOTE_DOUBLE + "");
       final String userID = CJSConstants.USERID_VIVIT;
@@ -81,7 +81,7 @@ public class Atlassian {
       Environment.sysOut("CURL Command:" + stringBuilder.toString());
       Map map = null;
       try {
-        map = CommandLine.runProcess(stringBuilder.toString(), true);
+        map = CommandLineTests.runProcess(stringBuilder.toString(), true);
       } catch (final Exception e) {
         e.printStackTrace();
       }

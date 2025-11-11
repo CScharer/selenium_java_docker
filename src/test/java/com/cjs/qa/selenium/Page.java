@@ -4,8 +4,8 @@ import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import com.cjs.qa.utilities.CJSConstants;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.DateHelpers;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.DateHelpersTests;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.JavaHelpers;
 import io.cucumber.java.Scenario;
 import java.awt.Robot;
@@ -333,11 +333,11 @@ public class Page extends JavaHelpers {
     FileUtil.mkdir(Constants.PATH_SCREENSHOTS);
     StringBuilder stringBuilder = new StringBuilder(Constants.PATH_SCREENSHOTS);
     setScreenshotCounter(getScreenshotCounter() + 1);
-    String dateTimeStamp = DateHelpers.getCurrentDateTimeStamp();
+    String dateTimeStamp = DateHelpersTests.getCurrentDateTimeStamp();
     stringBuilder.append(dateTimeStamp);
     stringBuilder.append("_");
     String title = getTitle();
-    title = FSO.fileValidateName(title);
+    title = FSOTests.fileValidateName(title);
     stringBuilder.append(title);
     stringBuilder.append("_");
     stringBuilder.append(

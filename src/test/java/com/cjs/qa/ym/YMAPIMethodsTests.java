@@ -6,7 +6,7 @@ import com.cjs.qa.jdbc.JDBC;
 import com.cjs.qa.jdbc.JDBCConstants;
 import com.cjs.qa.jdbc.SQL;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.ym.api.services.YMService;
 import java.util.ArrayList;
@@ -22,7 +22,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public final class YMAPIMethods {
+@SuppressWarnings("PMD.ClassNamingConventions")
+public final class YMAPIMethodsTests {
   public static final String LABEL_NAME = "Name";
   public static final String LABEL_DESCRIPTION = "Description";
   public static final String LABEL_BOOLEAN = "Boolean";
@@ -37,7 +38,7 @@ public final class YMAPIMethods {
       Environment.getFolderData() + "Templates" + Constants.DELIMETER_PATH;
   private static JDBC jdbc = new JDBC("", "QAAuto");
 
-  private YMAPIMethods() { // Empty
+  private YMAPIMethodsTests() { // Empty
   }
 
   @Test
@@ -49,7 +50,7 @@ public final class YMAPIMethods {
     try {
       final String fileTemplateYMAPIClass = PATH_TEMPLATES + "TemplateYMAPIClass" + IExtension.TXT;
       Environment.sysOut("fileTemplateYMAPIClass:[" + fileTemplateYMAPIClass + "]");
-      final String templateYMAPIClass = FSO.fileReadAll(fileTemplateYMAPIClass);
+      final String templateYMAPIClass = FSOTests.fileReadAll(fileTemplateYMAPIClass);
       Environment.sysOut("templateClass:[" + templateYMAPIClass + "]");
       final String namespaces =
           jdbc.queryResults(
@@ -74,7 +75,7 @@ public final class YMAPIMethods {
                 Constants.NEWLINE + Constants.NEWLINE, Constants.NEWLINE);
         Environment.sysOut("newTemplateYMAPIClass:[" + newTemplateYMAPIClass + "]");
         final String fileClass = PATH_TEMPLATES + newNamespace + "Namespace.java";
-        FSO.fileWrite(fileClass, newTemplateYMAPIClass, false);
+        FSOTests.fileWrite(fileClass, newTemplateYMAPIClass, false);
       }
       jdbc.close();
     } catch (final Exception e) {
@@ -88,7 +89,7 @@ public final class YMAPIMethods {
 
   private static String getMethods(String namespace) throws QAException {
     final String fileTemplateYMAPIMethod = PATH_TEMPLATES + "TemplateYMAPIMethod" + IExtension.TXT;
-    final String templateYMAPIMethod = FSO.fileReadAll(fileTemplateYMAPIMethod);
+    final String templateYMAPIMethod = FSOTests.fileReadAll(fileTemplateYMAPIMethod);
     Environment.sysOut("templateYMAPIMEthod:[" + templateYMAPIMethod + "]");
     final String methods =
         jdbc.queryResults(
@@ -223,9 +224,9 @@ public final class YMAPIMethods {
     Environment.sysOut("fileTemplateYMAPIClass:[" + fileTemplateYMAPIClass + "]");
     final String fileTemplateYMAPIMethod = PATH_TEMPLATES + "TemplateYMAPIMethod" + IExtension.TXT;
     Environment.sysOut("fileTemplateYMAPIMethod:[" + fileTemplateYMAPIClass + "]");
-    final String templateYMAPIClass = FSO.fileReadAll(fileTemplateYMAPIClass);
+    final String templateYMAPIClass = FSOTests.fileReadAll(fileTemplateYMAPIClass);
     Environment.sysOut("templateClass:[" + templateYMAPIClass + "]");
-    final String templateYMAPIMethod = FSO.fileReadAll(fileTemplateYMAPIMethod);
+    final String templateYMAPIMethod = FSOTests.fileReadAll(fileTemplateYMAPIMethod);
     Environment.sysOut("templateYMAPIMEthod:[" + templateYMAPIMethod + "]");
     try {
       StringBuilder sqlStringBuilder = new StringBuilder();
@@ -326,7 +327,7 @@ public final class YMAPIMethods {
                 "[METHOD_CALL_PARAMETERS]", stringBuilderCallParameters.toString());
         Environment.sysOut("newTemplateYMAPIClass:[" + newTemplateYMAPIClass + "]");
         final String classFileName = PATH_TEMPLATES + methodNameSpace + ".java";
-        FSO.fileWrite(classFileName, newTemplateYMAPIClass, false);
+        FSOTests.fileWrite(classFileName, newTemplateYMAPIClass, false);
         jdbc = null;
       }
     } catch (final Exception e) {

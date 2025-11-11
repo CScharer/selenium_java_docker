@@ -13,9 +13,9 @@ import com.cjs.qa.selenium.Page;
 import com.cjs.qa.selenium.Selenium;
 import com.cjs.qa.utilities.CJSConstants;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.DateHelpers;
+import com.cjs.qa.utilities.DateHelpersTests;
 import com.cjs.qa.utilities.Email;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
 import com.cjs.qa.utilities.XML;
@@ -159,9 +159,9 @@ public class RewardsPage extends Page {
         htmlMicrosoftReport.replace(
             "</html>",
             "<h4>Report Genereated at "
-                + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_US_STANDARD_DATE_TIME)
+                + DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_US_STANDARD_DATE_TIME)
                 + "</h4></html>");
-    FSO.fileWrite(FILE_REPORT, htmlMicrosoftReport, false);
+    FSOTests.fileWrite(FILE_REPORT, htmlMicrosoftReport, false);
   }
 
   /**
@@ -774,9 +774,9 @@ public class RewardsPage extends Page {
     final String password = EPasswords.EMAIL_MSN.getValue();
     final String date = new Date().toString();
     final String subject = "Microsoft - Automation (Daily Report) " + date;
-    final String embeddedReport = FSO.fileReadAll(FILE_REPORT);
+    final String embeddedReport = FSOTests.fileReadAll(FILE_REPORT);
     String body = embeddedReport; // + Constants.NEWLINE;
-    body += FSO.fileReadAll(FILE_SIGNATURE);
+    body += FSOTests.fileReadAll(FILE_SIGNATURE);
     Email.sendEmail(from, password, emailTO, emailTO, emailTO, subject, body, FILE_REPORT);
   }
 }

@@ -1,14 +1,14 @@
 package com.cjs.qa.gt.api.namespace.webinar;
 
 import com.cjs.qa.core.Environment;
-import com.cjs.qa.gt.api.services.GTWebinarService;
-import com.cjs.qa.utilities.CommandLine;
+import com.cjs.qa.gt.api.services.GTWebinarServiceTests;
+import com.cjs.qa.utilities.CommandLineTests;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.DateHelpers;
+import com.cjs.qa.utilities.DateHelpersTests;
 import com.cjs.qa.utilities.JSON;
 import java.util.Map;
 
-public class WebinarsNamespace extends GTWebinarService {
+public class WebinarsNamespace extends GTWebinarServiceTests {
   public Map<String, String> cancelWebinar(
       String credentials, String organizerKey, String webinarKey) throws Throwable {
     // /organizers/{organizerKey}/webinars/{webinarKey}
@@ -56,19 +56,19 @@ public class WebinarsNamespace extends GTWebinarService {
     String formatDateRight = "HH:mm:ss";
     curlStringBuilder.append(
         "&fromTime=\""
-            + DateHelpers.getCurrentDateTime(formatDateLeft)
+            + DateHelpersTests.getCurrentDateTime(formatDateLeft)
             + "T"
-            + DateHelpers.getCurrentDateTime(formatDateRight)
+            + DateHelpersTests.getCurrentDateTime(formatDateRight)
             + "Z\"");
     curlStringBuilder.append(
         "&toTime=\""
-            + DateHelpers.getCurrentDatePlusMinusDays(formatDateLeft, 365)
+            + DateHelpersTests.getCurrentDatePlusMinusDays(formatDateLeft, 365)
             + "T"
-            + DateHelpers.getCurrentDatePlusMinusDays(formatDateRight, 365)
+            + DateHelpersTests.getCurrentDatePlusMinusDays(formatDateRight, 365)
             + "Z\"");
     String command = "cmd /C " + curlStringBuilder.toString();
     Environment.sysOut("command:[" + command + "]");
-    Map<String, String> mapResponse = CommandLine.runProcess(command, true);
+    Map<String, String> mapResponse = CommandLineTests.runProcess(command, true);
     String json = mapResponse.get("lines");
     json = JSON.formatPretty(json, 4);
     Environment.sysOut("json Response:[" + Constants.NEWLINE + json + "]");

@@ -6,7 +6,7 @@ import com.cjs.qa.marlboro.Marlboro;
 import com.cjs.qa.marlboro.MarlboroEnvironment;
 import com.cjs.qa.selenium.Page;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
 import java.util.Arrays;
@@ -94,7 +94,7 @@ public class EarnPointsPage extends Page {
   }
 
   private Map<Integer, Integer> getHashMapFromFile(String filePathName) {
-    String indexes = FSO.fileReadAll(MarlboroEnvironment.FILE_INDEXES);
+    String indexes = FSOTests.fileReadAll(MarlboroEnvironment.FILE_INDEXES);
     Map<Integer, Integer> map = new HashMap<>();
     // List<String> indexList =
     // Arrays.asList(indexes.split(Constants.DELIMETER_LIST));
@@ -129,14 +129,14 @@ public class EarnPointsPage extends Page {
   public void earnPoints(Marlboro marlboro, Map<String, String> mapUser) throws QAException {
     setMarlboro(marlboro);
     setMapUser(mapUser);
-    double fileLogCount = FSO.filesGetCount(MarlboroEnvironment.FOLDER_DATA, IExtension.LOG);
+    double fileLogCount = FSOTests.filesGetCount(MarlboroEnvironment.FOLDER_DATA, IExtension.LOG);
     String filePathNameSource = MarlboroEnvironment.FILE_LOG;
     String extentionNew = JavaHelpers.formatNumber(fileLogCount, "000");
     String filePathNameDestination =
         MarlboroEnvironment.FILE_LOG.replace(IExtension.LOG, "_" + extentionNew + IExtension.LOG);
-    if (FSO.fileExists(filePathNameSource)) {
-      FSO.fileCopy(filePathNameSource, filePathNameDestination);
-      FSO.fileDelete(filePathNameSource);
+    if (FSOTests.fileExists(filePathNameSource)) {
+      FSOTests.fileCopy(filePathNameSource, filePathNameDestination);
+      FSOTests.fileDelete(filePathNameSource);
     }
     Environment.setScrollToObject(false);
     getWebDriver().get(URL_REWARDS_ENROLLED);
@@ -237,7 +237,7 @@ public class EarnPointsPage extends Page {
             + characterMap.toString()
             + "]";
     Environment.sysOut(messageData);
-    FSO.fileWrite(MarlboroEnvironment.FILE_INDEXES, indexMap.toString(), false);
+    FSOTests.fileWrite(MarlboroEnvironment.FILE_INDEXES, indexMap.toString(), false);
     String messageSys = "";
     String messageFile = "";
     int attempts = 0;
@@ -272,7 +272,7 @@ public class EarnPointsPage extends Page {
     setSearches(getSearches() + 1);
     Environment.sysOut("Searches Made:[" + getSearches() + "]");
     messageData = messageData.replaceAll("], ", "]\t");
-    FSO.fileWrite(
+    FSOTests.fileWrite(
         MarlboroEnvironment.FILE_LOG, messageFile + "\t" + messageData + Constants.NEWLINE, true);
     if (!failed) {
       // Environment.sysOut("Points Earned:" + getLabelPointsEarned());

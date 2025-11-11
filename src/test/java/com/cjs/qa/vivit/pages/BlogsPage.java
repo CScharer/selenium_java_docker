@@ -3,7 +3,7 @@ package com.cjs.qa.vivit.pages;
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.selenium.Page;
 import com.cjs.qa.utilities.JavaHelpers;
-import com.cjs.qa.vivit.VivitData;
+import com.cjs.qa.vivit.VivitDataTests;
 import com.cjs.qa.vivit.objects.Blogs;
 import com.cjs.qa.vivit.objects.Groups;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class BlogsPage extends Page {
     Environment.sysOut(
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     String statusName = "getBlogData";
-    if (VivitData.successFileExists(statusName)) {
+    if (VivitDataTests.successFileExists(statusName)) {
       return;
     }
     for (final Groups groups : Groups.getGroupsList()) {
@@ -59,8 +59,8 @@ public class BlogsPage extends Page {
     List<StringBuilder> sqlStringBuilderList = new ArrayList<>();
     sqlStringBuilderList.add(new StringBuilder("Blogs"));
     sqlStringBuilderList.add(Blogs.appendRecords());
-    VivitData.updateTableFromCurrentToPreviousAndInsert(sqlStringBuilderList);
-    VivitData.successFileCreate(statusName);
+    VivitDataTests.updateTableFromCurrentToPreviousAndInsert(sqlStringBuilderList);
+    VivitDataTests.successFileCreate(statusName);
   }
 
   private void getBlogs(String url, String blogPage) {

@@ -13,7 +13,8 @@ import java.util.List;
 import java.util.TimeZone;
 import org.junit.Test;
 
-public class DateHelpers {
+@SuppressWarnings("PMD.ClassNamingConventions")
+public class DateHelpersTests {
   public static final String DELIMETER = "/";
   public static final String FORMAT_DD_MMM_YYYY = "dd-MMM-yyyy";
   public static final String FORMAT_YYYY_MM_DD_COMPACT = "yyyyMMdd";
@@ -83,7 +84,7 @@ public class DateHelpers {
     try {
       boolean add = true;
       if (date == null) {
-        date = DateHelpers.getCurrentDateTime(FORMAT_US_STANDARD_DATE_TIME);
+        date = DateHelpersTests.getCurrentDateTime(FORMAT_US_STANDARD_DATE_TIME);
       }
       if (value < 0) {
         add = false;
@@ -154,32 +155,32 @@ public class DateHelpers {
 
   @Test
   public void getDatePlusMinusTestCase() {
-    final String now = DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_US_STANDARD_DATE_TIME);
+    final String now = DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_US_STANDARD_DATE_TIME);
     Environment.sysOut(now);
     Environment.sysOut(
-        FORMAT_Y + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_Y, 1, FORMAT_YYYY));
+        FORMAT_Y + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_Y, 1, FORMAT_YYYY));
     Environment.sysOut(
-        FORMAT_M + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_M, 1, FORMAT_MM));
+        FORMAT_M + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_M, 1, FORMAT_MM));
     Environment.sysOut(
-        FORMAT_D + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_D, 1, FORMAT_DD));
+        FORMAT_D + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_D, 1, FORMAT_DD));
     Environment.sysOut(
-        FORMAT_H + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_H, 1, FORMAT_HH));
+        FORMAT_H + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_H, 1, FORMAT_HH));
     Environment.sysOut(
-        FORMAT_M_LOWER + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_M_LOWER, 1, FORMAT_MM_LOWER));
+        FORMAT_M_LOWER + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_M_LOWER, 1, FORMAT_MM_LOWER));
     Environment.sysOut(
-        FORMAT_S + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_S, 1, FORMAT_SS));
+        FORMAT_S + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_S, 1, FORMAT_SS));
     Environment.sysOut(
-        FORMAT_Y + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_Y, -1, FORMAT_YYYY));
+        FORMAT_Y + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_Y, -1, FORMAT_YYYY));
     Environment.sysOut(
-        FORMAT_M + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_M, -1, FORMAT_MM));
+        FORMAT_M + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_M, -1, FORMAT_MM));
     Environment.sysOut(
-        FORMAT_D + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_D, -1, FORMAT_DD));
+        FORMAT_D + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_D, -1, FORMAT_DD));
     Environment.sysOut(
-        FORMAT_H + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_H, -1, FORMAT_HH));
+        FORMAT_H + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_H, -1, FORMAT_HH));
     Environment.sysOut(
-        FORMAT_M_LOWER + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_M_LOWER, -1, FORMAT_MM_LOWER));
+        FORMAT_M_LOWER + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_M_LOWER, -1, FORMAT_MM_LOWER));
     Environment.sysOut(
-        FORMAT_S + Constants.PIPE + DateHelpers.getDatePlusMinus(now, FORMAT_S, -1, FORMAT_SS));
+        FORMAT_S + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_S, -1, FORMAT_SS));
   }
 
   public static String getDatePlusMinusDays(String date, Integer days, String format) {
@@ -459,7 +460,7 @@ public class DateHelpers {
    */
   public static String getDateAfterXDays(int days) {
     try {
-      final String date = DateHelpers.getCurrentDateTime(FORMAT_DD_MMM_YYYY);
+      final String date = DateHelpersTests.getCurrentDateTime(FORMAT_DD_MMM_YYYY);
       final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_DD_MMM_YYYY);
       final Calendar c = Calendar.getInstance();
       c.setTime(simpleDateFormat.parse(date));
@@ -480,7 +481,7 @@ public class DateHelpers {
    */
   public static String getDateAfterXDays(int days, String format) {
     try {
-      final String date = DateHelpers.getCurrentDateTime(FORMAT_DD_MMM_YYYY);
+      final String date = DateHelpersTests.getCurrentDateTime(FORMAT_DD_MMM_YYYY);
       final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_DD_MMM_YYYY);
       final Calendar c = Calendar.getInstance();
       c.setTime(simpleDateFormat.parse(date));
@@ -500,7 +501,7 @@ public class DateHelpers {
    */
   public static String getDateAfterXDaysForACH(int days) {
     try {
-      final String date = DateHelpers.getCurrentDateTime(FORMAT_YYMMDD);
+      final String date = DateHelpersTests.getCurrentDateTime(FORMAT_YYMMDD);
       final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_YYMMDD);
       final Calendar c = Calendar.getInstance();
       c.setTime(simpleDateFormat.parse(date));
@@ -563,7 +564,7 @@ public class DateHelpers {
 
   public static String getMonthAfterXDays(int days) {
     try {
-      final String date = DateHelpers.getCurrentDateTime(FORMAT_MMMM);
+      final String date = DateHelpersTests.getCurrentDateTime(FORMAT_MMMM);
       final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_MMMM);
       final Calendar c = Calendar.getInstance();
       c.setTime(simpleDateFormat.parse(date));
@@ -577,7 +578,7 @@ public class DateHelpers {
 
   public static String getYearAfterXDays(int days) {
     try {
-      final String date = DateHelpers.getCurrentDateTime(FORMAT_DD_MMM_YYYY);
+      final String date = DateHelpersTests.getCurrentDateTime(FORMAT_DD_MMM_YYYY);
       final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_DD_MMM_YYYY);
       final Calendar c = Calendar.getInstance();
       c.setTime(simpleDateFormat.parse(date));
@@ -871,7 +872,7 @@ public class DateHelpers {
     calendar.add(Calendar.MONTH, months);
     calendar.set(Calendar.DAY_OF_MONTH, 1);
     calendar.add(Calendar.DAY_OF_MONTH, -1);
-    if (simpleDateFormat.format(calendar.getTime()).equals(DateHelpers.getCurrentCJSDate())) {
+    if (simpleDateFormat.format(calendar.getTime()).equals(DateHelpersTests.getCurrentCJSDate())) {
       calendar.add(Calendar.MONTH, 2);
       calendar.set(Calendar.DAY_OF_MONTH, 1);
       calendar.add(Calendar.DAY_OF_MONTH, -1);

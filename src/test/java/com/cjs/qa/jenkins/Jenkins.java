@@ -1,7 +1,7 @@
 package com.cjs.qa.jenkins;
 
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
 
@@ -33,8 +33,8 @@ public final class Jenkins {
       // C:\Workspace\Data\Vivit\Data\20190101\Jenkins_999.log
       String filePathNameDestination =
           filePathDestination + COMPANY + "_" + jenkinsBuildNumber + IExtension.LOG;
-      if (FSO.fileExists(filePathNameSource)) {
-        FSO.fileCopy(filePathNameSource, filePathNameDestination);
+      if (FSOTests.fileExists(filePathNameSource)) {
+        FSOTests.fileCopy(filePathNameSource, filePathNameDestination);
       }
     }
   }

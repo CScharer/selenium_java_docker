@@ -3,7 +3,7 @@ package com.cjs.qa.vivit.pages;
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.selenium.Page;
 import com.cjs.qa.utilities.JavaHelpers;
-import com.cjs.qa.vivit.VivitData;
+import com.cjs.qa.vivit.VivitDataTests;
 import com.cjs.qa.vivit.objects.Forums;
 import com.cjs.qa.vivit.objects.Groups;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class ForumsPage extends Page {
     Environment.sysOut(
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     String statusName = "getForumData";
-    if (VivitData.successFileExists(statusName)) {
+    if (VivitDataTests.successFileExists(statusName)) {
       return;
     }
     // final JDBC jdbc = new JDBC("", "QAAuto");
@@ -62,8 +62,8 @@ public class ForumsPage extends Page {
     List<StringBuilder> sqlStringBuilderList = new ArrayList<>();
     sqlStringBuilderList.add(new StringBuilder("Forums"));
     sqlStringBuilderList.add(Forums.appendRecords());
-    VivitData.updateTableFromCurrentToPreviousAndInsert(sqlStringBuilderList);
-    VivitData.successFileCreate(statusName);
+    VivitDataTests.updateTableFromCurrentToPreviousAndInsert(sqlStringBuilderList);
+    VivitDataTests.successFileCreate(statusName);
   }
 
   private void getForums(String url, String forumPage) {

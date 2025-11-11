@@ -2,7 +2,7 @@ package com.cjs.qa.ym.xml.objects;
 
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.XML;
 import java.io.File;
 import java.io.StringWriter;
@@ -12,7 +12,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import org.junit.Test;
 
-public class Marshall {
+public class MarshallTests {
   private static final String filePathNameXML = "C:\\Workspace\\Data\\Vivit\\Data\\Events\\temp.xml";
   private static final String filePathNameNewXML = "C:\\Workspace\\Data\\Vivit\\Data\\Events\\tempNew.xml";
 
@@ -88,7 +88,7 @@ public class Marshall {
     if (filePathName != null) {
       marshaller.marshal(yourMembershipResponse, new File(filePathName));
     }
-    //        xml = FSO.fileReadAll(filePathName);
+    //        xml = FSOTests.fileReadAll(filePathName);
     //        marshaller.marshal(yourMembershipResponse, System.out);
     StringWriter stringWriter = new StringWriter();
     marshaller.marshal(yourMembershipResponse, stringWriter);
@@ -97,9 +97,9 @@ public class Marshall {
   }
 
   private void createFixedXMLFile(String filePathName) {
-    String fixedXML = FSO.fileReadAll(filePathName);
+    String fixedXML = FSOTests.fileReadAll(filePathName);
     fixedXML = fixedXML.replace("Cp1252", XML.ENCODING);
     fixedXML = fixedXML.replace(XML.HEADING_INFO, XML.HEADING_INFO + Constants.NEWLINE);
-    FSO.fileWrite(filePathNameXML, fixedXML, false);
+    FSOTests.fileWrite(filePathNameXML, fixedXML, false);
   }
 }

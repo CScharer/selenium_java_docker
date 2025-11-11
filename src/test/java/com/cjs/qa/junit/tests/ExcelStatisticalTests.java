@@ -7,8 +7,8 @@ import com.cjs.qa.core.QAException;
 import com.cjs.qa.microsoft.excel.xls.XLS;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.Convert;
-import com.cjs.qa.utilities.DateHelpers;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.DateHelpersTests;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import java.io.IOException;
 import java.util.Arrays;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import org.junit.Test;
 
-public class ExcelStatisticalTestSet {
+public class ExcelStatisticalTests {
   // public static final String TIMINGS_PATH = Constants.DELIMETER_PATH +
   // Constants.DELIMETER_PATH + "wrbts" + Constants.DELIMETER_PATH + "shared"
   // + Constants.DELIMETER_PATH + "bts QA" + Constants.DELIMETER_PATH + "QA
@@ -52,7 +52,7 @@ public class ExcelStatisticalTestSet {
 
   private void getData(String timingPath, ExcelTiming excelTiming) throws QAException, IOException {
     final String sheetName = "Sheet1";
-    excelTiming.setFileList(FSO.filesList(timingPath, IExtension.XLS));
+    excelTiming.setFileList(FSOTests.filesList(timingPath, IExtension.XLS));
     for (final String filePathName : excelTiming.getFileList()) {
       Environment.sysOut("filePathName:[" + filePathName + "]");
       final XLS excel = new XLS(filePathName, sheetName);
@@ -84,7 +84,7 @@ public class ExcelStatisticalTestSet {
         PATH_TIMINGS
             + sheetName
             + "_"
-            + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_DATE_TIME_STAMP)
+            + DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_DATE_TIME_STAMP)
             + IExtension.XLS;
     final XLS excel = new XLS(filePathName, sheetName);
     int row = 1;

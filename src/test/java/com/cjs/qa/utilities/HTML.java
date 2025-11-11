@@ -27,7 +27,7 @@ public class HTML {
     Environment.sysOut("fileName:[" + this.fileName + "]");
     final StringBuilder stringBuilderReport = new StringBuilder();
     stringBuilderReport.append(HEADER);
-    FSO.fileWrite(fileName, stringBuilderReport.toString(), false);
+    FSOTests.fileWrite(fileName, stringBuilderReport.toString(), false);
   }
 
   public static String convertStringToHTML(String stringValue) {

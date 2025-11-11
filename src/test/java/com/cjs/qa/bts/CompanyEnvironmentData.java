@@ -2,7 +2,7 @@ package com.cjs.qa.bts;
 
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
 import com.cjs.qa.utilities.XML;
@@ -31,7 +31,7 @@ public class CompanyEnvironmentData {
   private String hubTunnelIdentifier = null;
 
   public CompanyEnvironmentData() throws Exception {
-    final String filePathName = FSO.fileReadAll(getEnvironmentsFilePathName());
+    final String filePathName = FSOTests.fileReadAll(getEnvironmentsFilePathName());
     setDocument(XML.createDocument(filePathName));
     String node = "User/";
     setUserName(getData(NODE_ROOT + node + "name" + NODE_TEXT));
@@ -147,7 +147,7 @@ public class CompanyEnvironmentData {
 
   public static String getEnvironmentsFilePathString() {
     final String folderPath = Constants.PATH_PROJECT + "XML\\";
-    FSO.folderCreate(folderPath);
+    FSOTests.folderCreate(folderPath);
     return folderPath;
   }
 

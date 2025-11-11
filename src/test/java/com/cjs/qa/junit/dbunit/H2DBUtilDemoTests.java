@@ -17,7 +17,7 @@ import org.junit.rules.TestName;
 import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class H2DBUtilDemo extends BaseDBUnitTestForJPADao {
+public class H2DBUtilDemoTests extends BaseDBUnitTestForJPADao {
   // private final OrderDaoJpaImpl target = null;
   private DefaultDataSet dataSet = null;
   //

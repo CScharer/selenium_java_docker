@@ -50,7 +50,7 @@ public class Project {
    */
   public static String pathWorkspace() {
     String directoryFolder = transformPath(pathAutomation() + "BTS/");
-    FSO.folderCreate(directoryFolder);
+    FSOTests.folderCreate(directoryFolder);
     return directoryFolder;
   }
 
@@ -59,7 +59,7 @@ public class Project {
    */
   public static String pathRepository(String filePath) {
     String directoryFolder = transformPath(pathAutomation() + "repository/" + filePath);
-    FSO.folderCreate(directoryFolder);
+    FSOTests.folderCreate(directoryFolder);
     return directoryFolder;
   }
 
@@ -75,109 +75,109 @@ public class Project {
 
   public static String pathFramework() {
     String directoryFolder = pathWorkspace() + transformPath("Framework/");
-    FSO.folderCreate(directoryFolder);
+    FSOTests.folderCreate(directoryFolder);
     return directoryFolder;
   }
 
   public static String testResources(String filePath) {
     final String testResources = "src/test/resources/" + filePath;
     String directoryFolder = pathFramework() + transformPath(testResources + filePath);
-    FSO.folderCreate(directoryFolder);
+    FSOTests.folderCreate(directoryFolder);
     return directoryFolder;
   }
 
   public static String dataFiles(String filePath) {
     final String dataFiles = "src/test/resources/datafiles/";
     String directoryFolder = path() + transformPath(dataFiles + filePath);
-    FSO.folderCreate(directoryFolder);
+    FSOTests.folderCreate(directoryFolder);
     return directoryFolder;
   }
 
   public static String dataFiles() {
     String directoryFolder = path() + transformPath("src/test/resources/datafiles/");
-    FSO.folderCreate(directoryFolder);
+    FSOTests.folderCreate(directoryFolder);
     return directoryFolder;
   }
 
   public static String notifications(String filePath) {
     final String notifications = "src/test/resources/notifications/";
     String directoryFolder = path() + transformPath(notifications + filePath);
-    FSO.folderCreate(directoryFolder);
+    FSOTests.folderCreate(directoryFolder);
     return directoryFolder;
   }
 
   public static String documents(String filePath) {
     final String documents = "src/test/resources/documents/";
     String directoryFolder = path() + transformPath(documents + filePath);
-    FSO.folderCreate(directoryFolder);
+    FSOTests.folderCreate(directoryFolder);
     return directoryFolder;
   }
 
   public static String queryresults(String filePath) {
     final String queryresults = "src/test/resources/queryresults/";
     String directoryFolder = path() + transformPath(queryresults + filePath);
-    FSO.folderCreate(directoryFolder);
+    FSOTests.folderCreate(directoryFolder);
     return directoryFolder;
   }
 
   public static String templates(String filePath) {
     final String templates = "src/main/java/com/bts/framework/templates/";
     String directoryFolder = pathFramework() + transformPath(templates + filePath);
-    FSO.folderCreate(directoryFolder);
+    FSOTests.folderCreate(directoryFolder);
     return directoryFolder;
   }
 
   public static String tools(String filePath) {
     final String tools = "src/main/java/com/bts/framework/tools/";
     String directoryFolder = pathFramework() + transformPath(tools + filePath);
-    FSO.folderCreate(directoryFolder);
+    FSOTests.folderCreate(directoryFolder);
     return directoryFolder;
   }
 
   public static String testsuites(String filePath) {
     final String testsuites = "src/test/java/com/bts/" + product + "/testsuites/";
     String directoryFolder = path() + transformPath(testsuites + filePath);
-    FSO.folderCreate(directoryFolder);
+    FSOTests.folderCreate(directoryFolder);
     return directoryFolder;
   }
 
   public static String scripts(String filePath) {
     final String scripts = "src/main/java/com/bts/framework/utils/scripts/";
     String directoryFolder = pathFramework() + transformPath(scripts + filePath);
-    FSO.folderCreate(directoryFolder);
+    FSOTests.folderCreate(directoryFolder);
     return directoryFolder;
   }
 
   public static String environment(String filePath) {
     final String environment = "src/main/java/com/bts/framework/environment/";
     String directoryFolder = pathFramework() + transformPath(environment + filePath);
-    FSO.folderCreate(directoryFolder);
+    FSOTests.folderCreate(directoryFolder);
     return directoryFolder;
   }
 
   public static String downloads(String filePath) {
     final String downloads = "target/test-downloads/";
     String directoryFolder = pathFramework() + transformPath(downloads + filePath);
-    FSO.folderCreate(directoryFolder);
+    FSOTests.folderCreate(directoryFolder);
     return directoryFolder;
   }
 
   public static String screenshots(String filePath) {
     final String screenshots = "target/test-screenshots/";
     String directoryFolder = pathFramework() + transformPath(screenshots + filePath);
-    FSO.folderCreate(directoryFolder);
+    FSOTests.folderCreate(directoryFolder);
     return directoryFolder;
   }
 
   public static String dataGeneration() {
     String directoryFolder = dataFiles() + transformPath("datagenerationfiles/");
-    FSO.folderCreate(directoryFolder);
+    FSOTests.folderCreate(directoryFolder);
     return directoryFolder;
   }
 
   public static String manualverification() {
     String directoryFolder = path() + transformPath("manualverification/");
-    FSO.folderCreate(directoryFolder);
+    FSOTests.folderCreate(directoryFolder);
     return directoryFolder;
   }
 
@@ -187,7 +187,7 @@ public class Project {
 
   public static String screenShots() {
     String directoryFolder = path() + transformPath("target/test-screenshots");
-    FSO.folderCreate(directoryFolder);
+    FSOTests.folderCreate(directoryFolder);
     return directoryFolder;
   }
 }

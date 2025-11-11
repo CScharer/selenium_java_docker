@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.security.EPasswords;
-import com.cjs.qa.linkedin.data.Data;
+import com.cjs.qa.linkedin.data.DataTests;
 import com.cjs.qa.linkedin.pages.ConnectionsPage;
 import com.cjs.qa.linkedin.pages.ContactInfoPage;
 import com.cjs.qa.linkedin.pages.HomePage;
@@ -63,13 +63,13 @@ public class LinkedIn {
       return;
     }
     List<Map<String, String>> linkedInMapList =
-        Data.getJdbc().queryResultsString(Data.getQueryLinkedInURL(), false);
+        DataTests.getJdbc().queryResultsString(DataTests.getQueryLinkedInURL(), false);
     if (linkedInMapList.isEmpty()) {
       Environment.sysOut(methodName + ":linkedInMapList.size():[" + linkedInMapList.size() + "]");
       return;
     }
     contactInfoPage.getContactInfoPageData(linkedInMapList);
-    Data.update();
+    DataTests.update();
   }
 
   public void getConnectionURLS(WebDriver webDriver, boolean run) throws Throwable {
@@ -81,7 +81,7 @@ public class LinkedIn {
       return;
     }
     List<Map<String, String>> linkedInMapList =
-        Data.getJdbc().queryResultsString(Data.getQueryNoLinkedInURL(), false);
+        DataTests.getJdbc().queryResultsString(DataTests.getQueryNoLinkedInURL(), false);
     if (linkedInMapList.isEmpty()) {
       Environment.sysOut(methodName + ":linkedInMapList.size():[" + linkedInMapList.size() + "]");
       return;
@@ -105,14 +105,14 @@ public class LinkedIn {
             href = href.replaceAll(LINKEDIN_URL, "");
           }
           href = href.replaceAll("/", "");
-          map.put(Data.FIELD_LINKEDIN_URL, href);
-          sqlStringBuilder = Data.appendRecordURL(sqlStringBuilder, map);
+          map.put(DataTests.FIELD_LINKEDIN_URL, href);
+          sqlStringBuilder = DataTests.appendRecordURL(sqlStringBuilder, map);
         }
       }
     }
-    Data.updateRecords(sqlStringBuilder);
-    Data.getJdbc().executeUpdate(Data.getQueryUpdateNotFound(), false);
-    Data.getJdbc().executeUpdate(Data.getQueryUpdateLinkedInURL(), false);
+    DataTests.updateRecords(sqlStringBuilder);
+    DataTests.getJdbc().executeUpdate(DataTests.getQueryUpdateNotFound(), false);
+    DataTests.getJdbc().executeUpdate(DataTests.getQueryUpdateLinkedInURL(), false);
   }
 
   public void run(WebDriver webDriver) throws Throwable {

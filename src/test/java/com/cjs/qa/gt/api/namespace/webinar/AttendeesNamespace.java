@@ -1,9 +1,9 @@
 package com.cjs.qa.gt.api.namespace.webinar;
 
-import com.cjs.qa.gt.api.services.GTWebinarService;
+import com.cjs.qa.gt.api.services.GTWebinarServiceTests;
 import java.util.Map;
 
-public class AttendeesNamespace extends GTWebinarService {
+public class AttendeesNamespace extends GTWebinarServiceTests {
   public Map<String, String> getAttendee(
       String credentials,
       String organizerKey,

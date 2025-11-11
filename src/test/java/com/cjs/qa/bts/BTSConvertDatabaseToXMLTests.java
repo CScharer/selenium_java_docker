@@ -3,7 +3,7 @@ package com.cjs.qa.bts;
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.jdbc.JDBC;
 import com.cjs.qa.jdbc.JDBCConstants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.XML;
 import java.util.Arrays;
 import java.util.Locale;
@@ -18,7 +18,7 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-public class BTSConvertDatabaseToXML {
+public class BTSConvertDatabaseToXMLTests {
   @Test
   public void testCompanyEnvironmentData() throws Exception {
     final BTSCompanyEnvironmentData btsCompanyEnvironmentData =
@@ -135,7 +135,7 @@ public class BTSConvertDatabaseToXML {
       // xml = HTML.convertStringToHTML(xml);
       Environment.sysOut("xml:[" + xml + "]");
       xml = XML.formatPretty(xml);
-      FSO.fileWrite(BTSCompanyEnvironmentData.getEnvironmentsFilePathName(), xml, false);
+      FSOTests.fileWrite(BTSCompanyEnvironmentData.getEnvironmentsFilePathName(), xml, false);
     } catch (Throwable throwable) {
       throwable.printStackTrace();
     }
@@ -178,7 +178,7 @@ public class BTSConvertDatabaseToXML {
   @Test
   public void readFromXML() throws Exception {
     String filePathName = BTSCompanyEnvironmentData.getEnvironmentsFilePathName();
-    String xml = FSO.fileReadAll(filePathName);
+    String xml = FSOTests.fileReadAll(filePathName);
     Document document = XML.createDocument(xml);
     String xPath = BTSCompanyEnvironmentData.NODE_COMPANY + BTSCompanyEnvironmentData.NODE_TEXT;
     XPathExpression xpathExpression = XML.XPATH.compile(xPath);

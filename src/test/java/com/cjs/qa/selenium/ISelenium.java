@@ -3,10 +3,10 @@ package com.cjs.qa.selenium;
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import com.cjs.qa.selenium.Page;
-import com.cjs.qa.utilities.CommandLine;
+import com.cjs.qa.utilities.CommandLineTests;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.DateHelpers;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.DateHelpersTests;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -345,8 +345,8 @@ public interface ISelenium {
       try {
         final String[] processes = processesRunning.split(Constants.DELIMETER_LIST);
         for (final String process : processes) {
-          if (CommandLine.isProcessRunning(process)) {
-            CommandLine.killProcess(process);
+          if (CommandLineTests.isProcessRunning(process)) {
+            CommandLineTests.killProcess(process);
           }
         }
       } catch (final Exception e) {
@@ -1029,7 +1029,7 @@ public interface ISelenium {
   default void saveScreenshot(WebDriver webDriver, String fileName) {
     String message = null;
     final String screenshotCounter =
-        DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_DATE_TIME_STAMP);
+        DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_DATE_TIME_STAMP);
     final String screenshot = String.format("%05d_%s.png", screenshotCounter, fileName);
     final File srcFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
     if (Environment.isLogAll()) {
@@ -1058,7 +1058,7 @@ public interface ISelenium {
     }
     final String source = webDriver.getPageSource();
     String fileName = Constants.PATH_ROOT + "source" + IExtension.TXT;
-    FSO.fileWrite(fileName, source, false);
+    FSOTests.fileWrite(fileName, source, false);
     final Document doc = Jsoup.parse(source);
     final Elements elements = doc.getAllElements();
     final StringBuilder sb = new StringBuilder();
@@ -1093,7 +1093,7 @@ public interface ISelenium {
               + Constants.NEWLINE);
     }
     fileName = Constants.PATH_ROOT + functionName + IExtension.XLS;
-    FSO.fileWrite(fileName, sb.toString(), true);
+    FSOTests.fileWrite(fileName, sb.toString(), true);
     return true;
   }
 }

@@ -6,7 +6,7 @@ import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import com.cjs.qa.microsoft.excel.IExcel;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.JavaHelpers;
 import java.io.File;
 import java.io.FileInputStream;
@@ -267,7 +267,7 @@ public class XLS implements IExcel {
         stringBuilder.append(Constants.NEWLINE);
       }
     }
-    FSO.fileWrite(fileName, stringBuilder.toString(), false);
+    FSOTests.fileWrite(fileName, stringBuilder.toString(), false);
   }
 
   public void createHeadings(String sheetName, List<String> headings) throws QAException {
@@ -318,7 +318,7 @@ public class XLS implements IExcel {
   }
 
   private void createWorkbook(String sheet) throws QAException, IOException {
-    if (FSO.fileExists(getFileName())) {
+    if (FSOTests.fileExists(getFileName())) {
       setWorkbook(new HSSFWorkbook(new FileInputStream(getFileName())));
       if (!sheetExists(sheet)) {
         setWorkSheet(createSheet(sheet));

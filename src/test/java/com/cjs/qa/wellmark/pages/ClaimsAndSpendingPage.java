@@ -7,7 +7,7 @@ import com.cjs.qa.jdbc.JDBCConstants;
 import com.cjs.qa.jdbc.SQL;
 import com.cjs.qa.selenium.Page;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -199,11 +199,11 @@ public class ClaimsAndSpendingPage extends Page {
     StringBuilder stringBuilder = getRecords("Medical and Pharmacy");
     // stringBuilder = getRecords("Medical")
     // stringBuilder = getRecords("Pharmacy")
-    // if (FSO.fileExists(Environment.FILE_CSV))
+    // if (FSOTests.fileExists(Environment.FILE_CSV))
     // {
     // stringBuilder = sortRecords(stringBuilder)
     final String fileName = Environment.getFolderData() + "Wellmark" + IExtension.CSV;
-    FSO.fileWrite(fileName, stringBuilder.toString(), false);
+    FSOTests.fileWrite(fileName, stringBuilder.toString(), false);
     // }
   }
 

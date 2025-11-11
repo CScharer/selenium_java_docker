@@ -21,7 +21,7 @@ import org.junit.runners.MethodSorters;
 import org.mockito.Mockito;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ScenariosSetupTeardown {
+public class ScenariosSetupTeardownTests {
   private static RTestRun rTestRun = new RTestRun("CJS", "Starting");
   // private static RTestReporter rTestReporter = new RTestReporter();
   @Rule public TestName testName = new TestName();

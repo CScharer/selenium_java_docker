@@ -5,7 +5,7 @@ import com.cjs.qa.core.QAException;
 import com.cjs.qa.microsoft.excel.xls.XLS;
 import com.cjs.qa.microsoft.excel.xlsx.XLSX;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class ExcelTests {
     final List<String> fileTypeList = Arrays.asList(IExtension.XLS, IExtension.XLSX);
     for (final String fileType : fileTypeList) {
       final String filePathName = filePath + "ExcelTest" + fileType;
-      FSO.fileDelete(filePathName);
+      FSOTests.fileDelete(filePathName);
       Environment.sysOut("filePathName:[" + filePathName + "]");
       switch (IExcel.getFileType(filePathName)) {
         case IExtension.XLSX:
@@ -232,7 +232,7 @@ public class ExcelTests {
     // Environment.sysOut("File:[" + xls.getFileName() + "]");;
     // xls.close();
     //// Environment.sysOut(xls.readCell(xls.DEFAULT_SHEET, 0, 0));
-    // FSO.fileDelete(fileName);
+    // FSOTests.fileDelete(fileName);
     // xls.convertToCSV(xls.getFileName() + IExtension.CSV);
     excel.autoSizeColumns("New Sheet");
     excel.save();
@@ -431,7 +431,7 @@ public class ExcelTests {
     // Environment.sysOut("File:[" + xls.getFileName() + "]");;
     // xls.close();
     //// Environment.sysOut(xls.readCell(xls.DEFAULT_SHEET, 0, 0));
-    // FSO.fileDelete(fileName);
+    // FSOTests.fileDelete(fileName);
     // xls.convertToCSV(xls.getFileName() + IExtension.CSV);
     excel.autoSizeColumns("New Sheet");
     excel.save();

@@ -14,8 +14,8 @@ public class Processes {
 
   public Processes(String command) throws Throwable {
     // Note: Command must not include headers.
-    // CommandLine.TASKLIST + " /fo:csv /nh /fi \"
-    String data = CommandLine.executeCommand(command);
+    // CommandLineTests.TASKLIST + " /fo:csv /nh /fi \"
+    String data = CommandLineTests.executeCommand(command);
     if (!data.contains(NO_RESULTS)) {
       List<String> records = Arrays.asList(data.split(Constants.NL));
       for (String recordRaw : records) {

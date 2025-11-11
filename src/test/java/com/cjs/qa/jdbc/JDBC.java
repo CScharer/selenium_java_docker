@@ -5,7 +5,7 @@ import java.util.Locale;
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.microsoft.excel.xls.XLS;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
 import java.sql.Connection;
@@ -369,8 +369,8 @@ public class JDBC {
             JDBCConstants.SELECT_ALL + JDBCConstants.FROM + "[" + tableViewName + "]", true);
     List<String> headingList = jdbc.getFieldNamesList(tableViewName);
     jdbc.close();
-    if (overwrite && FSO.fileExists(filePathName)) {
-      FSO.fileDelete(filePathName);
+    if (overwrite && FSOTests.fileExists(filePathName)) {
+      FSOTests.fileDelete(filePathName);
     }
     final XLS excel = new XLS(filePathName, sheetName);
     for (int recordIndex = 0; recordIndex < tableViewListMap.size(); recordIndex++) {
@@ -400,8 +400,8 @@ public class JDBC {
     JDBC jdbc = new JDBC("", database);
     String filePathName =
         jdbc.dbParameters.getName().replaceAll(IExtension.SQLITE, "_Schema" + IExtension.XLS);
-    if (overwrite && FSO.fileExists(filePathName)) {
-      FSO.fileDelete(filePathName);
+    if (overwrite && FSOTests.fileExists(filePathName)) {
+      FSOTests.fileDelete(filePathName);
     }
     sqlStringBuilder.append(JDBCConstants.SELECT + "[type],[name] ");
     sqlStringBuilder.append(JDBCConstants.FROM + "[" + "sqlite_master" + "] ");

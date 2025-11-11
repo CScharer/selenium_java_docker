@@ -5,7 +5,7 @@ import java.util.Locale;
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.selenium.Page;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.vivit.VivitEnvironment;
 import java.util.List;
@@ -90,7 +90,7 @@ public class SearchPage extends Page {
         }
       }
       final StringBuilder stringBuilderCSV = new StringBuilder();
-      FSO.fileWrite(fileName, stringBuilderCSV.toString(), false);
+      FSOTests.fileWrite(fileName, stringBuilderCSV.toString(), false);
       // https://www.vivit-worldwide.org/?page=LocalUserGroups
       // minimizeWindow();
     } catch (final Exception e) {
@@ -132,7 +132,7 @@ public class SearchPage extends Page {
       }
     }
     final String fileData = Environment.getFolderData() + group + "-List" + IExtension.TXT;
-    String expected = FSO.fileReadAll(fileData);
+    String expected = FSOTests.fileReadAll(fileData);
     expected = expected.replace("CÃ´te d'Ivoire", "Côte d'Ivoire");
     final String actual = stringBuilder.toString();
     Environment.getSoftAssert().assertEquals(expected, actual, group);

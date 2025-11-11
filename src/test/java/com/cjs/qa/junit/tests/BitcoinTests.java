@@ -5,11 +5,11 @@ import com.cjs.qa.core.Environment;
 import com.cjs.qa.jdbc.JDBC;
 import com.cjs.qa.jdbc.JDBCConstants;
 import com.cjs.qa.maven.objects.TestRunCommand;
-import com.cjs.qa.utilities.CommandLine;
+import com.cjs.qa.utilities.CommandLineTests;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.DateHelpers;
+import com.cjs.qa.utilities.DateHelpersTests;
 import com.cjs.qa.utilities.JavaHelpers;
-import com.cjs.qa.vivit.VivitData;
+import com.cjs.qa.vivit.VivitDataTests;
 import java.math.BigDecimal;
 import java.util.Map;
 import org.json.JSONObject;
@@ -19,11 +19,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
-public class BitcoinTestSet {
+public class BitcoinTests {
   @Rule public TestName testName = new TestName();
   private String mavenCommand =
       new TestRunCommand(this.getClass().getName(), getTestName()).toString();
-  private JDBC jdbc = new JDBC("", VivitData.DATABASE_DEFINITION);
+  private JDBC jdbc = new JDBC("", VivitDataTests.DATABASE_DEFINITION);
 
   @Before
   public void beforeTestSetup() throws Throwable {
@@ -76,8 +76,8 @@ public class BitcoinTestSet {
       do {
         StringBuilder stringBuilderSQL = new StringBuilder();
         String dateTimeStamp =
-            DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_US_STANDARD_DATE_TIME);
-        Map<String, String> responseMap = CommandLine.runProcess(command, true);
+            DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_US_STANDARD_DATE_TIME);
+        Map<String, String> responseMap = CommandLineTests.runProcess(command, true);
         String response = responseMap.get("lines");
         if (JavaHelpers.hasValue(response)) {
           // Environment.sysOut("response[" + response + "]")

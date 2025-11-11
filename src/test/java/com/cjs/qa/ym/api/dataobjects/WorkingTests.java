@@ -3,7 +3,7 @@ package com.cjs.qa.ym.api.dataobjects;
 import com.cjs.qa.core.Environment;
 import org.junit.Test;
 
-public class Working extends Environment {
+public class WorkingTests extends Environment {
   @Test
   public void verification() throws Throwable {
     // YourMembershipResponse yourMembership_Response = new

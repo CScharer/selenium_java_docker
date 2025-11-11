@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
 import com.cjs.qa.utilities.XML;
@@ -37,7 +37,7 @@ public class BTSCompanyEnvironmentData {
 
   public BTSCompanyEnvironmentData(String companyAbbreviation, String environment)
       throws Exception {
-    final String filePathName = FSO.fileReadAll(getEnvironmentsFilePathName());
+    final String filePathName = FSOTests.fileReadAll(getEnvironmentsFilePathName());
     setDocument(XML.createDocument(filePathName));
     setCompanyAbbreviation(companyAbbreviation);
     setEnvironment(environment);
@@ -171,7 +171,7 @@ public class BTSCompanyEnvironmentData {
 
   public static String getEnvironmentsFilePathString() {
     final String folderPath = Constants.PATH_PROJECT + "XML\\";
-    FSO.folderCreate(folderPath);
+    FSOTests.folderCreate(folderPath);
     return folderPath;
   }
 

@@ -20,7 +20,7 @@ import org.junit.rules.TestName;
 import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class DataSetUtilDemo extends BaseDBUnitTestForJPADao {
+public class DataSetUtilDemoTests extends BaseDBUnitTestForJPADao {
   private static final class DataFiles {
     private static final String PATH_DATA_FILES = "src/test/resources/DataSets/";
     private static final String XML_DATA_SET = PATH_DATA_FILES + "XML_DataSet" + IExtension.XML;

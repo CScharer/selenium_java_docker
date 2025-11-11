@@ -7,7 +7,7 @@ import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.JavaHelpers;
 import org.junit.Test;
 
-public class CompanyEnvironmentSetup extends Environment {
+public class CompanyEnvironmentSetupTests extends Environment {
   private CompanyEnvironmentData companyEnvironmentData = null;
   private String userName = null;
   private String userPasword = null;

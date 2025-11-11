@@ -26,19 +26,19 @@ import com.cjs.qa.selenium.WebDriverValidation;
 import com.cjs.qa.united.United;
 import com.cjs.qa.utilities.CJSConstants;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.DateHelpers;
+import com.cjs.qa.utilities.DateHelpersTests;
 import com.cjs.qa.utilities.Email;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
 import com.cjs.qa.utilities.SoftAssert;
 import com.cjs.qa.utilities.WMIC;
 import com.cjs.qa.utilities.colors.ColorPalette;
 import com.cjs.qa.vivit.Vivit;
-import com.cjs.qa.vivit.VivitData;
+import com.cjs.qa.vivit.VivitDataTests;
 import com.cjs.qa.vivit.pages.VivitDataFactory;
 import com.cjs.qa.wellmark.Wellmark;
-import com.cjs.qa.ym.YMAPIMethods;
+import com.cjs.qa.ym.YMAPIMethodsTests;
 import io.cucumber.datatable.DataTable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,7 +65,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class Scenarios {
+public class ScenariosTests {
   private static void sendEmail(
       String from, String password, String subject, String body, String attachment)
       throws Throwable {
@@ -227,7 +227,7 @@ public class Scenarios {
         final boolean overrideDay = true;
         // Environment.setScrollToObject(false)
         final String dayExpect = "1";
-        final String monthDay = DateHelpers.getCurrentDateTime("d");
+        final String monthDay = DateHelpersTests.getCurrentDateTime("d");
         if (!overrideDay && !monthDay.equals(dayExpect)) {
           Assert.fail(
               "The month day [" + monthDay + "] is not the expected day [" + dayExpect + "].");
@@ -343,7 +343,7 @@ public class Scenarios {
       // CONTEXT - Displays the state of all the global switches.
       // QUIT/EXIT - Exits the program.
       final WMIC wmic = new WMIC();
-      final String dateTimeStamp = DateHelpers.getCurrentDateTime("yyyyMMdd_HHmmss");
+      final String dateTimeStamp = DateHelpersTests.getCurrentDateTime("yyyyMMdd_HHmmss");
       // wmic.setNamespace("namespace")
       wmic.setRole(Constants.DELIMETER_PATH + "root" + Constants.DELIMETER_PATH + "cli");
       wmic.setNode("BTSDESEWS08");
@@ -478,14 +478,14 @@ public class Scenarios {
   public void getJenkinsInfo() {
     String pathTemp = Constants.PATH_TEMP_WINDOWS;
     final String extension = IExtension.BAT;
-    List<String> filesJenkinsList = FSO.filesList(pathTemp, IExtension.BAT);
+    List<String> filesJenkinsList = FSOTests.filesList(pathTemp, IExtension.BAT);
     if (!filesJenkinsList.isEmpty()) {
       Environment.sysOut("pathTemp:[" + pathTemp + "]");
       Environment.sysOut("extension:[" + extension + "]");
       Environment.sysOut("filesJenkinsList:[" + filesJenkinsList.toString() + "]");
       for (String filePathName : filesJenkinsList) {
         Environment.sysOut("filePathName:[" + filePathName + "]");
-        String fileContents = FSO.fileReadAll(filePathName);
+        String fileContents = FSOTests.fileReadAll(filePathName);
         Environment.sysOut("fileContents:" + "[" + fileContents + "]");
       }
     }
@@ -679,15 +679,15 @@ public class Scenarios {
     // + "&clip=0&mode=live"
     final PluralSightPage pluralSight = new PluralSightPage(getSeleniumWebDriver().getWebDriver());
     pluralSight.getLoginPage().login();
-    FSO.fileDelete(filePathname);
+    FSOTests.fileDelete(filePathname);
     for (String session : listSessions) {
       final String sessionInformation =
           pluralSight.getSessionPage().getSessionInformation(session);
-      FSO.fileWrite(filePathname, sessionInformation, true);
+      FSOTests.fileWrite(filePathname, sessionInformation, true);
       final String tableOfContents =
           pluralSight.getTableOfContentsPage().getTableOfContents(session);
-      FSO.fileWrite(filePathname, tableOfContents, true);
-      FSO.fileWrite(filePathname, Constants.NEWLINE, true);
+      FSOTests.fileWrite(filePathname, tableOfContents, true);
+      FSOTests.fileWrite(filePathname, Constants.NEWLINE, true);
       Environment.sysOut(sessionInformation);
     }
   }
@@ -875,9 +875,9 @@ public class Scenarios {
     stringBuilder = new StringBuilder();
     stringBuilder.append(JDBCConstants.SELECT_ALL);
     stringBuilder.append(JDBCConstants.FROM + "[Hours_Contractor] ");
-    final String year = DateHelpers.getCurrentDateTime("yyyy");
+    final String year = DateHelpersTests.getCurrentDateTime("yyyy");
     String month =
-        String.format("%02d", (Integer.valueOf(DateHelpers.getCurrentDateTime("MM")) - 1));
+        String.format("%02d", (Integer.valueOf(DateHelpersTests.getCurrentDateTime("MM")) - 1));
     if ("0".equals(month)) {
       month = "12";
     }
@@ -968,27 +968,27 @@ public class Scenarios {
       password = EPasswords.EMAIL_AOL.getValue();
       signatureFile = Constants.PATH_OUTLOOK_SIGNATURES + "AOL" + IExtension.HTML;
       attachment = signatureFile;
-      body += FSO.fileReadAll(signatureFile);
+      body += FSOTests.fileReadAll(signatureFile);
       sendEmail(from, password, subject, body, attachment);
       //
       from = CJSConstants.EMAIL_ADDRESS_GMAIL;
       password = EPasswords.EMAIL_GMAIL.getValue();
       signatureFile = Constants.PATH_OUTLOOK_SIGNATURES + "GMail" + IExtension.HTML;
-      body += FSO.fileReadAll(signatureFile);
+      body += FSOTests.fileReadAll(signatureFile);
       attachment = signatureFile;
       sendEmail(from, password, subject, body, attachment);
       //
       from = CJSConstants.EMAIL_ADDRESS_MSN;
       password = EPasswords.EMAIL_MSN.getValue();
       signatureFile = Constants.PATH_OUTLOOK_SIGNATURES + "MSN" + IExtension.HTML;
-      body += FSO.fileReadAll(signatureFile);
+      body += FSOTests.fileReadAll(signatureFile);
       attachment = signatureFile;
       sendEmail(from, password, subject, body, attachment);
       //
       from = CJSConstants.EMAIL_ADDRESS_VIVIT;
       password = EPasswords.EMAIL_VIVIT.getValue();
       signatureFile = Constants.PATH_OUTLOOK_SIGNATURES + "Vivit" + IExtension.HTML;
-      body += FSO.fileReadAll(signatureFile);
+      body += FSOTests.fileReadAll(signatureFile);
       attachment = signatureFile;
       sendEmail(from, password, subject, body, attachment);
     } catch (final Exception e) {
@@ -1038,8 +1038,8 @@ public class Scenarios {
     Environment.sysOut(dataTable.toString());
     // getVivit().MyMemberProfilePage.populatePageAndValidate(dataTable)
     // getVivit().SearchPage.validateGroups()
-    VivitData.initializeTest(getVivit());
-    VivitData.initializeData(getSeleniumWebDriver());
+    VivitDataTests.initializeTest(getVivit());
+    VivitDataTests.initializeData(getSeleniumWebDriver());
     getVivit().getGroupPage().getGroupPageData();
     // getVivit().getSearchPage().searchSites()
     getVivit().getBlogsPage().getBlogData();
@@ -1047,7 +1047,7 @@ public class Scenarios {
     getVivit().getForumsPage().getForumData();
     getVivit().getHomePage().clickButtonSignOut();
     getSeleniumWebDriver().killBrowser();
-    VivitData.wrapUp(true, true);
+    VivitDataTests.wrapUp(true, true);
   }
 
   @Test
@@ -1055,26 +1055,26 @@ public class Scenarios {
     Environment.setEnvironmentFileStructure("Google");
     setGoogle(new Google(getSeleniumWebDriver().getWebDriver()));
     Environment.setScrollToObject(false);
-    VivitData.getGoogleCommutes(getGoogle());
+    VivitDataTests.getGoogleCommutes(getGoogle());
     // getSeleniumWebDriver().killBrowser();
-    // VivitData.updateGoogleCommutesXLS(new JDBC("", DATABASE_QA));
+    // VivitDataTests.updateGoogleCommutesXLS(new JDBC("", DATABASE_QA));
   }
 
   @Test
   public void vivitTest() throws Throwable {
-    // VivitData.createReportHTMLTestInformation(getSeleniumWebDriver());
+    // VivitDataTests.createReportHTMLTestInformation(getSeleniumWebDriver());
     getSeleniumWebDriver().killBrowser();
-    // YMData.push();
-    // YMData.getAllEventInformation();
-    // YMData.importGoToWebinar();
-    VivitData.wrapUp(true, false);
-    // VivitData.finalizeTest();
+    // YMDataTests.push();
+    // YMDataTests.getAllEventInformation();
+    // YMDataTests.importGoToWebinar();
+    VivitDataTests.wrapUp(true, false);
+    // VivitDataTests.finalizeTest();
   }
 
   @Test
   public void vivitCreateYmapiMapping() throws Throwable {
     Assert.fail("This has already created the tables.");
-    YMAPIMethods.createMapping(getSeleniumWebDriver().getWebDriver());
+    YMAPIMethodsTests.createMapping(getSeleniumWebDriver().getWebDriver());
   }
 
   // @Ignore

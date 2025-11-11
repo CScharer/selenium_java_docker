@@ -1,9 +1,9 @@
 package com.cjs.qa.gt.api.namespace.webinar;
 
-import com.cjs.qa.gt.api.services.GTWebinarService;
+import com.cjs.qa.gt.api.services.GTWebinarServiceTests;
 import java.util.Map;
 
-public class SessionsNamespace extends GTWebinarService {
+public class SessionsNamespace extends GTWebinarServiceTests {
   public Map<String, String> getOrganizerSessions(String credentials, String organizerKey)
       throws Throwable {
     // /organizers/{organizerKey}/sessions

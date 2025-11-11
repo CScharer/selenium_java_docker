@@ -5,10 +5,10 @@ import java.util.Locale;
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.selenium.Page;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
-import com.cjs.qa.vivit.VivitData;
+import com.cjs.qa.vivit.VivitDataTests;
 import com.cjs.qa.vivit.VivitEnvironment;
 import com.cjs.qa.vivit.objects.GroupLeaderLink;
 import com.cjs.qa.vivit.objects.Groups;
@@ -44,7 +44,7 @@ public class GroupPage extends Page {
     Environment.sysOut(
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     String statusName = "getGroupPageData";
-    if (VivitData.successFileExists(statusName)) {
+    if (VivitDataTests.successFileExists(statusName)) {
       return;
     }
     Groups.setGroupPage(true);
@@ -72,10 +72,10 @@ public class GroupPage extends Page {
         default:
           break;
       }
-      VivitData.updateTableFromCurrentToPreviousAndInsert(sqlStringBuilderList);
+      VivitDataTests.updateTableFromCurrentToPreviousAndInsert(sqlStringBuilderList);
     }
     Groups.setGroupPage(false);
-    VivitData.successFileCreate(statusName);
+    VivitDataTests.successFileCreate(statusName);
   }
 
   private void getGroupData(String group) throws Throwable {
@@ -311,7 +311,7 @@ public class GroupPage extends Page {
         }
       }
       final StringBuilder stringBuilderCSV = new StringBuilder();
-      FSO.fileWrite(fileName, stringBuilderCSV.toString(), false);
+      FSOTests.fileWrite(fileName, stringBuilderCSV.toString(), false);
       // https://www.vivit-worldwide.org/?page=LocalUserGroups
       // minimizeWindow();
     } catch (final Exception e) {
@@ -353,7 +353,7 @@ public class GroupPage extends Page {
       }
     }
     final String fileData = Environment.getFolderData() + group + "-List" + IExtension.TXT;
-    String expected = FSO.fileReadAll(fileData);
+    String expected = FSOTests.fileReadAll(fileData);
     expected = expected.replace("CÃ´te d'Ivoire", "Côte d'Ivoire");
     final String actual = stringBuilder.toString();
     Environment.getSoftAssert().assertEquals(expected, actual, group);

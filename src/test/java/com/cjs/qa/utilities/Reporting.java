@@ -18,7 +18,7 @@ public class Reporting {
 
   public static String getLogStatus(String report) {
     return "dateTimeStamp:["
-            + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_US_STANDARD_DATE_TIME + ".SSS")
+            + DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_US_STANDARD_DATE_TIME + ".SSS")
             + "], "
             + report
             + Constants.NEWLINE;
@@ -77,6 +77,6 @@ public class Reporting {
     }
     // excel.save();
     excel.close();
-    FSO.fileWrite(fileName, getLogStatus(report), true);
+    FSOTests.fileWrite(fileName, getLogStatus(report), true);
   }
 }

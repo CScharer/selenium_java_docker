@@ -3,7 +3,7 @@ package com.cjs.qa.gt;
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.gt.api.namespace.webinar.AuthNamespace;
 import com.cjs.qa.gt.api.namespace.webinar.WebinarsNamespace;
-import com.cjs.qa.gt.api.services.GTWebinarService;
+import com.cjs.qa.gt.api.services.GTWebinarServiceTests;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.JavaHelpers;
 import com.cjs.qa.utilities.XML;
@@ -16,7 +16,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class GTWebinarData extends Environment {
+@SuppressWarnings("PMD.ClassNamingConventions")
+public class GTWebinarDataTests extends Environment {
   public static final String EVENTID_TEST = "4085145690110151939";
 
   public static List<Map<String, String>> getEventMapListAll(String xml) throws Throwable {
@@ -61,9 +62,9 @@ public class GTWebinarData extends Environment {
   public void testAuth() throws Throwable {
     AuthNamespace authNamespace = new AuthNamespace();
     authNamespace.oauth(
-        GTWebinarService.API_CONSUMER_KEY + ":" + GTWebinarService.API_CONSUMER_SECRET);
-    Environment.sysOut("AccessToken:[" + GTWebinarService.getAccessToken() + "]");
+        GTWebinarServiceTests.API_CONSUMER_KEY + ":" + GTWebinarServiceTests.API_CONSUMER_SECRET);
+    Environment.sysOut("AccessToken:[" + GTWebinarServiceTests.getAccessToken() + "]");
     WebinarsNamespace webinarsNamespace = new WebinarsNamespace();
-    webinarsNamespace.getAllWebinarsForAnAccount("", GTWebinarService.getAccountKey());
+    webinarsNamespace.getAllWebinarsForAnAccount("", GTWebinarServiceTests.getAccountKey());
   }
 }

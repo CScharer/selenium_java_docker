@@ -1,9 +1,9 @@
 package com.cjs.qa.gt.api.namespace.webinar;
 
-import com.cjs.qa.gt.api.services.GTWebinarService;
+import com.cjs.qa.gt.api.services.GTWebinarServiceTests;
 import java.util.Map;
 
-public class PanelistsNamespace extends GTWebinarService {
+public class PanelistsNamespace extends GTWebinarServiceTests {
   public Map<String, String> createPanelists(
       String credentials, String organizerKey, String webinarKey) throws Throwable {
     // /organizers/{organizerKey}/webinars/{webinarKey}/panelists

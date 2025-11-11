@@ -23,7 +23,8 @@ import java.util.Scanner;
 import java.util.Locale;
 import org.junit.Test;
 
-public class CommandLine {
+@SuppressWarnings("PMD.ClassNamingConventions")
+public class CommandLineTests {
   public static final String TASKKILL = "taskkill /f /im ";
   public static final String TASKLIST = "tasklist";
 

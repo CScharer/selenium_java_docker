@@ -4,7 +4,7 @@ import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.api.WebService;
 import com.cjs.qa.utilities.CJSConstants;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.DateHelpers;
+import com.cjs.qa.utilities.DateHelpersTests;
 import com.cjs.qa.utilities.Encoder;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
@@ -1470,7 +1470,7 @@ public class EntityService extends WebService {
     final String facebookURL = "https://www.facebook" + IExtension.COM + "/TexturaCorporation";
     final String numberOfEmployeesId = "1";
     final String numberOfOffices = getRandomNumberString(1, 24);
-    final String profileText = "PROFILE TEXT " + DateHelpers.getTimeStamp();
+    final String profileText = "PROFILE TEXT " + DateHelpersTests.getTimeStamp();
     final String twitterHandle = "@TexturaCorpAutomation";
     final String annualVolume = getRandomNumberString(1, 499);
     final String avgContractAmt = getRandomNumberString(1, 499);

@@ -2,9 +2,9 @@ package com.cjs.qa.selenium;
 
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
-import com.cjs.qa.utilities.CommandLine;
+import com.cjs.qa.utilities.CommandLineTests;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
 import com.cjs.qa.utilities.Processes;
@@ -119,7 +119,7 @@ public class SeleniumWebDriver {
       if (getWebDriver() != null) {
         String title = getWebDriver().getTitle();
         Environment.sysOut("title:[" + title + "]");
-        title = FSO.fileValidateName(title);
+        title = FSOTests.fileValidateName(title);
         Environment.sysOut("title:[" + title + "]");
         final int heightScroll = getPage().getScrollHeight();
         final String pathFileName = getScreenshotFilePathName(title);
@@ -174,7 +174,7 @@ public class SeleniumWebDriver {
    * @throws InterruptedException
    */
   private String combineALLImages(String pathTemp) throws IOException {
-    final List<String> listFiles = FSO.filesList(pathTemp, ".png");
+    final List<String> listFiles = FSOTests.filesList(pathTemp, ".png");
     final List<File> listFile = new ArrayList<>();
     final int columns = 1;
     final int rows = listFiles.size();
@@ -413,7 +413,7 @@ public class SeleniumWebDriver {
     // String[] webDriverArray = webDriver.split("/");
     // webDriver = webDriverArray[(driverArray.length - 1)];
     Environment.sysOut("webDriver:[" + webDriver + "]");
-    String command = CommandLine.TASKLIST + " /fo:csv /nh /fi \"imagename eq " + webDriver + "\"";
+    String command = CommandLineTests.TASKLIST + " /fo:csv /nh /fi \"imagename eq " + webDriver + "\"";
     Environment.sysOut("command:[" + command + "]");
     Processes processes = new Processes(command);
     // Environment.sysOut(processes.toString());
@@ -426,7 +426,7 @@ public class SeleniumWebDriver {
     if (!getBrowser().equalsIgnoreCase(Browser.EDGE)) {
       String webDriverCommand = "\"" + webDriver + "\" --version";
       Environment.sysOut("webDriverCommand:[" + webDriverCommand + "]");
-      Map<String, String> webDriverMap = CommandLine.runProcess(webDriverCommand, true);
+      Map<String, String> webDriverMap = CommandLineTests.runProcess(webDriverCommand, true);
       Environment.sysOut("webDriverMap:[" + webDriverMap.toString() + "]");
       String[] webDriverArray = webDriverMap.get("lines").split(" ");
       webDriverVersion = webDriverArray[1];

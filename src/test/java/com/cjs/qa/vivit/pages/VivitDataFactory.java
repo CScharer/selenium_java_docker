@@ -7,7 +7,7 @@ import com.cjs.qa.utilities.CJSConstants;
 import com.cjs.qa.utilities.Convert;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
-import com.cjs.qa.vivit.VivitData;
+import com.cjs.qa.vivit.VivitDataTests;
 import com.cjs.qa.vivit.VivitTables;
 import io.cucumber.datatable.DataTable;
 import java.util.Arrays;
@@ -20,12 +20,12 @@ public class VivitDataFactory {
   public DataTable getBio(String columnName, String columnValue) {
     Environment.sysOut(
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");
-    JDBC jdbc = new JDBC("", VivitData.DATABASE_DEFINITION);
+    JDBC jdbc = new JDBC("", VivitDataTests.DATABASE_DEFINITION);
     final StringBuilder sqlStringBuilder = new StringBuilder();
     sqlStringBuilder.append(
         JDBCConstants.SELECT_ALL_FROM + "[" + VivitTables.DOM_VIVIT_MEMBERS + "] ");
     switch (columnName) {
-      case VivitData.LABEL_WEB_SITE_MEMBER_ID:
+      case VivitDataTests.LABEL_WEB_SITE_MEMBER_ID:
       case "Username":
       case LABEL_EMAIL_ADDRESS:
       case "Email_Address_Alternate":
@@ -34,7 +34,7 @@ public class VivitDataFactory {
         break;
       default:
         sqlStringBuilder.append(
-            JDBCConstants.WHERE + "[" + VivitData.LABEL_WEB_SITE_MEMBER_ID + "]='10969660';");
+            JDBCConstants.WHERE + "[" + VivitDataTests.LABEL_WEB_SITE_MEMBER_ID + "]='10969660';");
         break;
     }
     final String sql = sqlStringBuilder.toString();

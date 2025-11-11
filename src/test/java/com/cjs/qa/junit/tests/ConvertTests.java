@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import org.junit.Test;
 
-public class ConvertTestSet {
+public class ConvertTests {
   private static DataTable getDataTable() {
     return DataTable.create(getList());
   }

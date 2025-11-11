@@ -3,7 +3,7 @@ package com.cjs.qa.ym;
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.security.EPasswords;
 import com.cjs.qa.utilities.CJSConstants;
-import com.cjs.qa.utilities.DateHelpers;
+import com.cjs.qa.utilities.DateHelpersTests;
 import com.cjs.qa.vivit.VivitEnvironment;
 import com.cjs.qa.ym.api.services.YMAPI;
 import java.util.HashMap;
@@ -13,9 +13,9 @@ public class YMAPIDebug {
 
   public void runTests() throws Throwable {
     final String dateTimeCurrent =
-        DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_US_STANDARD_DATE_TIME);
-    final String ymInceptionDate = DateHelpers.getCurrentDateTime("2007-07-01 00:00:00");
-    Environment.sysOut("dateTimeFormat:[" + DateHelpers.FORMAT_US_STANDARD_DATE_TIME + "]");
+        DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_US_STANDARD_DATE_TIME);
+    final String ymInceptionDate = DateHelpersTests.getCurrentDateTime("2007-07-01 00:00:00");
+    Environment.sysOut("dateTimeFormat:[" + DateHelpersTests.FORMAT_US_STANDARD_DATE_TIME + "]");
     Environment.sysOut("dateTimeCurrent:[" + dateTimeCurrent + "]");
     Environment.sysOut("ymInceptionDate:[" + ymInceptionDate + "]");
     final Map<String, String> mapCScharer = new HashMap<>();

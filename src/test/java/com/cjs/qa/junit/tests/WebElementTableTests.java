@@ -5,7 +5,7 @@ import com.cjs.qa.selenium.SeleniumWebDriver;
 import com.cjs.qa.selenium.WebElementTable;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.Convert;
-import com.cjs.qa.utilities.DateHelpers;
+import com.cjs.qa.utilities.DateHelpersTests;
 import com.cjs.qa.utilities.IExtension;
 import io.cucumber.datatable.DataTable;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import org.junit.runners.MethodSorters;
 import org.openqa.selenium.WebDriver;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class WebElementTableTestSet {
+public class WebElementTableTests {
   @Rule public final TestName testName = new TestName();
   public static final String LABEL_TITLE = "Title";
   public static final String LABEL_GROSS = "Gross";
@@ -35,7 +35,7 @@ public class WebElementTableTestSet {
   private final String pathOutput =
       Constants.PATH_FILES_DATA + this.getClass().getName() + Constants.DELIMETER_PATH;
   private final String boxOfficeMojoDate =
-      DateHelpers.getCurrentDatePlusMinusDays("YYYY-MM-dd", -2);
+      DateHelpersTests.getCurrentDatePlusMinusDays("YYYY-MM-dd", -2);
 
   @Before
   public void testSetup() throws Throwable {

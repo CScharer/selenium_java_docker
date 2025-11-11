@@ -3,8 +3,8 @@ package com.cjs.qa.jdbc;
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.utilities.CJSConstants;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.DateHelpers;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.DateHelpersTests;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import java.sql.Connection;
 import java.util.Arrays;
@@ -28,15 +28,15 @@ public class SQLite {
     final List<String> fields =
         Arrays.asList(
             "Product", "UnitState", "SubUnit", "Total", "Coverage", "SubCoverage", "Premium");
-    final String dateTimeStamp = DateHelpers.getCurrentDateAndTime();
+    final String dateTimeStamp = DateHelpersTests.getCurrentDateAndTime();
     Environment.sysOut("dateTimeStamp:[" + dateTimeStamp + "]");
     String fileName =
-        DateHelpers.convertDate(dateTimeStamp, "MM/dd/yyyy HH:mm:ss.SSS", "yyyyMMdd_HHmmss.SSS");
+        DateHelpersTests.convertDate(dateTimeStamp, "MM/dd/yyyy HH:mm:ss.SSS", "yyyyMMdd_HHmmss.SSS");
     fileName = "ProductSummary";
     Environment.sysOut("fileName:[" + fileName + "]");
     final String pathData = CJSConstants.PATH_FILES_DATA;
     final String pathFileName = pathData + fileName + IExtension.SQLITE; // ".db";
-    FSO.fileDelete(pathFileName);
+    FSOTests.fileDelete(pathFileName);
     final Connection connection = SQL.createDatabaseSQLite(pathFileName);
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append(JDBCConstants.CREATE_TABLE + "'<TABLE_NAME>' (");

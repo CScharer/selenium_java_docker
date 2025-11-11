@@ -3,12 +3,12 @@ package com.cjs.qa.junit.tests;
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.XML;
 import org.junit.Test;
 
-public class XMLUtilsTestSet {
+public class XMLUtilsTests {
 
   @Test
   public void assertXMLEqualFail() throws QAException {
@@ -51,10 +51,10 @@ public class XMLUtilsTestSet {
   }
 
   private String getXML1() {
-    return FSO.fileReadAll(Constants.PATH_FILES_XML + "xml1" + IExtension.XML);
+    return FSOTests.fileReadAll(Constants.PATH_FILES_XML + "xml1" + IExtension.XML);
   }
 
   private String getXML2() {
-    return FSO.fileReadAll(Constants.PATH_FILES_XML + "xml2" + IExtension.XML);
+    return FSOTests.fileReadAll(Constants.PATH_FILES_XML + "xml2" + IExtension.XML);
   }
 }

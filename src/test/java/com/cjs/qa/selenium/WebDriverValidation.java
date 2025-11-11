@@ -5,7 +5,7 @@ import java.util.Locale;
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.security.EPasswords;
 import com.cjs.qa.utilities.CJSConstants;
-import com.cjs.qa.utilities.CommandLine;
+import com.cjs.qa.utilities.CommandLineTests;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.Email;
 import com.cjs.qa.utilities.IExtension;
@@ -58,7 +58,7 @@ public class WebDriverValidation {
             "cmd /C wmic datafile where name=\"C:\\Program Files"
                 + " (x86)\\Google\\Chrome\\Application\\chrome.exe\" get Version"
                 + " /value";
-        Map<String, String> mapCommand = CommandLine.runProcess(command, true);
+        Map<String, String> mapCommand = CommandLineTests.runProcess(command, true);
         Environment.sysOut("mapCommand:[" + mapCommand.toString() + "]");
         // Version 74.0.3729.108 (Official Build) (64-bit)
         // WebDriver has been updated from [ChromeDriver 74.0.3729.6][5.0.3770.90] to

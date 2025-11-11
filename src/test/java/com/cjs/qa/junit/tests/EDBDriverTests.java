@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.Test;
 
-public class EDBDriverTestSet {
+public class EDBDriverTests {
   private final List<String> databaseTypeList =
       Arrays.asList("DB2", "MICROSOFT", "QUICKBOOKS", "SQLITE", "SQLSERVER", "UCANACCESS");
 

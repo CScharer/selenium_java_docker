@@ -2,7 +2,7 @@ package com.cjs.qa.selenium;
 
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.HashMap;
@@ -115,7 +115,7 @@ public class WebElementTable extends Page {
       }
     }
     stringBuilder.append(stringBuilderRecords.toString());
-    FSO.fileWrite(fileName, stringBuilder.toString(), false);
+    FSOTests.fileWrite(fileName, stringBuilder.toString(), false);
   }
 
   /**

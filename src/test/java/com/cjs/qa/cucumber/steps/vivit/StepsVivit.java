@@ -6,7 +6,7 @@ import com.cjs.qa.selenium.ISelenium;
 import com.cjs.qa.selenium.Selenium;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.Convert;
-import com.cjs.qa.utilities.DateHelpers;
+import com.cjs.qa.utilities.DateHelpersTests;
 import com.cjs.qa.utilities.JavaHelpers;
 import com.cjs.qa.utilities.Reports;
 import com.cjs.qa.vivit.Vivit;
@@ -148,7 +148,7 @@ public class StepsVivit extends Environment {
   public void testSetup(Scenario scenario) throws Exception {
     mapTest.put(
         "Started",
-        DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_US_STANDARD_DATE_TIME + ".SSS"));
+        DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_US_STANDARD_DATE_TIME + ".SSS"));
     setTimeStarted(System.currentTimeMillis());
     setScenarioObject(scenario);
     mapTest.put("API", "true");
@@ -186,7 +186,7 @@ public class StepsVivit extends Environment {
     mapTest.put("Status", getScenarioObject().getStatus().toString());
     mapTest.put(
         "Completed",
-        DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_US_STANDARD_DATE_TIME + ".SSS"));
+        DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_US_STANDARD_DATE_TIME + ".SSS"));
     setTimeCompleted(System.currentTimeMillis());
     mapTest.put(
         "Elapsed (seconds)",

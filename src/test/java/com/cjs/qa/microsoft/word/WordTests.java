@@ -27,7 +27,7 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTAbstractNum;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTLvl;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.STNumberFormat;
 
-public class Word {
+public class WordTests {
   public static void main(String[] args)
       throws Exception { // https://www.tutorialspoint" + IExtension.COM +
     // "/apache_poi_word/index.htm

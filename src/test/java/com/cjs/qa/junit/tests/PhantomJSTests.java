@@ -1,6 +1,6 @@
 package com.cjs.qa.junit.tests;
 
-import com.cjs.qa.utilities.CommandLine;
+import com.cjs.qa.utilities.CommandLineTests;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +12,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class PhantomJS {
+public class PhantomJSTests {
   public static final String DRIVER_PATH = "C:\\Selenium\\Grid2\\Drivers\\";
   public static final String DRIVER_EXE_PHANTOMJS = "phantomjs.exe";
   public static final String DRIVER_PATH_PHANTOMJS = DRIVER_PATH + DRIVER_EXE_PHANTOMJS;
@@ -46,16 +46,16 @@ public class PhantomJS {
 
   @Before
   public void beforeTest() throws Exception {
-    if (!CommandLine.isProcessRunning(DRIVER_EXE_PHANTOMJS)) {
+    if (!CommandLineTests.isProcessRunning(DRIVER_EXE_PHANTOMJS)) {
       String command = "cmd \"PhantomJS\" cmd /C \"" + DRIVER_PATH_PHANTOMJS + "\"";
-      CommandLine.runProcessNoWait(command);
+      CommandLineTests.runProcessNoWait(command);
     }
   }
 
   @After
   public void afterTest() throws Exception {
-    if (CommandLine.isProcessRunning(DRIVER_EXE_PHANTOMJS)) {
-      CommandLine.killProcess(DRIVER_EXE_PHANTOMJS);
+    if (CommandLineTests.isProcessRunning(DRIVER_EXE_PHANTOMJS)) {
+      CommandLineTests.killProcess(DRIVER_EXE_PHANTOMJS);
     }
   }
 

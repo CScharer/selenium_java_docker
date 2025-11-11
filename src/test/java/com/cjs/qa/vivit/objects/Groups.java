@@ -7,7 +7,7 @@ import com.cjs.qa.jdbc.JDBCConstants;
 import com.cjs.qa.jdbc.SQL;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.JavaHelpers;
-import com.cjs.qa.vivit.VivitData;
+import com.cjs.qa.vivit.VivitDataTests;
 import com.cjs.qa.vivit.VivitTables;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -133,7 +133,7 @@ public class Groups {
   }
 
   public static void intializeGroupsList(List<Groups> groupsList) throws Throwable {
-    JDBC jdbc = new JDBC("", VivitData.DATABASE_DEFINITION);
+    JDBC jdbc = new JDBC("", VivitDataTests.DATABASE_DEFINITION);
     StringBuilder sqlStringBuilder = new StringBuilder();
     sqlStringBuilder.append(
         JDBCConstants.SELECT_ALL_FROM + "[" + VivitTables.VIVIT_GROUPS_CURRENT + "] ");

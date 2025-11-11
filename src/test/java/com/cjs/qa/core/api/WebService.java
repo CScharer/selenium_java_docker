@@ -3,7 +3,7 @@ package com.cjs.qa.core.api;
 import com.cjs.qa.bts.policy.Policy;
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import jakarta.xml.soap.MessageFactory;
 import jakarta.xml.soap.SOAPBody;
@@ -184,8 +184,8 @@ public class WebService {
                   + policy.getPolicy()
                   + "_"
                   + "request");
-      // FSO.fileWrite(getFileRequest(), getXml(), false);
-      FSO.fileWrite(fileTemp, getXml(), false);
+      // FSOTests.fileWrite(getFileRequest(), getXml(), false);
+      FSOTests.fileWrite(fileTemp, getXml(), false);
       // setRequestName(XML.getBodyFirstChildName(getFileRequest()));
       // setRequestName(XML.getBodyFirstChildName(fileTemp));
       final String fileOut =
@@ -201,7 +201,7 @@ public class WebService {
                   + "_"
                   + getRequestName()
                   + "_request");
-      FSO.fileWrite(fileOut, getXml(), false);
+      FSOTests.fileWrite(fileOut, getXml(), false);
     } catch (final Exception e) {
       Environment.sysOut(e);
     }
@@ -247,8 +247,8 @@ public class WebService {
                   + policy.getPolicy()
                   + "_"
                   + "response");
-      // FSO.fileWrite(getFileResponse(), getXml(), false);
-      FSO.fileWrite(fileTemp, getXml(), false);
+      // FSOTests.fileWrite(getFileResponse(), getXml(), false);
+      FSOTests.fileWrite(fileTemp, getXml(), false);
       // setResponseName(XML.getBodyFirstChildName(getFileResponse()));
       // setResponseName(XML.getBodyFirstChildName(fileTemp));
       final String fileOut =
@@ -264,7 +264,7 @@ public class WebService {
                   + "_"
                   + getResponseName()
                   + "_response");
-      FSO.fileWrite(fileOut, getXml(), false);
+      FSOTests.fileWrite(fileOut, getXml(), false);
     } catch (final Exception e) {
       Environment.sysOut(e);
     }

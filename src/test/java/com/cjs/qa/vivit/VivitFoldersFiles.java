@@ -3,7 +3,7 @@ package com.cjs.qa.vivit;
 import com.cjs.qa.jdbc.DBConnections;
 import com.cjs.qa.utilities.CJSConstants;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.DateHelpers;
+import com.cjs.qa.utilities.DateHelpersTests;
 import com.cjs.qa.utilities.IExtension;
 
 public final class VivitFoldersFiles {
@@ -11,7 +11,7 @@ public final class VivitFoldersFiles {
       VivitEnvironment.FOLDER_DATA + "Data" + Constants.DELIMETER_PATH;
   public static final String PATH_DATA_TODAY =
       PATH_DATA
-          + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_YYYY_MM_DD_COMPACT)
+          + DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_YYYY_MM_DD_COMPACT)
           + Constants.DELIMETER_PATH;
   public static final String PATH_API_DATA_YM = PATH_DATA_TODAY + "YM" + Constants.DELIMETER_PATH;
   public static final String PATH_API_DATA_GTW = PATH_DATA_TODAY + "GTW" + Constants.DELIMETER_PATH;
@@ -23,7 +23,7 @@ public final class VivitFoldersFiles {
       PATH_DATA
           + "Flights"
           + Constants.DELIMETER_PATH
-          + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_YYYY_MM_DD_COMPACT)
+          + DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_YYYY_MM_DD_COMPACT)
           + IExtension.XLS;
   // API YM Data Import into Database
   public static final String DATA_YMAPI_DATA =
@@ -60,12 +60,12 @@ public final class VivitFoldersFiles {
       PATH_API_DATA_YM
           + "Report_Treasurer_Billable_Hours"
           + "_"
-          + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_MMM)
+          + DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_MMM)
           + IExtension.HTM;
   public static final String REPORT_HTM_AUTOMATION_TREASURER =
       PATH_API_DATA_YM
           + "Report_Treasurer_Monthly_"
-          + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_MMM)
+          + DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_MMM)
           + IExtension.HTM;
   public static final String REPORT_HTM_AUTOMATION_BROKEN_LINKS =
       PATH_API_DATA_YM + "Report_BrokenLinks" + IExtension.HTM;
@@ -90,7 +90,7 @@ public final class VivitFoldersFiles {
   public static final String REPORT_XLS_AUTOMATION_T =
       PATH_API_DATA_YM
           + "Report_Treasurer_Monthly_"
-          + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_MMM)
+          + DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_MMM)
           + IExtension.XLS;
   public static final String BAT = VivitEnvironment.FOLDER_DATA + "AddChartsBar" + IExtension.BAT;
   public static final String BATRUN =

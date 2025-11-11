@@ -4,13 +4,13 @@ import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.security.EPasswords;
 import com.cjs.qa.linkedin.LinkedIn;
 import com.cjs.qa.linkedin.LinkedInEnvironment;
-import com.cjs.qa.linkedin.data.Data;
+import com.cjs.qa.linkedin.data.DataTests;
 import com.cjs.qa.selenium.Page;
 import com.cjs.qa.utilities.CJSConstants;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.DateHelpers;
+import com.cjs.qa.utilities.DateHelpersTests;
 import com.cjs.qa.utilities.Email;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.JavaHelpers;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -276,8 +276,8 @@ public class ContactInfoPage extends Page {
       Map<String, String> map = linkedInMapList.get(mapIndex);
       if (JavaHelpers.hasValue(map.get("First Name"))
           && JavaHelpers.hasValue(map.get("Last Name"))
-          && JavaHelpers.hasValue(map.get(Data.FIELD_LINKEDIN_URL))) {
-        String linkedInURL = map.get(Data.FIELD_LINKEDIN_URL);
+          && JavaHelpers.hasValue(map.get(DataTests.FIELD_LINKEDIN_URL))) {
+        String linkedInURL = map.get(DataTests.FIELD_LINKEDIN_URL);
         String linkedInURLDetailContactInfo =
             LinkedIn.LINKEDIN_URL + linkedInURL + "/detail/contact-info";
         getWebDriver().get(linkedInURLDetailContactInfo);
@@ -310,9 +310,9 @@ public class ContactInfoPage extends Page {
         getValues(header);
       }
     }
-    String lastUpdated = DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_US_STANDARD_DATE);
+    String lastUpdated = DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_US_STANDARD_DATE);
     if (getContactInfoMap() != null) {
-      getContactInfoMap().put(Data.FIELD_LINKEDIN_URL, linkedInURL);
+      getContactInfoMap().put(DataTests.FIELD_LINKEDIN_URL, linkedInURL);
       appendLinkedInField("getLast Updated", lastUpdated);
       getLinkedInConnectionContactInfoListMap().add(getContactInfoMap());
     }
@@ -391,7 +391,7 @@ public class ContactInfoPage extends Page {
       for (Entry entry : map.entrySet()) {
         String fieldName = (String) entry.getKey();
         String fieldValue = (String) entry.getValue();
-        if (!Data.FIELD_LINKEDIN_URL.equals(fieldName)) {
+        if (!DataTests.FIELD_LINKEDIN_URL.equals(fieldName)) {
           if (stringBuilderData.length() > 0) {
             stringBuilderData.append(",");
           }
@@ -401,11 +401,11 @@ public class ContactInfoPage extends Page {
       }
       if (!stringBuilderData.toString().isEmpty()) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("UPDATE [" + Data.TABLE_LINKEDIN + "] ");
+        stringBuilder.append("UPDATE [" + DataTests.TABLE_LINKEDIN + "] ");
         stringBuilder.append("SET ");
         stringBuilder.append(stringBuilderData.toString());
         stringBuilder.append(
-            " WHERE [" + Data.FIELD_LINKEDIN_URL + "]='" + map.get(Data.FIELD_LINKEDIN_URL) + "';");
+            " WHERE [" + DataTests.FIELD_LINKEDIN_URL + "]='" + map.get(DataTests.FIELD_LINKEDIN_URL) + "';");
         Environment.sysOut(methodName + ":Adding record[" + stringBuilder.toString() + "]");
         setStringBuilderSQL(getStringBuilderSQL().append(stringBuilder.toString()));
       }
@@ -429,11 +429,11 @@ public class ContactInfoPage extends Page {
         appendLinkedInRecord(contactInfoMap);
       }
       if (getStringBuilderSQL().length() > 0) {
-        FSO.fileWrite(
+        FSOTests.fileWrite(
             LinkedInEnvironment.FILE_LOG,
             sqlStringBuilder.toString().replaceAll(";", Constants.NEWLINE + ';'),
             false);
-        int recordsAffected = Data.getJdbc().executeUpdate(sqlStringBuilder.toString(), false);
+        int recordsAffected = DataTests.getJdbc().executeUpdate(sqlStringBuilder.toString(), false);
         message =
             Constants.NEWLINE + sqlStringBuilder.toString().replaceAll(";", Constants.NEWLINE);
         Environment.sysOut("recordsAffected:[" + recordsAffected + "]");

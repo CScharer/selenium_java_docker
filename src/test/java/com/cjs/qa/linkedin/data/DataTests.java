@@ -8,7 +8,7 @@ import com.cjs.qa.jdbc.SQL;
 import com.cjs.qa.linkedin.LinkedIn;
 import com.cjs.qa.utilities.CJSConstants;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.DateHelpers;
+import com.cjs.qa.utilities.DateHelpersTests;
 import com.cjs.qa.utilities.Email;
 import com.cjs.qa.utilities.JavaHelpers;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 import org.junit.Test;
 
-public class Data {
+public class DataTests {
   private static JDBC jdbc = getJdbc();
   public static final String TABLE_LINKEDIN = "t_DOM_LinkedInConnections";
   public static final String TABLE_LINKEDIN_EMAILS = "t_DOM_LinkedInConnections_Emails";
@@ -34,12 +34,12 @@ public class Data {
     Environment.sysOut(
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("UPDATE [" + Data.TABLE_LINKEDIN + "] ");
+    stringBuilder.append("UPDATE [" + DataTests.TABLE_LINKEDIN + "] ");
     stringBuilder.append("SET ");
     stringBuilder.append("[" + fieldName + "]='" + fieldValue.replaceAll("'", "''") + "' ");
-    stringBuilder.append("WHERE [" + Data.FIELD_LINKEDIN_URL + "]='" + linkedInURL + "';");
+    stringBuilder.append("WHERE [" + DataTests.FIELD_LINKEDIN_URL + "]='" + linkedInURL + "';");
     sqlStringBuilder.append(stringBuilder);
-    if (Data.getQueryRecordCount(sqlStringBuilder) == Data.RECORD_UPDATE_MIN) {
+    if (DataTests.getQueryRecordCount(sqlStringBuilder) == DataTests.RECORD_UPDATE_MIN) {
       sqlStringBuilder = updateRecords(sqlStringBuilder);
     }
     return sqlStringBuilder;
@@ -51,15 +51,15 @@ public class Data {
     Environment.sysOut(
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("UPDATE [" + Data.TABLE_LINKEDIN + "] ");
+    stringBuilder.append("UPDATE [" + DataTests.TABLE_LINKEDIN + "] ");
     stringBuilder.append("SET ");
     stringBuilder.append(
         "[Last Updated]='"
-            + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_US_STANDARD_DATE)
+            + DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_US_STANDARD_DATE)
             + "' ");
-    stringBuilder.append("WHERE [" + Data.FIELD_LINKEDIN_URL + "]='" + linkedInURL + "';");
+    stringBuilder.append("WHERE [" + DataTests.FIELD_LINKEDIN_URL + "]='" + linkedInURL + "';");
     sqlStringBuilder.append(stringBuilder);
-    if (Data.getQueryRecordCount(sqlStringBuilder) == Data.RECORD_UPDATE_MIN) {
+    if (DataTests.getQueryRecordCount(sqlStringBuilder) == DataTests.RECORD_UPDATE_MIN) {
       sqlStringBuilder = updateRecords(sqlStringBuilder);
     }
     return sqlStringBuilder;
@@ -70,12 +70,12 @@ public class Data {
     Environment.sysOut(
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("UPDATE [" + Data.TABLE_LINKEDIN + "] ");
+    stringBuilder.append("UPDATE [" + DataTests.TABLE_LINKEDIN + "] ");
     stringBuilder.append(
         "SET ["
-            + Data.FIELD_LINKEDIN_URL
+            + DataTests.FIELD_LINKEDIN_URL
             + "]='"
-            + map.get(Data.FIELD_LINKEDIN_URL).replaceAll("'", "''")
+            + map.get(DataTests.FIELD_LINKEDIN_URL).replaceAll("'", "''")
             + "' ");
     stringBuilder.append(
         "WHERE [First Name]='" + map.get("First Name").replaceAll("'", "''") + "' ");
@@ -85,7 +85,7 @@ public class Data {
     stringBuilder.append(
         "AND [Connected On]='" + map.get("Connected On").replaceAll("'", "''") + "';");
     sqlStringBuilder.append(stringBuilder);
-    if (Data.getQueryRecordCount(sqlStringBuilder) == Data.RECORD_UPDATE_MIN) {
+    if (DataTests.getQueryRecordCount(sqlStringBuilder) == DataTests.RECORD_UPDATE_MIN) {
       sqlStringBuilder = updateRecords(sqlStringBuilder);
     }
     return sqlStringBuilder;
@@ -160,7 +160,7 @@ public class Data {
     stringBuilder.append("\n" + JDBCConstants.WHERE + "[First Name]!=''");
     stringBuilder.append("\n" + JDBCConstants.AND + "[Last Name]!=''");
     // String dateMinus31Days =
-    // DateHelpers.getCurrentDatePlusMinusDays("yyyyMMdd", -31);
+    // DateHelpersTests.getCurrentDatePlusMinusDays("yyyyMMdd", -31);
     // stringBuilder.append("\n" + JDBCConstants.AND + "[FilterDate]<" +
     // dateMinus31Days + "");
     // stringBuilder.append("\n" + JDBCConstants.AND + "[FilterDate]<(" +
@@ -258,7 +258,7 @@ public class Data {
     List<String> tableTypeList = Arrays.asList("Email", "Phone", "Website");
     for (String tableType : tableTypeList) {
       stringBuilderSQL.append(JDBCConstants.DELETE_FROM);
-      stringBuilderSQL.append("[" + Data.TABLE_LINKEDIN + "_" + tableType + "s];");
+      stringBuilderSQL.append("[" + DataTests.TABLE_LINKEDIN + "_" + tableType + "s];");
       stringBuilderSQL.append(Constants.NEWLINE);
       List<String> fieldTypeList = null;
       switch (tableType) {
@@ -276,13 +276,13 @@ public class Data {
       }
       for (String fieldType : fieldTypeList) {
         stringBuilderSQL.append(JDBCConstants.INSERT_INTO);
-        stringBuilderSQL.append("[" + Data.TABLE_LINKEDIN + "_" + tableType + "s] ");
+        stringBuilderSQL.append("[" + DataTests.TABLE_LINKEDIN + "_" + tableType + "s] ");
         stringBuilderSQL.append(JDBCConstants.SELECT);
         stringBuilderSQL.append("[LinkedIn URL],");
         stringBuilderSQL.append("'" + fieldType + "' as [Type],");
         stringBuilderSQL.append("[" + tableType + " (" + fieldType + ")] ");
         stringBuilderSQL.append(JDBCConstants.FROM);
-        stringBuilderSQL.append("[" + Data.TABLE_LINKEDIN + "] ");
+        stringBuilderSQL.append("[" + DataTests.TABLE_LINKEDIN + "] ");
         stringBuilderSQL.append(JDBCConstants.WHERE);
         stringBuilderSQL.append("[" + tableType + " (" + fieldType + ")]!='';");
         stringBuilderSQL.append(Constants.NEWLINE);
@@ -318,6 +318,6 @@ public class Data {
   }
 
   private static void setJdbc(JDBC jdbc) {
-    Data.jdbc = jdbc;
+    DataTests.jdbc = jdbc;
   }
 }

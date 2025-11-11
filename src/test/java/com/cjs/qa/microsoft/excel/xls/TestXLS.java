@@ -4,7 +4,7 @@ import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import com.cjs.qa.microsoft.excel.IExcel;
 import com.cjs.qa.utilities.Convert;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
 import java.io.IOException;
@@ -16,8 +16,8 @@ public class TestXLS {
   @Test
   public void testXLS() throws IOException, QAException {
     String sheetName = IExcel.SHEET_SUMMARY;
-    if (FSO.fileExists(FILE_NAME)) {
-      FSO.fileDelete(FILE_NAME);
+    if (FSOTests.fileExists(FILE_NAME)) {
+      FSOTests.fileDelete(FILE_NAME);
     }
     Environment.sysOut("Creating sheet [" + sheetName + "]");
     final XLS excel = new XLS(FILE_NAME, sheetName);

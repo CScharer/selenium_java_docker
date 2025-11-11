@@ -1,9 +1,9 @@
 package com.cjs.qa.gt.api.namespace.webinar;
 
-import com.cjs.qa.gt.api.services.GTWebinarService;
+import com.cjs.qa.gt.api.services.GTWebinarServiceTests;
 import java.util.Map;
 
-public class CoOrganizersNamespace extends GTWebinarService {
+public class CoOrganizersNamespace extends GTWebinarServiceTests {
   public Map<String, String> createCoOrganizers(
       String credentials, String organizerKey, String webinarKey) throws Throwable {
     // /organizers/{organizerKey}/webinars/{webinarKey}/coorganizers

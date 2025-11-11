@@ -6,7 +6,7 @@ import com.cjs.qa.microsoft.excel.IExcel;
 import com.cjs.qa.microsoft.excel.xls.XLS;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.Convert;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import org.junit.Test;
 
-public class ExcelFormulaSumTestSet {
+public class ExcelFormulaSumTests {
   public static final String PATH_SUM =
       "C:"
           + Constants.DELIMETER_PATH
@@ -31,8 +31,8 @@ public class ExcelFormulaSumTestSet {
   public void testExcelSum() throws IOException, QAException {
     final String filePathName = PATH_SUM + "FormulaSum" + IExtension.XLS;
     Environment.sysOut("filePathName:[" + filePathName + "]");
-    if (FSO.fileExists(filePathName)) {
-      FSO.fileDelete(filePathName);
+    if (FSOTests.fileExists(filePathName)) {
+      FSOTests.fileDelete(filePathName);
     }
     final XLS excel = new XLS(filePathName, SHEET_NAME);
     createData(excel);

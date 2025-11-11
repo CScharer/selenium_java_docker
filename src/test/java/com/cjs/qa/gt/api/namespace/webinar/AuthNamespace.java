@@ -1,14 +1,14 @@
 package com.cjs.qa.gt.api.namespace.webinar;
 
 import com.cjs.qa.core.Environment;
-import com.cjs.qa.gt.api.services.GTWebinarService;
-import com.cjs.qa.utilities.CommandLine;
+import com.cjs.qa.gt.api.services.GTWebinarServiceTests;
+import com.cjs.qa.utilities.CommandLineTests;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.JSON;
 import java.util.Map;
 import org.json.JSONObject;
 
-public class AuthNamespace extends GTWebinarService {
+public class AuthNamespace extends GTWebinarServiceTests {
   public AuthNamespace() throws Throwable {
     setHeader(null);
   }
@@ -46,7 +46,7 @@ public class AuthNamespace extends GTWebinarService {
     curlStringBuilder.append("&client_id=\"" + API_CONSUMER_KEY + "\"");
     String command = "cmd /C " + curlStringBuilder.toString();
     Environment.sysOut("command:[" + command + "]");
-    final Map<String, String> mapResponse = CommandLine.runProcess(command, true);
+    final Map<String, String> mapResponse = CommandLineTests.runProcess(command, true);
     String json = mapResponse.get("lines");
     json = JSON.formatPretty(json, 4);
     Environment.sysOut("json Response:[" + Constants.NEWLINE + json + "]");
@@ -68,8 +68,8 @@ public class AuthNamespace extends GTWebinarService {
             + "], accountType:["
             + accountType
             + "], ");
-    GTWebinarService.setAccessToken(accessToken);
-    GTWebinarService.setAccountKey(accountKey);
+    GTWebinarServiceTests.setAccessToken(accessToken);
+    GTWebinarServiceTests.setAccountKey(accountKey);
     return mapResponse;
   }
 

@@ -3,14 +3,14 @@ package com.cjs.qa.gt;
 import com.cjs.qa.jdbc.JDBC;
 import com.cjs.qa.jdbc.JDBCConstants;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
-import com.cjs.qa.vivit.VivitData;
+import com.cjs.qa.vivit.VivitDataTests;
 import java.util.List;
 import java.util.Map;
 import org.junit.Test;
 
-public class GTWAPIMethods {
+public class GTWAPIMethodsTests {
   public static final String GTW_METHOD_TABLE = "t_DOM_GTWNamespaces-Methods";
 
   @Test
@@ -30,7 +30,7 @@ public class GTWAPIMethods {
               + Constants.DELIMETER_PATH
               + thisClassPath
               + Constants.DELIMETER_PATH;
-      jdbc = new JDBC("", VivitData.DATABASE_DEFINITION);
+      jdbc = new JDBC("", VivitDataTests.DATABASE_DEFINITION);
       StringBuilder sqlStringBuilder = new StringBuilder();
       for (String namespace : getGTWNamespaces(jdbc)) {
         sqlStringBuilder = new StringBuilder();
@@ -55,7 +55,7 @@ public class GTWAPIMethods {
           } else {
             stringBuilderClass = getClassFooter(stringBuilderClass);
           }
-          FSO.fileWrite(filePathClassName, stringBuilderClass.toString(), false);
+          FSOTests.fileWrite(filePathClassName, stringBuilderClass.toString(), false);
         }
       }
     } catch (Exception e) {
@@ -84,7 +84,7 @@ public class GTWAPIMethods {
   public static StringBuilder getClassHeader(StringBuilder stringBuilder, String className) {
     stringBuilder.append("package com.cjs.qa.gt.api.namespace.webinar;");
     stringBuilder.append("\n\nimport java.util.Map;");
-    stringBuilder.append("\n\nimport com.cjs.qa.gt.api.services.GTWebinarService;");
+    stringBuilder.append("\n\nimport com.cjs.qa.gt.api.services.GTWebinarServiceTests;");
     stringBuilder.append("\n\npublic class " + className + " extends GTWebinarService");
     stringBuilder.append("\n{");
     return stringBuilder;

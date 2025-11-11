@@ -87,7 +87,7 @@ public class JavaHelpers {
    * @throws QAException
    */
   public static Map<String, List<String>> buildCsvMap(String filePathName) throws QAException {
-    final List<String> fileList = FSO.fileReadAllList(filePathName);
+    final List<String> fileList = FSOTests.fileReadAllList(filePathName);
     final Map<String, List<String>> csv = new LinkedHashMap<>();
     final List<String> headers = Arrays.asList(fileList.get(0).split(",", -1));
     for (int fileListIndex = 1; fileListIndex < fileList.size(); fileListIndex++) {
@@ -747,7 +747,7 @@ public class JavaHelpers {
       String t2 = iterator.next();
       t = t.toLowerCase(Locale.ENGLISH);
       t2 = t2.toLowerCase(Locale.ENGLISH);
-      if (DateHelpers.compareTo(t, t2) > 0) {
+      if (DateHelpersTests.compareTo(t, t2) > 0) {
         Environment.sysOut(t + " " + t2);
         return false;
       }
@@ -1020,19 +1020,19 @@ public class JavaHelpers {
       // same second this could be resolved also by modifying file name
       JavaHelpers.sleep(1);
       for (int attempt = 0; attempt < 4; attempt++) {
-        if (FSO.fileExists(pdfFilePathName)) {
+        if (FSOTests.fileExists(pdfFilePathName)) {
           break;
         }
         JavaHelpers.sleep(2);
       }
-      if (!FSO.fileExists(pdfFilePathName)) {
+      if (!FSOTests.fileExists(pdfFilePathName)) {
         Environment.sysOut("readPDF: PDF file not found: " + pdfFilePathName);
         return "null";
       }
       final String filePathName =
           pdfFilePathName.substring(0, pdfFilePathName.lastIndexOf('.')) + IExtension.TXT;
       readPDFIntoTextFile(pdfFilePathName, filePathName);
-      return FSO.fileReadAll(filePathName);
+      return FSOTests.fileReadAll(filePathName);
     } catch (final Exception e) {
       throw new QAException(
           "Failure reading in readPDF:" + Constants.NL + JavaHelpers.getStackTrace(e));

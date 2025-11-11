@@ -29,7 +29,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.junit.Test;
 
-public class FSO {
+@SuppressWarnings("PMD.ClassNamingConventions")
+public class FSOTests {
   public static final int SECONDS_MINUTES_05 = (Constants.MILLISECONDS * 60 * 5);
   public static final int SECONDS_MINUTES_10 = (Constants.MILLISECONDS * 60 * 10);
   public static final int URL_TIMEOUT_CONNECTION = SECONDS_MINUTES_10;
@@ -53,9 +54,9 @@ public class FSO {
     sysOut(String.valueOf(filesGetCount(pathTest, false)));
     sysOut(String.valueOf(filesGetCount(pathTest, false, extension)));
     //
-    List<Path> pathList = FSO.pathsList(Constants.PATH_FILES_DATA_DATABASES, IExtension.BAK);
+    List<Path> pathList = FSOTests.pathsList(Constants.PATH_FILES_DATA_DATABASES, IExtension.BAK);
     File[] files = Convert.fromListPathToFileArray(pathList);
-    displayArrayFile("FSO.pathsList(pathDatabase, \"" + IExtension.BAK + "\")", files);
+    displayArrayFile("FSOTests.pathsList(pathDatabase, \"" + IExtension.BAK + "\")", files);
   }
 
   private static void displayListPath(String type, List<String> list) {

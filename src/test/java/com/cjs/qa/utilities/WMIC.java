@@ -178,7 +178,7 @@ public class WMIC {
   public Map<String, String> run() throws Exception {
     final String command = createCommand();
     final Map<String, String> result = new HashMap<>();
-    // result = CommandLine.runProcess(command, true);
+    // result = CommandLineTests.runProcess(command, true);
     result.put("command", command);
     return result;
   }
@@ -252,7 +252,7 @@ public class WMIC {
       // CONTEXT - Displays the state of all the global switches.
       // QUIT/EXIT - Exits the program.
       final WMIC wmic = new WMIC();
-      final String dateTimeStamp = DateHelpers.getCurrentDateTime("yyyyMMdd_HHmmss");
+      final String dateTimeStamp = DateHelpersTests.getCurrentDateTime("yyyyMMdd_HHmmss");
       // wmic.setNamespace("namespace");
       wmic.setRole(Constants.DELIMETER_PATH + "root" + Constants.DELIMETER_PATH + "cli");
       wmic.setNode("BTSDESEWS08");

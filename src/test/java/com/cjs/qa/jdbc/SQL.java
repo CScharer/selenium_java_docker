@@ -4,9 +4,9 @@ import com.cjs.qa.core.AutGui;
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import com.cjs.qa.utilities.CJSConstants;
-import com.cjs.qa.utilities.CommandLine;
+import com.cjs.qa.utilities.CommandLineTests;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
 import com.cjs.qa.vivit.VivitFoldersFiles;
@@ -378,21 +378,21 @@ public class SQL {
     int recordsAffected = 0;
     Environment.sysOut(action + " " + sectionName);
     if (sqlStringBuilder.toString().length() != 0) {
-      int sqlFileCount = FSO.filesGetCount(VivitFoldersFiles.PATH_API_DATA_YM_SQL, IExtension.SQL);
+      int sqlFileCount = FSOTests.filesGetCount(VivitFoldersFiles.PATH_API_DATA_YM_SQL, IExtension.SQL);
       String sqlFilePrefix = JavaHelpers.formatNumber(sqlFileCount, "000");
       String sqlFileName = sqlFilePrefix + "-" + action + "-" + sectionName + IExtension.SQL;
       String sqlFilePathName = VivitFoldersFiles.PATH_API_DATA_YM_SQL + sqlFileName;
       String sql = sqlStringBuilder.toString();
-      FSO.fileWrite(sqlFilePathName, sql, true);
+      FSOTests.fileWrite(sqlFilePathName, sql, true);
       recordsAffected = execute(sql);
       String logLine = sqlFileName + Constants.TAB + recordsAffected + Constants.NEWLINE;
-      if (!FSO.fileExists(VivitFoldersFiles.FILE_SQL_LOG)) {
-        FSO.fileWrite(
+      if (!FSOTests.fileExists(VivitFoldersFiles.FILE_SQL_LOG)) {
+        FSOTests.fileWrite(
             VivitFoldersFiles.FILE_SQL_LOG,
             "SQL File" + Constants.TAB + "Records Updated" + Constants.NEWLINE,
             true);
       }
-      FSO.fileWrite(VivitFoldersFiles.FILE_SQL_LOG, logLine, true);
+      FSOTests.fileWrite(VivitFoldersFiles.FILE_SQL_LOG, logLine, true);
     }
     return recordsAffected;
   }
@@ -751,13 +751,13 @@ public class SQL {
             + Constants.QUOTE_DOUBLE
             + sql
             + Constants.QUOTE_DOUBLE;
-    FSO.fileWrite(BATCH_FILE_UPDATE, command, false);
+    FSOTests.fileWrite(BATCH_FILE_UPDATE, command, false);
     command = "CMD /C " + Constants.QUOTE_DOUBLE + BATCH_FILE_UPDATE + Constants.QUOTE_DOUBLE;
-    CommandLine.runProcess(command);
+    CommandLineTests.runProcess(command);
   }
 
   public static int updateSubmissionStatus(String fileName, String status) {
-    // String currentDateTime = DateHelpers.getCurrentDateAndTime()
+    // String currentDateTime = DateHelpersTests.getCurrentDateAndTime()
     final String sql =
         "UPDATE ["
             + TABLE_SUBMISSIONLOG

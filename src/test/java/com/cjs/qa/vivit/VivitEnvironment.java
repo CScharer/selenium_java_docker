@@ -2,7 +2,7 @@ package com.cjs.qa.vivit;
 
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 public class VivitEnvironment extends Environment {
   public static final String COMPANY = "Vivit";
   public static final String EMAIL_SIGNATURE =
-      FSO.fileReadAll(Constants.PATH_OUTLOOK_SIGNATURES + COMPANY + IExtension.HTM);
+      FSOTests.fileReadAll(Constants.PATH_OUTLOOK_SIGNATURES + COMPANY + IExtension.HTM);
   public static final String FOLDER_DATA =
       Constants.PATH_FILES_DATA + COMPANY + Constants.DELIMETER_PATH;
   public static final String FILE_CONFIG =

@@ -8,15 +8,15 @@ import com.cjs.qa.jdbc.JDBCConstants;
 import com.cjs.qa.jdbc.SQL;
 import com.cjs.qa.utilities.CJSConstants;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.DateHelpers;
+import com.cjs.qa.utilities.DateHelpersTests;
 import com.cjs.qa.utilities.Email;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.HTML;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
 import com.cjs.qa.utilities.ParameterHelper;
 import com.cjs.qa.utilities.colors.ColorsHEX;
-import com.cjs.qa.vivit.VivitData;
+import com.cjs.qa.vivit.VivitDataTests;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -39,7 +39,7 @@ public class Payment {
       IaDhsEnvironment.FOLDER_DATA
           + "Data"
           + Constants.DELIMETER_PATH
-          + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_YYYY_MM_DD_COMPACT)
+          + DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_YYYY_MM_DD_COMPACT)
           + "_IA DHS Child Support Payments"
           + IExtension.XLS;
   public static final String REPORT_IADHS_PAYMENTS_CUMULATIVE =
@@ -114,7 +114,7 @@ public class Payment {
       }
       append(paymentMap);
     }
-    JDBC jdbc = new JDBC("", VivitData.DATABASE_DEFINITION);
+    JDBC jdbc = new JDBC("", VivitDataTests.DATABASE_DEFINITION);
     final String sql =
         JDBCConstants.SELECT_ALL + JDBCConstants.FROM + "[" + VIEW_IADHS_PAYMENTS_CUMULATIVE + "];";
     final List<Map<String, String>> listMapReport = jdbc.queryResultsString(sql, false);
@@ -124,12 +124,12 @@ public class Payment {
     String footer = "Last Payment will occur in December 2028";
     String report =
         getPaymentTable(header, footer, fieldsList, listMapReport, appendedDistribDateList);
-    FSO.fileWrite(REPORT_IADHS_PAYMENTS_CUMULATIVE, report, false);
+    FSOTests.fileWrite(REPORT_IADHS_PAYMENTS_CUMULATIVE, report, false);
     JDBC.exportDataFromTableView(
         VIEW_IADHS_PAYMENTS_CUMULATIVE,
         FILE_IADHS_PAYMENTS_CUMULATIVE,
         "IADHS-Payments",
-        VivitData.DATABASE_DEFINITION,
+        VivitDataTests.DATABASE_DEFINITION,
         true);
     String body =
         toString()
@@ -196,7 +196,7 @@ public class Payment {
             + paymentMap.get(LBLHEADING_PAYMENT_DISTRIB)
             + "';");
     Environment.sysOut("stringBuilderSQL:" + sqlStringBuilder.toString());
-    JDBC jdbc = new JDBC("", VivitData.DATABASE_DEFINITION);
+    JDBC jdbc = new JDBC("", VivitDataTests.DATABASE_DEFINITION);
     List<Map<String, String>> resultsMapList =
         jdbc.queryResultsString(sqlStringBuilder.toString(), true);
     Map<String, String> resultsMap = resultsMapList.get(1);

@@ -7,7 +7,7 @@ import com.cjs.qa.microsoft.excel.xls.XLS;
 import com.cjs.qa.selenium.Page;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.Convert;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.JavaHelpers;
 import com.cjs.qa.utilities.ParameterHelper;
 import java.util.ArrayList;
@@ -65,8 +65,8 @@ public class FlightsPage extends Page {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     Environment.sysOut(ParameterHelper.getParameters(Arrays.asList(Arrays.asList())));
-    if (FSO.fileExists(filePathName)) {
-      FSO.fileDelete(filePathName);
+    if (FSOTests.fileExists(filePathName)) {
+      FSOTests.fileDelete(filePathName);
     }
     String sheetSummary = IExcel.SHEET_SUMMARY;
     XLS excel = new XLS(filePathName, sheetSummary);

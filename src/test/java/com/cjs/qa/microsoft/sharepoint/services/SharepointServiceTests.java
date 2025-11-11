@@ -6,7 +6,7 @@ import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.IHTTP;
 import com.cjs.qa.utilities.JavaHelpers;
 import com.cjs.qa.utilities.XML;
-import com.cjs.qa.vivit.VivitData;
+import com.cjs.qa.vivit.VivitDataTests;
 import com.cjs.qa.vivit.VivitEnvironment;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -19,7 +19,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class SharepointService {
+public class SharepointServiceTests {
   public static final String URL_MICROSOFT_API_BASE =
       "https://login.microsoftonline.com/extSTS.srf";
   public static final String URL_MICROSOFT = URL_MICROSOFT_API_BASE;
@@ -30,7 +30,7 @@ public class SharepointService {
       "https://vivitworldwide.sharepoint.com/_forms/default.aspx?wa=wsignin1.0";
   public static final String CONNECTED_TO = "Connection to [";
 
-  public SharepointService() {
+  public SharepointServiceTests() {
     try {
       final HttpURLConnection httpUrlConnection =
           (HttpURLConnection) new URL(URL_SHAREPOINT).openConnection();
@@ -76,16 +76,16 @@ public class SharepointService {
   @Test
   public void sharepointServiceTest() throws Throwable {
     String microsoftLoginRequest =
-        getMicrosoftLoginRequest(VivitData.getEmailFrom(), VivitData.getEmailPassword());
+        getMicrosoftLoginRequest(VivitDataTests.getEmailFrom(), VivitDataTests.getEmailPassword());
     Environment.sysOut("microsoftLoginRequest:" + microsoftLoginRequest);
     Map<String, String> resultsMap =
-        SharepointService.getAPIXMLResponse("POST", microsoftLoginRequest, URL_MICROSOFT);
+        SharepointServiceTests.getAPIXMLResponse("POST", microsoftLoginRequest, URL_MICROSOFT);
     String xml = resultsMap.get("xml");
     xml = XML.formatPretty(xml);
     Environment.sysOut("xml:" + xml);
     String binarySecurityToken = XML.getTag(xml, "wsse:BinarySecurityToken");
     Environment.sysOut("binarySecurityToken:[" + binarySecurityToken + "]");
-    resultsMap = SharepointService.getAPIXMLResponse("POST", binarySecurityToken, URL_SIGNIN);
+    resultsMap = SharepointServiceTests.getAPIXMLResponse("POST", binarySecurityToken, URL_SIGNIN);
     xml = resultsMap.get("xml");
     xml = XML.formatPretty(xml);
     Environment.sysOut("xml:" + xml);

@@ -3,12 +3,12 @@ package com.cjs.qa.ym.api.namespace;
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
 import com.cjs.qa.utilities.XML;
 import com.cjs.qa.vivit.VivitFoldersFiles;
-import com.cjs.qa.ym.YMData;
+import com.cjs.qa.ym.YMDataTests;
 import com.cjs.qa.ym.api.services.YMAPI;
 import com.cjs.qa.ym.api.services.YMService;
 import java.util.Map;
@@ -261,7 +261,7 @@ public class SaExportNamespace extends YMService {
 
   public Map<String, String> exportDataMembers(String dateTimeFrom) throws Throwable {
     if (!JavaHelpers.hasValue(dateTimeFrom)) {
-      dateTimeFrom = YMData.getInceptionDateTime();
+      dateTimeFrom = YMDataTests.getInceptionDateTime();
     }
     Map<String, String> mapResults = members(false, true, dateTimeFrom);
     final String exportID = XML.getTag(mapResults.get("xml"), "ExportID");
@@ -285,7 +285,7 @@ public class SaExportNamespace extends YMService {
     } while (exportStatus.equals(ExportStatus.WORKING)
         || exportStatus.equals(ExportStatus.UNKNOWN));
     if (exportStatus.equals(ExportStatus.COMPLETE)) {
-      FSO.fileDownloadFromURL(exportURI, VivitFoldersFiles.DATA_YMAPI_DATA_MEMBERS);
+      FSOTests.fileDownloadFromURL(exportURI, VivitFoldersFiles.DATA_YMAPI_DATA_MEMBERS);
     } else {
       throw new QAException(
           JavaHelpers.getCurrentClassMethodDebugName() + Constants.NEWLINE + mapResults.toString());
@@ -295,7 +295,7 @@ public class SaExportNamespace extends YMService {
 
   public Map<String, String> exportDataMemberGroups(String dateTimeFrom) throws Throwable {
     if (!JavaHelpers.hasValue(dateTimeFrom)) {
-      dateTimeFrom = YMData.getInceptionDateTime();
+      dateTimeFrom = YMDataTests.getInceptionDateTime();
     }
     Map<String, String> mapResults = membersGroups(false, dateTimeFrom);
     final String exportID = XML.getTag(mapResults.get("xml"), "ExportID");
@@ -319,7 +319,7 @@ public class SaExportNamespace extends YMService {
     } while (exportStatus.equals(ExportStatus.WORKING)
         || exportStatus.equals(ExportStatus.UNKNOWN));
     if (exportStatus.equals(ExportStatus.COMPLETE)) {
-      FSO.fileDownloadFromURL(exportURI, VivitFoldersFiles.DATA_YMAPI_DATA_MEMBER_GROUPS);
+      FSOTests.fileDownloadFromURL(exportURI, VivitFoldersFiles.DATA_YMAPI_DATA_MEMBER_GROUPS);
     } else {
       throw new QAException(
           JavaHelpers.getCurrentClassMethodDebugName() + Constants.NEWLINE + mapResults.toString());

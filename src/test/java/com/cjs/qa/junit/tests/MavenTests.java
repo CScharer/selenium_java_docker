@@ -2,9 +2,9 @@ package com.cjs.qa.junit.tests;
 
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.maven.objects.Dependency;
-import com.cjs.qa.utilities.CommandLine;
+import com.cjs.qa.utilities.CommandLineTests;
 import com.cjs.qa.utilities.Constants;
-import com.cjs.qa.utilities.FSO;
+import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
 import java.nio.file.Path;
@@ -13,15 +13,15 @@ import java.util.List;
 import java.util.Map;
 import org.junit.Test;
 
-public class MavenTestSet {
+public class MavenTests {
   private String stringBuffer = JavaHelpers.createBufferString("*", 100, "") + Constants.NEWLINE;
-  private FSO fso = new FSO();
+  private FSOTests fso = new FSOTests();
 
   private String getStringBuffer() {
     return stringBuffer;
   }
 
-  public FSO getFso() {
+  public FSOTests getFso() {
     return fso;
   }
 
@@ -49,8 +49,8 @@ public class MavenTestSet {
             + Constants.DELIMETER_PATH;
     final String resultsPathFile =
         Constants.PATH_FILES_DATA + "MavenDependenciesResults" + IExtension.LOG;
-    FSO.fileWrite(resultsPathFile, "", false);
-    final List<Path> files = FSO.pathsList(pathWorkspace);
+    FSOTests.fileWrite(resultsPathFile, "", false);
+    final List<Path> files = FSOTests.pathsList(pathWorkspace);
     for (final Path path : files) {
       final StringBuilder stringBuilder = new StringBuilder();
       final String filePathName = path.toString();
@@ -67,17 +67,17 @@ public class MavenTestSet {
           final String outputPathFile = batchPathFile.replace(IExtension.BAT, IExtension.LOG);
           stringBuilder.append(newLine("outputPathFile:[" + outputPathFile + "]"));
           Environment.sysOut(stringBuilder.toString());
-          FSO.fileWrite(resultsPathFile, stringBuilder.toString(), true);
+          FSOTests.fileWrite(resultsPathFile, stringBuilder.toString(), true);
           final String results = runDependencyCheck(batchPathFile, projectPath, outputPathFile);
           Environment.sysOut(results);
-          FSO.fileWrite(resultsPathFile, results, false);
-          if (FSO.fileExists(outputPathFile)) {
-            FSO.fileDelete(outputPathFile);
+          FSOTests.fileWrite(resultsPathFile, results, false);
+          if (FSOTests.fileExists(outputPathFile)) {
+            FSOTests.fileDelete(outputPathFile);
           }
         }
       }
     }
-    FSO.fileWrite(resultsPathFile, getStringBuffer(), true);
+    FSOTests.fileWrite(resultsPathFile, getStringBuffer(), true);
   }
 
   private String runDependencyCheck(
@@ -98,11 +98,11 @@ public class MavenTestSet {
                 + Constants.QUOTE_DOUBLE));
     stringBuilderBatch.append(newLine("exit"));
     stringBuilder.append(stringBuilderBatch.toString());
-    FSO.fileWrite(batchPathFile, stringBuilderBatch.toString(), false);
+    FSOTests.fileWrite(batchPathFile, stringBuilderBatch.toString(), false);
     final String command =
         "cmd /C " + Constants.QUOTE_DOUBLE + batchPathFile + Constants.QUOTE_DOUBLE;
     stringBuilder.append(newLine("command:[" + command + "]"));
-    final Map<String, String> mapResults = CommandLine.runProcess(command, true);
+    final Map<String, String> mapResults = CommandLineTests.runProcess(command, true);
     final String status = mapResults.get("status");
     stringBuilder.append(newLine("status:" + mapResults.get("status")));
     if ("0".equals(status)) {
@@ -110,8 +110,8 @@ public class MavenTestSet {
           projectPath.substring((projectPath.lastIndexOf(Constants.DELIMETER_PATH) + 1));
       stringBuilder.append(newLine(parseResultsFile(resultsPathFile, projectFolder)));
     }
-    if (FSO.fileExists(batchPathFile)) {
-      FSO.fileDelete(batchPathFile);
+    if (FSOTests.fileExists(batchPathFile)) {
+      FSOTests.fileDelete(batchPathFile);
     }
     return stringBuilder.toString();
   }
@@ -122,7 +122,7 @@ public class MavenTestSet {
     final String warningDependency = "[WARNING]    ";
     final String warningUndeclared = "[WARNING] Used undeclared dependencies found:";
     final String warningUnused = "[WARNING] Unused declared dependencies found:";
-    final String results = FSO.fileReadAll(resultsPathFile);
+    final String results = FSOTests.fileReadAll(resultsPathFile);
     stringBuilder.append(results);
     if (results.contains(infoBuildSuccess)) {
       final String[] records = results.split(Constants.NEWLINE);
