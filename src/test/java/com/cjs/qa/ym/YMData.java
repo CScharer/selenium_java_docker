@@ -138,7 +138,7 @@ public class YMData extends Environment {
     }
     boolean success = false;
     int attempt = 0;
-    final int ATTEMPTS_MAX = 3;
+    final int attemptsMax = 3;
     do {
       try {
         getAllEventAttendees();
@@ -148,7 +148,7 @@ public class YMData extends Environment {
             QAException.ERROR
                 + JavaHelpers.getCurrentClassMethodName()
                 + ":Error Extracting Event Attendees Data.");
-        if (attempt > ATTEMPTS_MAX) {
+        if (attempt > attemptsMax) {
           throw new QAException(QAException.ERROR + "[" + e.getMessage() + "]", e);
         }
       }
@@ -165,7 +165,7 @@ public class YMData extends Environment {
     }
     boolean success = false;
     int attempt = 0;
-    final int ATTEMPTS_MAX = 3;
+    final int attemptsMax = 3;
     do {
       try {
         getAllEventInformation();
@@ -175,7 +175,7 @@ public class YMData extends Environment {
             QAException.ERROR
                 + JavaHelpers.getCurrentClassMethodName()
                 + ":Error Extracting Event Attendees Data.");
-        if (attempt > ATTEMPTS_MAX) {
+        if (attempt > attemptsMax) {
           throw new QAException(QAException.ERROR + "[" + e.getMessage() + "]", e);
         }
       }
@@ -192,7 +192,7 @@ public class YMData extends Environment {
     }
     boolean success = false;
     int attempt = 0;
-    final int ATTEMPTS_MAX = 3;
+    final int attemptsMax = 3;
     do {
       try {
         getAllEventRegistrationIDs();
@@ -202,7 +202,7 @@ public class YMData extends Environment {
             QAException.ERROR
                 + JavaHelpers.getCurrentClassMethodName()
                 + ":Error Extracting Event Attendees Data.");
-        if (attempt > ATTEMPTS_MAX) {
+        if (attempt > attemptsMax) {
           throw new QAException(QAException.ERROR + "[" + e.getMessage() + "]", e);
         }
       }
@@ -219,7 +219,7 @@ public class YMData extends Environment {
     }
     boolean success = false;
     int attempt = 0;
-    final int ATTEMPTS_MAX = 3;
+    final int attemptsMax = 3;
     do {
       try {
         getAllEventRegistration();
@@ -229,7 +229,7 @@ public class YMData extends Environment {
             QAException.ERROR
                 + JavaHelpers.getCurrentClassMethodName()
                 + ":Error Extracting Event Attendees Data.");
-        if (attempt > ATTEMPTS_MAX) {
+        if (attempt > attemptsMax) {
           throw new QAException(QAException.ERROR + "[" + e.getMessage() + "]", e);
         }
       }
@@ -246,7 +246,7 @@ public class YMData extends Environment {
     }
     boolean success = false;
     int attempt = 0;
-    final int ATTEMPTS_MAX = 3;
+    final int attemptsMax = 3;
     do {
       try {
         long pageRecordStart = 1;
@@ -257,7 +257,7 @@ public class YMData extends Environment {
             QAException.ERROR
                 + JavaHelpers.getCurrentClassMethodName()
                 + ":Error Extracting Event Data.");
-        if (attempt > ATTEMPTS_MAX) {
+        if (attempt > attemptsMax) {
           throw new QAException(QAException.ERROR + "[" + e.getMessage() + "]", e);
         }
       }
@@ -1097,9 +1097,9 @@ public class YMData extends Environment {
     List<String> headingsExpectedList = jdbc.getFieldNamesList(tableName);
     jdbc.close();
     StringBuilder sqlStringBuilder = new StringBuilder();
-    final int RECORD_START = 0;
-    final int RECORD_LIMIT_INSERT = 25000;
-    final int RECORD_LIMIT_DEBUG = Integer.valueOf(RECORD_LIMIT_INSERT / 10);
+    final int recordStart = 0;
+    final int recordLimitInsert = 25000;
+    final int recordLimitDebug = Integer.valueOf(recordLimitInsert / 10);
     try {
       final Map<String, String> headingsExpectedMap = new HashMap<>();
       for (final String heading : headingsExpectedList) {
@@ -1116,7 +1116,7 @@ public class YMData extends Environment {
         for (final CSVRecord record : records) {
           // final int recordNumber = (int) record.getRecordNumber()
           recordNumber++;
-          if (recordNumber >= (RECORD_START + 1)) {
+          if (recordNumber >= (recordStart + 1)) {
             if (!headingsMapped) {
               headingsCSVMap = record.toMap();
               final List<String> headingsCSVList = Convert.fromKeySetToList(headingsCSVMap.keySet());
@@ -1177,10 +1177,10 @@ public class YMData extends Environment {
             }
             sqlStringBuilder =
                 SQL.appendStringBuilderSQLInsertRecord(tableName, sqlStringBuilder, mapMember, true);
-            if ((recordNumber % RECORD_LIMIT_DEBUG) == 0) {
+            if ((recordNumber % recordLimitDebug) == 0) {
               sysOut(JavaHelpers.getCurrentMethodName() + "-Records:[" + recordNumber + "]");
             }
-            if ((recordNumber % RECORD_LIMIT_INSERT) == 0) {
+            if ((recordNumber % recordLimitInsert) == 0) {
               sqlStringBuilderList.add(sqlStringBuilder);
               sqlStringBuilder = new StringBuilder();
             }
@@ -1207,7 +1207,7 @@ public class YMData extends Environment {
     }
     boolean success = false;
     int attempt = 0;
-    final int ATTEMPTS_MAX = 10;
+    final int attemptsMax = 10;
     do {
       try {
         attempt++;
@@ -1225,7 +1225,7 @@ public class YMData extends Environment {
       } catch (Exception e) {
         Environment.sysOut(
             QAException.ERROR + JavaHelpers.getCurrentClassMethodName() + ":Pulling data from YM.");
-        if (attempt > ATTEMPTS_MAX) {
+        if (attempt > attemptsMax) {
           throw new QAException(QAException.ERROR + "[" + e.getMessage() + "]", e);
         }
       }

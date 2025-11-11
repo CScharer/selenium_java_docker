@@ -435,7 +435,7 @@ public class SeleniumWebDriver {
   }
 
   public void initializeWebDriver() throws Throwable {
-    final int MAX_INSTANCIATION_ATTEMPTS = 100;
+    final int maxInstanciationAttempts = 100;
     final DesiredCapabilities desiredCapabilities =
         setDesiredCapabilities(getOperatingSystem(), getBrowser());
     final EDriverProperties eDriverProperties =
@@ -466,7 +466,7 @@ public class SeleniumWebDriver {
                 System.out.print(".");
               }
             }
-          } while (!driverInstanciated && attempt < MAX_INSTANCIATION_ATTEMPTS);
+          } while (!driverInstanciated && attempt < maxInstanciationAttempts);
           if (!driverInstanciated) {
             throw new QAException("Remote Web Driver could not be instanciated");
           }

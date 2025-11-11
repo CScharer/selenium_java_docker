@@ -766,14 +766,14 @@ public interface ISelenium {
       switch (sBrowser) {
         case "firefox":
           // webDriver = new FirefoxDriver(desiredCapabilities);
-          final String PROXY = "localhost";
-          final int PORT = 8080;
+          final String proxy = "localhost";
+          final int port = 8080;
           final JsonObject jsonObject = new JsonObject();
           jsonObject.addProperty("proxyType", "MANUAL");
-          jsonObject.addProperty("httpProxy", PROXY);
-          jsonObject.addProperty("httpProxyPort", PORT);
-          jsonObject.addProperty("sslProxy", PROXY);
-          jsonObject.addProperty("sslProxyPort", PORT);
+          jsonObject.addProperty("httpProxy", proxy);
+          jsonObject.addProperty("httpProxyPort", port);
+          jsonObject.addProperty("sslProxy", proxy);
+          jsonObject.addProperty("sslProxyPort", port);
           desiredCapabilities = new DesiredCapabilities();
           desiredCapabilities.setCapability("proxy", jsonObject);
           // final FirefoxBinary firefoxBinary = null;

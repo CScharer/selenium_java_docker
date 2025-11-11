@@ -398,7 +398,7 @@ public class XML {
               .getDocumentElement();
     } catch (SAXException | IOException | ParserConfigurationException e) {
       throw new QAException(
-          "DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(" + inputSource + ")",
+          "DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(InputSource)",
           e);
     }
     final Boolean keepDeclaration = xml.startsWith("<?xml");
