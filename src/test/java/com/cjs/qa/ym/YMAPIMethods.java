@@ -451,11 +451,11 @@ public final class YMAPIMethods {
 
   private static String getNamespace(String methodName, List<String> listNamespaces)
       throws QAException {
-    final String NAMESPACE_ADMIN = "Sa";
+    final String namespaceAdmin = "Sa";
     String namespace = null;
     final String[] methodElements = methodName.split(Constants.DELIMETER_PATH + ".");
     String methodNameSearch = methodElements[0];
-    if (methodElements[0].equals(NAMESPACE_ADMIN)) {
+    if (methodElements[0].equals(namespaceAdmin)) {
       methodNameSearch = methodElements[0] + "." + methodElements[1];
     }
     for (final String namespaceFound : listNamespaces) {

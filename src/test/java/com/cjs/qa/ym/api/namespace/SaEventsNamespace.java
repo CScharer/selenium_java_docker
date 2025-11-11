@@ -56,8 +56,8 @@ public class SaEventsNamespace extends YMService {
         Map<String, String> mapResults = eventGet(eventID);
         sXML = mapResults.get("xml");
         //
-        final String XPATH_ROOT = "//Sa.Events.Event.Get";
-        String sXpath = XPATH_ROOT;
+        final String xpathRoot = "//Sa.Events.Event.Get";
+        String sXpath = xpathRoot;
         final NodeList nodesEvent = XML.getNodeList(sXML, sXpath);
         for (int indexEvent = 0; indexEvent < nodesEvent.getLength(); indexEvent++) {
           final Map<String, String> eventMap = eventMap();
