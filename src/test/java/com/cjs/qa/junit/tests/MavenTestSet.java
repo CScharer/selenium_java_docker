@@ -40,7 +40,7 @@ public class MavenTestSet {
             + Constants.DELIMETER_PATH
             + "pom"
             + IExtension.XML;
-    final String PATH_WORKSPACE =
+    final String pathWorkspace =
         "C:"
             + Constants.DELIMETER_PATH
             + "Workspace"
@@ -50,14 +50,14 @@ public class MavenTestSet {
     final String resultsPathFile =
         Constants.PATH_FILES_DATA + "MavenDependenciesResults" + IExtension.LOG;
     FSO.fileWrite(resultsPathFile, "", false);
-    final List<Path> files = FSO.pathsList(PATH_WORKSPACE);
+    final List<Path> files = FSO.pathsList(pathWorkspace);
     for (final Path path : files) {
       final StringBuilder stringBuilder = new StringBuilder();
       final String filePathName = path.toString();
       if (filePathName.contains("pom" + IExtension.XML)) {
         if (filePathName.equals(projectAnalyze)) {
           stringBuilder.append(getStringBuffer());
-          stringBuilder.append(newLine("PATH_WORKSPACE:" + PATH_WORKSPACE));
+          stringBuilder.append(newLine("PATH_WORKSPACE:" + pathWorkspace));
           stringBuilder.append(newLine("resultsPathFile:" + resultsPathFile));
           stringBuilder.append(newLine("filePathName:[" + filePathName + "]"));
           final String projectPath = path.getParent().toString();
@@ -118,13 +118,13 @@ public class MavenTestSet {
 
   private String parseResultsFile(String resultsPathFile, String projectFolder) {
     final StringBuilder stringBuilder = new StringBuilder();
-    final String INFO_BUILD_SUCCESS = "[INFO] BUILD SUCCESS";
-    final String WARNING_DEPENDENCY = "[WARNING]    ";
-    final String WARNING_UNDECLARED = "[WARNING] Used undeclared dependencies found:";
-    final String WARNING_UNUSED = "[WARNING] Unused declared dependencies found:";
+    final String infoBuildSuccess = "[INFO] BUILD SUCCESS";
+    final String warningDependency = "[WARNING]    ";
+    final String warningUndeclared = "[WARNING] Used undeclared dependencies found:";
+    final String warningUnused = "[WARNING] Unused declared dependencies found:";
     final String results = FSO.fileReadAll(resultsPathFile);
     stringBuilder.append(results);
-    if (results.contains(INFO_BUILD_SUCCESS)) {
+    if (results.contains(infoBuildSuccess)) {
       final String[] records = results.split(Constants.NEWLINE);
       final List<String> dependenciesUndeclaredList = new ArrayList<>();
       final List<String> dependenciesUnusedList = new ArrayList<>();
@@ -142,24 +142,24 @@ public class MavenTestSet {
           dependenciesSection = false;
         }
         if (dependenciesSection) {
-          if (record.equals(WARNING_UNDECLARED)) {
+          if (record.equals(warningUndeclared)) {
             unusedSection = false;
             undeclaredSection = true;
           }
-          if (record.equals(WARNING_UNUSED)) {
+          if (record.equals(warningUnused)) {
             unusedSection = true;
             undeclaredSection = false;
           }
           if (undeclaredSection) { // Add Undeclared Dependency
-            if (record.contains(WARNING_DEPENDENCY)
-                && !record.equalsIgnoreCase(WARNING_UNDECLARED)) {
+            if (record.contains(warningDependency)
+                && !record.equalsIgnoreCase(warningUndeclared)) {
               final String[] dependencyArray = record.split(" ");
               final String dependency = dependencyArray[dependencyArray.length - 1];
               dependenciesUndeclaredList.add(dependency);
             }
           }
           if (unusedSection) { // Add Unused Dependency
-            if (record.contains(WARNING_DEPENDENCY) && !record.equalsIgnoreCase(WARNING_UNUSED)) {
+            if (record.contains(warningDependency) && !record.equalsIgnoreCase(warningUnused)) {
               final String[] dependencyArray = record.split(" ");
               final String dependency = dependencyArray[dependencyArray.length - 1];
               dependenciesUnusedList.add(dependency);

@@ -25,7 +25,7 @@ public class SessionNamespace extends YMService {
 
   public static String getSessionID() throws Throwable {
     final long timeSessionCurrent = System.currentTimeMillis(); // 20 minutes
-    final long SESSION_LIMIT = (TIMEOUT_SESSION * 60 * Constants.MILLISECONDS);
+    final long sessionLimit = (TIMEOUT_SESSION * 60 * Constants.MILLISECONDS);
     final long timeSessionElapsed = (timeSessionCurrent - timeSessionStart);
     VivitEnvironment.sysOut(
         "timeSessionStart:["
@@ -35,7 +35,7 @@ public class SessionNamespace extends YMService {
             + "], timeSessionElapsed:["
             + timeSessionElapsed
             + "]");
-    if (timeSessionElapsed >= SESSION_LIMIT || timeSessionStart == 0) {
+    if (timeSessionElapsed >= sessionLimit || timeSessionStart == 0) {
       setSessionID();
     }
     return Constants.nlTab(1, 1) + "<SessionID>" + sessionID + "</SessionID>";

@@ -51,16 +51,16 @@ public class ExcelStatisticalTestSet {
   }
 
   private void getData(String timingPath, ExcelTiming excelTiming) throws QAException, IOException {
-    final String SHEET_NAME = "Sheet1";
+    final String sheetName = "Sheet1";
     excelTiming.setFileList(FSO.filesList(timingPath, IExtension.XLS));
     for (final String filePathName : excelTiming.getFileList()) {
       Environment.sysOut("filePathName:[" + filePathName + "]");
-      final XLS excel = new XLS(filePathName, SHEET_NAME);
-      final int rows = excel.getRowCount(SHEET_NAME);
+      final XLS excel = new XLS(filePathName, sheetName);
+      final int rows = excel.getRowCount(sheetName);
       for (int row = 1; row < rows; row++) {
-        String methodName = excel.readCell(SHEET_NAME, 0, row);
+        String methodName = excel.readCell(sheetName, 0, row);
         methodName = methodName.toLowerCase(Locale.ENGLISH);
-        final double timing = Double.parseDouble(excel.readCell(SHEET_NAME, 1, row));
+        final double timing = Double.parseDouble(excel.readCell(sheetName, 1, row));
         Environment.sysOut("methodName:[" + methodName + "], timing:[" + timing + "]");
         if (excelTiming.getMethodCallsMap().get(methodName) == null) {
           excelTiming.getMethodCallsMap().put(methodName, 1);
@@ -79,34 +79,34 @@ public class ExcelStatisticalTestSet {
   }
 
   private void createStatisticalReport() throws QAException, IOException {
-    final String SHEET_NAME = "Statistical Timings";
+    final String sheetName = "Statistical Timings";
     final String filePathName =
         PATH_TIMINGS
-            + SHEET_NAME
+            + sheetName
             + "_"
             + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_DATE_TIME_STAMP)
             + IExtension.XLS;
-    final XLS excel = new XLS(filePathName, SHEET_NAME);
+    final XLS excel = new XLS(filePathName, sheetName);
     int row = 1;
-    // excel.writeCell(SHEET_NAME, 0, 0, "Method")
-    excel.writeCell(SHEET_NAME, 1, 0, PATH_LIST.get(0));
-    excel.writeCell(SHEET_NAME, 2, 0, "Files");
-    excel.writeCell(SHEET_NAME, 3, 0, getExcelTimingControl().getFileList().size());
-    excel.writeCell(SHEET_NAME, 4, 0, PATH_LIST.get(1));
-    excel.writeCell(SHEET_NAME, 5, 0, "Files");
-    excel.writeCell(SHEET_NAME, 6, 0, getExcelTimingTest().getFileList().size());
-    // excel.writeCell(SHEET_NAME, 7, 0, "Difference")
-    excel.writeCell(SHEET_NAME, 0, row, "Method");
-    excel.writeCell(SHEET_NAME, 1, row, "Calls");
-    excel.writeCell(SHEET_NAME, 2, row, "Time");
-    excel.writeCell(SHEET_NAME, 3, row, "Average");
-    excel.writeCell(SHEET_NAME, 4, row, "Calls");
-    excel.writeCell(SHEET_NAME, 5, row, "Time");
-    excel.writeCell(SHEET_NAME, 6, row, "Average");
-    excel.writeCell(SHEET_NAME, 7, row, "Difference");
+    // excel.writeCell(sheetName, 0, 0, "Method")
+    excel.writeCell(sheetName, 1, 0, PATH_LIST.get(0));
+    excel.writeCell(sheetName, 2, 0, "Files");
+    excel.writeCell(sheetName, 3, 0, getExcelTimingControl().getFileList().size());
+    excel.writeCell(sheetName, 4, 0, PATH_LIST.get(1));
+    excel.writeCell(sheetName, 5, 0, "Files");
+    excel.writeCell(sheetName, 6, 0, getExcelTimingTest().getFileList().size());
+    // excel.writeCell(sheetName, 7, 0, "Difference")
+    excel.writeCell(sheetName, 0, row, "Method");
+    excel.writeCell(sheetName, 1, row, "Calls");
+    excel.writeCell(sheetName, 2, row, "Time");
+    excel.writeCell(sheetName, 3, row, "Average");
+    excel.writeCell(sheetName, 4, row, "Calls");
+    excel.writeCell(sheetName, 5, row, "Time");
+    excel.writeCell(sheetName, 6, row, "Average");
+    excel.writeCell(sheetName, 7, row, "Difference");
     for (int column = 0; column < 8; column++) {
-      excel.setFormatHeading(SHEET_NAME, column, 0);
-      excel.setFormatHeading(SHEET_NAME, column, row);
+      excel.setFormatHeading(sheetName, column, 0);
+      excel.setFormatHeading(sheetName, column, row);
     }
     for (final Entry entry : getExcelTimingControl().getMethodCallsMap().entrySet()) {
       row++;
@@ -115,10 +115,10 @@ public class ExcelStatisticalTestSet {
       final Double methodTimeControl =
           getExcelTimingControl().getMethodTimingMap().get(methodNameControl);
       final Double methodTimeControlAverage = (methodTimeControl / methodCallsControl);
-      excel.writeCell(SHEET_NAME, 0, row, methodNameControl);
-      excel.writeCell(SHEET_NAME, 1, row, methodCallsControl);
-      excel.writeCell(SHEET_NAME, 2, row, methodTimeControl);
-      excel.writeCell(SHEET_NAME, 3, row, methodTimeControlAverage);
+      excel.writeCell(sheetName, 0, row, methodNameControl);
+      excel.writeCell(sheetName, 1, row, methodCallsControl);
+      excel.writeCell(sheetName, 2, row, methodTimeControl);
+      excel.writeCell(sheetName, 3, row, methodTimeControlAverage);
       Environment.sysOut(
           "methodNameControl:["
               + methodNameControl
@@ -144,21 +144,21 @@ public class ExcelStatisticalTestSet {
               + "], methodTimeTestAverage:["
               + methodTimeTestAverage
               + "]");
-      excel.writeCell(SHEET_NAME, 4, row, methodCallsTest);
-      excel.writeCell(SHEET_NAME, 5, row, methodTimeTest);
-      excel.writeCell(SHEET_NAME, 6, row, methodTimeTestAverage);
-      excel.writeCell(SHEET_NAME, 7, row, (methodTimeTestAverage - methodTimeControlAverage));
+      excel.writeCell(sheetName, 4, row, methodCallsTest);
+      excel.writeCell(sheetName, 5, row, methodTimeTest);
+      excel.writeCell(sheetName, 6, row, methodTimeTestAverage);
+      excel.writeCell(sheetName, 7, row, (methodTimeTestAverage - methodTimeControlAverage));
       // getExcelTimingControl().getMethodCallsMap().remove(methodNameControl)
       // getExcelTimingControl().getMethodTimingMap().remove(methodNameControl)
       // getExcelTimingTest().getMethodCallsMap().remove(methodNameControl)
       // getExcelTimingTest().getMethodTimingMap().remove(methodNameControl)
     }
     row++;
-    excel.writeCell(SHEET_NAME, 0, row, "Totals");
+    excel.writeCell(sheetName, 0, row, "Totals");
     for (int column = 0; column < 8; column++) {
       if (column >= 1) {
         excel.writeCellFormula(
-            SHEET_NAME,
+            sheetName,
             column,
             row,
             "Sum("
@@ -168,9 +168,9 @@ public class ExcelStatisticalTestSet {
                 + row
                 + ")");
       }
-      excel.setFormatHeading(SHEET_NAME, column, row);
+      excel.setFormatHeading(sheetName, column, row);
     }
-    excel.autoSizeColumns(SHEET_NAME);
+    excel.autoSizeColumns(sheetName);
     excel.save();
     excel.close();
   }

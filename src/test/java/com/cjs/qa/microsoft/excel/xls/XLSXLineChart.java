@@ -44,14 +44,14 @@ public class XLSXLineChart {
   public static void main(String[] args) throws IOException {
     try (XSSFWorkbook workbookXLSX = new XSSFWorkbook()) {
       final XSSFSheet sheetXLSX = workbookXLSX.createSheet("linechart");
-      final int NUM_OF_ROWS = 3;
-      final int NUM_OF_COLUMNS = 10;
+      final int numOfRows = 3;
+      final int numOfColumns = 10;
       // Create a row and put some cells in it. Rows are 0 based.
       Row row;
       Cell cell;
-      for (int rowIndex = 0; rowIndex < NUM_OF_ROWS; rowIndex++) {
+      for (int rowIndex = 0; rowIndex < numOfRows; rowIndex++) {
         row = sheetXLSX.createRow((short) rowIndex);
-        for (int colIndex = 0; colIndex < NUM_OF_COLUMNS; colIndex++) {
+        for (int colIndex = 0; colIndex < numOfColumns; colIndex++) {
           cell = row.createCell((short) colIndex);
           cell.setCellValue(colIndex * (rowIndex + 1));
         }

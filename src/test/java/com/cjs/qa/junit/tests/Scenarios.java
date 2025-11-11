@@ -649,29 +649,29 @@ public class Scenarios {
 
   @Test
   public void jenkinsPluralsight() throws Throwable {
-    final String FILE_PATHNAME =
+    final String filePathname =
         Constants.PATH_DESKTOP + "PluralSightSessionInformation" + IExtension.TXT;
     final List<String> listSessions = new ArrayList<>();
-    final String URL_PLURALSIGHT = "https://app.pluralsight";
-    listSessions.add(URL_PLURALSIGHT + IExtension.COM + "/library/courses/communication-skills");
+    final String urlPluralsight = "https://app.pluralsight";
+    listSessions.add(urlPluralsight + IExtension.COM + "/library/courses/communication-skills");
     listSessions.add(
-        URL_PLURALSIGHT + IExtension.COM + "/library/courses/effective-email-communication");
+        urlPluralsight + IExtension.COM + "/library/courses/effective-email-communication");
     listSessions.add(
-        URL_PLURALSIGHT
+        urlPluralsight
             + IExtension.COM
             + "/library/courses/working-communicating-with-different-personalities");
     listSessions.add(
-        URL_PLURALSIGHT + IExtension.COM + "/library/courses/project-management-beginners-guide");
+        urlPluralsight + IExtension.COM + "/library/courses/project-management-beginners-guide");
     listSessions.add(
-        URL_PLURALSIGHT
+        urlPluralsight
             + IExtension.COM
             + "/library/courses/project-scope-managing-resources-defining");
     listSessions.add(
-        URL_PLURALSIGHT
+        urlPluralsight
             + IExtension.COM
             + "/library/courses/technical-writing-software-documentation");
     listSessions.add(
-        URL_PLURALSIGHT + IExtension.COM + "/library/courses/test-driven-development-java");
+        urlPluralsight + IExtension.COM + "/library/courses/test-driven-development-java");
     // final String url =
     // URL_PLURALSIGHT + IExtension.COM +
     // "/player?course=scrum-master-fundamentals-scrum-master"
@@ -679,15 +679,15 @@ public class Scenarios {
     // + "&clip=0&mode=live"
     final PluralSightPage pluralSight = new PluralSightPage(getSeleniumWebDriver().getWebDriver());
     pluralSight.getLoginPage().login();
-    FSO.fileDelete(FILE_PATHNAME);
+    FSO.fileDelete(filePathname);
     for (String session : listSessions) {
       final String sessionInformation =
           pluralSight.getSessionPage().getSessionInformation(session);
-      FSO.fileWrite(FILE_PATHNAME, sessionInformation, true);
+      FSO.fileWrite(filePathname, sessionInformation, true);
       final String tableOfContents =
           pluralSight.getTableOfContentsPage().getTableOfContents(session);
-      FSO.fileWrite(FILE_PATHNAME, tableOfContents, true);
-      FSO.fileWrite(FILE_PATHNAME, Constants.NEWLINE, true);
+      FSO.fileWrite(filePathname, tableOfContents, true);
+      FSO.fileWrite(filePathname, Constants.NEWLINE, true);
       Environment.sysOut(sessionInformation);
     }
   }
@@ -890,11 +890,11 @@ public class Scenarios {
 
   @Test
   public void testQueryMapping() throws Throwable {
-    final String TABLE_FROM = "t_DOM_Vivit Contractor";
-    final String TABLE_TO = "t_DOM_Vivit ContractorNew";
+    final String tableFrom = "t_DOM_Vivit Contractor";
+    final String tableTo = "t_DOM_Vivit ContractorNew";
     JDBC jdbc = new JDBC("", DATABASE_QA);
     StringBuilder sqlStringBuilder = new StringBuilder();
-    sqlStringBuilder.append(JDBCConstants.DELETE_FROM + "[" + TABLE_TO + "]");
+    sqlStringBuilder.append(JDBCConstants.DELETE_FROM + "[" + tableTo + "]");
     int recordsDeleted = 0;
     try {
       recordsDeleted = jdbc.executeUpdate(sqlStringBuilder.toString(), false);
@@ -921,11 +921,11 @@ public class Scenarios {
     // }
     stringBuilder.append(keySet.substring(1, (keySet.length() - 1)).replace(", ", "],["));
     stringBuilder.append("] ");
-    stringBuilder.append(JDBCConstants.FROM + "[" + TABLE_FROM + "]");
+    stringBuilder.append(JDBCConstants.FROM + "[" + tableFrom + "]");
     List<Map<String, String>> listResults = jdbc.queryResultsString(stringBuilder.toString(), true);
     Environment.sysOut("listResults:[" + listResults.toString() + "]");
     stringBuilder = new StringBuilder();
-    stringBuilder.append(JDBCConstants.INSERT_INTO + "[" + TABLE_TO + "] ([");
+    stringBuilder.append(JDBCConstants.INSERT_INTO + "[" + tableTo + "] ([");
     stringBuilder.append(keyValues.substring(1, (keyValues.length() - 1)).replace(", ", "],["));
     stringBuilder.append("])" + JDBCConstants.VALUES + "(");
     sqlStringBuilder = new StringBuilder();

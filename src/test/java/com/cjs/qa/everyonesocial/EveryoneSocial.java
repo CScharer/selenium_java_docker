@@ -91,17 +91,17 @@ public class EveryoneSocial {
   }
 
   public List<WebElement> webElementListShare() {
-    final String BUTTONS_SHARE = ".//button/span[contains(text(),'Share')]";
+    final String buttonsShare = ".//button/span[contains(text(),'Share')]";
     List<WebElement> webElementListShared = webElementListShared();
     List<WebElement> webElementListShare =
-        (List<WebElement>) getWebDriver().findElement(By.xpath(BUTTONS_SHARE));
+        (List<WebElement>) getWebDriver().findElement(By.xpath(buttonsShare));
     webElementListShare.removeAll(webElementListShared);
     return webElementListShare;
   }
 
   public List<WebElement> webElementListShared() {
-    final String BUTTONS_SHARED = ".//button/span[contains(text(),'Shared')]";
-    return (List<WebElement>) getWebDriver().findElement(By.xpath(BUTTONS_SHARED));
+    final String buttonsShared = ".//button/span[contains(text(),'Shared')]";
+    return (List<WebElement>) getWebDriver().findElement(By.xpath(buttonsShared));
   }
 
   public void clickButtonCancel() {

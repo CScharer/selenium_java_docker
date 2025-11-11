@@ -69,13 +69,13 @@ public class CasePaymentsPage extends Page {
   }
 
   public void getPreviousPayments() throws Throwable {
-    final int RECORDS_CHECK_MAX = 3;
+    final int recordsCheckMax = 3;
     List<String> headingList = validateHeadingList();
     List<WebElement> previousPaymentRecordsWebElementList =
         getWebDriver().findElements(getPreviousPaymentRecordsBy());
     int recordsCheck = (previousPaymentRecordsWebElementList.size() - 1);
-    if (recordsCheck > RECORDS_CHECK_MAX) {
-      recordsCheck = RECORDS_CHECK_MAX;
+    if (recordsCheck > recordsCheckMax) {
+      recordsCheck = recordsCheckMax;
     }
     for (int previousPaymentRecordsWebElementListIndex = recordsCheck;
         previousPaymentRecordsWebElementListIndex > 0;

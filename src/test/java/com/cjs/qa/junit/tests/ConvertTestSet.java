@@ -145,7 +145,7 @@ public class ConvertTestSet {
   @Test
   public void fromNumberToLetterExcel() {
     final String method = JavaHelpers.getCurrentMethodName();
-    final String FORMAT_NUMBER = "###,###,##0";
+    final String formatNumber = "###,###,##0";
     final int numberStep = 1;
     final int numberStart = -1;
     final int numberEnd = (IExcel.MAX_COLUMNS_XLSX + 1);
@@ -153,7 +153,7 @@ public class ConvertTestSet {
     for (int number = numberStart; number <= numberEnd; number += numberStep) {
       Environment.sysOut(
           "number:["
-              + JavaHelpers.formatNumber(number, FORMAT_NUMBER)
+              + JavaHelpers.formatNumber(number, formatNumber)
               + "], letter:["
               + Convert.fromNumberToLetterExcel(number)
               + "]");
