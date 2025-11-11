@@ -638,35 +638,35 @@ public interface ISelenium {
    */
   default boolean webComboBoxSelect(WebDriver webDriver, String field, String value) {
     boolean match = false;
-    int iIndex = 0;
+    int index = 0;
     Select dropdown;
-    String sItem = null;
-    String[] aItems = null;
-    String sMessage = null;
+    String item = null;
+    String[] items = null;
+    String message = null;
     if (Environment.isLogAll()) {
       Environment.sysOut("");
     }
-    final List<WebElement> oItems = webDriver.findElements(By.name(field));
-    if (oItems.size() == 1) {
-      sItem = oItems.get(0).getText();
-      aItems = sItem.split(Constants.NEWLINE);
+    final List<WebElement> optionElements = webDriver.findElements(By.name(field));
+    if (optionElements.size() == 1) {
+      item = optionElements.get(0).getText();
+      items = item.split(Constants.NEWLINE);
       dropdown = new Select(webDriver.findElement(By.name(field)));
       dropdown.selectByVisibleText(value);
       match = true;
       if (match) {
         return match;
       }
-      for (iIndex = 0; iIndex < aItems.length; iIndex++) {
-        if (aItems[iIndex].equalsIgnoreCase(value)) {
+      for (index = 0; index < items.length; index++) {
+        if (items[index].equalsIgnoreCase(value)) {
           dropdown = new Select(webDriver.findElement(By.name(field)));
-          dropdown.selectByIndex((iIndex + 1));
-          final List<WebElement> oItem = dropdown.getAllSelectedOptions();
-          final String valueActual = oItem.get(0).getText();
+          dropdown.selectByIndex((index + 1));
+          final List<WebElement> selectedOption = dropdown.getAllSelectedOptions();
+          final String valueActual = selectedOption.get(0).getText();
           if (!valueActual.equalsIgnoreCase(value)) {
             dropdown.selectByVisibleText(value);
             if (Environment.isLogAll()) {
-              sMessage = String.format("Field:[%s], Value[%s]", field, value);
-              Environment.sysOut(sMessage);
+              message = String.format("Field:[%s], Value[%s]", field, value);
+              Environment.sysOut(message);
             }
           }
           match = true;
@@ -674,12 +674,12 @@ public interface ISelenium {
         }
       }
     } else {
-      for (iIndex = 0; iIndex < oItems.size(); iIndex++) {
-        sItem = oItems.get(iIndex).getText();
-        if (sItem.trim().equals(value)) {
+      for (index = 0; index < optionElements.size(); index++) {
+        item = optionElements.get(index).getText();
+        if (item.trim().equals(value)) {
           if (Environment.isLogAll()) {
-            sMessage = String.format("Field:[%s], Value[%s]", field, sItem);
-            Environment.sysOut(sMessage);
+            message = String.format("Field:[%s], Value[%s]", field, item);
+            Environment.sysOut(message);
           }
           match = true;
         }
@@ -762,8 +762,8 @@ public interface ISelenium {
       DesiredCapabilities desiredCapabilities = setDesiredCapabilities(operatingSystem, browser);
       // AppEnvironment.sysOut("desiredCapabilities:[" +
       // desiredCapabilities.toString() + "]");
-      final String sBrowser = browser.toLowerCase(Locale.ENGLISH);
-      switch (sBrowser) {
+      final String browserLowercase = browser.toLowerCase(Locale.ENGLISH);
+      switch (browserLowercase) {
         case "firefox":
           // webDriver = new FirefoxDriver(desiredCapabilities);
           final String proxy = "localhost";
@@ -883,7 +883,7 @@ public interface ISelenium {
       // // STANDARD_FIREFOX = "C:/Program Files (x86)/Mozilla
       // // Firefox/firefox.exe";
       // }
-      String sMessage = null;
+      String message = null;
       // String browserDefault = "Firefox (Default)"; // XLS, XML, Text,
       // Properties
       // Firefox Profiling
@@ -898,12 +898,12 @@ public interface ISelenium {
       // firefox
       // -P
       final String browserDefault = "firefox";
-      String sDriver = "";
+      String driverPath = "";
       if (Environment.isLogAll()) {
-        sMessage =
+        message =
             String.format(
                 "Browser:[%s], Default:[%s], Driver:[%s]", browser, browserDefault, webDriver);
-        Environment.sysOut(sMessage);
+        Environment.sysOut(message);
       }
       // Loads all the profiles
       // final ProfilesIni profilesIni = new ProfilesIni();
@@ -911,16 +911,16 @@ public interface ISelenium {
       switch (browser.toLowerCase(Locale.ENGLISH)) {
         case "chrome":
           // Version 54.0.2840.71 m
-          sDriver = Constants.PATH_DRIVERS_LOCAL + "chromedriver.exe";
-          System.setProperty("webdriver.chrome.driver", sDriver);
+          driverPath = Constants.PATH_DRIVERS_LOCAL + "chromedriver.exe";
+          System.setProperty("webdriver.chrome.driver", driverPath);
           final ChromeOptions chromeOptions = setChromeOptions();
           webDriver = new ChromeDriver(chromeOptions);
           break;
         case "edge":
           // Microsoft Edge 38.14393.0.0
           // Microsoft EdgeHTML 14.14393
-          sDriver = Constants.PATH_DRIVERS_LOCAL + "MicrosoftWebDriver.exe";
-          System.setProperty("webdriver.edge.driver", sDriver);
+          driverPath = Constants.PATH_DRIVERS_LOCAL + "MicrosoftWebDriver.exe";
+          System.setProperty("webdriver.edge.driver", driverPath);
           webDriver = new EdgeDriver();
           break;
         case "firefox":
@@ -968,8 +968,8 @@ public interface ISelenium {
           // Version 11.0.9600.18499
           // Update Versions: 11.0.36 (KB3191492)
           // Product ID: 00150-20000-00003-AA459
-          sDriver = Constants.PATH_DRIVERS_LOCAL + "IEDriverServer.exe";
-          System.setProperty("webdriver.ie.driver", sDriver);
+          driverPath = Constants.PATH_DRIVERS_LOCAL + "IEDriverServer.exe";
+          System.setProperty("webdriver.ie.driver", driverPath);
           webDriver = new InternetExplorerDriver();
           break;
           // case "opera": // (least stable)
@@ -999,13 +999,13 @@ public interface ISelenium {
           break;
       }
       if (Environment.isLogAll()) {
-        sMessage = String.format("Implemented Browser:[%s] Driver From [%s]", browser, sDriver);
-        Environment.sysOut(sMessage);
+        message = String.format("Implemented Browser:[%s] Driver From [%s]", browser, driverPath);
+        Environment.sysOut(message);
       }
       // Position to 2nd monitor.
       if (Environment.isRunRemote()) {
-        final Point oPoint = new Point(2000, 1);
-        webDriver.manage().window().setPosition(oPoint);
+        final Point windowPosition = new Point(2000, 1);
+        webDriver.manage().window().setPosition(windowPosition);
       }
       webDriver.manage().window().maximize();
       // Point oPoint = new Point(0, 0);
@@ -1027,14 +1027,14 @@ public interface ISelenium {
    * @param fileName
    */
   default void saveScreenshot(WebDriver webDriver, String fileName) {
-    String sMessage = null;
+    String message = null;
     final String screenshotCounter =
         DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_DATE_TIME_STAMP);
     final String screenshot = String.format("%05d_%s.png", screenshotCounter, fileName);
     final File srcFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
     if (Environment.isLogAll()) {
-      sMessage = String.format("Saving:[%s]", Constants.PATH_ROOT + screenshot + "]");
-      Environment.sysOut(sMessage);
+      message = String.format("Saving:[%s]", Constants.PATH_ROOT + screenshot + "]");
+      Environment.sysOut(message);
     }
     try {
       FileUtils.copyFile(srcFile, new File(screenshot));
@@ -1051,10 +1051,10 @@ public interface ISelenium {
    */
   default boolean webPageGetObjects(
       WebDriver webDriver, WebElement elementParent, String functionName) {
-    String sMessage = null;
+    String message = null;
     if (Environment.isLogAll()) {
-      sMessage = String.format("Driver [%s]", webDriver);
-      Environment.sysOut(sMessage);
+      message = String.format("Driver [%s]", webDriver);
+      Environment.sysOut(message);
     }
     final String source = webDriver.getPageSource();
     String fileName = Constants.PATH_ROOT + "source" + IExtension.TXT;

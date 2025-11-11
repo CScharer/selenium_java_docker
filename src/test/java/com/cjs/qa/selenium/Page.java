@@ -631,11 +631,11 @@ public class Page extends JavaHelpers {
         listFields.add("XPATH:" + xpath);
         listFields.addAll(getAllFieldsType(xpath));
       } else {
-        final String sObjectSubType = sObject.substring(0, sObject.indexOf(':'));
-        final String sObjectSubTypes = sObject.substring(sObject.indexOf(':') + 1);
-        final String[] sObjectType = sObjectSubTypes.split(Constants.DELIMETER_LIST);
-        for (String objectType : sObjectType) {
-          xpath = PATH_DELIMETER + sObjectSubType + "[@type='" + objectType + "']";
+        final String objectSubType = sObject.substring(0, sObject.indexOf(':'));
+        final String objectSubTypes = sObject.substring(sObject.indexOf(':') + 1);
+        final String[] objectTypes = objectSubTypes.split(Constants.DELIMETER_LIST);
+        for (String objectType : objectTypes) {
+          xpath = PATH_DELIMETER + objectSubType + "[@type='" + objectType + "']";
           listFields.add("XPATH:" + xpath);
           listFields.addAll(getAllFieldsType(xpath));
         }

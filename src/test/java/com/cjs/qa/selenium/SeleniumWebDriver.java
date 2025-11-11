@@ -858,7 +858,7 @@ public class SeleniumWebDriver {
       setGridHubPort(8080);
       setGridHub("http://" + getGridHubName() + ":" + getGridHubPort() + "/wd/hub");
     }
-    String sProxy = getGridHubName() + ":" + getGridHubPort();
+    String proxyAddress = getGridHubName() + ":" + getGridHubPort();
     switch (browser) {
       case Browser.FIREFOX:
         JsonObject json = new JsonObject();
@@ -872,7 +872,7 @@ public class SeleniumWebDriver {
       case Browser.CHROME:
       default:
         Proxy proxy = new Proxy();
-        proxy.setHttpProxy(sProxy).setFtpProxy(sProxy).setSslProxy(sProxy);
+        proxy.setHttpProxy(proxyAddress).setFtpProxy(proxyAddress).setSslProxy(proxyAddress);
         desiredCapabilities.setCapability(CapabilityType.PROXY, proxy);
         break;
     }
