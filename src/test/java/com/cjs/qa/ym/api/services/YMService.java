@@ -156,20 +156,20 @@ public class YMService {
         map.put("xml", xml);
         // Environment.sysOut("xml:[" + xml + "]")
       }
-      dataOutputStream.close();
-      httpURLConnection.disconnect();
       if (responseCode != HttpURLConnection.HTTP_OK) {
         Environment.sysOut("responseCode:[" + responseCode + "]");
         Environment.sysOut("responseMessage:[" + responseMessage + "]");
       }
-      dataOutputStream.close();
-      httpURLConnection.disconnect();
       if (!"0".equals(XML.getTag(xml, "ErrCode"))) {
         String message = JavaHelpers.getCallingMethodName() + ":" + XML.getTag(xml, "ErrDesc");
         throw new QAException(message);
       }
     } catch (final Exception e) {
       Environment.sysOut(e);
+    } finally {
+      if (httpURLConnection != null) {
+        httpURLConnection.disconnect();
+      }
     }
     // Environment.sysOut("map:[" + map.toString() + "]")
     return map;
