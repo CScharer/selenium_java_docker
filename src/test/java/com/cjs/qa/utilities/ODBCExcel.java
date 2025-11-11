@@ -22,30 +22,31 @@ public class ODBCExcel {
             + "urls"
             + IExtension.XLS;
     final List<String> lFields = Arrays.asList("company", "abbreviation", "environment", "url");
-    Connection oConnection = connectDb(sDatabase);
-    try {
-      final Statement oStatement = oConnection.createStatement();
-      final ResultSet oResultSet =
-          oStatement.executeQuery(
-              JDBCConstants.SELECT_ALL_FROM
-                  + "urls "
-                  + JDBCConstants.WHERE
-                  + "([company] = 'Acadia' "
-                  + JDBCConstants.OR
-                  + "[companyAbbreviation] = 'AIC') "
-                  + JDBCConstants.AND
-                  + "[environment] = 'INT'");
-      while (oResultSet.next()) {
-        for (int iField = 0; iField < lFields.size(); iField++) {
-          final String sField = lFields.get(iField);
-          if (iField < (lFields.size() - 1)) {
-            System.out.print(sField + ":[" + oResultSet.getString(sField) + "]");
-          } else {
-            System.out.println(sField + ":[" + oResultSet.getString(sField) + "]");
+    try (Connection oConnection = connectDb(sDatabase)) {
+      if (oConnection != null) {
+        try (Statement oStatement = oConnection.createStatement();
+            ResultSet oResultSet =
+                oStatement.executeQuery(
+                    JDBCConstants.SELECT_ALL_FROM
+                        + "urls "
+                        + JDBCConstants.WHERE
+                        + "([company] = 'Acadia' "
+                        + JDBCConstants.OR
+                        + "[companyAbbreviation] = 'AIC') "
+                        + JDBCConstants.AND
+                        + "[environment] = 'INT'")) {
+          while (oResultSet.next()) {
+            for (int iField = 0; iField < lFields.size(); iField++) {
+              final String sField = lFields.get(iField);
+              if (iField < (lFields.size() - 1)) {
+                System.out.print(sField + ":[" + oResultSet.getString(sField) + "]");
+              } else {
+                System.out.println(sField + ":[" + oResultSet.getString(sField) + "]");
+              }
+            }
           }
         }
       }
-      oConnection = null;
     } catch (final Exception oException) {
       System.out.println(oException.getMessage());
       oException.printStackTrace();
@@ -77,25 +78,28 @@ public class ODBCExcel {
   }
 
   public boolean execute(Connection oConnection, String sSQL) {
-    try {
-      final Statement oStatement = oConnection.createStatement();
-      final ResultSet oResultSet = oStatement.executeQuery(sSQL);
+    try (Statement oStatement = oConnection.createStatement();
+        ResultSet oResultSet = oStatement.executeQuery(sSQL)) {
       System.out.println(oResultSet.toString());
-      oStatement.close();
-      oConnection.close();
-      oConnection = null;
     } catch (final Exception oException) {
       System.out.println(oException.getMessage());
       oException.printStackTrace();
       return false;
+    } finally {
+      try {
+        if (oConnection != null) {
+          oConnection.close();
+        }
+      } catch (final SQLException e) {
+        System.out.println(e.getMessage());
+      }
     }
     return true;
   }
 
   public int executeUpdate(Connection oConnection, String sSQL) {
     int iReturn = 0;
-    try {
-      final Statement oStatement = oConnection.createStatement();
+    try (Statement oStatement = oConnection.createStatement()) {
       iReturn = oStatement.executeUpdate(sSQL);
       // if (iReturn == 1){
       // System.out.println(String.valueOf(iReturn) + " record updated");
@@ -103,7 +107,6 @@ public class ODBCExcel {
       // System.out.println(String.valueOf(iReturn) + " records updated");
       // }
       // oConnection.commit();
-      oStatement.close();
       return iReturn;
     } catch (final Exception oException) {
       System.out.println(oException.getMessage());
