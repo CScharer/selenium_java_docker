@@ -647,19 +647,19 @@ public class SQL {
       sql +=
           " " + JDBCConstants.AND + "[" + TABLE_ENVIRONMENTS + "].[Abbreviation]='" + company + "'";
     }
-    String sURL = null;
+    String url = null;
     final JDBC jdbc = new JDBC("", DATABASE_DEFINITION);
     try (ResultSet resultSet = jdbc.queryResults(sql)) {
       if (resultSet != null) {
-        sURL = resultSet.getString("URL");
+        url = resultSet.getString("URL");
       }
     } catch (final SQLException e) {
       Environment.sysOut(e.getMessage());
     } finally {
       jdbc.close();
     }
-    Environment.sysOut("Value [" + sURL + "]");
-    return sURL;
+    Environment.sysOut("Value [" + url + "]");
+    return url;
   }
 
   public static String getUserName(String company, String environment)
@@ -689,19 +689,19 @@ public class SQL {
       sql +=
           " " + JDBCConstants.AND + "[" + TABLE_ENVIRONMENTS + "].[Abbreviation]='" + company + "'";
     }
-    String sUserName = null;
+    String userName = null;
     final JDBC jdbc = new JDBC("", DATABASE_DEFINITION);
     try (ResultSet resultSet = jdbc.queryResults(sql)) {
       if (resultSet != null) {
-        sUserName = resultSet.getString("UserName");
+        userName = resultSet.getString("UserName");
       }
     } catch (final SQLException e) {
       Environment.sysOut(e.getMessage());
     } finally {
       jdbc.close();
     }
-    Environment.sysOut("Value [" + sUserName + "]");
-    return sUserName;
+    Environment.sysOut("Value [" + userName + "]");
+    return userName;
   }
 
   public static String getUniqueString(String database, String sql) {
