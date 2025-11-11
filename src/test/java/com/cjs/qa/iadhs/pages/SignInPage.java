@@ -12,9 +12,9 @@ public class SignInPage extends Page {
     super(webDriver);
   }
 
-  private final By editUserName = By.xpath(".//*[@id='userId']");
-  private final By editPassword = By.xpath(".//*[@id='xyz']");
-  private final By buttonSignIn = By.xpath(".//*[@id='signInBtn']");
+  private static final By editUserName = By.xpath(".//*[@id='userId']");
+  private static final By editPassword = By.xpath(".//*[@id='xyz']");
+  private static final By buttonSignIn = By.xpath(".//*[@id='signInBtn']");
 
   private By getEditUserName() {
     return editUserName;

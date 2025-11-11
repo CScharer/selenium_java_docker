@@ -11,9 +11,9 @@ public class LoginPage extends Page {
   }
 
   public static final String DEFAULT_URL = "https://app.pluralsight" + IExtension.COM;
-  private final By editUserName = By.id("Username");
-  private final By editPassword = By.id("Password");
-  private final By buttonSignIn = By.id("login");
+  private static final By editUserName = By.id("Username");
+  private static final By editPassword = By.id("Password");
+  private static final By buttonSignIn = By.id("login");
 
   public void buttonSignInClick() {
     clickObject(buttonSignIn);

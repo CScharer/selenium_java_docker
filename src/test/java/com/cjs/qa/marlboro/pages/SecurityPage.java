@@ -20,7 +20,7 @@ public class SecurityPage extends Page {
   // private By editVerifyPin3 = By.xpath(".//*[@id='createPin_verifypin3']");
   // private By editVerifyPin4 = By.xpath(".//*[@id='createPin_verifypin4']");
   // private By editVerifyPin5 = By.xpath(".//*[@id='createPin_verifypin5']");
-  private final By buttonEnterPin = By.xpath(".//*[@id='btnEnterPin']");
+  private static final By buttonEnterPin = By.xpath(".//*[@id='btnEnterPin']");
 
   public void editSetPin(String pin) {
     Assert.assertEquals("Pin is not 5 characters in length.", 5, pin.length());

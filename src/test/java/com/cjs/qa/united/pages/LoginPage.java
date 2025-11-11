@@ -10,12 +10,12 @@ public class LoginPage extends Page {
     super(webDriver);
   }
 
-  private final By editMileagePlusNumber = By.xpath(".//*[@id='loginFormModel.login']");
-  private final By editPassword = By.xpath(".//*[@id='loginFormModel.password']");
-  private final By checkboxRememberMe =
+  private static final By editMileagePlusNumber = By.xpath(".//*[@id='loginFormModel.login']");
+  private static final By editPassword = By.xpath(".//*[@id='loginFormModel.password']");
+  private static final By checkboxRememberMe =
       By.xpath(".//*[@id='loginFormModel']//input[@id='saveCredentials']");
   // loginFormModel.rememberMe
-  private final By buttonSignIn = By.xpath(".//*[@id='loginFormModel']/button");
+  private static final By buttonSignIn = By.xpath(".//*[@id='loginFormModel']/button");
 
   public void editMileagePlusNumberSet(String value) throws QAException {
     setEdit(editMileagePlusNumber, value);

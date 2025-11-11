@@ -23,7 +23,7 @@ public class SecurityPage extends Page {
 
   private final By optionDontRememberThisDevice =
       By.xpath(".//*[@id='authQuestionsForm']/div/div/label[@for='IsRememberDevice_False']");
-  private final By buttonNext = By.xpath(".//*[@id='btnNext']");
+  private static final By buttonNext = By.xpath(".//*[@id='btnNext']");
 
   public void buttonNextClick() throws QAException {
     clickObject(buttonNext);

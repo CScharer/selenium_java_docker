@@ -16,9 +16,9 @@ public class SignInPage extends Page {
     super(webDriver);
   }
 
-  private final By editUserName = By.xpath(".//*[@id='UserName']");
-  private final By editPassword = By.xpath(".//*[@id='Password']");
-  private final By editDateOfBirthMonth = By.xpath(".//*[@id='DateOfBirthMonth']");
+  private static final By editUserName = By.xpath(".//*[@id='UserName']");
+  private static final By editPassword = By.xpath(".//*[@id='Password']");
+  private static final By editDateOfBirthMonth = By.xpath(".//*[@id='DateOfBirthMonth']");
   private final By editDateOfBirthDay = By.xpath(".//*[@id='DateOfBirthDay']");
   private final By editDateOfBirthYear = By.xpath(".//*[@id='DateOfBirthYear']");
   private final By checkboxRememberUsername = By.xpath(".//*[@id='rememberUsername']");

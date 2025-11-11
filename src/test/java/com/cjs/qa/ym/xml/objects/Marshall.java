@@ -13,8 +13,8 @@ import javax.xml.bind.Unmarshaller;
 import org.junit.Test;
 
 public class Marshall {
-  private final String filePathNameXML = "C:\\Workspace\\Data\\Vivit\\Data\\Events\\temp.xml";
-  private final String filePathNameNewXML = "C:\\Workspace\\Data\\Vivit\\Data\\Events\\tempNew.xml";
+  private static final String filePathNameXML = "C:\\Workspace\\Data\\Vivit\\Data\\Events\\temp.xml";
+  private static final String filePathNameNewXML = "C:\\Workspace\\Data\\Vivit\\Data\\Events\\tempNew.xml";
 
   @Test
   public void testAll() throws JAXBException {

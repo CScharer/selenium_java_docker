@@ -12,7 +12,7 @@ public class SessionPage extends Page {
     super(webDriver);
   }
 
-  private final By bySessionTitle = By.xpath("//h1[@class='course-hero__title']");
+  private static final By bySessionTitle = By.xpath("//h1[@class='course-hero__title']");
   private final By bySessionInstructor =
       By.xpath(".//*[@id='ps-main']//p[@class='course-hero__byline']");
   private final By bySessionSynopsis =

@@ -13,8 +13,8 @@ public class HomePage extends Page {
     super(webDriver);
   }
 
-  private final By buttonSignIn = By.xpath(".//*[@id='loginButton']");
-  private final By buttonSignOut = By.xpath("//button/span[.='Sign out']");
+  private static final By buttonSignIn = By.xpath(".//*[@id='loginButton']");
+  private static final By buttonSignOut = By.xpath("//button/span[.='Sign out']");
 
   public void buttonSignInClick() throws QAException {
     clickObject(buttonSignIn);

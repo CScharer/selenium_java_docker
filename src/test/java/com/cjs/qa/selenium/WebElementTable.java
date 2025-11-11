@@ -16,7 +16,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class WebElementTable extends Page {
-  private final String columnNamePrefix = "#";
+  private static final String columnNamePrefix = "#";
   private boolean highlightObjects = false;
 
   private String getColumnNamePrefix() {

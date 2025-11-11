@@ -67,13 +67,13 @@ public class XLSXLineChart {
       CTLineChart ctLineChart = ctPlotArea.addNewLineChart();
       ctLineChart.addNewVaryColors().setVal(false);
       // Add series
-      for (int seriesIndex = 1; seriesIndex < NUM_OF_ROWS; seriesIndex++) {
+      for (int seriesIndex = 1; seriesIndex < numOfRows; seriesIndex++) {
         CTLineSer ctLineSer = ctLineChart.addNewSer();
         ctLineSer.addNewIdx().setVal(seriesIndex - 1);
         ctLineSer.addNewOrder().setVal(seriesIndex - 1);
         // Category axis data
         CTAxDataSource cads = ctLineSer.addNewCat();
-        cads.addNewNumRef().setF("linechart!$A$1:$" + (char) ('A' + NUM_OF_COLUMNS - 1) + "$1");
+        cads.addNewNumRef().setF("linechart!$A$1:$" + (char) ('A' + numOfColumns - 1) + "$1");
         // Values
         CTNumDataSource ctNumDataSource = ctLineSer.addNewVal();
         ctNumDataSource
@@ -82,7 +82,7 @@ public class XLSXLineChart {
                 "linechart!$A$"
                     + (seriesIndex + 1)
                     + ":$"
-                    + (char) ('A' + NUM_OF_COLUMNS - 1)
+                    + (char) ('A' + numOfColumns - 1)
                     + "$"
                     + (seriesIndex + 1));
       }

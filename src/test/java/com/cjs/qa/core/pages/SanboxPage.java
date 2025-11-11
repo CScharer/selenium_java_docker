@@ -62,14 +62,14 @@ public class SanboxPage extends Page {
   // the included fields on the page.
   //
   // DECLARATIONS
-  private final By buttonButton = By.id("Button");
-  private final By checkboxCheckbox = By.id("Checkbox");
-  private final By dropdownDropdown = By.id("Dropdown");
-  private final By editEdit = By.id("Edit");
-  private final By labelLabel = By.id("Label");
-  private final By linkLink = By.id("Link");
-  private final By optionOption = By.id("Option");
-  private final String pageTitle = "Core - CreateCucumberCodePage";
+  private static final By buttonButton = By.id("Button");
+  private static final By checkboxCheckbox = By.id("Checkbox");
+  private static final By dropdownDropdown = By.id("Dropdown");
+  private static final By editEdit = By.id("Edit");
+  private static final By labelLabel = By.id("Label");
+  private static final By linkLink = By.id("Link");
+  private static final By optionOption = By.id("Option");
+  private static final String pageTitle = "Core - CreateCucumberCodePage";
 
   private String getPageTitle() {
     return pageTitle;

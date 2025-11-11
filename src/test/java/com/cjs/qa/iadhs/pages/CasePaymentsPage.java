@@ -23,12 +23,12 @@ public class CasePaymentsPage extends Page {
   // Headings
   // .//*[@id='content']/div/section/div/div[2]/div[2]/div/b
   // .//*[@id='content']//div/div[2]/div[2]//b
-  private final By headingsBy = By.xpath(".//*[@id='content']//div/div[2]/div[2]//b");
+  private static final By headingsBy = By.xpath(".//*[@id='content']//div/div[2]/div[2]//b");
   // Payments
   // .//*[@id='content']/div/section/div/div[2]/section/div[2]/div/a
   // .//*[@id='content']//div[2]/section/div[2]//a[1]
-  private final By previousPaymentRecordsBy = By.xpath(".//*[@id='content']//div[2]/section/div");
-  private final By lastPaymentBy = By.xpath(".//*[@id='content']//div[2]/section/div[2]//a[2]");
+  private static final By previousPaymentRecordsBy = By.xpath(".//*[@id='content']//div[2]/section/div");
+  private static final By lastPaymentBy = By.xpath(".//*[@id='content']//div[2]/section/div[2]//a[2]");
   private List<Payment> paymentList = new ArrayList<>();
   private Payment payment = new Payment();
 
