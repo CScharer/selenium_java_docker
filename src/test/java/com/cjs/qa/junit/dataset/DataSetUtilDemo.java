@@ -45,21 +45,24 @@ public class DataSetUtilDemo extends BaseDBUnitTestForJPADao {
 
     // Add data set initialization
     // XML
-    final InputStream inputStreamXML =
-        ClassLoader.getSystemResourceAsStream(DataFiles.XML_DATA_SET);
-    final XmlDataSet xmlDataSet = new XmlDataSet(inputStreamXML);
-    dataSet = xmlDataSet;
+    try (InputStream inputStreamXML =
+        ClassLoader.getSystemResourceAsStream(DataFiles.XML_DATA_SET)) {
+      final XmlDataSet xmlDataSet = new XmlDataSet(inputStreamXML);
+      dataSet = xmlDataSet;
+    }
 
     // Flat XML
-    final InputStream inputStreamFlatXML =
-        ClassLoader.getSystemResourceAsStream(DataFiles.FLAT_XML_DATA_SET);
-    final FlatXmlDataSetBuilder flatXMLDataSetBuilder = new FlatXmlDataSetBuilder();
-    dataSet = flatXMLDataSetBuilder.build(inputStreamFlatXML);
+    try (InputStream inputStreamFlatXML =
+        ClassLoader.getSystemResourceAsStream(DataFiles.FLAT_XML_DATA_SET)) {
+      final FlatXmlDataSetBuilder flatXMLDataSetBuilder = new FlatXmlDataSetBuilder();
+      dataSet = flatXMLDataSetBuilder.build(inputStreamFlatXML);
+    }
 
     // XLS
-    final InputStream inputStreamXls =
-        ClassLoader.getSystemResourceAsStream(DataFiles.XLS_DATA_SET);
-    dataSet = new XlsDataSet(inputStreamXls);
+    try (InputStream inputStreamXls =
+        ClassLoader.getSystemResourceAsStream(DataFiles.XLS_DATA_SET)) {
+      dataSet = new XlsDataSet(inputStreamXls);
+    }
 
     DatabaseOperation.INSERT.execute(getiDatabaseConnection(), dataSet);
   }
