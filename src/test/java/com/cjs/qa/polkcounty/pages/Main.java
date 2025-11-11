@@ -45,13 +45,13 @@ public class Main extends Page {
     SQL.execute(sqlStringBuilder.toString());
     if (captureNew) {
       load();
-      String sTotalInmates =
+      String totalInmates =
           getWebDriver()
               .findElement(By.xpath(".//*[@id='ctl00_ContentPlaceHolder1_lblTotal']"))
               .getText();
-      sTotalInmates = sTotalInmates.substring((sTotalInmates.indexOf("=") + 1)).trim();
-      final int iTotalInmates = Integer.valueOf(sTotalInmates);
-      Environment.sysOut("iTotalInmates:[" + iTotalInmates + "]");
+      totalInmates = totalInmates.substring((totalInmates.indexOf("=") + 1)).trim();
+      final int totalInmatesCount = Integer.valueOf(totalInmates);
+      Environment.sysOut("iTotalInmates:[" + totalInmatesCount + "]");
       sqlStringBuilder = new StringBuilder();
       sqlStringBuilder.append("SELECT [URL] ");
       sqlStringBuilder.append("FROM [t_DOM_IOW_Arrests];");

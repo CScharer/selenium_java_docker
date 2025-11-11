@@ -70,9 +70,9 @@ public class XML {
   //
   public XML(String xml) {
     Environment.sysOut(XPathConstants.NODESET.toString());
-    final String sXpath = "";
+    final String xpath = "";
     try {
-      XPATH.compile(sXpath);
+      XPATH.compile(xpath);
     } catch (final Exception e) {
       Environment.sysOut(e);
     }

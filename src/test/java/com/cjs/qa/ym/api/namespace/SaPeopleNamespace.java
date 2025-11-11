@@ -154,10 +154,10 @@ public class SaPeopleNamespace extends YMService {
       success = false;
       Map<String, String> mapResults = profileUpdate(apiGUID, xml);
       Environment.sysOut("mapResults:[" + mapResults.toString() + "]");
-      final String sXML = mapResults.get("xml");
+      final String responseXml = mapResults.get("xml");
       try {
         final int errCode =
-            Integer.parseInt(XML.getNode(sXML, "YourMembershipResponse", "ErrCode"));
+            Integer.parseInt(XML.getNode(responseXml, "YourMembershipResponse", "ErrCode"));
         switch (errCode) {
           case 0:
             success = true;
