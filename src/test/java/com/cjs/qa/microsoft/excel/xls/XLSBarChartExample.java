@@ -111,7 +111,7 @@ public class XLSBarChartExample {
        * We can now read the byte data from output stream and stamp the chart
        * to Excel worksheet
        */
-      final int my_picture_id =
+      final int myPictureId =
           workbookXLS.addPicture(byteArrayOutputStream.toByteArray(), Workbook.PICTURE_TYPE_PNG);
       /* we close the output stream as we don't need this anymore */
       byteArrayOutputStream.close();

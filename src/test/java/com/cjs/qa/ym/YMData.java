@@ -1159,11 +1159,11 @@ public class YMData extends Environment {
               }
               headingsMapped = true;
             }
-            final String web_Site_Member_ID = record.get(VivitData.LABEL_WEB_SITE_MEMBER_ID);
+            final String webSiteMemberId = record.get(VivitData.LABEL_WEB_SITE_MEMBER_ID);
             final Map<String, String> mapMember = new HashMap<>();
             mapMember.put(LABEL_RECORD_NUMBER, String.valueOf(recordNumber));
             mapMember.put(LABEL_RECORD_COMPLETE, "1");
-            mapMember.put(VivitData.LABEL_WEB_SITE_MEMBER_ID, web_Site_Member_ID);
+            mapMember.put(VivitData.LABEL_WEB_SITE_MEMBER_ID, webSiteMemberId);
             for (final String field : headingsExpectedList) {
               try {
                 if (!VivitData.getDatabaseOnlyFields().contains(field)
