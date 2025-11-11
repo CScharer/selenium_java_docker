@@ -300,16 +300,15 @@ public class XLSX implements IExcel {
   }
 
   public void createSheet(String sheet, String contents) throws QAException {
-    FileOutputStream fileOutputStream = null;
     try {
       setWorkbook(new XSSFWorkbook(new FileInputStream(getFileName())));
       setWorkSheet(createWorkSheet(sheet, contents));
       Environment.sysOut(getWorkSheet().toString());
-      fileOutputStream = new FileOutputStream(getFileName());
-      getWorkbook().write(fileOutputStream);
+      try (FileOutputStream fileOutputStream = new FileOutputStream(getFileName())) {
+        getWorkbook().write(fileOutputStream);
+        fileOutputStream.flush();
+      }
       getWorkbook().close();
-      fileOutputStream.flush();
-      fileOutputStream.close();
     } catch (final IOException e) {
       throw new QAException("Error Creating Sheet.", e);
     }
@@ -368,9 +367,9 @@ public class XLSX implements IExcel {
 
   private void fileWrite() throws QAException {
     try {
-      final FileOutputStream fileOutputStream = new FileOutputStream(new File(getFileName()));
-      getWorkbook().write(fileOutputStream);
-      fileOutputStream.close();
+      try (FileOutputStream fileOutputStream = new FileOutputStream(new File(getFileName()))) {
+        getWorkbook().write(fileOutputStream);
+      }
       //
       // setWorkbook(new XSSFWorkbook(new
       // FileInputStream(getFileName())));

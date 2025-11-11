@@ -12,25 +12,24 @@ import javax.swing.JOptionPane;
 public class OdbcMsAccess64 {
 
   public void main(String[] args) {
-    Connection oConnection =
+    try (Connection oConnection =
         connectDb(
             "C:"
                 + Constants.DELIMETER_PATH
                 + "Temp"
                 + Constants.DELIMETER_PATH
                 + "qatoolsweb"
-                + IExtension.MDB);
-    try {
-      final Statement oStatement = oConnection.createStatement();
-      final ResultSet oResultSet =
-          oStatement.executeQuery(JDBCConstants.SELECT_ALL_FROM + "[tblSubmissionLog]");
-      while (oResultSet.next()) {
-        // Environment.sysOut(oResultSet.getString(1));
-        Environment.sysOut("SubmissionID:" + oResultSet.getString("SubmissionID"));
+                + IExtension.MDB)) {
+      if (oConnection != null) {
+        try (Statement oStatement = oConnection.createStatement();
+            ResultSet oResultSet =
+                oStatement.executeQuery(JDBCConstants.SELECT_ALL_FROM + "[tblSubmissionLog]")) {
+          while (oResultSet.next()) {
+            // Environment.sysOut(oResultSet.getString(1));
+            Environment.sysOut("SubmissionID:" + oResultSet.getString("SubmissionID"));
+          }
+        }
       }
-      oStatement.close();
-      oConnection.close();
-      oConnection = null;
     } catch (final Exception oException) {
       Environment.sysOut(oException.getMessage());
       oException.printStackTrace();
@@ -42,15 +41,6 @@ public class OdbcMsAccess64 {
     try {
       // String dir = System.getProperty("user.dir");
       Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-      final Connection oConnection =
-          DriverManager.getConnection(
-              "jdbc:odbc:Driver={Microsoft Access Driver (*"
-                  + IExtension.MDB
-                  + ")};DBQ="
-                  + database
-                  + Constants.DELIMETER_LIST,
-              "",
-              "");
       return DriverManager.getConnection(
               "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=" + database,
               "",

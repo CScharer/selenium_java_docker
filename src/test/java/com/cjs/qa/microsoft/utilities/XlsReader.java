@@ -309,12 +309,11 @@ public class XlsReader {
   }
 
   public boolean addSheet(String sheetName) {
-    FileOutputStream fileOutputStream;
     try {
       workbook.createSheet(sheetName);
-      fileOutputStream = new FileOutputStream(path);
-      workbook.write(fileOutputStream);
-      fileOutputStream.close();
+      try (FileOutputStream fileOutputStream = new FileOutputStream(path)) {
+        workbook.write(fileOutputStream);
+      }
     } catch (final Exception e) {
       e.printStackTrace();
       return false;
@@ -327,12 +326,11 @@ public class XlsReader {
     if (sheetIndex == -1) {
       return false;
     }
-    FileOutputStream fileOutputStream;
     try {
       workbook.removeSheetAt(sheetIndex);
-      fileOutputStream = new FileOutputStream(path);
-      workbook.write(fileOutputStream);
-      fileOutputStream.close();
+      try (FileOutputStream fileOutputStream = new FileOutputStream(path)) {
+        workbook.write(fileOutputStream);
+      }
     } catch (final Exception e) {
       e.printStackTrace();
       return false;

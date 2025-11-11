@@ -70,37 +70,31 @@ public class REST {
       // printStream.print(apiRequest);
       // printStream.close();
       //
-      final DataOutputStream dataOutputStream =
-          new DataOutputStream(httpURLConnection.getOutputStream());
-      if (JavaHelpers.hasValue(apiRequest)) {
-        dataOutputStream.writeBytes(apiRequest);
+      try (DataOutputStream dataOutputStream =
+          new DataOutputStream(httpURLConnection.getOutputStream())) {
+        if (JavaHelpers.hasValue(apiRequest)) {
+          dataOutputStream.writeBytes(apiRequest);
+        }
+        dataOutputStream.flush();
+        responseCode = String.valueOf(httpURLConnection.getResponseCode());
+        map.put("responseCode", responseCode);
+        final String responseMessage = String.valueOf(httpURLConnection.getResponseMessage());
+        map.put("responseMessage", responseMessage);
+        // if (responseCode == HttpURLConnection.HTTP_OK)
+        // {
+        // final BufferedReader bufferedReader = new BufferedReader(new
+        // InputStreamReader(httpURLConnection.getInputStream(),
+        // StandardCharsets.UTF_8));
+        try (BufferedReader bufferedReader =
+            new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()))) {
+          while ((line = bufferedReader.readLine()) != null) {
+            stringBuilderJSON.append(line);
+          }
+        }
+        // }
+      } finally {
+        httpURLConnection.disconnect();
       }
-      dataOutputStream.flush();
-      responseCode = String.valueOf(httpURLConnection.getResponseCode());
-      map.put("responseCode", responseCode);
-      final String responseMessage = String.valueOf(httpURLConnection.getResponseMessage());
-      map.put("responseMessage", responseMessage);
-      // if (responseCode == HttpURLConnection.HTTP_OK)
-      // {
-      // final BufferedReader bufferedReader = new BufferedReader(new
-      // InputStreamReader(httpURLConnection.getInputStream(),
-      // StandardCharsets.UTF_8));
-      final BufferedReader bufferedReader =
-          new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
-      while ((line = bufferedReader.readLine()) != null) {
-        stringBuilderJSON.append(line);
-      }
-      bufferedReader.close();
-      // }
-      dataOutputStream.close();
-      httpURLConnection.disconnect();
-      // if (responseCode != HttpURLConnection.HTTP_OK)
-      // {
-      System.out.println("responseCode:[" + responseCode + "]");
-      System.out.println("responseMessage:[" + responseMessage + "]");
-      // }
-      dataOutputStream.close();
-      httpURLConnection.disconnect();
     } catch (final Exception e) {
       throw new QAException(e);
     }

@@ -782,20 +782,27 @@ public interface ISelenium {
           // .usingDriverExecutable(new
           // File(System.getProperty("webdriver.gecko.driver")))
           // .usingAnyFreePort().usingAnyFreePort().build();
-          final GeckoDriverService service =
-              new GeckoDriverService.Builder()
-                  .usingDriverExecutable(new File(System.getProperty("webdriver.gecko.driver")))
-                  .usingAnyFreePort()
-                  .usingAnyFreePort()
-                  .build();
-          service.start();
-          // GeckoDriver currently needs the Proxy set in
-          // RequiredCapabilities
-          // webDriver = new FirefoxDriver(service,
-          // desiredCapabilities, desiredCapabilities);
-          FirefoxOptions ffOpts = new FirefoxOptions();
-          ffOpts.merge(desiredCapabilities);
-          webDriver = new FirefoxDriver(ffOpts);
+          GeckoDriverService service = null;
+          try {
+            service =
+                new GeckoDriverService.Builder()
+                    .usingDriverExecutable(new File(System.getProperty("webdriver.gecko.driver")))
+                    .usingAnyFreePort()
+                    .usingAnyFreePort()
+                    .build();
+            service.start();
+            // GeckoDriver currently needs the Proxy set in
+            // RequiredCapabilities
+            // webDriver = new FirefoxDriver(service,
+            // desiredCapabilities, desiredCapabilities);
+            FirefoxOptions ffOpts = new FirefoxOptions();
+            ffOpts.merge(desiredCapabilities);
+            webDriver = new FirefoxDriver(ffOpts);
+          } finally {
+            if (service != null && service.isRunning()) {
+              service.stop();
+            }
+          }
           break;
         case "htmlunit":
           webDriver = new HtmlUnitDriver(desiredCapabilities);
@@ -948,12 +955,13 @@ public interface ISelenium {
         case "htmlunit":
           webDriver = new HtmlUnitDriver();
           ((HtmlUnitDriver) webDriver).setJavascriptEnabled(true);
-          final WebClient webClient = new WebClient();
-          try {
-            final HtmlPage page = webClient.getPage("http://stackoverflow" + IExtension.COM + "/");
-            Environment.sysOut(page.asNormalizedText());
-          } catch (final Exception e) {
-            Environment.sysOut(e);
+          try (WebClient webClient = new WebClient()) {
+            try {
+              final HtmlPage page = webClient.getPage("http://stackoverflow" + IExtension.COM + "/");
+              Environment.sysOut(page.asNormalizedText());
+            } catch (final Exception e) {
+              Environment.sysOut(e);
+            }
           }
           break;
         case "ie": // (very slow)

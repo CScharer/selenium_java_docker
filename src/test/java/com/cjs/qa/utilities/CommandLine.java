@@ -126,8 +126,9 @@ public class CommandLine {
     final StringBuilder stringBuilder = new StringBuilder();
     try {
       Process process = Runtime.getRuntime().exec(command);
-      final InputStream inputStream = process.getInputStream();
-      stringBuilder.append(printLines(inputStream));
+      try (InputStream inputStream = process.getInputStream()) {
+        stringBuilder.append(printLines(inputStream));
+      }
     } catch (final IOException e) {
       e.printStackTrace();
     }
@@ -153,16 +154,17 @@ public class CommandLine {
     Process process;
     try {
       process = Runtime.getRuntime().exec(TASKLIST);
-      final BufferedReader bufferedReader =
-          new BufferedReader(new InputStreamReader(process.getInputStream()));
-      String line;
-      while ((line = bufferedReader.readLine()) != null) {
-        line = line.toLowerCase(Locale.ENGLISH);
-        if (line.contains(processRunning.toLowerCase(Locale.ENGLISH))) {
-          if (Environment.isLogAll()) {
-            Environment.sysOut(line);
+      try (BufferedReader bufferedReader =
+          new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+          line = line.toLowerCase(Locale.ENGLISH);
+          if (line.contains(processRunning.toLowerCase(Locale.ENGLISH))) {
+            if (Environment.isLogAll()) {
+              Environment.sysOut(line);
+            }
+            return true;
           }
-          return true;
         }
       }
     } catch (final Exception e) {

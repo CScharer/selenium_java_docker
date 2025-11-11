@@ -50,11 +50,18 @@ public class BaseDBUnitTestForJPADao {
     properties.put("user", DBInfo.USER);
     properties.put("password", DBInfo.PASSWORD);
 
-    final Connection connection = Driver.load().connect(DBInfo.URL, properties);
-    iDatabaseConnection = new DatabaseConnection(connection);
-    String dbLocation = Constants.PATH_PROJECT + "b2csite.dll" + IExtension.SQL;
-    dbLocation = "src/test/resources/TableDef/b2csite.dll" + IExtension.SQL;
-    RunScript.execute(iDatabaseConnection.getConnection(), new FileReader(dbLocation));
+    try {
+      final Connection connection = Driver.load().connect(DBInfo.URL, properties);
+      iDatabaseConnection = new DatabaseConnection(connection);
+      String dbLocation = Constants.PATH_PROJECT + "b2csite.dll" + IExtension.SQL;
+      dbLocation = "src/test/resources/TableDef/b2csite.dll" + IExtension.SQL;
+      RunScript.execute(iDatabaseConnection.getConnection(), new FileReader(dbLocation));
+    } catch (final Exception e) {
+      if (iDatabaseConnection != null) {
+        iDatabaseConnection.close();
+      }
+      throw e;
+    }
 
     final Map<Object, Object> mapProperties = new HashMap<>();
     mapProperties.put("javax.persistence.jdbc.url", DBInfo.URL);
@@ -67,6 +74,9 @@ public class BaseDBUnitTestForJPADao {
   public static void teardownTestClass() {
     Environment.sysOut("TearDown-Class Method:[" + JavaHelpers.getCurrentClassName() + "]");
     try {
+      if (iDatabaseConnection != null) {
+        iDatabaseConnection.close();
+      }
       if (entityManagerFactory != null) {
         if (entityManagerFactory.isOpen()) {
           entityManagerFactory.close();
