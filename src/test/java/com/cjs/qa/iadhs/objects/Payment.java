@@ -53,6 +53,9 @@ public class Payment {
   private Double paymentAmount;
   private String typeOfPayment;
 
+  /**
+   * Default constructor.
+   */
   public Payment() { }
 
   public Payment(

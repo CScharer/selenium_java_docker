@@ -19,6 +19,9 @@ public class XLSCellStyles {
   private String styleName;
   private CellStyle styleObject;
 
+  /**
+   * Default constructor.
+   */
   public XLSCellStyles() { }
 
   public XLSCellStyles(int styleIndex, String styleName, CellStyle styleObject) throws QAException {

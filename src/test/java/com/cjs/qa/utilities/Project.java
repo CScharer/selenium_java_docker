@@ -4,6 +4,10 @@ import com.cjs.qa.core.Environment;
 import java.io.IOException;
 
 public class Project {
+  private Project() {
+    // Utility class - prevent instantiation
+  }
+
 
   private static String fileSeperator = System.getProperty("file.separator");
   private static ConfigComponents product;

@@ -13,6 +13,9 @@ public class XLSCellFonts {
   private Font fontObject;
   private String fontName;
 
+  /**
+   * Default constructor.
+   */
   public XLSCellFonts() { }
 
   public XLSCellFonts(Font fontObject, String fontName) throws QAException {

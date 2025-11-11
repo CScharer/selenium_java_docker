@@ -35,6 +35,9 @@ public class Groups {
   public static final String EXTENDED_LIST =
       "GroupDirectoryURL;CalendarURL;BlogsURL;ForumsURL;PhotoGalleryURL";
 
+  /**
+   * Default constructor.
+   */
   public Groups() { }
 
   public Groups(

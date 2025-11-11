@@ -11,6 +11,9 @@ public class Attendee {
   private String rsvpResponse;
   private DataSet dataSet;
 
+  /**
+   * Default constructor.
+   */
   public Attendee() { }
 
   public Attendee(

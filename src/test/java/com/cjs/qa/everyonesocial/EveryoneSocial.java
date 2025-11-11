@@ -63,6 +63,9 @@ public class EveryoneSocial {
     return techBeaconPage;
   }
 
+  /**
+   * Default constructor.
+   */
   public EveryoneSocial() { }
 
   public EveryoneSocial(WebDriver webDriver) {

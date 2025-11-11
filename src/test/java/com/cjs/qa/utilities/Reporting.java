@@ -12,6 +12,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Reporting {
+  private Reporting() {
+    // Utility class - prevent instantiation
+  }
+
   public static String getLogStatus(String report) {
     return "dateTimeStamp:["
             + DateHelpers.getCurrentDateTime(DateHelpers.FORMAT_US_STANDARD_DATE_TIME + ".SSS")

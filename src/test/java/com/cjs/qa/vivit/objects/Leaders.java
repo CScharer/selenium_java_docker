@@ -17,6 +17,9 @@ public class Leaders {
   private String leaderName;
   private String href;
 
+  /**
+   * Default constructor.
+   */
   public Leaders() { }
 
   public Leaders(String webSiteMemberID, String leaderName, String href) {

@@ -18,6 +18,10 @@ import java.util.concurrent.ConcurrentHashMap;
  * @since 2025-11-08
  */
 public class SecureConfig {
+  private SecureConfig() {
+    // Utility class - prevent instantiation
+  }
+
 
   private static final String PROJECT_ID = "cscharer";
   private static final Map<String, String> CACHE = new ConcurrentHashMap<>();

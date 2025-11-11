@@ -22,6 +22,10 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 public class XLSBarChartExample {
+  private XLSBarChartExample() {
+    // Utility class - prevent instantiation
+  }
+
   public static void main(String[] args) throws Exception {
     String fileName = "C:/Workspace/Github/cjs-app/cjs-app-gui/barChart" + IExtension.XLS;
     fileName = "barChart" + IExtension.XLS;

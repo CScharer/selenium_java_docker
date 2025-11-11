@@ -7,6 +7,10 @@ import com.google.protobuf.ByteString;
 import java.io.IOException;
 
 public class GoogleCloud {
+  private GoogleCloud() {
+    // Utility class - prevent instantiation
+  }
+
   // public class SecretManagerExample {
 
   /**

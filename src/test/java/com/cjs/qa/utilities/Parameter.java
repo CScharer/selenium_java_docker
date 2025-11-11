@@ -7,6 +7,9 @@ public class Parameter {
   private String type = null;
   private Object value = null;
 
+  /**
+   * Default constructor.
+   */
   public Parameter() { }
 
   public Parameter(Integer index, String name, String type, Object value) {

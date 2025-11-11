@@ -11,6 +11,10 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ODBCMSAccess {
+  private ODBCMSAccess() {
+    // Utility class - prevent instantiation
+  }
+
 
   public static void main(String[] args) {
     final List<String> listFields =

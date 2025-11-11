@@ -18,6 +18,9 @@ public class Calendars {
   private String details;
   private String eventURL;
 
+  /**
+   * Default constructor.
+   */
   public Calendars() { }
 
   private static String appendRecord(String tableName, List<String> fieldsList, Calendars record) {

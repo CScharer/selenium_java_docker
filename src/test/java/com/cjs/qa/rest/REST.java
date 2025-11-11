@@ -14,6 +14,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class REST {
+  private REST() {
+    // Utility class - prevent instantiation
+  }
+
 
   public static Map<String, String> getAPIJSONResponse(
       String credentials, String requestMethod, String apiRequest, String url) throws QAException {

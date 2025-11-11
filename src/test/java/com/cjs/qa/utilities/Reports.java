@@ -18,6 +18,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Reports {
+  private Reports() {
+    // Utility class - prevent instantiation
+  }
+
   public static final String JIRA_URL = "http://jira-tst.wrberkley" + IExtension.COM + "/browse/";
   public static final int DEFAULT_SHEET_COUNT = 2;
   public static final String STRING_SUMMARY =

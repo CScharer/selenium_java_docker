@@ -18,6 +18,10 @@ import org.apache.commons.csv.CSVRecord;
 import org.junit.Assert;
 
 public class SystemProcesses {
+  private SystemProcesses() {
+    // Utility class - prevent instantiation
+  }
+
   private static JDBC jdbc = new JDBC("", "");
   public static final String FILE_DATA_CSV = Environment.getFolderData() + "Data" + IExtension.CSV;
   public static final String USERID = "CHRIS";

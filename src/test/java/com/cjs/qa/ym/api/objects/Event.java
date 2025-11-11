@@ -9,6 +9,9 @@ public class Event {
   private String isValid;
   private List<Registration> registrationList;
 
+  /**
+   * Default constructor.
+   */
   public Event() { }
 
   public Event(String eventDate, String eventID, String eventName) {

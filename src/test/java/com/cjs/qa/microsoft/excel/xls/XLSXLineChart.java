@@ -37,6 +37,10 @@ import org.openxmlformats.schemas.drawingml.x2006.chart.STLegendPos;
 
 /** Line chart example. */
 public class XLSXLineChart {
+  private XLSXLineChart() {
+    // Utility class - prevent instantiation
+  }
+
   public static void main(String[] args) throws IOException {
     final XSSFWorkbook workbookXLSX = new XSSFWorkbook();
     final XSSFSheet sheetXLSX = workbookXLSX.createSheet("linechart");

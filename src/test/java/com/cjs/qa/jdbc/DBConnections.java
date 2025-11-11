@@ -6,6 +6,10 @@ import com.cjs.qa.utilities.IExtension;
 import java.util.Locale;
 
 public class DBConnections {
+  private DBConnections() {
+    // Utility class - prevent instantiation
+  }
+
   private static DBParameters access() {
     final DBParameters dbParameters = new DBParameters("UCANACCESS");
     dbParameters.setServer(

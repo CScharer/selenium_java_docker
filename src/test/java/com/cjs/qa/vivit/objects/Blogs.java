@@ -18,6 +18,9 @@ public class Blogs {
   private String lastActivity;
   private String blogURL;
 
+  /**
+   * Default constructor.
+   */
   public Blogs() { }
 
   public Blogs(

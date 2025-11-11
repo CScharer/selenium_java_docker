@@ -18,6 +18,9 @@ public class GroupLeaderLink {
   private String webSiteMemberID;
   private String leaderType;
 
+  /**
+   * Default constructor.
+   */
   public GroupLeaderLink() { }
 
   public GroupLeaderLink(

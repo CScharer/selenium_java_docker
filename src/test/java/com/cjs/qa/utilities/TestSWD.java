@@ -7,6 +7,10 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 
 public class TestSWD {
+  private TestSWD() {
+    // Utility class - prevent instantiation
+  }
+
 
   public static void main(String[] args) {
     WebDriver webDriver = null;

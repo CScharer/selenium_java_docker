@@ -19,6 +19,9 @@ public class XLSXCellStyles {
   private String styleName;
   private CellStyle styleObject;
 
+  /**
+   * Default constructor.
+   */
   public XLSXCellStyles() { }
 
   public XLSXCellStyles(int styleIndex, String styleName, CellStyle styleObject)

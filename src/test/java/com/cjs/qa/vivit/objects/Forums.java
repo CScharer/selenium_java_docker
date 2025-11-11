@@ -19,6 +19,9 @@ public class Forums {
   private String lastActivity;
   private String forumURL;
 
+  /**
+   * Default constructor.
+   */
   public Forums() { }
 
   public Forums(

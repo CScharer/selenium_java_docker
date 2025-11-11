@@ -11,6 +11,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SQLite {
+  private SQLite() {
+    // Utility class - prevent instantiation
+  }
+
   public static void main(String[] args) throws Throwable {
     try {
       createProductSummaryTableAndViews("tblProductSummaryControl", "tblProductSummaryTest");

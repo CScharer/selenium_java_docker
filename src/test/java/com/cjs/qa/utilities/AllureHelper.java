@@ -14,6 +14,10 @@ import org.openqa.selenium.WebDriver;
  * attachment functionality
  */
 public class AllureHelper {
+  private AllureHelper() {
+    // Utility class - prevent instantiation
+  }
+
   private static final Logger LOGGER = LogManager.getLogger(AllureHelper.class);
 
   /**
