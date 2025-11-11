@@ -15,12 +15,12 @@ public class SurveyPage extends Page {
     super(webDriver);
   }
 
-  private final String nodeRoot = ".//*[@id='surveyQuestions']";
-  private final By editCN1 = By.xpath(".//*[@id='CN1']");
-  private final By editCN2 = By.xpath(".//*[@id='CN2']");
-  private final By editCN3 = By.xpath(".//*[@id='CN3']");
-  private final By editCN4 = By.xpath(".//*[@id='CN4']");
-  private final By editCN5 = By.xpath(".//*[@id='CN5']");
+  private static final String nodeRoot = ".//*[@id='surveyQuestions']";
+  private static final By editCN1 = By.xpath(".//*[@id='CN1']");
+  private static final By editCN2 = By.xpath(".//*[@id='CN2']");
+  private static final By editCN3 = By.xpath(".//*[@id='CN3']");
+  private static final By editCN4 = By.xpath(".//*[@id='CN4']");
+  private static final By editCN5 = By.xpath(".//*[@id='CN5']");
   private final By editCN6 = By.xpath(".//*[@id='CN6']");
   private final By buttonStart = By.xpath(".//*[@id='NextButton']");
   private final By buttonNext = buttonStart; // By.xpath(".//*[@id='NextButton']");

@@ -27,11 +27,11 @@ public class EarnPointsPage extends Page {
       Arrays.asList(CHARACTERS.split(Constants.DELIMETER_LIST));
   public static final String STATUS_FAILED = "FAILED";
   public static final String STATUS_PASSED = "PASSED";
-  private final By labelPointsEarned = By.xpath(".//div[@class='points-container']");
-  private final By labelCodesEntered = By.xpath(".//div[@class='added-code-text']/p");
-  private final By labelErrorMessage = By.xpath(".//div[@class='err-msg']/p");
-  private final By editPackCode = By.xpath(".//input[@name='snumber']");
-  private final By buttonSubmit = By.xpath(".//button[@type='button'][.='Submit']");
+  private static final By labelPointsEarned = By.xpath(".//div[@class='points-container']");
+  private static final By labelCodesEntered = By.xpath(".//div[@class='added-code-text']/p");
+  private static final By labelErrorMessage = By.xpath(".//div[@class='err-msg']/p");
+  private static final By editPackCode = By.xpath(".//input[@name='snumber']");
+  private static final By buttonSubmit = By.xpath(".//button[@type='button'][.='Submit']");
   private final Map<Integer, String> characterMap = new HashMap<>();
   private final Map<Integer, Integer> indexMap = new HashMap<>();
 

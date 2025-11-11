@@ -8,7 +8,7 @@ import java.util.Map;
 import org.junit.Assert;
 
 public class ExampleService extends WebService {
-  private final String baseAPIExample = "http://jsonplaceholder.typicode" + IExtension.COM;
+  private static final String baseAPIExample = "http://jsonplaceholder.typicode" + IExtension.COM;
 
   /**
    * @param ssoUserTokenId

@@ -19,12 +19,12 @@ public class SignInPage extends Page {
   private static final By editUserName = By.xpath(".//*[@id='UserName']");
   private static final By editPassword = By.xpath(".//*[@id='Password']");
   private static final By editDateOfBirthMonth = By.xpath(".//*[@id='DateOfBirthMonth']");
-  private final By editDateOfBirthDay = By.xpath(".//*[@id='DateOfBirthDay']");
-  private final By editDateOfBirthYear = By.xpath(".//*[@id='DateOfBirthYear']");
-  private final By checkboxRememberUsername = By.xpath(".//*[@id='rememberUsername']");
-  private final By buttonEnter = By.xpath(".//*[@id='loginBtn']");
-  private final By imageAccount = By.xpath(".//a[@data-dtmtext='Account Logo']");
-  private final By linkLogOut = By.xpath(".//a[contains(text(),'LOG OUT')]");
+  private static final By editDateOfBirthDay = By.xpath(".//*[@id='DateOfBirthDay']");
+  private static final By editDateOfBirthYear = By.xpath(".//*[@id='DateOfBirthYear']");
+  private static final By checkboxRememberUsername = By.xpath(".//*[@id='rememberUsername']");
+  private static final By buttonEnter = By.xpath(".//*[@id='loginBtn']");
+  private static final By imageAccount = By.xpath(".//a[@data-dtmtext='Account Logo']");
+  private static final By linkLogOut = By.xpath(".//a[contains(text(),'LOG OUT')]");
 
   private By getEditUserName() {
     return editUserName;

@@ -9,7 +9,7 @@ import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
 public class RTestWatcher implements TestRule {
-  private final RTestRun rTestRun = new RTestRun(null, null);
+  private static final RTestRun rTestRun = new RTestRun(null, null);
 
   @Rule
   public TestWatcher testWatcher =

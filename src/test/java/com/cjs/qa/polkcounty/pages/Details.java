@@ -17,7 +17,7 @@ public class Details extends Page {
     super(webDriver);
   }
 
-  private final By byNoResults = By.xpath(".//*[@id='ctl00_ContentPlaceHolder1_noResults']");
+  private static final By byNoResults = By.xpath(".//*[@id='ctl00_ContentPlaceHolder1_noResults']");
 
   public StringBuilder getArrestRecord(String url, StringBuilder sqlStringBuilder) {
     getWebDriver().get(url);

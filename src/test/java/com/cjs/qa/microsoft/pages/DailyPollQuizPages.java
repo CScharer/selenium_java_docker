@@ -15,18 +15,18 @@ import org.openqa.selenium.WebElement;
 
 public class DailyPollQuizPages extends RewardsPage {
   private List<Answers> answersList;
-  private final By bySearchEdit = By.xpath(".//input[@name='q']");
+  private static final By bySearchEdit = By.xpath(".//input[@name='q']");
   private final By byPointsAvailableLabel =
       By.xpath(".//*[@id='quizWelcomeContainer']//span[@class='rqWcCredits']");
   private final By byPointsEarnedLabel =
       By.xpath(".//*[@id='btoHeadPanel']//span[@class='rqECredits']");
   private final By byWelcomeLabel =
       By.xpath(".//*[@id='quizWelcomeContainer']/div[@class='rqText']");
-  private final By byStartPlayingButton = By.xpath(".//*[@id='rqStartQuiz']");
-  private final By byQuestionID = By.xpath(".//*[@id='questionId']");
-  private final By byQuizComplete = By.xpath(".//*[@id='quizCompleteContainer']/div");
-  private final By byAnswerCorrectMessageLabel = By.xpath(".//*[@id='rqcorrectAns']");
-  private final By byAnswerWrongMessageLabel = By.xpath(".//*[@id='wrongAnswerMessage']");
+  private static final By byStartPlayingButton = By.xpath(".//*[@id='rqStartQuiz']");
+  private static final By byQuestionID = By.xpath(".//*[@id='questionId']");
+  private static final By byQuizComplete = By.xpath(".//*[@id='quizCompleteContainer']/div");
+  private static final By byAnswerCorrectMessageLabel = By.xpath(".//*[@id='rqcorrectAns']");
+  private static final By byAnswerWrongMessageLabel = By.xpath(".//*[@id='wrongAnswerMessage']");
 
   private String pointsAvailable;
   private int answersNeeded;

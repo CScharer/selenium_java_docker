@@ -46,10 +46,10 @@ public class RewardsPage extends Page {
   private static int searchesMin = 34;
   public static final int SEARCH = 1;
   private Selenium selenium = new Selenium(getWebDriver());
-  private final By byButtonSignInWithMicrosoft = By.xpath(".//span[.='SIGN IN WITH MICROSOFT']");
+  private static final By byButtonSignInWithMicrosoft = By.xpath(".//span[.='SIGN IN WITH MICROSOFT']");
   private final By byPointsDailySet =
       By.xpath(".//*[@id='daily-sets']/mee-card-group[1]/div/mee-card");
-  private final By byPointsMoreActivities = By.xpath(".//*[@id='more-activities']/div/mee-card");
+  private static final By byPointsMoreActivities = By.xpath(".//*[@id='more-activities']/div/mee-card");
   private final By byPointsAvailableSneakPeek =
       By.xpath(".//*[@id='daily-sets']/mee-card-group[2]/div/mee-card");
   public static final String XPAPTH_USER_BANNER = ".//*[@id='userBanner']";
@@ -78,7 +78,7 @@ public class RewardsPage extends Page {
     return byPointsAvailableSneakPeek;
   }
 
-  private final MicrosoftReport microsoftReport = new MicrosoftReport();
+  private static final MicrosoftReport microsoftReport = new MicrosoftReport();
   private boolean searchesRequired = true;
   private int searchesNeeded = 0;
   private int searchAttempts = 0;

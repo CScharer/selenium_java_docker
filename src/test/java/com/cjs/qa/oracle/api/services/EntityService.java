@@ -25,7 +25,7 @@ public class EntityService extends WebService {
           + OracleConstants.API_ORG_VERSION_MAJOR
           + "/"
           + OracleConstants.API_ORG_VERSION_MINOR;
-  private final Encoder encoder = new Encoder("");
+  private static final Encoder encoder = new Encoder("");
 
   /**
    * @param ssoUserTokenId

@@ -7,11 +7,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class SignInPage extends Page {
-  private final By checkboxKeepMeSignedIn = By.xpath(".//input[@name='KMSI']");
-  private final By editEmail = By.xpath(".//input[@name='loginfmt']");
-  private final By editPassword = By.xpath(".//input[@name='passwd']");
-  private final By buttonNext = By.xpath(".//input[@value='Next']");
-  private final By buttonSignIn = By.xpath(".//input[@value='Sign in']");
+  private static final By checkboxKeepMeSignedIn = By.xpath(".//input[@name='KMSI']");
+  private static final By editEmail = By.xpath(".//input[@name='loginfmt']");
+  private static final By editPassword = By.xpath(".//input[@name='passwd']");
+  private static final By buttonNext = By.xpath(".//input[@value='Next']");
+  private static final By buttonSignIn = By.xpath(".//input[@value='Sign in']");
 
   private By getCheckboxKeepMeSignedIn() {
     return checkboxKeepMeSignedIn;

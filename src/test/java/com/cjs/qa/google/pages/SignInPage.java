@@ -12,7 +12,7 @@ public class SignInPage extends Page {
     super(webDriver);
   }
 
-  private final By editSearch = By.name("q");
+  private static final By editSearch = By.name("q");
 
   public void editSearchSet(String value) throws QAException {
     if (objectExists(editSearch)) {
