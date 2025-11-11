@@ -35,46 +35,46 @@ public class Encoder {
     // we should only use the UPPERCASE unless we know for sure what we need
     // is not case sensitive.
     final String cCHARS = "";
-    final StringBuilder oStringBuilder = new StringBuilder();
-    final DateFormat oFormatNano = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss:SSS");
-    Date oDate = new Date();
-    String sDateTimeStamp = oFormatNano.format(oDate);
-    for (int iLoop = 1; iLoop <= 1; iLoop++) {
-      final String sValueEncoded = getEncodedValue(cCHARS);
-      final String sValueDecoded = getDecodedValue(sValueEncoded, cCHARS);
-      oStringBuilder.append(sValueDecoded + " - " + sValueEncoded + Constants.NL);
+    final StringBuilder stringBuilder = new StringBuilder();
+    final DateFormat formatNano = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss:SSS");
+    Date date = new Date();
+    String dateTimeStamp = formatNano.format(date);
+    for (int loop = 1; loop <= 1; loop++) {
+      final String valueEncoded = getEncodedValue(cCHARS);
+      final String valueDecoded = getDecodedValue(valueEncoded, cCHARS);
+      stringBuilder.append(valueDecoded + " - " + valueEncoded + Constants.NL);
     }
-    oDate = new Date();
-    oStringBuilder.append(sDateTimeStamp + Constants.NL);
-    sDateTimeStamp = oFormatNano.format(oDate);
-    oStringBuilder.append(sDateTimeStamp);
-    System.out.println(oStringBuilder.toString());
+    date = new Date();
+    stringBuilder.append(dateTimeStamp + Constants.NL);
+    dateTimeStamp = formatNano.format(date);
+    stringBuilder.append(dateTimeStamp);
+    System.out.println(stringBuilder.toString());
   }
 
   public String getDecodedValue(String sValue, String base) {
-    int iDecodedDate = 0;
-    int iDecodedTime = 0;
-    int iDecodedNano = 0;
-    String sEncoded = "";
-    String sDecoded = "";
+    int decodedDate = 0;
+    int decodedTime = 0;
+    int decodedNano = 0;
+    String encoded = "";
+    String decoded = "";
     setCharacterSet(base);
-    sEncoded = sValue;
+    encoded = sValue;
     switch (base) {
       case "52":
-        iDecodedDate = decode(sEncoded.substring(0, 5));
-        iDecodedTime = decode(sEncoded.substring(5, 9));
-        iDecodedNano = decode(sEncoded.substring(9));
+        decodedDate = decode(encoded.substring(0, 5));
+        decodedTime = decode(encoded.substring(5, 9));
+        decodedNano = decode(encoded.substring(9));
         break;
       default:
-        iDecodedDate = decode(sEncoded.substring(0, 6));
-        iDecodedTime = decode(sEncoded.substring(6, 11));
-        iDecodedNano = decode(sEncoded.substring(11));
+        decodedDate = decode(encoded.substring(0, 6));
+        decodedTime = decode(encoded.substring(6, 11));
+        decodedNano = decode(encoded.substring(11));
         break;
     }
-    sDecoded = String.valueOf(iDecodedDate);
-    sDecoded += String.valueOf(iDecodedTime);
-    sDecoded += String.valueOf(iDecodedNano);
-    return sDecoded;
+    decoded = String.valueOf(decodedDate);
+    decoded += String.valueOf(decodedTime);
+    decoded += String.valueOf(decodedNano);
+    return decoded;
   }
 
   public String getEncodedValue(String sBase) {
@@ -86,44 +86,44 @@ public class Encoder {
       e.printStackTrace();
     }
     setCharacterSet(sBase);
-    final DateFormat oFormatDate = new SimpleDateFormat("yyyyMMdd");
-    final DateFormat oFormatTime = new SimpleDateFormat("1HHmmss");
-    final DateFormat oFormatNano = new SimpleDateFormat("1SSS");
-    final Date oDate = new Date();
-    final String sDate = oFormatDate.format(oDate);
+    final DateFormat formatDate = new SimpleDateFormat("yyyyMMdd");
+    final DateFormat formatTime = new SimpleDateFormat("1HHmmss");
+    final DateFormat formatNano = new SimpleDateFormat("1SSS");
+    final Date date = new Date();
+    final String dateString = formatDate.format(date);
     // Prepend a 1 as the time may be AM and would lose a character.
-    final String sTime = oFormatTime.format(oDate);
+    final String timeString = formatTime.format(date);
     // Prepend a 1 as the Nanoseconds could have leading zeros which would
     // be lost characters.
-    final String sNano = oFormatNano.format(oDate);
-    final int iDate = Integer.valueOf(sDate);
-    final int iTime = Integer.valueOf(sTime);
-    final int iNano = Integer.valueOf(sNano);
-    String sDateEncoded = encode(iDate);
-    sDateEncoded += encode(iTime);
-    sDateEncoded += encode(iNano);
-    return sDateEncoded;
+    final String nanoString = formatNano.format(date);
+    final int dateInt = Integer.valueOf(dateString);
+    final int timeInt = Integer.valueOf(timeString);
+    final int nanoInt = Integer.valueOf(nanoString);
+    String dateEncoded = encode(dateInt);
+    dateEncoded += encode(timeInt);
+    dateEncoded += encode(nanoInt);
+    return dateEncoded;
   }
 
   public String encode(int iNumber) {
-    String sText = "";
-    final int iTextLength = (int) Math.ceil(Math.log(iNumber) / Math.log(characterSet.length()));
-    for (int iLoop = 0; iLoop < iTextLength; iLoop++) {
-      // iLoop goes to log base characterSet.length() of iNumber
+    String text = "";
+    final int textLength = (int) Math.ceil(Math.log(iNumber) / Math.log(characterSet.length()));
+    for (int loop = 0; loop < textLength; loop++) {
+      // loop goes to log base characterSet.length() of iNumber
       // (using change of base formula)
-      sText += characterSet.charAt(iNumber % characterSet.length());
+      text += characterSet.charAt(iNumber % characterSet.length());
       iNumber /= characterSet.length();
     }
-    return sText;
+    return text;
   }
 
   public int decode(String sText) {
-    int iNumber = 0;
-    final int iTextLength = sText.length();
-    for (int iLoop = 0; iLoop < iTextLength; iLoop++) {
-      iNumber += characterSet.indexOf(sText.charAt(0)) * Math.pow(characterSet.length(), iLoop);
+    int number = 0;
+    final int textLength = sText.length();
+    for (int loop = 0; loop < textLength; loop++) {
+      number += characterSet.indexOf(sText.charAt(0)) * Math.pow(characterSet.length(), loop);
       sText = sText.substring(1);
     }
-    return iNumber;
+    return number;
   }
 }
