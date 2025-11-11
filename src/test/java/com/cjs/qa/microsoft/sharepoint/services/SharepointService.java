@@ -160,16 +160,16 @@ public class SharepointService {
         map.put("xml", stringBuilder.toString());
         // Environment.sysOut("xml:[" + xml + "]")
       }
-      dataOutputStream.close();
-      httpURLConnection.disconnect();
       if (responseCode != HttpURLConnection.HTTP_OK) {
         VivitEnvironment.sysOut("responseCode:[" + responseCode + "]");
         VivitEnvironment.sysOut("responseMessage:[" + responseMessage + "]");
       }
-      dataOutputStream.close();
-      httpURLConnection.disconnect();
     } catch (final Exception e) {
       VivitEnvironment.sysOut(e);
+    } finally {
+      if (httpURLConnection != null) {
+        httpURLConnection.disconnect();
+      }
     }
     // Environment.sysOut("map:[" + map.toString() + "]")
     return map;
