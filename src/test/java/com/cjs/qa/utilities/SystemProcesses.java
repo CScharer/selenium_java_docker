@@ -255,56 +255,55 @@ public class SystemProcesses {
     createBackupTable(tableName);
     SQL.execute("DELETE FROM [" + tableName + "]");
     StringBuilder stringBuilder = new StringBuilder();
-    Reader reader;
     try {
       JavaHelpers.sleep(0, Constants.MILLISECONDS * 15);
       final Map<String, String> mapHeadingsExpected = new HashMap<>();
       for (final String heading : listHeadingsExpected) {
         mapHeadingsExpected.put(heading, "");
       }
-      reader = new FileReader(FILE_DATA_CSV);
-      Iterable<CSVRecord> records = CSVFormat.RFC4180.withHeader().parse(reader);
-      boolean headingsMapped = false;
-      Map<String, String> mapHeadingsCSV = null;
-      stringBuilder = new StringBuilder();
-      int recordNumber = 0;
-      for (final CSVRecord record : records) {
-        // final int recordNumber = (int) record.getRecordNumber();
-        recordNumber++;
-        if (recordNumber >= (RECORD_START + 1)) {
-          if (!headingsMapped) {
-            mapHeadingsCSV = record.toMap();
-            Environment.sysOut("listHeadingsExpected:[" + listHeadingsExpected + "]");
-            Environment.sysOut("mapHeadingsExpected:[" + mapHeadingsExpected.keySet() + "]");
-            Environment.sysOut("mapHeadingsCSV:[" + mapHeadingsCSV.keySet() + "]");
-            if (!mapHeadingsCSV.keySet().equals(mapHeadingsExpected.keySet())) {
-              Assert.fail("CSV headings do not match Expected DB headings");
+      try (Reader reader = new FileReader(FILE_DATA_CSV)) {
+        Iterable<CSVRecord> records = CSVFormat.RFC4180.withHeader().parse(reader);
+        boolean headingsMapped = false;
+        Map<String, String> mapHeadingsCSV = null;
+        stringBuilder = new StringBuilder();
+        int recordNumber = 0;
+        for (final CSVRecord record : records) {
+          // final int recordNumber = (int) record.getRecordNumber();
+          recordNumber++;
+          if (recordNumber >= (RECORD_START + 1)) {
+            if (!headingsMapped) {
+              mapHeadingsCSV = record.toMap();
+              Environment.sysOut("listHeadingsExpected:[" + listHeadingsExpected + "]");
+              Environment.sysOut("mapHeadingsExpected:[" + mapHeadingsExpected.keySet() + "]");
+              Environment.sysOut("mapHeadingsCSV:[" + mapHeadingsCSV.keySet() + "]");
+              if (!mapHeadingsCSV.keySet().equals(mapHeadingsExpected.keySet())) {
+                Assert.fail("CSV headings do not match Expected DB headings");
+              }
+              for (final String key : mapHeadingsCSV.keySet()) {
+                Environment.sysOut("heading: [" + key + "]");
+              }
+              headingsMapped = true;
             }
-            for (final String key : mapHeadingsCSV.keySet()) {
-              Environment.sysOut("heading: [" + key + "]");
+            final Map<String, String> memberMap = new HashMap<>();
+            for (final String field : listHeadingsExpected) {
+              try {
+                memberMap.put(field, record.get(field));
+              } catch (final Exception e) {
+                Environment.sysOut(e);
+              }
             }
-            headingsMapped = true;
-          }
-          final Map<String, String> memberMap = new HashMap<>();
-          for (final String field : listHeadingsExpected) {
-            try {
-              memberMap.put(field, record.get(field));
-            } catch (final Exception e) {
-              Environment.sysOut(e);
+            memberMap.put("DateTimeStamp", dateTimeStamp);
+            stringBuilder =
+                SQL.appendStringBuilderSQLInsertRecord(tableName, stringBuilder, memberMap, true);
+            if ((recordNumber % RECORD_LIMIT) == 0) {
+              SQL.execute(stringBuilder.toString());
+              stringBuilder = new StringBuilder();
             }
-          }
-          memberMap.put("DateTimeStamp", dateTimeStamp);
-          stringBuilder =
-              SQL.appendStringBuilderSQLInsertRecord(tableName, stringBuilder, memberMap, true);
-          if ((recordNumber % RECORD_LIMIT) == 0) {
-            SQL.execute(stringBuilder.toString());
-            stringBuilder = new StringBuilder();
           }
         }
+          SQL.execute(stringBuilder.toString());
+          records = null;
       }
-      SQL.execute(stringBuilder.toString());
-      records = null;
-      reader = null;
       FSO.fileDelete(FILE_DATA_CSV);
     } catch (final Exception e) {
       Environment.sysOut(e);

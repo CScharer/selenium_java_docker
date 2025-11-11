@@ -55,8 +55,9 @@ public class WebDriverUtils {
       if (!file.exists()) {
         file.createNewFile();
       }
-      final FileOutputStream fos = new FileOutputStream(file);
-      ImageIO.write(bufferedImage, extension, fos);
+      try (FileOutputStream fos = new FileOutputStream(file)) {
+        ImageIO.write(bufferedImage, extension, fos);
+      }
     } catch (AWTException | IOException oException) {
       oException.printStackTrace();
     }

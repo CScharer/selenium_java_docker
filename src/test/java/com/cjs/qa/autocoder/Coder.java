@@ -22,7 +22,7 @@ import org.junit.Test;
 
 public class Coder {
   private static JDBC jdbc = new JDBC("", "AutoCoderExcel");
-  public static final String COMMENT = "// ";
+    public static final String COMMENT = "// ";
   private static final String METHOD_NAME_POPULATE = "populatePage";
   private static final String METHOD_NAME_VALIDATE = "validatePage";
   private static final String CASE_NOT_DEFINED = "Case Not Defined";

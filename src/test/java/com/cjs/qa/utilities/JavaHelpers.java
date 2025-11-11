@@ -653,8 +653,9 @@ public class JavaHelpers {
    */
   public static String getStackTrace(Throwable throwable) {
     final Writer writer = new StringWriter();
-    final PrintWriter printWriter = new PrintWriter(writer);
-    throwable.printStackTrace(printWriter);
+    try (PrintWriter printWriter = new PrintWriter(writer)) {
+      throwable.printStackTrace(printWriter);
+    }
     return writer.toString();
   }
 

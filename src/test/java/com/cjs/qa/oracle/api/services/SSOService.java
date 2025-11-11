@@ -244,12 +244,12 @@ public class SSOService extends WebService {
       oHttpURLConnection.setRequestMethod("GET");
       final String responseCode = String.valueOf(oHttpURLConnection.getResponseCode());
       final String responseMessage = String.valueOf(oHttpURLConnection.getResponseMessage());
-      final BufferedReader oBufferedReader =
-          new BufferedReader(new InputStreamReader(oHttpURLConnection.getInputStream()));
-      while ((line = oBufferedReader.readLine()) != null) {
-        json += line;
+      try (BufferedReader oBufferedReader =
+          new BufferedReader(new InputStreamReader(oHttpURLConnection.getInputStream()))) {
+        while ((line = oBufferedReader.readLine()) != null) {
+          json += line;
+        }
       }
-      oBufferedReader.close();
       if (!"200".equals(responseCode)) {
         System.out.println(responseCode);
         System.out.println(responseMessage);

@@ -131,10 +131,11 @@ public class YMService {
       httpURLConnection.setRequestProperty(
           "Content-Length", "" + Integer.toString(request.getBytes().length));
       httpURLConnection.setUseCaches(false);
-      final DataOutputStream dataOutputStream =
-          new DataOutputStream(httpURLConnection.getOutputStream());
-      dataOutputStream.writeBytes(request);
-      dataOutputStream.flush();
+      try (DataOutputStream dataOutputStream =
+          new DataOutputStream(httpURLConnection.getOutputStream())) {
+        dataOutputStream.writeBytes(request);
+        dataOutputStream.flush();
+      }
       responseCode = httpURLConnection.getResponseCode();
       map.put("responseCode", String.valueOf(responseCode));
       final String responseMessage = String.valueOf(httpURLConnection.getResponseMessage());

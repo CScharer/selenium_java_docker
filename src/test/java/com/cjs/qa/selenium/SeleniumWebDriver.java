@@ -500,18 +500,25 @@ public class SeleniumWebDriver {
             // setWebDriver(new MarionetteDriver());
             setWebDriver(new FirefoxDriver(firefoxOptions));
             //
-            GeckoDriverService service =
-                new GeckoDriverService.Builder()
-                    .usingDriverExecutable(new File("path to geckodriver"))
-                    .usingAnyFreePort()
-                    .usingAnyFreePort()
-                    .build();
-            service.start();
-            // GeckoDriver needs the Proxy set in
-            // RequiredCapabilities
-            FirefoxOptions ffOpts = new FirefoxOptions();
-            ffOpts.merge(desiredCapabilities);
-            setWebDriver(new FirefoxDriver(service, ffOpts));
+            GeckoDriverService service = null;
+            try {
+              service =
+                  new GeckoDriverService.Builder()
+                      .usingDriverExecutable(new File("path to geckodriver"))
+                      .usingAnyFreePort()
+                      .usingAnyFreePort()
+                      .build();
+              service.start();
+              // GeckoDriver needs the Proxy set in
+              // RequiredCapabilities
+              FirefoxOptions ffOpts = new FirefoxOptions();
+              ffOpts.merge(desiredCapabilities);
+              setWebDriver(new FirefoxDriver(service, ffOpts));
+            } finally {
+              if (service != null && service.isRunning()) {
+                service.stop();
+              }
+            }
             break;
           case Browser.HTML_UNIT:
             // setWebDriver(new

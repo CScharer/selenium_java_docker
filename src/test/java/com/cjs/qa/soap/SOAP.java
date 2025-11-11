@@ -62,9 +62,10 @@ public class SOAP {
     SOAPConnectionFactory soapConnectionFactory;
     try {
       soapConnectionFactory = SOAPConnectionFactory.newInstance();
-      final SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-      final SOAPMessage soapMessageResponse = soapConnection.call(soapMessage, url);
-      setXml(getSOAPMessageValue(soapMessageResponse, false));
+      try (SOAPConnection soapConnection = soapConnectionFactory.createConnection()) {
+        final SOAPMessage soapMessageResponse = soapConnection.call(soapMessage, url);
+        setXml(getSOAPMessageValue(soapMessageResponse, false));
+      }
     } catch (SOAPException | UnsupportedOperationException e) {
       throw new QAException("Error getting Soap Response.", e);
     }

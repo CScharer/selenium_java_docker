@@ -71,30 +71,27 @@ public class ParameterHelper {
           Type typeDeclaringClass = Type.getType(declaringClass);
           String methodDescriptor = Type.getMethodDescriptor(method);
           String url = typeDeclaringClass.getInternalName() + ".class";
-          InputStream inputStream = declaringClassLoader.getResourceAsStream(url);
-          if (inputStream == null) {
-            throw new IllegalArgumentException(
-                "The constructor's class loader cannot find the bytecode that"
-                    + " defined the constructor's class (URL: "
-                    + url
-                    + ")");
-          }
-          // ASM 7.1 is now used exclusively (old asm:asm:3.3.1 excluded from QuickBooks
-          // dependency)
-          ClassNode classNode = new ClassNode();
-          try {
+          try (InputStream inputStream = declaringClassLoader.getResourceAsStream(url)) {
+            if (inputStream == null) {
+              throw new IllegalArgumentException(
+                  "The constructor's class loader cannot find the bytecode that"
+                      + " defined the constructor's class (URL: "
+                      + url
+                      + ")");
+            }
+            // ASM 7.1 is now used exclusively (old asm:asm:3.3.1 excluded from QuickBooks
+            // dependency)
+            ClassNode classNode = new ClassNode();
             new ClassReader(inputStream).accept(classNode, 0);
-          } finally {
-            inputStream.close();
-          }
-          List<MethodNode> methodNodeList = classNode.methods;
-          for (MethodNode methodNode : methodNodeList) {
-            if (methodNode.name.equals(methodName) && methodNode.desc.equals(methodDescriptor)) {
-              methodFound = true;
-              parameterHelper.setIsStatic(method.toString().contains(" static "));
-              parameterHelper =
-                  getParameterData(parameterHelper, method, methodNode, parameterList);
-              return parameterHelper.toString();
+            List<MethodNode> methodNodeList = classNode.methods;
+            for (MethodNode methodNode : methodNodeList) {
+              if (methodNode.name.equals(methodName) && methodNode.desc.equals(methodDescriptor)) {
+                methodFound = true;
+                parameterHelper.setIsStatic(method.toString().contains(" static "));
+                parameterHelper =
+                    getParameterData(parameterHelper, method, methodNode, parameterList);
+                return parameterHelper.toString();
+              }
             }
           }
         }

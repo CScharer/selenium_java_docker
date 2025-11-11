@@ -256,10 +256,10 @@ public final class Email {
         // Put parts in message
         message.setContent(multipart);
         // Send the message
-        final Transport transport = session.getTransport("smtp");
-        transport.connect(parameters.get(LABEL_HOST), from, password);
-        transport.sendMessage(message, message.getAllRecipients());
-        transport.close();
+        try (Transport transport = session.getTransport("smtp")) {
+          transport.connect(parameters.get(LABEL_HOST), from, password);
+          transport.sendMessage(message, message.getAllRecipients());
+        }
         success = true;
       } catch (final Exception e) {
         Environment.sysOut(

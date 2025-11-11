@@ -1100,96 +1100,95 @@ public class YMData extends Environment {
     final int RECORD_START = 0;
     final int RECORD_LIMIT_INSERT = 25000;
     final int RECORD_LIMIT_DEBUG = Integer.valueOf(RECORD_LIMIT_INSERT / 10);
-    Reader reader = null;
     try {
       final Map<String, String> headingsExpectedMap = new HashMap<>();
       for (final String heading : headingsExpectedList) {
         headingsExpectedMap.put(heading, "");
       }
-      reader = new FileReader(filePathName);
-      Iterable<CSVRecord> records = CSVFormat.RFC4180.withHeader().parse(reader);
-      boolean headingsMapped = false;
-      Map<String, String> headingsCSVMap = null;
-      sqlStringBuilder = new StringBuilder();
-      int recordNumber = 0;
-      List<String> headingsExpectedMissingList = new ArrayList<>();
-      List<String> headingsCSVMissingList;
-      for (final CSVRecord record : records) {
-        // final int recordNumber = (int) record.getRecordNumber()
-        recordNumber++;
-        if (recordNumber >= (RECORD_START + 1)) {
-          if (!headingsMapped) {
-            headingsCSVMap = record.toMap();
-            final List<String> headingsCSVList = Convert.fromKeySetToList(headingsCSVMap.keySet());
-            headingsExpectedList = new ArrayList(headingsExpectedList);
-            headingsExpectedList.removeAll(VivitData.getDatabaseOnlyFields());
-            headingsExpectedList.sort(null);
-            headingsCSVList.sort(null);
-            sysOut("headingsCSVList:[" + headingsCSVList + "]");
-            sysOut("headingsExpectedList:[" + headingsExpectedList + "]");
-            if (!headingsCSVList.equals(headingsExpectedList)) {
-              headingsExpectedMissingList = new ArrayList(headingsExpectedList);
-              headingsCSVMissingList = new ArrayList(headingsCSVList);
-              headingsExpectedMissingList.removeAll(headingsCSVList);
-              headingsCSVMissingList.removeAll(headingsExpectedList);
-              sysOut("headingsExpectedMissingList:" + headingsCSVMissingList.toString());
-              sysOut("headingsCSVMissingList:" + headingsExpectedMissingList.toString());
-              if (!headingsExpectedMissingList.isEmpty()
-                  && !removeExtraFields(apiNamespace, tableName, headingsExpectedMissingList)) {
-                Assert.fail(
-                    "Expected headings (headingsExpectedMissingList["
-                        + headingsExpectedMissingList.toString()
-                        + "]) do not match CSV headings and could not be"
-                        + " removed from tableName["
-                        + tableName
-                        + "]");
+      try (Reader reader = new FileReader(filePathName)) {
+        Iterable<CSVRecord> records = CSVFormat.RFC4180.withHeader().parse(reader);
+        boolean headingsMapped = false;
+        Map<String, String> headingsCSVMap = null;
+        sqlStringBuilder = new StringBuilder();
+        int recordNumber = 0;
+        List<String> headingsExpectedMissingList = new ArrayList<>();
+        List<String> headingsCSVMissingList;
+        for (final CSVRecord record : records) {
+          // final int recordNumber = (int) record.getRecordNumber()
+          recordNumber++;
+          if (recordNumber >= (RECORD_START + 1)) {
+            if (!headingsMapped) {
+              headingsCSVMap = record.toMap();
+              final List<String> headingsCSVList = Convert.fromKeySetToList(headingsCSVMap.keySet());
+              headingsExpectedList = new ArrayList(headingsExpectedList);
+              headingsExpectedList.removeAll(VivitData.getDatabaseOnlyFields());
+              headingsExpectedList.sort(null);
+              headingsCSVList.sort(null);
+              sysOut("headingsCSVList:[" + headingsCSVList + "]");
+              sysOut("headingsExpectedList:[" + headingsExpectedList + "]");
+              if (!headingsCSVList.equals(headingsExpectedList)) {
+                headingsExpectedMissingList = new ArrayList(headingsExpectedList);
+                headingsCSVMissingList = new ArrayList(headingsCSVList);
+                headingsExpectedMissingList.removeAll(headingsCSVList);
+                headingsCSVMissingList.removeAll(headingsExpectedList);
+                sysOut("headingsExpectedMissingList:" + headingsCSVMissingList.toString());
+                sysOut("headingsCSVMissingList:" + headingsExpectedMissingList.toString());
+                if (!headingsExpectedMissingList.isEmpty()
+                    && !removeExtraFields(apiNamespace, tableName, headingsExpectedMissingList)) {
+                  Assert.fail(
+                      "Expected headings (headingsExpectedMissingList["
+                          + headingsExpectedMissingList.toString()
+                          + "]) do not match CSV headings and could not be"
+                          + " removed from tableName["
+                          + tableName
+                          + "]");
+                }
+                if (!headingsCSVMissingList.isEmpty()
+                    && !addMissingFields(apiNamespace, tableName, headingsCSVMissingList)) {
+                  Assert.fail(
+                      "CSV headings (headingsCSVMissingList["
+                          + headingsCSVMissingList.toString()
+                          + "]) do not match Expected DB headings and could"
+                          + " not be added to tableName["
+                          + tableName
+                          + "]");
+                }
               }
-              if (!headingsCSVMissingList.isEmpty()
-                  && !addMissingFields(apiNamespace, tableName, headingsCSVMissingList)) {
-                Assert.fail(
-                    "CSV headings (headingsCSVMissingList["
-                        + headingsCSVMissingList.toString()
-                        + "]) do not match Expected DB headings and could"
-                        + " not be added to tableName["
-                        + tableName
-                        + "]");
+              for (final String key : headingsCSVMap.keySet()) {
+                sysOut("heading:[" + key + "]");
+              }
+              headingsMapped = true;
+            }
+            final String web_Site_Member_ID = record.get(VivitData.LABEL_WEB_SITE_MEMBER_ID);
+            final Map<String, String> mapMember = new HashMap<>();
+            mapMember.put(LABEL_RECORD_NUMBER, String.valueOf(recordNumber));
+            mapMember.put(LABEL_RECORD_COMPLETE, "1");
+            mapMember.put(VivitData.LABEL_WEB_SITE_MEMBER_ID, web_Site_Member_ID);
+            for (final String field : headingsExpectedList) {
+              try {
+                if (!VivitData.getDatabaseOnlyFields().contains(field)
+                    && !headingsExpectedMissingList.contains(field)) {
+                  mapMember.put(field, record.get(field));
+                }
+              } catch (final Exception e) {
+                sysOut("Field Not Found:[" + field + "]");
+                mapMember.put(LABEL_RECORD_COMPLETE, "0");
               }
             }
-            for (final String key : headingsCSVMap.keySet()) {
-              sysOut("heading:[" + key + "]");
+            sqlStringBuilder =
+                SQL.appendStringBuilderSQLInsertRecord(tableName, sqlStringBuilder, mapMember, true);
+            if ((recordNumber % RECORD_LIMIT_DEBUG) == 0) {
+              sysOut(JavaHelpers.getCurrentMethodName() + "-Records:[" + recordNumber + "]");
             }
-            headingsMapped = true;
-          }
-          final String web_Site_Member_ID = record.get(VivitData.LABEL_WEB_SITE_MEMBER_ID);
-          final Map<String, String> mapMember = new HashMap<>();
-          mapMember.put(LABEL_RECORD_NUMBER, String.valueOf(recordNumber));
-          mapMember.put(LABEL_RECORD_COMPLETE, "1");
-          mapMember.put(VivitData.LABEL_WEB_SITE_MEMBER_ID, web_Site_Member_ID);
-          for (final String field : headingsExpectedList) {
-            try {
-              if (!VivitData.getDatabaseOnlyFields().contains(field)
-                  && !headingsExpectedMissingList.contains(field)) {
-                mapMember.put(field, record.get(field));
-              }
-            } catch (final Exception e) {
-              sysOut("Field Not Found:[" + field + "]");
-              mapMember.put(LABEL_RECORD_COMPLETE, "0");
+            if ((recordNumber % RECORD_LIMIT_INSERT) == 0) {
+              sqlStringBuilderList.add(sqlStringBuilder);
+              sqlStringBuilder = new StringBuilder();
             }
-          }
-          sqlStringBuilder =
-              SQL.appendStringBuilderSQLInsertRecord(tableName, sqlStringBuilder, mapMember, true);
-          if ((recordNumber % RECORD_LIMIT_DEBUG) == 0) {
-            sysOut(JavaHelpers.getCurrentMethodName() + "-Records:[" + recordNumber + "]");
-          }
-          if ((recordNumber % RECORD_LIMIT_INSERT) == 0) {
-            sqlStringBuilderList.add(sqlStringBuilder);
-            sqlStringBuilder = new StringBuilder();
           }
         }
+          sqlStringBuilderList.add(sqlStringBuilder);
+          VivitData.successFileCreate(statusName);
       }
-      sqlStringBuilderList.add(sqlStringBuilder);
-      VivitData.successFileCreate(statusName);
-      reader.close();
     } catch (final Exception e) {
       sysOut(e);
     }
