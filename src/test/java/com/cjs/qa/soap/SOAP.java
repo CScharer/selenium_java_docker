@@ -30,16 +30,13 @@ public class SOAP {
   private String xml = null;
 
   public SOAPMessage getSoapMessageFromFile(String filePathName) throws IOException, SOAPException {
-    final BufferedReader bufferedReader =
-        new BufferedReader(new FileReader(new File(filePathName)));
     String input = "";
     final StringBuilder stringBuilder = new StringBuilder();
-    try {
+    try (FileReader fileReader = new FileReader(new File(filePathName));
+        BufferedReader bufferedReader = new BufferedReader(fileReader)) {
       while ((input = bufferedReader.readLine()) != null) {
         stringBuilder.append(input);
       }
-    } finally {
-      bufferedReader.close();
     }
     return getSoapMessageFromString(stringBuilder.toString());
   }
