@@ -107,14 +107,14 @@ public class SQL {
             + "'";
     sql = AutGui.updateSQL(sql);
     final JDBC jdbc = new JDBC("TST", "Jira");
-    final ResultSet resultSet = jdbc.queryResults(sql);
-    try {
-      resultSet.next();
-      partyID = resultSet.getInt("PartyId");
-      resultSet.close();
-      jdbc.close();
+    try (ResultSet resultSet = jdbc.queryResults(sql)) {
+      if (resultSet != null && resultSet.next()) {
+        partyID = resultSet.getInt("PartyId");
+      }
     } catch (final SQLException e) {
       Environment.sysOut(e.getMessage());
+    } finally {
+      jdbc.close();
     }
     return partyID;
   }
@@ -351,20 +351,21 @@ public class SQL {
   public static void createTableView(Connection connection, String sql, String tableViewName)
       throws Throwable {
     Environment.sysOut("sql:[" + sql + "]");
-    final Statement statement = connection.createStatement();
-    statement.setQueryTimeout(30); // set timeout to 30 sec.
-    // statement.executeUpdate(JDBCConstants.DROP_TABLE +
-    // JDBCConstants.IF_EXISTS + tableViewName)
-    statement.executeUpdate(sql);
-    try (ResultSet resultSet =
-        statement.executeQuery(
-            JDBCConstants.SELECT_COUNT + "AS Count " + JDBCConstants.FROM + tableViewName)) {
-      final DatabaseMetaData databaseMetaData = connection.getMetaData();
-      Environment.sysOut("Driver Name:[" + databaseMetaData.getDriverName() + "]");
-      Environment.sysOut("A new Table/View [" + tableViewName + "] has been created.");
-      while (resultSet.next()) {
-        // Read the result set
-        Environment.sysOut("Count = " + resultSet.getString("Count"));
+    try (Statement statement = connection.createStatement()) {
+      statement.setQueryTimeout(30); // set timeout to 30 sec.
+      // statement.executeUpdate(JDBCConstants.DROP_TABLE +
+      // JDBCConstants.IF_EXISTS + tableViewName)
+      statement.executeUpdate(sql);
+      try (ResultSet resultSet =
+          statement.executeQuery(
+              JDBCConstants.SELECT_COUNT + "AS Count " + JDBCConstants.FROM + tableViewName)) {
+        final DatabaseMetaData databaseMetaData = connection.getMetaData();
+        Environment.sysOut("Driver Name:[" + databaseMetaData.getDriverName() + "]");
+        Environment.sysOut("A new Table/View [" + tableViewName + "] has been created.");
+        while (resultSet.next()) {
+          // Read the result set
+          Environment.sysOut("Count = " + resultSet.getString("Count"));
+        }
       }
     } catch (Exception e) {
       throw new QAException("createTableView", e);
@@ -485,10 +486,16 @@ public class SQL {
             + "';";
     String companyNumber = "";
     final JDBC jdbc = new JDBC("", DATABASE_DEFINITION);
-    final ResultSet resultSet = jdbc.queryResults(sql);
-    companyNumber = resultSet.getString("Number");
+    try (ResultSet resultSet = jdbc.queryResults(sql)) {
+      if (resultSet != null) {
+        companyNumber = resultSet.getString("Number");
+      }
+    } catch (final SQLException e) {
+      Environment.sysOut(e.getMessage());
+    } finally {
+      jdbc.close();
+    }
     Environment.sysOut("Value [" + companyNumber + "]");
-    jdbc.close();
     return companyNumber;
   }
 
@@ -529,9 +536,12 @@ public class SQL {
             + "].[Abbreviation]='"
             + company
             + "';";
-    ResultSet resultSet = jdbc.queryResults(sql);
-    map.put("CompanyNumber", resultSet.getString("Number"));
-    map.put("FilenetSplit", resultSet.getString("FilenetSplit"));
+    try (ResultSet resultSet = jdbc.queryResults(sql)) {
+      if (resultSet != null) {
+        map.put("CompanyNumber", resultSet.getString("Number"));
+        map.put("FilenetSplit", resultSet.getString("FilenetSplit"));
+      }
+    }
     // Get the WSDL.
     sql =
         JDBCConstants.SELECT
@@ -552,10 +562,14 @@ public class SQL {
       sql +=
           " " + JDBCConstants.AND + "[" + TABLE_ENVIRONMENTS + "].[Abbreviation]='" + company + "'";
     }
-    resultSet = jdbc.queryResults(sql);
-    map.put("WSDL", resultSet.getString("WSDL"));
+    try (ResultSet resultSet2 = jdbc.queryResults(sql)) {
+      if (resultSet2 != null) {
+        map.put("WSDL", resultSet2.getString("WSDL"));
+      }
+    } finally {
+      jdbc.close();
+    }
     Environment.sysOut(map);
-    jdbc.close();
     return map;
   }
 
@@ -579,24 +593,30 @@ public class SQL {
     sql += "LEFT JOIN [" + TABLE_FILENET + "] f " + JDBCConstants.ON;
     sql += "c.[FilenetSplit] = f.[FilenetSplit] ";
     sql += JDBCConstants.WHERE + "c.[Abbreviation]='" + company.toUpperCase(Locale.ENGLISH) + "';";
-    final ResultSet resultSet = jdbc.queryResults(sql);
-    map.put("FilenetSplit", resultSet.getString("FilenetSplit"));
-    Environment.sysOut("FilenetSplit:[" + map.get("FilenetSplit") + "]");
-    map.put("Number", resultSet.getString("Number"));
-    Environment.sysOut("Company Number:[" + map.get("Number") + "]");
-    map.put("Service_Account", resultSet.getString("Service_Account"));
-    Environment.sysOut("Service_Account:[" + map.get("Service_Account") + "]");
-    map.put("pPassword", resultSet.getString("pPassword"));
-    map.put("UserID", resultSet.getString("UserID"));
-    Environment.sysOut("UserID:[" + map.get("UserID") + "]");
-    if (map.get("UserID") == null) {
-      map.put("UserID", "");
-      Environment.sysOut("UserID:[" + map.get("UserID") + "]");
-      map.put("fPassword", "");
-    } else {
-      map.put("fPassword", resultSet.getString("fPassword"));
+    try (ResultSet resultSet = jdbc.queryResults(sql)) {
+      if (resultSet != null) {
+        map.put("FilenetSplit", resultSet.getString("FilenetSplit"));
+        Environment.sysOut("FilenetSplit:[" + map.get("FilenetSplit") + "]");
+        map.put("Number", resultSet.getString("Number"));
+        Environment.sysOut("Company Number:[" + map.get("Number") + "]");
+        map.put("Service_Account", resultSet.getString("Service_Account"));
+        Environment.sysOut("Service_Account:[" + map.get("Service_Account") + "]");
+        map.put("pPassword", resultSet.getString("pPassword"));
+        map.put("UserID", resultSet.getString("UserID"));
+        Environment.sysOut("UserID:[" + map.get("UserID") + "]");
+        if (map.get("UserID") == null) {
+          map.put("UserID", "");
+          Environment.sysOut("UserID:[" + map.get("UserID") + "]");
+          map.put("fPassword", "");
+        } else {
+          map.put("fPassword", resultSet.getString("fPassword"));
+        }
+      }
+    } catch (final SQLException e) {
+      Environment.sysOut(e.getMessage());
+    } finally {
+      jdbc.close();
     }
-    jdbc.close();
     return map;
   }
 
@@ -629,10 +649,16 @@ public class SQL {
     }
     String sURL = null;
     final JDBC jdbc = new JDBC("", DATABASE_DEFINITION);
-    final ResultSet resultSet = jdbc.queryResults(sql);
-    sURL = resultSet.getString("URL");
+    try (ResultSet resultSet = jdbc.queryResults(sql)) {
+      if (resultSet != null) {
+        sURL = resultSet.getString("URL");
+      }
+    } catch (final SQLException e) {
+      Environment.sysOut(e.getMessage());
+    } finally {
+      jdbc.close();
+    }
     Environment.sysOut("Value [" + sURL + "]");
-    jdbc.close();
     return sURL;
   }
 
@@ -665,10 +691,16 @@ public class SQL {
     }
     String sUserName = null;
     final JDBC jdbc = new JDBC("", DATABASE_DEFINITION);
-    final ResultSet resultSet = jdbc.queryResults(sql);
-    sUserName = resultSet.getString("UserName");
+    try (ResultSet resultSet = jdbc.queryResults(sql)) {
+      if (resultSet != null) {
+        sUserName = resultSet.getString("UserName");
+      }
+    } catch (final SQLException e) {
+      Environment.sysOut(e.getMessage());
+    } finally {
+      jdbc.close();
+    }
     Environment.sysOut("Value [" + sUserName + "]");
-    jdbc.close();
     return sUserName;
   }
 
@@ -677,10 +709,11 @@ public class SQL {
     final JDBC jdbc = new JDBC("", database);
     try {
       Environment.sysOut("sql:[" + sql + "]");
-      final ResultSet resultSet = jdbc.queryResults(sql);
-      if (resultSet.next()) {
-        uniqueString = resultSet.getString("UniqueString");
-        Environment.sysOut("UniqueString:[" + uniqueString + "]");
+      try (ResultSet resultSet = jdbc.queryResults(sql)) {
+        if (resultSet != null && resultSet.next()) {
+          uniqueString = resultSet.getString("UniqueString");
+          Environment.sysOut("UniqueString:[" + uniqueString + "]");
+        }
       }
     } catch (final Exception e) {
       Environment.sysOut(e);
@@ -778,12 +811,16 @@ public class SQL {
     // LOWER([QATOOLS_USERS_AUTHORIZED].[EMail])='" + eMail.toLowerCase(Locale.ENGLISH) +
     // "';"
     final JDBC jdbc = new JDBC("", DATABASE_DEFINITION);
-    final ResultSet resultSet = jdbc.queryResults(sql);
-    Environment.sysOut("Searching EMail [" + sql + "]");
-    if (resultSet.next()) {
-      validEmail = true;
+    try (ResultSet resultSet = jdbc.queryResults(sql)) {
+      Environment.sysOut("Searching EMail [" + sql + "]");
+      if (resultSet != null && resultSet.next()) {
+        validEmail = true;
+      }
+    } catch (final SQLException e) {
+      Environment.sysOut(e.getMessage());
+    } finally {
+      jdbc.close();
     }
-    jdbc.close();
     return validEmail;
   }
 }

@@ -128,31 +128,30 @@ public class WebService {
       httpURLConnection.setRequestProperty(
           "Content-Length", "" + Integer.toString(apiRequest.getBytes().length));
       httpURLConnection.setUseCaches(false);
-      final DataOutputStream dataOutputStream =
-          new DataOutputStream(httpURLConnection.getOutputStream());
-      dataOutputStream.writeBytes(apiRequest);
-      dataOutputStream.flush();
-      responseCode = httpURLConnection.getResponseCode();
-      map.put("responseCode", String.valueOf(responseCode));
-      final String responseMessage = String.valueOf(httpURLConnection.getResponseMessage());
-      map.put("responseMessage", responseMessage);
-      if (responseCode == HttpURLConnection.HTTP_OK) {
-        final BufferedReader bufferedReader =
-            new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
-        while ((line = bufferedReader.readLine()) != null) {
-          json += line;
+      try (DataOutputStream dataOutputStream =
+          new DataOutputStream(httpURLConnection.getOutputStream())) {
+        dataOutputStream.writeBytes(apiRequest);
+        dataOutputStream.flush();
+        responseCode = httpURLConnection.getResponseCode();
+        map.put("responseCode", String.valueOf(responseCode));
+        final String responseMessage = String.valueOf(httpURLConnection.getResponseMessage());
+        map.put("responseMessage", responseMessage);
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+          try (BufferedReader bufferedReader =
+              new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()))) {
+            while ((line = bufferedReader.readLine()) != null) {
+              json += line;
+            }
+            map.put("json", json);
+          }
         }
-        bufferedReader.close();
-        map.put("json", json);
+        if (responseCode != HttpURLConnection.HTTP_OK) {
+          Environment.sysOut("responseCode:[" + responseCode + "]");
+          Environment.sysOut("responseMessage:[" + responseMessage + "]");
+        }
+      } finally {
+        httpURLConnection.disconnect();
       }
-      dataOutputStream.close();
-      httpURLConnection.disconnect();
-      if (responseCode != HttpURLConnection.HTTP_OK) {
-        Environment.sysOut("responseCode:[" + responseCode + "]");
-        Environment.sysOut("responseMessage:[" + responseMessage + "]");
-      }
-      dataOutputStream.close();
-      httpURLConnection.disconnect();
     } catch (final Exception e) {
       Environment.sysOut(e);
     }
@@ -213,10 +212,11 @@ public class WebService {
     final Map<String, String> map = new HashMap<>();
     try {
       final SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
-      final SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-      final SOAPMessage soapMessage = soapConnection.call(createSOAPRequest(url), url);
-      // Process the SOAP Response
-      getSOAPMessageValue(soapMessage, false);
+      try (SOAPConnection soapConnection = soapConnectionFactory.createConnection()) {
+        final SOAPMessage soapMessage = soapConnection.call(createSOAPRequest(url), url);
+        // Process the SOAP Response
+        getSOAPMessageValue(soapMessage, false);
+      }
     } catch (final Exception e) {
       Environment.sysOut(e);
     }
@@ -229,10 +229,11 @@ public class WebService {
     try {
       writeSOAPMessageToOutputStream(soapMessage);
       final SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
-      final SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-      final SOAPMessage soapMessageResponse = soapConnection.call(soapMessage, url);
-      // Process the SOAP Response
-      setXml(getSOAPMessageValue(soapMessageResponse, false));
+      try (SOAPConnection soapConnection = soapConnectionFactory.createConnection()) {
+        final SOAPMessage soapMessageResponse = soapConnection.call(soapMessage, url);
+        // Process the SOAP Response
+        setXml(getSOAPMessageValue(soapMessageResponse, false));
+      }
       setFileResponse(Constants.PATH_FILES_XML + policy.getPolicy() + "response" + IExtension.XML);
       final String fileTemp =
           getFileResponse().replace(
@@ -314,31 +315,30 @@ public class WebService {
       httpURLConnection.setRequestProperty(
           "Content-Length", "" + Integer.toString(apiRequest.getBytes().length));
       httpURLConnection.setUseCaches(false);
-      final DataOutputStream dataOutputStream =
-          new DataOutputStream(httpURLConnection.getOutputStream());
-      dataOutputStream.writeBytes(apiRequest);
-      dataOutputStream.flush();
-      responseCode = httpURLConnection.getResponseCode();
-      map.put("responseCode", String.valueOf(responseCode));
-      final String responseMessage = String.valueOf(httpURLConnection.getResponseMessage());
-      map.put("responseMessage", responseMessage);
-      if (responseCode == HttpURLConnection.HTTP_OK) {
-        final BufferedReader bufferedReader =
-            new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
-        while ((line = bufferedReader.readLine()) != null) {
-          xml += line;
+      try (DataOutputStream dataOutputStream =
+          new DataOutputStream(httpURLConnection.getOutputStream())) {
+        dataOutputStream.writeBytes(apiRequest);
+        dataOutputStream.flush();
+        responseCode = httpURLConnection.getResponseCode();
+        map.put("responseCode", String.valueOf(responseCode));
+        final String responseMessage = String.valueOf(httpURLConnection.getResponseMessage());
+        map.put("responseMessage", responseMessage);
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+          try (BufferedReader bufferedReader =
+              new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()))) {
+            while ((line = bufferedReader.readLine()) != null) {
+              xml += line;
+            }
+            map.put("xml", xml);
+          }
         }
-        bufferedReader.close();
-        map.put("xml", xml);
+        if (responseCode != HttpURLConnection.HTTP_OK) {
+          Environment.sysOut("responseCode:[" + responseCode + "]");
+          Environment.sysOut("responseMessage:[" + responseMessage + "]");
+        }
+      } finally {
+        httpURLConnection.disconnect();
       }
-      dataOutputStream.close();
-      httpURLConnection.disconnect();
-      if (responseCode != HttpURLConnection.HTTP_OK) {
-        Environment.sysOut("responseCode:[" + responseCode + "]");
-        Environment.sysOut("responseMessage:[" + responseMessage + "]");
-      }
-      dataOutputStream.close();
-      httpURLConnection.disconnect();
     } catch (final Exception e) {
       Environment.sysOut(e);
     }
