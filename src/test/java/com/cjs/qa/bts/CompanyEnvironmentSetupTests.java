@@ -56,6 +56,7 @@ public class CompanyEnvironmentSetupTests extends Environment {
     if (JavaHelpers.hasValue(getBrowserName())) {
       getCompanyEnvironmentData().setBrowserName(getBrowserName());
     } else if (JavaHelpers.hasValue(getCompanyEnvironmentData().getBrowserName())) {
+      // Browser name already set in environment data
     } else {
       getCompanyEnvironmentData().setBrowserName(ISelenium.BROWSER_DEFAULT);
       sysOut(
@@ -65,6 +66,7 @@ public class CompanyEnvironmentSetupTests extends Environment {
     if (JavaHelpers.hasValue(getBrowserVersion())) {
       getCompanyEnvironmentData().setBrowserVersion(getBrowserVersion());
     } else if (JavaHelpers.hasValue(getCompanyEnvironmentData().getBrowserVersion())) {
+      // Browser version already set in environment data
     } else if (JavaHelpers.hasValue(getBrowserPlatform())) {
       getCompanyEnvironmentData().setBrowserPlatform(getBrowserPlatform());
     }
@@ -72,6 +74,7 @@ public class CompanyEnvironmentSetupTests extends Environment {
     if (JavaHelpers.hasValue(getHubHost())) {
       getCompanyEnvironmentData().setHubHost(getHubHost());
     } else if (JavaHelpers.hasValue(getCompanyEnvironmentData().getHubHost())) {
+      // Hub host already set in environment data
     } else {
       getCompanyEnvironmentData().setHubHost("");
     }

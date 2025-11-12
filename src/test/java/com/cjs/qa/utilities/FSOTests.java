@@ -600,7 +600,7 @@ public class FSOTests {
       } else {
         valueNew =
             valueNew.substring(0, index)
-                + "_"
+                + replacer
                 + valueNew.substring(index + (replacee.length()), valueNew.length());
       }
       index = valueNew.indexOf(replacee);

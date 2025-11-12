@@ -34,9 +34,6 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.CDATASection;
 
 public class WebService {
-  private SOAPConnectionFactory soapConnectionFactory = null;
-  private SOAPConnection soapConnection = null;
-  private String url = null;
   private static String xml = null;
   private static String requestName = null;
   private static String responseName = null;
@@ -77,9 +74,9 @@ public class WebService {
 
   public WebService() {
     try {
-      soapConnectionFactory = SOAPConnectionFactory.newInstance();
-      soapConnection = soapConnectionFactory.createConnection();
-      url = null;
+      final SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+      final SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+      final String url = null;
     } catch (final Exception e) {
       Environment.sysOut(e);
     }

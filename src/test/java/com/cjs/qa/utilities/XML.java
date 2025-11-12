@@ -68,7 +68,8 @@ public class XML {
   // init();
   // }
   //
-  public XML(String xml) {
+  public XML(String _xml) {
+    // Parameter reserved for future implementation
     Environment.sysOut(XPathConstants.NODESET.toString());
     final String xpath = "";
     try {

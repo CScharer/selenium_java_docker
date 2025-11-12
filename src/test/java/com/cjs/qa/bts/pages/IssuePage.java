@@ -41,7 +41,7 @@ public class IssuePage extends Page {
     clickObject(buttonIssueNow);
     // Wait for Processing Policy pop-up window to disappear
     while (objectExists(By.xpath("//span[contains(text(), 'Processing Policy')]"))) {
-      // Wait for pop-up to disappear
+      // Wait for pop-up to disappear - intentional busy wait
     }
   }
 

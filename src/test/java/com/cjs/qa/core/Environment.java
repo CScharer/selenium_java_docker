@@ -50,7 +50,6 @@ public class Environment {
           + IExtension.XML;
   private static String folderData = Constants.PATH_FILES_DATA + COMPANY + Constants.DELIMETER_PATH;
   private static String fileLog = folderData + "Log_" + COMPANY + IExtension.LOG;
-  private static List<String> classExlusionList = Arrays.asList("");
   private static Map<Integer, String> scenarioErrors = new HashMap<>();
   private static String gridHub = null;
   private static String gridPort = null;

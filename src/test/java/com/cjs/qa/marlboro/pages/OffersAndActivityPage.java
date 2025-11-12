@@ -13,7 +13,6 @@ public class OffersAndActivityPage extends Page {
     super(webDriver);
   }
 
-  private static final String urlOffers = MarlboroEnvironment.URL_BASE + "/marlboro/my-marlboro/offers";
   private static final By button3DollarsOffACarton = By.xpath(".//span[contains(text(),'$3 Off a Carton')]");
   // final By buttonClaimYours =
   // By.xpath(".//*[@id='container']//span[.='CLAIM YOURS']");

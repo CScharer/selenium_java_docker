@@ -17,12 +17,16 @@ public class IssuePageLeftNav extends Page {
   // .xpath(nodeProcessedErrs +
   // "11:navigationMenuItem:menuLinkSubmittable']/span");
   public void clickLinkPremiumSummary() {
-    while (!(isDisplayed(linkPremiumSummary))) { }
+    while (!(isDisplayed(linkPremiumSummary))) {
+      // Wait for element to be displayed
+    }
     clickObject(linkPremiumSummary);
   }
 
   public void clickLinkPolicyActivity() {
-    while (!(isDisplayed(linkPolicyActivity))) { }
+    while (!(isDisplayed(linkPolicyActivity))) {
+      // Wait for element to be displayed
+    }
     clickObject(linkPolicyActivity);
   }
 }

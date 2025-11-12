@@ -35,7 +35,7 @@ public class LoginPage extends Page {
     sUserName = SQL.getUserName(company, environment);
     if (sURL != null) {
       getWebDriver().get(sURL);
-      if (getTitle().toString() == getLoginTitle().toString()) {
+      if (getTitle().toString().equals(getLoginTitle().toString())) {
         setEditUserName(sUserName);
         switch (sUserName.toLowerCase(Locale.ENGLISH)) {
           case "btsqa":

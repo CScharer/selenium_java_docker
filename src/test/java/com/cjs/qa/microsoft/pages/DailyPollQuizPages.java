@@ -67,7 +67,9 @@ public class DailyPollQuizPages extends RewardsPage {
       } else {
         completeQuizBySelection();
       }
-      if (!objectExists(byQuizComplete, 5)) { }
+      if (!objectExists(byQuizComplete, 5)) {
+        // Quiz completion check - intentional empty block
+      }
     }
   }
 

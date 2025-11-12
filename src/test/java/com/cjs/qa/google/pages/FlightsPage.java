@@ -83,7 +83,7 @@ public class FlightsPage extends Page {
       excel.writeCell(sheetSummary, summaryMap.get("Traveler"), row, traveler);
       excel.save();
       if (airportFrom.equals(airportTo)) {
-        String addressFrom = getURLAddress(airportMap, airportTo);
+        String addressFrom = getURLAddress(airportMap);
         String url = getURLDrive(addressFrom, airportTo);
         getWebDriver().get(url);
         JavaHelpers.sleep(2);
@@ -192,7 +192,7 @@ public class FlightsPage extends Page {
   public Flight getDriveData(Map<String, String> driverMap, String airportTo) {
     String traveler = driverMap.get("Traveler");
     String airportFrom = driverMap.get("Airport");
-    String addressFrom = getURLAddress(driverMap, airportTo);
+    String addressFrom = getURLAddress(driverMap);
     String url = getURLDrive(addressFrom, airportTo);
     getWebDriver().get(url);
     JavaHelpers.sleep(2);
@@ -375,7 +375,7 @@ public class FlightsPage extends Page {
     return map;
   }
 
-  private static String getURLAddress(Map<String, String> airportMap, String airportTo) {
+  private static String getURLAddress(Map<String, String> airportMap) {
     StringBuilder stringBuilderAddress = new StringBuilder();
     stringBuilderAddress.append(airportMap.get("Address1"));
     stringBuilderAddress.append(", ");

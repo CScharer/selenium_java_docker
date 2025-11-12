@@ -55,11 +55,12 @@ public class Selenium extends Page implements ISelenium {
     } else if (getWebDriver() instanceof SafariDriver) {
       setCapabilities(((SafariDriver) getWebDriver()).getCapabilities());
       setSessionId(((SafariDriver) getWebDriver()).getSessionId());
-    } // else if (getWebDriver() instanceof OperaDriver)
-    {
-      // setCapabilities(((OperaDriver) webDriver).getCapabilities());
-      // setSessionId(((OperaDriver) webDriver).getSessionId());
     }
+    // Note: OperaDriver support commented out
+    // else if (getWebDriver() instanceof OperaDriver) {
+    //   setCapabilities(((OperaDriver) webDriver).getCapabilities());
+    //   setSessionId(((OperaDriver) webDriver).getSessionId());
+    // }
     Environment.sysOut(toString());
   }
 

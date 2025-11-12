@@ -30,7 +30,6 @@ public class BingPage extends Page {
   private static By bySearch = By.xpath(".//*[@id='sb_form_go']");
   private static By bycurrentPoints = By.xpath(".//*[@id='id_rc']");
   private static int currentPoints = -1;
-  private int search = 1;
   private static int searchesMade = 0;
   private static List<String> wordsList = null;
 

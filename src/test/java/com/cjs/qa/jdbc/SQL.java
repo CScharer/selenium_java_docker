@@ -138,7 +138,7 @@ public class SQL {
     }
     final StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append(JDBCConstants.INSERT_INTO);
-    stringBuilder.append("[" + TABLE_PSTAR_PDF_COMPARE + "] ");
+    stringBuilder.append("[" + tableName + "] ");
     stringBuilder.append("(" + stringBuilderFields.toString() + ")");
     stringBuilder.append(JDBCConstants.VALUES);
     stringBuilder.append("(" + stringBuilderValues.toString() + ")");

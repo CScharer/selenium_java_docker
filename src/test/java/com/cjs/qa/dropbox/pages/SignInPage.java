@@ -96,12 +96,12 @@ public class SignInPage extends Page {
     }
     switch (value.toLowerCase(Locale.ENGLISH)) {
       case LABEL_OPTION_CHECKED:
-        if (getCheckbox(getCheckboxRememberMeInput()) != value) {
+        if (!getCheckbox(getCheckboxRememberMeInput()).equals(value)) {
           getWebDriver().findElement(getCheckboxRememberMe()).click();
         }
         break;
       case LABEL_OPTION_UNCHECKED:
-        if (getCheckbox(getCheckboxRememberMeInput()) != value) {
+        if (!getCheckbox(getCheckboxRememberMeInput()).equals(value)) {
           getWebDriver().findElement(getCheckboxRememberMe()).click();
         }
         break;
@@ -109,7 +109,7 @@ public class SignInPage extends Page {
         Environment.sysOut("The value [" + value + "] is not supported for a Checkbox.");
         break;
     }
-    if (getCheckbox(getCheckboxRememberMeInput()) != value) {
+    if (!getCheckbox(getCheckboxRememberMeInput()).equals(value)) {
       Environment.sysOut(
           "The value ["
               + value

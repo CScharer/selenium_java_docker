@@ -94,7 +94,7 @@ public class EarnPointsPage extends Page {
   }
 
   private Map<Integer, Integer> getHashMapFromFile(String filePathName) {
-    String indexes = FSOTests.fileReadAll(MarlboroEnvironment.FILE_INDEXES);
+    String indexes = FSOTests.fileReadAll(filePathName);
     Map<Integer, Integer> map = new HashMap<>();
     // List<String> indexList =
     // Arrays.asList(indexes.split(Constants.DELIMETER_LIST));
