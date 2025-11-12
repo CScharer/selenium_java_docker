@@ -81,7 +81,7 @@ public class BingPage extends Page {
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     final boolean SELECT_LINK = false;
     final double PROCESS_TIME_HOURS = 0.05;
-    final double PROCESS_TIME_MILLISECONDS = (PROCESS_TIME_HOURS * 60 * 60 * 1000);
+    final double PROCESS_TIME_MILLISECONDS = PROCESS_TIME_HOURS * 60 * 60 * 1000;
     final int WORD_LIMIT = 100;
     boolean searchRequired = false;
     int currentPoints = 0;
@@ -126,8 +126,8 @@ public class BingPage extends Page {
         if (SELECT_LINK) {
           clickFirstLink(".//*[@id='b_results']//a[not(contains(@href,'search?'))]", badHREFList);
         }
-        elapsedTimeMilliseconds = (System.currentTimeMillis() - startTime);
-        final double percentCompleteNumber = (elapsedTimeMilliseconds / PROCESS_TIME_MILLISECONDS);
+        elapsedTimeMilliseconds = System.currentTimeMillis() - startTime;
+        final double percentCompleteNumber = elapsedTimeMilliseconds / PROCESS_TIME_MILLISECONDS;
         final String percentCompleteString =
             JavaHelpers.formatNumber(percentCompleteNumber, "##0.00%");
         MicrosoftEnvironment.sysOut(
