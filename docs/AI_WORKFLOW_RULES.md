@@ -1,6 +1,6 @@
 # AI Workflow Rules for Code Changes
 
-**Version:** 1.7 (Updated: 2025-11-12 - CRITICAL: Fixed compilation verification to include test-compile)
+**Version:** 1.8 (Updated: 2025-11-12 - Added Google Java Format as mandatory pre-compilation step)
 
 ## 🚨 MANDATORY RULES - NEVER SKIP THESE STEPS
 
@@ -26,6 +26,22 @@ Before making ANY code changes, you MUST:
 
 ### **Rule 3: Post-Change Verification (AFTER each batch)**
 After making code changes, you MUST verify in this order:
+
+#### **Step 0: Google Java Format (Auto-fix imports & formatting)**
+```bash
+# Run Google Java Format to auto-fix import and style issues
+docker-compose run --rm tests com.spotify.fmt:fmt-maven-plugin:format -Dcheckstyle.skip=true
+
+# ⚠️  Note: Changes happen inside Docker container
+# Pipeline runs this automatically, so local formatting ensures consistency
+```
+**Purpose:** 
+- Auto-fixes redundant/unused imports
+- Ensures consistent code formatting
+- Reduces Checkstyle violations
+- Should run BEFORE compilation to catch any formatting-introduced issues
+
+**Duration:** ~30-60 seconds
 
 #### **Step 1: Compilation Verification (MUST MATCH PIPELINE!)**
 ```bash
@@ -212,6 +228,9 @@ If you see dependency download errors:
 
 **Before EVERY batch:**
 ```bash
+# 0. Run Google Java Format (auto-fix imports/formatting, ~30-60 sec)
+docker-compose run --rm tests com.spotify.fmt:fmt-maven-plugin:format -Dcheckstyle.skip=true
+
 # 1. Verify compilation (REQUIRED - every batch, MUST INCLUDE test-compile!)
 docker-compose run --rm tests compile test-compile
 # OR with clean: docker-compose run --rm tests clean compile test-compile

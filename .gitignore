@@ -176,3 +176,4 @@ target/surefire-reports/
 target/cucumber-reports/
 target/allure-results/
 target/test-reports/
+checkstyle-current.xml

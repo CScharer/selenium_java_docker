@@ -1,5 +1,57 @@
 # CHANGE LOG
 
+## [2025-11-12 07:22:00 CST] [PENDING] - 📋 Rules v1.8: Google Java Format as Pre-Compilation Step
+
+### Overview
+**RULES ENHANCEMENT:** Added Google Java Format as mandatory Step 0 in verification workflow  
+**Purpose:** Auto-fix imports and formatting BEFORE compilation to reduce Checkstyle violations  
+**Impact:** Prevents import issues and ensures consistent code style across all batches
+
+**Cursor Token Status:** Tokens Used: 205,173 / Total: 1,000,000 (794,827 remaining, 20.5% used, 79.5% remaining)
+
+---
+
+### Changes
+
+#### AI_WORKFLOW_RULES.md v1.8
+**Added Step 0:** Google Java Format
+```bash
+docker-compose run --rm tests com.spotify.fmt:fmt-maven-plugin:format -Dcheckstyle.skip=true
+```
+
+**Benefits:**
+- Auto-fixes redundant imports (67 Checkstyle violations)
+- Auto-fixes unused imports (9 Checkstyle violations)
+- Ensures consistent formatting
+- Runs in ~30-60 seconds
+- Reduces Checkstyle violations before compilation
+
+**Updated Sections:**
+1. Rule 3: Post-Change Verification - Added Step 0
+2. Quick Reference - Added Step 0 to "Before EVERY batch" section
+3. Version updated to 1.8
+
+**Why This Matters:**
+- Pipeline runs Google Java Format automatically
+- Running locally ensures consistency and catches format-introduced issues
+- Reduces back-and-forth with pipeline for simple formatting problems
+- Complements PMD fixes with style consistency
+
+---
+
+### Workflow Evolution Summary
+
+**v1.0** → Initial rules  
+**v1.4** → Local verification must match pipeline  
+**v1.5** → Token status with percentages  
+**v1.6** → Mandatory timestamp verification  
+**v1.7** → CRITICAL: test-compile phase required  
+**v1.8** → Google Java Format as pre-compilation step ✅
+
+Each version makes the workflow more robust and reduces pipeline failures!
+
+---
+
 ## [2025-11-12 06:55:00 CST] [e9eb181d] - 🔧 CRITICAL FIX #5: Pipeline Compilation Errors (3 fixes)
 
 **Fifth Pipeline Failure:** 3 compilation errors  
