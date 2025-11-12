@@ -35,13 +35,13 @@ public class SecurityPage extends Page {
       Environment.sysOut("({Field}" + by.toString() + ", {Value}" + value + ");");
     }
     final WebElement webElement = getWebDriver().findElement(by);
-    final Select Dropdown = new Select(webElement);
+    final Select dropdown = new Select(webElement);
     final List<WebElement> list = webElement.findElements(By.xpath("./option"));
     final Iterator<WebElement> iterator = list.iterator();
     while (iterator.hasNext()) {
       final WebElement webElementIterator = iterator.next();
       if (webElementIterator.getText().contains(value)) {
-        Dropdown.selectByValue(webElementIterator.getAttribute("value"));
+        dropdown.selectByValue(webElementIterator.getAttribute("value"));
         break;
       }
     }

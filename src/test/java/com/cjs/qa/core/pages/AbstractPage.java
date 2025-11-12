@@ -35,8 +35,8 @@ public class AbstractPage implements ISelenium { // extends Page {
   }
 
   protected void selectDropdown(By findBy, String selection) {
-    final Select Dropdown = new Select(this.getWebDriver().findElement(findBy));
-    Dropdown.selectByVisibleText(selection);
+    final Select dropdown = new Select(this.getWebDriver().findElement(findBy));
+    dropdown.selectByVisibleText(selection);
   }
 
   protected void setEdit(By byLocator, String value) {

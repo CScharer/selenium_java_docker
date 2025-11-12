@@ -77,10 +77,10 @@ public class BingPage extends Page {
   public void searchRandomSites(boolean browseForAnHour) throws QAException {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
-    final boolean SELECT_LINK = false;
-    final double PROCESS_TIME_HOURS = 0.05;
-    final double PROCESS_TIME_MILLISECONDS = PROCESS_TIME_HOURS * 60 * 60 * 1000;
-    final int WORD_LIMIT = 100;
+    final boolean selectLink = false;
+    final double processTimeHours = 0.05;
+    final double processTimeMilliseconds = processTimeHours * 60 * 60 * 1000;
+    final int wordLimit = 100;
     boolean searchRequired = false;
     int currentPoints = 0;
     int search = 1;
@@ -105,7 +105,7 @@ public class BingPage extends Page {
       stringBuilder.append("AND [w].[Word] NOT IN(");
       stringBuilder.append("SELECT * ");
       stringBuilder.append("FROM [t_WordsUsed]) ");
-      stringBuilder.append("ORDER BY RANDOM() LIMIT " + WORD_LIMIT);
+      stringBuilder.append("ORDER BY RANDOM() LIMIT " + wordLimit);
       setWordsList(jdbc.queryResultsList(stringBuilder.toString(), false));
       final long startTime = System.currentTimeMillis();
       long elapsedTimeMilliseconds = 0;
@@ -121,11 +121,11 @@ public class BingPage extends Page {
         search++;
         setSearchesMade(search);
         currentPoints = getCurrentPointsValue(search, currentPoints);
-        if (SELECT_LINK) {
+        if (selectLink) {
           clickFirstLink(".//*[@id='b_results']//a[not(contains(@href,'search?'))]", badHREFList);
         }
         elapsedTimeMilliseconds = System.currentTimeMillis() - startTime;
-        final double percentCompleteNumber = elapsedTimeMilliseconds / PROCESS_TIME_MILLISECONDS;
+        final double percentCompleteNumber = elapsedTimeMilliseconds / processTimeMilliseconds;
         final String percentCompleteString =
             JavaHelpers.formatNumber(percentCompleteNumber, "##0.00%");
         MicrosoftEnvironment.sysOut(
@@ -136,7 +136,7 @@ public class BingPage extends Page {
                 + "]");
         searchRequired =
             BingPage.getCurrentPoints() != currentPoints && search < RewardsPage.getSearchesMin()
-                || elapsedTimeMilliseconds <= PROCESS_TIME_MILLISECONDS;
+                || elapsedTimeMilliseconds <= processTimeMilliseconds;
       } while (searchRequired);
     } else {
       do {
@@ -247,30 +247,30 @@ public class BingPage extends Page {
   public void searchVivitSites() throws QAException {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
-    final String URL_VIVIT = "http://www.vivit-worldwide.org";
-    final String URL_VIVIT_YM = "https://vivitworldwide.site-ym";
-    final String LUGS = URL_VIVIT + "/?page=LocalUserGroups";
-    final String SIGS = URL_VIVIT + "/?page=SIGS";
+    final String urlVivit = "http://www.vivit-worldwide.org";
+    final String urlVivitYm = "https://vivitworldwide.site-ym";
+    final String lugs = urlVivit + "/?page=LocalUserGroups";
+    final String sigs = urlVivit + "/?page=SIGS";
     final By lugLinks = By.xpath(".//*[@id='CustomPageBody']//a");
     final By sigLinks = By.xpath(".//*[@id='CustomPageBody']//a");
     maximizeWindow();
     final List<String> urls =
         Arrays.asList(
-            URL_VIVIT_YM + IExtension.COM + "/",
-            URL_VIVIT_YM + IExtension.COM + "/?page=board",
-            URL_VIVIT_YM + IExtension.COM + "/staff/",
-            URL_VIVIT_YM + IExtension.COM + "/?page=Volunteer",
+            urlVivitYm + IExtension.COM + "/",
+            urlVivitYm + IExtension.COM + "/?page=board",
+            urlVivitYm + IExtension.COM + "/staff/",
+            urlVivitYm + IExtension.COM + "/?page=Volunteer",
             "http://c.ymcdn"
                 + IExtension.COM
                 + "/sites/www.vivit-worldwide.org/resource/resmgr/docs/2017_VivitMemberBrochure"
                 + IExtension.PDF,
-            URL_VIVIT_YM + IExtension.COM + "/?page=HallofFame");
+            urlVivitYm + IExtension.COM + "/?page=HallofFame");
     for (final String url : urls) {
       MicrosoftEnvironment.sysOut("Searching:[" + url + "]");
       getWebDriver().get(url);
       sleep(SEARCH_WAIT_TIME);
     }
-    getWebDriver().get(LUGS);
+    getWebDriver().get(lugs);
     sleep(5);
     List<WebElement> links = getWebDriver().findElements(lugLinks);
     for (int index = 0; index < links.size(); index++) {
@@ -281,12 +281,12 @@ public class BingPage extends Page {
       sleep(SEARCH_WAIT_TIME);
       tabCloseExtras();
       if (index < links.size()) {
-        getWebDriver().get(LUGS);
+        getWebDriver().get(lugs);
         sleep(5);
         links = getWebDriver().findElements(lugLinks);
       }
     }
-    getWebDriver().get(SIGS);
+    getWebDriver().get(sigs);
     sleep(5);
     links = getWebDriver().findElements(sigLinks);
     for (int index = 0; index < links.size(); index++) {
@@ -297,7 +297,7 @@ public class BingPage extends Page {
       sleep(SEARCH_WAIT_TIME);
       tabCloseExtras();
       if (index < links.size()) {
-        getWebDriver().get(SIGS);
+        getWebDriver().get(sigs);
         sleep(5);
         getWebDriver().findElements(sigLinks);
       }

@@ -330,9 +330,9 @@ public class FlightsPage extends Page {
   }
 
   public String getDrivePrice(String miles) {
-    final Double MILEAGE_2019 = .58;
+    final Double mileage2019 = .58;
     double price = Double.valueOf(miles) * 2.0; // RoundTrip
-    price = price * MILEAGE_2019;
+    price = price * mileage2019;
     // return JavaHelpers.formatNumber(String.valueOf(price), "$#,##0.00");
     return JavaHelpers.formatNumber(String.valueOf(price), "###0.00");
   }

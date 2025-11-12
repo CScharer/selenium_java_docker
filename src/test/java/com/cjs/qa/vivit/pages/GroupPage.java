@@ -81,7 +81,7 @@ public class GroupPage extends Page {
   private void getGroupData(String group) throws Throwable {
     Environment.sysOut(
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");
-    final String SYMBOL_ID = "id=";
+    final String symbolId = "id=";
     try {
       final By groupTitle = By.xpath(".//*[@id='ctl00_PageContent_lblPageSummaryTitle']");
       String groupValue = "";
@@ -198,10 +198,10 @@ public class GroupPage extends Page {
           final String leaderName = webElement.getText();
           final String href = webElement.getAttribute("href");
           String webSiteMemberID = href.replace(Constants.NEWLINE, "");
-          if (webSiteMemberID.indexOf(SYMBOL_ID) != -1) {
+          if (webSiteMemberID.indexOf(symbolId) != -1) {
             webSiteMemberID =
                 webSiteMemberID.substring(
-                    webSiteMemberID.indexOf(SYMBOL_ID) + SYMBOL_ID.length(),
+                    webSiteMemberID.indexOf(symbolId) + symbolId.length(),
                     webSiteMemberID.length());
           }
           Environment.sysOut(
@@ -231,24 +231,23 @@ public class GroupPage extends Page {
   }
 
   private Map<String, By> getGroupURLs() {
-    final String ROOT_NODE_PRE = ".//div[@id='pnlNavBarFormat']/table//a/text()[contains(.,'";
-    final String ROOT_NODE_POST = "')]/..";
+    final String rootNodePre = ".//div[@id='pnlNavBarFormat']/table//a/text()[contains(.,'";
+    final String rootNodePost = "')]/..";
     final Map<String, By> mapByGroupURLsBy = new HashMap<>();
     mapByGroupURLsBy.put(
-        "GroupDirectoryURL", By.xpath(ROOT_NODE_PRE + "Group Directory" + ROOT_NODE_POST));
-    mapByGroupURLsBy.put("CalendarURL", By.xpath(ROOT_NODE_PRE + "Calendar" + ROOT_NODE_POST));
-    mapByGroupURLsBy.put("BlogsURL", By.xpath(ROOT_NODE_PRE + "Blogs" + ROOT_NODE_POST));
-    mapByGroupURLsBy.put("ForumsURL", By.xpath(ROOT_NODE_PRE + "Forums" + ROOT_NODE_POST));
-    mapByGroupURLsBy.put(
-        "PhotoGalleryURL", By.xpath(ROOT_NODE_PRE + "Photo Gallery" + ROOT_NODE_POST));
+        "GroupDirectoryURL", By.xpath(rootNodePre + "Group Directory" + rootNodePost));
+    mapByGroupURLsBy.put("CalendarURL", By.xpath(rootNodePre + "Calendar" + rootNodePost));
+    mapByGroupURLsBy.put("BlogsURL", By.xpath(rootNodePre + "Blogs" + rootNodePost));
+    mapByGroupURLsBy.put("ForumsURL", By.xpath(rootNodePre + "Forums" + rootNodePost));
+    mapByGroupURLsBy.put("PhotoGalleryURL", By.xpath(rootNodePre + "Photo Gallery" + rootNodePost));
     return mapByGroupURLsBy;
   }
 
   public void searchSites() {
     try {
       final String fileName = Environment.getFolderData() + "searchVivitSites" + IExtension.CSV;
-      final String LIGS = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
-      final String SIGS = VivitEnvironment.URL_LOGIN + "?page=SIGS";
+      final String ligs = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
+      final String sigsUrl = VivitEnvironment.URL_LOGIN + "?page=SIGS";
       final By ligLinks = By.xpath(".//*[@id='CustomPageBody']//a[text()!='contact us today!']");
       final By sigLinks = By.xpath(".//*[@id='CustomPageBody']//a[text()!='contact us today!']");
       final By hrefLinks = By.xpath(".//*[@id='ctl00_PageContent_tdZone2']/table/tbody/tr/td/a");
@@ -265,7 +264,7 @@ public class GroupPage extends Page {
       // VivitEnvironment.sysOut("Searching:[" + url + "]");
       // getWebDriver().get(url);
       // }
-      getWebDriver().get(LIGS);
+      getWebDriver().get(ligs);
       sleep(1, 0);
       List<WebElement> links = getWebDriver().findElements(ligLinks);
       for (int index = 0; index < links.size(); index++) {
@@ -283,12 +282,12 @@ public class GroupPage extends Page {
               "Leader Type:[" + leaderType + "], Leader:[" + leaderName + "], Href:[" + href + "]");
         }
         if (index < links.size()) {
-          getWebDriver().get(LIGS);
+          getWebDriver().get(ligs);
           sleep(1, 0);
           links = getWebDriver().findElements(ligLinks);
         }
       }
-      getWebDriver().get(SIGS);
+      getWebDriver().get(sigsUrl);
       sleep(1, 0);
       links = getWebDriver().findElements(sigLinks);
       for (int index = 0; index < links.size(); index++) {
@@ -306,7 +305,7 @@ public class GroupPage extends Page {
               "Leader Type:[" + leaderType + "], Leader:[" + leaderName + "], Href:[" + href + "]");
         }
         if (index < links.size()) {
-          getWebDriver().get(SIGS);
+          getWebDriver().get(sigsUrl);
           sleep(1, 0);
           getWebDriver().findElements(sigLinks);
         }
