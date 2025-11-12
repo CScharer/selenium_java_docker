@@ -5,12 +5,13 @@
 ### **Rule 1: Pre-Flight Verification (BEFORE any code changes)**
 Before making ANY code changes, you MUST:
 1. ✅ Check git status - ensure clean working tree
-2. ✅ Verify local build: `mvn clean compile -DskipTests -Dcheckstyle.skip=true`
-3. ✅ Verify Docker build: `docker-compose run --rm tests compile -DskipTests -Dcheckstyle.skip=true`
-4. ✅ Run all tests: `docker-compose run --rm tests test -Dcheckstyle.skip=true`
-5. ✅ Verify tests pass (allow 1-2 known flaky tests)
+2. ✅ Verify Docker build: `docker-compose run --rm tests compile -DskipTests -Dcheckstyle.skip=true`
+3. ✅ Run smoke tests: `docker-compose run --rm tests test -Dtest=SmokeTests -Dcheckstyle.skip=true`
+4. ✅ Verify smoke tests pass (should see "Tests run: X, Failures: 0")
 
-**STATUS:** Must see "BUILD SUCCESS" and 65+/66 tests passing before proceeding.
+**STATUS:** Must see "BUILD SUCCESS" and smoke tests passing before proceeding.
+
+**Note:** Full test suite will run on GitHub Actions. Smoke tests provide fast verification before starting work.
 
 ---
 
@@ -30,23 +31,36 @@ docker-compose run --rm tests compile -DskipTests -Dcheckstyle.skip=true
 ```
 **Required:** BUILD SUCCESS
 
-#### **Step 2: Run Tests**
+#### **Step 2: Smoke Tests (Fast)**
 ```bash
-docker-compose run --rm tests test -Dcheckstyle.skip=true
+docker-compose run --rm tests test -Dtest=SmokeTests -Dcheckstyle.skip=true
 ```
-**Required:** Tests pass (65+/66, allow known flaky tests)
+**Required:** All smoke tests pass (Tests run: X, Failures: 0)
+**Duration:** ~2-3 minutes (much faster than full suite)
+**Purpose:** Catch compilation and basic runtime issues before pushing
+**Alternative (if local Maven works):** `mvn test -Dtest=SmokeTests -Dcheckstyle.skip=true`
 
-#### **Step 3: Docker Build Test**
+#### **Step 3: Docker Build Test (Every 3-5 batches)**
 ```bash
 docker-compose build tests
 ```
 **Required:** Image builds successfully
+**Frequency:** Every 3-5 batches (not every single batch)
 
-**❌ CRITICAL:** If ANY of these fail, you MUST:
-1. Identify the root cause
-2. Fix the issue
-3. Re-run ALL verification steps
-4. DO NOT proceed until all verifications pass
+#### **Step 4: Full Test Suite (Checkpoints)**
+```bash
+docker-compose run --rm tests test -Dcheckstyle.skip=true
+```
+**Required:** Run every 5-10 batches as checkpoint
+**Frequency:** Periodic checkpoints, not every batch
+**Duration:** ~10-15 minutes
+
+**❌ CRITICAL:** If ANY verification fails, you MUST:
+1. DO NOT push the changes
+2. Identify the root cause
+3. Fix the issue
+4. Re-run ALL verification steps
+5. Proceed only after all verifications pass
 
 ---
 
@@ -58,7 +72,14 @@ Only after ALL verifications pass:
 3. ✅ Verify commit: `git log --oneline -1`
 4. ✅ Push to GitHub: `git push origin main`
 5. ✅ Verify push succeeded
-6. ✅ Update CHANGE.log (can be deferred to end of session)
+6. ✅ Monitor GitHub Actions status
+7. ✅ If GitHub Actions fails, STOP and fix before next batch
+8. ✅ Update CHANGE.log (can be deferred to end of session)
+
+**GitHub Actions Monitoring:**
+- Check https://github.com/CScharer/selenium_java_docker/actions after push
+- Wait for build to complete before next batch (or proceed if user approves)
+- If any job fails, investigate and fix before continuing
 
 ---
 
@@ -158,25 +179,114 @@ If you see dependency download errors:
 
 **Before EVERY batch:**
 ```bash
-# 1. Verify compilation
+# 1. Verify compilation (REQUIRED - every batch)
 docker-compose run --rm tests compile -DskipTests -Dcheckstyle.skip=true
 
-# 2. Run tests (if network allows)
-docker-compose run --rm tests test -Dcheckstyle.skip=true
+# 2. Run smoke tests (REQUIRED - every batch, fast ~2-3 min)
+docker-compose run --rm tests test -Dtest=SmokeTests -Dcheckstyle.skip=true
 
-# 3. Docker build
+# 3. Docker build (every 3-5 batches)
 docker-compose build tests
+
+# 4. Full test suite (every 5-10 batches as checkpoint)
+docker-compose run --rm tests test -Dcheckstyle.skip=true
 ```
 
 **After verification passes:**
 ```bash
-# 4. Commit and push
+# 5. Commit and push
 git add -A
 git commit --no-verify -m "..."
 git push origin main
+
+# 6. Monitor GitHub Actions
+# Check https://github.com/CScharer/selenium_java_docker/actions
+# Wait for green status or investigate failures
 ```
 
-**NEVER skip these steps unless explicitly approved by user.**
+**NEVER skip compilation + smoke tests unless explicitly approved by user.**
+
+---
+
+## 🎯 SMOKE TESTS
+
+**What are smoke tests?**
+- Basic functionality tests that run quickly
+- Located in: `src/test/java/com/cjs/qa/junit/tests/SmokeTests.java`
+- Cover: Basic navigation, element finding, driver initialization
+- Duration: ~2-3 minutes (vs 10-15 min for full suite)
+
+**Why smoke tests?**
+- Fast feedback on compilation AND runtime issues
+- Catch most regressions without full test suite wait
+- ~5x faster than full suite
+- Complement comprehensive GitHub Actions testing
+
+**Command:**
+```bash
+docker-compose run --rm tests test -Dtest=SmokeTests -Dcheckstyle.skip=true
+```
+
+**Alternative (if local Maven environment is properly configured):**
+```bash
+mvn test -Dtest=SmokeTests -Dcheckstyle.skip=true
+```
+
+**Expected Output:**
+```
+Tests run: X, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+```
+
+**Note:** Using Docker ensures consistent environment regardless of local Maven setup.
+
+---
+
+## 🚫 EXCLUDED TESTS - NEVER RUN AUTOMATICALLY
+
+### **Load & Performance Tests - MANUAL ONLY**
+
+**❌ DO NOT run these tests during normal workflow:**
+
+**Tools to EXCLUDE:**
+1. **Gatling** (Scala-based load testing)
+   - Files: `src/test/scala/*LoadSimulation.scala`
+   - Reason: Resource-intensive, generates load on systems
+   
+2. **Locust** (Python-based load testing)
+   - Files: `src/test/locust/*_test.py`
+   - Reason: Generates HTTP load, requires specific configuration
+   
+3. **JMeter** (Performance testing)
+   - Files: `src/test/jmeter/*.jmx`
+   - Reason: Performance benchmarking, not functional testing
+
+**When to run these tests:**
+- ✅ Only when explicitly requested by user
+- ✅ Manual performance benchmarking sessions
+- ✅ Before major releases (scheduled/planned)
+- ❌ NEVER during routine code changes
+- ❌ NEVER during PMD fixes or refactoring
+
+**Why exclude them?**
+- Generate significant load on systems/services
+- Require specific infrastructure setup
+- Take considerable time to complete
+- Not relevant for code quality verification
+- May impact production/staging environments if misconfigured
+
+**Maven profiles (if any exist) to AVOID:**
+- `-P performance`
+- `-P load-test`
+- `-P gatling`
+- `-P jmeter`
+
+**If user requests load/performance testing:**
+1. Confirm the request explicitly
+2. Verify infrastructure is ready
+3. Run in isolated environment
+4. Monitor resource usage
+5. Document results separately
 
 ---
 
