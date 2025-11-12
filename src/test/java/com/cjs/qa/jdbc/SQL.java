@@ -446,7 +446,7 @@ public class SQL {
               messagePre + " " + sql.substring(sql.indexOf('['), sql.indexOf(']') + 1));
           break;
         default:
-          Environment.sysOut(messagePre + " [" + records.length - 1 + "] RECORD(S)");
+          Environment.sysOut(messagePre + " [" + (records.length - 1) + "] RECORD(S)");
           break;
       }
       recordsUpdated = jdbc.executeUpdate(sql, false);
