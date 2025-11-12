@@ -84,4 +84,28 @@
   <suppress checks="ConstantNameCheck" files="src/test/java/.*/pages/.*\.java$"/>
   <suppress checks="ConstantNameCheck" files="src/test/java/com/cjs/qa/core/pages/.*\.java$"/>
 
+  <!--
+    WhitespaceAround & EmptyForIteratorPad - Google Java Format Compatibility
+    
+    Google Java Format enforces specific whitespace rules that conflict with some Checkstyle checks:
+    - Empty blocks: Google uses {} (no space), Checkstyle wants { }
+    - Empty for loops: Google uses for(...;) (no space), Checkstyle wants for(...; )
+    
+    Rationale:
+    1. Google Java Format is the authoritative formatter for this project
+    2. Google Style Guide is well-established industry standard
+    3. Attempting to "fix" these creates infinite conflicts (format reverts changes)
+    4. Standard practice: Suppress Checkstyle rules that conflict with formatter
+    5. No functionality or readability impact
+    
+    References:
+    - Google Java Style Guide: https://google.github.io/styleguide/javaguide.html
+    - Empty blocks allowed without spaces per Google style
+    
+    Affected: All Java files (formatter enforces consistently)
+    Violations: 12 WhitespaceAround + 2 EmptyForIteratorPad = 14 total
+  -->
+  <suppress checks="WhitespaceAround"/>
+  <suppress checks="EmptyForIteratorPad"/>
+
 </suppressions>
