@@ -382,7 +382,7 @@ jobs:
   mobile-tests:
     name: Mobile Browser & Responsive Design Tests
     runs-on: ubuntu-latest
-    needs: selenium-grid-tests
+    needs: [build-and-compile, smoke-tests]
     
     services:
       selenium-hub:
