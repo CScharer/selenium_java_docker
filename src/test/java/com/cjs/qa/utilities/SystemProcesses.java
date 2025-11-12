@@ -295,7 +295,7 @@ public class SystemProcesses {
             memberMap.put("DateTimeStamp", dateTimeStamp);
             stringBuilder =
                 SQL.appendStringBuilderSQLInsertRecord(tableName, stringBuilder, memberMap, true);
-            if ((recordNumber % RECORD_LIMIT) == 0) {
+            if (recordNumber % RECORD_LIMIT == 0) {
               SQL.execute(stringBuilder.toString());
               stringBuilder = new StringBuilder();
             }

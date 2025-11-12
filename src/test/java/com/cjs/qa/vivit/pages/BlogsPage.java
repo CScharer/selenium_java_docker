@@ -101,7 +101,7 @@ public class BlogsPage extends Page {
           String fieldName = mapFields.get(fieldIndex);
           // Account for Sort/Options
           if (mapFields.size() == 4) {
-            fieldName = mapFields.get((fieldIndex + 1));
+            fieldName = mapFields.get(fieldIndex + 1);
           }
           switch (fieldName) {
             case "Blog Name / Description":

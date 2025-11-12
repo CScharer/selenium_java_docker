@@ -154,7 +154,7 @@ public class Groups {
         String fieldValue = (String) groupMap.get(fieldName);
         mapGroupURLs.put(fieldName, fieldValue);
       }
-      groupsList.get((groupsList.size() - 1)).updateURLs(mapGroupURLs);
+      groupsList.get(groupsList.size() - 1).updateURLs(mapGroupURLs);
     }
     setGroupsList(groupsList);
     if (getGroupsList().isEmpty()) {

@@ -171,13 +171,13 @@ public class GroupPage extends Page {
           }
           Groups.getGroupsList()
               .add(new Groups(groupType, pageID, groupName, elapsedTime, wallPosts, chapterURL));
-          Groups.getGroupsList().get((Groups.getGroupsList().size() - 1)).updateURLs(mapGroupURLs);
+          Groups.getGroupsList().get(Groups.getGroupsList().size() - 1).updateURLs(mapGroupURLs);
         } else { // Broken Group URL.
           Environment.sysOut("Missing chapterURL:" + chapterURL);
           // groupType = groupType;
           // pageID = pageID;
           groupName =
-              groupType + ": " + pageID.substring((pageID.lastIndexOf("/") + 1), pageID.length());
+              groupType + ": " + pageID.substring(pageID.lastIndexOf("/") + 1, pageID.length());
           elapsedTime = "N/A";
           wallPosts = "N/A";
           // chapterURL = chapterURL;
@@ -200,7 +200,7 @@ public class GroupPage extends Page {
           if (webSiteMemberID.indexOf(SYMBOL_ID) != -1) {
             webSiteMemberID =
                 webSiteMemberID.substring(
-                    (webSiteMemberID.indexOf(SYMBOL_ID) + SYMBOL_ID.length()),
+                    webSiteMemberID.indexOf(SYMBOL_ID) + SYMBOL_ID.length(),
                     webSiteMemberID.length());
           }
           Environment.sysOut(

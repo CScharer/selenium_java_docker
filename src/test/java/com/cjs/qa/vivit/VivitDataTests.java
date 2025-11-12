@@ -193,7 +193,7 @@ public class VivitDataTests extends Environment {
     sysOut(ParameterHelper.getParameters(Arrays.asList(Arrays.asList())));
     final String formatDate = DateHelpersTests.FORMAT_YYYY_MM_DD_COMPACT;
     final String date =
-        DateHelpersTests.getCurrentDatePlusMinusDays(formatDate, (DAYS_TO_KEEP_BACKUPS * -1));
+        DateHelpersTests.getCurrentDatePlusMinusDays(formatDate, DAYS_TO_KEEP_BACKUPS * -1);
     final String folderName = VivitFoldersFiles.PATH_DATA + date;
     FSOTests.fileDelete(folderName);
     List<Path> pathList = FSOTests.pathsList(Constants.PATH_FILES_DATA_DATABASES, IExtension.BAK);
@@ -240,7 +240,7 @@ public class VivitDataTests extends Environment {
     StringBuilder sqlStringBuilder = new StringBuilder();
     String datePreviousBackUp =
         DateHelpersTests.getCurrentDatePlusMinusDays(
-            DateHelpersTests.FORMAT_YYYY_MM_DD_COMPACT, (DAYS_TO_KEEP_BACKUPS * -1));
+            DateHelpersTests.FORMAT_YYYY_MM_DD_COMPACT, DAYS_TO_KEEP_BACKUPS * -1);
     final String dateCurrentBackUp = DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_YYYY_MM_DD_COMPACT);
     String tableName = VivitTables.PREFIX + tableGroupName;
     // Drop the old backup table.
@@ -961,7 +961,7 @@ public class VivitDataTests extends Environment {
       sysOut("data:[" + data + "]");
       if (!"".equals(data)) {
         final String[] records = data.split(Constants.NEWLINE);
-        reportMap.put(viewName, String.valueOf((records.length - 1)));
+        reportMap.put(viewName, String.valueOf(records.length - 1));
         if (records.length > 1) {
           sheetLinkIndex++;
           final String sheetName = "S" + JavaHelpers.formatNumber(sheetLinkIndex, "000");
@@ -1221,7 +1221,7 @@ public class VivitDataTests extends Environment {
               + sheetLinkName
               + "]");
       List<Map<String, String>> recordListMap = jdbc.queryResultsString(sql, true);
-      double recordCount = (recordListMap.size() - 1);
+      double recordCount = recordListMap.size() - 1;
       // if (recordListMap.size() > 1 && recordCount < RECORD_LIMIT_100)
       if (recordListMap.size() > 1) {
         sysOut("Record Count:[" + recordCount + "]");
@@ -1506,7 +1506,7 @@ public class VivitDataTests extends Environment {
         if (records.length > 1) {
           final XLS excel = new XLS(VivitFoldersFiles.REPORT_XLS_AUTOMATION_T, sheetName);
           int column = 0;
-          int row = (excel.getRowCount(sheetName));
+          int row = excel.getRowCount(sheetName);
           if (row == 1) {
             row--;
           }
@@ -1524,9 +1524,9 @@ public class VivitDataTests extends Environment {
                   excel.setFormatHeading(sheetName, column, row);
                   excel.writeCell(
                       sheetName,
-                      (column + 1),
+                      column + 1,
                       row,
-                      (records.length - 1) + " Records of (" + recordCount + ")");
+                      records.length - 1 + " Records of (" + recordCount + ")");
                   // headersWritten = true
                   // }
                 } else {
@@ -1630,7 +1630,7 @@ public class VivitDataTests extends Environment {
     sysOut(
         ParameterHelper.getParameters(
             Arrays.asList(Arrays.asList(LABEL_FILE_PATH_NAME, filePathName))));
-    final int TIMEOUT = (2 * 60);
+    final int TIMEOUT = 2 * 60;
     String command =
         "cscript //S //T:"
             + TIMEOUT
@@ -1832,7 +1832,7 @@ public class VivitDataTests extends Environment {
     for (int row = 1; row < rows; row++) {
       String airportFound = excel.readCell(sheetName, 0, row);
       if (airportFound.equalsIgnoreCase(airport)) {
-        return String.valueOf((row + 1));
+        return String.valueOf(row + 1);
       }
     }
     return "-1";
