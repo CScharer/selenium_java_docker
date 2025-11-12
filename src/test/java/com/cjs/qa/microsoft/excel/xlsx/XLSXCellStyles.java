@@ -194,7 +194,7 @@ public class XLSXCellStyles {
       case CELL_STYLE_INDEX_DEFINED:
         // Styles & Fonts already exist.
         for (int cellStyleIndex = 0;
-            cellStyleIndex < (IExcel.CELL_STYLE_LIST.size() - 1);
+            cellStyleIndex < IExcel.CELL_STYLE_LIST.size() - 1;
             cellStyleIndex++) {
           final int workbookStyleIndex = (CELL_STYLE_INDEX_START + cellStyleIndex);
           final String cellStyleType = IExcel.CELL_STYLE_LIST.get(cellStyleIndex);

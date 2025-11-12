@@ -148,7 +148,7 @@ public class ConvertTests {
     final String formatNumber = "###,###,##0";
     final int numberStep = 1;
     final int numberStart = -1;
-    final int numberEnd = (IExcel.MAX_COLUMNS_XLSX + 1);
+    final int numberEnd = IExcel.MAX_COLUMNS_XLSX + 1;
     Environment.sysOut("method:[" + method + "]");
     for (int number = numberStart; number <= numberEnd; number += numberStep) {
       Environment.sysOut(

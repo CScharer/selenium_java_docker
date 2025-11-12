@@ -74,11 +74,11 @@ public class DailyPollQuizPages extends RewardsPage {
   public void completeQuizByOrder() throws QAException {
     Environment.sysOut(
         "***ClassMethodDebug***:[" + JavaHelpers.getCurrentClassMethodDebugName() + "]");
-    for (int answerIndex = 0; answerIndex < (answersList.size() - 1); answerIndex++) {
+    for (int answerIndex = 0; answerIndex < answersList.size() - 1; answerIndex++) {
       getAnswers(true);
       final Answers answers = answersList.get(answerIndex);
-      final int answerActualIndex = (Integer.valueOf(answers.getDataOptionNumber()));
-      final int answerExpectedIndex = (Integer.valueOf(answers.getDataID()) - 1);
+      final int answerActualIndex = Integer.valueOf(answers.getDataOptionNumber());
+      final int answerExpectedIndex = Integer.valueOf(answers.getDataID()) - 1;
       if (answerActualIndex != answerExpectedIndex) {
         final WebElement moveFromWebElement =
             scrollToElementAndHighlightBriefly(
@@ -142,7 +142,7 @@ public class DailyPollQuizPages extends RewardsPage {
       answers.setDataOption(webElement.getAttribute("data-option"));
       Environment.sysOut("answers: (" + answers.toString() + "]");
       if (ordering) { // Update correct state.
-        if ((Integer.valueOf(answers.getDataID()) - 1)
+        if (Integer.valueOf(answers.getDataID()) - 1
             == Integer.valueOf(answers.getDataOptionNumber())) {
           answers.setCorrect(true);
         }
@@ -238,7 +238,7 @@ public class DailyPollQuizPages extends RewardsPage {
     if (objectExists(byPointsAvailableLabel, 5)) {
       WebElement webElement = scrollToElementAndHighlightBriefly(byPointsAvailableLabel);
       setPointsAvailable(webElement.getText());
-      setAnswersNeeded((Integer.valueOf(getPointsAvailable()) / 10));
+      setAnswersNeeded(Integer.valueOf(getPointsAvailable()) / 10);
       Environment.sysOut(
           "Points Available: ["
               + getPointsAvailable()
@@ -276,8 +276,8 @@ public class DailyPollQuizPages extends RewardsPage {
     String questions = webElement.getText();
     questions = questions.substring(1, questions.length() - 1);
     final String[] values = questions.split(" of ");
-    final int questionStart = (Integer.valueOf(values[0]) - 1);
-    final int answers = (Integer.valueOf(values[1]) - 1);
+    final int questionStart = Integer.valueOf(values[0]) - 1;
+    final int answers = Integer.valueOf(values[1]) - 1;
     for (int questionNumber = questionStart; questionNumber <= answers; questionNumber++) {
       webElement =
           scrollToElementAndHighlightBriefly(By.xpath(".//*[contains(@id,'wk_question_text')]"));
@@ -305,7 +305,7 @@ public class DailyPollQuizPages extends RewardsPage {
         Environment.sysOut("answerValue:[" + answerValue + "]");
       }
       final int randomSelection =
-          Integer.valueOf(JavaHelpers.generateRandomInteger(0, (webElementList.size() - 1)));
+          Integer.valueOf(JavaHelpers.generateRandomInteger(0, webElementList.size() - 1));
       webElement =
           scrollToElementAndHighlightBriefly(
               By.xpath(
@@ -403,7 +403,7 @@ public class DailyPollQuizPages extends RewardsPage {
     final String[] pointsArray = points.split("/");
     setPointsAvailable(pointsArray[1]);
     final int pointEarned = Integer.valueOf(pointsArray[0]);
-    setAnswersNeeded(((Integer.valueOf(getPointsAvailable()) - pointEarned) / 10));
+    setAnswersNeeded((Integer.valueOf(getPointsAvailable()) - pointEarned) / 10);
     Environment.sysOut(
         "Points Available: ["
             + getPointsAvailable()

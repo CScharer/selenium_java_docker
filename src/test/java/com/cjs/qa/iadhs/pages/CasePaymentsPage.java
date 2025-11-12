@@ -73,7 +73,7 @@ public class CasePaymentsPage extends Page {
     List<String> headingList = validateHeadingList();
     List<WebElement> previousPaymentRecordsWebElementList =
         getWebDriver().findElements(getPreviousPaymentRecordsBy());
-    int recordsCheck = (previousPaymentRecordsWebElementList.size() - 1);
+    int recordsCheck = previousPaymentRecordsWebElementList.size() - 1;
     if (recordsCheck > recordsCheckMax) {
       recordsCheck = recordsCheckMax;
     }

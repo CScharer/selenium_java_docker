@@ -26,7 +26,7 @@ public class RTestReporter {
   public void addStepStatus(String stepName, Description description, String status) {
     final Map<String, String> mapStatus = new HashMap<>();
     mapStatus.put(description.toString(), status);
-    mapCounts.put(status, (mapCounts.get(status) + 1));
+    mapCounts.put(status, mapCounts.get(status) + 1);
   }
 
   public List<String> getListStatus() {
