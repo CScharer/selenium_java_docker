@@ -117,7 +117,7 @@ public class JavaHelpers {
     }
     for (int i = 0; i < shortest; i++) {
       final char c = string1.charAt(i);
-      if ((c == '(') || (c == '-')) {
+      if (c == '(' || c == '-') {
         return 0;
       }
       if (string1.charAt(i) > string2.charAt(i)) {
@@ -186,7 +186,7 @@ public class JavaHelpers {
       String key = (String) entry.getKey();
       String value = (String) entry.getValue();
       // dataTableList.add(Arrays.asList(key, value))
-      int bufferLength = (maxLength - key.length());
+      int bufferLength = maxLength - key.length();
       String buffer = JavaHelpers.createBufferString(" ", bufferLength, "");
       String message = "key:[" + key + "], " + buffer + "value:[" + value + "]";
       propertyList.add(message);
@@ -256,7 +256,7 @@ public class JavaHelpers {
         classesList.addAll(findClasses(file, packageName + "." + file.getName()));
       } else if (file.getName().endsWith(".class")) {
         classesList.add(
-            (packageName + '.' + file.getName().substring(0, file.getName().length() - 6)));
+            packageName + '.' + file.getName().substring(0, file.getName().length() - 6));
       }
     }
     return classesList;
@@ -332,7 +332,7 @@ public class JavaHelpers {
     // numberMax + 1)
     // Random random = new Random()
     // int randomNumber = JavaHelpers.random.nextInt()
-    randomNumber = JavaHelpers.random.nextInt((numberMax + 1) - numberMin) + numberMin;
+    randomNumber = JavaHelpers.random.nextInt(numberMax + 1 - numberMin) + numberMin;
     return randomNumber;
   }
 
@@ -370,10 +370,10 @@ public class JavaHelpers {
    * @return
    */
   public static int getCallingLineNumber() {
-    final StackTraceElement[] stackTraceElements = (new Throwable()).getStackTrace();
+    final StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
     final String fullString = stackTraceElements[2].toString();
     String lineNumber =
-        fullString.substring((fullString.indexOf(':') + 1), (fullString.length() - 1));
+        fullString.substring(fullString.indexOf(':') + 1, fullString.length() - 1);
     return Integer.valueOf(lineNumber);
   }
 
@@ -383,7 +383,7 @@ public class JavaHelpers {
    * @return
    */
   public static String getCallingMethodName() {
-    final StackTraceElement[] stackTraceElements = (new Throwable()).getStackTrace();
+    final StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
     return stackTraceElements[3].getMethodName();
   }
 
@@ -417,7 +417,7 @@ public class JavaHelpers {
    * @return
    */
   public static String getCurrentClassMethodDebugName() {
-    final StackTraceElement[] stackTraceElements = (new Throwable()).getStackTrace();
+    final StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
     final String fullString = stackTraceElements[1].toString();
     String className = Thread.currentThread().getStackTrace()[2].getClassName();
     String classNameTemp = className;
@@ -433,7 +433,7 @@ public class JavaHelpers {
    * @return
    */
   public static String getCurrentClassMethodName() {
-    final StackTraceElement[] stackTraceElements = (new Throwable()).getStackTrace();
+    final StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
     final String fullString = stackTraceElements[1].toString();
     String className = Thread.currentThread().getStackTrace()[2].getClassName();
     className = className.substring((className.lastIndexOf('.') + 1), className.length());
@@ -456,10 +456,10 @@ public class JavaHelpers {
   }
 
   public static int getCurrentLineNumber() {
-    final StackTraceElement[] stackTraceElements = (new Throwable()).getStackTrace();
+    final StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
     final String fullString = stackTraceElements[1].toString();
     String lineNumber =
-        fullString.substring((fullString.indexOf(':') + 1), (fullString.length() - 1));
+        fullString.substring(fullString.indexOf(':') + 1, fullString.length() - 1);
     return Integer.valueOf(lineNumber);
   }
 
@@ -469,7 +469,7 @@ public class JavaHelpers {
    * @return
    */
   public static String getCurrentMethodDebugName() {
-    final StackTraceElement[] stackTraceElements = (new Throwable()).getStackTrace();
+    final StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
     final String fullString = stackTraceElements[1].toString();
     String className = Thread.currentThread().getStackTrace()[2].getClassName();
     return fullString.substring(
@@ -482,7 +482,7 @@ public class JavaHelpers {
    * @return
    */
   public static String getCurrentMethodName() {
-    final StackTraceElement[] stackTraceElements = (new Throwable()).getStackTrace();
+    final StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
     return stackTraceElements[1].getMethodName();
   }
 
@@ -492,7 +492,7 @@ public class JavaHelpers {
    * @return
    */
   public static String getCurrentPackageClassMethodDebugName() {
-    final StackTraceElement[] stackTraceElements = (new Throwable()).getStackTrace();
+    final StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
     return stackTraceElements[1].toString();
   }
 
@@ -502,7 +502,7 @@ public class JavaHelpers {
    * @return
    */
   public static String getCurrentPackageClassMethodName() {
-    final StackTraceElement[] stackTraceElements = (new Throwable()).getStackTrace();
+    final StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
     final String fullString = stackTraceElements[1].toString();
     final int stringEnd = fullString.indexOf('(');
     return fullString.substring(0, stringEnd);
@@ -639,7 +639,7 @@ public class JavaHelpers {
    * @return
    */
   public static String getStackTrace() {
-    final StackTraceElement[] stackTraceElements = (new Throwable()).getStackTrace();
+    final StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
     final StringBuilder stringBuilder = new StringBuilder();
     for (StackTraceElement stackTraceElement : stackTraceElements) {
       stringBuilder.append(stackTraceElement.toString() + Constants.NL);
@@ -661,7 +661,7 @@ public class JavaHelpers {
 
   /** Returns the name of current test case class name, used for debugging. */
   public static String getTestCaseClassName() {
-    final StackTraceElement[] stackTraceElements = (new Throwable()).getStackTrace();
+    final StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
     for (final StackTraceElement stackTraceElement : stackTraceElements) {
       final String value = stackTraceElement.toString();
       if (value.contains("com.cjs.junit.testsuites")) {
@@ -691,7 +691,7 @@ public class JavaHelpers {
    * @return
    */
   public static String getTestCaseMethodName() {
-    final StackTraceElement[] stackTraceElements = (new Throwable()).getStackTrace();
+    final StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
     for (final StackTraceElement stackTraceElement : stackTraceElements) {
       try {
         if (stackTraceElement.getClassName().contains(COM_CJS)
@@ -762,7 +762,7 @@ public class JavaHelpers {
    * @return
    */
   public static boolean isMethodInStack(String methodName) {
-    final StackTraceElement[] stackTraceElements = (new Throwable()).getStackTrace();
+    final StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
     for (StackTraceElement stackTraceElement : stackTraceElements) {
       if (stackTraceElement.toString().contains(methodName)) {
         return true;
