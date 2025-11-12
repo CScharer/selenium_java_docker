@@ -8,6 +8,7 @@ import jakarta.xml.soap.MessageFactory;
 import jakarta.xml.soap.MimeHeaders;
 import jakarta.xml.soap.SOAPConnection;
 import jakarta.xml.soap.SOAPConnectionFactory;
+import java.nio.charset.StandardCharsets;
 import jakarta.xml.soap.SOAPException;
 import jakarta.xml.soap.SOAPMessage;
 import java.io.BufferedReader;

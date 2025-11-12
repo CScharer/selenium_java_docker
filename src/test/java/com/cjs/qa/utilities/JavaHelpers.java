@@ -775,7 +775,7 @@ public class JavaHelpers {
    * @param iterable
    * @return
    */
-  public static boolean isSorted(List<String> iterable) {
+  public static boolean isSortedStrings(List<String> iterable) {
     final Iterator<String> iterator = iterable.iterator();
     if (!iterator.hasNext()) {
       return true;
