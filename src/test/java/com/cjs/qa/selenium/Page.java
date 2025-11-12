@@ -493,7 +493,7 @@ public class Page extends JavaHelpers {
           Environment.sysOut("Element not found yet, retrying...");
         }
       }
-    } while ((elapsedTime <= ((getTimeoutElement() / 6) * 1000)) && (!buttonExists));
+    } while (elapsedTime <= (getTimeoutElement() / 6) * 1000 && !buttonExists);
     // Only wait five seconds as these are supposed to be pop-ups
     if (buttonExists) {
       clickObject(webElement);
@@ -1392,7 +1392,7 @@ public class Page extends JavaHelpers {
     try {
       final List<String> bounds = getBoundedRectangleOfElement(webElement);
       final double totalInnerPageHeight = getViewPortHeight();
-      final double centerLocation = (Integer.parseInt(bounds.get(1)) - (totalInnerPageHeight / 2));
+      final double centerLocation = Integer.parseInt(bounds.get(1)) - totalInnerPageHeight / 2;
       final String script = "window.scrollTo(0, " + centerLocation + ");";
       executeJavaScript(script);
       final Actions actions = new Actions(getWebDriver());
@@ -1631,7 +1631,7 @@ public class Page extends JavaHelpers {
             }
           }
           Assert.assertTrue(
-              "Could not find an item with the value of [" + value + "]", (itemFound));
+              "Could not find an item with the value of [" + value + "]", itemFound);
         }
       }
       // logFieldName(webElement.getAttribute("id").toString(), value)
@@ -1969,7 +1969,7 @@ public class Page extends JavaHelpers {
     final long initialTime = System.currentTimeMillis() / 1000;
     long currentTime = System.currentTimeMillis() / 1000;
     String heading = "";
-    while (!(heading.equals(headingTitle)) && (timeoutSec > (currentTime - initialTime))) {
+    while (!heading.equals(headingTitle) && timeoutSec > currentTime - initialTime) {
       JavaHelpers.sleep(0, 500);
       currentTime = System.currentTimeMillis() / 1000;
       heading = getWebDriver().findElement(By.className("headingtitle")).getText().trim();
@@ -2005,12 +2005,12 @@ public class Page extends JavaHelpers {
       String changedURL = initialURL;
       final long initialTime = System.currentTimeMillis() / 1000;
       long currentTime = System.currentTimeMillis() / 1000;
-      while (initialURL.equals(changedURL) && (timeoutSec > (currentTime - initialTime))) {
+      while (initialURL.equals(changedURL) && timeoutSec > currentTime - initialTime) {
         sleep(0, 500);
         changedURL = getWebDriver().getCurrentUrl();
         currentTime = System.currentTimeMillis() / 1000;
       }
-      return (timeoutSec > (currentTime - initialTime));
+      return timeoutSec > currentTime - initialTime;
     } catch (final Exception e) {
       Environment.sysOut(e);
       return false;
@@ -2062,10 +2062,10 @@ public class Page extends JavaHelpers {
    * @return
    */
   public boolean wildCardMatch(String text, String pattern) {
-    if ((text.length() < 1) && (pattern.length() < 1)) {
+    if (text.length() < 1 && pattern.length() < 1) {
       return true;
     }
-    if ((text.length() < 1) || (pattern.length() < 1)) {
+    if (text.length() < 1 || pattern.length() < 1) {
       return false;
     }
     // Create the cards by splitting using a RegEx. If more speed
@@ -2100,10 +2100,10 @@ public class Page extends JavaHelpers {
    * @return
    */
   public boolean wildCardMatchNoPrint(String text, String pattern) {
-    if ((text.length() < 1) && (pattern.length() < 1)) {
+    if (text.length() < 1 && pattern.length() < 1) {
       return true;
     }
-    if ((text.length() < 1) || (pattern.length() < 1)) {
+    if (text.length() < 1 || pattern.length() < 1) {
       return false;
     }
     // Create the cards by splitting using a RegEx. If more speed
