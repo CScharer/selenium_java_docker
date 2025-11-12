@@ -1,5 +1,85 @@
 # CHANGE LOG
 
+## [2025-11-12 06:55:00 CST] [e9eb181d] - 🔧 CRITICAL FIX #5: Pipeline Compilation Errors (3 fixes)
+
+**Fifth Pipeline Failure:** 3 compilation errors  
+**Root Cause:** Batch #3 changes had subtle Java compilation issues not caught locally  
+**Why Missed:** Used `compile -DskipTests` instead of `compile test-compile`
+
+**Cursor Token Status:** Tokens Used: 182,044 / Total: 1,000,000 (817,956 remaining, 18.2% used, 81.8% remaining)
+
+---
+
+### Errors & Fixes
+
+#### Error #1: Type Erasure Name Clash
+**File:** JavaHelpers.java:[799,25]  
+**Error:** `isSorted(List<Boolean>)` and `isSorted(List<String>)` have same erasure  
+**Cause:** Java generics type erasure - both methods become `isSorted(List)` at runtime  
+**Fix:** Renamed `isSorted(List<String>)` → `isSortedStrings(List<String>)`  
+**Lesson:** Can't overload methods that differ only by generic type parameter
+
+#### Error #2: Multi-Catch Subclass Violation
+**File:** WordTests.java:[181,44]  
+**Error:** FileNotFoundException is subclass of IOException - can't be in multi-catch  
+**Cause:** Multi-catch statement cannot have related exception types  
+**Fix:** Changed `catch (FileNotFoundException | IOException e)` → `catch (IOException e)`  
+**Lesson:** Multi-catch alternatives must be unrelated exception types
+
+#### Error #3: Missing Import
+**File:** SOAP.java:[46,66] cannot find symbol  
+**Error:** StandardCharsets not imported  
+**Cause:** Changed `Charset.forName("UTF-8")` to `StandardCharsets.UTF_8` but forgot import  
+**Fix:** Added `import java.nio.charset.StandardCharsets;`  
+**Lesson:** Always verify imports when changing to new classes
+
+---
+
+### Why This Happened
+
+**Local Verification Used:**
+```bash
+docker-compose run --rm tests compile -DskipTests
+```
+
+**Pipeline Actually Runs:**
+```bash
+./mvnw clean compile test-compile
+```
+
+**The Difference:**
+- `-DskipTests` skips test execution but STILL compiles test classes
+- BUT: Using just `compile` phase doesn't include `test-compile` phase
+- Result: Test class compilation errors were MISSED locally!
+
+**Correct Command Should Be:**
+```bash
+docker-compose run --rm tests compile test-compile
+```
+
+This explicitly compiles BOTH main and test sources, matching the pipeline.
+
+---
+
+### Prevention: Rules Update Needed
+
+**AI_WORKFLOW_RULES.md needs update:**
+- Rule 3 currently says: `compile -DskipTests` (WRONG - doesn't test-compile!)
+- Should be: `compile test-compile` (matches pipeline exactly!)
+- This would have caught all 3 errors before push
+
+**Action Required:**
+Update AI_WORKFLOW_RULES.md v1.7 to use `compile test-compile` consistently
+
+---
+
+### Verification
+✅ **Compilation:** BUILD SUCCESS (Docker `compile test-compile`, 3:25 min)  
+✅ **All 3 errors resolved**  
+📋 **Next:** Update rules v1.7, commit, push
+
+---
+
 ## [2025-11-12 06:26:00 CST] [26379a14] - 🎉 PMD Batch #3: LOW PRIORITY Complete - 100% OF NEW VIOLATIONS! (15/17 fixes)
 
 ### Overview
