@@ -67,14 +67,25 @@ docker-compose run --rm tests test -Dcheckstyle.skip=true
 ### **Rule 4: Commit & Push Process**
 Only after ALL verifications pass:
 
-1. ✅ Stage changes: `git add -A`
-2. ✅ Commit with descriptive message following established format
-3. ✅ Verify commit: `git log --oneline -1`
-4. ✅ Push to GitHub: `git push origin main`
-5. ✅ Verify push succeeded
-6. ✅ Monitor GitHub Actions status
-7. ✅ If GitHub Actions fails, STOP and fix before next batch
-8. ✅ Update CHANGE.log (can be deferred to end of session)
+1. ✅ **Update CHANGE.log** (MANDATORY BEFORE COMMIT)
+   - Add new entry at top of file with:
+     - Timestamp: `[YYYY-MM-DD HH:MM:SS CST]`
+     - Commit hash: `[hash]` (use placeholder if not yet committed)
+     - Summary title
+     - Overview section with high-level summary
+     - List of commits in session (if multiple)
+     - Detailed changes, files modified, verification results
+     - Impact summary and next steps
+   - Format: Follow existing CHANGE.log structure
+   - Content: Include all changes since last entry
+   
+2. ✅ Stage changes: `git add -A` (including docs/CHANGE.log)
+3. ✅ Commit with descriptive message following established format
+4. ✅ Verify commit: `git log --oneline -1`
+5. ✅ Push to GitHub: `git push origin main`
+6. ✅ Verify push succeeded
+7. ✅ Monitor GitHub Actions status
+8. ✅ If GitHub Actions fails, STOP and fix before next batch
 
 **GitHub Actions Monitoring:**
 - Check https://github.com/CScharer/selenium_java_docker/actions after push
@@ -194,17 +205,22 @@ docker-compose run --rm tests test -Dcheckstyle.skip=true
 
 **After verification passes:**
 ```bash
-# 5. Commit and push
+# 5. Update CHANGE.log (MANDATORY!)
+# Add entry at top with timestamp, commit hash, summary, details
+
+# 6. Commit and push
 git add -A
 git commit --no-verify -m "..."
 git push origin main
 
-# 6. Monitor GitHub Actions
+# 7. Monitor GitHub Actions
 # Check https://github.com/CScharer/selenium_java_docker/actions
 # Wait for green status or investigate failures
 ```
 
-**NEVER skip compilation + smoke tests unless explicitly approved by user.**
+**NEVER skip:**
+- Compilation + smoke tests (unless explicitly approved by user)
+- CHANGE.log update (MANDATORY before every push)
 
 ---
 
