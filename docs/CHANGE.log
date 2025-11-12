@@ -1,5 +1,92 @@
 # CHANGE LOG
 
+## [2025-11-12 07:38:00 CST] [PENDING] - 📋 Rules v1.9: Java Version Compatibility & Format Strategy
+
+### Overview
+**RULES CLARIFICATION:** Documented Java version mismatch and proper Google Java Format strategy  
+**Discovery:** Local Java 21 vs Docker Java 17 causes Google Java Format plugin failures  
+**Solution:** Skip format locally, let pipeline handle it automatically
+
+**Cursor Token Status:** Tokens Used: 238,254 / Total: 1,000,000 (761,746 remaining, 23.8% used, 76.2% remaining)
+
+---
+
+### Java Version Analysis
+
+**Local Environment:**
+- Java: OpenJDK 21.0.7 (Homebrew)
+- Maven: 3.9.11  
+- Issue: Google Java Format plugin incompatible with Java 21
+
+**Docker Environment:**
+- Java: 17.0.17 (Eclipse Adoptium)
+- Maven: 3.9.11
+- Issue: Docker volume mount prevents changes from persisting to host
+
+**Pipeline Environment:**
+- Java: 17 (matches Docker)
+- Google Java Format: Runs automatically ✅
+- Result: Import/formatting violations auto-fixed in pipeline
+
+---
+
+### Rules Updated (v1.9)
+
+#### Step 0: Google Java Format - Revised Strategy
+
+**Previous (v1.8):**
+- Recommended running format in Docker before every batch
+
+**New (v1.9):**
+- **SKIP format locally** (Java version incompatibility)
+- **Let pipeline handle it** (runs automatically)
+- **Manual fixes** only if import issues block compilation
+
+**Added Documentation:**
+1. Java version compatibility warning (Local 21 vs Docker 17)
+2. Three options with clear recommendations
+3. Recommendation to skip Step 0 locally
+4. Updated Quick Reference to skip format
+
+**Rationale:**
+- Local Java 21 incompatible with fmt-maven-plugin
+- Docker format works but changes don't persist (volume mount)
+- Pipeline handles format automatically after push
+- Avoid wasted time on local format attempts
+- Focus verification on compilation correctness
+
+---
+
+### Impact
+
+**Prevents:**
+- ❌ Wasted time troubleshooting local format failures
+- ❌ Confusion about Java version compatibility
+- ❌ Unnecessary manual import fixes
+- ❌ Debugging Docker volume mount issues
+
+**Clarifies:**
+- ✅ Why local format doesn't work (Java 21 vs 17)
+- ✅ Why Docker format doesn't persist (volume mount)
+- ✅ When to manually fix imports (compilation blockers only)
+- ✅ Trust pipeline for formatting (automatic)
+
+---
+
+### Workflow Evolution
+
+**v1.0** → Initial rules  
+**v1.4** → Local verification must match pipeline  
+**v1.5** → Token status with percentages  
+**v1.6** → Mandatory timestamp verification  
+**v1.7** → CRITICAL: test-compile phase required  
+**v1.8** → Google Java Format as pre-compilation step  
+**v1.9** → Java version compatibility & skip format locally ✅
+
+Each version refines the workflow based on real-world discoveries!
+
+---
+
 ## [2025-11-12 07:22:00 CST] [1cc83fe5] - 📋 Rules v1.8: Google Java Format as Pre-Compilation Step
 
 ### Overview
