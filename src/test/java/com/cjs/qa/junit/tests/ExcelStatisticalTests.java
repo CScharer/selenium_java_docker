@@ -114,7 +114,7 @@ public class ExcelStatisticalTests {
       final Integer methodCallsControl = (Integer) entry.getValue();
       final Double methodTimeControl =
           getExcelTimingControl().getMethodTimingMap().get(methodNameControl);
-      final Double methodTimeControlAverage = (methodTimeControl / methodCallsControl);
+      final Double methodTimeControlAverage = methodTimeControl / methodCallsControl;
       excel.writeCell(sheetName, 0, row, methodNameControl);
       excel.writeCell(sheetName, 1, row, methodCallsControl);
       excel.writeCell(sheetName, 2, row, methodTimeControl);
@@ -133,7 +133,7 @@ public class ExcelStatisticalTests {
           getExcelTimingTest().getMethodCallsMap().get(methodNameControl);
       final Double methodTimeTest =
           getExcelTimingTest().getMethodTimingMap().get(methodNameControl);
-      final Double methodTimeTestAverage = (methodTimeTest / methodCallsTest);
+      final Double methodTimeTestAverage = methodTimeTest / methodCallsTest;
       Environment.sysOut(
           "methodNameTest:["
               + methodNameControl
@@ -147,7 +147,7 @@ public class ExcelStatisticalTests {
       excel.writeCell(sheetName, 4, row, methodCallsTest);
       excel.writeCell(sheetName, 5, row, methodTimeTest);
       excel.writeCell(sheetName, 6, row, methodTimeTestAverage);
-      excel.writeCell(sheetName, 7, row, (methodTimeTestAverage - methodTimeControlAverage));
+      excel.writeCell(sheetName, 7, row, methodTimeTestAverage - methodTimeControlAverage);
       // getExcelTimingControl().getMethodCallsMap().remove(methodNameControl)
       // getExcelTimingControl().getMethodTimingMap().remove(methodNameControl)
       // getExcelTimingTest().getMethodCallsMap().remove(methodNameControl)

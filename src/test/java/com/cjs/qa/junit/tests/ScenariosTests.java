@@ -276,7 +276,7 @@ public class ScenariosTests {
             + "]");
     // Environment.sysOut("QAException:[" + QAException.getQaErrorMessage()
     // + "]")
-    final boolean failures = (mapTestCount.get("failed") != 0);
+    final boolean failures = mapTestCount.get("failed") != 0;
     if (failures) {
       captureImages();
     }
@@ -877,7 +877,7 @@ public class ScenariosTests {
     stringBuilder.append(JDBCConstants.FROM + "[Hours_Contractor] ");
     final String year = DateHelpersTests.getCurrentDateTime("yyyy");
     String month =
-        String.format("%02d", (Integer.valueOf(DateHelpersTests.getCurrentDateTime("MM")) - 1));
+        String.format("%02d", Integer.valueOf(DateHelpersTests.getCurrentDateTime("MM")) - 1);
     if ("0".equals(month)) {
       month = "12";
     }

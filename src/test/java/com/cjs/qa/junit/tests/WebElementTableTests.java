@@ -240,15 +240,15 @@ public class WebElementTableTests {
             + "], Index:["
             + getWebElementTable().getColumnIndex(LABEL_TITLE)
             + "], Value:["
-            + getWebElementTable().getCellText((rowCount + 1), 2)
+            + getWebElementTable().getCellText(rowCount + 1, 2)
             + "]");
     Environment.sysOut(
         "Name:["
-            + getWebElementTable().getColumnName((columnCount + 1))
+            + getWebElementTable().getColumnName(columnCount + 1)
             + "], Index:["
             + getWebElementTable().getColumnIndex(LABEL_TITLE)
             + "], Value:["
-            + getWebElementTable().getCellText((rowCount + 1), 2)
+            + getWebElementTable().getCellText(rowCount + 1, 2)
             + "]");
   }
 

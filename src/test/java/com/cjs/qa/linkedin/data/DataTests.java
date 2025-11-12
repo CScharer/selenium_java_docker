@@ -101,7 +101,7 @@ public class DataTests {
     String limitString = getJdbc().queryResults(sqlStringBuilder.toString(), "", false);
     int limit = Integer.valueOf(limitString);
     // limit = (limit / (365 * 2));
-    limit = (limit / 365);
+    limit = limit / 365;
     if (limit < RECORD_UPDATE_MIN) {
       limit = RECORD_UPDATE_MIN;
     }
@@ -181,7 +181,7 @@ public class DataTests {
             "Jan;Feb;Mar;Apr;May;Jun;Jul;Aug;Sep;Oct;Nov;Dec".split(Constants.DELIMETER_LIST));
     for (int monthIndex = 0; monthIndex < monthList.size(); monthIndex++) {
       String monthAbbreviation = monthList.get(monthIndex);
-      String monthNumber = JavaHelpers.formatNumber((monthIndex + 1), "00");
+      String monthNumber = JavaHelpers.formatNumber(monthIndex + 1, "00");
       stringBuilder.append(
           "\n\t\t\t" + "when '" + monthAbbreviation + "' then '" + monthNumber + "'");
     }

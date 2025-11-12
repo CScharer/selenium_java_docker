@@ -107,7 +107,7 @@ public class MavenTests {
     stringBuilder.append(newLine("status:" + mapResults.get("status")));
     if ("0".equals(status)) {
       final String projectFolder =
-          projectPath.substring((projectPath.lastIndexOf(Constants.DELIMETER_PATH) + 1));
+          projectPath.substring(projectPath.lastIndexOf(Constants.DELIMETER_PATH) + 1);
       stringBuilder.append(newLine(parseResultsFile(resultsPathFile, projectFolder)));
     }
     if (FSOTests.fileExists(batchPathFile)) {
