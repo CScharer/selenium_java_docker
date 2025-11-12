@@ -949,7 +949,7 @@ public class Page extends JavaHelpers {
     String tabOrder = stringBuilderFields.toString();
     // Environment.sysOut("Tab Order: [" + tabOrder + "]")
     if (tabOrder.indexOf(Constants.NL) > 0) {
-      tabOrder = tabOrder.substring(0, (tabOrder.length() - Constants.NL.length()));
+      tabOrder = tabOrder.substring(0, tabOrder.length() - Constants.NL.length());
     }
     return tabOrder;
   }

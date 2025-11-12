@@ -96,7 +96,7 @@ public class SOAP {
       String postPW = "</password>";
       if (getXml().contains(prePW)) {
         final String prePassword =
-            getXml().substring(0, (getXml().indexOf(prePW) + prePW.length()));
+            getXml().substring(0, getXml().indexOf(prePW) + prePW.length());
         final String postPassword = getXml().substring(getXml().indexOf(postPW), getXml().length());
         setXml(prePassword + "**********" + postPassword);
       }

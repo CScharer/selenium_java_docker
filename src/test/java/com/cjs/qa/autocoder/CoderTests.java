@@ -397,7 +397,7 @@ public class CoderTests {
       }
     }
     String newString = stringBuilder.toString();
-    newString = newString.substring(0, (newString.length() - 1)) + "));";
+    newString = newString.substring(0, newString.length() - 1) + "))";
     return newString;
   }
 

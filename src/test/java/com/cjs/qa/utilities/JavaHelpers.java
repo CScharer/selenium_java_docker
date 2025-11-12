@@ -524,7 +524,7 @@ public class JavaHelpers {
    */
   public static String getCurrentPackageName() {
     String packageName = Thread.currentThread().getStackTrace()[2].getClassName();
-    packageName = packageName.substring(0, (packageName.lastIndexOf('.')));
+    packageName = packageName.substring(0, packageName.lastIndexOf('.'));
     return packageName;
   }
 

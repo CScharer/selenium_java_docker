@@ -100,7 +100,7 @@ public class RoleManagementService extends WebService {
       Map<String, String> oCompanyInfo) {
     final Map<String, String> map = new HashMap<>();
     map.put("API_Method", JavaHelpers.getCurrentMethodName().toString());
-    final String name = eMail.substring(0, (eMail.indexOf(CJSConstants.MAILDOMAIN_GMAIL) - 1));
+    final String name = eMail.substring(0, eMail.indexOf(CJSConstants.MAILDOMAIN_GMAIL) - 1);
     String organizationId = null;
     final String organizationName = OracleDynamicVariables.getORGName(name);
     oCompanyInfo.put("CompanyName", organizationName);
