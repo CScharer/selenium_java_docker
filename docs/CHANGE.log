@@ -1,13 +1,19 @@
 # CHANGE LOG
 
-## [2025-11-12 11:20:00 CST] [cfd6319e] - 🔧 CRITICAL FIX #3: ContactInfoPage QAException
+## [2025-11-12 11:25:00 CST] [b43fff91] - 🔧 CRITICAL FIX #4: ContactInfoPage - Selective QAException
 
-**Third Pipeline Failure:** ContactInfoPage.java:446 - unreported exception QAException  
-**Cause:** Email.sendEmail() throws QAException (14 catch blocks affected)  
-**Fix:** Added QAException import + catch (Exception | QAException) to all 14 blocks  
-**Status:** ✅ All AvoidCatchingThrowable QAException issues now fixed!
+**Fourth Pipeline Failure:** 12 errors - "exception QAException is never thrown"  
+**Cause:** Used replace_all - added QAException to ALL 14 catch blocks (only 1 needed it!)  
+**Fix:** Reverted all, then SELECTIVELY added QAException ONLY to updateLinkedInTable()  
+**Result:** 1 method with QAException, 13 without ✅
 
-**Cursor Token Status:** Tokens Used: 296,146 / Total: 1,000,000 (703,854 remaining, 29.6% used, 70.4% remaining)
+**Cursor Token Status:** Tokens Used: 307,412 / Total: 1,000,000 (692,588 remaining, 30.7% used, 69.3% remaining)
+
+**Lesson:** ❌ Don't use replace_all for exception handling - analyze each method!
+
+---
+
+## [2025-11-12 11:20:00 CST] [cfd6319e] - ⏪ REVERTED: ContactInfoPage blanket QAException (caused 12 errors)
 
 ---
 
