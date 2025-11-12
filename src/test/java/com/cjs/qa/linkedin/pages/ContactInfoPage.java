@@ -88,7 +88,7 @@ public class ContactInfoPage extends Page {
       String address = webElement.getText();
       Environment.sysOut(methodName + ":address:[" + address + "]");
       appendLinkedInField(methodName, address);
-    } catch (Exception | QAException throwable) {
+    } catch (Exception throwable) {
       throwError(methodName);
     }
   }
@@ -102,7 +102,7 @@ public class ContactInfoPage extends Page {
       String birthday = webElement.getText();
       Environment.sysOut(methodName + ":birthday:[" + birthday + "]");
       appendLinkedInField(methodName, birthday);
-    } catch (Exception | QAException throwable) {
+    } catch (Exception throwable) {
       throwError(methodName);
     }
   }
@@ -116,7 +116,7 @@ public class ContactInfoPage extends Page {
       WebElement webElement = getWebElementSection().findElement(By.xpath("./div/span"));
       String connected = webElement.getText();
       Environment.sysOut(methodName + ":connected:[" + connected + "]");
-    } catch (Exception | QAException throwable) {
+    } catch (Exception throwable) {
       throwError(methodName);
     }
   }
@@ -131,7 +131,7 @@ public class ContactInfoPage extends Page {
       String eMail = webElement.getText();
       Environment.sysOut(methodName + ":eMail:[" + eMail + "]");
       appendLinkedInField(methodName + " (Work)", eMail);
-    } catch (Exception | QAException throwable) {
+    } catch (Exception throwable) {
       throwError(methodName);
     }
   }
@@ -145,7 +145,7 @@ public class ContactInfoPage extends Page {
       String im = webElement.getText();
       Environment.sysOut(methodName + ":im:[" + im + "]");
       appendLinkedInField(methodName, im);
-    } catch (Exception | QAException throwable) {
+    } catch (Exception throwable) {
       throwError(methodName);
     }
   }
@@ -181,7 +181,7 @@ public class ContactInfoPage extends Page {
           number = webElement.getText();
         }
       }
-    } catch (Exception | QAException throwable) {
+    } catch (Exception throwable) {
       throwError(methodName);
     }
   }
@@ -200,7 +200,7 @@ public class ContactInfoPage extends Page {
         Environment.sysOut(methodName + ":twitter:[" + twitter + "]");
         appendLinkedInField(methodName, twitter);
       }
-    } catch (Exception | QAException throwable) {
+    } catch (Exception throwable) {
       throwError(methodName);
     }
   }
@@ -231,7 +231,7 @@ public class ContactInfoPage extends Page {
             break;
         }
       }
-    } catch (Exception | QAException throwable) {
+    } catch (Exception throwable) {
       throwError(methodName);
     }
   }
@@ -261,7 +261,7 @@ public class ContactInfoPage extends Page {
             break;
         }
       }
-    } catch (Exception | QAException throwable) {
+    } catch (Exception throwable) {
       throwError(methodName + "s");
     }
   }
@@ -355,7 +355,7 @@ public class ContactInfoPage extends Page {
         default:
           break;
       }
-    } catch (Exception | QAException throwable) {
+    } catch (Exception throwable) {
       throwError(methodName + ":" + header);
       return false;
     }
@@ -378,7 +378,7 @@ public class ContactInfoPage extends Page {
       } else {
         getContactInfoMap().put(fieldName, fieldNameMap + "\n" + fieldValue);
       }
-    } catch (Exception | QAException throwable) {
+    } catch (Exception throwable) {
       throwError(methodName + ":fieldName:[" + fieldName + "], fieldValue:[" + fieldValue + "]");
     }
   }
@@ -410,7 +410,7 @@ public class ContactInfoPage extends Page {
         Environment.sysOut(methodName + ":Adding record[" + stringBuilder.toString() + "]");
         setStringBuilderSQL(getStringBuilderSQL().append(stringBuilder.toString()));
       }
-    } catch (Exception | QAException throwable) {
+    } catch (Exception throwable) {
       throwError(methodName + ":" + "");
     }
   }
