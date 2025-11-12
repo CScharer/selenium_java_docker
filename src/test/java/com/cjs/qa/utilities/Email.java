@@ -191,7 +191,7 @@ public final class Email {
       throws QAException {
     boolean success = false;
     int attempt = 0;
-    final int ATTEMPTS_MAX = 3;
+    final int attemptsMax = 3;
     do {
       attempt++;
       try {
@@ -263,7 +263,7 @@ public final class Email {
       } catch (final Exception e) {
         Environment.sysOut(
             QAException.ERROR + JavaHelpers.getCurrentClassMethodName() + ":Error Sending Email.");
-        if (attempt > ATTEMPTS_MAX) {
+        if (attempt > attemptsMax) {
           throw new QAException(QAException.ERROR + "[" + e.getMessage() + "]", e);
         }
       }

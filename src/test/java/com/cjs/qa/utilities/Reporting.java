@@ -30,8 +30,8 @@ public final class Reporting {
       throws Exception, QAException {
     Environment.sysOut("Acquiring Lock: fileName:[" + fileName + "], value:[" + value + "]");
     try {
-      final String FILE_LOCK = CJSConstants.PATH_FILES_DATA + "Reporting.lck";
-      try (RandomAccessFile randomAccessFile = new RandomAccessFile(FILE_LOCK, "rw");
+      final String fileLock = CJSConstants.PATH_FILES_DATA + "Reporting.lck";
+      try (RandomAccessFile randomAccessFile = new RandomAccessFile(fileLock, "rw");
           FileChannel fileChannel = randomAccessFile.getChannel()) {
         Environment.sysOut("Lock Acquired: fileName:[" + fileName + "], value:[" + value + "]");
         final ByteBuffer byteBuffer = ByteBuffer.allocate(1024);

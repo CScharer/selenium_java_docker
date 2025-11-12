@@ -426,11 +426,11 @@ public class Main extends Page {
   }
 
   private Map<String, String> getCaseMap() {
-    final Map<String, String> CaseMap = new HashMap<>();
-    CaseMap.put("Case #", "");
-    CaseMap.put("Description", "");
-    CaseMap.put("Bond", "");
-    CaseMap.put("Bond Type", "");
-    return CaseMap;
+    final Map<String, String> caseMap = new HashMap<>();
+    caseMap.put("Case #", "");
+    caseMap.put("Description", "");
+    caseMap.put("Bond", "");
+    caseMap.put("Bond Type", "");
+    return caseMap;
   }
 }

@@ -26,11 +26,11 @@ public final class Project {
    */
   private static String pathAutomation() {
     String automationPath = "";
-    final String OSName = System.getProperty("os.name");
+    final String osName = System.getProperty("os.name");
     try {
-      if (OSName.startsWith("Linux") || OSName.startsWith("Mac")) {
+      if (osName.startsWith("Linux") || osName.startsWith("Mac")) {
         automationPath = "/Automation/";
-      } else if (OSName.startsWith("Windows")) {
+      } else if (osName.startsWith("Windows")) {
         automationPath = "C:/Automation/";
       } else {
         throw new IOException();

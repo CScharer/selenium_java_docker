@@ -45,13 +45,13 @@ public class CoderTests {
   }
 
   private static void getRecordsFromExcel(String pageName) throws QAException, Exception {
-    final String SHEET_NAME = pageName; // IExcel.SHEET_DEFAULT;
+    final String sheetName = pageName; // IExcel.SHEET_DEFAULT;
     String filePathName =
         jdbc.getDbParameters().getName().replaceAll(IExtension.SQLITE, IExtension.XLS);
     // IExcel.updateSummarySheetXLS(filePathName, sheetName, sheetLinkName);
-    final XLS excel = new XLS(filePathName, SHEET_NAME);
+    final XLS excel = new XLS(filePathName, sheetName);
     Environment.sysOut("excel.getSheetCount():[" + excel.getSheetCount() + "]");
-    int rows = excel.getRowCount(SHEET_NAME);
+    int rows = excel.getRowCount(sheetName);
     Environment.sysOut("rows:[" + rows + "]");
     jdbc.executeUpdate(JDBCConstants.DELETE_FROM + "[tObjects];", false);
     jdbc.executeUpdate(JDBCConstants.DELETE_FROM + "[tObjectPages];", false);
@@ -65,10 +65,10 @@ public class CoderTests {
     for (int row = 1; row <= rows; row++) {
       recordMap.put("Page", pageName);
       recordMap.put("Location", String.valueOf(row));
-      recordMap.put("Type", excel.readCell(SHEET_NAME, 0, row));
-      recordMap.put("Name", excel.readCell(SHEET_NAME, 1, row));
-      recordMap.put("xPath", excel.readCell(SHEET_NAME, 2, row));
-      recordMap.put("HasParameter", excel.readCell(SHEET_NAME, 3, row));
+      recordMap.put("Type", excel.readCell(sheetName, 0, row));
+      recordMap.put("Name", excel.readCell(sheetName, 1, row));
+      recordMap.put("xPath", excel.readCell(sheetName, 2, row));
+      recordMap.put("HasParameter", excel.readCell(sheetName, 3, row));
       Environment.sysOut("recordMap:[" + recordMap.toString() + "]");
       StringBuilder stringBuilder =
           SQL.appendStringBuilderSQLInsertRecord("tObjects", new StringBuilder(), recordMap, true);

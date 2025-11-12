@@ -736,7 +736,7 @@ public class SQL {
   public static void updateQAToolsWebSubmissionLog(String sql) throws Exception {
     // Failed attempt at connecting to the access db.
     // updateSubmissionStatus(fileName, "Running")
-    final String BATCH_FILE_UPDATE =
+    final String batchFileUpdate =
         CJSConstants.PATH_FILES_DATA + "PDF_BATCH_FILE_UPDATE" + IExtension.BAT;
     String command =
         Constants.QUOTE_DOUBLE
@@ -748,8 +748,8 @@ public class SQL {
             + Constants.QUOTE_DOUBLE
             + sql
             + Constants.QUOTE_DOUBLE;
-    FSOTests.fileWrite(BATCH_FILE_UPDATE, command, false);
-    command = "CMD /C " + Constants.QUOTE_DOUBLE + BATCH_FILE_UPDATE + Constants.QUOTE_DOUBLE;
+    FSOTests.fileWrite(batchFileUpdate, command, false);
+    command = "CMD /C " + Constants.QUOTE_DOUBLE + batchFileUpdate + Constants.QUOTE_DOUBLE;
     CommandLineTests.runProcess(command);
   }
 

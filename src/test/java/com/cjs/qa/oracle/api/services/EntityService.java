@@ -1724,7 +1724,7 @@ public class EntityService extends WebService {
     final String date = "Aug 2015";
     final String description = "QA Testing";
     final String imageShortKey = "5a0lc9ge5n";
-    final String LEEDRating = "2";
+    final String leedRating = "2";
     final String location = OracleDynamicVariables.getLOCName(dynamicName);
     final String owner = OracleDynamicVariables.getOWNName(dynamicName);
     final String projectTypes = "1";
@@ -1735,7 +1735,7 @@ public class EntityService extends WebService {
             date,
             description,
             imageShortKey,
-            LEEDRating,
+            leedRating,
             location,
             owner,
             projectTypes);

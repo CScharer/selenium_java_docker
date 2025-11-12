@@ -29,16 +29,16 @@ public class CommandLineTests {
 
   @Test
   public void testGetJpsProcesses() throws Throwable {
-    final String SUREFIRE_BOOTER = "surefirebooter";
+    final String surefireBooter = "surefirebooter";
     List<String> jpsProcessList = new ArrayList<>();
     Map<String, String> jpsProcessMap = new HashMap<>();
-    jpsProcessList = getJpsProcessesList(SUREFIRE_BOOTER);
+    jpsProcessList = getJpsProcessesList(surefireBooter);
     Environment.sysOut("jpsProcessList:" + jpsProcessList.toString());
     jpsProcessList = getJpsProcessesList(null);
     Environment.sysOut("jpsProcessList:" + jpsProcessList.toString());
     jpsProcessMap = getJpsProcessesMap(null);
     Environment.sysOut("jpsProcessMap:" + jpsProcessMap.toString());
-    jpsProcessMap = getJpsProcessesMap(SUREFIRE_BOOTER);
+    jpsProcessMap = getJpsProcessesMap(surefireBooter);
     Environment.sysOut("jpsProcessMap:" + jpsProcessMap.toString());
     for (Entry entry : jpsProcessMap.entrySet()) {
       String pid = (String) entry.getKey();

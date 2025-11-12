@@ -531,9 +531,9 @@ public class JavaHelpers {
    * @return
    */
   public static List<String> getExclusions(String currentPackage) {
-    final String EXCLUSION_STANDARD = "java.lang.Thread";
+    final String exclusionStandard = "java.lang.Thread";
     final List<String> classesList = new ArrayList<>();
-    classesList.add(EXCLUSION_STANDARD);
+    classesList.add(exclusionStandard);
     currentPackage = currentPackage.replace(".", "/");
     try {
       classesList.addAll(JavaHelpers.getClasses(currentPackage));

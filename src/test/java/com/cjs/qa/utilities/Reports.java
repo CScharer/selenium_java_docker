@@ -70,10 +70,10 @@ public final class Reports {
 
   public static synchronized void createReportExcelLock(
       Scenario scenarioObject, Map<String, List> mapListTest) throws Exception, QAException {
-    final String FILE_NAME_LOCK = CJSConstants.PATH_FILES_DATA + "Parallel.lck";
+    final String fileNameLock = CJSConstants.PATH_FILES_DATA + "Parallel.lck";
     FileChannel fileChannel = null;
     try {
-      final File file = new File(FILE_NAME_LOCK);
+      final File file = new File(fileNameLock);
       final Path path = FileSystems.getDefault().getPath(file.getCanonicalPath());
       try {
         // fileChannel = FileChannel.open(path,
@@ -83,9 +83,9 @@ public final class Reports {
         e.printStackTrace();
       }
       // Aquire lock
-      Environment.sysOut("Aquiring Lock:[" + FILE_NAME_LOCK + "]");
+      Environment.sysOut("Aquiring Lock:[" + fileNameLock + "]");
       fileChannel.lock();
-      Environment.sysOut("Lock Aquired:[" + FILE_NAME_LOCK + "]");
+      Environment.sysOut("Lock Aquired:[" + fileNameLock + "]");
       // Read in the excel file as Apache POI object
       final byte[] byteArray =
           (mapListTest.get("Summary").toString() + Constants.NEWLINE).getBytes();
@@ -102,7 +102,7 @@ public final class Reports {
       // Release lock
       if (fileChannel != null) {
         fileChannel.close();
-        Environment.sysOut("Lock Released:[" + FILE_NAME_LOCK + "]");
+        Environment.sysOut("Lock Released:[" + fileNameLock + "]");
       }
     }
   }
