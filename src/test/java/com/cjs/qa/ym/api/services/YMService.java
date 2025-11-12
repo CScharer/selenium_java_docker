@@ -73,7 +73,7 @@ public class YMService {
                 + ":"
                 + IHTTP.getResponseValue(responseCode)
                 + "].");
-        serviceActive = true;
+        serviceActive = true; // NOPMD - Constructor sets service availability state
       } catch (final Exception e) {
         Environment.sysOut(e);
       }

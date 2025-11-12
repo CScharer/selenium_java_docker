@@ -27,7 +27,7 @@ public class SoftAssert {
   }
 
   public void assertAll(Scenario scenario) {
-    if (failureMap.size() > 0) {
+    if (!failureMap.isEmpty()) {
       for (final Entry entry : failureMap.entrySet()) {
         String key = (String) entry.getKey();
         // String value = (String) entry.getValue();

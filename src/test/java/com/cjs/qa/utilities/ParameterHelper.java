@@ -301,7 +301,7 @@ public class ParameterHelper {
     stringBuilder.append("Variables:");
     stringBuilder.append(getCountVariables());
     List<Parameter> parameterList = getParameterList();
-    if (parameterList.size() > 0) {
+    if (!parameterList.isEmpty()) {
       stringBuilder.append(Constants.NEWLINE + "\tParameters:");
     }
     for (Parameter parameter : parameterList) {

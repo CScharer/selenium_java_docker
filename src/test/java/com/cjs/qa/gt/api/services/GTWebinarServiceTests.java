@@ -72,7 +72,7 @@ public class GTWebinarServiceTests {
                 + ":"
                 + IHTTP.getResponseValue(responseCode)
                 + "].");
-        serviceActive = true;
+        serviceActive = true; // NOPMD - Constructor sets service availability state
       } catch (final Exception e) {
         Environment.sysOut(e);
       }

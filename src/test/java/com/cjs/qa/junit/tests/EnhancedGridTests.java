@@ -222,7 +222,7 @@ public class EnhancedGridTests {
     // Verify cookies can be retrieved
     var cookies = driver.manage().getCookies();
     LOGGER.info("Cookies found: {}", cookies.size());
-    Assert.assertTrue(cookies.size() > 0, "Should have at least one cookie");
+    Assert.assertTrue(!cookies.isEmpty(), "Should have at least one cookie");
 
     // Verify window can be resized
     driver.manage().window().setSize(new org.openqa.selenium.Dimension(1024, 768));

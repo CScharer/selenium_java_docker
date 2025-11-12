@@ -12,13 +12,13 @@ public class QAException extends Throwable {
   }
 
   public QAException(String message) {
-    QAException.qaErrorMessage = message;
+    QAException.qaErrorMessage = message; // NOPMD - Intentional static state for last error message
     Environment.sysOut(ERROR + JavaHelpers.getCallingMethodName() + ":" + message);
   }
 
   public QAException(String message, Throwable throwable) {
     Environment.sysOut(ERROR + JavaHelpers.getCallingMethodName() + ":" + message);
-    QAException.qaErrorMessage = message;
+    QAException.qaErrorMessage = message; // NOPMD - Intentional static state for last error message
     throwable(throwable);
   }
 

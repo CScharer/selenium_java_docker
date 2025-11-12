@@ -21,7 +21,7 @@ public final class SauceUtils {
 
   private SauceUtils() { }
 
-  private static SauceREST getSauceRestClient(String userName, String accessKey) {
+  private static synchronized SauceREST getSauceRestClient(String userName, String accessKey) {
     if (sauceRESTClient == null) {
       sauceRESTClient = new SauceREST(userName, accessKey);
     }

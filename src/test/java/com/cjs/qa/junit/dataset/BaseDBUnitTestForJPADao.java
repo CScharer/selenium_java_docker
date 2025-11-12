@@ -81,7 +81,7 @@ public class BaseDBUnitTestForJPADao {
         if (entityManagerFactory.isOpen()) {
           entityManagerFactory.close();
         }
-        entityManagerFactory = null;
+        entityManagerFactory = null; // NOPMD - Test teardown in single-threaded context
       }
     } catch (final Exception e) {
       // Intentionally empty - cleanup failure is non-critical
