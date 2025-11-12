@@ -13,7 +13,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
-public class REST {
+public final class REST {
   private REST() {
     // Utility class - prevent instantiation
   }

@@ -2,7 +2,7 @@ package com.cjs.qa.app;
 
 import org.apache.log4j.Logger;
 
-public class App {
+public final class App {
   private App() {
     // Utility class - prevent instantiation
   }

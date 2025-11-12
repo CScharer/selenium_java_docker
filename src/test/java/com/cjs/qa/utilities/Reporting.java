@@ -11,7 +11,7 @@ import java.nio.channels.FileChannel;
 import java.util.List;
 import java.util.Map;
 
-public class Reporting {
+public final class Reporting {
   private Reporting() {
     // Utility class - prevent instantiation
   }

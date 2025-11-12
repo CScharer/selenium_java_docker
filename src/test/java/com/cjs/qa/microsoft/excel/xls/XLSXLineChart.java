@@ -36,7 +36,7 @@ import org.openxmlformats.schemas.drawingml.x2006.chart.CTPlotArea;
 import org.openxmlformats.schemas.drawingml.x2006.chart.STLegendPos;
 
 /** Line chart example. */
-public class XLSXLineChart {
+public final class XLSXLineChart {
   private XLSXLineChart() {
     // Utility class - prevent instantiation
   }

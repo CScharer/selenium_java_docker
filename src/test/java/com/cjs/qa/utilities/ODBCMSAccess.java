@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-public class ODBCMSAccess {
+public final class ODBCMSAccess {
   private ODBCMSAccess() {
     // Utility class - prevent instantiation
   }

@@ -5,7 +5,7 @@ import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.IExtension;
 import java.util.Locale;
 
-public class DBConnections {
+public final class DBConnections {
   private DBConnections() {
     // Utility class - prevent instantiation
   }

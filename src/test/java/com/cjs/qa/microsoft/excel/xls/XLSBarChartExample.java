@@ -21,7 +21,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-public class XLSBarChartExample {
+public final class XLSBarChartExample {
   private XLSBarChartExample() {
     // Utility class - prevent instantiation
   }

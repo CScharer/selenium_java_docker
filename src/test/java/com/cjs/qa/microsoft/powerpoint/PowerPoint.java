@@ -14,7 +14,7 @@ import org.apache.poi.xslf.usermodel.XSLFSlideLayout;
 import org.apache.poi.xslf.usermodel.XSLFSlideMaster;
 import org.apache.poi.xslf.usermodel.XSLFTextShape;
 
-public class PowerPoint {
+public final class PowerPoint {
   private PowerPoint() {
     // Utility class - prevent instantiation
   }

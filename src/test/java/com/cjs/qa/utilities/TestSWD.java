@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 
-public class TestSWD {
+public final class TestSWD {
   private TestSWD() {
     // Utility class - prevent instantiation
   }

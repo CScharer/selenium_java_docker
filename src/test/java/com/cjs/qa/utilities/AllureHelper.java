@@ -13,7 +13,7 @@ import org.openqa.selenium.WebDriver;
  * Utility class for Allure reporting enhancements Provides screenshot capture, logging, and
  * attachment functionality
  */
-public class AllureHelper {
+public final class AllureHelper {
   private AllureHelper() {
     // Utility class - prevent instantiation
   }

@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.util.Arrays;
 import java.util.List;
 
-public class SQLite {
+public final class SQLite {
   private SQLite() {
     // Utility class - prevent instantiation
   }

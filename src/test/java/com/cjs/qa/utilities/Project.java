@@ -3,7 +3,7 @@ package com.cjs.qa.utilities;
 import com.cjs.qa.core.Environment;
 import java.io.IOException;
 
-public class Project {
+public final class Project {
   private Project() {
     // Utility class - prevent instantiation
   }

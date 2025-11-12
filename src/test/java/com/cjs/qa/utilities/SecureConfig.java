@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @version 1.0
  * @since 2025-11-08
  */
-public class SecureConfig {
+public final class SecureConfig {
   private SecureConfig() {
     // Utility class - prevent instantiation
   }

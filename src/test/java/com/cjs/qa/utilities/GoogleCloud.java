@@ -6,7 +6,7 @@ import com.google.cloud.secretmanager.v1.SecretVersionName;
 import com.google.protobuf.ByteString;
 import java.io.IOException;
 
-public class GoogleCloud {
+public final class GoogleCloud {
   private GoogleCloud() {
     // Utility class - prevent instantiation
   }

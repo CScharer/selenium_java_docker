@@ -17,7 +17,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.junit.Assert;
 
-public class SystemProcesses {
+public final class SystemProcesses {
   private SystemProcesses() {
     // Utility class - prevent instantiation
   }
