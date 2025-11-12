@@ -43,6 +43,6 @@ public class Policy {
     this.dateTimeStamp = DateHelpersTests.getCurrentDateAndTime();
     this.policy = policy;
     this.policyNumber = policy.substring(0, policy.indexOf("-"));
-    this.sequenceNumber = policy.substring((policy.indexOf("-") + 1), policy.length());
+    this.sequenceNumber = policy.substring(policy.indexOf("-") + 1, policy.length());
   }
 }

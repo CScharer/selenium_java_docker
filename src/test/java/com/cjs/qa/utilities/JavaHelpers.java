@@ -362,7 +362,7 @@ public class JavaHelpers {
    */
   public static String getCallingClassName() {
     String className = Thread.currentThread().getStackTrace()[1].getClassName();
-    className = className.substring((className.lastIndexOf('.') + 1), className.length());
+    className = className.substring(className.lastIndexOf('.') + 1, className.length());
     return className;
   }
 
@@ -421,7 +421,7 @@ public class JavaHelpers {
     final String fullString = stackTraceElements[1].toString();
     String className = Thread.currentThread().getStackTrace()[2].getClassName();
     String classNameTemp = className;
-    className = className.substring((className.lastIndexOf('.') + 1), className.length());
+    className = className.substring(className.lastIndexOf('.') + 1, className.length());
     return className
         + fullString.substring(
             fullString.indexOf(classNameTemp) + classNameTemp.length(), fullString.length());
@@ -436,7 +436,7 @@ public class JavaHelpers {
     final StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
     final String fullString = stackTraceElements[1].toString();
     String className = Thread.currentThread().getStackTrace()[2].getClassName();
-    className = className.substring((className.lastIndexOf('.') + 1), className.length());
+    className = className.substring(className.lastIndexOf('.') + 1, className.length());
     final int stringEnd = fullString.indexOf('(');
     String fullName = fullString.substring(0, stringEnd);
     final int start = fullName.lastIndexOf('.') + 1;
@@ -451,7 +451,7 @@ public class JavaHelpers {
    */
   public static String getCurrentClassName() {
     String className = Thread.currentThread().getStackTrace()[2].getClassName();
-    className = className.substring((className.lastIndexOf('.') + 1), className.length());
+    className = className.substring(className.lastIndexOf('.') + 1, className.length());
     return className;
   }
 

@@ -78,7 +78,7 @@ public class Environment {
   }
 
   public void addScenarioError(String error) {
-    Environment.getScenarioErrors().put((Environment.getScenarioErrors().size() + 1), error);
+    Environment.getScenarioErrors().put(Environment.getScenarioErrors().size() + 1, error);
   }
 
   public static void clearScenarioErrors() {
