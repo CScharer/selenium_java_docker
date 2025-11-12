@@ -443,10 +443,10 @@ public class SQL {
         case "CREATING TABLE":
         case "CREATING VIEW":
           Environment.sysOut(
-              messagePre + " " + sql.substring(sql.indexOf('['), (sql.indexOf(']') + 1)));
+              messagePre + " " + sql.substring(sql.indexOf('['), sql.indexOf(']') + 1));
           break;
         default:
-          Environment.sysOut(messagePre + " [" + (records.length - 1) + "] RECORD(S)");
+          Environment.sysOut(messagePre + " [" + records.length - 1 + "] RECORD(S)");
           break;
       }
       recordsUpdated = jdbc.executeUpdate(sql, false);
@@ -456,7 +456,7 @@ public class SQL {
         case "VIEW DROPPED":
         case "VIEW CREATED":
           Environment.sysOut(
-              sql.substring(sql.indexOf('['), (sql.indexOf(']') + 1)) + " " + messagePost);
+              sql.substring(sql.indexOf('['), sql.indexOf(']') + 1) + " " + messagePost);
           break;
         default:
           Environment.sysOut("[" + recordsUpdated + "] RECORD(S) " + messagePost);

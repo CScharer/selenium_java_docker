@@ -50,7 +50,7 @@ public class GTWAPIMethodsTests {
             stringBuilderClass = getClassHeader(stringBuilderClass, className);
           }
           stringBuilderClass = getMethod(stringBuilderClass, gtwMethodMap);
-          if (gtwMethodMapListIndex != (gtwMethodMapList.size() - 1)) {
+          if (gtwMethodMapListIndex != gtwMethodMapList.size() - 1) {
             stringBuilderClass.append("\n");
           } else {
             stringBuilderClass = getClassFooter(stringBuilderClass);

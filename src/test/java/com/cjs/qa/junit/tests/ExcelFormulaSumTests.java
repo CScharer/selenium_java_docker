@@ -71,23 +71,23 @@ public class ExcelFormulaSumTests {
       String columnLetter = Convert.fromNumberToLetterExcel(column);
       String formulaSum = "SUM(" + columnLetter + "2:" + columnLetter + (rows + 1) + ")";
       Environment.sysOut("columnName:[" + columnName + "], formulaSum:[" + formulaSum + "]");
-      excel.writeCellFormula(SHEET_NAME, column, (rows + 1), formulaSum);
+      excel.writeCellFormula(SHEET_NAME, column, rows + 1, formulaSum);
       if (columnName.contains("Passed")) {
-        excel.setFormatPass(SHEET_NAME, column, (rows + 1));
+        excel.setFormatPass(SHEET_NAME, column, rows + 1);
       } else if (columnName.contains("Failed")) {
-        excel.setFormatFail(SHEET_NAME, column, (rows + 1));
+        excel.setFormatFail(SHEET_NAME, column, rows + 1);
       }
     }
   }
 
   private static HashMap<String, Integer> getColumns() {
     HashMap<String, Integer> columns = new HashMap<>();
-    columns.put("Summaries (Passed)", (columns.size()));
-    columns.put("Summaries (Failed)", (columns.size()));
-    columns.put("Coverages (Passed)", (columns.size()));
-    columns.put("Coverages (Failed)", (columns.size()));
-    columns.put("Forms (Passed)", (columns.size()));
-    columns.put("Forms (Failed)", (columns.size()));
+    columns.put("Summaries (Passed)", columns.size());
+    columns.put("Summaries (Failed)", columns.size());
+    columns.put("Coverages (Passed)", columns.size());
+    columns.put("Coverages (Failed)", columns.size());
+    columns.put("Forms (Passed)", columns.size());
+    columns.put("Forms (Failed)", columns.size());
     return columns;
   }
 }

@@ -40,8 +40,8 @@ public class GTWebinarServiceTests {
             (HttpURLConnection) new URL(URL_GT).openConnection();
         httpUrlConnection.setRequestMethod("HEAD");
         final int responseCode = httpUrlConnection.getResponseCode();
-        if (!((responseCode >= HttpURLConnection.HTTP_OK)
-            && (responseCode < HttpURLConnection.HTTP_BAD_REQUEST))) {
+        if (!(responseCode >= HttpURLConnection.HTTP_OK
+            && responseCode < HttpURLConnection.HTTP_BAD_REQUEST)) {
           Environment.sysOut(
               CONNECTED_TO
                   + URL_GT
@@ -62,8 +62,8 @@ public class GTWebinarServiceTests {
                 + ":"
                 + IHTTP.getResponseValue(responseCode)
                 + "].",
-            ((responseCode >= HttpURLConnection.HTTP_OK)
-                && (responseCode < HttpURLConnection.HTTP_BAD_REQUEST)));
+            (responseCode >= HttpURLConnection.HTTP_OK
+                && responseCode < HttpURLConnection.HTTP_BAD_REQUEST));
         Environment.sysOut(
             CONNECTED_TO
                 + URL_GT

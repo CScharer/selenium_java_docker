@@ -516,7 +516,7 @@ public class JDBC {
       final int columns = resultSetMetaData.getColumnCount();
       StringBuilder stringBuilderHeadings = new StringBuilder();
       if (includeColumnNames) {
-        for (int index = 1; index < (columns + 1); index++) {
+        for (int index = 1; index < columns + 1; index++) {
           if (!"".equals(stringBuilderHeadings.toString()) && (columns < (columns + 1))) {
             stringBuilderHeadings.append(delimeter);
           }
@@ -564,14 +564,14 @@ public class JDBC {
       if (includeColumnNames) {
         Map<Integer, String> mapHeadings = new HashMap<>();
         for (int index = 1; index <= columns; index++) {
-          mapHeadings.put((index - 1), resultSetMetaData.getColumnName(index));
+          mapHeadings.put(index - 1, resultSetMetaData.getColumnName(index));
         }
         listResults.add(listResults.size(), mapHeadings);
       }
       while (resultSet.next()) {
         Map<Integer, String> mapRecord = new HashMap<>();
         for (int index = 1; index <= columns; index++) {
-          mapRecord.put((index - 1), resultSet.getString(index));
+          mapRecord.put(index - 1, resultSet.getString(index));
         }
         listResults.add(listResults.size(), mapRecord);
       }

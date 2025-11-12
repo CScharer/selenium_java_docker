@@ -97,7 +97,7 @@ public class Payment {
       recordsUpdated = SQL.execute(sqlStringBuilder.toString());
       Environment.sysOut("recordsUpdated:[" + recordsUpdated + "]");
     }
-    return (recordsUpdated > 0);
+    return recordsUpdated > 0;
   }
 
   public void append(List<Payment> paymentList) throws Throwable {
@@ -202,7 +202,7 @@ public class Payment {
     Map<String, String> resultsMap = resultsMapList.get(1);
     int count = Integer.parseInt(resultsMap.get("Count"));
     Environment.sysOut("Count:" + count);
-    return (count != 0);
+    return count != 0;
   }
 
   public static String getPaymentTable(
