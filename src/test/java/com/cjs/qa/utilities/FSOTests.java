@@ -1,7 +1,5 @@
 package com.cjs.qa.utilities;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import java.io.BufferedReader;
@@ -23,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import org.apache.commons.io.FileUtils;
@@ -614,12 +613,15 @@ public class FSOTests {
    */
   public static FileFilter setFileFilter(String extension) {
     return new FileFilter() {
-          @Override
-          public boolean accept(File fileName) {
-            return fileName.isFile()
-                && fileName.getName().toLowerCase(Locale.ENGLISH).endsWith(extension.toLowerCase(Locale.ENGLISH));
-          }
-        };
+      @Override
+      public boolean accept(File fileName) {
+        return fileName.isFile()
+            && fileName
+                .getName()
+                .toLowerCase(Locale.ENGLISH)
+                .endsWith(extension.toLowerCase(Locale.ENGLISH));
+      }
+    };
   }
 
   public static String[] sortByLastModified(List<String> filePathNameList, boolean ascending) {

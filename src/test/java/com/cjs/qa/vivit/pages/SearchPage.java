@@ -1,7 +1,5 @@
 package com.cjs.qa.vivit.pages;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.selenium.Page;
 import com.cjs.qa.utilities.Constants;
@@ -9,6 +7,7 @@ import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.vivit.VivitEnvironment;
 import java.util.List;
+import java.util.Locale;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,7 +17,8 @@ public class SearchPage extends Page {
     super(webDriver);
   }
 
-  private final By linksGroups = By.xpath("//*[@id='CustomPageBody']//a[text()!='contact us today!']");
+  private final By linksGroups =
+      By.xpath("//*[@id='CustomPageBody']//a[text()!='contact us today!']");
 
   public void searchSites() {
     try {

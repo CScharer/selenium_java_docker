@@ -11,7 +11,6 @@ public final class TestSWD {
     // Utility class - prevent instantiation
   }
 
-
   public static void main(String[] args) {
     WebDriver webDriver = null;
     final Selenium selenium = new Selenium(webDriver);

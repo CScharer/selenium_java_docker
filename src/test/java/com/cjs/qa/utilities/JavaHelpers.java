@@ -372,8 +372,7 @@ public class JavaHelpers {
   public static int getCallingLineNumber() {
     final StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
     final String fullString = stackTraceElements[2].toString();
-    String lineNumber =
-        fullString.substring(fullString.indexOf(':') + 1, fullString.length() - 1);
+    String lineNumber = fullString.substring(fullString.indexOf(':') + 1, fullString.length() - 1);
     return Integer.valueOf(lineNumber);
   }
 
@@ -458,8 +457,7 @@ public class JavaHelpers {
   public static int getCurrentLineNumber() {
     final StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
     final String fullString = stackTraceElements[1].toString();
-    String lineNumber =
-        fullString.substring(fullString.indexOf(':') + 1, fullString.length() - 1);
+    String lineNumber = fullString.substring(fullString.indexOf(':') + 1, fullString.length() - 1);
     return Integer.valueOf(lineNumber);
   }
 

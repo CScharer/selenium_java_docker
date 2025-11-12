@@ -1,9 +1,8 @@
 package com.cjs.qa.marlboro.pages;
 
-import java.util.Locale;
-
 import com.cjs.qa.marlboro.MarlboroEnvironment;
 import com.cjs.qa.selenium.Page;
+import java.util.Locale;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -75,7 +74,10 @@ public class VerifyInformationInterruptPage extends Page {
   }
 
   public void populatePage() {
-    if (!getWebDriver().getCurrentUrl().toLowerCase(Locale.ENGLISH).equals(getUrlVerifyInformation().toLowerCase(Locale.ENGLISH))) {
+    if (!getWebDriver()
+        .getCurrentUrl()
+        .toLowerCase(Locale.ENGLISH)
+        .equals(getUrlVerifyInformation().toLowerCase(Locale.ENGLISH))) {
       return;
     }
     // checkboxCigarettesSet(LABEL_OPTION_CHECKED);

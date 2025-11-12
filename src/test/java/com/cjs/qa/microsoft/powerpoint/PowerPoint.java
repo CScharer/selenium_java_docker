@@ -70,7 +70,7 @@ public final class PowerPoint {
       final XSLFSlide xslfSlide = xmlSlideShow.createSlide(titleLayout);
       // selecting the place holder in it
       final XSLFTextShape title1 = xslfSlide.getPlaceholder(0);
-        // setting the title init
+      // setting the title init
       title1.setText(title);
       // create a file object
       file = new File(fileName);

@@ -29,7 +29,8 @@ public class ContactInfoPage extends Page {
 
   private String linkedInURL = null;
   private WebElement webElementSection = null;
-  private StringBuilder sqlStringBuilder = new StringBuilder(); // NOPMD - Intentional mutable field for SQL building across methods
+  private StringBuilder sqlStringBuilder =
+      new StringBuilder(); // NOPMD - Intentional mutable field for SQL building across methods
   private List<Map<String, String>> linkedInConnectionContactInfoListMap = new ArrayList<>();
   private Map<String, String> contactInfoMap = new HashMap<>();
 
@@ -75,8 +76,9 @@ public class ContactInfoPage extends Page {
   }
 
   public List<WebElement> getWebElementSectionList() {
-    return getWebDriver().findElements(
-        By.xpath(".//div[@class='pv-profile-section__section-info section-info']/section"));
+    return getWebDriver()
+        .findElements(
+            By.xpath(".//div[@class='pv-profile-section__section-info section-info']/section"));
   }
 
   private void getAddress() {
@@ -311,7 +313,8 @@ public class ContactInfoPage extends Page {
         getValues(header);
       }
     }
-    String lastUpdated = DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_US_STANDARD_DATE);
+    String lastUpdated =
+        DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_US_STANDARD_DATE);
     if (getContactInfoMap() != null) {
       getContactInfoMap().put(DataTests.FIELD_LINKEDIN_URL, linkedInURL);
       appendLinkedInField("getLast Updated", lastUpdated);
@@ -406,7 +409,11 @@ public class ContactInfoPage extends Page {
         stringBuilder.append("SET ");
         stringBuilder.append(stringBuilderData.toString());
         stringBuilder.append(
-            " WHERE [" + DataTests.FIELD_LINKEDIN_URL + "]='" + map.get(DataTests.FIELD_LINKEDIN_URL) + "';");
+            " WHERE ["
+                + DataTests.FIELD_LINKEDIN_URL
+                + "]='"
+                + map.get(DataTests.FIELD_LINKEDIN_URL)
+                + "';");
         Environment.sysOut(methodName + ":Adding record[" + stringBuilder.toString() + "]");
         setStringBuilderSQL(getStringBuilderSQL().append(stringBuilder.toString()));
       }

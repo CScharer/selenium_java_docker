@@ -1,7 +1,7 @@
 package com.cjs.qa.selenium;
 
 public final class Browser {
-  private Browser() { }
+  private Browser() {}
 
   public static final String CHROME = "chrome";
   public static final String EDGE = "edge";

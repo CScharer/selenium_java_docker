@@ -17,9 +17,7 @@ public class Leaders {
   private String leaderName;
   private String href;
 
-  /**
-   * Default constructor for data binding and instantiation.
-   */
+  /** Default constructor for data binding and instantiation. */
   public Leaders() {
     // Default constructor for data binding
   }

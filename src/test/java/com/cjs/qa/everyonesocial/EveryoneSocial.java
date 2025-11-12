@@ -63,9 +63,7 @@ public class EveryoneSocial {
     return techBeaconPage;
   }
 
-  /**
-   * Default constructor for data binding and instantiation.
-   */
+  /** Default constructor for data binding and instantiation. */
   public EveryoneSocial() {
     // Default constructor for data binding
   }

@@ -1,5 +1,7 @@
 package com.cjs.qa.junit.tests.mobile;
 
+import static com.cjs.qa.junit.tests.mobile.MobileTestsConfiguration.MobileDevice;
+
 import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -7,6 +9,9 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
+import java.io.ByteArrayInputStream;
+import java.time.Duration;
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -23,25 +28,21 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.io.ByteArrayInputStream;
-import java.time.Duration;
-import java.util.List;
-
-import static com.cjs.qa.junit.tests.mobile.MobileTestsConfiguration.MobileDevice;
-
 /**
- * Responsive Design Validation Tests.
- * Validates website responsiveness across various screen sizes and devices.
+ * Responsive Design Validation Tests. Validates website responsiveness across various screen sizes
+ * and devices.
  */
 @Epic("Mobile Testing")
 @Feature("Responsive Design Validation")
 public class ResponsiveDesignTests {
 
   private WebDriver driver;
-  private static final String GRID_URL = System.getProperty("selenium.grid.url",
-      System.getenv("SELENIUM_REMOTE_URL") != null 
-          ? System.getenv("SELENIUM_REMOTE_URL")
-          : "http://localhost:4444/wd/hub");
+  private static final String GRID_URL =
+      System.getProperty(
+          "selenium.grid.url",
+          System.getenv("SELENIUM_REMOTE_URL") != null
+              ? System.getenv("SELENIUM_REMOTE_URL")
+              : "http://localhost:4444/wd/hub");
 
   @BeforeMethod
   public void setUp() {
@@ -76,14 +77,14 @@ public class ResponsiveDesignTests {
   @DataProvider(name = "responsiveViewports")
   public Object[][] responsiveViewports() {
     return new Object[][] {
-        {new Dimension(375, 667), "iPhone SE"},
-        {new Dimension(390, 844), "iPhone 13"},
-        {new Dimension(393, 852), "iPhone 14 Pro"},
-        {new Dimension(412, 892), "Google Pixel 9"},
-        {new Dimension(768, 1024), "iPad Portrait"},
-        {new Dimension(1024, 768), "iPad Landscape"},
-        {new Dimension(1366, 768), "Desktop (Small)"},
-        {new Dimension(1920, 1080), "Desktop (Full HD)"}
+      {new Dimension(375, 667), "iPhone SE"},
+      {new Dimension(390, 844), "iPhone 13"},
+      {new Dimension(393, 852), "iPhone 14 Pro"},
+      {new Dimension(412, 892), "Google Pixel 9"},
+      {new Dimension(768, 1024), "iPad Portrait"},
+      {new Dimension(1024, 768), "iPad Landscape"},
+      {new Dimension(1366, 768), "Desktop (Small)"},
+      {new Dimension(1920, 1080), "Desktop (Full HD)"}
     };
   }
 
@@ -94,8 +95,8 @@ public class ResponsiveDesignTests {
   public void testMultipleViewportSizes() throws Exception {
     System.out.println(">>> Test: Multiple Viewport Sizes");
 
-    driver = MobileTestsConfiguration.createMobileChromeDriver(GRID_URL,
-        MobileDevice.IPHONE_14_PRO);
+    driver =
+        MobileTestsConfiguration.createMobileChromeDriver(GRID_URL, MobileDevice.IPHONE_14_PRO);
 
     Dimension[] viewports = MobileTestsConfiguration.getResponsiveViewports();
 
@@ -108,16 +109,17 @@ public class ResponsiveDesignTests {
       wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
 
       // Verify no horizontal scroll
-      Long documentWidth = (Long) ((JavascriptExecutor) driver)
-          .executeScript("return document.body.scrollWidth;");
-      Long windowWidth = (Long) ((JavascriptExecutor) driver)
-          .executeScript("return window.innerWidth;");
+      Long documentWidth =
+          (Long) ((JavascriptExecutor) driver).executeScript("return document.body.scrollWidth;");
+      Long windowWidth =
+          (Long) ((JavascriptExecutor) driver).executeScript("return window.innerWidth;");
 
-      Assert.assertTrue(documentWidth <= windowWidth + 20,
+      Assert.assertTrue(
+          documentWidth <= windowWidth + 20,
           "Content should fit within viewport at " + viewport.getWidth() + "px");
 
-      System.out.println("✅ Viewport " + viewport.getWidth() + "x" + viewport.getHeight() 
-          + " verified");
+      System.out.println(
+          "✅ Viewport " + viewport.getWidth() + "x" + viewport.getHeight() + " verified");
 
       Thread.sleep(500); // Brief pause between viewports
     }
@@ -133,11 +135,16 @@ public class ResponsiveDesignTests {
   public void testResponsiveBreakpoints(Dimension viewport, String deviceName) throws Exception {
     System.out.println(">>> Test: Responsive Breakpoints - " + deviceName);
 
-    driver = MobileTestsConfiguration.createMobileChromeDriver(GRID_URL,
-        MobileDevice.PIXEL_7);
+    driver = MobileTestsConfiguration.createMobileChromeDriver(GRID_URL, MobileDevice.PIXEL_7);
     driver.manage().window().setSize(viewport);
-    System.out.println("✅ Testing breakpoint: " + deviceName + " (" 
-        + viewport.getWidth() + "x" + viewport.getHeight() + ")");
+    System.out.println(
+        "✅ Testing breakpoint: "
+            + deviceName
+            + " ("
+            + viewport.getWidth()
+            + "x"
+            + viewport.getHeight()
+            + ")");
 
     driver.get("https://www.wikipedia.org/");
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -152,15 +159,15 @@ public class ResponsiveDesignTests {
     System.out.println("Viewport width: " + viewportWidth + "px");
 
     // Input should be responsive (not exceeding viewport)
-    Assert.assertTrue(inputWidth <= viewportWidth,
-        "Search input should fit within viewport");
+    Assert.assertTrue(inputWidth <= viewportWidth, "Search input should fit within viewport");
 
     // Check for responsive images
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    Long overflowingImages = (Long) js.executeScript(
-        "return Array.from(document.images).filter(img => img.width > window.innerWidth).length;");
-    Assert.assertEquals(overflowingImages.longValue(), 0L,
-        "No images should overflow viewport");
+    Long overflowingImages =
+        (Long)
+            js.executeScript(
+                "return Array.from(document.images).filter(img => img.width > window.innerWidth).length;");
+    Assert.assertEquals(overflowingImages.longValue(), 0L, "No images should overflow viewport");
 
     System.out.println("✅ Breakpoint validated for " + deviceName);
     Allure.step("Breakpoint validation completed for " + deviceName);
@@ -173,8 +180,7 @@ public class ResponsiveDesignTests {
   public void testMobileNavigationMenu() throws Exception {
     System.out.println(">>> Test: Mobile Navigation Menu");
 
-    driver = MobileTestsConfiguration.createMobileChromeDriver(GRID_URL,
-        MobileDevice.IPHONE_SE);
+    driver = MobileTestsConfiguration.createMobileChromeDriver(GRID_URL, MobileDevice.IPHONE_SE);
     System.out.println("✅ Mobile driver initialized for navigation testing");
 
     driver.get("https://www.github.com/");
@@ -182,8 +188,9 @@ public class ResponsiveDesignTests {
     wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
 
     // Look for mobile menu button
-    List<WebElement> menuButtons = driver.findElements(
-        By.xpath("//button[contains(@aria-label, 'menu') or contains(@class, 'menu')]"));
+    List<WebElement> menuButtons =
+        driver.findElements(
+            By.xpath("//button[contains(@aria-label, 'menu') or contains(@class, 'menu')]"));
 
     if (!menuButtons.isEmpty()) {
       System.out.println("✅ Mobile menu button found");
@@ -208,8 +215,9 @@ public class ResponsiveDesignTests {
   public void testMobileImageOptimization() throws Exception {
     System.out.println(">>> Test: Mobile Image Optimization");
 
-    driver = MobileTestsConfiguration.createMobileChromeDriver(GRID_URL,
-        MobileDevice.SAMSUNG_GALAXY_S21);
+    driver =
+        MobileTestsConfiguration.createMobileChromeDriver(
+            GRID_URL, MobileDevice.SAMSUNG_GALAXY_S21);
     System.out.println("✅ Mobile driver initialized for image testing");
 
     driver.get("https://www.wikipedia.org/");
@@ -220,17 +228,18 @@ public class ResponsiveDesignTests {
     JavascriptExecutor js = (JavascriptExecutor) driver;
 
     // Count images with srcset attribute (responsive images)
-    Long responsiveImages = (Long) js.executeScript(
-        "return document.querySelectorAll('img[srcset]').length;");
+    Long responsiveImages =
+        (Long) js.executeScript("return document.querySelectorAll('img[srcset]').length;");
     System.out.println("Responsive images found: " + responsiveImages);
 
     // Check for images that are too large for viewport
-    Long oversizedImages = (Long) js.executeScript(
-        "return Array.from(document.images).filter(img => img.naturalWidth > window.innerWidth * 2).length;");
+    Long oversizedImages =
+        (Long)
+            js.executeScript(
+                "return Array.from(document.images).filter(img => img.naturalWidth > window.innerWidth * 2).length;");
     System.out.println("Oversized images: " + oversizedImages);
 
-    Assert.assertTrue(oversizedImages < 5,
-        "Should have minimal oversized images on mobile");
+    Assert.assertTrue(oversizedImages < 5, "Should have minimal oversized images on mobile");
 
     System.out.println("✅ Image optimization verified");
     Allure.step("Image optimization validated");
@@ -243,8 +252,8 @@ public class ResponsiveDesignTests {
   public void testMobileFontLegibility() throws Exception {
     System.out.println(">>> Test: Mobile Font Legibility");
 
-    driver = MobileTestsConfiguration.createMobileChromeDriver(GRID_URL,
-        MobileDevice.IPHONE_14_PRO);
+    driver =
+        MobileTestsConfiguration.createMobileChromeDriver(GRID_URL, MobileDevice.IPHONE_14_PRO);
     System.out.println("✅ Mobile driver initialized for font testing");
 
     driver.get("https://www.github.com/");
@@ -255,18 +264,19 @@ public class ResponsiveDesignTests {
     JavascriptExecutor js = (JavascriptExecutor) driver;
 
     // Get all text elements and check font size
-    Long tooSmallText = (Long) js.executeScript(
-        "const elements = document.querySelectorAll('p, span, div, a, button');"
-            + "return Array.from(elements)"
-            + ".filter(el => {"
-            + "  const fontSize = parseFloat(window.getComputedStyle(el).fontSize);"
-            + "  return fontSize < 12 && el.textContent.trim().length > 0;"
-            + "}).length;");
+    Long tooSmallText =
+        (Long)
+            js.executeScript(
+                "const elements = document.querySelectorAll('p, span, div, a, button');"
+                    + "return Array.from(elements)"
+                    + ".filter(el => {"
+                    + "  const fontSize = parseFloat(window.getComputedStyle(el).fontSize);"
+                    + "  return fontSize < 12 && el.textContent.trim().length > 0;"
+                    + "}).length;");
 
     System.out.println("Elements with font size < 12px: " + tooSmallText);
 
-    Assert.assertTrue(tooSmallText < 10,
-        "Most text should be at least 12px for mobile legibility");
+    Assert.assertTrue(tooSmallText < 10, "Most text should be at least 12px for mobile legibility");
 
     System.out.println("✅ Font legibility verified");
     Allure.step("Font legibility validated");
@@ -279,8 +289,7 @@ public class ResponsiveDesignTests {
   public void testOrientationChanges() throws Exception {
     System.out.println(">>> Test: Orientation Changes");
 
-    driver = MobileTestsConfiguration.createMobileChromeDriver(GRID_URL,
-        MobileDevice.IPAD_AIR);
+    driver = MobileTestsConfiguration.createMobileChromeDriver(GRID_URL, MobileDevice.IPAD_AIR);
     System.out.println("✅ Mobile driver initialized for orientation testing");
 
     String testUrl = "https://www.github.com/";
@@ -292,11 +301,16 @@ public class ResponsiveDesignTests {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
 
-    Long portraitWidth = (Long) ((JavascriptExecutor) driver)
-        .executeScript("return window.innerWidth;");
+    Long portraitWidth =
+        (Long) ((JavascriptExecutor) driver).executeScript("return window.innerWidth;");
     Dimension portraitSize = driver.manage().window().getSize();
-    System.out.println("Portrait viewport width: " + portraitWidth + "px, Actual window: " 
-        + portraitSize.getWidth() + "x" + portraitSize.getHeight());
+    System.out.println(
+        "Portrait viewport width: "
+            + portraitWidth
+            + "px, Actual window: "
+            + portraitSize.getWidth()
+            + "x"
+            + portraitSize.getHeight());
 
     Thread.sleep(1000);
 
@@ -306,21 +320,27 @@ public class ResponsiveDesignTests {
     driver.get(testUrl);
     wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
 
-    Long landscapeWidth = (Long) ((JavascriptExecutor) driver)
-        .executeScript("return window.innerWidth;");
+    Long landscapeWidth =
+        (Long) ((JavascriptExecutor) driver).executeScript("return window.innerWidth;");
     Dimension landscapeSize = driver.manage().window().getSize();
-    System.out.println("Landscape viewport width: " + landscapeWidth + "px, Actual window: " 
-        + landscapeSize.getWidth() + "x" + landscapeSize.getHeight());
+    System.out.println(
+        "Landscape viewport width: "
+            + landscapeWidth
+            + "px, Actual window: "
+            + landscapeSize.getWidth()
+            + "x"
+            + landscapeSize.getHeight());
 
     // Both orientations should render properly
     Assert.assertNotNull(portraitWidth, "Portrait mode should render");
     Assert.assertNotNull(landscapeWidth, "Landscape mode should render");
-    
+
     // Verify window dimensions were set (may not affect viewport in Grid/headless)
     Assert.assertNotNull(portraitSize, "Portrait window size should be set");
     Assert.assertNotNull(landscapeSize, "Landscape window size should be set");
     System.out.println("✅ Both orientations render successfully");
-    System.out.println("ℹ️ Note: Viewport size may not change in Grid/headless - window resize attempted");
+    System.out.println(
+        "ℹ️ Note: Viewport size may not change in Grid/headless - window resize attempted");
 
     System.out.println("✅ Orientation changes handled properly");
     Allure.step("Orientation change validation completed");
@@ -341,4 +361,3 @@ public class ResponsiveDesignTests {
     }
   }
 }
-

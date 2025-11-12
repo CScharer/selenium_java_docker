@@ -1,7 +1,5 @@
 package com.cjs.qa.selenium;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.security.EPasswords;
 import com.cjs.qa.utilities.CJSConstants;
@@ -13,6 +11,7 @@ import com.cjs.qa.utilities.JavaHelpers;
 import com.cjs.qa.utilities.SoftAssert;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

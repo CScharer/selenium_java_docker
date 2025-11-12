@@ -2,7 +2,6 @@ package com.cjs.qa.selenium;
 
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
-import com.cjs.qa.selenium.Page;
 import com.cjs.qa.utilities.CommandLineTests;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.DateHelpersTests;
@@ -18,15 +17,11 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Locale;
 import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -157,8 +152,8 @@ public interface ISelenium {
    * @param byType
    * @return
    */
-  static String getWebElementXPath(
-      List<Integer> parentList, WebElement webElement, String byType) throws QAException {
+  static String getWebElementXPath(List<Integer> parentList, WebElement webElement, String byType)
+      throws QAException {
     final String webElementString = webElement.toString();
     // [[[[RemoteWebDriver: MicrosoftEdge on ANY
     // (F5466750-F292-4D4A-9637-5B0755B92C49)] -> xpath:
@@ -236,7 +231,8 @@ public interface ISelenium {
         "case Node.COMMENT_NODE:comp.name='comment()';break;case Node.ELEMENT_NODE:");
     stringBuilder.append("comp.name=element.nodeName;break;}comp.position=getPos(element);}");
     stringBuilder.append("for (var i=comps.length - 1; i >= 0; i--){comp=comps[i];");
-    stringBuilder.append("xpath += '/' + comp.name.toLowerCase(Locale.ENGLISH);if (comp.position !== null){");
+    stringBuilder.append(
+        "xpath += '/' + comp.name.toLowerCase(Locale.ENGLISH);if (comp.position !== null){");
     stringBuilder.append("xpath += '[' + comp.position + ']';}}return xpath;}");
     stringBuilder.append("return absoluteXPath(arguments[0]);");
     return (String)
@@ -578,7 +574,8 @@ public interface ISelenium {
         desiredCapabilities.setPlatform(Platform.YOSEMITE);
         break;
       default:
-        Environment.sysOut("Unknown operating system: " + operatingSystem + ". Using ANY platform.");
+        Environment.sysOut(
+            "Unknown operating system: " + operatingSystem + ". Using ANY platform.");
         desiredCapabilities.setPlatform(Platform.ANY);
         break;
     }
@@ -957,7 +954,8 @@ public interface ISelenium {
           ((HtmlUnitDriver) webDriver).setJavascriptEnabled(true);
           try (WebClient webClient = new WebClient()) {
             try {
-              final HtmlPage page = webClient.getPage("http://stackoverflow" + IExtension.COM + "/");
+              final HtmlPage page =
+                  webClient.getPage("http://stackoverflow" + IExtension.COM + "/");
               Environment.sysOut(page.asNormalizedText());
             } catch (final Exception e) {
               Environment.sysOut(e);

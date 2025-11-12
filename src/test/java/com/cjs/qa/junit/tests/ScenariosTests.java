@@ -1,7 +1,5 @@
 package com.cjs.qa.junit.tests;
 
-import java.util.Locale;
-
 import com.cjs.qa.americanairlines.AmericanAirlines;
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
@@ -45,6 +43,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import org.junit.After;
@@ -682,8 +681,7 @@ public class ScenariosTests {
     pluralSight.getLoginPage().login();
     FSOTests.fileDelete(filePathname);
     for (String session : listSessions) {
-      final String sessionInformation =
-          pluralSight.getSessionPage().getSessionInformation(session);
+      final String sessionInformation = pluralSight.getSessionPage().getSessionInformation(session);
       FSOTests.fileWrite(filePathname, sessionInformation, true);
       final String tableOfContents =
           pluralSight.getTableOfContentsPage().getTableOfContents(session);
@@ -1027,7 +1025,9 @@ public class ScenariosTests {
     // setVivit(new Vivit(getSeleniumWebDriver().getWebDriver()))
     // getVivit().BoDPage.getData();
     // getVivit().StaffPage.getData();
-    getVivit().getHomePage().signIn(CJSConstants.USERID_VIVIT, EPasswords.VIVIT.getValue(), "checked");
+    getVivit()
+        .getHomePage()
+        .signIn(CJSConstants.USERID_VIVIT, EPasswords.VIVIT.getValue(), "checked");
     // getVivit().getHomePage().clickUpdateProfileLink()
     VivitDataFactory vivitDataFactory = new VivitDataFactory();
     DataTable dataTable = vivitDataFactory.getBio("Web_Site_Member_ID", "10969660");

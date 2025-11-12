@@ -42,11 +42,11 @@ public class AdvancedFeaturesTests {
     LOGGER.info("========================================");
 
     ChromeOptions options = new ChromeOptions();
-    
+
     // Check if headless mode is requested (default: true)
     String headlessProperty = System.getProperty("headless", "true");
     boolean isHeadless = !"false".equalsIgnoreCase(headlessProperty);
-    
+
     if (isHeadless) {
       options.addArguments("--headless");
     }
@@ -117,7 +117,8 @@ public class AdvancedFeaturesTests {
     Assert.assertNotNull(retrievedCookie, "Cookie should be retrievable");
     Assert.assertEquals(retrievedCookie.getValue(), "selenium_test_value");
     if (LOGGER.isInfoEnabled()) {
-      LOGGER.info("Cookie verified: {} = {}", retrievedCookie.getName(), retrievedCookie.getValue());
+      LOGGER.info(
+          "Cookie verified: {} = {}", retrievedCookie.getName(), retrievedCookie.getValue());
     }
 
     Allure.step("Delete specific cookie");

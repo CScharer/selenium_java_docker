@@ -26,13 +26,10 @@ import com.cjs.qa.wellmark.WellmarkEnvironment;
 import io.cucumber.java.Scenario;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Locale;
 import org.apache.log4j.BasicConfigurator;
 import org.junit.Assert;
 

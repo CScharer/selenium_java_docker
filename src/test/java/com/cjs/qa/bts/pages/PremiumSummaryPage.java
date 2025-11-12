@@ -9,15 +9,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class PremiumSummaryPage extends Page {
-  
+
   // State abbreviations for validation
-  private static final List<String> STATE_ABBREVIATIONS = List.of(
-      "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
-      "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
-      "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "ND", "NY",
-      "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT",
-      "VT", "VA", "WA", "WV", "WI", "WY");
-  
+  private static final List<String> STATE_ABBREVIATIONS =
+      List.of(
+          "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA",
+          "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "ND", "NY",
+          "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI",
+          "WY");
+
   public PremiumSummaryPage(WebDriver webDriver) {
     super(webDriver);
   }
@@ -177,8 +177,7 @@ public class PremiumSummaryPage extends Page {
                 .getText();
         assert coverageFromTable
             .toString()
-            .equals(
-                coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium);
+            .equals(coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium);
       } else {
         coverageFromTable =
             getWebElement(
@@ -193,8 +192,7 @@ public class PremiumSummaryPage extends Page {
                 .getText();
         assert coverageFromTable
             .toString()
-            .equals(
-                coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium);
+            .equals(coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium);
       }
     } else if (STATE_ABBREVIATIONS.contains(state)) {
       if (" ".equals(coverage) && " ".equals(deductible) && " ".equals(premium)) {
@@ -205,8 +203,7 @@ public class PremiumSummaryPage extends Page {
                 .getText();
         assert coverageFromTable
             .toString()
-            .equals(
-                coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium);
+            .equals(coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium);
       } else {
         coverageFromTable =
             getWebElement(
@@ -221,8 +218,7 @@ public class PremiumSummaryPage extends Page {
                 .getText();
         assert coverageFromTable
             .toString()
-            .equals(
-                coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium);
+            .equals(coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium);
       }
     } else {
       if (" ".equals(coverage) && " ".equals(deductible) && " ".equals(premium)) {
@@ -237,8 +233,7 @@ public class PremiumSummaryPage extends Page {
                 .getText();
         assert coverageFromTable
             .toString()
-            .equals(
-                coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium);
+            .equals(coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium);
         Environment.sysOut("LAST ONE");
       }
       // else

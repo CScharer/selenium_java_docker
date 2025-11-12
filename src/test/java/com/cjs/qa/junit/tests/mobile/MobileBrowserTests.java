@@ -1,5 +1,7 @@
 package com.cjs.qa.junit.tests.mobile;
 
+import static com.cjs.qa.junit.tests.mobile.MobileTestsConfiguration.MobileDevice;
+
 import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -7,6 +9,8 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
+import java.io.ByteArrayInputStream;
+import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -23,24 +27,21 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.io.ByteArrayInputStream;
-import java.time.Duration;
-
-import static com.cjs.qa.junit.tests.mobile.MobileTestsConfiguration.MobileDevice;
-
 /**
- * Mobile Browser Testing Suite.
- * Tests mobile-specific functionality including device emulation and responsive design.
+ * Mobile Browser Testing Suite. Tests mobile-specific functionality including device emulation and
+ * responsive design.
  */
 @Epic("Mobile Testing")
 @Feature("Mobile Browser Tests")
 public class MobileBrowserTests {
 
   private WebDriver driver;
-  private static final String GRID_URL = System.getProperty("selenium.grid.url",
-      System.getenv("SELENIUM_REMOTE_URL") != null 
-          ? System.getenv("SELENIUM_REMOTE_URL")
-          : "http://localhost:4444/wd/hub");
+  private static final String GRID_URL =
+      System.getProperty(
+          "selenium.grid.url",
+          System.getenv("SELENIUM_REMOTE_URL") != null
+              ? System.getenv("SELENIUM_REMOTE_URL")
+              : "http://localhost:4444/wd/hub");
 
   @BeforeMethod
   public void setUp() {
@@ -76,10 +77,10 @@ public class MobileBrowserTests {
   @DataProvider(name = "mobileDevices")
   public Object[][] mobileDevices() {
     return new Object[][] {
-        {MobileDevice.IPHONE_14_PRO},
-        {MobileDevice.SAMSUNG_GALAXY_S21},
-        {MobileDevice.PIXEL_7},
-        {MobileDevice.PIXEL_9}
+      {MobileDevice.IPHONE_14_PRO},
+      {MobileDevice.SAMSUNG_GALAXY_S21},
+      {MobileDevice.PIXEL_7},
+      {MobileDevice.PIXEL_9}
     };
   }
 
@@ -91,8 +92,8 @@ public class MobileBrowserTests {
     System.out.println(">>> Test: Mobile Device Emulation");
 
     // Create mobile Chrome driver with iPhone 14 Pro emulation
-    driver = MobileTestsConfiguration.createMobileChromeDriver(GRID_URL,
-        MobileDevice.IPHONE_14_PRO);
+    driver =
+        MobileTestsConfiguration.createMobileChromeDriver(GRID_URL, MobileDevice.IPHONE_14_PRO);
     System.out.println("✅ Mobile Chrome driver initialized (iPhone 14 Pro emulation)");
 
     // Navigate to a mobile-friendly site
@@ -108,8 +109,8 @@ public class MobileBrowserTests {
     System.out.println("ℹ️ Note: Exact viewport matching may vary in Grid/headless mode");
 
     // Verify mobile user agent
-    String userAgent = (String) ((JavascriptExecutor) driver)
-        .executeScript("return navigator.userAgent");
+    String userAgent =
+        (String) ((JavascriptExecutor) driver).executeScript("return navigator.userAgent");
     System.out.println("User agent: " + userAgent);
     Assert.assertTrue(userAgent.contains("Mobile"), "User agent should contain 'Mobile'");
 
@@ -126,8 +127,14 @@ public class MobileBrowserTests {
 
     // Create mobile driver for specific device
     driver = MobileTestsConfiguration.createMobileChromeDriver(GRID_URL, device);
-    System.out.println("✅ Testing on: " + device.getDeviceName() + " (" 
-        + device.getWidth() + "x" + device.getHeight() + ")");
+    System.out.println(
+        "✅ Testing on: "
+            + device.getDeviceName()
+            + " ("
+            + device.getWidth()
+            + "x"
+            + device.getHeight()
+            + ")");
 
     // Test responsive site
     driver.get("https://www.wikipedia.org/");
@@ -153,8 +160,9 @@ public class MobileBrowserTests {
   public void testMobileTouchInteractions() throws Exception {
     System.out.println(">>> Test: Mobile Touch Interactions");
 
-    driver = MobileTestsConfiguration.createMobileChromeDriver(GRID_URL,
-        MobileDevice.SAMSUNG_GALAXY_S21);
+    driver =
+        MobileTestsConfiguration.createMobileChromeDriver(
+            GRID_URL, MobileDevice.SAMSUNG_GALAXY_S21);
     System.out.println("✅ Mobile driver initialized for touch testing");
 
     // Navigate to a page with clickable elements
@@ -162,20 +170,26 @@ public class MobileBrowserTests {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
     // Test tap/click on mobile
-    WebElement searchButton = wait.until(
-        ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class, 'Button')]")));
+    WebElement searchButton =
+        wait.until(
+            ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[contains(@class, 'Button')]")));
     searchButton.click();
     System.out.println("✅ Touch interaction (tap) successful");
 
     // Verify touch target size (should be >= 44x44 pixels for accessibility)
     Dimension size = searchButton.getSize();
     System.out.println("Touch target size: " + size.getWidth() + "x" + size.getHeight());
-    
+
     // Some sites may have smaller targets - verify element is clickable instead
-    Assert.assertTrue(searchButton.isEnabled() && searchButton.isDisplayed(),
-        "Touch target should be clickable");
-    System.out.println("ℹ️ Touch target size: " + size.getWidth() + "x" + size.getHeight() 
-        + " (Ideal: ≥44x44px for WCAG)");
+    Assert.assertTrue(
+        searchButton.isEnabled() && searchButton.isDisplayed(), "Touch target should be clickable");
+    System.out.println(
+        "ℹ️ Touch target size: "
+            + size.getWidth()
+            + "x"
+            + size.getHeight()
+            + " (Ideal: ≥44x44px for WCAG)");
 
     System.out.println("✅ Mobile touch interactions verified");
     Allure.step("Touch interactions validated");
@@ -201,12 +215,13 @@ public class MobileBrowserTests {
 
     // Check performance metrics using Navigation Timing API
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    Long domContentLoaded = (Long) js.executeScript(
-        "return performance.timing.domContentLoadedEventEnd - performance.timing.navigationStart;");
+    Long domContentLoaded =
+        (Long)
+            js.executeScript(
+                "return performance.timing.domContentLoadedEventEnd - performance.timing.navigationStart;");
     System.out.println("DOM Content Loaded: " + domContentLoaded + "ms");
 
-    Assert.assertTrue(domContentLoaded < 3000,
-        "DOM should be loaded in under 3 seconds on mobile");
+    Assert.assertTrue(domContentLoaded < 3000, "DOM should be loaded in under 3 seconds on mobile");
 
     System.out.println("✅ Mobile page load performance acceptable");
     Allure.step("Performance metrics validated");
@@ -219,8 +234,7 @@ public class MobileBrowserTests {
   public void testMobileViewportConfiguration() throws Exception {
     System.out.println(">>> Test: Mobile Viewport Configuration");
 
-    driver = MobileTestsConfiguration.createMobileChromeDriver(GRID_URL,
-        MobileDevice.IPHONE_SE);
+    driver = MobileTestsConfiguration.createMobileChromeDriver(GRID_URL, MobileDevice.IPHONE_SE);
     System.out.println("✅ Mobile driver initialized for viewport testing");
 
     driver.get("https://www.github.com/");
@@ -229,19 +243,22 @@ public class MobileBrowserTests {
 
     // Check viewport meta tag
     JavascriptExecutor js = (JavascriptExecutor) driver;
-    String viewportContent = (String) js.executeScript(
-        "return document.querySelector('meta[name=\"viewport\"]')?.content || 'not found';");
+    String viewportContent =
+        (String)
+            js.executeScript(
+                "return document.querySelector('meta[name=\"viewport\"]')?.content || 'not found';");
     System.out.println("Viewport meta tag: " + viewportContent);
 
-    Assert.assertTrue(viewportContent.contains("width=device-width"),
-        "Viewport should be configured for mobile");
+    Assert.assertTrue(
+        viewportContent.contains("width=device-width"), "Viewport should be configured for mobile");
 
     // Check if content fits within viewport (no horizontal scroll)
     Long documentWidth = (Long) js.executeScript("return document.body.scrollWidth;");
     Long windowWidth = (Long) js.executeScript("return window.innerWidth;");
     System.out.println("Document width: " + documentWidth + ", Window width: " + windowWidth);
 
-    Assert.assertTrue(documentWidth <= windowWidth + 20,
+    Assert.assertTrue(
+        documentWidth <= windowWidth + 20,
         "Content should fit within viewport without horizontal scroll");
 
     System.out.println("✅ Mobile viewport configuration verified");
@@ -255,16 +272,15 @@ public class MobileBrowserTests {
   public void testMobileFormInput() throws Exception {
     System.out.println(">>> Test: Mobile Form Input");
 
-    driver = MobileTestsConfiguration.createMobileChromeDriver(GRID_URL,
-        MobileDevice.IPHONE_14_PRO);
+    driver =
+        MobileTestsConfiguration.createMobileChromeDriver(GRID_URL, MobileDevice.IPHONE_14_PRO);
     System.out.println("✅ Mobile driver initialized for form testing");
 
     driver.get("https://www.google.com/");
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
     // Find and interact with search input
-    WebElement searchBox = wait.until(
-        ExpectedConditions.presenceOfElementLocated(By.name("q")));
+    WebElement searchBox = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("q")));
 
     // Test text input on mobile
     searchBox.sendKeys("Mobile Testing");
@@ -275,8 +291,10 @@ public class MobileBrowserTests {
     Assert.assertEquals(inputValue, "Mobile Testing", "Input value should match");
 
     // Check if keyboard would be shown (in real device testing)
-    boolean isInputFocused = (Boolean) ((JavascriptExecutor) driver)
-        .executeScript("return document.activeElement === arguments[0];", searchBox);
+    boolean isInputFocused =
+        (Boolean)
+            ((JavascriptExecutor) driver)
+                .executeScript("return document.activeElement === arguments[0];", searchBox);
     System.out.println("Input is focused: " + isInputFocused);
 
     System.out.println("✅ Mobile form input verified");
@@ -298,4 +316,3 @@ public class MobileBrowserTests {
     }
   }
 }
-

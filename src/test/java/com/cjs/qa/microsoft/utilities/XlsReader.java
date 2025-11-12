@@ -1,11 +1,10 @@
 package com.cjs.qa.microsoft.utilities;
 
-import java.util.Locale;
-
 import com.cjs.qa.utilities.Constants;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Calendar;
+import java.util.Locale;
 import org.apache.poi.common.usermodel.HyperlinkType;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
@@ -139,8 +138,7 @@ public class XlsReader {
       }
       if (cell.getCellType() == CellType.STRING) {
         return cell.getStringCellValue();
-      } else if (cell.getCellType() == CellType.NUMERIC
-          || cell.getCellType() == CellType.FORMULA) {
+      } else if (cell.getCellType() == CellType.NUMERIC || cell.getCellType() == CellType.FORMULA) {
         String cellText = String.valueOf(cell.getNumericCellValue());
         if (DateUtil.isCellDateFormatted(cell)) {
           // format in form of M/D/YY
@@ -183,8 +181,7 @@ public class XlsReader {
       }
       if (cell.getCellType() == CellType.STRING) {
         return cell.getStringCellValue();
-      } else if (cell.getCellType() == CellType.NUMERIC
-          || cell.getCellType() == CellType.FORMULA) {
+      } else if (cell.getCellType() == CellType.NUMERIC || cell.getCellType() == CellType.FORMULA) {
         /*
          * if (XSSFDateUtil.isCellDateFormatted(cell)) { //format in
          * form of M/D/YY double d = cell.getNumericCellValue();

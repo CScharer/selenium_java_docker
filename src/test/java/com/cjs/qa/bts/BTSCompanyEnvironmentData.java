@@ -1,7 +1,5 @@
 package com.cjs.qa.bts;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.FSOTests;
@@ -9,6 +7,7 @@ import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.JavaHelpers;
 import com.cjs.qa.utilities.XML;
 import java.io.File;
+import java.util.Locale;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;

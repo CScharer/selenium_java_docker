@@ -15,7 +15,8 @@ public class TableOfContentsPage extends Page {
 
   private final By bySection =
       By.xpath("//div[@id='tab-table-of-contents']/section[contains(@class,'module')]");
-  private static final By byHeading2 = By.xpath(".//div[contains(@class,'side-menu-module-title')]/h2");
+  private static final By byHeading2 =
+      By.xpath(".//div[contains(@class,'side-menu-module-title')]/h2");
   private static final By byHeading3 = By.xpath(".//h3");
 
   public void expandTableOfContentNodes() {

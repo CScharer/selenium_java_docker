@@ -7,7 +7,6 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.HashMap;
@@ -17,7 +16,6 @@ public final class REST {
   private REST() {
     // Utility class - prevent instantiation
   }
-
 
   public static Map<String, String> getAPIJSONResponse(
       String credentials, String requestMethod, String apiRequest, String url) throws QAException {

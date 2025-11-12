@@ -151,8 +151,7 @@ public class MavenTests {
             undeclaredSection = false;
           }
           if (undeclaredSection) { // Add Undeclared Dependency
-            if (record.contains(warningDependency)
-                && !record.equalsIgnoreCase(warningUndeclared)) {
+            if (record.contains(warningDependency) && !record.equalsIgnoreCase(warningUndeclared)) {
               final String[] dependencyArray = record.split(" ");
               final String dependency = dependencyArray[dependencyArray.length - 1];
               dependenciesUndeclaredList.add(dependency);

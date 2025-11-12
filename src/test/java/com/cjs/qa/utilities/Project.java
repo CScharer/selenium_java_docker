@@ -8,7 +8,6 @@ public final class Project {
     // Utility class - prevent instantiation
   }
 
-
   private static String fileSeperator = System.getProperty("file.separator");
   private static ConfigComponents product;
   private static String root;
@@ -31,8 +30,7 @@ public final class Project {
     try {
       if (OSName.startsWith("Linux") || OSName.startsWith("Mac")) {
         automationPath = "/Automation/";
-      }
-      else if (OSName.startsWith("Windows")) {
+      } else if (OSName.startsWith("Windows")) {
         automationPath = "C:/Automation/";
       } else {
         throw new IOException();

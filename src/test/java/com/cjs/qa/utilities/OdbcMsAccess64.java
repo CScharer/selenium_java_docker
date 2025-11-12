@@ -42,9 +42,7 @@ public class OdbcMsAccess64 {
       // String dir = System.getProperty("user.dir");
       Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
       return DriverManager.getConnection(
-              "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=" + database,
-              "",
-              "");
+          "jdbc:odbc:Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=" + database, "", "");
     } catch (ClassNotFoundException | SQLException oException) {
       JOptionPane.showMessageDialog(null, "Problem connecting to database [" + database + "]");
       Environment.sysOut(oException.getMessage());

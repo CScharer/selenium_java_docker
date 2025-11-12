@@ -1,8 +1,7 @@
 package com.cjs.qa.selenium;
 
-import java.util.Locale;
-
 import com.cjs.qa.utilities.Constants;
+import java.util.Locale;
 
 public enum EDriverProperties {
   // MicrosoftWebDriver

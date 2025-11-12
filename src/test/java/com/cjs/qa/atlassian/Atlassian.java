@@ -32,7 +32,8 @@ public class Atlassian {
     setConfluence(new Confluence());
     setCrowd(new Crowd());
     final Project project = new Project("QSDT");
-    final String dateTimeStamp = DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_DATE_TIME_STAMP);
+    final String dateTimeStamp =
+        DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_DATE_TIME_STAMP);
     final Issue issue =
         new Issue(
             "TEST_" + dateTimeStamp,

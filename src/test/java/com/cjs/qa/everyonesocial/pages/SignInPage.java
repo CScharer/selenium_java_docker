@@ -1,7 +1,5 @@
 package com.cjs.qa.everyonesocial.pages;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import com.cjs.qa.everyonesocial.EveryoneSocialEnvironment;
@@ -10,6 +8,7 @@ import com.cjs.qa.selenium.Page;
 import io.cucumber.datatable.DataTable;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import org.junit.Assert;
 import org.openqa.selenium.By;

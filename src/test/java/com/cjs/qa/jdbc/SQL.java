@@ -17,15 +17,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Locale;
 import java.util.Map.Entry;
-import java.util.Locale;
 
 public class SQL {
   private static final String DATABASE_DEFINITION = "QAAuto";
@@ -172,8 +168,8 @@ public class SQL {
       // Environment.sysOut("recordData.length:[" + recordData.length +
       // "]")
       for (int index = 0; index < listFields.size(); index++) {
-      // for (int recordIndex = 0; recordIndex < recordData.length
-      // recordIndex++)
+        // for (int recordIndex = 0; recordIndex < recordData.length
+        // recordIndex++)
         // String value = recordData[index]
         String value = "";
         if (index > (recordData.length - 1)) {
@@ -305,7 +301,7 @@ public class SQL {
     stringBuilder.append(fieldNames.replace(", ", ","));
     stringBuilder.append(") VALUES (");
     for (int keyIndex = 0; keyIndex < fields.length; keyIndex++) {
-    // for (String key : hashMapRecord.keySet())
+      // for (String key : hashMapRecord.keySet())
       final String fieldValue = mapPage.get(fields[keyIndex]);
       if (fieldValue == null) {
         stringBuilder.append("''");
@@ -378,7 +374,8 @@ public class SQL {
     int recordsAffected = 0;
     Environment.sysOut(action + " " + sectionName);
     if (sqlStringBuilder.toString().length() != 0) {
-      int sqlFileCount = FSOTests.filesGetCount(VivitFoldersFiles.PATH_API_DATA_YM_SQL, IExtension.SQL);
+      int sqlFileCount =
+          FSOTests.filesGetCount(VivitFoldersFiles.PATH_API_DATA_YM_SQL, IExtension.SQL);
       String sqlFilePrefix = JavaHelpers.formatNumber(sqlFileCount, "000");
       String sqlFileName = sqlFilePrefix + "-" + action + "-" + sectionName + IExtension.SQL;
       String sqlFilePathName = VivitFoldersFiles.PATH_API_DATA_YM_SQL + sqlFileName;

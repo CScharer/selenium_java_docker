@@ -1,7 +1,5 @@
 package com.cjs.qa.jdbc;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.microsoft.excel.xls.XLS;
 import com.cjs.qa.utilities.Constants;
@@ -19,6 +17,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 

@@ -155,10 +155,13 @@ public class DateHelpersTests {
 
   @Test
   public void getDatePlusMinusTestCase() {
-    final String now = DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_US_STANDARD_DATE_TIME);
+    final String now =
+        DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_US_STANDARD_DATE_TIME);
     Environment.sysOut(now);
     Environment.sysOut(
-        FORMAT_Y + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_Y, 1, FORMAT_YYYY));
+        FORMAT_Y
+            + Constants.PIPE
+            + DateHelpersTests.getDatePlusMinus(now, FORMAT_Y, 1, FORMAT_YYYY));
     Environment.sysOut(
         FORMAT_M + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_M, 1, FORMAT_MM));
     Environment.sysOut(
@@ -166,21 +169,35 @@ public class DateHelpersTests {
     Environment.sysOut(
         FORMAT_H + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_H, 1, FORMAT_HH));
     Environment.sysOut(
-        FORMAT_M_LOWER + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_M_LOWER, 1, FORMAT_MM_LOWER));
+        FORMAT_M_LOWER
+            + Constants.PIPE
+            + DateHelpersTests.getDatePlusMinus(now, FORMAT_M_LOWER, 1, FORMAT_MM_LOWER));
     Environment.sysOut(
         FORMAT_S + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_S, 1, FORMAT_SS));
     Environment.sysOut(
-        FORMAT_Y + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_Y, -1, FORMAT_YYYY));
+        FORMAT_Y
+            + Constants.PIPE
+            + DateHelpersTests.getDatePlusMinus(now, FORMAT_Y, -1, FORMAT_YYYY));
     Environment.sysOut(
-        FORMAT_M + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_M, -1, FORMAT_MM));
+        FORMAT_M
+            + Constants.PIPE
+            + DateHelpersTests.getDatePlusMinus(now, FORMAT_M, -1, FORMAT_MM));
     Environment.sysOut(
-        FORMAT_D + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_D, -1, FORMAT_DD));
+        FORMAT_D
+            + Constants.PIPE
+            + DateHelpersTests.getDatePlusMinus(now, FORMAT_D, -1, FORMAT_DD));
     Environment.sysOut(
-        FORMAT_H + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_H, -1, FORMAT_HH));
+        FORMAT_H
+            + Constants.PIPE
+            + DateHelpersTests.getDatePlusMinus(now, FORMAT_H, -1, FORMAT_HH));
     Environment.sysOut(
-        FORMAT_M_LOWER + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_M_LOWER, -1, FORMAT_MM_LOWER));
+        FORMAT_M_LOWER
+            + Constants.PIPE
+            + DateHelpersTests.getDatePlusMinus(now, FORMAT_M_LOWER, -1, FORMAT_MM_LOWER));
     Environment.sysOut(
-        FORMAT_S + Constants.PIPE + DateHelpersTests.getDatePlusMinus(now, FORMAT_S, -1, FORMAT_SS));
+        FORMAT_S
+            + Constants.PIPE
+            + DateHelpersTests.getDatePlusMinus(now, FORMAT_S, -1, FORMAT_SS));
   }
 
   public static String getDatePlusMinusDays(String date, Integer days, String format) {
@@ -931,7 +948,8 @@ public class DateHelpersTests {
             break;
           default:
             // This should never happen as Calendar.DAY_OF_WEEK is 1-7
-            Environment.sysOut("Unexpected day of week: " + calendarStart.get(Calendar.DAY_OF_WEEK));
+            Environment.sysOut(
+                "Unexpected day of week: " + calendarStart.get(Calendar.DAY_OF_WEEK));
             break;
         }
         // if (calendarStart.get(Calendar.DAY_OF_WEEK) !=

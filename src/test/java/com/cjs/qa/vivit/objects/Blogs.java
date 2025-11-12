@@ -18,9 +18,7 @@ public class Blogs {
   private String lastActivity;
   private String blogURL;
 
-  /**
-   * Default constructor for data binding and instantiation.
-   */
+  /** Default constructor for data binding and instantiation. */
   public Blogs() {
     // Default constructor for data binding
   }

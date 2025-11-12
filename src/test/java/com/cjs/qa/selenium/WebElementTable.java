@@ -4,13 +4,10 @@ import com.cjs.qa.core.Environment;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.FSOTests;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Locale;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -145,7 +142,8 @@ public class WebElementTable extends Page {
    */
   public String getCellAttribute(int row, String columnName, String attribute) {
     populateTableObjects();
-    return getCellAttribute(row, getHeadingsNameLookup().get(columnName.toLowerCase(Locale.ENGLISH)), attribute);
+    return getCellAttribute(
+        row, getHeadingsNameLookup().get(columnName.toLowerCase(Locale.ENGLISH)), attribute);
   }
 
   /**

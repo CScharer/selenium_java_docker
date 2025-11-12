@@ -12,8 +12,10 @@ public class BookTravelPage extends Page {
 
   private static final By editFrom = By.xpath(".//*[@id='flightSearch']//input[@id='Origin']");
   private static final By editTo = By.xpath(".//*[@id='flightSearch']//input[@id='Destination']");
-  private static final By editDepartDate = By.xpath(".//*[@id='flightSearch']//input[@id='DepartDate']");
-  private static final By editReturnDate = By.xpath(".//*[@id='flightSearch']//input[@id='ReturnDate']");
+  private static final By editDepartDate =
+      By.xpath(".//*[@id='flightSearch']//input[@id='DepartDate']");
+  private static final By editReturnDate =
+      By.xpath(".//*[@id='flightSearch']//input[@id='ReturnDate']");
   private static final By buttonSearch = By.xpath(".//*[@id='flightBookingSubmit']");
 
   public void editFromSet(String value) throws QAException {

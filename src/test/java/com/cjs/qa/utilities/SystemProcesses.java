@@ -1,7 +1,5 @@
 package com.cjs.qa.utilities;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.jdbc.JDBC;
 import com.cjs.qa.jdbc.JDBCConstants;
@@ -12,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
@@ -167,7 +166,8 @@ public final class SystemProcesses {
           listFieldsProcess.addAll(listFieldsTemp);
           break;
         default:
-          Environment.sysOut("Unknown process type: " + processType + ". Using standard fields only.");
+          Environment.sysOut(
+              "Unknown process type: " + processType + ". Using standard fields only.");
           break;
       }
       fieldsProcessMap.put(processType, listFieldsProcess);
@@ -301,8 +301,8 @@ public final class SystemProcesses {
             }
           }
         }
-          SQL.execute(stringBuilder.toString());
-          records = null;
+        SQL.execute(stringBuilder.toString());
+        records = null;
       }
       FSOTests.fileDelete(FILE_DATA_CSV);
     } catch (final Exception e) {

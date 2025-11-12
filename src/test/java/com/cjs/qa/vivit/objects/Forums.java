@@ -19,9 +19,7 @@ public class Forums {
   private String lastActivity;
   private String forumURL;
 
-  /**
-   * Default constructor for data binding and instantiation.
-   */
+  /** Default constructor for data binding and instantiation. */
   public Forums() {
     // Default constructor for data binding
   }

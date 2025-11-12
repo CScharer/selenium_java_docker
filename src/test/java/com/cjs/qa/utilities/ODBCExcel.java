@@ -59,16 +59,16 @@ public class ODBCExcel {
       // String dir = System.getProperty("user.dir");
       Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
       return DriverManager.getConnection(
-              "jdbc:odbc:Driver={Microsoft Excel Driver (*"
-                  + IExtension.XLS
-                  + ", *"
-                  + IExtension.XLSX
-                  + ", *"
-                  + IExtension.XLSM
-                  + ", *"
-                  + IExtension.XLSB
-                  + ")};Dbq="
-                  + database);
+          "jdbc:odbc:Driver={Microsoft Excel Driver (*"
+              + IExtension.XLS
+              + ", *"
+              + IExtension.XLSX
+              + ", *"
+              + IExtension.XLSM
+              + ", *"
+              + IExtension.XLSB
+              + ")};Dbq="
+              + database);
     } catch (ClassNotFoundException | SQLException oException) {
       JOptionPane.showMessageDialog(null, "Problem connecting to database [" + database + "]");
       System.out.println(oException.getMessage());

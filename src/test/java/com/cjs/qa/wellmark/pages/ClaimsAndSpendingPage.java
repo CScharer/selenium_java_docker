@@ -125,8 +125,9 @@ public class ClaimsAndSpendingPage extends Page {
     final List<String> headings = new ArrayList<>();
     getWebDriver().findElements(byType);
     final List<WebElement> headingElements =
-        getWebDriver().findElements(
-            By.xpath(byType.toString().replace(BY_XPATH, "") + "/tr[" + 1 + "]/th/a"));
+        getWebDriver()
+            .findElements(
+                By.xpath(byType.toString().replace(BY_XPATH, "") + "/tr[" + 1 + "]/th/a"));
     Environment.sysOut(headingElements.toString());
     for (int indexHeading = 0; indexHeading < headingElements.size(); indexHeading++) {
       final WebElement element = headingElements.get(indexHeading);

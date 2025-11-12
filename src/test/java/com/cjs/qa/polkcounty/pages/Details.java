@@ -164,8 +164,8 @@ public class Details extends Page {
       return sqlStringBuilder;
     }
     final List<WebElement> rowElements =
-        getWebDriver().findElements(
-            By.xpath(".//*[@id='ctl00_ContentPlaceHolder1_gvCharges']/tbody/tr"));
+        getWebDriver()
+            .findElements(By.xpath(".//*[@id='ctl00_ContentPlaceHolder1_gvCharges']/tbody/tr"));
     int row = 0;
     for (final WebElement rowElement : rowElements) {
       row++;

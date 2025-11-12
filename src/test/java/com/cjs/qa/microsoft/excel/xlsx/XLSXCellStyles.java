@@ -19,9 +19,7 @@ public class XLSXCellStyles {
   private String styleName;
   private CellStyle styleObject;
 
-  /**
-   * Default constructor for data binding and style management.
-   */
+  /** Default constructor for data binding and style management. */
   public XLSXCellStyles() {
     // Default constructor for data binding
   }

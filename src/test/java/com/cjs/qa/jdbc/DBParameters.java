@@ -1,8 +1,7 @@
 package com.cjs.qa.jdbc;
 
-import java.util.Locale;
-
 import com.cjs.qa.utilities.Constants;
+import java.util.Locale;
 
 public class DBParameters {
   private String type;

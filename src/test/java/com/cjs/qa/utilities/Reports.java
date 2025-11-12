@@ -269,10 +269,11 @@ public final class Reports {
 
   public static String getLogStatus(String report) {
     return "dateTimeStamp:["
-            + DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_US_STANDARD_DATE_TIME + ".SSS")
-            + "], "
-            + report
-            + Constants.NEWLINE;
+        + DateHelpersTests.getCurrentDateTime(
+            DateHelpersTests.FORMAT_US_STANDARD_DATE_TIME + ".SSS")
+        + "], "
+        + report
+        + Constants.NEWLINE;
   }
 
   private static void setColumnsIndex(String columns) {

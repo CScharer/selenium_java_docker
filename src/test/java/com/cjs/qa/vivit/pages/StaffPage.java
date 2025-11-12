@@ -1,7 +1,5 @@
 package com.cjs.qa.vivit.pages;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import com.cjs.qa.selenium.ISelenium;
@@ -12,6 +10,7 @@ import io.cucumber.datatable.DataTable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -115,8 +114,8 @@ public class StaffPage extends Page {
     final List<WebElement> webElementList =
         getWebDriver()
             .findElements(
-            By.xpath(
-                ".//*[@id='SpContent_Container']/table/tbody/tr/td/b/a[contains(@href,'id=')]"));
+                By.xpath(
+                    ".//*[@id='SpContent_Container']/table/tbody/tr/td/b/a[contains(@href,'id=')]"));
     for (WebElement webElement : webElementList) {
       final String url = webElement.getAttribute("href");
       final StaffDetails staffDetails = new StaffDetails(url);

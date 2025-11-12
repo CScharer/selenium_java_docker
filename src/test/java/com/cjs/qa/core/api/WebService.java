@@ -170,34 +170,36 @@ public class WebService {
       setXml(getSOAPMessageValue(soapMessage, false));
       setFileRequest(Constants.PATH_FILES_XML + policy.getPolicy() + "request" + IExtension.XML);
       final String fileTemp =
-          getFileRequest().replace(
-              "request",
-              policy.getDateTimeStamp()
-                  + "_"
-                  + Environment.getComputerName()
-                  + "_"
-                  + Environment.CURRENT_USER
-                  + "_"
-                  + policy.getPolicy()
-                  + "_"
-                  + "request");
+          getFileRequest()
+              .replace(
+                  "request",
+                  policy.getDateTimeStamp()
+                      + "_"
+                      + Environment.getComputerName()
+                      + "_"
+                      + Environment.CURRENT_USER
+                      + "_"
+                      + policy.getPolicy()
+                      + "_"
+                      + "request");
       // FSOTests.fileWrite(getFileRequest(), getXml(), false);
       FSOTests.fileWrite(fileTemp, getXml(), false);
       // setRequestName(XML.getBodyFirstChildName(getFileRequest()));
       // setRequestName(XML.getBodyFirstChildName(fileTemp));
       final String fileOut =
-          getFileRequest().replace(
-              "request",
-              policy.getDateTimeStamp()
-                  + "_"
-                  + policy.getComputerName()
-                  + "_"
-                  + policy.getUserName()
-                  + "_"
-                  + policy.getPolicy()
-                  + "_"
-                  + getRequestName()
-                  + "_request");
+          getFileRequest()
+              .replace(
+                  "request",
+                  policy.getDateTimeStamp()
+                      + "_"
+                      + policy.getComputerName()
+                      + "_"
+                      + policy.getUserName()
+                      + "_"
+                      + policy.getPolicy()
+                      + "_"
+                      + getRequestName()
+                      + "_request");
       FSOTests.fileWrite(fileOut, getXml(), false);
     } catch (final Exception e) {
       Environment.sysOut(e);
@@ -233,34 +235,36 @@ public class WebService {
       }
       setFileResponse(Constants.PATH_FILES_XML + policy.getPolicy() + "response" + IExtension.XML);
       final String fileTemp =
-          getFileResponse().replace(
-              "response",
-              policy.getDateTimeStamp()
-                  + "_"
-                  + Environment.getComputerName()
-                  + "_"
-                  + Environment.CURRENT_USER
-                  + "_"
-                  + policy.getPolicy()
-                  + "_"
-                  + "response");
+          getFileResponse()
+              .replace(
+                  "response",
+                  policy.getDateTimeStamp()
+                      + "_"
+                      + Environment.getComputerName()
+                      + "_"
+                      + Environment.CURRENT_USER
+                      + "_"
+                      + policy.getPolicy()
+                      + "_"
+                      + "response");
       // FSOTests.fileWrite(getFileResponse(), getXml(), false);
       FSOTests.fileWrite(fileTemp, getXml(), false);
       // setResponseName(XML.getBodyFirstChildName(getFileResponse()));
       // setResponseName(XML.getBodyFirstChildName(fileTemp));
       final String fileOut =
-          getFileResponse().replace(
-              "response",
-              policy.getDateTimeStamp()
-                  + "_"
-                  + Environment.getComputerName()
-                  + "_"
-                  + Environment.CURRENT_USER
-                  + "_"
-                  + policy.getPolicy()
-                  + "_"
-                  + getResponseName()
-                  + "_response");
+          getFileResponse()
+              .replace(
+                  "response",
+                  policy.getDateTimeStamp()
+                      + "_"
+                      + Environment.getComputerName()
+                      + "_"
+                      + Environment.CURRENT_USER
+                      + "_"
+                      + policy.getPolicy()
+                      + "_"
+                      + getResponseName()
+                      + "_response");
       FSOTests.fileWrite(fileOut, getXml(), false);
     } catch (final Exception e) {
       Environment.sysOut(e);
@@ -480,15 +484,19 @@ public class WebService {
         String prePW = "<password>";
         String postPW = "</password>";
         if (getXml().contains(prePW)) {
-          final String prePassword = getXml().substring(0, getXml().indexOf(prePW) + prePW.length());
-          final String postPassword = getXml().substring(getXml().indexOf(postPW), getXml().length());
+          final String prePassword =
+              getXml().substring(0, getXml().indexOf(prePW) + prePW.length());
+          final String postPassword =
+              getXml().substring(getXml().indexOf(postPW), getXml().length());
           setXml(prePassword + "**********" + postPassword);
         }
         prePW = "<fnetPassword>";
         postPW = "</fnetPassword>";
         if (getXml().contains(prePW)) {
-          final String prePassword = getXml().substring(0, getXml().indexOf(prePW) + prePW.length());
-          final String postPassword = getXml().substring(getXml().indexOf(postPW), getXml().length());
+          final String prePassword =
+              getXml().substring(0, getXml().indexOf(prePW) + prePW.length());
+          final String postPassword =
+              getXml().substring(getXml().indexOf(postPW), getXml().length());
           setXml(prePassword + "**********" + postPassword);
         }
       }

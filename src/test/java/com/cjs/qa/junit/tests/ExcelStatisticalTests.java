@@ -1,7 +1,5 @@
 package com.cjs.qa.junit.tests;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import com.cjs.qa.microsoft.excel.xls.XLS;
@@ -13,6 +11,7 @@ import com.cjs.qa.utilities.IExtension;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map.Entry;
 import org.junit.Test;
 

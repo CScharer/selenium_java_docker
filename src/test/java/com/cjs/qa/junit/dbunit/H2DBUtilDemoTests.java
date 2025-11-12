@@ -63,57 +63,57 @@ public class H2DBUtilDemoTests extends BaseDBUnitTestForJPADao {
 
   private Object[][] createOrderSourceRows() {
     return new Object[][] {
-          new Object[] {
-            1,
-            "so",
-            "Store Ordrer",
-            "cbrown",
-            new DateTime().withYear(2012).withMonthOfYear(12).withDayOfMonth(31).toDate()
-          },
-          new Object[] {
-            2,
-            "wo",
-            "Web Ordrer",
-            "lvanpelt",
-            new DateTime().withYear(2012).withMonthOfYear(12).withDayOfMonth(31).toDate()
-          },
-          new Object[] {
-            3,
-            "un",
-            null,
-            "lvanpelt",
-            new DateTime().withYear(2013).withMonthOfYear(1).withDayOfMonth(1).toDate()
-          }
-        };
+      new Object[] {
+        1,
+        "so",
+        "Store Ordrer",
+        "cbrown",
+        new DateTime().withYear(2012).withMonthOfYear(12).withDayOfMonth(31).toDate()
+      },
+      new Object[] {
+        2,
+        "wo",
+        "Web Ordrer",
+        "lvanpelt",
+        new DateTime().withYear(2012).withMonthOfYear(12).withDayOfMonth(31).toDate()
+      },
+      new Object[] {
+        3,
+        "un",
+        null,
+        "lvanpelt",
+        new DateTime().withYear(2013).withMonthOfYear(1).withDayOfMonth(1).toDate()
+      }
+    };
   }
 
   private Object[][] createOrderRowData() {
     return new Object[][] {
-          // Refernce the web order.
-          new Object[] {
-            1,
-            "Customer 1 Order 1",
-            "ORD1",
-            1,
-            new DateTime().withYear(2013).withMonthOfYear(12).withDayOfMonth(23).toDate(),
-            250000,
-            null,
-            1,
-            2
-          },
-          // Refernce the store order.
-          new Object[] {
-            2,
-            "Customer 1 Order 2",
-            "ORD2",
-            1,
-            new DateTime().withYear(2013).withMonthOfYear(12).withDayOfMonth(23).toDate(),
-            250000,
-            new DateTime().withYear(2013).withMonthOfYear(12).withDayOfMonth(26).toDate(),
-            1,
-            1
-          }
-        };
+      // Refernce the web order.
+      new Object[] {
+        1,
+        "Customer 1 Order 1",
+        "ORD1",
+        1,
+        new DateTime().withYear(2013).withMonthOfYear(12).withDayOfMonth(23).toDate(),
+        250000,
+        null,
+        1,
+        2
+      },
+      // Refernce the store order.
+      new Object[] {
+        2,
+        "Customer 1 Order 2",
+        "ORD2",
+        1,
+        new DateTime().withYear(2013).withMonthOfYear(12).withDayOfMonth(23).toDate(),
+        250000,
+        new DateTime().withYear(2013).withMonthOfYear(12).withDayOfMonth(26).toDate(),
+        1,
+        1
+      }
+    };
   }
 
   @Test

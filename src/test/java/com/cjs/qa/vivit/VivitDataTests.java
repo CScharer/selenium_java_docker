@@ -1,7 +1,5 @@
 package com.cjs.qa.vivit;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import com.cjs.qa.core.security.EPasswords;
@@ -46,6 +44,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import org.apache.commons.io.FileUtils;
@@ -241,7 +240,8 @@ public class VivitDataTests extends Environment {
     String datePreviousBackUp =
         DateHelpersTests.getCurrentDatePlusMinusDays(
             DateHelpersTests.FORMAT_YYYY_MM_DD_COMPACT, DAYS_TO_KEEP_BACKUPS * -1);
-    final String dateCurrentBackUp = DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_YYYY_MM_DD_COMPACT);
+    final String dateCurrentBackUp =
+        DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_YYYY_MM_DD_COMPACT);
     String tableName = VivitTables.PREFIX + tableGroupName;
     // Drop the old backup table.
     String tableNameBackUpPrevious = tableName + "_" + datePreviousBackUp;
@@ -809,7 +809,8 @@ public class VivitDataTests extends Environment {
         FSOTests.fileReadAll(VivitFoldersFiles.REPORT_HTM_AUTOMATION_MEMBER_CHANGES);
     embeddedReport = embeddedReport.replace("LABEL_REPLACE_MEMBER_CHANGES", htmlMemberChanges);
     getHTMLYMGTWEvents();
-    final String htmlYMEvents = FSOTests.fileReadAll(VivitFoldersFiles.REPORT_HTM_AUTOMATION_EVENTS_YM);
+    final String htmlYMEvents =
+        FSOTests.fileReadAll(VivitFoldersFiles.REPORT_HTM_AUTOMATION_EVENTS_YM);
     embeddedReport = embeddedReport.replace("LABEL_REPLACE_EVENTS_YM", htmlYMEvents);
     getHTMLYMGTWEventAttendees();
     // final String htmlYMEventAttendees = FSO
@@ -836,7 +837,8 @@ public class VivitDataTests extends Environment {
     embeddedReportTemp =
         embeddedReportTemp.replace("LABEL_REPLACE_API_VERSION_YM", YMService.API_VERSION);
     embeddedReportTemp =
-        embeddedReportTemp.replace("LABEL_REPLACE_API_VERSION_GTW", GTWebinarServiceTests.API_VERSION);
+        embeddedReportTemp.replace(
+            "LABEL_REPLACE_API_VERSION_GTW", GTWebinarServiceTests.API_VERSION);
     //
     String htmlTestInformation =
         FSOTests.fileReadAll(VivitFoldersFiles.REPORT_HTM_AUTOMATION_TEST_INFORMATION);
@@ -866,7 +868,8 @@ public class VivitDataTests extends Environment {
       listReports.add(VivitFoldersFiles.REPORT_XLS_AUTOMATION_S_MONTH);
     }
     String yearToday = DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_YYYY);
-    String yearTomorrow = DateHelpersTests.getCurrentDatePlusMinusDays(DateHelpersTests.FORMAT_YYYY, 1);
+    String yearTomorrow =
+        DateHelpersTests.getCurrentDatePlusMinusDays(DateHelpersTests.FORMAT_YYYY, 1);
     if (!yearTomorrow.equals(yearToday)) {
       VivitDataTests.createReportAutomationStatisticsForPeriod(
           VivitViews.VIVIT_MEMBER_CHANGE_YEAR, VivitFoldersFiles.REPORT_XLS_AUTOMATION_S_YEAR);
@@ -1116,10 +1119,7 @@ public class VivitDataTests extends Environment {
     }
   }
 
-  /**
-   * Write Excel header cell with formatting.
-   * Extracted method to reduce nesting depth.
-   */
+  /** Write Excel header cell with formatting. Extracted method to reduce nesting depth. */
   private static void writeExcelHeader(
       XLS excel, String sheetName, int column, int row, String value) throws QAException {
     excel.writeCell(sheetName, column, row, value);
@@ -1127,8 +1127,8 @@ public class VivitDataTests extends Environment {
   }
 
   /**
-   * Write Excel data cell with conditional formatting based on column type.
-   * Extracted method to reduce nesting depth.
+   * Write Excel data cell with conditional formatting based on column type. Extracted method to
+   * reduce nesting depth.
    */
   private static void writeExcelDataCell(
       XLS excel,
@@ -1137,7 +1137,8 @@ public class VivitDataTests extends Environment {
       int row,
       String columnName,
       String value,
-      String dynamicQuery) throws QAException {
+      String dynamicQuery)
+      throws QAException {
     switch (columnName) {
       case "Count":
       case "Year":
@@ -1163,16 +1164,15 @@ public class VivitDataTests extends Environment {
   }
 
   /**
-   * Handle numeric column values (convert "null" to "0").
-   * Extracted method to reduce nesting depth.
+   * Handle numeric column values (convert "null" to "0"). Extracted method to reduce nesting depth.
    */
   private static String handleNumericColumn(String value) {
     return "null".equals(value) ? "0" : value;
   }
 
   /**
-   * Handle percent column values with conditional formatting.
-   * Extracted method to reduce nesting depth.
+   * Handle percent column values with conditional formatting. Extracted method to reduce nesting
+   * depth.
    */
   private static String handlePercentColumn(String value, String dynamicQuery) {
     final String processedValue = "null".equals(value) ? "0" : value;
@@ -1892,8 +1892,14 @@ public class VivitDataTests extends Environment {
     stringBuilderSQL.append(";");
     List<Map<String, String>> airportListMap =
         jdbc.queryResultsString(stringBuilderSQL.toString(), false);
-    google.getFlightsPage().getFlightsOld(
-        VivitFoldersFiles.DATA_FLIGHTS, airportListMap, airportTo, dateDepartTo, dateDepartFrom);
+    google
+        .getFlightsPage()
+        .getFlightsOld(
+            VivitFoldersFiles.DATA_FLIGHTS,
+            airportListMap,
+            airportTo,
+            dateDepartTo,
+            dateDepartFrom);
   }
 
   public static void getHTMLBrokenLinks() throws Throwable {
@@ -2012,7 +2018,8 @@ public class VivitDataTests extends Environment {
     stringBuilder.append("</table>");
     String htmlBrokenLinks = "<html>" + stringBuilder.toString() + "</html>";
     htmlBrokenLinks = XML.formatPretty(htmlBrokenLinks);
-    FSOTests.fileWrite(VivitFoldersFiles.REPORT_HTM_AUTOMATION_BROKEN_LINKS, htmlBrokenLinks, false);
+    FSOTests.fileWrite(
+        VivitFoldersFiles.REPORT_HTM_AUTOMATION_BROKEN_LINKS, htmlBrokenLinks, false);
   }
 
   public static void getHTMLDatabaseChanges() throws Throwable {
@@ -2409,7 +2416,8 @@ public class VivitDataTests extends Environment {
     stringBuilder.append("</table>");
     String htmlMemberChanges = "<html>" + stringBuilder.toString() + "</html>";
     htmlMemberChanges = XML.formatPretty(htmlMemberChanges);
-    FSOTests.fileWrite(VivitFoldersFiles.REPORT_HTM_AUTOMATION_MEMBER_CHANGES, htmlMemberChanges, false);
+    FSOTests.fileWrite(
+        VivitFoldersFiles.REPORT_HTM_AUTOMATION_MEMBER_CHANGES, htmlMemberChanges, false);
   }
 
   public static void getHTMLYMGTWEvents() throws Throwable {
@@ -2538,7 +2546,8 @@ public class VivitDataTests extends Environment {
     stringBuilder.append("</table>");
     String htmlGTWEventsLinks = "<html>" + stringBuilder.toString() + "</html>";
     htmlGTWEventsLinks = XML.formatPretty(htmlGTWEventsLinks);
-    FSOTests.fileWrite(VivitFoldersFiles.REPORT_HTM_AUTOMATION_EVENTS_YM, htmlGTWEventsLinks, false);
+    FSOTests.fileWrite(
+        VivitFoldersFiles.REPORT_HTM_AUTOMATION_EVENTS_YM, htmlGTWEventsLinks, false);
   }
 
   public static void getHTMLYMGTWEventAttendees() throws Throwable {

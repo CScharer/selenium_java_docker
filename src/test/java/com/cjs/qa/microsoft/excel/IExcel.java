@@ -1,7 +1,5 @@
 package com.cjs.qa.microsoft.excel;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import com.cjs.qa.microsoft.excel.xls.XLS;
@@ -10,6 +8,7 @@ import com.cjs.qa.utilities.IExtension;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.common.usermodel.HyperlinkType;
 import org.apache.poi.hssf.util.HSSFColor;
@@ -233,8 +232,8 @@ public interface IExcel {
     }
   }
 
-  static XLS updateSummarySheetXLS(
-      String filePathName, String sheetName, String sheetLinkName) throws IOException, QAException {
+  static XLS updateSummarySheetXLS(String filePathName, String sheetName, String sheetLinkName)
+      throws IOException, QAException {
     final XLS excel = new XLS(filePathName, SHEET_SUMMARY);
     final String hyperlinkSheetSummary = "'" + SHEET_SUMMARY + "'!A1";
     final String hyperlinkSheetData = "'" + sheetName + "'!A1";
@@ -257,8 +256,8 @@ public interface IExcel {
     return excel;
   }
 
-  static XLSX updateSummarySheetXLSX(
-      String filePathName, String sheetName, String sheetLinkName) throws IOException, QAException {
+  static XLSX updateSummarySheetXLSX(String filePathName, String sheetName, String sheetLinkName)
+      throws IOException, QAException {
     final XLSX excel = new XLSX(filePathName, SHEET_SUMMARY);
     final String hyperlinkSheetSummary = "'" + SHEET_SUMMARY + "'!A1";
     final String hyperlinkSheetData = "'" + sheetName + "'!A1";

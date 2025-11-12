@@ -15,7 +15,6 @@ public final class ODBCMSAccess {
     // Utility class - prevent instantiation
   }
 
-
   public static void main(String[] args) {
     final List<String> listFields =
         Arrays.asList(

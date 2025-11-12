@@ -1,13 +1,12 @@
 package com.cjs.qa.vivit.pages;
 
-import java.util.Locale;
-
 import com.cjs.qa.selenium.ISelenium;
 import com.cjs.qa.selenium.Page;
 import com.cjs.qa.vivit.VivitEnvironment;
 import io.cucumber.datatable.DataTable;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

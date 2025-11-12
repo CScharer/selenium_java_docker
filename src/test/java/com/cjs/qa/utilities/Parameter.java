@@ -7,9 +7,7 @@ public class Parameter {
   private String type = null;
   private Object value = null;
 
-  /**
-   * Default constructor for data binding and instantiation.
-   */
+  /** Default constructor for data binding and instantiation. */
   public Parameter() {
     // Default constructor for data binding
   }

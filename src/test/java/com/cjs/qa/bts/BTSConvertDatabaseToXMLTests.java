@@ -7,11 +7,9 @@ import com.cjs.qa.jdbc.JDBCConstants;
 import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.XML;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Locale;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
@@ -53,7 +51,9 @@ public class BTSConvertDatabaseToXMLTests {
         Environment.sysOut("company:[" + company + "]");
         String companyAbbreviation = (String) company.get("Abbreviation");
         stringBuilder.append(
-            XML.ENCLOSURE_LEFT + companyAbbreviation.toLowerCase(Locale.ENGLISH) + XML.ENCLOSURE_RIGHT);
+            XML.ENCLOSURE_LEFT
+                + companyAbbreviation.toLowerCase(Locale.ENGLISH)
+                + XML.ENCLOSURE_RIGHT);
         stringBuilder = getWrappedField(stringBuilder, company, "Name");
         stringBuilder = getWrappedField(stringBuilder, company, "Number");
         stringBuilder = getWrappedField(stringBuilder, company, "FilenetSplit");
@@ -89,7 +89,9 @@ public class BTSConvertDatabaseToXMLTests {
             String environmentTag = (String) environment.get("Environment");
             Environment.sysOut("environment:[" + environment + "]");
             stringBuilder.append(
-                XML.ENCLOSURE_LEFT + environmentTag.toLowerCase(Locale.ENGLISH) + XML.ENCLOSURE_RIGHT);
+                XML.ENCLOSURE_LEFT
+                    + environmentTag.toLowerCase(Locale.ENGLISH)
+                    + XML.ENCLOSURE_RIGHT);
             stringBuilder = getWrappedField(stringBuilder, environment, "URL");
             sql =
                 JDBCConstants.SELECT_ALL_FROM

@@ -63,8 +63,8 @@ public class Main extends Page {
       Environment.sysOut("capturedArrestsURLArray:[" + listCapturedArrestsURL.size() + "]");
       sqlStringBuilder = new StringBuilder();
       final List<WebElement> rowElements =
-          getWebDriver().findElements(
-              By.xpath(".//*[@id='ctl00_ContentPlaceHolder1_gvInmates']/tbody/tr"));
+          getWebDriver()
+              .findElements(By.xpath(".//*[@id='ctl00_ContentPlaceHolder1_gvInmates']/tbody/tr"));
       for (int indexRow = 0; indexRow < rowElements.size(); indexRow++) {
         final WebElement rowElement = rowElements.get(indexRow);
         final List<WebElement> columnElements = rowElement.findElements(By.xpath("./td"));
@@ -141,7 +141,7 @@ public class Main extends Page {
     sqlStringBuilder.append("SELECT [URL] ");
     sqlStringBuilder.append("FROM [v_IOW_MissingPrisonerURLs];");
     final String missingPrisonerURLs = jdbc.queryResults(sqlStringBuilder.toString(), "", false);
-      List<String> listMissingPrisonerURL = new ArrayList<>();
+    List<String> listMissingPrisonerURL = new ArrayList<>();
     if (!"".equals(missingPrisonerURLs)) {
       listMissingPrisonerURL = Arrays.asList(missingPrisonerURLs.split(Constants.NEWLINE));
     }
@@ -335,8 +335,8 @@ public class Main extends Page {
       return sqlStringBuilder;
     }
     final List<WebElement> rowElements =
-        getWebDriver().findElements(
-            By.xpath(".//*[@id='ctl00_ContentPlaceHolder1_gvCharges']/tbody/tr"));
+        getWebDriver()
+            .findElements(By.xpath(".//*[@id='ctl00_ContentPlaceHolder1_gvCharges']/tbody/tr"));
     int row = 0;
     for (final WebElement rowElement : rowElements) {
       row++;

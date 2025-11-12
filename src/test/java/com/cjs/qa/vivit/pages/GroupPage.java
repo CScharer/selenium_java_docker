@@ -1,7 +1,5 @@
 package com.cjs.qa.vivit.pages;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.selenium.Page;
 import com.cjs.qa.utilities.Constants;
@@ -18,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
@@ -38,7 +37,8 @@ public class GroupPage extends Page {
     return listGroupLeaders;
   }
 
-  private final By byLinksGroups = By.xpath("//*[@id='CustomPageBody']//a[text()!='contact us today!']");
+  private final By byLinksGroups =
+      By.xpath("//*[@id='CustomPageBody']//a[text()!='contact us today!']");
 
   public void getGroupPageData() throws Throwable {
     Environment.sysOut(
@@ -152,7 +152,8 @@ public class GroupPage extends Page {
               groupName = groupName.replace("Special Interest Group", groupType);
               break;
             default:
-              Environment.sysOut("Unknown group type: " + groupType + ". Using original group name.");
+              Environment.sysOut(
+                  "Unknown group type: " + groupType + ". Using original group name.");
               break;
           }
           final Map<String, By> mapByGroupURLsBy = getGroupURLs();

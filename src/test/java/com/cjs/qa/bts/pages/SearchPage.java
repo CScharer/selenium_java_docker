@@ -1,12 +1,11 @@
 package com.cjs.qa.bts.pages;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.selenium.ISelenium;
 import com.cjs.qa.selenium.Page;
 import io.cucumber.datatable.DataTable;
 import java.util.List;
+import java.util.Locale;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 

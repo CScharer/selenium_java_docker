@@ -1,7 +1,5 @@
 package com.cjs.qa.microsoft.excel.xls;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import com.cjs.qa.microsoft.excel.IExcel;
@@ -15,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.common.usermodel.HyperlinkType;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
@@ -47,7 +46,8 @@ public class XLS implements IExcel {
   private Cell workCell = null;
 
   public XLS(String fileName, String sheetName) throws QAException, IOException {
-    final String fileNameExtensionExpected = "." + this.getClass().getSimpleName().toLowerCase(Locale.ENGLISH);
+    final String fileNameExtensionExpected =
+        "." + this.getClass().getSimpleName().toLowerCase(Locale.ENGLISH);
     setFileName(fileName);
     Environment.sysOut("fileName:[" + getFileName() + "], sheet:" + sheetName + "]");
     if (!JavaHelpers.hasValue(sheetName)) {
@@ -174,7 +174,7 @@ public class XLS implements IExcel {
   }
 
   public boolean autoSizeColumns(String sheet) throws QAException {
-      // , int column)
+    // , int column)
     final int columns = getColumnCount(sheet);
     for (int column = 0; column < columns; column++) {
       autoSizeColumn(sheet, column);

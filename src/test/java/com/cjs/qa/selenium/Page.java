@@ -1630,8 +1630,7 @@ public class Page extends JavaHelpers {
               break;
             }
           }
-          Assert.assertTrue(
-              "Could not find an item with the value of [" + value + "]", itemFound);
+          Assert.assertTrue("Could not find an item with the value of [" + value + "]", itemFound);
         }
       }
       // logFieldName(webElement.getAttribute("id").toString(), value)
@@ -1953,12 +1952,12 @@ public class Page extends JavaHelpers {
     final Wait<WebDriver> webDriverWait =
         new WebDriverWait(getWebDriver(), java.time.Duration.ofSeconds(timeout));
     return webDriverWait.until(
-            new Function<WebDriver, WebElement>() {
-              @Override
-              public WebElement apply(WebDriver driver) {
-                return driver.findElement(By.cssSelector(selector));
-              }
-            });
+        new Function<WebDriver, WebElement>() {
+          @Override
+          public WebElement apply(WebDriver driver) {
+            return driver.findElement(By.cssSelector(selector));
+          }
+        });
   }
 
   /**

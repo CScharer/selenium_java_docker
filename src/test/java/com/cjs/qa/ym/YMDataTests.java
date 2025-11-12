@@ -267,7 +267,8 @@ public class YMDataTests extends Environment {
   }
 
   public static void exportYMGTWTables() throws Throwable {
-    if (FSOTests.fileExists(VivitFoldersFiles.DATA_YMAPI_DATA)) { // The file has already been created.
+    if (FSOTests.fileExists(
+        VivitFoldersFiles.DATA_YMAPI_DATA)) { // The file has already been created.
       return;
     }
     JDBC.exportDataFromTableView(
@@ -337,7 +338,8 @@ public class YMDataTests extends Environment {
     if (getYmApi() == null) {
       setYmApi(new YMAPI());
     }
-    Map<String, String> resultsMap = getYmapi().getSaExportNamespace().exportDataMembers(dateTimeFrom);
+    Map<String, String> resultsMap =
+        getYmapi().getSaExportNamespace().exportDataMembers(dateTimeFrom);
     sysOut("mapResults:[" + resultsMap.toString() + "]");
   }
 
@@ -930,24 +932,23 @@ public class YMDataTests extends Environment {
   }
 
   /**
-   * Process non-DataSet nodes in event registration XML.
-   * Extracted method to reduce nesting depth.
+   * Process non-DataSet nodes in event registration XML. Extracted method to reduce nesting depth.
    */
   private static void processNonDataSetNode(
       String nodeName, String nodeValue, Map<String, String> eventRegistrationMap) {
     if (eventRegistrationMap.containsKey(nodeName)) {
       eventRegistrationMap.put(nodeName, nodeValue);
     } else {
-      sysOut(
-          "The [" + nodeName + "] item does not exist in the" + " eventRegistrationMap!!!");
+      sysOut("The [" + nodeName + "] item does not exist in the" + " eventRegistrationMap!!!");
     }
   }
 
   /**
-   * Process DataSet child nodes in event registration XML.
-   * Extracted method to reduce nesting depth.
+   * Process DataSet child nodes in event registration XML. Extracted method to reduce nesting
+   * depth.
    */
-  private static void processDataSetNode(Node dataSetParentNode, Map<String, String> eventRegistrationMap) {
+  private static void processDataSetNode(
+      Node dataSetParentNode, Map<String, String> eventRegistrationMap) {
     NodeList dataSetChildrenNodeList = dataSetParentNode.getChildNodes();
     for (int dataSetChildNodeIndex = 0;
         dataSetChildNodeIndex < dataSetChildrenNodeList.getLength();
@@ -967,7 +968,10 @@ public class YMDataTests extends Environment {
         eventRegistrationMap.put(dataSetNodeName, valueNodeValue);
       } else {
         sysOut(
-            "The [" + dataSetNodeName + "] item does not exist in the" + " eventRegistrationMap!!!");
+            "The ["
+                + dataSetNodeName
+                + "] item does not exist in the"
+                + " eventRegistrationMap!!!");
       }
     }
   }
@@ -1120,7 +1124,8 @@ public class YMDataTests extends Environment {
           if (recordNumber >= (recordStart + 1)) {
             if (!headingsMapped) {
               headingsCSVMap = record.toMap();
-              final List<String> headingsCSVList = Convert.fromKeySetToList(headingsCSVMap.keySet());
+              final List<String> headingsCSVList =
+                  Convert.fromKeySetToList(headingsCSVMap.keySet());
               headingsExpectedList = new ArrayList(headingsExpectedList);
               headingsExpectedList.removeAll(VivitDataTests.getDatabaseOnlyFields());
               headingsExpectedList.sort(null);
@@ -1177,7 +1182,8 @@ public class YMDataTests extends Environment {
               }
             }
             sqlStringBuilder =
-                SQL.appendStringBuilderSQLInsertRecord(tableName, sqlStringBuilder, mapMember, true);
+                SQL.appendStringBuilderSQLInsertRecord(
+                    tableName, sqlStringBuilder, mapMember, true);
             if (recordNumber % recordLimitDebug == 0) {
               sysOut(JavaHelpers.getCurrentMethodName() + "-Records:[" + recordNumber + "]");
             }
@@ -1187,8 +1193,8 @@ public class YMDataTests extends Environment {
             }
           }
         }
-          sqlStringBuilderList.add(sqlStringBuilder);
-          VivitDataTests.successFileCreate(statusName);
+        sqlStringBuilderList.add(sqlStringBuilder);
+        VivitDataTests.successFileCreate(statusName);
       }
     } catch (final Exception e) {
       sysOut(e);
@@ -1469,7 +1475,9 @@ public class YMDataTests extends Environment {
   }
 
   public static void stubAttendeeUpdateMe() throws Throwable {
-    String otherday = DateHelpersTests.getCurrentDatePlusMinusDays(DateHelpersTests.FORMAT_YYYY_MM_DD_COMPACT, -1);
+    String otherday =
+        DateHelpersTests.getCurrentDatePlusMinusDays(
+            DateHelpersTests.FORMAT_YYYY_MM_DD_COMPACT, -1);
     String today = DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_YYYY_MM_DD_COMPACT);
     String filePathNameSource =
         VivitFoldersFiles.PATH_API_DATA_YM_EVENT_ATTENDEES.replace(today, otherday)

@@ -13,9 +13,7 @@ public class XLSCellFonts {
   private Font fontObject;
   private String fontName;
 
-  /**
-   * Default constructor for data binding and font management.
-   */
+  /** Default constructor for data binding and font management. */
   public XLSCellFonts() {
     // Default constructor for data binding
   }

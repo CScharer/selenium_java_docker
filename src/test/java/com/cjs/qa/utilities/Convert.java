@@ -15,7 +15,7 @@ import java.util.Set;
 import org.apache.commons.io.IOUtils;
 
 public final class Convert {
-  private Convert() { }
+  private Convert() {}
 
   public static final String LABEL_INSTANCES_OF_MAX = "instancesOfMax";
   public static final String LABEL_LETTER = "letter";

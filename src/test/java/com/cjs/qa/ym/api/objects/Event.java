@@ -9,9 +9,7 @@ public class Event {
   private String isValid;
   private List<Registration> registrationList;
 
-  /**
-   * Default constructor for data binding and instantiation.
-   */
+  /** Default constructor for data binding and instantiation. */
   public Event() {
     // Default constructor for data binding
   }

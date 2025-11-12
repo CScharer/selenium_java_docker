@@ -175,6 +175,8 @@ services:
       - PARALLEL_THREADS=${PARALLEL_THREADS:-5}
       - GOOGLE_APPLICATION_CREDENTIALS=/app/credentials/service-account-key.json
     volumes:
+      # Mount source code for Google Java Format changes to persist
+      - ./src:/app/src
       # Mount test results for access from host
       - ./target/surefire-reports:/app/target/surefire-reports
       - ./target/cucumber-reports:/app/target/cucumber-reports

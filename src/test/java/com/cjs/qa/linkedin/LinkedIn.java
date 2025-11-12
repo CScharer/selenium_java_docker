@@ -1,7 +1,5 @@
 package com.cjs.qa.linkedin;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.security.EPasswords;
 import com.cjs.qa.linkedin.data.DataTests;
@@ -14,11 +12,13 @@ import com.cjs.qa.utilities.CJSConstants;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.JavaHelpers;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import org.openqa.selenium.WebDriver;
 
 public class LinkedIn {
-  public static final String LINKEDIN_URL = LinkedInEnvironment.URL_LOGIN.toLowerCase(Locale.ENGLISH) + "in/";
+  public static final String LINKEDIN_URL =
+      LinkedInEnvironment.URL_LOGIN.toLowerCase(Locale.ENGLISH) + "in/";
   private ConnectionsPage connectionsPage;
   private ContactInfoPage contactInfoPage;
   private HomePage homePage;

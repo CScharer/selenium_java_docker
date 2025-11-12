@@ -8,7 +8,6 @@ import jakarta.xml.soap.MessageFactory;
 import jakarta.xml.soap.MimeHeaders;
 import jakarta.xml.soap.SOAPConnection;
 import jakarta.xml.soap.SOAPConnectionFactory;
-import java.nio.charset.StandardCharsets;
 import jakarta.xml.soap.SOAPException;
 import jakarta.xml.soap.SOAPMessage;
 import java.io.BufferedReader;
@@ -18,7 +17,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import javax.xml.transform.Source;
@@ -45,7 +44,7 @@ public class SOAP {
   public SOAPMessage getSoapMessageFromString(String xml) throws IOException, SOAPException {
     final MessageFactory messageFactory = MessageFactory.newInstance();
     return messageFactory.createMessage(
-            new MimeHeaders(), new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
+        new MimeHeaders(), new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
   }
 
   public String getAPIXMLRequest(SOAPMessage soapMessage) throws QAException {
@@ -96,8 +95,7 @@ public class SOAP {
       String prePW = "<password>";
       String postPW = "</password>";
       if (getXml().contains(prePW)) {
-        final String prePassword =
-            getXml().substring(0, getXml().indexOf(prePW) + prePW.length());
+        final String prePassword = getXml().substring(0, getXml().indexOf(prePW) + prePW.length());
         final String postPassword = getXml().substring(getXml().indexOf(postPW), getXml().length());
         setXml(prePassword + "**********" + postPassword);
       }

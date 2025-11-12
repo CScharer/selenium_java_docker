@@ -53,9 +53,7 @@ public class Payment {
   private Double paymentAmount;
   private String typeOfPayment;
 
-  /**
-   * Default constructor for data binding and instantiation.
-   */
+  /** Default constructor for data binding and instantiation. */
   public Payment() {
     // Default constructor for data binding
   }
@@ -248,7 +246,7 @@ public class Payment {
     boolean firstRecord = false;
     // NOPMD - ForLoopCanBeForeach: Complex loop requires index for multiple operations
     for (int mapReportIndex = 0; mapReportIndex < listMapReport.size(); mapReportIndex++) {
-    // for (Map<String, String> mapReport : listMapReport)
+      // for (Map<String, String> mapReport : listMapReport)
       Map<String, String> mapReport = listMapReport.get(mapReportIndex);
       if (!firstRecord) {
         firstRecord = true;

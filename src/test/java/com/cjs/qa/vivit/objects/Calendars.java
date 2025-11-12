@@ -18,9 +18,7 @@ public class Calendars {
   private String details;
   private String eventURL;
 
-  /**
-   * Default constructor for data binding and instantiation.
-   */
+  /** Default constructor for data binding and instantiation. */
   public Calendars() {
     // Default constructor for data binding
   }

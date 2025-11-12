@@ -400,7 +400,7 @@ public class SeleniumWebDriver {
           Environment.sysOut("webDriverVersion:[" + webDriverVersion + "]");
         }
       }
-    } catch (Throwable e) {  // PMD suppression: getWebDriverProcesses() explicitly throws Throwable
+    } catch (Throwable e) { // PMD suppression: getWebDriverProcesses() explicitly throws Throwable
       Environment.sysOut("throwable:[" + e.toString() + "]");
     }
   }
@@ -413,7 +413,8 @@ public class SeleniumWebDriver {
     // String[] webDriverArray = webDriver.split("/");
     // webDriver = webDriverArray[(driverArray.length - 1)];
     Environment.sysOut("webDriver:[" + webDriver + "]");
-    String command = CommandLineTests.TASKLIST + " /fo:csv /nh /fi \"imagename eq " + webDriver + "\"";
+    String command =
+        CommandLineTests.TASKLIST + " /fo:csv /nh /fi \"imagename eq " + webDriver + "\"";
     Environment.sysOut("command:[" + command + "]");
     Processes processes = new Processes(command);
     // Environment.sysOut(processes.toString());
@@ -669,7 +670,8 @@ public class SeleniumWebDriver {
    * @return
    */
   private DesiredCapabilities setDesiredCapabilities(String operatingSystem, String browser) {
-    final EDriverProperties eDriverProperties = EDriverProperties.fromString(browser.toUpperCase(Locale.ENGLISH));
+    final EDriverProperties eDriverProperties =
+        EDriverProperties.fromString(browser.toUpperCase(Locale.ENGLISH));
     DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
     switch (browser.toLowerCase(Locale.ENGLISH)) {
       case "android":
@@ -778,7 +780,8 @@ public class SeleniumWebDriver {
         desiredCapabilities.setPlatform(Platform.YOSEMITE);
         break;
       default:
-        Environment.sysOut("Unknown operating system: " + operatingSystem + ". Using ANY platform.");
+        Environment.sysOut(
+            "Unknown operating system: " + operatingSystem + ". Using ANY platform.");
         desiredCapabilities.setPlatform(Platform.ANY);
         break;
     }

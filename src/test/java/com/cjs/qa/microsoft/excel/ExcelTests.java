@@ -75,11 +75,7 @@ public class ExcelTests {
             + "]");
     Environment.sysOut("Sheet Exists(1):[" + excel.sheetExists(1) + "]");
     Environment.sysOut(
-        "Sheet Exists("
-            + SHEET_MISSING
-            + "):["
-            + excel.sheetExists(SHEET_MISSING)
-            + "]");
+        "Sheet Exists(" + SHEET_MISSING + "):[" + excel.sheetExists(SHEET_MISSING) + "]");
     Environment.sysOut("Sheet Exists(5):[" + excel.sheetExists(5) + "]");
     //
     Environment.sysOut(
@@ -274,11 +270,7 @@ public class ExcelTests {
             + "]");
     Environment.sysOut("Sheet Exists(1):[" + excel.sheetExists(1) + "]");
     Environment.sysOut(
-        "Sheet Exists("
-            + SHEET_MISSING
-            + "):["
-            + excel.sheetExists(SHEET_MISSING)
-            + "]");
+        "Sheet Exists(" + SHEET_MISSING + "):[" + excel.sheetExists(SHEET_MISSING) + "]");
     Environment.sysOut("Sheet Exists(5):[" + excel.sheetExists(5) + "]");
     //
     Environment.sysOut(

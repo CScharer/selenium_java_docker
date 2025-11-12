@@ -35,9 +35,7 @@ public class Groups {
   public static final String EXTENDED_LIST =
       "GroupDirectoryURL;CalendarURL;BlogsURL;ForumsURL;PhotoGalleryURL";
 
-  /**
-   * Default constructor for data binding and instantiation.
-   */
+  /** Default constructor for data binding and instantiation. */
   public Groups() {
     // Default constructor for data binding
   }

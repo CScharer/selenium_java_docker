@@ -1,12 +1,12 @@
 package com.cjs.qa.utilities;
 
 public final class IExtension {
-  
+
   // Private constructor to prevent instantiation
   private IExtension() {
     throw new UnsupportedOperationException("Utility class - do not instantiate");
   }
-  
+
   public static final String ACCDB = ".accdb";
   public static final String BAK = ".bak";
   public static final String BAT = ".bat";

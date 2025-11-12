@@ -1,11 +1,10 @@
 package com.cjs.qa.utilities.colors;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.utilities.Constants;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ColorPalette {
   private String palette;

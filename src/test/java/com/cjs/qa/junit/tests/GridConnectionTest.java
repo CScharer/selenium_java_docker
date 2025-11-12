@@ -27,11 +27,11 @@ public class GridConnectionTest {
     System.out.println("Connecting to Grid at: " + gridUrl);
 
     ChromeOptions options = new ChromeOptions();
-    
+
     // Check if headless mode is requested (default: true)
     String headlessProperty = System.getProperty("headless", "true");
     boolean isHeadless = !"false".equalsIgnoreCase(headlessProperty);
-    
+
     if (isHeadless) {
       options.addArguments("--headless");
     }

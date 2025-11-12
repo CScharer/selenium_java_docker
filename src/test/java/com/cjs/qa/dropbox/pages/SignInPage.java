@@ -1,13 +1,12 @@
 package com.cjs.qa.dropbox.pages;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import com.cjs.qa.core.security.EPasswords;
 import com.cjs.qa.dropbox.DropboxEnvironment;
 import com.cjs.qa.selenium.Page;
 import com.cjs.qa.utilities.CJSConstants;
+import java.util.Locale;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -92,7 +91,8 @@ public class SignInPage extends Page {
   @Override
   protected void setCheckbox(By by, String value) {
     if (Environment.isLogAll()) {
-      Environment.sysOut("({Field}" + getCheckboxRememberMe().toString() + ", {Value}" + value + ");");
+      Environment.sysOut(
+          "({Field}" + getCheckboxRememberMe().toString() + ", {Value}" + value + ");");
     }
     switch (value.toLowerCase(Locale.ENGLISH)) {
       case LABEL_OPTION_CHECKED:

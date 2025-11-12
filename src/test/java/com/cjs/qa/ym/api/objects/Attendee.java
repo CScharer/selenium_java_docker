@@ -11,9 +11,7 @@ public class Attendee {
   private String rsvpResponse;
   private DataSet dataSet;
 
-  /**
-   * Default constructor for data binding and instantiation.
-   */
+  /** Default constructor for data binding and instantiation. */
   public Attendee() {
     // Default constructor for data binding
   }

@@ -1,14 +1,11 @@
 package com.cjs.qa.autocoder;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import com.cjs.qa.jdbc.JDBC;
 import com.cjs.qa.jdbc.JDBCConstants;
 import com.cjs.qa.jdbc.SQL;
 import com.cjs.qa.microsoft.excel.xls.XLS;
-import com.cjs.qa.selenium.Page;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.FSOTests;
 import com.cjs.qa.utilities.IExtension;
@@ -16,13 +13,14 @@ import com.cjs.qa.utilities.RegularExpression;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import org.junit.Test;
 
 public class CoderTests {
   private static JDBC jdbc = new JDBC("", "AutoCoderExcel");
-    public static final String COMMENT = "// ";
+  public static final String COMMENT = "// ";
   private static final String METHOD_NAME_POPULATE = "populatePage";
   private static final String METHOD_NAME_VALIDATE = "validatePage";
   private static final String CASE_NOT_DEFINED = "Case Not Defined";
@@ -34,25 +32,22 @@ public class CoderTests {
   private static final String LABEL_EDIT = "Edit";
   private static final String LABEL_OPTION = "Option";
   private static final String LABEL_RADIOBUTTON = "RadioButton";
-  protected static final List<String> TYPES_INPUT = List.of(
-      LABEL_CHECKBOX,
-      LABEL_DROPDOWN,
-      LABEL_EDIT,
-      LABEL_OPTION,
-      LABEL_RADIOBUTTON
-  );
+  protected static final List<String> TYPES_INPUT =
+      List.of(LABEL_CHECKBOX, LABEL_DROPDOWN, LABEL_EDIT, LABEL_OPTION, LABEL_RADIOBUTTON);
 
   @Test
   public void testCodeCreation() throws QAException, Exception {
     String pageName = "ConnectionsPage";
     String code = createCode(pageName);
-    String fileNamePath = jdbc.getDbParameters().getName().replace(IExtension.SQLITE, IExtension.JAVA);
+    String fileNamePath =
+        jdbc.getDbParameters().getName().replace(IExtension.SQLITE, IExtension.JAVA);
     FSOTests.fileWrite(fileNamePath, code, false);
   }
 
   private static void getRecordsFromExcel(String pageName) throws QAException, Exception {
     final String SHEET_NAME = pageName; // IExcel.SHEET_DEFAULT;
-    String filePathName = jdbc.getDbParameters().getName().replaceAll(IExtension.SQLITE, IExtension.XLS);
+    String filePathName =
+        jdbc.getDbParameters().getName().replaceAll(IExtension.SQLITE, IExtension.XLS);
     // IExcel.updateSummarySheetXLS(filePathName, sheetName, sheetLinkName);
     final XLS excel = new XLS(filePathName, SHEET_NAME);
     Environment.sysOut("excel.getSheetCount():[" + excel.getSheetCount() + "]");
@@ -113,8 +108,7 @@ public class CoderTests {
     stringBuilderAll.append(getInputs(recordsOtherListMap, mapOtherFields));
     stringBuilderAll.append(getTable(recordsOtherListMap, mapOtherFields));
     stringBuilderAll.append(Constants.nlTab(1, 0));
-    final List<Map<Integer, String>> recordsCodeListMap =
-        jdbc.queryResultsIndex(codeQuery, true);
+    final List<Map<Integer, String>> recordsCodeListMap = jdbc.queryResultsIndex(codeQuery, true);
     Map<String, Integer> mapCodeFields = null;
     if (!recordsCodeListMap.isEmpty()) {
       mapCodeFields = getHashMapFields(recordsCodeListMap.get(0));

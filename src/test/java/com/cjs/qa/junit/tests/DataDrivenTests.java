@@ -1,10 +1,9 @@
 package com.cjs.qa.junit.tests;
 
-import java.util.Locale;
-
 import com.cjs.qa.utilities.AllureHelper;
 import io.qameta.allure.*;
 import java.net.URL;
+import java.util.Locale;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -47,11 +46,11 @@ public class DataDrivenTests {
     LOGGER.info("========================================");
 
     ChromeOptions options = new ChromeOptions();
-    
+
     // Check if headless mode is requested (default: true)
     String headlessProperty = System.getProperty("headless", "true");
     boolean isHeadless = !"false".equalsIgnoreCase(headlessProperty);
-    
+
     if (isHeadless) {
       options.addArguments("--headless");
     }
@@ -146,7 +145,9 @@ public class DataDrivenTests {
 
     Allure.step("Verify title contains expected text");
     Assert.assertTrue(
-        title.toLowerCase(Locale.ENGLISH).contains(expectedTitleFragment.toLowerCase(Locale.ENGLISH)),
+        title
+            .toLowerCase(Locale.ENGLISH)
+            .contains(expectedTitleFragment.toLowerCase(Locale.ENGLISH)),
         "Title should contain '" + expectedTitleFragment + "'");
 
     Allure.step("Verify URL is correct");

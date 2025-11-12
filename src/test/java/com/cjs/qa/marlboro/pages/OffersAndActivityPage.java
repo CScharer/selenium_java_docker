@@ -2,7 +2,6 @@ package com.cjs.qa.marlboro.pages;
 
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
-import com.cjs.qa.marlboro.MarlboroEnvironment;
 import com.cjs.qa.selenium.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +12,8 @@ public class OffersAndActivityPage extends Page {
     super(webDriver);
   }
 
-  private static final By button3DollarsOffACarton = By.xpath(".//span[contains(text(),'$3 Off a Carton')]");
+  private static final By button3DollarsOffACarton =
+      By.xpath(".//span[contains(text(),'$3 Off a Carton')]");
   // final By buttonClaimYours =
   // By.xpath(".//*[@id='container']//span[.='CLAIM YOURS']");
   private final By buttonGetYoursByMail =

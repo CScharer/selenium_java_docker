@@ -18,16 +18,16 @@ public class ConvertTests {
 
   private static List<List<String>> getList() {
     return Arrays.asList(
-            Arrays.asList("One", "1"),
-            Arrays.asList("Two", "2"),
-            Arrays.asList("Three", ""),
-            Arrays.asList("Four", "4"),
-            Arrays.asList("Five", "5"),
-            Arrays.asList("Six", "6"),
-            Arrays.asList("Seven", ""),
-            Arrays.asList("Eight", "8"),
-            Arrays.asList("Nine", "9"),
-            Arrays.asList("Ten", "10"));
+        Arrays.asList("One", "1"),
+        Arrays.asList("Two", "2"),
+        Arrays.asList("Three", ""),
+        Arrays.asList("Four", "4"),
+        Arrays.asList("Five", "5"),
+        Arrays.asList("Six", "6"),
+        Arrays.asList("Seven", ""),
+        Arrays.asList("Eight", "8"),
+        Arrays.asList("Nine", "9"),
+        Arrays.asList("Ten", "10"));
   }
 
   private static Map<String, String> getMap() {

@@ -242,7 +242,8 @@ public final class YMAPIMethodsTests {
             Arrays.asList(callMethod.split(Constants.DELIMETER_PATH + "."));
         final String methodNameSpace = listMethod.get(0) + "Namespace";
         String methodName = listMethod.get(listMethod.size() - 1);
-        methodName = methodName.substring(0, 1).toLowerCase(Locale.ENGLISH) + methodName.substring(1);
+        methodName =
+            methodName.substring(0, 1).toLowerCase(Locale.ENGLISH) + methodName.substring(1);
         final String methodDescription = mapMethod.get(LABEL_DESCRIPTION);
         final String methodURL = mapMethod.get("URL");
         newTemplateYMAPIClass =
@@ -299,7 +300,8 @@ public final class YMAPIMethodsTests {
               stringBuilderArguments.append(",");
             }
             final String paramterName =
-                paramterCall.substring(0, 1).toLowerCase(Locale.ENGLISH) + paramterCall.substring(1);
+                paramterCall.substring(0, 1).toLowerCase(Locale.ENGLISH)
+                    + paramterCall.substring(1);
             stringBuilderArguments.append(parameterDeclarationType + " " + paramterName);
             stringBuilderCallParameters.append(
                 Constants.nlTab(1, 2)

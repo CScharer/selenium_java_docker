@@ -28,8 +28,7 @@ public class TestXLS {
       Environment.sysOut("Creating sheet [" + sheetName + "]");
       excel.createSheet(sheetName);
       final String hyperlinkSheet = "'" + sheetName + "'!A1";
-      excel.addLink(
-          IExcel.SHEET_SUMMARY, 0, sheetIndex + 1, "DOCUMENT", sheetName, hyperlinkSheet);
+      excel.addLink(IExcel.SHEET_SUMMARY, 0, sheetIndex + 1, "DOCUMENT", sheetName, hyperlinkSheet);
       createFontsColumns(excel, sheetName);
       createFontsRows(excel, sheetName);
       createFontsCells(excel, sheetName);

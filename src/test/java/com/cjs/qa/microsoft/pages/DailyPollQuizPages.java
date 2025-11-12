@@ -1,7 +1,5 @@
 package com.cjs.qa.microsoft.pages;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import com.cjs.qa.microsoft.objects.Answers;
@@ -9,6 +7,7 @@ import com.cjs.qa.microsoft.objects.PointsCard;
 import com.cjs.qa.utilities.JavaHelpers;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

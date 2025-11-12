@@ -19,8 +19,7 @@ public class FormsRightNav extends Page {
   private final By linkPolicyViews =
       By.xpath(".//*[@id='" + nodeForm1Admin + "panelGroupButtonForPolicyViews']/a");
   private final By linkRequestPrint =
-      By.xpath(
-          ".//*[@id='" + nodeForm1Admin + "0" + nodeNavigationMenu + "menuLinkSubmittable']");
+      By.xpath(".//*[@id='" + nodeForm1Admin + "0" + nodeNavigationMenu + "menuLinkSubmittable']");
   private final By linkTerritoryInformation =
       By.xpath(".//*[@id='" + nodeForm1Admin + "terrInfoLink']");
   private final By linkClientInformation =

@@ -31,7 +31,8 @@ public final class SQLite {
     final String dateTimeStamp = DateHelpersTests.getCurrentDateAndTime();
     Environment.sysOut("dateTimeStamp:[" + dateTimeStamp + "]");
     String fileName =
-        DateHelpersTests.convertDate(dateTimeStamp, "MM/dd/yyyy HH:mm:ss.SSS", "yyyyMMdd_HHmmss.SSS");
+        DateHelpersTests.convertDate(
+            dateTimeStamp, "MM/dd/yyyy HH:mm:ss.SSS", "yyyyMMdd_HHmmss.SSS");
     fileName = "ProductSummary";
     Environment.sysOut("fileName:[" + fileName + "]");
     final String pathData = CJSConstants.PATH_FILES_DATA;

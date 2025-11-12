@@ -22,7 +22,6 @@ public final class SecureConfig {
     // Utility class - prevent instantiation
   }
 
-
   private static final String PROJECT_ID = "cscharer";
   private static final Map<String, String> CACHE = new ConcurrentHashMap<>();
   private static boolean cacheEnabled = true;

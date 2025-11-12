@@ -3,7 +3,6 @@ package com.cjs.qa.bts.pages;
 import com.cjs.qa.selenium.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class PremiumSummaryRightNav extends Page {
   public PremiumSummaryRightNav(WebDriver webDriver) {

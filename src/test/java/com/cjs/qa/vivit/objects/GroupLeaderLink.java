@@ -18,9 +18,7 @@ public class GroupLeaderLink {
   private String webSiteMemberID;
   private String leaderType;
 
-  /**
-   * Default constructor for data binding and instantiation.
-   */
+  /** Default constructor for data binding and instantiation. */
   public GroupLeaderLink() {
     // Default constructor for data binding
   }

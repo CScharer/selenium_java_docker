@@ -20,15 +20,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Locale;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
@@ -148,7 +144,8 @@ public class StepsVivit extends Environment {
   public void testSetup(Scenario scenario) throws Exception {
     mapTest.put(
         "Started",
-        DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_US_STANDARD_DATE_TIME + ".SSS"));
+        DateHelpersTests.getCurrentDateTime(
+            DateHelpersTests.FORMAT_US_STANDARD_DATE_TIME + ".SSS"));
     setTimeStarted(System.currentTimeMillis());
     setScenarioObject(scenario);
     mapTest.put("API", "true");
@@ -186,7 +183,8 @@ public class StepsVivit extends Environment {
     mapTest.put("Status", getScenarioObject().getStatus().toString());
     mapTest.put(
         "Completed",
-        DateHelpersTests.getCurrentDateTime(DateHelpersTests.FORMAT_US_STANDARD_DATE_TIME + ".SSS"));
+        DateHelpersTests.getCurrentDateTime(
+            DateHelpersTests.FORMAT_US_STANDARD_DATE_TIME + ".SSS"));
     setTimeCompleted(System.currentTimeMillis());
     mapTest.put(
         "Elapsed (seconds)",

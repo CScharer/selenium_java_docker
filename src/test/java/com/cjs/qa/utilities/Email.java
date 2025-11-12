@@ -1,7 +1,5 @@
 package com.cjs.qa.utilities;
 
-import java.util.Locale;
-
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
 import java.nio.charset.StandardCharsets;
@@ -9,6 +7,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import javax.activation.CommandMap;
