@@ -136,8 +136,8 @@ public class BTSConvertDatabaseToXMLTests {
       Environment.sysOut("xml:[" + xml + "]");
       xml = XML.formatPretty(xml);
       FSOTests.fileWrite(BTSCompanyEnvironmentData.getEnvironmentsFilePathName(), xml, false);
-    } catch (Throwable throwable) {
-      throwable.printStackTrace();
+    } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 

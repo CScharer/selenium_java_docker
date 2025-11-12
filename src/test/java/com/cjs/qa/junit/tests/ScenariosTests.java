@@ -794,8 +794,8 @@ public class ScenariosTests {
       getMicrosoft().getRewardsPage().getPoints10CardsAvailable();
       getMicrosoft().getRewardsPage().createReport();
       getMicrosoft().getRewardsPage().sendReport();
-    } catch (Throwable throwable) {
-      throw new QAException(throwable);
+    } catch (Exception e) {
+      throw new QAException(e);
     }
   }
 

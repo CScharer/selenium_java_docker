@@ -400,8 +400,8 @@ public class SeleniumWebDriver {
           Environment.sysOut("webDriverVersion:[" + webDriverVersion + "]");
         }
       }
-    } catch (Throwable throwable) {
-      Environment.sysOut("throwable:[" + throwable.toString() + "]");
+    } catch (Exception e) {
+      Environment.sysOut("throwable:[" + e.toString() + "]");
     }
   }
 
