@@ -48,14 +48,14 @@ public class Jira {
     }
     int tab = 0;
     stringBuilder.append(c.nlTab(newLine, tab) + "{");
-    tab = c.tabIncriment(tab, (newLine * 1));
+    tab = c.tabIncriment(tab, newLine * 1);
     stringBuilder.append(
         c.nlTab(newLine, tab) + Constants.QUOTE_DOUBLE + "fields" + Constants.QUOTE_DOUBLE + ":");
     stringBuilder.append(c.nlTab(newLine, tab) + "{");
     stringBuilder.append(c.nlTab(newLine, tab) + getProject());
     stringBuilder.append(c.nlTab(newLine, tab) + getIssue());
     stringBuilder.append(c.nlTab(newLine, tab) + "}");
-    tab = c.tabIncriment(tab, (newLine * -1));
+    tab = c.tabIncriment(tab, newLine * -1);
     stringBuilder.append(c.nlTab(newLine, tab) + "}");
     return stringBuilder.toString();
   }

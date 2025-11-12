@@ -943,7 +943,7 @@ public class SeleniumWebDriver {
     // "Selenium WebDriver
     // Information" + Constants.QUOTE_DOUBLE + ":");
     stringBuilder.append(c.nlTab(newLine, tab) + "{");
-    tab = c.tabIncriment(tab, (newLine * 1));
+    tab = c.tabIncriment(tab, newLine * 1);
     stringBuilder.append(
         c.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
@@ -1085,7 +1085,7 @@ public class SeleniumWebDriver {
             + Constants.QUOTE_DOUBLE
             + ":");
     stringBuilder.append(c.nlTab(newLine, tab) + "{");
-    tab = c.tabIncriment(tab, (newLine * 1));
+    tab = c.tabIncriment(tab, newLine * 1);
     stringBuilder.append(
         c.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
@@ -1116,9 +1116,9 @@ public class SeleniumWebDriver {
             + getCapabilities().getBrowserVersion()
             + Constants.QUOTE_DOUBLE
             + "");
-    tab = c.tabIncriment(tab, (newLine * -1));
+    tab = c.tabIncriment(tab, newLine * -1);
     stringBuilder.append(c.nlTab(newLine, tab) + "}");
-    tab = c.tabIncriment(tab, (newLine * -1));
+    tab = c.tabIncriment(tab, newLine * -1);
     stringBuilder.append(c.nlTab(newLine, tab) + "}");
     // tab = c.tabIncriment(tab, (newLine * -1));
     // stringBuilder.append(c.nlTab(newLine, tab) + "}");
