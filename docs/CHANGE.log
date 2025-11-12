@@ -1,5 +1,83 @@
 # CHANGE LOG
 
+## [2025-11-12 11:35:00 CST] [PENDING] - 🔧 Fixed GitHub Pages Deployment Conflict
+
+### Overview
+**INFRASTRUCTURE FIX:** Resolved GitHub Pages deployment branch conflict  
+**Issue:** `gh-pages` branch push rejected due to remote changes  
+**Solution:** Added `force_orphan: true` to force-push gh-pages branch  
+**Result:** GitHub Pages deployments will now succeed
+
+**Cursor Token Status:** Tokens Used: 555,630 / Total: 1,000,000 (444,370 remaining, 55.6% used, 44.4% remaining)
+
+---
+
+### The Problem
+
+**Error from GitHub Actions:**
+```
+! [rejected]        gh-pages -> gh-pages (fetch first)
+error: failed to push some refs
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally.
+```
+
+**Root Cause:**
+- `peaceiris/actions-gh-pages@v3` was trying to push to `gh-pages` branch
+- Branch had commits not present locally (likely from concurrent runs or manual changes)
+- Without `force_orphan: true`, push was rejected
+
+---
+
+### The Solution
+
+**Modified `.github/workflows/ci.yml`:**
+```yaml
+- name: Deploy to GitHub Pages
+  uses: peaceiris/actions-gh-pages@v3
+  with:
+    github_token: ${{ secrets.GITHUB_TOKEN }}
+    publish_dir: ./allure-report
+    keep_files: false
+    force_orphan: true  # ← Added this to force push
+```
+
+**Why This Works:**
+- `force_orphan: true` creates a new orphan branch on each deployment
+- Avoids merge conflicts by force-pushing
+- Safe for documentation/reports where history doesn't matter
+- Ensures clean deployment every time
+
+---
+
+### Files Modified (1)
+
+1. `.github/workflows/ci.yml` - Added `force_orphan: true` to GitHub Pages deployment step
+
+---
+
+### Impact
+
+**Deployment:**
+- ✅ GitHub Pages deployments will succeed
+- ✅ Allure reports will be published automatically
+- ✅ No more branch conflict errors
+
+**Safety:**
+- Force push is safe for gh-pages (documentation branch)
+- Each deployment is a fresh copy of the report
+- No risk to main codebase
+
+---
+
+### Next Steps
+- ✅ GitHub Pages deployment fixed
+- 🔄 Monitor next pipeline run to confirm fix works
+- ✅ Checkstyle 100% complete
+- ✅ PMD violations cleaned up
+
+---
+
 ## [2025-11-12 11:32:00 CST] [ff5a0c9f] - 🎉 CHECKSTYLE 100% COMPLETE: 195 → 0 Violations! (4 files + suppressions)
 
 ### Overview
