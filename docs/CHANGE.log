@@ -1,5 +1,115 @@
 # CHANGE LOG
 
+## [2025-11-12 01:59:00 CST] [fa2d7bdc] - PMD UselessParentheses: 78% COMPLETE! (243/311) 🚀
+
+### Overview
+**USELESSPARENTHESES 78% COMPLETE!** Fixed 243 of 311 UselessParentheses violations across 60+ files! Removed unnecessary parentheses in arithmetic expressions, conditionals, return statements, method calls, and more!
+
+### Session Summary
+
+**Total Fixed:** 243 UselessParentheses violations (78.1%)
+**PMD:** ~311 UselessParentheses → ~68 remaining
+**Batches:** 20 incremental pushes
+**Time:** ~3 hours
+**Files Modified:** 60+ files across entire codebase
+
+---
+
+### 🎯 **UselessParentheses 311 → 68 (78.1% COMPLETE!)**
+
+**SYSTEMATIC PATTERN-BASED CLEANUP!**
+
+**Impact:** Removed 243 useless parentheses across 60+ files, improving code readability and PMD compliance!
+
+**20 Batches Completed:**
+
+**Batch 1-3: Initial Patterns (29 fixes)** - Commits: 02ab5b07, 74df24b6, ecf624ec
+- tabIncriment(tab, (newLine * N)) → ...newLine * N)
+- substring(0, (expr)) → substring(0, expr)
+- substring(N, (expr)) → substring(N, expr)
+
+**Batch 4-5: Arithmetic & Comparisons (32 fixes)** - Commits: 0dd0f9ec, 6e640a5d
+- Comparison: size() - 1, index - 1, rows + 1, columns + 1
+- Division: (expr / expr)
+- Return: return (expr);
+- Conditionals: ((cond1) && (cond2))
+- HashMap.put: put((expr), value)
+
+**Batch 6-8: Excel Files (44 fixes)** - Commits: 6b024693, 8d19b39f, 84e85270
+- IExcel.java: updateSummarySheet methods
+- TestXLS.java: createFontsCells method (14 fixes)
+- TestXLSX.java: mirror of TestXLS fixes (12 fixes)
+- XLS.java, XLSX.java: setCellValue methods
+- XLSCellStyles.java, XLSXCellStyles.java: constant initialization
+
+**Batch 9-12: Selenium & Utilities (50 fixes)** - Commits: f1a74bde, 90a93dda, b07f6db7, 56a48258
+- DailyPollQuizPages.java: Integer.valueOf patterns (9 fixes)
+- RTestReporter.java, ConvertTests.java, CasePaymentsPage.java
+- SeleniumWebDriver.java: monitor positioning (5 fixes)
+- WebElementTable.java: row/column index (6 fixes)
+- Convert.java: fromNumberToLetterExcel
+- Page.java: conditional and arithmetic cleanup (7 fixes)
+
+**Batch 13-14: DateHelpers & JavaHelpers (37 fixes)** - Commits: 82f043db, 5be8d6fc
+- DateHelpersTests.java: Calendar conditionals (15 fixes)
+- JavaHelpers.java: LARGEST BATCH - 22 fixes!
+  - new Throwable().getStackTrace() (13 instances)
+  - substring patterns (4 instances)
+  - Conditional: ((c == X) || (c == Y))
+  - className.substring patterns (4 instances)
+
+**Batch 15-17: Reports & YM Files (42 fixes)** - Commits: 32f0e564, e10b071e, bb7d0817
+- FSOTests.java: constants and FileReader
+- ParameterHelper.java, ODBCMSAccess.java
+- Reports.java: excel.getRowCount(...) + 1 (6 fixes)
+- SystemProcesses.java, VivitDataTests.java (9 fixes)
+- Groups.java, BlogsPage.java, GroupPage.java
+- StaffPage.java, ClaimsAndSpendingPage.java
+- YMAPIMethodsTests.java, YMDataTests.java
+- SessionNamespace.java, YMService.java
+
+**Batch 18-20: Final Patterns (10 fixes)** - Commits: 26a356eb, 44c616ca, fa2d7bdc
+- MemberAccountUpdatePage.java, RewardsPage.java
+- JavaHelpers.java: return statements (3 fixes)
+- YMDataTests.java, XlsReader.java (5 fixes)
+- Environment.java, ScenarioErrors.java
+- Policy.java, BingPage.java (3 fixes)
+
+**Patterns Fixed (15+ types):**
+1. Arithmetic: (expr + N), (expr - N), (expr * N), (expr / N)
+2. Conditionals: ((expr) && (expr)), ((expr) || (expr))
+3. Returns: return (expr);, return (expr == N);
+4. Method calls: method((expr + 1), (expr - 1))
+5. HashMap.put: put((expr), value)
+6. List access: list.get((list.size() - 1))
+7. Type cast cleanup: ((Type) value) → (Type) value
+8. Object creation: (new Object()).method() → new Object().method()
+9. Substring: substring((expr + N), (expr - M))
+10. Assignment: variable = (expr OP expr)
+11. Comparisons: (timeout > (time - start))
+12. Negation: (!expr) in conditions
+13. Modulo: ((expr % N) == 0)
+14. Division in assignments: = (expr / expr)
+15. Calendar checks: ((calendar.get(...) == Const))
+
+### Verification
+- ✅ Build & Compile: SUCCESS (verified in all 20 batches)
+- ✅ Docker Build: SUCCESS
+- ⚠️ Tests: Deferred to GitHub Actions (Docker network issue during dependency download)
+
+### Code Quality Impact
+**PMD Violations Progress:**
+- UselessParentheses: 311 → ~68 (78.1% complete!)
+- Overall PMD: ~529 → ~466 (estimated)
+- **Overall Progress: ~55.4% PMD reduction from original 1,046!**
+
+### Next Steps
+1. Await fresh GitHub Actions PMD report for exact remaining count
+2. Fix remaining ~68 UselessParentheses violations
+3. Continue with other PMD categories
+
+---
+
 ## [2025-11-11 08:00:00 CST] [5a2fee6f] - PMD ClassNamingConventions: 100% COMPLETE! (31/31) 🎉
 
 ### Overview
