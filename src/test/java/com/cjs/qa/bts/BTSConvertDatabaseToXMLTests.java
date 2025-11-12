@@ -1,6 +1,7 @@
 package com.cjs.qa.bts;
 
 import com.cjs.qa.core.Environment;
+import com.cjs.qa.core.QAException;
 import com.cjs.qa.jdbc.JDBC;
 import com.cjs.qa.jdbc.JDBCConstants;
 import com.cjs.qa.utilities.FSOTests;
@@ -136,7 +137,7 @@ public class BTSConvertDatabaseToXMLTests {
       Environment.sysOut("xml:[" + xml + "]");
       xml = XML.formatPretty(xml);
       FSOTests.fileWrite(BTSCompanyEnvironmentData.getEnvironmentsFilePathName(), xml, false);
-    } catch (Exception e) {
+    } catch (Exception | QAException e) {
       e.printStackTrace();
     }
   }

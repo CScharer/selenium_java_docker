@@ -25,11 +25,21 @@ Before making ANY code changes, you MUST:
 ### **Rule 3: Post-Change Verification (AFTER each batch)**
 After making code changes, you MUST verify in this order:
 
-#### **Step 1: Compilation Verification**
+#### **Step 1: Compilation Verification (MUST MATCH PIPELINE!)**
 ```bash
-docker-compose run --rm tests compile -DskipTests -Dcheckstyle.skip=true
+# Option 1: Full verification (matches pipeline exactly)
+docker-compose run --rm tests clean compile test-compile
+
+# Option 2: Skip tests only (still runs Checkstyle)
+docker-compose run --rm tests compile -DskipTests
+
+# ❌ NEVER USE: -Dcheckstyle.skip=true (pipeline runs Checkstyle!)
 ```
 **Required:** BUILD SUCCESS
+
+**CRITICAL:** Pipeline runs Checkstyle, so local verification MUST too!
+- Pipeline: `./mvnw clean compile test-compile` + `./mvnw checkstyle:check`
+- Local must match or issues will only appear in pipeline
 
 #### **Step 2: Smoke Tests (Fast)**
 ```bash
@@ -192,8 +202,10 @@ If you see dependency download errors:
 
 **Before EVERY batch:**
 ```bash
-# 1. Verify compilation (REQUIRED - every batch)
-docker-compose run --rm tests compile -DskipTests -Dcheckstyle.skip=true
+# 1. Verify compilation (REQUIRED - every batch, MUST MATCH PIPELINE!)
+docker-compose run --rm tests clean compile test-compile
+# OR: docker-compose run --rm tests compile -DskipTests (includes Checkstyle)
+# ❌ NEVER: docker-compose run --rm tests compile -Dcheckstyle.skip=true
 
 # 2. Run smoke tests (REQUIRED - every batch, fast ~2-3 min)
 docker-compose run --rm tests test -Dtest=SmokeTests -Dcheckstyle.skip=true
