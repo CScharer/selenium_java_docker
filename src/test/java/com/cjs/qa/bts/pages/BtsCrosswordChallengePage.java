@@ -117,7 +117,7 @@ public class BtsCrosswordChallengePage extends Page {
     // 552=T,556=E,46=C,558=E,48=A,560=T,562=N,51=I,53=F,54=A,55=L,56=C,57=O,58=R,69=P,71=O,73=R,
     // ... (crossword puzzle data continues) ...
     // 499=O,504=E,506=I,508=N,510=O
-    final String letters = values.substring(2, (values.length() - 1));
+    final String letters = values.substring(2, values.length() - 1);
     final String[] gridSquares = letters.split(",");
     for (final String gridSquare : gridSquares) {
       Environment.sysOut(gridSquare);

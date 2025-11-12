@@ -104,7 +104,7 @@ public class EarnPointsPage extends Page {
     // map.put((index + 1), indexMap);
     // }
     // indexes = indexes.replaceAll("{", "").replaceAll("}", "");
-    indexes = indexes.substring(1, (indexes.length() - 1));
+    indexes = indexes.substring(1, indexes.length() - 1);
     String[] indexArray = indexes.split(", ");
     for (String index : indexArray) {
       String[] indexRecord = index.split("=");

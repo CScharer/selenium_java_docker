@@ -174,7 +174,7 @@ public final class Email {
     String attachment = "";
     if (!attachments.isEmpty()) {
       attachment = attachments.toString();
-      attachment = attachment.substring(1, (attachment.length() - 1));
+      attachment = attachment.substring(1, attachment.length() - 1);
       attachment = attachment.replace(", ", Constants.DELIMETER_LIST);
     }
     return sendEmail(from, password, emailTO, emailCC, emailBCC, subject, body, attachment);

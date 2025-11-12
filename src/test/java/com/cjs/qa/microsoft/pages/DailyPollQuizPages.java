@@ -274,7 +274,7 @@ public class DailyPollQuizPages extends RewardsPage {
     WebElement webElement =
         scrollToElementAndHighlightBriefly(By.xpath(".//div[contains(@class,'b_footnote')]"));
     String questions = webElement.getText();
-    questions = questions.substring(1, (questions.length() - 1));
+    questions = questions.substring(1, questions.length() - 1);
     final String[] values = questions.split(" of ");
     final int questionStart = (Integer.valueOf(values[0]) - 1);
     final int answers = (Integer.valueOf(values[1]) - 1);

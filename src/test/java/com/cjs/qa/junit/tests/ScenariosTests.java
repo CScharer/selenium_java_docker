@@ -919,14 +919,14 @@ public class ScenariosTests {
     // {
     // Environment.sysOut("key:[" + key + "]")
     // }
-    stringBuilder.append(keySet.substring(1, (keySet.length() - 1)).replace(", ", "],["));
+    stringBuilder.append(keySet.substring(1, keySet.length() - 1).replace(", ", "],["));
     stringBuilder.append("] ");
     stringBuilder.append(JDBCConstants.FROM + "[" + tableFrom + "]");
     List<Map<String, String>> listResults = jdbc.queryResultsString(stringBuilder.toString(), true);
     Environment.sysOut("listResults:[" + listResults.toString() + "]");
     stringBuilder = new StringBuilder();
     stringBuilder.append(JDBCConstants.INSERT_INTO + "[" + tableTo + "] ([");
-    stringBuilder.append(keyValues.substring(1, (keyValues.length() - 1)).replace(", ", "],["));
+    stringBuilder.append(keyValues.substring(1, keyValues.length() - 1).replace(", ", "],["));
     stringBuilder.append("])" + JDBCConstants.VALUES + "(");
     sqlStringBuilder = new StringBuilder();
     for (int index = 1; index < listResults.size(); index++) {

@@ -294,7 +294,7 @@ public class SQL {
   public static StringBuilder appendStringBuilderSQLInsertRecord(
       String tableName, StringBuilder sqlStringBuilder, Map<String, String> mapPage) {
     final String keySet = mapPage.keySet().toString();
-    final String fieldNames = keySet.substring(1, (keySet.length() - 1));
+    final String fieldNames = keySet.substring(1, keySet.length() - 1);
     final String[] fields = fieldNames.split(", ");
     // sqlStringBuilder.append(JDBCConstants.INSERT_INTO +"[" +
     // tableName
