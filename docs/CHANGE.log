@@ -1,5 +1,16 @@
 # CHANGE LOG
 
+## [2025-11-12 11:20:00 CST] [cfd6319e] - 🔧 CRITICAL FIX #3: ContactInfoPage QAException
+
+**Third Pipeline Failure:** ContactInfoPage.java:446 - unreported exception QAException  
+**Cause:** Email.sendEmail() throws QAException (14 catch blocks affected)  
+**Fix:** Added QAException import + catch (Exception | QAException) to all 14 blocks  
+**Status:** ✅ All AvoidCatchingThrowable QAException issues now fixed!
+
+**Cursor Token Status:** Tokens Used: 296,146 / Total: 1,000,000 (703,854 remaining, 29.6% used, 70.4% remaining)
+
+---
+
 ## [2025-11-12 11:15:00 CST] [16991c1b] - 🎯 PMD UncommentedEmptyConstructor: 100% COMPLETE! (15/15) + Rules v1.5
 
 ### Overview
