@@ -212,7 +212,7 @@ public class FSOTests {
     Environment.sysOut("exportURI:[" + exportURI + "]");
     boolean success = false;
     int attempt = 0;
-    final int ATTEMPTS_MAX = 3;
+    final int attemptsMax = 3;
     do {
       attempt++;
       Environment.sysOut(JavaHelpers.getCurrentMethodName() + " attempt " + attempt);
@@ -227,7 +227,7 @@ public class FSOTests {
             QAException.ERROR
                 + JavaHelpers.getCurrentClassMethodName()
                 + ":Error Downloading File.");
-        if (attempt > ATTEMPTS_MAX) {
+        if (attempt > attemptsMax) {
           throw new QAException("***ERROR***:[" + e.getMessage() + "]", e);
         }
       }
@@ -281,23 +281,23 @@ public class FSOTests {
    * @return
    */
   public static String fileValidateName(String filePathName) {
-    final String REPLACER = "_";
+    final String replacer = "_";
     final Map<String, String> invalidCharacters = getCharactersInvalid();
     final Map<String, String> escapedCharacters = getCharactersEsacped();
     for (final Entry entry : invalidCharacters.entrySet()) {
       final String replacee = (String) entry.getValue();
       if (filePathName.contains(replacee)) {
         final String key = (String) entry.getKey();
-        Environment.sysOut("Replacing [" + key + ":" + replacee + "] with [" + REPLACER + "]");
+        Environment.sysOut("Replacing [" + key + ":" + replacee + "] with [" + replacer + "]");
         if (escapedCharacters.containsKey(key)) {
-          filePathName = replaceEscapedCharacter(filePathName, replacee, REPLACER);
+          filePathName = replaceEscapedCharacter(filePathName, replacee, replacer);
         } else {
-          filePathName = filePathName.replaceAll(replacee, REPLACER);
+          filePathName = filePathName.replaceAll(replacee, replacer);
         }
       }
     }
-    while (filePathName.contains(REPLACER + REPLACER)) {
-      filePathName = filePathName.replaceAll(REPLACER + REPLACER, REPLACER);
+    while (filePathName.contains(replacer + replacer)) {
+      filePathName = filePathName.replaceAll(replacer + replacer, replacer);
     }
     return filePathName;
   }

@@ -131,10 +131,10 @@ public class StaffPage extends Page {
       staffDetails.setNameTitle(webElement.getText());
       webElement = getWebDriver().findElement(By.xpath(".//*[@id='SpContent_Container']/a"));
       staffDetails.seteMail(webElement.getText());
-      final String LABEL_PHONE = "Phone: ";
+      final String labelPhone = "Phone: ";
       for (final String text : pageTextArray) {
-        if (text.contains(LABEL_PHONE)) {
-          staffDetails.setPhone(text.substring(text.indexOf(LABEL_PHONE) + LABEL_PHONE.length()));
+        if (text.contains(labelPhone)) {
+          staffDetails.setPhone(text.substring(text.indexOf(labelPhone) + labelPhone.length()));
           break;
         }
       }

@@ -171,8 +171,8 @@ public final class Convert {
   }
 
   public static String fromNumberToLetter(int number) {
-    final int MAX_NUMBER = 25;
-    if (number < 0 || number > MAX_NUMBER) {
+    final int maxNumber = 25;
+    if (number < 0 || number > maxNumber) {
       return null;
     }
     return String.valueOf(number + 65);
@@ -182,18 +182,18 @@ public final class Convert {
     if (number < 0) {
       return null;
     }
-    final int MAX_NUMBER = 26;
+    final int maxNumber = 26;
     StringBuilder stringBuilder = new StringBuilder();
-    final int instancesOfMax = number / MAX_NUMBER;
+    final int instancesOfMax = number / maxNumber;
     Map<String, String> mapInstances = new HashMap<>();
     mapInstances.put(LABEL_INSTANCES_OF_MAX, String.valueOf(instancesOfMax));
     mapInstances.put(LABEL_LETTER, stringBuilder.toString());
     mapInstances.put(LABEL_NUMBER, String.valueOf(number));
-    mapInstances = fromNumberToLetterExcelLevel(mapInstances, MAX_NUMBER);
+    mapInstances = fromNumberToLetterExcelLevel(mapInstances, maxNumber);
     number = Integer.parseInt(mapInstances.get(LABEL_NUMBER));
     stringBuilder.append(mapInstances.get(LABEL_LETTER));
-    final int remainder = number % MAX_NUMBER;
-    if (number >= MAX_NUMBER) {
+    final int remainder = number % maxNumber;
+    if (number >= maxNumber) {
       // stringBuilder.append(String.valueOf(instancesOfMax + 64));
       stringBuilder.append(Character.toString((char) (instancesOfMax + 64)));
       number = remainder;

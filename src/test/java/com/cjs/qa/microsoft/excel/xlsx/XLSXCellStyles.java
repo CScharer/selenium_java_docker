@@ -59,8 +59,8 @@ public class XLSXCellStyles {
     this.styleObject = styleObject;
   }
 
-  public void setStylesList(List<XLSXCellStyles> stylesList) throws QAException {
-    XLSXCellStyles.stylesList = stylesList;
+  public void setStylesList(List<XLSXCellStyles> stylesListParam) throws QAException {
+    XLSXCellStyles.stylesList = stylesListParam;
   }
 
   public static void createCellStyleBold(XSSFWorkbook workbook) throws QAException {

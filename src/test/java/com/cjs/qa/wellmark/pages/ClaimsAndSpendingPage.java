@@ -51,25 +51,25 @@ public class ClaimsAndSpendingPage extends Page {
   // ./tbody/tr/td/select/option[@selected]
 
   private void getHeadingInfo() throws QAException {
-    final String LABEL_SPAN = "//span";
+    final String labelSpan = "//span";
     listHeadings = new ArrayList<>();
     listTypes = new ArrayList<>();
     listHeadings.add("Patient Name");
-    listTypes.add(LABEL_SPAN);
+    listTypes.add(labelSpan);
     listHeadings.add("Service Date");
-    listTypes.add(LABEL_SPAN);
+    listTypes.add(labelSpan);
     listHeadings.add("Provider");
-    listTypes.add(LABEL_SPAN);
+    listTypes.add(labelSpan);
     listHeadings.add("Amount Charged");
-    listTypes.add(LABEL_SPAN);
+    listTypes.add(labelSpan);
     listHeadings.add("Your Share");
-    listTypes.add(LABEL_SPAN);
+    listTypes.add(labelSpan);
     listHeadings.add("Status");
-    listTypes.add(LABEL_SPAN);
+    listTypes.add(labelSpan);
     listHeadings.add("Issue Date");
     listTypes.add("/div");
     listHeadings.add("Details");
-    listTypes.add(LABEL_SPAN);
+    listTypes.add(labelSpan);
     listHeadings.add("Category");
     listTypes.add("//select/option[@selected]");
     listHeadings.add("Note");
@@ -97,7 +97,7 @@ public class ClaimsAndSpendingPage extends Page {
   }
 
   public StringBuilder getRecords(String type) throws QAException {
-    final String BY_XPATH = "By.xpath: ";
+    final String byXpath = "By.xpath: ";
     final StringBuilder stringBuilder = new StringBuilder();
     StringBuilder sqlStringBuilder = new StringBuilder();
     By byType = null;
@@ -126,8 +126,7 @@ public class ClaimsAndSpendingPage extends Page {
     getWebDriver().findElements(byType);
     final List<WebElement> headingElements =
         getWebDriver()
-            .findElements(
-                By.xpath(byType.toString().replace(BY_XPATH, "") + "/tr[" + 1 + "]/th/a"));
+            .findElements(By.xpath(byType.toString().replace(byXpath, "") + "/tr[" + 1 + "]/th/a"));
     Environment.sysOut(headingElements.toString());
     for (int indexHeading = 0; indexHeading < headingElements.size(); indexHeading++) {
       final WebElement element = headingElements.get(indexHeading);
@@ -146,7 +145,7 @@ public class ClaimsAndSpendingPage extends Page {
     Environment.sysOut(listHeadings);
     Environment.sysOut(headings);
     Assert.assertEquals("Headings " + type, listHeadings, headings);
-    String xPath = byType.toString().replace(BY_XPATH, "") + "/tr";
+    String xPath = byType.toString().replace(byXpath, "") + "/tr";
     Environment.sysOut("xPath:" + xPath);
     final List<WebElement> rowElements = getWebDriver().findElements(By.xpath(xPath));
     for (int indexRecord = 2; indexRecord <= rowElements.size(); indexRecord++) {
@@ -157,7 +156,7 @@ public class ClaimsAndSpendingPage extends Page {
         // Environment.sysOut(HEADINGS.get((index)).toString() +
         // " xpath:[" + xPath + "]")
         xPath =
-            byType.toString().replace(BY_XPATH, "")
+            byType.toString().replace(byXpath, "")
                 + "/tr["
                 + indexRecord
                 + "]/td["

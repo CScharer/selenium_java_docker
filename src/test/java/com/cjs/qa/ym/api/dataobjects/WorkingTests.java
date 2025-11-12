@@ -14,10 +14,10 @@ public class WorkingTests extends Environment {
     String fileName = "C:\\Workspace\\Data\\Vivit\\Data\\20190316\\YM\\Events\\1.xml";
     final UnmarshallYourMembershipResponse unmarshallYourMembershipResponse =
         new UnmarshallYourMembershipResponse();
-    final YourMembershipResponse yourMembership_Response =
+    final YourMembershipResponse yourMembershipResponse =
         unmarshallYourMembershipResponse.getFromFile(fileName);
-    sysOut(yourMembership_Response.getErrCode());
-    Results results = yourMembership_Response.getResults();
+    sysOut(yourMembershipResponse.getErrCode());
+    Results results = yourMembershipResponse.getResults();
     int eventCount = results.getResultTotal();
     sysOut("eventCount:[" + eventCount + "]");
   }
