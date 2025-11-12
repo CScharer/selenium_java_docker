@@ -59,7 +59,7 @@ public class MemberAccountUpdatePage extends Page {
     } else {
       buttonAcceptAndUpdateLaterClick();
     }
-    return (matches == 3);
+    return matches == 3;
   }
 
   public void buttonAcceptAndSubmitClick() throws QAException {

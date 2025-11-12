@@ -1178,7 +1178,7 @@ public class YMDataTests extends Environment {
             }
             sqlStringBuilder =
                 SQL.appendStringBuilderSQLInsertRecord(tableName, sqlStringBuilder, mapMember, true);
-            if ((recordNumber % recordLimitDebug) == 0) {
+            if (recordNumber % recordLimitDebug == 0) {
               sysOut(JavaHelpers.getCurrentMethodName() + "-Records:[" + recordNumber + "]");
             }
             if (recordNumber % recordLimitInsert == 0) {

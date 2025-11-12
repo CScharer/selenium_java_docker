@@ -139,8 +139,8 @@ public class XlsReader {
       }
       if (cell.getCellType() == CellType.STRING) {
         return cell.getStringCellValue();
-      } else if ((cell.getCellType() == CellType.NUMERIC)
-          || (cell.getCellType() == CellType.FORMULA)) {
+      } else if (cell.getCellType() == CellType.NUMERIC
+          || cell.getCellType() == CellType.FORMULA) {
         String cellText = String.valueOf(cell.getNumericCellValue());
         if (DateUtil.isCellDateFormatted(cell)) {
           // format in form of M/D/YY
@@ -183,8 +183,8 @@ public class XlsReader {
       }
       if (cell.getCellType() == CellType.STRING) {
         return cell.getStringCellValue();
-      } else if ((cell.getCellType() == CellType.NUMERIC)
-          || (cell.getCellType() == CellType.FORMULA)) {
+      } else if (cell.getCellType() == CellType.NUMERIC
+          || cell.getCellType() == CellType.FORMULA) {
         /*
          * if (XSSFDateUtil.isCellDateFormatted(cell)) { //format in
          * form of M/D/YY double d = cell.getNumericCellValue();

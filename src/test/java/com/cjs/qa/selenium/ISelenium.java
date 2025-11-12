@@ -177,7 +177,7 @@ public interface ISelenium {
     final String[] nodes = webElementString.split(" -> xpath: .");
     final StringBuilder stringBuilder = new StringBuilder();
     for (int indexLevel = 1; indexLevel <= parentList.size(); indexLevel++) {
-      final int nodeIndex = parentList.get((indexLevel - 1));
+      final int nodeIndex = parentList.get(indexLevel - 1);
       String node = nodes[indexLevel];
       final String[] elements = node.split(Constants.DELIMETER_PATH + "]");
       final List<String> nodeList = new ArrayList<>();

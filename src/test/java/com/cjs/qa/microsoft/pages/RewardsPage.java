@@ -406,7 +406,7 @@ public class RewardsPage extends Page {
     if (!isSearchesRequired()) {
       getDashboardInfo();
     }
-    return (isSearchesRequired());
+    return isSearchesRequired();
   }
 
   /**

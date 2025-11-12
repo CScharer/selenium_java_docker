@@ -667,7 +667,7 @@ public class JavaHelpers {
       if (value.contains("com.cjs.junit.testsuites")) {
         final int methodEnd = value.lastIndexOf('(');
         final int methodBegin = value.lastIndexOf('c', methodEnd);
-        if ((methodBegin < 0) || (methodBegin >= methodEnd)) {
+        if (methodBegin < 0 || methodBegin >= methodEnd) {
           continue;
         }
         final String caseName = value.substring(methodBegin, methodEnd);
@@ -717,7 +717,7 @@ public class JavaHelpers {
    * @return
    */
   public static boolean hasValue(String value) {
-    return (value != null && !value.isEmpty());
+    return value != null && !value.isEmpty();
   }
 
   /**
@@ -889,7 +889,7 @@ public class JavaHelpers {
   public static boolean isValuePresentInColumnCSV(String value, String column, String filePathName)
       throws QAException {
     final Map<String, List<String>> csvMap = buildCsvMap(filePathName);
-    return (csvMap.containsKey(column) && csvMap.get(column).contains(value));
+    return csvMap.containsKey(column) && csvMap.get(column).contains(value);
   }
 
   /**
@@ -905,7 +905,7 @@ public class JavaHelpers {
     final ArrayList<File> fileList = new ArrayList<>();
     final File[] fileArray = directory.listFiles();
     for (final File file : fileArray) {
-      if ((filenameFilter == null) || filenameFilter.accept(directory, file.getName())) {
+      if (filenameFilter == null || filenameFilter.accept(directory, file.getName())) {
         fileList.add(file);
       }
       if (recurse && file.isDirectory()) {
