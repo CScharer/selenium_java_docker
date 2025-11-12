@@ -13,7 +13,7 @@ import org.apache.poi.ss.usermodel.FillPatternType;
 public class XLSCellStyles {
   public static final int CELL_STYLE_INDEX_START = 21;
   public static final int CELL_STYLE_INDEX_DEFINED =
-      (CELL_STYLE_INDEX_START + IExcel.CELL_STYLE_DEFINED_COUNT);
+      CELL_STYLE_INDEX_START + IExcel.CELL_STYLE_DEFINED_COUNT;
   private static List<XLSCellStyles> stylesList = new ArrayList<>();
   private Integer styleIndex;
   private String styleName;
@@ -193,7 +193,7 @@ public class XLSCellStyles {
       case CELL_STYLE_INDEX_DEFINED:
         // Styles & Fonts already exist.
         for (int cellStyleIndex = 0;
-            cellStyleIndex < (IExcel.CELL_STYLE_LIST.size() - 1);
+            cellStyleIndex < IExcel.CELL_STYLE_LIST.size() - 1;
             cellStyleIndex++) {
           final int workbookStyleIndex = (CELL_STYLE_INDEX_START + cellStyleIndex);
           final String cellStyleType = IExcel.CELL_STYLE_LIST.get(cellStyleIndex);

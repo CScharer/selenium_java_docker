@@ -619,7 +619,7 @@ public class XLSX implements IExcel {
           .setCellStyle(XLSXCellStyles.getCellStyle(getWorkbook(), IExcel.FORMAT_NAME_NUMBER));
     }
     if (value instanceof String) {
-      final String stringValue = ((String) value);
+      final String stringValue = (String) value;
       boolean isNumeric = false;
       boolean containsPercentSign = false;
       if (stringValue.contains("%")) {
@@ -635,16 +635,16 @@ public class XLSX implements IExcel {
           // valueFloat = Float.parseFloat(stringValue);
           if (containsPercentSign) {
             final String stringValueNoPercent = stringValue.replace("%", "");
-            valueFloat = (Float.valueOf(stringValueNoPercent.trim()).floatValue());
+            valueFloat = Float.valueOf(stringValueNoPercent.trim()).floatValue();
             if (valueFloat != floatZero) {
-              valueFloat = (valueFloat / 100);
+              valueFloat = valueFloat / 100;
             }
             setCellValue(valueFloat);
             getWorkCell()
                 .setCellStyle(
                     XLSXCellStyles.getCellStyle(getWorkbook(), IExcel.FORMAT_NAME_PERCENT));
           } else if (isNumeric) {
-            valueFloat = (Float.valueOf(stringValue.trim()).floatValue());
+            valueFloat = Float.valueOf(stringValue.trim()).floatValue();
             setCellValue(valueFloat);
             getWorkCell()
                 .setCellStyle(
@@ -951,7 +951,7 @@ public class XLSX implements IExcel {
 
   public boolean sheetExists(String sheet) throws QAException {
     setWorkSheet(getWorkbook().getSheet(sheet));
-    return (getWorkSheet() != null);
+    return getWorkSheet() != null;
   }
 
   public String writeCell(String sheetName, int column, int row, Object value) throws QAException {
