@@ -1630,10 +1630,10 @@ public class VivitDataTests extends Environment {
     sysOut(
         ParameterHelper.getParameters(
             Arrays.asList(Arrays.asList(LABEL_FILE_PATH_NAME, filePathName))));
-    final int TIMEOUT = 2 * 60;
+    final int timeout = 2 * 60;
     String command =
         "cscript //S //T:"
-            + TIMEOUT
+            + timeout
             + " "
             + Constants.QUOTE_DOUBLE
             + VivitFoldersFiles.VBS
@@ -3102,8 +3102,8 @@ public class VivitDataTests extends Environment {
    */
   public static void updateTableFromCurrentToPreviousAndInsert(
       List<StringBuilder> stringBuilderSQLList) {
-    final String LABEL_CURRENT = "_Current";
-    final String LABEL_PREVIOUS = "_Previous";
+    final String labelCurrent = "_Current";
+    final String labelPrevious = "_Previous";
     StringBuilder stringBiulderSQL = stringBuilderSQLList.get(0);
     String[] tableArray = stringBiulderSQL.toString().split(Constants.DELIMETER_LIST);
     // For each table update the tables with the exception of the Calendars
@@ -3112,40 +3112,40 @@ public class VivitDataTests extends Environment {
       if (!"Calendars".equalsIgnoreCase(table)) {
         VivitDataTests.dropAndCreateBackUpTables(table);
         String queryDeletePrevious =
-            JDBCConstants.DELETE_FROM + "[" + VivitTables.PREFIX + table + LABEL_PREVIOUS + "];";
+            JDBCConstants.DELETE_FROM + "[" + VivitTables.PREFIX + table + labelPrevious + "];";
         sysOut(queryDeletePrevious);
         SQL.executeVivit(
-            "DeleteFrom", table + LABEL_PREVIOUS, new StringBuilder(queryDeletePrevious));
+            "DeleteFrom", table + labelPrevious, new StringBuilder(queryDeletePrevious));
         String queryInsertPrevious =
             JDBCConstants.INSERT_INTO
                 + "["
                 + VivitTables.PREFIX
                 + table
-                + LABEL_PREVIOUS
+                + labelPrevious
                 + "] "
                 + JDBCConstants.SELECT_ALL_FROM
                 + "["
                 + VivitTables.PREFIX
                 + table
-                + LABEL_CURRENT
+                + labelCurrent
                 + "];";
         sysOut(queryInsertPrevious);
         SQL.executeVivit(
-            "InsertInto", table + LABEL_PREVIOUS, new StringBuilder(queryInsertPrevious));
+            "InsertInto", table + labelPrevious, new StringBuilder(queryInsertPrevious));
       }
       String queryDeleteCurrent =
-          JDBCConstants.DELETE_FROM + "[" + VivitTables.PREFIX + table + LABEL_CURRENT + "];";
-      SQL.executeVivit("DeleteFrom", table + LABEL_CURRENT, new StringBuilder(queryDeleteCurrent));
+          JDBCConstants.DELETE_FROM + "[" + VivitTables.PREFIX + table + labelCurrent + "];";
+      SQL.executeVivit("DeleteFrom", table + labelCurrent, new StringBuilder(queryDeleteCurrent));
       // Run the queries to update the Current table(s).
       for (int stringBiulderSQLIndex = 1;
           stringBiulderSQLIndex < stringBuilderSQLList.size();
           stringBiulderSQLIndex++) {
         // String table = tableArray[(stringBiulderSQLIndex - 1)]
         String queryInsertCurrent =
-            "Inserting data into [" + VivitTables.PREFIX + table + LABEL_CURRENT + "];";
+            "Inserting data into [" + VivitTables.PREFIX + table + labelCurrent + "];";
         sysOut(queryInsertCurrent);
         stringBiulderSQL = stringBuilderSQLList.get(stringBiulderSQLIndex);
-        SQL.executeVivit("InsertInto", table + LABEL_CURRENT, stringBiulderSQL);
+        SQL.executeVivit("InsertInto", table + labelCurrent, stringBiulderSQL);
       }
     }
   }

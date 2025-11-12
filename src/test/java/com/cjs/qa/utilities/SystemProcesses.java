@@ -250,8 +250,8 @@ public final class SystemProcesses {
 
   private static void importData(
       String dateTimeStamp, String tableName, List<String> listHeadingsExpected) {
-    final int RECORD_START = 0;
-    final int RECORD_LIMIT = 25000;
+    final int recordStart = 0;
+    final int recordLimit = 25000;
     createBackupTable(tableName);
     SQL.execute("DELETE FROM [" + tableName + "]");
     StringBuilder stringBuilder = new StringBuilder();
@@ -270,7 +270,7 @@ public final class SystemProcesses {
         for (final CSVRecord record : records) {
           // final int recordNumber = (int) record.getRecordNumber();
           recordNumber++;
-          if (recordNumber >= (RECORD_START + 1)) {
+          if (recordNumber >= (recordStart + 1)) {
             if (!headingsMapped) {
               mapHeadingsCSV = record.toMap();
               Environment.sysOut("listHeadingsExpected:[" + listHeadingsExpected + "]");
@@ -295,7 +295,7 @@ public final class SystemProcesses {
             memberMap.put("DateTimeStamp", dateTimeStamp);
             stringBuilder =
                 SQL.appendStringBuilderSQLInsertRecord(tableName, stringBuilder, memberMap, true);
-            if (recordNumber % RECORD_LIMIT == 0) {
+            if (recordNumber % recordLimit == 0) {
               SQL.execute(stringBuilder.toString());
               stringBuilder = new StringBuilder();
             }
