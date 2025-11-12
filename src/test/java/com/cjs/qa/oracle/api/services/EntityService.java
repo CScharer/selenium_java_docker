@@ -25,7 +25,7 @@ public class EntityService extends WebService {
           + OracleConstants.API_ORG_VERSION_MAJOR
           + "/"
           + OracleConstants.API_ORG_VERSION_MINOR;
-  private static final Encoder encoder = new Encoder("");
+  private static final Encoder ENCODER = new Encoder("");
 
   /**
    * @param ssoUserTokenId
@@ -676,7 +676,7 @@ public class EntityService extends WebService {
     final Map<String, String> map = new HashMap<>();
     map.put("API_Method", JavaHelpers.getCurrentMethodName().toString());
     final String name = eMail.substring(0, eMail.indexOf(CJSConstants.MAILDOMAIN_GMAIL) - 1);
-    final String linkedInURL = encoder.getDecodedValue(name, "");
+    final String linkedInURL = ENCODER.getDecodedValue(name, "");
     String organizationId = null;
     final String organizationName = OracleDynamicVariables.getORGName(name);
     oCompanyInfo.put("CompanyName", organizationName);
@@ -1251,7 +1251,7 @@ public class EntityService extends WebService {
 
   public Map<String, String> getContactDynamic() {
     Map<String, String> map = new HashMap<>();
-    final String name = encoder.getEncodedValue("");
+    final String name = ENCODER.getEncodedValue("");
     final String address1 = name + " SUITE 1";
     final String address2 = name + " AVE 2";
     final String addressName = OracleDynamicVariables.getCONName(name);
@@ -1348,7 +1348,7 @@ public class EntityService extends WebService {
 
   public Map<String, String> getOrgAddressesDynamic() {
     Map<String, String> map = new HashMap<>();
-    final String name = encoder.getEncodedValue("");
+    final String name = ENCODER.getEncodedValue("");
     final String locationName = OracleDynamicVariables.getLOCName(name);
     final String address1 = name + " SUITE 1";
     final String address2 = name + " AVE 2";
@@ -1610,7 +1610,7 @@ public class EntityService extends WebService {
 
   public Map<String, String> getOrgContactsDynamic() {
     Map<String, String> map = new HashMap<>();
-    final String name = encoder.getEncodedValue("");
+    final String name = ENCODER.getEncodedValue("");
     final String address1 = name + " SUITE 1";
     final String address2 = name + " AVE 2";
     final String locationName = OracleDynamicVariables.getLOCName(name);
@@ -1718,7 +1718,7 @@ public class EntityService extends WebService {
 
   public Map<String, String> getOrgProjectDynamic() {
     Map<String, String> map = new HashMap<>();
-    final String dynamicName = encoder.getEncodedValue("");
+    final String dynamicName = ENCODER.getEncodedValue("");
     final String name = OracleDynamicVariables.getPROName(dynamicName);
     final String contractValue = "10000";
     final String date = "Aug 2015";

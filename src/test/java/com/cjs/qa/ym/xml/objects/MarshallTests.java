@@ -13,9 +13,9 @@ import javax.xml.bind.Unmarshaller;
 import org.junit.Test;
 
 public class MarshallTests {
-  private static final String filePathNameXML =
+  private static final String FILE_PATH_NAME_XML =
       "C:\\Workspace\\Data\\Vivit\\Data\\Events\\temp.xml";
-  private static final String filePathNameNewXML =
+  private static final String FILE_PATH_NAME_NEW_XML =
       "C:\\Workspace\\Data\\Vivit\\Data\\Events\\tempNew.xml";
 
   @Test
@@ -40,7 +40,7 @@ public class MarshallTests {
       Environment.sysOut("Item Index (" + eventsIndex + ")");
       Environment.sysOut(item.toString());
     }
-    yourMembershipResponseMarshall(yourMembershipResponse, filePathNameNewXML);
+    yourMembershipResponseMarshall(yourMembershipResponse, FILE_PATH_NAME_NEW_XML);
   }
 
   @Test
@@ -49,7 +49,7 @@ public class MarshallTests {
     YourMembershipResponse yourMembershipResponse = yourMembershipResponseUnmarshall(filePathName);
     Environment.sysOut(yourMembershipResponse.toString());
     Environment.sysOut(yourMembershipResponse.getEventsEventGet().toString());
-    yourMembershipResponseMarshall(yourMembershipResponse, filePathNameNewXML);
+    yourMembershipResponseMarshall(yourMembershipResponse, FILE_PATH_NAME_NEW_XML);
   }
 
   @Test
@@ -58,7 +58,7 @@ public class MarshallTests {
         "C:\\Workspace\\Data\\Vivit\\Data\\Events\\Registration\\49170B25-A49F-46F7-98CB-3DA7042D4BB1.xml";
     YourMembershipResponse yourMembershipResponse = yourMembershipResponseUnmarshall(filePathName);
     Environment.sysOut(yourMembershipResponse.getSaEventsEventRegistrationGet().toString());
-    String xml = yourMembershipResponseMarshall(yourMembershipResponse, filePathNameNewXML);
+    String xml = yourMembershipResponseMarshall(yourMembershipResponse, FILE_PATH_NAME_NEW_XML);
     Environment.sysOut("TESTING XML CREATION" + Constants.NEWLINE + xml);
     System.out.println(
         "Getting the Phone Number:"
@@ -74,7 +74,7 @@ public class MarshallTests {
     createFixedXMLFile(filePathName);
     JAXBContext jaxbContext = JAXBContext.newInstance(YourMembershipResponse.class);
     Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-    File file = new File(filePathNameXML);
+    File file = new File(FILE_PATH_NAME_XML);
     return (YourMembershipResponse) unmarshaller.unmarshal(file);
   }
 
@@ -99,6 +99,6 @@ public class MarshallTests {
     String fixedXML = FSOTests.fileReadAll(filePathName);
     fixedXML = fixedXML.replace("Cp1252", XML.ENCODING);
     fixedXML = fixedXML.replace(XML.HEADING_INFO, XML.HEADING_INFO + Constants.NEWLINE);
-    FSOTests.fileWrite(filePathNameXML, fixedXML, false);
+    FSOTests.fileWrite(FILE_PATH_NAME_XML, fixedXML, false);
   }
 }

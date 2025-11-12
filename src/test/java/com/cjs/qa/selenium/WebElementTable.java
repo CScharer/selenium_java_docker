@@ -13,11 +13,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class WebElementTable extends Page {
-  private static final String columnNamePrefix = "#";
+  private static final String COLUMN_NAME_PREFIX = "#";
   private boolean highlightObjects = false;
 
   private String getColumnNamePrefix() {
-    return columnNamePrefix;
+    return COLUMN_NAME_PREFIX;
   }
 
   private boolean resetTable = false;

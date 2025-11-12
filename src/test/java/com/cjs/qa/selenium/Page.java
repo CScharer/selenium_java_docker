@@ -95,7 +95,7 @@ public class Page extends JavaHelpers {
           + "element.style.borderBottom = borders[2];"
           + "element.style.borderLeft = borders[3];";
   // public final boolean SCROLL_TO_OBJECT = false
-  private static final String formatScreenshotNumber = "000000";
+  private static final String FORMAT_SCREENSHOT_NUMBER = "000000";
   private final int flashMilliseconds = 25;
   private WebElement previousWebElement = null;
   private String previousBorder = null;
@@ -125,7 +125,7 @@ public class Page extends JavaHelpers {
   }
 
   private String getFormatScreenshotNumber() {
-    return formatScreenshotNumber;
+    return FORMAT_SCREENSHOT_NUMBER;
   }
 
   public int getFlashMilliseconds() {

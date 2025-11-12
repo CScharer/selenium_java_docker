@@ -8,7 +8,7 @@ import java.util.Map;
 import org.junit.Assert;
 
 public class ExampleService extends WebService {
-  private static final String baseAPIExample = "http://jsonplaceholder.typicode" + IExtension.COM;
+  private static final String BASE_API_EXAMPLE = "http://jsonplaceholder.typicode" + IExtension.COM;
 
   /**
    * @param ssoUserTokenId
@@ -19,7 +19,7 @@ public class ExampleService extends WebService {
     final Map<String, String> map = new HashMap<>();
     map.put("API_Method", JavaHelpers.getCurrentMethodName().toString());
     final String apiRequest = "{}";
-    final String requestURL = baseAPIExample + "/posts/1";
+    final String requestURL = BASE_API_EXAMPLE + "/posts/1";
     final String json =
         WebService.getAPIJSONResponse("GET", requestURL, apiRequest, ssoUserTokenId);
     map.put("JSON", json);

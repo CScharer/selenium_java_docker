@@ -27,7 +27,7 @@ public class SSOService extends WebService {
           + OracleConstants.API_SSO_VERSION_MAJOR
           + "/"
           + OracleConstants.API_SSO_VERSION_MINOR;
-  private static final Encoder encoder = new Encoder("");
+  private static final Encoder ENCODER = new Encoder("");
 
   /**
    * @param userName
@@ -369,7 +369,7 @@ public class SSOService extends WebService {
     final Map<String, String> map = new HashMap<>();
     map.put("API_Method", JavaHelpers.getCurrentMethodName().toString());
     if (name.isEmpty()) {
-      name = encoder.getEncodedValue("");
+      name = ENCODER.getEncodedValue("");
     }
     final String eMail = name + CJSConstants.MAILDOMAIN_GMAIL;
     System.out.println(
