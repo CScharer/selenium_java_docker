@@ -75,8 +75,7 @@ public class WebService {
   public WebService() {
     try {
       final SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
-      final SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-      final String url = null;
+      soapConnectionFactory.createConnection();
     } catch (final Exception e) {
       Environment.sysOut(e);
     }

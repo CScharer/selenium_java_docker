@@ -30,7 +30,6 @@ public class SQL {
   private static final String TABLE_FILENET = "tblDOM_Filenet";
   private static final String TABLE_ENVIRONMENTS = "tblEnvironments";
   private static final String TABLE_PSTAR = "tblDOM_PSTAR_Service_Accounts";
-  private static final String TABLE_PSTAR_PDF_COMPARE = "tblPSTAR_PDF_Compare";
   private static final String TABLE_SUBMISSIONLOG = "tblSubmissionLog";
 
   public int exUpdateDbUserToAdmin(String eMail) {
