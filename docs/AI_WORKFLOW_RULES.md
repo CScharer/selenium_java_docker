@@ -1,5 +1,7 @@
 # AI Workflow Rules for Code Changes
 
+**Version:** 1.6 (Updated: 2025-11-12 - Added mandatory timestamp verification)
+
 ## 🚨 MANDATORY RULES - NEVER SKIP THESE STEPS
 
 ### **Rule 1: Pre-Flight Verification (BEFORE any code changes)**
@@ -78,9 +80,10 @@ docker-compose run --rm tests test -Dcheckstyle.skip=true
 Only after ALL verifications pass:
 
 1. ✅ **Update CHANGE.log** (MANDATORY BEFORE COMMIT)
+   - **FIRST:** Get actual current timestamp: `date "+%Y-%m-%d %H:%M:%S"` (CST timezone)
    - Add new entry at top of file with:
-     - Timestamp: `[YYYY-MM-DD HH:MM:SS CST]`
-     - Commit hash: `[hash]` (use placeholder if not yet committed)
+     - **Timestamp:** `[YYYY-MM-DD HH:MM:SS CST]` - **MUST use actual system time from date command**
+     - Commit hash: `[hash]` (use placeholder like `[PENDING]` if not yet committed)
      - Summary title
      - Overview section with high-level summary
      - **Cursor Token Status:** `Tokens Used: X / Total: Y (Z remaining, A% used, B% remaining)`
@@ -90,6 +93,7 @@ Only after ALL verifications pass:
    - Format: Follow existing CHANGE.log structure
    - Content: Include all changes since last entry
    - **Token tracking:** Always include current token usage with percentages for session visibility
+   - **CRITICAL:** Never guess timestamps - always use actual system time!
    
 2. ✅ Stage changes: `git add -A` (including docs/CHANGE.log)
 3. ✅ Commit with descriptive message following established format
@@ -219,15 +223,19 @@ docker-compose run --rm tests test -Dcheckstyle.skip=true
 
 **After verification passes:**
 ```bash
-# 5. Update CHANGE.log (MANDATORY!)
-# Add entry at top with timestamp, commit hash, summary, details
+# 5. Get actual timestamp (FIRST!)
+date "+%Y-%m-%d %H:%M:%S"
+# Use this EXACT timestamp in CHANGE.log entry
 
-# 6. Commit and push
+# 6. Update CHANGE.log (MANDATORY!)
+# Add entry at top with ACTUAL timestamp, commit hash, summary, details
+
+# 7. Commit and push
 git add -A
 git commit --no-verify -m "..."
 git push origin main
 
-# 7. Monitor GitHub Actions
+# 8. Monitor GitHub Actions
 # Check https://github.com/CScharer/selenium_java_docker/actions
 # Wait for green status or investigate failures
 ```
