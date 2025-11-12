@@ -1,6 +1,19 @@
 # AI Workflow Rules for Code Changes
 
-**Version:** 1.8 (Updated: 2025-11-12 - Added Google Java Format as mandatory pre-compilation step)
+**Version:** 2.0 (Updated: 2025-11-12 - Added Checkstyle validation + fixed Docker config mounts)
+
+### 📋 Version 2.0 Changes:
+- **✅ FIXED:** Docker config mount issues - Checkstyle now runs locally!
+  - Added `checkstyle-custom.xml` and `checkstyle-suppressions.xml` volume mounts
+  - Enables local Checkstyle validation before pushing
+- **✅ ADDED:** Optional Checkstyle validation in Step 0 (post-format)
+  - Command: `docker-compose run --rm tests checkstyle:checkstyle -DskipTests`
+  - Shows violation count for monitoring progress
+  - Non-blocking (BUILD SUCCESS even with violations)
+- **✅ UPDATED:** Quick Reference with Checkstyle validation step
+- **✅ REMOVED:** Outdated notes about Checkstyle config mount issues
+
+---
 
 ## 🚨 MANDATORY RULES - NEVER SKIP THESE STEPS
 
@@ -27,21 +40,26 @@ Before making ANY code changes, you MUST:
 ### **Rule 3: Post-Change Verification (AFTER each batch)**
 After making code changes, you MUST verify in this order:
 
-#### **Step 0: Google Java Format (Auto-fix imports & formatting)**
+#### **Step 0: Google Java Format + Checkstyle Validation (Auto-fix & validate)**
 ```bash
 # Run Google Java Format to auto-fix import and style issues
 docker-compose run --rm tests com.spotify.fmt:fmt-maven-plugin:format -Dcheckstyle.skip=true
 
-# ⚠️  Note: Changes happen inside Docker container
-# Pipeline runs this automatically, so local formatting ensures consistency
+# (Optional but recommended) Run Checkstyle to catch remaining style issues
+docker-compose run --rm tests checkstyle:checkstyle -DskipTests
 ```
 **Purpose:** 
 - Auto-fixes redundant/unused imports
 - Ensures consistent code formatting
-- Reduces Checkstyle violations
+- Validates against Checkstyle rules (optional)
 - Should run BEFORE compilation to catch any formatting-introduced issues
 
-**Duration:** ~30-60 seconds
+**Checkstyle Output:**
+- Shows violation count: "You have X Checkstyle violations"
+- BUILD SUCCESS even with violations (failOnViolation=false)
+- Use this to monitor progress, not as a gate
+
+**Duration:** ~30-60 seconds (format), ~20-30 seconds (checkstyle)
 
 #### **Step 1: Compilation Verification (MUST MATCH PIPELINE!)**
 ```bash
@@ -53,9 +71,6 @@ docker-compose run --rm tests clean compile test-compile
 
 # ❌ WRONG: docker-compose run --rm tests compile -DskipTests
 #    (This skips test-compile phase! Will miss test compilation errors!)
-
-# ⚠️  Note: Checkstyle may fail in Docker due to config mount issues
-#    Pipeline will catch Checkstyle issues - focus on Java compilation
 ```
 **Required:** BUILD SUCCESS
 
@@ -231,11 +246,13 @@ If you see dependency download errors:
 # 0. Run Google Java Format (auto-fix imports/formatting, ~30-60 sec)
 docker-compose run --rm tests com.spotify.fmt:fmt-maven-plugin:format -Dcheckstyle.skip=true
 
+# 0b. (Optional) Run Checkstyle validation to monitor violations (~20-30 sec)
+docker-compose run --rm tests checkstyle:checkstyle -DskipTests
+
 # 1. Verify compilation (REQUIRED - every batch, MUST INCLUDE test-compile!)
 docker-compose run --rm tests compile test-compile
 # OR with clean: docker-compose run --rm tests clean compile test-compile
 # ❌ WRONG: docker-compose run --rm tests compile -DskipTests (misses test-compile!)
-# ⚠️  Note: May need -Dcheckstyle.skip=true if Checkstyle config has Docker issues
 
 # 2. Run smoke tests (REQUIRED - every batch, fast ~2-3 min)
 docker-compose run --rm tests test -Dtest=SmokeTests -Dcheckstyle.skip=true
