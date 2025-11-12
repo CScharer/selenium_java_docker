@@ -1068,7 +1068,7 @@ public class VivitDataTests extends Environment {
       if (!"".equals(data)) {
         final String[] records = data.split(Constants.NEWLINE);
         final String[] fields = records[0].split(Constants.DELIMETER_LIST);
-        if ("0".equals(dynamicQuery) || (records.length > 1 && records.length < RECORD_LIMIT_100)) {
+        if ("0".equals(dynamicQuery) || records.length > 1 && records.length < RECORD_LIMIT_100) {
           sysOut("records.length:[" + records.length + "]");
           sheetLinkIndex++;
           final String sheetName = "S" + JavaHelpers.formatNumber(sheetLinkIndex, "000");
