@@ -49,7 +49,7 @@ public class Main extends Page {
           getWebDriver()
               .findElement(By.xpath(".//*[@id='ctl00_ContentPlaceHolder1_lblTotal']"))
               .getText();
-      totalInmates = totalInmates.substring((totalInmates.indexOf("=") + 1)).trim();
+      totalInmates = totalInmates.substring(totalInmates.indexOf("=") + 1).trim();
       final int totalInmatesCount = Integer.valueOf(totalInmates);
       Environment.sysOut("iTotalInmates:[" + totalInmatesCount + "]");
       sqlStringBuilder = new StringBuilder();

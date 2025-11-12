@@ -46,7 +46,7 @@ public class REST {
       }
       if (JavaHelpers.hasValue(credentials)) {
         final String encoding =
-            Base64.getEncoder().encodeToString((credentials).getBytes(Charset.forName("UTF-8")));
+            Base64.getEncoder().encodeToString(credentials.getBytes(Charset.forName("UTF-8")));
         httpURLConnection.setRequestProperty("Authorization", "Basic " + encoding);
       }
       // httpURLConnection.setRequestProperty("X-Atlassian-Token:",

@@ -37,7 +37,7 @@ public class SSOService extends WebService {
    */
   public String apiAddProject(String userName, String eMail, String applicationAbbreviation) {
     Map<String, String> map = new HashMap<>();
-    if ((userName == null) || userName.isEmpty()) {
+    if (userName == null || userName.isEmpty()) {
       userName = eMail.substring(0, eMail.indexOf("@"));
     }
     Map<String, String> oAuthenticate = new HashMap<>();

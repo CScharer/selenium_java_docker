@@ -23,7 +23,7 @@ public class TableOfContentsPage extends Page {
     do {
       webElements = getWebDriver().findElements(By.xpath("//*[contains(@class,'icon-drop-down')]"));
       if (!webElements.isEmpty()) {
-        final int index = (webElements.size() - 1);
+        final int index = webElements.size() - 1;
         final WebElement webElement = webElements.get(index);
         webElement.click();
       }

@@ -165,7 +165,7 @@ public interface ISelenium {
     // [[[[EdgeDriver: MicrosoftEdge on ANY
     // (F5466750-F292-4D4A-9637-5B0755B92C49)] -> xpath:
     final String indexer = webElementString.substring(0, webElementString.indexOf("Driver:"));
-    final int parents = ((indexer.lastIndexOf("[") + 1) / 2);
+    final int parents = (indexer.lastIndexOf("[") + 1) / 2;
     if (parents != parentList.size()) {
       Assert.fail(
           "The parentList ["
@@ -659,7 +659,7 @@ public interface ISelenium {
       for (index = 0; index < items.length; index++) {
         if (items[index].equalsIgnoreCase(value)) {
           dropdown = new Select(webDriver.findElement(By.name(field)));
-          dropdown.selectByIndex((index + 1));
+          dropdown.selectByIndex(index + 1);
           final List<WebElement> selectedOption = dropdown.getAllSelectedOptions();
           final String valueActual = selectedOption.get(0).getText();
           if (!valueActual.equalsIgnoreCase(value)) {
