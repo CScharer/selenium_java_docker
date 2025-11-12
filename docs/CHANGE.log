@@ -1,5 +1,14 @@
 # CHANGE LOG
 
+## [2025-11-12 11:05:00 CST] [66ea3649] - 🔧 CRITICAL FIX #2: SeleniumWebDriver Throwable
+
+**Second Pipeline Failure:** SeleniumWebDriver.java:379 - unreported exception Throwable  
+**Fix:** Reverted to `catch (Throwable e)` - method getWebDriverProcesses() throws Throwable  
+**Impact:** 1 PMD violation restored (justified - method signature requires it)  
+**Status:** ✅ Pipeline should now pass!
+
+---
+
 ## [2025-11-12 11:00:00 CST] [00144549] - 🔧 CRITICAL FIX: Pipeline Failure - QAException Handling + Rules v1.4
 
 ### Overview
