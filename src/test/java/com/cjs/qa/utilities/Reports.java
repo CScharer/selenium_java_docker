@@ -318,7 +318,7 @@ public class Reports {
       }
       final List<String> fieldNames = Arrays.asList(fields.split(Constants.DELIMETER_LIST));
       setColumnsIndex(fields);
-      row = (excel.getRowCount(sheetName) + 1);
+      row = excel.getRowCount(sheetName) + 1;
       for (int indexRecord = 0; indexRecord < listMapSection.size(); indexRecord++) {
         row = excel.getRowCount(sheetName) + 1;
         if (indexRecord == 0) {

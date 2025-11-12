@@ -147,7 +147,7 @@ public class XlsReader {
           final double d = cell.getNumericCellValue();
           final Calendar cal = Calendar.getInstance();
           cal.setTime(DateUtil.getJavaDate(d));
-          cellText = (String.valueOf(cal.get(Calendar.YEAR))).substring(2);
+          cellText = String.valueOf(cal.get(Calendar.YEAR)).substring(2);
           cellText =
               cal.get(Calendar.DAY_OF_MONTH) + "/" + cal.get(Calendar.MONTH) + 1 + "/" + cellText;
         }

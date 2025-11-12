@@ -137,8 +137,8 @@ public class BingPage extends Page {
                 + elapsedTimeMilliseconds
                 + "]");
         searchRequired =
-            (BingPage.getCurrentPoints() != currentPoints && search < RewardsPage.getSearchesMin()
-                || elapsedTimeMilliseconds <= PROCESS_TIME_MILLISECONDS);
+            BingPage.getCurrentPoints() != currentPoints && search < RewardsPage.getSearchesMin()
+                || elapsedTimeMilliseconds <= PROCESS_TIME_MILLISECONDS;
       } while (searchRequired);
     } else {
       do {
@@ -147,7 +147,7 @@ public class BingPage extends Page {
         search(url);
         currentPoints = getCurrentPointsValue(search, currentPoints);
         searchRequired =
-            (BingPage.getCurrentPoints() != currentPoints || search < RewardsPage.getSearchesMin());
+            BingPage.getCurrentPoints() != currentPoints || search < RewardsPage.getSearchesMin();
       } while (searchRequired);
     }
   }

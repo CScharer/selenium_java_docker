@@ -36,8 +36,8 @@ public class SharepointServiceTests {
           (HttpURLConnection) new URL(URL_SHAREPOINT).openConnection();
       httpUrlConnection.setRequestMethod("HEAD");
       final int responseCode = httpUrlConnection.getResponseCode();
-      if (!((responseCode >= HttpURLConnection.HTTP_OK)
-          && (responseCode < HttpURLConnection.HTTP_BAD_REQUEST))) {
+      if (!(responseCode >= HttpURLConnection.HTTP_OK
+          && responseCode < HttpURLConnection.HTTP_BAD_REQUEST)) {
         Environment.sysOut(
             CONNECTED_TO
                 + URL_SHAREPOINT
@@ -58,8 +58,8 @@ public class SharepointServiceTests {
               + ":"
               + IHTTP.getResponseValue(responseCode)
               + "].",
-          ((responseCode >= HttpURLConnection.HTTP_OK)
-              && (responseCode < HttpURLConnection.HTTP_BAD_REQUEST)));
+          responseCode >= HttpURLConnection.HTTP_OK
+              && responseCode < HttpURLConnection.HTTP_BAD_REQUEST);
       Environment.sysOut(
           CONNECTED_TO
               + URL_SHAREPOINT

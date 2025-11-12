@@ -195,7 +195,7 @@ public class XLSCellStyles {
         for (int cellStyleIndex = 0;
             cellStyleIndex < IExcel.CELL_STYLE_LIST.size() - 1;
             cellStyleIndex++) {
-          final int workbookStyleIndex = (CELL_STYLE_INDEX_START + cellStyleIndex);
+          final int workbookStyleIndex = CELL_STYLE_INDEX_START + cellStyleIndex;
           final String cellStyleType = IExcel.CELL_STYLE_LIST.get(cellStyleIndex);
           final CellStyle cellStyle =
               workbook.getCellStyleAt(CELL_STYLE_INDEX_START + cellStyleIndex);

@@ -473,7 +473,7 @@ public class JavaHelpers {
     final String fullString = stackTraceElements[1].toString();
     String className = Thread.currentThread().getStackTrace()[2].getClassName();
     return fullString.substring(
-        (fullString.indexOf(className + '.') + (className.length() + 1)), fullString.length());
+        fullString.indexOf(className + '.') + (className.length() + 1), fullString.length());
   }
 
   /**

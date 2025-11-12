@@ -517,7 +517,7 @@ public class JDBC {
       StringBuilder stringBuilderHeadings = new StringBuilder();
       if (includeColumnNames) {
         for (int index = 1; index < columns + 1; index++) {
-          if (!"".equals(stringBuilderHeadings.toString()) && (columns < (columns + 1))) {
+          if (!"".equals(stringBuilderHeadings.toString()) && columns < columns + 1) {
             stringBuilderHeadings.append(delimeter);
           }
           stringBuilderHeadings.append(resultSetMetaData.getColumnName(index));

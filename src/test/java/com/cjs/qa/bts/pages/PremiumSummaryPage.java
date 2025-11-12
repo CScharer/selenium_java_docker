@@ -175,10 +175,10 @@ public class PremiumSummaryPage extends Page {
                             + coverage
                             + "')]"))
                 .getText();
-        assert (coverageFromTable
+        assert coverageFromTable
             .toString()
             .equals(
-                coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium));
+                coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium);
       } else {
         coverageFromTable =
             getWebElement(
@@ -191,10 +191,10 @@ public class PremiumSummaryPage extends Page {
                             + premium
                             + "')]"))
                 .getText();
-        assert (coverageFromTable
+        assert coverageFromTable
             .toString()
             .equals(
-                coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium));
+                coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium);
       }
     } else if (STATE_ABBREVIATIONS.contains(state)) {
       if (" ".equals(coverage) && " ".equals(deductible) && " ".equals(premium)) {
@@ -203,10 +203,10 @@ public class PremiumSummaryPage extends Page {
         coverageFromTable =
             getWebElement(By.xpath(" .//*[@id='stateCloser']/div[contains(.,'" + coverage + "')]"))
                 .getText();
-        assert (coverageFromTable
+        assert coverageFromTable
             .toString()
             .equals(
-                coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium));
+                coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium);
       } else {
         coverageFromTable =
             getWebElement(
@@ -219,10 +219,10 @@ public class PremiumSummaryPage extends Page {
                             + premium
                             + "')]"))
                 .getText();
-        assert (coverageFromTable
+        assert coverageFromTable
             .toString()
             .equals(
-                coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium));
+                coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium);
       }
     } else {
       if (" ".equals(coverage) && " ".equals(deductible) && " ".equals(premium)) {
@@ -235,10 +235,10 @@ public class PremiumSummaryPage extends Page {
                             + coverage
                             + "')]"))
                 .getText();
-        assert (coverageFromTable
+        assert coverageFromTable
             .toString()
             .equals(
-                coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium));
+                coverage + " " + limitExp + " " + deductible + " " + classCode + " " + premium);
         Environment.sysOut("LAST ONE");
       }
       // else

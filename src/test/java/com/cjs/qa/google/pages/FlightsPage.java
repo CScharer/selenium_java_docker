@@ -117,7 +117,7 @@ public class FlightsPage extends Page {
             flightWebElementListIndex++) {
           WebElement flightWebElement = flightWebElementList.get(flightWebElementListIndex);
           flightList.add(
-              setFlight(airportFrom, "Best", (flightWebElementListIndex + 1), flightWebElement));
+              setFlight(airportFrom, "Best", flightWebElementListIndex + 1, flightWebElement));
         }
         flightWebElementList = getOtherDepartingFlightsList();
         for (int flightWebElementListIndex = 0;
@@ -125,7 +125,7 @@ public class FlightsPage extends Page {
             flightWebElementListIndex++) {
           WebElement flightWebElement = flightWebElementList.get(flightWebElementListIndex);
           flightList.add(
-              setFlight(airportFrom, "Other", (flightWebElementListIndex + 1), flightWebElement));
+              setFlight(airportFrom, "Other", flightWebElementListIndex + 1, flightWebElement));
         }
         for (int flightIndex = 0; flightIndex < flightList.size(); flightIndex++) {
           Flight flight = flightList.get(flightIndex);
@@ -149,23 +149,23 @@ public class FlightsPage extends Page {
             excel.addLink(sheetSummary, summaryMap.get("URL"), row, "URL", sheetName, url);
           }
           excel.writeCell(
-              sheetName, flightMap.get("Airport"), (flightIndex + 1), flight.getAirport());
+              sheetName, flightMap.get("Airport"), flightIndex + 1, flight.getAirport());
           excel.writeCell(
-              sheetName, flightMap.get("Preference"), (flightIndex + 1), flight.getPreference());
-          excel.writeCell(sheetName, flightMap.get("Sort"), (flightIndex + 1), flight.getSort());
+              sheetName, flightMap.get("Preference"), flightIndex + 1, flight.getPreference());
+          excel.writeCell(sheetName, flightMap.get("Sort"), flightIndex + 1, flight.getSort());
           excel.writeCell(
-              sheetName, flightMap.get("Airline"), (flightIndex + 1), flight.getAirline());
+              sheetName, flightMap.get("Airline"), flightIndex + 1, flight.getAirline());
           excel.writeCell(
-              sheetName, flightMap.get("Operated By"), (flightIndex + 1), flight.getOperatedBy());
+              sheetName, flightMap.get("Operated By"), flightIndex + 1, flight.getOperatedBy());
           excel.writeCell(
-              sheetName, flightMap.get("Time Depart"), (flightIndex + 1), flight.getTimeDepart());
+              sheetName, flightMap.get("Time Depart"), flightIndex + 1, flight.getTimeDepart());
           excel.writeCell(
-              sheetName, flightMap.get("Time Arrive"), (flightIndex + 1), flight.getTimeArrive());
+              sheetName, flightMap.get("Time Arrive"), flightIndex + 1, flight.getTimeArrive());
           excel.writeCell(
-              sheetName, flightMap.get("Duration"), (flightIndex + 1), flight.getDuration());
-          excel.writeCell(sheetName, flightMap.get("Stops"), (flightIndex + 1), flight.getStops());
+              sheetName, flightMap.get("Duration"), flightIndex + 1, flight.getDuration());
+          excel.writeCell(sheetName, flightMap.get("Stops"), flightIndex + 1, flight.getStops());
           double price = flight.getPrice();
-          excel.writeCell(sheetName, flightMap.get("Price"), (flightIndex + 1), price);
+          excel.writeCell(sheetName, flightMap.get("Price"), flightIndex + 1, price);
         }
         excel.autoSizeColumns(sheetName);
         excel.save();
@@ -226,7 +226,7 @@ public class FlightsPage extends Page {
         flightWebElementListIndex++) {
       WebElement flightWebElement = flightWebElementList.get(flightWebElementListIndex);
       flightList.add(
-          setFlight(airportFrom, "Best", (flightWebElementListIndex + 1), flightWebElement));
+          setFlight(airportFrom, "Best", flightWebElementListIndex + 1, flightWebElement));
     }
     flightWebElementList = getOtherDepartingFlightsList();
     for (int flightWebElementListIndex = 0;
@@ -234,7 +234,7 @@ public class FlightsPage extends Page {
         flightWebElementListIndex++) {
       WebElement flightWebElement = flightWebElementList.get(flightWebElementListIndex);
       flightList.add(
-          setFlight(airportFrom, "Other", (flightWebElementListIndex + 1), flightWebElement));
+          setFlight(airportFrom, "Other", flightWebElementListIndex + 1, flightWebElement));
     }
     return flightList;
   }
@@ -331,8 +331,8 @@ public class FlightsPage extends Page {
 
   public String getDrivePrice(String miles) {
     final Double MILEAGE_2019 = .58;
-    double price = (Double.valueOf(miles) * 2.0); // RoundTrip
-    price = (price * MILEAGE_2019);
+    double price = Double.valueOf(miles) * 2.0; // RoundTrip
+    price = price * MILEAGE_2019;
     // return JavaHelpers.formatNumber(String.valueOf(price), "$#,##0.00");
     return JavaHelpers.formatNumber(String.valueOf(price), "###0.00");
   }

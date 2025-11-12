@@ -63,8 +63,8 @@ public class YMService {
                 + ":"
                 + IHTTP.getResponseValue(responseCode)
                 + "].",
-            (responseCode >= HttpURLConnection.HTTP_OK
-                && responseCode < HttpURLConnection.HTTP_BAD_REQUEST));
+            responseCode >= HttpURLConnection.HTTP_OK
+                && responseCode < HttpURLConnection.HTTP_BAD_REQUEST);
         Environment.sysOut(
             CONNECTED_TO
                 + URL_YM

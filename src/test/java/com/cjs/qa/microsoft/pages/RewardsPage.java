@@ -717,7 +717,7 @@ public class RewardsPage extends Page {
         pointsAvailable += pointsCard.getPointsAvailable();
       }
     }
-    final int pointsNeeded = (pointsAvailable - pointsEarned);
+    final int pointsNeeded = pointsAvailable - pointsEarned;
     setSearchesNeeded(pointsNeeded / POINTS_PER_SEACH_PC);
     // final int searchesNeeded = (pointsNeeded / POINTS_PER_SEACH_PC);
     RewardsInfo.getRewardsInfoList()
@@ -743,7 +743,7 @@ public class RewardsPage extends Page {
                 "Searches Needed",
                 String.valueOf(getSearchesNeeded())));
     searchesMin = getSearchesNeeded();
-    setSearchesRequired((getSearchesNeeded() > 0 && getSearchAttempts() < 2));
+    setSearchesRequired(getSearchesNeeded() > 0 && getSearchAttempts() < 2);
     return isSearchesRequired();
   }
 

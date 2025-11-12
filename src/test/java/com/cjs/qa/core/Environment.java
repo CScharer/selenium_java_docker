@@ -89,7 +89,7 @@ public class Environment {
       throws IOException, QAException {
     final XLS excel = new XLS(filePathName, IExcel.SHEET_SUMMARY);
     // int rowSummary = (excel.getRowCount(IExcel.SHEET_SUMMARY) + 1)
-    int rowSummary = (excel.getSheetCount() - (defaultSheetCount - 1));
+    int rowSummary = excel.getSheetCount() - (defaultSheetCount - 1);
     excel.close();
     return JavaHelpers.formatNumber(rowSummary, "000");
     // + "_" + policy;
