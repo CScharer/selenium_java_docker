@@ -142,7 +142,7 @@ public class Reports {
         updateCount(excel, "Failed");
         mapSummary.put("Error(s)", "See Sheet (" + sheetNameFailure + ")");
       }
-      final int rowSummary = (excel.getRowCount(sheetNameSummary) + 1);
+      final int rowSummary = excel.getRowCount(sheetNameSummary) + 1;
       for (final String columnName : MAP_STRING_SUMMARY.keySet()) {
         final String value = mapSummary.get(columnName);
         if (JavaHelpers.hasValue(value)) {
@@ -177,7 +177,7 @@ public class Reports {
           excel.addLink(
               sheetNameFailure, 0, 0, "DOCUMENT", sheetNameSummary, hyperlinkSheetSummary);
           for (final Integer key : Environment.getScenarioErrors().keySet()) {
-            final int rowSheetFailure = (excel.getRowCount(sheetNameFailure) + 1);
+            final int rowSheetFailure = excel.getRowCount(sheetNameFailure) + 1;
             excel.writeCell(
                 sheetNameFailure, 0, rowSheetFailure, "Failure (" + String.valueOf(key) + ")");
             excel.autoSizeColumn(sheetNameFailure, 0);
@@ -234,7 +234,7 @@ public class Reports {
         excel.writeCell(sheetName, columnIndex, row, columnName);
         excel.setFormatBold(sheetName, columnIndex, row);
         excel.setFormatFontBackgroundColor(sheetName, columnIndex, row, "grey_25");
-        excel.writeCell(sheetName, columnIndex, (row + 1), 0);
+        excel.writeCell(sheetName, columnIndex, row + 1, 0);
       }
       excel.autoSizeColumns(sheetName);
       // excel.save();
@@ -293,7 +293,7 @@ public class Reports {
       if (listMapSection == null) {
         return;
       }
-      int row = (excel.getRowCount(sheetName) + 1);
+      int row = excel.getRowCount(sheetName) + 1;
       int column = 0;
       excel.writeCell(sheetName, column, row, section);
       excel.setFormatBold(sheetName, column, row);
@@ -320,7 +320,7 @@ public class Reports {
       setColumnsIndex(fields);
       row = (excel.getRowCount(sheetName) + 1);
       for (int indexRecord = 0; indexRecord < listMapSection.size(); indexRecord++) {
-        row = (excel.getRowCount(sheetName) + 1);
+        row = excel.getRowCount(sheetName) + 1;
         if (indexRecord == 0) {
           for (final String fieldName : fieldNames) {
             column = resultColumns.get(fieldName);
@@ -329,7 +329,7 @@ public class Reports {
             excel.setFormatFontBackgroundColor(sheetName, column, row, "grey_25");
           }
         }
-        row = (excel.getRowCount(sheetName) + 1);
+        row = excel.getRowCount(sheetName) + 1;
         final Map<String, String> mapData = listMapSection.get(indexRecord);
         final String action = mapData.get("Action");
         if (!"Match".equals(action)) {

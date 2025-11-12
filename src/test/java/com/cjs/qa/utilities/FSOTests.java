@@ -31,8 +31,8 @@ import org.junit.Test;
 
 @SuppressWarnings("PMD.ClassNamingConventions")
 public class FSOTests {
-  public static final int SECONDS_MINUTES_05 = (Constants.MILLISECONDS * 60 * 5);
-  public static final int SECONDS_MINUTES_10 = (Constants.MILLISECONDS * 60 * 10);
+  public static final int SECONDS_MINUTES_05 = Constants.MILLISECONDS * 60 * 5;
+  public static final int SECONDS_MINUTES_10 = Constants.MILLISECONDS * 60 * 10;
   public static final int URL_TIMEOUT_CONNECTION = SECONDS_MINUTES_10;
   public static final int URL_TIMEOUT_READ = SECONDS_MINUTES_05;
 
@@ -259,7 +259,7 @@ public class FSOTests {
   public static List<String> fileReadAllList(String filePathName) throws QAException {
     String line = null;
     final List<String> contents = new ArrayList<>();
-    try (BufferedReader bufferedReader = new BufferedReader((new FileReader(filePathName)))) {
+    try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePathName))) {
       while ((line = bufferedReader.readLine()) != null) {
         contents.add(line);
       }

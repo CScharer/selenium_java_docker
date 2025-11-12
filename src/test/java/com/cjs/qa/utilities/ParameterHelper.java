@@ -54,7 +54,7 @@ public class ParameterHelper {
     ParameterHelper parameterHelper = null;
     try {
       String methodName = JavaHelpers.getCallingMethodName();
-      final StackTraceElement[] stackTraceArray = (new Throwable()).getStackTrace();
+      final StackTraceElement[] stackTraceArray = new Throwable().getStackTrace();
       StackTraceElement stackTraceElement = stackTraceArray[2];
       methodName = stackTraceElement.getMethodName();
       String className = stackTraceElement.getClassName();
@@ -150,7 +150,7 @@ public class ParameterHelper {
           parameterFieldMap.put("value", localVariableNode.toString());
           Parameter parameter =
               new Parameter(
-                  (parameterHelper.getParameterList().size()),
+                  parameterHelper.getParameterList().size(),
                   parameterFieldMap.get("name").toString(),
                   parameterFieldMap.get("type").toString(),
                   parameterFieldMap.get("value"));
@@ -168,7 +168,7 @@ public class ParameterHelper {
         parameterFieldMap.put("value", objectValue);
         Parameter parameter =
             new Parameter(
-                (parameterHelper.getParameterList().size()),
+                parameterHelper.getParameterList().size(),
                 parameterFieldMap.get("name").toString(),
                 parameterFieldMap.get("type").toString(),
                 parameterFieldMap.get("value"));
@@ -187,7 +187,7 @@ public class ParameterHelper {
             parameterFieldMap.put("value", localVariableNode.toString());
             Parameter parameter =
                 new Parameter(
-                    (parameterHelper.getParameterList().size() - parameterCount),
+                    parameterHelper.getParameterList().size() - parameterCount,
                     parameterFieldMap.get("name").toString(),
                     parameterFieldMap.get("type").toString(),
                     parameterFieldMap.get("value"));

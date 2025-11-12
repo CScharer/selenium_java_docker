@@ -75,7 +75,7 @@ public class ODBCMSAccess {
               // resultSet.getString("SubmissionID"));
               // map.put(field, value);
               if (value != null) {
-                if (fieldIndex == (listFields.size() - 1)) {
+                if (fieldIndex == listFields.size() - 1) {
                   sqlPre.append("[" + field + "]) VALUES (");
                   sqlValues.append("'" + value + "');");
                 } else {
@@ -86,7 +86,7 @@ public class ODBCMSAccess {
             }
             sql = sqlPre.toString() + sqlValues.toString();
             recordCount += odbcSQLite.executeUpdate(connectionSQLite, sql);
-            if ((recordCount % 100) == 0) {
+            if (recordCount % 100 == 0) {
               System.out.println(recordCount + " records");
             }
             // System.out.println(map.toString());
