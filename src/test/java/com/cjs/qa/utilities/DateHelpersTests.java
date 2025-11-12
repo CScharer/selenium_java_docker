@@ -71,7 +71,7 @@ public class DateHelpersTests {
     final LocalDateTime now = LocalDateTime.now();
     LocalDateTime then;
     if (days < 0) {
-      days = (days * -1);
+      days = days * -1;
       then = now.minusDays(days);
     } else {
       then = now.plusDays(days);
@@ -88,7 +88,7 @@ public class DateHelpersTests {
       }
       if (value < 0) {
         add = false;
-        value = (value * -1);
+        value = value * -1;
       }
       if (format == null) {
         format = FORMAT_US_STANDARD_DATE_TIME;
@@ -194,7 +194,7 @@ public class DateHelpersTests {
             Integer.valueOf(iDate[2]), Integer.valueOf(iDate[0]), Integer.valueOf(iDate[1]), 0, 0);
     LocalDateTime then;
     if (days < 0) {
-      days = (days * -1);
+      days = days * -1;
       then = now.minusDays(days);
     } else {
       then = now.plusDays(days);
@@ -519,8 +519,8 @@ public class DateHelpersTests {
   }
 
   public static String getDaySuffix(int day) {
-    if ((day >= 1) && (day <= 31)) {
-      if ((day >= 11) && (day <= 13)) {
+    if (day >= 1 && day <= 31) {
+      if (day >= 11 && day <= 13) {
         return "th";
       }
       switch (day % 10) {
@@ -690,7 +690,7 @@ public class DateHelpersTests {
       final Calendar calendar = Calendar.getInstance();
       calendar.setTime(simpleDateFormat.parse(date));
       final int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-      if ((dayOfWeek != Calendar.SATURDAY) && (dayOfWeek != Calendar.SUNDAY)) {
+      if (dayOfWeek != Calendar.SATURDAY && dayOfWeek != Calendar.SUNDAY) {
         return true;
       }
     } catch (final ParseException e) {
@@ -804,8 +804,8 @@ public class DateHelpersTests {
     int i = 0;
     while (i < days) {
       calendar.add(Calendar.DAY_OF_YEAR, 1);
-      if ((calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY)
-          && (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY)) {
+      if (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY
+          && calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
         i++;
       }
     }
@@ -818,14 +818,14 @@ public class DateHelpersTests {
     int i = 0;
     // if starting on a weekend, Monday doesn't get counted for settlement
     // date
-    if ((calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY)
-        || (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)) {
+    if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY
+        || calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
       i++;
     }
     while (i < days) {
       calendar.add(Calendar.DAY_OF_YEAR, 1);
-      if ((calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY)
-          && (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY)) {
+      if (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY
+          && calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
         i++;
       }
     }
@@ -838,15 +838,15 @@ public class DateHelpersTests {
     int i = 0;
     // if starting on a weekend, Monday doesn't get counted for settlement
     // date
-    if ((calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY)
-        || (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY)) {
+    if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY
+        || calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
       i++;
     }
     while (i < days) {
 
       calendar.add(Calendar.DAY_OF_YEAR, 1);
-      if ((calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY)
-          && (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY)) {
+      if (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY
+          && calendar.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
         i++;
       }
     }
