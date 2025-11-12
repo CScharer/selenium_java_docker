@@ -184,7 +184,7 @@ public final class Convert {
     }
     final int MAX_NUMBER = 26;
     StringBuilder stringBuilder = new StringBuilder();
-    final int instancesOfMax = (number / MAX_NUMBER);
+    final int instancesOfMax = number / MAX_NUMBER;
     Map<String, String> mapInstances = new HashMap<>();
     mapInstances.put(LABEL_INSTANCES_OF_MAX, String.valueOf(instancesOfMax));
     mapInstances.put(LABEL_LETTER, stringBuilder.toString());
@@ -210,8 +210,8 @@ public final class Convert {
     final int instancesOfMax = Integer.parseInt(mapInstances.get(LABEL_INSTANCES_OF_MAX));
     if (instancesOfMax > maxNumber) {
       final int number = Integer.parseInt(mapInstances.get(LABEL_NUMBER));
-      String letter = fromNumberToLetterExcel((instancesOfMax - 1));
-      final int numberNew = number - (((instancesOfMax - 1) * maxNumber) + (maxNumber));
+      String letter = fromNumberToLetterExcel(instancesOfMax - 1);
+      final int numberNew = number - ((instancesOfMax - 1) * maxNumber + maxNumber);
       letter += fromNumberToLetterExcel(numberNew);
       mapInstances.put(LABEL_INSTANCES_OF_MAX, String.valueOf(instancesOfMax));
       mapInstances.put(LABEL_LETTER, letter);

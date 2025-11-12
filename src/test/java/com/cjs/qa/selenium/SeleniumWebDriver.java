@@ -194,7 +194,7 @@ public class SeleniumWebDriver {
         final String filePathName = listFiles.get(indexRow);
         final String fileName =
             filePathName.substring(
-                (filePathName.lastIndexOf(Constants.DELIMETER_PATH) + 1), filePathName.length());
+                filePathName.lastIndexOf(Constants.DELIMETER_PATH) + 1, filePathName.length());
         Environment.sysOut("Adding Image File:[" + index + "], [" + fileName + "]");
         final BufferedImage bufferedImageTemp = ImageIO.read(listFile.get(index));
         bufferedImageFinal
@@ -564,14 +564,14 @@ public class SeleniumWebDriver {
       }
       getSessionInformation();
       // Move browser to last monitor.
-      int lastMonitor = (JavaHelpers.getMonitorCount() - 1);
+      int lastMonitor = JavaHelpers.getMonitorCount() - 1;
       if (lastMonitor != 0) {
-        int position = (lastMonitor * 2000);
+        int position = lastMonitor * 2000;
         Point point = new Point(position, 0);
         getWebDriver().manage().window().setPosition(point);
         // Resize browser.
-        int pointX = (JavaHelpers.getMonitorWidth(lastMonitor));
-        int pointY = (JavaHelpers.getMonitorHeight(lastMonitor));
+        int pointX = JavaHelpers.getMonitorWidth(lastMonitor);
+        int pointY = JavaHelpers.getMonitorHeight(lastMonitor);
         Dimension dimension = new Dimension(pointX, pointY);
         getWebDriver().manage().window().setSize(dimension);
       }

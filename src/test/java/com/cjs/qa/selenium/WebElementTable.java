@@ -125,7 +125,7 @@ public class WebElementTable extends Page {
    * @return
    */
   public String getCellAttribute(int row, int columnIndex, String attribute) {
-    final int rowIndex = (row - 1);
+    final int rowIndex = row - 1;
     if (row > getTableRowsList().size()) {
       return null;
     }
@@ -155,7 +155,7 @@ public class WebElementTable extends Page {
    */
   public String getCellText(int row, int columnIndex) {
     populateTableObjects();
-    final int rowIndex = (row - 1);
+    final int rowIndex = row - 1;
     if (row > getTableRowsList().size()) {
       return null;
     }
@@ -313,7 +313,7 @@ public class WebElementTable extends Page {
    * @return
    */
   public boolean matchingRecordsExist(Map<String, String> map) {
-    return (matchingRecordsCount(map) > 0);
+    return matchingRecordsCount(map) > 0;
   }
 
   /**
@@ -382,11 +382,11 @@ public class WebElementTable extends Page {
       highlightWebElement(webElement);
       String columnName = webElement.getText();
       if (columnName.isEmpty()) {
-        columnName = getColumnNamePrefix() + String.valueOf((headingIndex + 1));
+        columnName = getColumnNamePrefix() + String.valueOf(headingIndex + 1);
       }
-      getHeadingsName().put(columnName, (headingIndex + 1));
-      getHeadingsIndex().put((headingIndex + 1), columnName);
-      getHeadingsNameLookup().put(columnName.toLowerCase(Locale.ENGLISH).trim(), (headingIndex + 1));
+      getHeadingsName().put(columnName, headingIndex + 1);
+      getHeadingsIndex().put(headingIndex + 1, columnName);
+      getHeadingsNameLookup().put(columnName.toLowerCase(Locale.ENGLISH).trim(), headingIndex + 1);
     }
     setTableHeadingsList(headings);
   }
