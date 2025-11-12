@@ -242,9 +242,9 @@ public interface IExcel {
       excel.createSheet(SHEET_SUMMARY, "");
     }
     final int column = 0;
-    int row = (excel.getRowCount(SHEET_SUMMARY));
+    int row = excel.getRowCount(SHEET_SUMMARY);
     if (excel.getSheetCount() == 1) {
-      row = (excel.getRowCount(SHEET_SUMMARY));
+      row = excel.getRowCount(SHEET_SUMMARY);
       excel.writeCell(SHEET_SUMMARY, column, row, SHEET_SUMMARY);
       excel.setFormatHeading(SHEET_SUMMARY, column, row);
     }
@@ -266,9 +266,9 @@ public interface IExcel {
       excel.createSheet(SHEET_SUMMARY, "");
     }
     final int column = 0;
-    int row = (excel.getRowCount(SHEET_SUMMARY));
+    int row = excel.getRowCount(SHEET_SUMMARY);
     if (excel.getSheetCount() == 1) {
-      row = (excel.getRowCount(SHEET_SUMMARY));
+      row = excel.getRowCount(SHEET_SUMMARY);
       excel.writeCell(SHEET_SUMMARY, column, row, SHEET_SUMMARY);
       excel.setFormatHeading(SHEET_SUMMARY, column, row);
     }

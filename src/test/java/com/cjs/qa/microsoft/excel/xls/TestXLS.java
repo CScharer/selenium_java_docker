@@ -23,13 +23,13 @@ public class TestXLS {
     final XLS excel = new XLS(FILE_NAME, sheetName);
     excel.writeCell(sheetName, 0, 0, "Sheet Summary");
     for (int sheetIndex = 0; sheetIndex < 10; sheetIndex++) {
-      Double sheetIndexDouble = (Double.valueOf(sheetIndex) + 1);
+      Double sheetIndexDouble = Double.valueOf(sheetIndex) + 1;
       sheetName = "Sheet_" + JavaHelpers.formatNumber(sheetIndexDouble, "000");
       Environment.sysOut("Creating sheet [" + sheetName + "]");
       excel.createSheet(sheetName);
       final String hyperlinkSheet = "'" + sheetName + "'!A1";
       excel.addLink(
-          IExcel.SHEET_SUMMARY, 0, (sheetIndex + 1), "DOCUMENT", sheetName, hyperlinkSheet);
+          IExcel.SHEET_SUMMARY, 0, sheetIndex + 1, "DOCUMENT", sheetName, hyperlinkSheet);
       createFontsColumns(excel, sheetName);
       createFontsRows(excel, sheetName);
       createFontsCells(excel, sheetName);
@@ -127,39 +127,39 @@ public class TestXLS {
     // int maxRows = IExcel.MAX_ROWS_XLS
     final int maxRows = styleListSize;
     for (int column = 0; column < maxColumns; column++) {
-      final String columnLetter = Convert.fromNumberToLetterExcel((column + 1));
+      final String columnLetter = Convert.fromNumberToLetterExcel(column + 1);
       for (int row = 0; row < maxRows; row++) {
         final int styleIndex = row % styleListSize;
         final XLSCellStyles xlsCellStyles = XLSCellStyles.getStylesList().get(styleIndex);
         final String format = xlsCellStyles.getStyleName();
         final String value = columnLetter + 1 + " (" + format + ")";
-        excel.writeCell(sheetName, (column + 1), (row + 1), value);
+        excel.writeCell(sheetName, column + 1, row + 1, value);
         switch (format) {
           case IExcel.FORMAT_NAME_BOLD:
-            excel.setFormatBold(sheetName, (column + 1), (row + 1));
+            excel.setFormatBold(sheetName, column + 1, row + 1);
             break;
           case IExcel.FORMAT_NAME_HEADING:
-            excel.setFormatHeading(sheetName, (column + 1), (row + 1));
+            excel.setFormatHeading(sheetName, column + 1, row + 1);
             break;
           case IExcel.FORMAT_NAME_HYPERLINK:
             final String hyperlink =
                 "'" + IExcel.SHEET_SUMMARY + "'!A" + (excel.getSheetCount() - 1);
-            excel.addLink(sheetName, (column + 1), (row + 1), "DOCUMENT", value, hyperlink);
+            excel.addLink(sheetName, column + 1, row + 1, "DOCUMENT", value, hyperlink);
             break;
           case IExcel.FORMAT_NAME_NORMAL:
-            excel.setFormatNormal(sheetName, (column + 1), (row + 1));
+            excel.setFormatNormal(sheetName, column + 1, row + 1);
             break;
           case IExcel.FORMAT_NAME_PASS:
-            excel.setFormatPass(sheetName, (column + 1), (row + 1));
+            excel.setFormatPass(sheetName, column + 1, row + 1);
             break;
           case IExcel.FORMAT_NAME_FAIL:
-            excel.setFormatFail(sheetName, (column + 1), (row + 1));
+            excel.setFormatFail(sheetName, column + 1, row + 1);
             break;
           case IExcel.FORMAT_NAME_SECTION:
-            excel.setFormatSection(sheetName, (column + 1), (row + 1));
+            excel.setFormatSection(sheetName, column + 1, row + 1);
             break;
           case IExcel.FORMAT_NAME_STATUS:
-            excel.setFormatStatus(sheetName, (column + 1), (row + 1));
+            excel.setFormatStatus(sheetName, column + 1, row + 1);
             break;
           default:
             break;
