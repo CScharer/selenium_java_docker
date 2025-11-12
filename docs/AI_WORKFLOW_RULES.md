@@ -1,6 +1,14 @@
 # AI Workflow Rules for Code Changes
 
-**Version:** 2.0 (Updated: 2025-11-12 - Added Checkstyle validation + fixed Docker config mounts)
+**Version:** 2.1 (Updated: 2025-11-12 - Added file persistence verification step)
+
+### 📋 Version 2.1 Changes:
+- **✅ ADDED:** Mandatory file persistence verification step
+  - Verify changes actually saved to files before proceeding
+  - Command: `git status --short` to see modified files
+  - Prevents "phantom fixes" that don't persist
+- **✅ ADDED:** Example verification workflow
+- **✅ UPDATED:** Quick Reference with persistence check
 
 ### 📋 Version 2.0 Changes:
 - **✅ FIXED:** Docker config mount issues - Checkstyle now runs locally!
@@ -60,6 +68,38 @@ docker-compose run --rm tests checkstyle:checkstyle -DskipTests
 - Use this to monitor progress, not as a gate
 
 **Duration:** ~30-60 seconds (format), ~20-30 seconds (checkstyle)
+
+#### **Step 0b: Verify File Changes Persist (CRITICAL!)**
+```bash
+# After making ANY code changes, verify they actually saved:
+git status --short
+
+# You should see:
+#  M src/test/java/com/cjs/qa/some/File.java
+#  M src/test/java/com/cjs/qa/other/File.java
+# ... etc.
+
+# ⚠️  If you DON'T see modified files:
+# - Changes didn't persist (volume mount issue or editor problem)
+# - DO NOT proceed - investigate why changes didn't save
+# - Re-apply changes and verify again
+```
+**Required:** Modified files appear in `git status`
+
+**CRITICAL:** If changes don't appear:
+- Changes are NOT saved to filesystem
+- Compilation will use old code
+- Pushing will NOT include your fixes
+- **MUST** re-apply and verify before proceeding
+
+**Example Workflow:**
+1. Make 10 file changes
+2. Run `git status --short`
+3. Verify 10 files show as modified
+4. If count doesn't match → investigate and fix
+5. Only proceed when all expected files are modified
+
+**Duration:** ~5 seconds
 
 #### **Step 1: Compilation Verification (MUST MATCH PIPELINE!)**
 ```bash
@@ -248,6 +288,11 @@ docker-compose run --rm tests com.spotify.fmt:fmt-maven-plugin:format -Dchecksty
 
 # 0b. (Optional) Run Checkstyle validation to monitor violations (~20-30 sec)
 docker-compose run --rm tests checkstyle:checkstyle -DskipTests
+
+# 0c. VERIFY FILE CHANGES PERSIST (CRITICAL - 5 sec)
+git status --short
+# ⚠️  Count modified files - should match number of files you changed!
+# If files missing, changes didn't persist - STOP and investigate!
 
 # 1. Verify compilation (REQUIRED - every batch, MUST INCLUDE test-compile!)
 docker-compose run --rm tests compile test-compile
