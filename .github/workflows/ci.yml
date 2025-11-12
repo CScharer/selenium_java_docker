@@ -808,3 +808,108 @@ jobs:
 
           echo "### 📊 Allure Report" >> $GITHUB_STEP_SUMMARY
           echo "Download the 'allure-report' artifact to view detailed test results" >> $GITHUB_STEP_SUMMARY
+
+  deploy-dev:
+    name: Deploy to DEV
+    runs-on: ubuntu-latest
+    needs: [smoke-tests, selenium-grid-tests, mobile-browser-tests, responsive-design-tests, code-quality, docker-build]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Deployment Status Check
+        run: |
+          echo "═══════════════════════════════════════════════════════════════════════════════"
+          echo "🚀 DEPLOYMENT TO DEV ENVIRONMENT"
+          echo "═══════════════════════════════════════════════════════════════════════════════"
+          echo ""
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Author: ${{ github.actor }}"
+          echo ""
+          echo "✅ All prerequisite stages passed:"
+          echo "   - Build & Compile"
+          echo "   - Smoke Tests"
+          echo "   - Grid Tests (Chrome & Firefox)"
+          echo "   - Mobile Browser Tests"
+          echo "   - Responsive Design Tests"
+          echo "   - Code Quality Checks"
+          echo "   - Docker Build"
+          echo ""
+          echo "📋 Deployment Steps (Placeholder):"
+          echo "   ⏭️  Actual deployment steps will be configured later"
+          echo "   ⏭️  This stage validates all tests passed"
+          echo ""
+          echo "✅ DEV deployment validation: PASSED"
+          echo "═══════════════════════════════════════════════════════════════════════════════"
+
+  deploy-test:
+    name: Deploy to TEST
+    runs-on: ubuntu-latest
+    needs: deploy-dev
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Deployment Status Check
+        run: |
+          echo "═══════════════════════════════════════════════════════════════════════════════"
+          echo "🔧 DEPLOYMENT TO TEST ENVIRONMENT"
+          echo "═══════════════════════════════════════════════════════════════════════════════"
+          echo ""
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Author: ${{ github.actor }}"
+          echo ""
+          echo "✅ Prerequisites:"
+          echo "   - DEV deployment successful"
+          echo "   - All quality gates passed"
+          echo ""
+          echo "📋 Deployment Steps (Placeholder):"
+          echo "   ⏭️  Actual deployment steps will be configured later"
+          echo "   ⏭️  This stage validates DEV deployment succeeded"
+          echo ""
+          echo "✅ TEST deployment validation: PASSED"
+          echo "═══════════════════════════════════════════════════════════════════════════════"
+
+  deploy-prod:
+    name: Deploy to PROD
+    runs-on: ubuntu-latest
+    needs: deploy-test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment:
+      name: production
+      url: https://your-production-url.com
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Deployment Status Check
+        run: |
+          echo "═══════════════════════════════════════════════════════════════════════════════"
+          echo "🏭 DEPLOYMENT TO PRODUCTION ENVIRONMENT"
+          echo "═══════════════════════════════════════════════════════════════════════════════"
+          echo ""
+          echo "⚠️  PRODUCTION DEPLOYMENT"
+          echo ""
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Author: ${{ github.actor }}"
+          echo ""
+          echo "✅ Prerequisites:"
+          echo "   - DEV deployment successful"
+          echo "   - TEST deployment successful"
+          echo "   - All quality gates passed"
+          echo ""
+          echo "📋 Deployment Steps (Placeholder):"
+          echo "   ⏭️  Actual deployment steps will be configured later"
+          echo "   ⏭️  This stage validates TEST deployment succeeded"
+          echo "   ⏭️  Production environment protection enabled"
+          echo ""
+          echo "✅ PROD deployment validation: PASSED"
+          echo "═══════════════════════════════════════════════════════════════════════════════"
