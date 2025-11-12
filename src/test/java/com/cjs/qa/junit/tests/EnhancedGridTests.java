@@ -40,10 +40,12 @@ public class EnhancedGridTests {
       gridUrl = "http://localhost:4444/wd/hub";
     }
 
-    LOGGER.info("\n========================================");
-    LOGGER.info("Test Browser: {}", browser.toUpperCase(Locale.ENGLISH));
-    LOGGER.info("Grid URL: {}", gridUrl);
-    LOGGER.info("========================================");
+    if (LOGGER.isInfoEnabled()) {
+      LOGGER.info("\n========================================");
+      LOGGER.info("Test Browser: {}", browser.toUpperCase(Locale.ENGLISH));
+      LOGGER.info("Grid URL: {}", gridUrl);
+      LOGGER.info("========================================");
+    }
 
     // Check if headless mode is requested (default: true)
     String headlessProperty = System.getProperty("headless", "true");
@@ -67,11 +69,13 @@ public class EnhancedGridTests {
       driver = new RemoteWebDriver(new URL(gridUrl), options);
     }
     
-    LOGGER.info("✅ Driver initialized in " + (isHeadless ? "headless" : "headed") + " mode");
+    LOGGER.info("✅ Driver initialized in {} mode", isHeadless ? "headless" : "headed");
 
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-    LOGGER.info("✅ {} browser initialized\n", currentBrowser.toUpperCase(Locale.ENGLISH));
+    if (LOGGER.isInfoEnabled()) {
+      LOGGER.info("✅ {} browser initialized\n", currentBrowser.toUpperCase(Locale.ENGLISH));
+    }
   }
 
   @Test(priority = 1, description = "Verify Google homepage loads correctly")
@@ -289,12 +293,16 @@ public class EnhancedGridTests {
         AllureHelper.logBrowserInfo(driver);
       } else if (result.getStatus() == ITestResult.SUCCESS) {
         LOGGER.info("✅ Test passed - capturing success screenshot...");
-        AllureHelper.captureScreenshot(driver, "SUCCESS-" + result.getName());
+        if (LOGGER.isInfoEnabled()) {
+          AllureHelper.captureScreenshot(driver, "SUCCESS-" + result.getName());
+        }
       } else if (result.getStatus() == ITestResult.SKIP) {
         LOGGER.info("⏭️  Test skipped");
       }
 
-      LOGGER.info("\nClosing {} browser...", currentBrowser.toUpperCase(Locale.ENGLISH));
+      if (LOGGER.isInfoEnabled()) {
+        LOGGER.info("\nClosing {} browser...", currentBrowser.toUpperCase(Locale.ENGLISH));
+      }
       driver.quit();
       LOGGER.info("Browser closed successfully");
       LOGGER.info("========================================\n");

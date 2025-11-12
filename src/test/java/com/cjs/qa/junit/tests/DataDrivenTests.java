@@ -60,7 +60,7 @@ public class DataDrivenTests {
     options.addArguments("--disable-gpu");
 
     driver = new RemoteWebDriver(new URL(gridUrl), options);
-    LOGGER.info("✅ Driver initialized in " + (isHeadless ? "headless" : "headed") + " mode");
+    LOGGER.info("✅ Driver initialized in {} mode", isHeadless ? "headless" : "headed");
     LOGGER.info("✅ Driver initialized");
   }
 

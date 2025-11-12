@@ -13,8 +13,12 @@ public class QALogger extends Throwable {
   }
 
   public QALogger(String message, Exception e) {
-    LOG.debug(message + Constants.NEWLINE + e);
-    LOGGER.debug(message + Constants.NEWLINE + e);
+    if (LOG.isDebugEnabled()) {
+      LOG.debug(message + Constants.NEWLINE + e);
+    }
+    if (LOGGER.isDebugEnabled()) {
+      LOGGER.debug(message + Constants.NEWLINE + e);
+    }
   }
 
   public QALogger(String message) {

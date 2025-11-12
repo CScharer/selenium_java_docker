@@ -65,7 +65,7 @@ public class SmokeTests {
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
 
-    LOGGER.info("✅ Driver initialized in " + (isHeadless ? "headless" : "headed") + " mode");
+    LOGGER.info("✅ Driver initialized in {} mode", isHeadless ? "headless" : "headed");
   }
 
   @Test(priority = 1, groups = "smoke")

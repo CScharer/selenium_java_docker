@@ -814,6 +814,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: [smoke-tests, selenium-grid-tests, mobile-browser-tests, responsive-design-tests, code-quality, docker-build]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment:
+      name: development
+      url: https://your-development-url.com
     
     steps:
       - name: Checkout code
@@ -850,6 +853,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: deploy-dev
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment:
+      name: test
+      url: https://your-test-url.com
     
     steps:
       - name: Checkout code

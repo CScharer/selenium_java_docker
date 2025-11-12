@@ -55,7 +55,7 @@ public class AdvancedFeaturesTests {
     options.addArguments("--disable-gpu");
 
     driver = new RemoteWebDriver(new URL(gridUrl), options);
-    LOGGER.info("✅ Driver initialized in " + (isHeadless ? "headless" : "headed") + " mode");
+    LOGGER.info("✅ Driver initialized in {} mode", isHeadless ? "headless" : "headed");
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     LOGGER.info("✅ Driver initialized");
   }
@@ -116,7 +116,9 @@ public class AdvancedFeaturesTests {
     Cookie retrievedCookie = driver.manage().getCookieNamed("test_cookie");
     Assert.assertNotNull(retrievedCookie, "Cookie should be retrievable");
     Assert.assertEquals(retrievedCookie.getValue(), "selenium_test_value");
-    LOGGER.info("Cookie verified: {} = {}", retrievedCookie.getName(), retrievedCookie.getValue());
+    if (LOGGER.isInfoEnabled()) {
+      LOGGER.info("Cookie verified: {} = {}", retrievedCookie.getName(), retrievedCookie.getValue());
+    }
 
     Allure.step("Delete specific cookie");
     driver.manage().deleteCookie(customCookie);

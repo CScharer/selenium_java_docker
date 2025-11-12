@@ -31,9 +31,9 @@ public class AllureHelper {
       try {
         byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         Allure.addAttachment(name, "image/png", new ByteArrayInputStream(screenshot), ".png");
-        LOGGER.info("📸 Screenshot captured: " + name);
+        LOGGER.info("📸 Screenshot captured: {}", name);
       } catch (Exception e) {
-        LOGGER.error("⚠️  Failed to capture screenshot: " + e.getMessage());
+        LOGGER.error("⚠️  Failed to capture screenshot: {}", e.getMessage());
       }
     }
   }
@@ -59,7 +59,7 @@ public class AllureHelper {
       try {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
       } catch (Exception e) {
-        LOGGER.error("⚠️  Failed to capture screenshot: " + e.getMessage());
+        LOGGER.error("⚠️  Failed to capture screenshot: {}", e.getMessage());
         return new byte[0];
       }
     }
@@ -115,7 +115,7 @@ public class AllureHelper {
         attachText("Browser Info", info);
         LOGGER.info("ℹ️  Browser info logged to Allure");
       } catch (Exception e) {
-        LOGGER.error("⚠️  Failed to log browser info: " + e.getMessage());
+        LOGGER.error("⚠️  Failed to log browser info: {}", e.getMessage());
       }
     }
   }
@@ -132,7 +132,7 @@ public class AllureHelper {
         attachHtml("Page Source", pageSource);
         LOGGER.info("📄 Page source attached to Allure");
       } catch (Exception e) {
-        LOGGER.error("⚠️  Failed to attach page source: " + e.getMessage());
+        LOGGER.error("⚠️  Failed to attach page source: {}", e.getMessage());
       }
     }
   }

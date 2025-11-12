@@ -59,7 +59,7 @@ public class NegativeTests {
     options.addArguments("--disable-gpu");
 
     driver = new RemoteWebDriver(new URL(gridUrl), options);
-    LOGGER.info("✅ Driver initialized in " + (isHeadless ? "headless" : "headed") + " mode");
+    LOGGER.info("✅ Driver initialized in {} mode", isHeadless ? "headless" : "headed");
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     LOGGER.info("✅ Driver initialized");
   }
@@ -126,7 +126,9 @@ public class NegativeTests {
       LOGGER.info("✅ Invalid URL handled by browser");
 
     } catch (Exception e) {
-      LOGGER.info("Exception caught during invalid URL navigation: {}", e.getMessage());
+      if (LOGGER.isInfoEnabled()) {
+        LOGGER.info("Exception caught during invalid URL navigation: {}", e.getMessage());
+      }
       AllureHelper.captureScreenshot(driver, "Invalid-URL-Exception");
       // This is acceptable behavior
     }
@@ -271,7 +273,9 @@ public class NegativeTests {
       LOGGER.info("Correctly caught StaleElementReferenceException");
       staleElementCaught = true;
     } catch (Exception e) {
-      LOGGER.info("Caught different exception: {}", e.getClass().getSimpleName());
+      if (LOGGER.isInfoEnabled()) {
+        LOGGER.info("Caught different exception: {}", e.getClass().getSimpleName());
+      }
       // Still acceptable
       staleElementCaught = true;
     }
