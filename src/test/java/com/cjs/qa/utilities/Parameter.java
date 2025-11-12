@@ -8,9 +8,11 @@ public class Parameter {
   private Object value = null;
 
   /**
-   * Default constructor.
+   * Default constructor for data binding and instantiation.
    */
-  public Parameter() { }
+  public Parameter() {
+    // Default constructor for data binding
+  }
 
   public Parameter(Integer index, String name, String type, Object value) {
     this.index = index;

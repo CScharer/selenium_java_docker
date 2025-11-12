@@ -20,9 +20,11 @@ public class Forums {
   private String forumURL;
 
   /**
-   * Default constructor.
+   * Default constructor for data binding and instantiation.
    */
-  public Forums() { }
+  public Forums() {
+    // Default constructor for data binding
+  }
 
   public Forums(
       String groupName,

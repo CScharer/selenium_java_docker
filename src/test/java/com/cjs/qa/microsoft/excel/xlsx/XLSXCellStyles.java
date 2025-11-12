@@ -20,9 +20,11 @@ public class XLSXCellStyles {
   private CellStyle styleObject;
 
   /**
-   * Default constructor.
+   * Default constructor for data binding and style management.
    */
-  public XLSXCellStyles() { }
+  public XLSXCellStyles() {
+    // Default constructor for data binding
+  }
 
   public XLSXCellStyles(int styleIndex, String styleName, CellStyle styleObject)
       throws QAException {

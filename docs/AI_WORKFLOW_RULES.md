@@ -83,13 +83,13 @@ Only after ALL verifications pass:
      - Commit hash: `[hash]` (use placeholder if not yet committed)
      - Summary title
      - Overview section with high-level summary
-     - **Cursor Token Status:** `Tokens Used: X / Total: Y (Z remaining)`
+     - **Cursor Token Status:** `Tokens Used: X / Total: Y (Z remaining, A% used, B% remaining)`
      - List of commits in session (if multiple)
      - Detailed changes, files modified, verification results
      - Impact summary and next steps
    - Format: Follow existing CHANGE.log structure
    - Content: Include all changes since last entry
-   - **Token tracking:** Always include current token usage for session visibility
+   - **Token tracking:** Always include current token usage with percentages for session visibility
    
 2. ✅ Stage changes: `git add -A` (including docs/CHANGE.log)
 3. ✅ Commit with descriptive message following established format

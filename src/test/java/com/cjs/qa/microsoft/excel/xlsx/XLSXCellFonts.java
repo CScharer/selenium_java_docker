@@ -14,9 +14,11 @@ public class XLSXCellFonts {
   private String fontName;
 
   /**
-   * Default constructor.
+   * Default constructor for data binding and font management.
    */
-  public XLSXCellFonts() { }
+  public XLSXCellFonts() {
+    // Default constructor for data binding
+  }
 
   public XLSXCellFonts(Font fontObject, String fontName) throws QAException {
     this.fontObject = fontObject;

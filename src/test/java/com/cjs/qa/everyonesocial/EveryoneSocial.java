@@ -64,9 +64,11 @@ public class EveryoneSocial {
   }
 
   /**
-   * Default constructor.
+   * Default constructor for data binding and instantiation.
    */
-  public EveryoneSocial() { }
+  public EveryoneSocial() {
+    // Default constructor for data binding
+  }
 
   public EveryoneSocial(WebDriver webDriver) {
     setWebDriver(webDriver);

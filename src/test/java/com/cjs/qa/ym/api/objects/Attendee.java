@@ -12,9 +12,11 @@ public class Attendee {
   private DataSet dataSet;
 
   /**
-   * Default constructor.
+   * Default constructor for data binding and instantiation.
    */
-  public Attendee() { }
+  public Attendee() {
+    // Default constructor for data binding
+  }
 
   public Attendee(
       String registerID,

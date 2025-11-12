@@ -19,9 +19,11 @@ public class GroupLeaderLink {
   private String leaderType;
 
   /**
-   * Default constructor.
+   * Default constructor for data binding and instantiation.
    */
-  public GroupLeaderLink() { }
+  public GroupLeaderLink() {
+    // Default constructor for data binding
+  }
 
   public GroupLeaderLink(
       String groupType, String pageID, String webSiteMemberID, String leaderType) {

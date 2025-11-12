@@ -18,9 +18,11 @@ public class Leaders {
   private String href;
 
   /**
-   * Default constructor.
+   * Default constructor for data binding and instantiation.
    */
-  public Leaders() { }
+  public Leaders() {
+    // Default constructor for data binding
+  }
 
   public Leaders(String webSiteMemberID, String leaderName, String href) {
     this.webSiteMemberID = webSiteMemberID;

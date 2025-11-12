@@ -36,9 +36,11 @@ public class Groups {
       "GroupDirectoryURL;CalendarURL;BlogsURL;ForumsURL;PhotoGalleryURL";
 
   /**
-   * Default constructor.
+   * Default constructor for data binding and instantiation.
    */
-  public Groups() { }
+  public Groups() {
+    // Default constructor for data binding
+  }
 
   public Groups(
       String groupType,

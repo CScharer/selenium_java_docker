@@ -19,9 +19,11 @@ public class Blogs {
   private String blogURL;
 
   /**
-   * Default constructor.
+   * Default constructor for data binding and instantiation.
    */
-  public Blogs() { }
+  public Blogs() {
+    // Default constructor for data binding
+  }
 
   public Blogs(
       String groupName,

@@ -19,9 +19,11 @@ public class Calendars {
   private String eventURL;
 
   /**
-   * Default constructor.
+   * Default constructor for data binding and instantiation.
    */
-  public Calendars() { }
+  public Calendars() {
+    // Default constructor for data binding
+  }
 
   private static String appendRecord(String tableName, List<String> fieldsList, Calendars record) {
     StringBuilder stringBuilder = new StringBuilder();

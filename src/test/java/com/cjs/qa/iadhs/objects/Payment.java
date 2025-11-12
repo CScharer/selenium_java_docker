@@ -54,9 +54,11 @@ public class Payment {
   private String typeOfPayment;
 
   /**
-   * Default constructor.
+   * Default constructor for data binding and instantiation.
    */
-  public Payment() { }
+  public Payment() {
+    // Default constructor for data binding
+  }
 
   public Payment(
       String paymentWithheld,

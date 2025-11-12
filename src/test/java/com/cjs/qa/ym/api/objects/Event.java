@@ -10,9 +10,11 @@ public class Event {
   private List<Registration> registrationList;
 
   /**
-   * Default constructor.
+   * Default constructor for data binding and instantiation.
    */
-  public Event() { }
+  public Event() {
+    // Default constructor for data binding
+  }
 
   public Event(String eventDate, String eventID, String eventName) {
     this.eventDate = eventDate;
