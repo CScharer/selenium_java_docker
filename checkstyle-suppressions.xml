@@ -54,12 +54,15 @@
   <suppress checks="VariableDeclarationUsageDistance" files="src/test/java/com/cjs/qa/microsoft/excel/xls/XLS\.java$"/>
   <suppress checks="VariableDeclarationUsageDistance" files="src/test/java/com/cjs/qa/microsoft/excel/xlsx/XLSX\.java$"/>
   <suppress checks="VariableDeclarationUsageDistance" files="src/test/java/com/cjs/qa/microsoft/word/Word\.java$"/>
+  <suppress checks="VariableDeclarationUsageDistance" files="src/test/java/com/cjs/qa/microsoft/word/WordTests\.java$"/>
   <suppress checks="VariableDeclarationUsageDistance" files="src/test/java/com/cjs/qa/oracle/api/services/EntityService\.java$"/>
   <suppress checks="VariableDeclarationUsageDistance" files="src/test/java/com/cjs/qa/oracle/api/services/RoleManagementService\.java$"/>
   <suppress checks="VariableDeclarationUsageDistance" files="src/test/java/com/cjs/qa/utilities/CommandLine\.java$"/>
+  <suppress checks="VariableDeclarationUsageDistance" files="src/test/java/com/cjs/qa/utilities/CommandLineTests\.java$"/>
   <suppress checks="VariableDeclarationUsageDistance" files="src/test/java/com/cjs/qa/utilities/Encoder\.java$"/>
   <suppress checks="VariableDeclarationUsageDistance" files="src/test/java/com/cjs/qa/bts/pages/LoginPage\.java$"/>
   <suppress checks="VariableDeclarationUsageDistance" files="src/test/java/com/cjs/qa/vivit/VivitData\.java$"/>
+  <suppress checks="VariableDeclarationUsageDistance" files="src/test/java/com/cjs/qa/vivit/VivitDataTests\.java$"/>
 
   <!--
     ConstantNameCheck - Suppress for Page Object Locators

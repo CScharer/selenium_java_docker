@@ -54,7 +54,7 @@ public class GTWebinarDataTests extends Environment {
     sysOut(Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
   }
 
-  private static void pullFromGTWebinar(String _dateTimeFrom) {
+  private static void pullFromGTWebinar(String dateTimeFrom) {
     // Parameter reserved for future implementation
     sysOut(Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
   }
