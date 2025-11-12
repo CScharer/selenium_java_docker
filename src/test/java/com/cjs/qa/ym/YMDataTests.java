@@ -480,7 +480,7 @@ public class YMDataTests extends Environment {
         xml = FSOTests.fileReadAll(filePathName);
         int recordCount = getEventMapListAll(xml).size();
         sysOut("recordCount:[" + recordCount + "], filePathName:[" + filePathName + "]");
-        recordsExist = (recordCount > 0);
+        recordsExist = recordCount > 0;
         pageRecordStart += EventsNamespace.PAGES_MAX;
       } while (recordsExist);
       // mapResults = allSearch(null, 100, 701)
@@ -1181,7 +1181,7 @@ public class YMDataTests extends Environment {
             if ((recordNumber % recordLimitDebug) == 0) {
               sysOut(JavaHelpers.getCurrentMethodName() + "-Records:[" + recordNumber + "]");
             }
-            if ((recordNumber % recordLimitInsert) == 0) {
+            if (recordNumber % recordLimitInsert == 0) {
               sqlStringBuilderList.add(sqlStringBuilder);
               sqlStringBuilder = new StringBuilder();
             }

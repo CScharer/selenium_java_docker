@@ -241,7 +241,7 @@ public final class YMAPIMethodsTests {
         final List<String> listMethod =
             Arrays.asList(callMethod.split(Constants.DELIMETER_PATH + "."));
         final String methodNameSpace = listMethod.get(0) + "Namespace";
-        String methodName = listMethod.get((listMethod.size() - 1));
+        String methodName = listMethod.get(listMethod.size() - 1);
         methodName = methodName.substring(0, 1).toLowerCase(Locale.ENGLISH) + methodName.substring(1);
         final String methodDescription = mapMethod.get(LABEL_DESCRIPTION);
         final String methodURL = mapMethod.get("URL");
@@ -480,7 +480,7 @@ public final class YMAPIMethodsTests {
     try {
       String description =
           pageText.substring(
-              (pageText.indexOf(methodName) + methodName.length()), pageText.indexOf("Parameters"));
+              pageText.indexOf(methodName) + methodName.length(), pageText.indexOf("Parameters"));
       description = description.trim();
       description = description.replaceAll("'", "''");
       mapValues.put("description", description);
@@ -500,7 +500,7 @@ public final class YMAPIMethodsTests {
     try {
       String exampleRequest =
           pageText.substring(
-              (pageText.indexOf("Example XML Request")), pageText.indexOf("Example XML Response"));
+              pageText.indexOf("Example XML Request"), pageText.indexOf("Example XML Response"));
       exampleRequest = exampleRequest.trim();
       exampleRequest = exampleRequest.replaceAll("'", "''");
       mapValues.put("exampleRequest", exampleRequest);
@@ -513,7 +513,7 @@ public final class YMAPIMethodsTests {
     try {
       String exampleResponse =
           pageText.substring(
-              (pageText.indexOf("Example XML Response")), pageText.indexOf("See Also"));
+              pageText.indexOf("Example XML Response"), pageText.indexOf("See Also"));
       exampleResponse = exampleResponse.trim();
       exampleResponse = exampleResponse.replaceAll("'", "''");
       mapValues.put("exampleResponse", exampleResponse);

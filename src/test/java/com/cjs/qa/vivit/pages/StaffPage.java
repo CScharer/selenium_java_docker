@@ -139,7 +139,7 @@ public class StaffPage extends Page {
           break;
         }
       }
-      staffDetails.setProfile(pageTextArray[(pageTextArray.length - 1)]);
+      staffDetails.setProfile(pageTextArray[pageTextArray.length - 1]);
       Environment.sysOut(staffDetails.toString());
     }
   }

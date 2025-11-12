@@ -167,7 +167,7 @@ public class ClaimsAndSpendingPage extends Page {
         final WebElement cell = getWebDriver().findElement(By.xpath(xPath));
         // Environment.sysOut(cell.toString())
         final String value = cell.getText().trim();
-        Environment.sysOut(listHeadings.get((index)) + ":[" + value + "]");
+        Environment.sysOut(listHeadings.get(index) + ":[" + value + "]");
         if (index != 0) {
           stringBuilder.append(",");
         }

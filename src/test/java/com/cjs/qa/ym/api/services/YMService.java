@@ -41,8 +41,8 @@ public class YMService {
             (HttpURLConnection) new URL(URL_YM).openConnection();
         httpUrlConnection.setRequestMethod("HEAD");
         final int responseCode = httpUrlConnection.getResponseCode();
-        if (!((responseCode >= HttpURLConnection.HTTP_OK)
-            && (responseCode < HttpURLConnection.HTTP_BAD_REQUEST))) {
+        if (!(responseCode >= HttpURLConnection.HTTP_OK
+            && responseCode < HttpURLConnection.HTTP_BAD_REQUEST)) {
           Environment.sysOut(
               CONNECTED_TO
                   + URL_YM
@@ -63,8 +63,8 @@ public class YMService {
                 + ":"
                 + IHTTP.getResponseValue(responseCode)
                 + "].",
-            ((responseCode >= HttpURLConnection.HTTP_OK)
-                && (responseCode < HttpURLConnection.HTTP_BAD_REQUEST)));
+            (responseCode >= HttpURLConnection.HTTP_OK
+                && responseCode < HttpURLConnection.HTTP_BAD_REQUEST));
         Environment.sysOut(
             CONNECTED_TO
                 + URL_YM
