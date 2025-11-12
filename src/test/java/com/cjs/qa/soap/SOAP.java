@@ -44,7 +44,7 @@ public class SOAP {
   public SOAPMessage getSoapMessageFromString(String xml) throws IOException, SOAPException {
     final MessageFactory messageFactory = MessageFactory.newInstance();
     return messageFactory.createMessage(
-            new MimeHeaders(), new ByteArrayInputStream(xml.getBytes(Charset.forName("UTF-8"))));
+            new MimeHeaders(), new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
   }
 
   public String getAPIXMLRequest(SOAPMessage soapMessage) throws QAException {

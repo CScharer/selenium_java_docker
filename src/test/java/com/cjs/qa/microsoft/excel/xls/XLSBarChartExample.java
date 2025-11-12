@@ -60,8 +60,11 @@ public final class XLSBarChartExample {
             case NUMERIC:
               number = cell.getNumericCellValue();
               break;
-            default:
             case STRING:
+              label = cell.getStringCellValue();
+              break;
+            default:
+              // Default to string value
               label = cell.getStringCellValue();
               break;
           }

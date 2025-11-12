@@ -2,6 +2,7 @@ package com.cjs.qa.core;
 
 import com.cjs.qa.utilities.JavaHelpers;
 
+@SuppressWarnings("PMD.DoNotExtendJavaLangThrowable") // Custom exception design
 public class QAException extends Throwable {
   public static final String ERROR = "***ERROR***:";
   private static final long serialVersionUID = 1L;

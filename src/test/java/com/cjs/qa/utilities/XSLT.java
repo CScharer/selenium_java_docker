@@ -15,7 +15,9 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 public class XSLT {
-  public void main(String[] args) throws IOException, URISyntaxException, TransformerException { }
+  public void main(String[] args) throws IOException, URISyntaxException, TransformerException {
+    // Placeholder main method - not currently used
+  }
 
   private String fileInput = null;
   private String fileOutput = null;

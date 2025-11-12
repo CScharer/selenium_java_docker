@@ -20,6 +20,7 @@ public class XLSBarChart extends XLS {
   private String fileName = "";
   private String sheet = "";
 
+  @Override
   public String getFileName() {
     return fileName;
   }

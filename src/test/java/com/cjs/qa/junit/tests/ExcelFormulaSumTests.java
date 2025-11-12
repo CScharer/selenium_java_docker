@@ -80,8 +80,8 @@ public class ExcelFormulaSumTests {
     }
   }
 
-  private static HashMap<String, Integer> getColumns() {
-    HashMap<String, Integer> columns = new HashMap<>();
+  private static Map<String, Integer> getColumns() {
+    Map<String, Integer> columns = new HashMap<>();
     columns.put("Summaries (Passed)", columns.size());
     columns.put("Summaries (Failed)", columns.size());
     columns.put("Coverages (Passed)", columns.size());

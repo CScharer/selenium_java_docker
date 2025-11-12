@@ -74,7 +74,7 @@ public class WebDriverUtils {
     final String encodedValue = encoder.getEncodedValue("");
     final String decodedValue = encoder.getDecodedValue(encodedValue, "");
     name += "_" + encodedValue + "_" + decodedValue;
-    if (!(driver == null)) {
+    if (driver != null) {
       final File screenShotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
       try {
         FileUtils.copyFile(screenShotFile, new File(path + name + "." + extension));

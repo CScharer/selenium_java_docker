@@ -180,7 +180,7 @@ public class VivitDataTests extends Environment {
       if (viewIndex < (viewsList.size() - 1)) {
         stringHTML += Constants.NEWLINE;
       }
-      FSOTests.fileWrite(fileStandardTable, stringHTML, !(viewIndex == 0));
+      FSOTests.fileWrite(fileStandardTable, stringHTML, viewIndex != 0);
       String xml = XML.formatPretty(stringHTML);
       sysOut(xml);
     }

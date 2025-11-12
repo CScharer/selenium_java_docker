@@ -775,7 +775,7 @@ public class JavaHelpers {
    * @param iterable
    * @return
    */
-  public static boolean isSorted(ArrayList<String> iterable) {
+  public static boolean isSorted(List<String> iterable) {
     final Iterator<String> iterator = iterable.iterator();
     if (!iterator.hasNext()) {
       return true;
@@ -1035,7 +1035,7 @@ public class JavaHelpers {
       return FSOTests.fileReadAll(filePathName);
     } catch (final Exception e) {
       throw new QAException(
-          "Failure reading in readPDF:" + Constants.NL + JavaHelpers.getStackTrace(e));
+          "Failure reading in readPDF:" + Constants.NL + JavaHelpers.getStackTrace(e), e);
     }
   }
 

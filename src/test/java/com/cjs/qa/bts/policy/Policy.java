@@ -35,7 +35,9 @@ public class Policy {
     return dateTimeStamp;
   }
 
-  public static void main(String[] args) { }
+  public static void main(String[] args) {
+    // Placeholder main method - not currently used
+  }
 
   public Policy(String policy) {
     this.computerName = Environment.getComputerName();

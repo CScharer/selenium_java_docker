@@ -195,12 +195,12 @@ public final class Convert {
     final int remainder = number % MAX_NUMBER;
     if (number >= MAX_NUMBER) {
       // stringBuilder.append(String.valueOf(instancesOfMax + 64));
-      stringBuilder.append(new Character((char) (instancesOfMax + 64)).toString());
+      stringBuilder.append(Character.toString((char) (instancesOfMax + 64)));
       number = remainder;
     }
     if (number >= 0) {
       // stringBuilder.append(String.valueOf(instancesOfMax + 65));
-      stringBuilder.append(new Character((char) (number + 65)).toString());
+      stringBuilder.append(Character.toString((char) (number + 65)));
     }
     return stringBuilder.toString();
   }

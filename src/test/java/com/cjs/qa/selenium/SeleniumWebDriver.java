@@ -549,7 +549,6 @@ public class SeleniumWebDriver {
             // Safari driver is bundled with Safari - no WebDriverManager needed
             setWebDriver(new SafariDriver());
             break;
-          default:
           case Browser.CHROME:
             // WebDriverManager automatically downloads and sets up Chrome driver
             WebDriverManager.chromedriver().setup();
@@ -559,6 +558,12 @@ public class SeleniumWebDriver {
             final ChromeOptions chromeOptions = setChromeOptions(null, null);
             setWebDriver(new ChromeDriver(chromeOptions));
             // setWebDriver(new ChromeDriver(desiredCapabilities));
+            break;
+          default:
+            // Default to Chrome
+            WebDriverManager.chromedriver().setup();
+            final ChromeOptions defaultChromeOptions = setChromeOptions(null, null);
+            setWebDriver(new ChromeDriver(defaultChromeOptions));
             break;
         }
       }

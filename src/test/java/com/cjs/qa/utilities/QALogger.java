@@ -2,6 +2,7 @@ package com.cjs.qa.utilities;
 
 import org.apache.log4j.Logger;
 
+@SuppressWarnings("PMD.DoNotExtendJavaLangThrowable") // Custom logging exception design
 public class QALogger extends Throwable {
   private static final long serialVersionUID = 1L;
   private static final Logger LOG = Logger.getLogger(QALogger.class);

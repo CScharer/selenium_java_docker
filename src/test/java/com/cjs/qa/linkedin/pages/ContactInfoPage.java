@@ -29,7 +29,7 @@ public class ContactInfoPage extends Page {
 
   private String linkedInURL = null;
   private WebElement webElementSection = null;
-  private StringBuilder sqlStringBuilder = new StringBuilder();
+  private StringBuilder sqlStringBuilder = new StringBuilder(); // NOPMD - Intentional mutable field for SQL building across methods
   private List<Map<String, String>> linkedInConnectionContactInfoListMap = new ArrayList<>();
   private Map<String, String> contactInfoMap = new HashMap<>();
 

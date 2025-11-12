@@ -177,9 +177,7 @@ public class WordTests {
           xwpfDocument.write(fileOutputStream);
         }
       }
-    } catch (final FileNotFoundException e) {
-      e.printStackTrace();
-    } catch (final IOException e) {
+    } catch (final FileNotFoundException | IOException e) {
       e.printStackTrace();
     }
   }
