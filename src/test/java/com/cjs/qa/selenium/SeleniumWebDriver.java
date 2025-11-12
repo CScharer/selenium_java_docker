@@ -400,7 +400,7 @@ public class SeleniumWebDriver {
           Environment.sysOut("webDriverVersion:[" + webDriverVersion + "]");
         }
       }
-    } catch (Exception e) {
+    } catch (Throwable e) {  // PMD suppression: getWebDriverProcesses() explicitly throws Throwable
       Environment.sysOut("throwable:[" + e.toString() + "]");
     }
   }
