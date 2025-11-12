@@ -22,7 +22,7 @@ public class BiAPlusFarmPage extends Page {
   private final By dropdownSelectthePriorPolicyPrefix = By.id("PRI_POL_PRE");
   private final By editEnterthePriorPolicyNumber = By.id("PRI_POL_NUM");
   private final By editEnterthePriorPolicyMod = By.id("PRI_POL_MOD");
-  private final String pageTitle = "BI_APlusFarmPage";
+  private static final String pageTitle = "BI_APlusFarmPage";
 
   private String getPageTitle() {
     return pageTitle;

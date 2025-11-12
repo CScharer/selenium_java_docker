@@ -18,7 +18,7 @@ import org.openqa.selenium.WebDriver;
 public class WebDriverUtils {
   // final String PATH_SCREENSHOTS = "C:" + Constants.DELIMETER_PATH + "Temp"
   // + Constants.DELIMETER_PATH + "Screenshots" + Constants.DELIMETER_PATH;
-  private final String pathScreenshots = "./target/reports/Screenshots/";
+  private static final String pathScreenshots = "./target/reports/Screenshots/";
   private WebDriver driver;
 
   public WebDriverUtils(WebDriver driver) {

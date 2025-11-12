@@ -38,7 +38,7 @@ public class AmendPage extends Page {
   private final By buttonRemove = By.id("amendForm:btnLeft");
   private final By buttonOK = By.id("amendForm:buttonOk");
   private final By buttonCancel = By.id("amendForm:cancelBtn");
-  private final String pageTitle = "AmendPage";
+  private static final String pageTitle = "AmendPage";
 
   private String getPageTitle() {
     return pageTitle;

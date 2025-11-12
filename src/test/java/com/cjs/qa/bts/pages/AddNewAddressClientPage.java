@@ -44,7 +44,7 @@ public class AddNewAddressClientPage extends Page {
   private final By buttonAdd = By.id("form1:availableList:addressPanelId:btnAdd");
   private final By buttonDelete = By.id("form1:availableList:addressPanelId:btnDelete");
   private final By buttonSave = By.id("form1:availableList:addressPanelId:btnSave");
-  private final String pageTitle = "AddNewAddressClientPage";
+  private static final String pageTitle = "AddNewAddressClientPage";
 
   private String getPageTitle() {
     return pageTitle;

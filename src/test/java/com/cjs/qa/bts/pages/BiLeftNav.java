@@ -30,7 +30,7 @@ public class BiLeftNav extends Page {
   private final By buttonNotes = By.id("notesId");
   private final By buttonPolicyDocuments = By.id("policyDocumentsId");
   private final By buttonExportExcel = By.xpath(".//*[@id='viewport']/div[2]/div/a/span");
-  private final String pageTitle = "BI_LeftNav";
+  private static final String pageTitle = "BI_LeftNav";
 
   private String getPageTitle() {
     return pageTitle;

@@ -35,7 +35,7 @@ public class SearchPage extends Page {
   private final By buttonClear = By.id("clearButton");
   private final By dropdownLogin =
       By.xpath("//button[contains(@class,'btn-primary')][@data-toggle='Dropdown']");
-  private final String pageTitle = "SearchPage";
+  private static final String pageTitle = "SearchPage";
 
   private String getPageTitle() {
     return pageTitle;

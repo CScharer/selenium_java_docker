@@ -22,7 +22,7 @@ public class BiAdvantagePage extends Page {
   private final By editNumberOfLossesProperty = By.id("NUM_LOSE_PROP");
   private final By editNumberOfEmployees = By.id("NUM_EMP");
   private final By buttonFrame = By.id("advantage-title");
-  private final String pageTitle = "BI_AdvantagePage";
+  private static final String pageTitle = "BI_AdvantagePage";
 
   private String getPageTitle() {
     return pageTitle;

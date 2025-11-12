@@ -15,7 +15,7 @@ public class PolicyIssuancePage extends Page {
   private final By buttonBind = By.id("BindBind");
   private final By buttonIssue = By.id("form1:cplProcessedResults:buttonRate");
   private final By buttonRequestPrint = By.id("requestPrintLink");
-  private final String pageTitle = "PolicyIssuancePage";
+  private static final String pageTitle = "PolicyIssuancePage";
 
   private String getPageTitle() {
     return pageTitle;

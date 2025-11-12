@@ -15,7 +15,7 @@ public class BiButtonsPage extends Page {
   private final By buttonQuickScroll = By.id("quickScroll");
   private final By buttonOpenCloseLeftNav =
       By.xpath("html/body/div[1]/nav/div/div[1]/div[1]/button");
-  private final String pageTitle = "BI_ButtonsPage";
+  private static final String pageTitle = "BI_ButtonsPage";
 
   private String getPageTitle() {
     return pageTitle;

@@ -21,7 +21,7 @@ public class BiCollectorCarPage extends Page {
   private final By checkboxPolicyManuallyEntered = By.id("SRC_BUS");
   private final By editReferral = By.id("REFRL");
   private final By dropdownException = By.id("EXCPTN");
-  private final String pageTitle = "BI_CollectorCarPage";
+  private static final String pageTitle = "BI_CollectorCarPage";
 
   private String getPageTitle() {
     return pageTitle;

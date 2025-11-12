@@ -11,7 +11,7 @@ public class BiBillingPage extends Page {
 
   private final By numberOfGroupMembers = By.id("NUM_GRP_MBR");
   private final By buttonFrame = By.id("billing-title");
-  private final String pageTitle = "BI_BillingPage";
+  private static final String pageTitle = "BI_BillingPage";
 
   private String getPageTitle() {
     return pageTitle;

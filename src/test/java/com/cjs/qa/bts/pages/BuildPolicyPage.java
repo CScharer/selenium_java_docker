@@ -33,7 +33,7 @@ public class BuildPolicyPage extends Page {
   private final By editSequenceNumber = By.id("policyNbrSeqBI");
   private final By buttonSave = By.id("button1");
   private final By buttonCancel = By.id("button2");
-  private final String pageTitle = "BuildPolicyPage";
+  private static final String pageTitle = "BuildPolicyPage";
 
   private String getPageTitle() {
     return pageTitle;

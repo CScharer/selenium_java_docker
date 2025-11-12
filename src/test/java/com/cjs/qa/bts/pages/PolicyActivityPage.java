@@ -10,9 +10,9 @@ public class PolicyActivityPage extends Page {
     super(webDriver);
   }
 
-  private final String addRtnPrem = ".//*/tr[contains(.,'";
+  private static final String addRtnPrem = ".//*/tr[contains(.,'";
   private final By exitPolicySearch = By.xpath(".//*[@id='requestLinkSearch1']");
-  private final String pageTitle = "Genesys - Policy Activity";
+  private static final String pageTitle = "Genesys - Policy Activity";
 
   public String getPageTitle() {
     return pageTitle;

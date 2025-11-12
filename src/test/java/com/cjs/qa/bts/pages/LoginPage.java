@@ -63,13 +63,13 @@ public class LoginPage extends Page {
   private final By editUserName = By.id("username");
   private final By editPassword = By.id("password");
   private final By buttonSubmit = By.id("//button[.='Submit']");
-  private final String pageTitle = "LoginPage";
+  private static final String pageTitle = "LoginPage";
 
   private String getPageTitle() {
     return pageTitle;
   }
 
-  private final String loginTitle = "Login";
+  private static final String loginTitle = "Login";
 
   private String getLoginTitle() {
     return loginTitle;

@@ -18,7 +18,7 @@ public class CopyPolicyPage extends Page {
     super(webDriver);
   }
 
-  private final String nodeCopyPolicy = "form1:copyPolicy:";
+  private static final String nodeCopyPolicy = "form1:copyPolicy:";
   private final By editEffectiveDate = By.id(nodeCopyPolicy + "effectiveDtBI");
   // private By dropdownEffectiveDate = By.id(nodeCopyPolicy + "termBI");
   private final By dropdownTerm = By.id(nodeCopyPolicy + "termBI");
@@ -42,7 +42,7 @@ public class CopyPolicyPage extends Page {
   private final By buttonCancel = By.id(nodeCopyPolicy + "cancelBtn");
   private final By buttonCopySuccess = By.xpath("*//button[@type='button']//span[.='OK']");
   private final By buttonPendingChangesOK = By.xpath(".//*/span[.='OK']");
-  private final String pageTitle = "CopyPolicyPage";
+  private static final String pageTitle = "CopyPolicyPage";
 
   private String getPageTitle() {
     return pageTitle;

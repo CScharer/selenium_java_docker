@@ -25,7 +25,7 @@ public class SearchResultsPage extends Page {
   // By.xpath("html/body/div[4]/div[2]/div/div[1]/div[2]/div[1]/div[2]/ul/li/div/div[1]/ul/li[10]/a/div[2]")
   private final By buttonInquireOnPrompt = By.xpath(".//*[@id='btn-ok']");
   // private final By PolicyToPolicy = By.linkText("Policy To Policy");
-  private final String pageTitle = "SearchResultsPage";
+  private static final String pageTitle = "SearchResultsPage";
 
   private String getPageTitle() {
     return pageTitle;

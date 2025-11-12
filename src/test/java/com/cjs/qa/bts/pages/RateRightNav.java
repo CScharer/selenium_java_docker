@@ -10,10 +10,10 @@ public class RateRightNav extends Page {
   }
 
   // DECLARATIONS
-  private final String nodeForm1Admin = "form1:adminFunctions:";
+  private static final String nodeForm1Admin = "form1:adminFunctions:";
   private final String nodePolicyIssuance = nodeForm1Admin + "policyIssuanceFunctions:";
-  private final String nodeNavigationMenu = ":navigationMenuItem:";
-  private final String nodeMenuCsubmit = "menuCommandSubmittable";
+  private static final String nodeNavigationMenu = ":navigationMenuItem:";
+  private static final String nodeMenuCsubmit = "menuCommandSubmittable";
   private final By sidebarRight = By.xpath(".//*[@id='outer-east-open-btn']");
   private final By linkExitPolicySearch = By.xpath(".//*[@id='requestLinkExitPolicy']");
   private final By linkChangeDates = By.xpath(".//*[@id='requestLinkChangeDates']");

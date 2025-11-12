@@ -15,7 +15,7 @@ public class BiTerrorismPage extends Page {
   private final By editTerrorismFireFollowingPremium = By.id("TRSM_FF_PREM");
   private final By editOtherActsOfTerrorism = By.id("TRSM_OTH_PREM");
   private final By buttonFrame = By.id("terrorism-title");
-  private final String pageTitle = "BI_TerrorismPage";
+  private static final String pageTitle = "BI_TerrorismPage";
 
   private String getPageTitle() {
     return pageTitle;

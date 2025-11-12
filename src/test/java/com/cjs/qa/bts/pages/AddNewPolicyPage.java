@@ -31,7 +31,7 @@ public class AddNewPolicyPage extends Page {
   private final By buttonCancel = By.id(nodePolicyDetails + "button2");
   private final By clickOffDate = By.id(nodePolicyDetails + "buildPolicyGrp");
   private final By editPolicyNumSeq = By.id(nodePolicyDetails + "policyNbrSeqBI");
-  private final String pageTitle = "AddNewPolicyPage";
+  private static final String pageTitle = "AddNewPolicyPage";
 
   private String getPageTitle() {
     return pageTitle;

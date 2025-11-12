@@ -16,7 +16,7 @@ public class AdminFunctionsPage extends Page {
   private final By linkMassNotes = By.id("requestLinkForMassNotes");
   private final By linkViewExportRequests = By.id("requestLinkExportRequest");
   private final By linkQueriesTools = By.id("requestLinkQueriesTools");
-  private final String pageTitle = "AdminFunctionsPage";
+  private static final String pageTitle = "AdminFunctionsPage";
 
   private String getPageTitle() {
     return pageTitle;

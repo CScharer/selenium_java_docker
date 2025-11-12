@@ -17,13 +17,14 @@ public class RatePage extends Page {
     super(webDriver);
   }
 
-  private final String pageTitle = "RatePage";
+  private static final String pageTitle = "RatePage";
 
   private String getPageTitle() {
     return pageTitle;
   }
 
-  private final String nodeProcessedErrs = ".//*[@id='form1:cplProcessedResults:cplProcessedErrs:";
+  private static final String nodeProcessedErrs =
+      ".//*[@id='form1:cplProcessedResults:cplProcessedErrs:";
   private final By labelCustomStatusMsg = By.xpath(nodeProcessedErrs + "customStatusMsg']");
   private final By labelPrintStatus = By.xpath(nodeProcessedErrs + "processTransactionStatus']");
   private final By toggleResults =

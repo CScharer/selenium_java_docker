@@ -12,7 +12,7 @@ public class FormsPage extends Page {
 
   private final String formsListBoxBegin = ".//*/tr[contains(.," + Constants.QUOTE_SINGLE;
   private final String formsListBoxEnd = Constants.QUOTE_SINGLE + ")]/td/input";
-  private final String nodeForms1 = ".//*[@id='form1:forms:";
+  private static final String nodeForms1 = ".//*[@id='form1:forms:";
   private final By buttonOptionalForms = By.xpath(nodeForms1 + "manualFormsBtn']");
   private final By buttonUserDefinedForms = By.xpath(nodeForms1 + "userDefinedFormsBtn']");
   private final By buttonViewExcludedForms = By.xpath(nodeForms1 + "forms:excludedFormsBtn']");
@@ -20,7 +20,7 @@ public class FormsPage extends Page {
       By.xpath(nodeForms1 + "forms:variableDataBtnGroup']/div[6]/input");
   private final By buttonDelete = By.xpath(nodeForms1 + "forms:deleteBtn']");
   private final By buttonUpdateReprint = By.xpath(".//*[@id='form1:forms:printBtn']");
-  private final String pageTitle = "FormsPage";
+  private static final String pageTitle = "FormsPage";
 
   public String getPageTitle() {
     return pageTitle;

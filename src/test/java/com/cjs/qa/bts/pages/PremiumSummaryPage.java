@@ -23,7 +23,7 @@ public class PremiumSummaryPage extends Page {
   }
 
   // DECLERATIONS
-  private final String nodeViewPort = ".//*[@id='viewport']";
+  private static final String nodeViewPort = ".//*[@id='viewport']";
   // private final String nodePolicyInfoDiv =
   // "/div[1]/div[1]/div[2]/div[1]/div/";
   // private final By textPremium = By.xpath(nodeViewPort +
@@ -43,7 +43,7 @@ public class PremiumSummaryPage extends Page {
   private final By buttonExportExcel = By.xpath(nodeViewPort + "/div[2]/div/a/span");
   private final By subHeaders =
       By.xpath(".//*[@id='productsPanel']/div[5]/div/div[@class='table']/div/..");
-  private final String pageTitle = "PremiumSummaryPage";
+  private static final String pageTitle = "PremiumSummaryPage";
 
   public String getPageTitle() {
     return pageTitle;

@@ -9,7 +9,7 @@ public class RateLeftNavPage extends Page {
     super(webDriver);
   }
 
-  private final String nodeProcessedErrs =
+  private static final String nodeProcessedErrs =
       ".//*[@id='form1:viewNavigationMenu:navigationMenuLevel1:";
   private final By linkManageProducts =
       By.xpath(nodeProcessedErrs + "5:navigationMenuItem:menuLinkSubmittable']/span");

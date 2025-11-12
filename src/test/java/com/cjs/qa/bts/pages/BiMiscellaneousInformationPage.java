@@ -23,7 +23,7 @@ public class BiMiscellaneousInformationPage extends Page {
   private final By editNationalAccountIndicator = By.id("nationalAccountIndicator");
   private final By dropdownReportingCompany = By.id("reportingCompany");
   private final By buttonFrame = By.id("miscInformation-title");
-  private final String pageTitle = "BI_MiscellaneousInformationPage";
+  private static final String pageTitle = "BI_MiscellaneousInformationPage";
 
   private String getPageTitle() {
     return pageTitle;

@@ -17,7 +17,7 @@ public class BiAgencyInformationPage extends Page {
   private final By editProducerCode = By.id("producerCode");
   private final By dropdownProducerName = By.id("producerName");
   private final By buttonFrame = By.id("agencyInformation-title");
-  private final String pageTitle = "BI_AgencyInformationPage";
+  private static final String pageTitle = "BI_AgencyInformationPage";
 
   private String getPageTitle() {
     return pageTitle;

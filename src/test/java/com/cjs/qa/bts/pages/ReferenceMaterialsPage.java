@@ -12,7 +12,7 @@ public class ReferenceMaterialsPage extends Page {
   private final By linkTerritoryInformation = By.id("terrInfoLink");
   private final By linkClientInformation = By.id("clientViewLink");
   private final By linkPayorDetails = By.id("payorViewLink");
-  private final String pageTitle = "ReferenceMaterialsPage";
+  private static final String pageTitle = "ReferenceMaterialsPage";
 
   private String getPageTitle() {
     return pageTitle;

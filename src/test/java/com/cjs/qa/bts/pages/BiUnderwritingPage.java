@@ -61,7 +61,7 @@ public class BiUnderwritingPage extends Page {
   private final By checkboxRapidRenewal = By.id("RPD_RNL");
   private final By editSupportingPolicies = By.id("SUP_POL");
   private final By buttonFrame = By.id("underwriting-title");
-  private final String pageTitle = "BI_UnderwritingPage";
+  private static final String pageTitle = "BI_UnderwritingPage";
 
   private String getPageTitle() {
     return pageTitle;

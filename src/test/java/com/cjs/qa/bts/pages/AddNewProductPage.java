@@ -25,7 +25,7 @@ public class AddNewProductPage extends Page {
   private final By dropdownState = By.id("stateCode");
   private final By buttonAdd = By.id("");
   private final By buttonAddProductCoverages = By.id("");
-  private final String pageTitle = "AddNewProductPage";
+  private static final String pageTitle = "AddNewProductPage";
 
   private String getPageTitle() {
     return pageTitle;

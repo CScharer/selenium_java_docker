@@ -16,7 +16,7 @@ public class ManageProductsPage extends Page {
   private final By dropdownProgram = By.id("programId");
   private final By dropdownRatingCompany = By.id("addProductForm");
   private final By dropdownState = By.id("stateCode");
-  private final String pageTitle = "ManageProductsPage";
+  private static final String pageTitle = "ManageProductsPage";
 
   private String getPageTitle() {
     return pageTitle;

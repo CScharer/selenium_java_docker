@@ -36,7 +36,7 @@ public class BiBasicInfoPage extends Page {
   private final By checkboxMultiPolicy = By.id("multiPolicy");
   private final By editMultiPolicyDiscount = By.id("multiPolicyDiscount");
   private final By buttonFrame = By.id("basicInformation-title");
-  private final String pageTitle = "BI_BasicInfoPage";
+  private static final String pageTitle = "BI_BasicInfoPage";
 
   private String getPageTitle() {
     return pageTitle;

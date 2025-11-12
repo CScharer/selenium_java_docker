@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class Encoder {
-  private final String characters26 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  private final String characters52 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  private static final String characters26 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  private static final String characters52 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   private String characterSet;
 
   public Encoder(String base) {

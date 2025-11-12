@@ -18,12 +18,12 @@ public class NamedInsuredsPage extends Page {
   }
 
   // DECLARATIONS
-  private final String nodeForm1 = "form1:";
+  private static final String nodeForm1 = "form1:";
   private final By buttonAdd = By.id(nodeForm1 + "addInsIntBtn");
   private final By buttonDelete = By.id(nodeForm1 + "deleteNamedInsBtn");
   private final By buttonCreateNewNameSeq = By.id(nodeForm1 + "crteNameSeqButton");
   private final By buttonAddExistNameSeq = By.id(nodeForm1 + "addExistNSeqButton");
-  private final String pageTitle = "NamedInsuredsPage";
+  private static final String pageTitle = "NamedInsuredsPage";
 
   private String getPageTitle() {
     return pageTitle;

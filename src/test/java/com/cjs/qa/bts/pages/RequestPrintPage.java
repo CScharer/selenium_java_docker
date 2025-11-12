@@ -17,7 +17,7 @@ public class RequestPrintPage extends Page {
     super(webDriver);
   }
 
-  private final String nodeRequestPrint = "form1:requestPrint:";
+  private static final String nodeRequestPrint = "form1:requestPrint:";
   private final By dropdownReports = By.id(nodeRequestPrint + "reportId");
   private final By dropdownEffectiveDate = By.id(nodeRequestPrint + "effectiveDtId");
   private final By dropdownProcessedDate = By.id(nodeRequestPrint + "processedDt");
@@ -32,7 +32,7 @@ public class RequestPrintPage extends Page {
       By.id(nodeRequestPrint + "heading3form1:requestPrint:heading3");
   private final By buttonMinimizePrintOptions =
       By.id(nodeRequestPrint + "printPolicyId:printheading");
-  private final String pageTitle = "RequestPrintPage";
+  private static final String pageTitle = "RequestPrintPage";
 
   private String getPageTitle() {
     return pageTitle;

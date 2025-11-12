@@ -9,7 +9,7 @@ public class CPLResultsPage extends Page {
     super(webDriver);
   }
 
-  private final String pageTitle = "CPLResultsPage";
+  private static final String pageTitle = "CPLResultsPage";
 
   private String getPageTitle() {
     return pageTitle;

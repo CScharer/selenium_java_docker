@@ -17,7 +17,7 @@ public class BiBillingInformationPage extends Page {
   private final By dropdownDepositType = By.id("depositType");
   private final By editDepositPercent = By.id("depositPercent");
   private final By buttonFrame = By.id("billingInformation-title");
-  private final String pageTitle = "BI_BillingInformationPage";
+  private static final String pageTitle = "BI_BillingInformationPage";
 
   private String getPageTitle() {
     return pageTitle;
