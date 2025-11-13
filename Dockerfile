@@ -33,7 +33,7 @@ COPY checkstyle-custom.xml checkstyle-suppressions.xml ./
 RUN ./mvnw clean package -DskipTests
 
 # Stage 2: Runtime stage
-FROM eclipse-temurin:17-jdk
+FROM eclipse-temurin:25-jdk
 
 LABEL maintainer="CJS Consulting, L.L.C"
 
