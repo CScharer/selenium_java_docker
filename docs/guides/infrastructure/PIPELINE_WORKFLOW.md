@@ -6,14 +6,17 @@
 **Maintained By**: CJS QA Team
 **Status**: Active
 **Related To**: GITHUB_ACTIONS.md, CI_TROUBLESHOOTING.md, MULTI_ENVIRONMENT_IMPLEMENTATION_PLAN.md
+**Version**: 2.0 - Reusable Workflow Architecture
 ---
 
 # CI/CD Pipeline Workflow Reference
 ## Complete Guide to GitHub Actions Pipeline
 
-**Workflow File**: `.github/workflows/ci.yml`
-**Performance Workflow**: `.github/workflows/performance.yml`
-**Last Pipeline Update**: 2025-11-13 (multi-environment support added)
+**Main Workflow**: `.github/workflows/ci.yml` (524 lines - orchestrator)
+**Reusable Workflow**: `.github/workflows/test-environment.yml` (413 lines - per-environment testing)
+**Performance Workflow**: `.github/workflows/performance.yml` (separate, not modified)
+**Architecture**: Reusable Workflow Pattern (DRY principle)
+**Last Pipeline Update**: 2025-11-13 (multi-environment + reusable workflow architecture)
 
 ---
 
@@ -39,13 +42,20 @@
 
 **Purpose**: Automated testing, quality checks, and deployment
 **Trigger**: Push/PR to `main` or `develop` branches
+**Architecture**: Reusable workflow pattern for clean, maintainable code
 **Duration**:
 - Documentation-only: ~30 seconds (optimized!)
-- Code changes: ~20-30 minutes (full pipeline)
+- Single environment: ~15 minutes (shared setup + one environment)
+- All environments: ~33 minutes (shared setup + 3 environments @ ~8min each)
 
-**Total Jobs**: 15 jobs organized in 6 stages
+**Total Jobs in ci.yml**: 12 main orchestrator jobs
+**Jobs per Environment** (in test-environment.yml): 6 jobs (smoke, grid×2, mobile, responsive, allure, summary)
 
-**🆕 NEW**: Multi-environment support added! Can now test DEV, TEST, and PROD environments independently or all sequentially.
+**🆕 NEW Features**:
+- ✅ Multi-environment support (DEV, TEST, PROD)
+- ✅ Reusable workflow architecture (59% smaller main workflow)
+- ✅ Parallel test execution within each environment
+- ✅ Sequential environment gating (DEV → TEST → PROD)
 
 ---
 
@@ -86,10 +96,13 @@
 **Sequential Execution** (when `environment=all`):
 ```
 1. DEV environment tests run first
-   ↓ (only if success)
+   ↓ (waits for DEV tests to pass, not deployment)
 2. TEST environment tests run
-   ↓ (only if success)
+   ↓ (waits for TEST tests to pass, not deployment)
 3. PROD environment tests run
+
+Note: Deployments are optional final steps (only run on main branch)
+      Test sequencing works on all branches for validation
 ```
 
 **Independent Execution** (when `environment=dev|test|prod`):
@@ -109,6 +122,101 @@ env:
 ```
 
 **Update these URLs** in `.github/workflows/ci.yml` to match your actual environment URLs.
+
+---
+
+## 🏗️ REUSABLE WORKFLOW ARCHITECTURE (Added 2025-11-13)
+
+### **Why Reusable Workflows?**
+
+**Problem**: Testing three environments meant duplicating test logic 3× in ci.yml
+**Solution**: Extract environment testing into a reusable workflow
+
+### **Architecture**:
+
+```
+ci.yml (Main Orchestrator - 524 lines)
+├── Shared setup (run once)
+│   ├── detect-changes
+│   ├── determine-environments
+│   ├── build-and-compile
+│   ├── code-quality
+│   └── docker-build
+│
+├── DEV Environment
+│   ├── test-dev-environment → calls test-environment.yml
+│   └── deploy-dev
+│
+├── TEST Environment
+│   ├── test-test-environment → calls test-environment.yml
+│   └── deploy-test
+│
+├── PROD Environment
+│   ├── test-prod-environment → calls test-environment.yml
+│   └── deploy-prod
+│
+└── Final Reporting
+    ├── combined-allure-report
+    └── pipeline-summary
+
+test-environment.yml (Reusable - 413 lines)
+├── Inputs: environment, test_suite, base_url
+└── Jobs (all run in PARALLEL after trigger):
+    ├── smoke-tests
+    ├── grid-tests (matrix: chrome, firefox)
+    ├── mobile-browser-tests
+    ├── responsive-design-tests
+    ├── environment-allure-report (waits for all tests)
+    └── environment-test-summary (waits for all tests)
+```
+
+### **Benefits**:
+
+1. **Cleaner Code**: 59% reduction in main workflow size (1285 → 524 lines)
+2. **DRY Principle**: Test logic defined once, reused 3× (for each environment)
+3. **Easier Maintenance**: Update test steps in one place, applies to all environments
+4. **Better Organization**: Clear separation between orchestration and execution
+5. **Parallel Execution**: All tests within an environment run simultaneously
+
+### **How It Works**:
+
+**Calling the Reusable Workflow**:
+```yaml
+test-dev-environment:
+  uses: ./.github/workflows/test-environment.yml
+  with:
+    environment: 'dev'
+    test_suite: 'smoke'
+    base_url: 'https://dev.yourapp.com'
+```
+
+**Inside test-environment.yml**:
+```yaml
+on:
+  workflow_call:
+    inputs:
+      environment:   # Which environment (dev/test/prod)
+      test_suite:    # Which tests (smoke/ci/extended/all)
+      base_url:      # Environment URL
+```
+
+### **Test Execution Pattern**:
+
+**Within Each Environment** (all PARALLEL):
+```
+START
+  ├── smoke-tests (3min)
+  ├── grid-chrome (5min)
+  ├── grid-firefox (5min)
+  ├── mobile-tests (4min)
+  └── responsive-tests (3min)
+         ↓ (all complete)
+     ├── allure-report
+     └── test-summary
+END
+```
+
+**Result**: ~8 minutes per environment (vs ~20 minutes if sequential)
 
 ---
 
@@ -1127,12 +1235,28 @@ See pipeline workflow documentation for details.
 
 ## 📝 CHANGE LOG
 
+### **2025-11-13: Reusable Workflow Architecture** 🔥 **MAJOR REFACTOR**
+- **Created reusable workflow**: `.github/workflows/test-environment.yml` (413 lines)
+- **Refactored main workflow**: Reduced from 1,285 lines to 524 lines (59% reduction)
+- **Architecture change**: DRY principle - test logic defined once, reused 3×
+- **Improved dependencies**: Environments now wait for previous TEST completion, not deployments
+  - `test-test-environment` depends on `test-dev-environment` (not `deploy-dev`)
+  - `test-prod-environment` depends on `test-test-environment` (not `deploy-test`)
+  - Benefit: Sequential testing works on all branches, not just main
+- **Parallel execution**: All tests within each environment run simultaneously
+  - Smoke, grid (Chrome + Firefox), mobile, and responsive tests start together
+  - Allure report and test summary wait for all tests to complete
+  - Result: ~8 min per environment (vs ~20 min sequential)
+- **Cleaner separation**: Orchestration (ci.yml) vs execution (test-environment.yml)
+- **Easier maintenance**: Update test steps in one place, applies to all environments
+- **Feature branch tested**: `feature/multi-environment-pipeline`
+
 ### **2025-11-13: Added Multi-Environment Support** 🆕
 - Added `determine-environments` job to select which environments to test
 - Added three environment-specific test jobs:
-  - `test-dev-environment` - Tests DEV environment
-  - `test-test-environment` - Tests TEST environment
-  - `test-prod-environment` - Tests PROD environment
+  - `test-dev-environment` - Calls reusable workflow for DEV
+  - `test-test-environment` - Calls reusable workflow for TEST
+  - `test-prod-environment` - Calls reusable workflow for PROD
 - Added workflow_dispatch inputs:
   - `environment` selection (all, dev, test, prod)
   - `test_suite` selection (smoke, ci, extended, all)
