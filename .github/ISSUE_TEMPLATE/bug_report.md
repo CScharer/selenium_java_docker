@@ -1,74 +1,59 @@
 ---
 name: Bug Report
-about: Report a bug or unexpected behavior in the test framework
+about: Report a bug or issue with the test framework
 title: '[BUG] '
-labels: bug
-assignees: CScharer
-
+labels: 'bug'
+assignees: 'CScharer'
 ---
 
-## Bug Description
-<!-- A clear and concise description of what the bug is -->
+## 🐛 Bug Description
+A clear and concise description of what the bug is.
 
-
-
-## Steps to Reproduce
-<!-- Steps to reproduce the behavior -->
-
+## 📋 Steps to Reproduce
+Steps to reproduce the behavior:
 1. Go to '...'
 2. Run test '...'
-3. See error
+3. See error '...'
 
-## Expected Behavior
-<!-- What you expected to happen -->
+## ✅ Expected Behavior
+A clear and concise description of what you expected to happen.
 
+## ❌ Actual Behavior
+A clear and concise description of what actually happened.
 
-
-## Actual Behavior
-<!-- What actually happened -->
-
-
-
-## Test Information
-
-**Test Class**: <!-- e.g., Scenarios.java -->
-**Test Method**: <!-- e.g., testGoogle -->
-**Browser**: <!-- e.g., Chrome -->
-**Environment**: <!-- e.g., dev, test, prod -->
-
-## Error Messages
-<!-- Copy and paste any error messages or stack traces -->
+## 📸 Screenshots/Logs
+If applicable, add screenshots or log output to help explain your problem.
 
 ```
-Paste error here
+Paste logs here
 ```
 
-## Screenshots
-<!-- If applicable, add screenshots to help explain the problem -->
+## 🌍 Environment
+- **Browser**: [e.g. Chrome 120, Firefox 121]
+- **Environment**: [e.g. DEV, TEST, PROD]
+- **OS**: [e.g. macOS 14, Windows 11, Ubuntu 22.04]
+- **Java Version**: 17
+- **Selenium Version**: 4.27.0
+- **Test Suite**: [e.g. smoke, ci, extended]
 
+## 🔄 How Often Does This Occur?
+- [ ] Always
+- [ ] Sometimes (please specify frequency)
+- [ ] Rarely
+- [ ] Only once
 
+## 📝 Additional Context
+Add any other context about the problem here. This could include:
+- Recent changes to the codebase
+- Related issues or PRs
+- Workarounds you've tried
+- Impact on testing
 
-## Environment
+## 🔗 Related Issues
+List any related issues here: #
 
-**OS**: <!-- e.g., macOS 15.5, Windows 11 -->
-**Java Version**: <!-- e.g., Java 17 -->
-**Maven Version**: <!-- Run: ./mvnw --version -->
-**Browser Version**: <!-- e.g., Chrome 120.0.6099 -->
-
-## Build/Test Output
-<!-- Include relevant build or test output -->
-
-```bash
-# Command used
-./mvnw test -Dtest=...
-
-# Output
-```
-
-## Additional Context
-<!-- Add any other context about the problem here -->
-
-
-
-## Possible Solution
-<!-- If you have suggestions on how to fix the bug -->
+## ✔️ Checklist
+- [ ] I have searched for similar issues
+- [ ] I have provided all required information
+- [ ] I have attached relevant logs/screenshots
+- [ ] I have tested on the latest version
