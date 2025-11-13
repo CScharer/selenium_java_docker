@@ -398,21 +398,21 @@ jobs:
     
     steps:
       - name: Download Locust Results
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         continue-on-error: true
         with:
           name: locust-performance-results
           path: results/locust
       
       - name: Download Gatling Results
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         continue-on-error: true
         with:
           name: gatling-performance-results
           path: results/gatling
       
       - name: Download JMeter Results
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         continue-on-error: true
         with:
           name: jmeter-performance-results
