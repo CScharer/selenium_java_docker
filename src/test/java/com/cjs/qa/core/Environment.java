@@ -37,7 +37,7 @@ import org.junit.Assert;
 
 public class Environment {
   private static final Logger log = LogManager.getLogger(Environment.class);
-  
+
   public static final String NOT_FOUND_USING_DEFAULT = " NOT FOUND.  USING DEFAULT-";
   public static final String COMPANY = "Core";
   public static final String EMAIL_SIGNATURE =
@@ -227,7 +227,7 @@ public class Environment {
       // stringBuilder.append(getStackInfo())
       // stringBuilder.append(Constants.DELIMETER_LIST)
       stringBuilder.append(value);
-      log.info(stringBuilder.toString());  // Modernized: Using log4j 2.x instead of System.out
+      log.info(stringBuilder.toString()); // Modernized: Using log4j 2.x instead of System.out
       // stringBuilder.append(Constants.NEWLINE)
       // FSOTests.fileWrite(fileLog, stringBuilder.toString(), true)
     }
@@ -243,12 +243,12 @@ public class Environment {
   }
 
   public static void sysOut(Exception e) {
-    log.error("Exception occurred", e);  // Modernized: Using log4j 2.x with exception
+    log.error("Exception occurred", e); // Modernized: Using log4j 2.x with exception
     Assert.fail();
   }
 
   public static void sysOut(Throwable e) {
-    log.error("Throwable occurred", e);  // Modernized: Using log4j 2.x with throwable
+    log.error("Throwable occurred", e); // Modernized: Using log4j 2.x with throwable
   }
 
   public static void sysOut(String[] value) {

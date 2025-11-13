@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Calendar;
 import java.util.Locale;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.common.usermodel.HyperlinkType;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
@@ -23,6 +25,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class XlsReader {
+  private static final Logger log = LogManager.getLogger(XlsReader.class);
 
   private static String filename =
       System.getProperty("user.dir")
@@ -123,8 +126,7 @@ public class XlsReader {
         }
       }
       if (columnNumber == -1) {
-        System.out.println(
-            "The [" + columnName + "] Column could not be found on the [" + sheetName + "] sheet.");
+        log.warn("The [{}] Column could not be found on the [{}] sheet.", columnName, sheetName);
         return "";
       }
       sheet = workbook.getSheetAt(sheetIndex);

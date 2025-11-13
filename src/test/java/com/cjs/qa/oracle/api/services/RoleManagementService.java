@@ -10,9 +10,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 
 public class RoleManagementService extends WebService {
+  private static final Logger log = LogManager.getLogger(RoleManagementService.class);
   private final String baseAPIRoleManagement =
       "https://RoleManagementAPI."
           + OracleConstants.API_BASE
@@ -77,7 +80,7 @@ public class RoleManagementService extends WebService {
                     + ":")
                 .length());
     roleId = roleId.substring(0, roleId.indexOf(","));
-    System.out.println("Role ID:[" + roleId + "]");
+    log.info("Role ID:[{}]", roleId);
     Assert.assertNotNull("Role ID:[" + roleId + "]", roleId);
     return roleId;
   }
@@ -186,11 +189,11 @@ public class RoleManagementService extends WebService {
                 .length());
     organizationId = organizationId.substring(0, organizationId.indexOf(","));
     map.put("organizationId", organizationId);
-    System.out.println("oAddresses:" + oAddresses);
-    System.out.println("oContactPhones:" + oContactPhones);
-    System.out.println("oPhones:" + oPhones);
-    System.out.println("oCompanyInfo:" + oCompanyInfo);
-    System.out.println("Organization ID:[" + organizationId + "]");
+    log.debug("oAddresses:{}", oAddresses);
+    log.debug("oContactPhones:{}", oContactPhones);
+    log.debug("oPhones:{}", oPhones);
+    log.debug("oCompanyInfo:{}", oCompanyInfo);
+    log.info("Organization ID:[{}]", organizationId);
     Assert.assertNotNull("Organization ID:[" + organizationId + "]", organizationId);
     // return organizationId;
     return map;

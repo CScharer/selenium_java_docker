@@ -308,7 +308,7 @@ public class SeleniumWebDriver {
     } else if (webDriver instanceof InternetExplorerDriver) {
       setCapabilities(((InternetExplorerDriver) webDriver).getCapabilities());
       setSessionId(((InternetExplorerDriver) webDriver).getSessionId());
-    // PhantomJS support removed - use Chrome/Firefox headless instead
+      // PhantomJS support removed - use Chrome/Firefox headless instead
     } else if (webDriver instanceof HtmlUnitDriver) {
       setCapabilities(((HtmlUnitDriver) webDriver).getCapabilities());
       // setSessionId(((HtmlUnitDriver) webDriver).getSessionId())
@@ -715,7 +715,7 @@ public class SeleniumWebDriver {
       case "iphone":
         desiredCapabilities = new DesiredCapabilities();
         break;
-      // PhantomJS support removed - use Chrome/Firefox headless instead
+        // PhantomJS support removed - use Chrome/Firefox headless instead
       case Browser.SAFARI:
         SafariOptions safariOpts = new SafariOptions();
         desiredCapabilities = new DesiredCapabilities();

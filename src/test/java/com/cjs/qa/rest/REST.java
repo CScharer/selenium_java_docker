@@ -11,8 +11,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public final class REST {
+  private static final Logger log = LogManager.getLogger(REST.class);
+
   private REST() {
     // Utility class - prevent instantiation
   }
@@ -20,14 +24,11 @@ public final class REST {
   public static Map<String, String> getAPIJSONResponse(
       String credentials, String requestMethod, String apiRequest, String url) throws QAException {
     final Map<String, String> map = new HashMap<>();
-    System.out.println(
-        "getAPIJSONResponse Parameters:\n\trequestMethod:["
-            + requestMethod
-            + "]\n\turl:["
-            + url
-            + "]\n\tapiRequest["
-            + apiRequest
-            + "]");
+    log.debug(
+        "getAPIJSONResponse Parameters:\n\trequestMethod:[{}]\n\turl:[{}]\n\tapiRequest[{}]",
+        requestMethod,
+        url,
+        apiRequest);
     String responseCode = "-1";
     map.put("responseCode", responseCode);
     HttpURLConnection httpURLConnection = null;
