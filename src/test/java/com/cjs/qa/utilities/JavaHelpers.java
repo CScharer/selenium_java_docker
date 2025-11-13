@@ -39,7 +39,7 @@ import java.util.Set;
 // import java.util.regex.Pattern
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;

@@ -46,7 +46,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 // HtmlUnitDriverOptions not available in this version
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
+// PhantomJS removed - use Chrome/Firefox headless instead
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -308,9 +308,7 @@ public class SeleniumWebDriver {
     } else if (webDriver instanceof InternetExplorerDriver) {
       setCapabilities(((InternetExplorerDriver) webDriver).getCapabilities());
       setSessionId(((InternetExplorerDriver) webDriver).getSessionId());
-    } else if (webDriver instanceof PhantomJSDriver) {
-      setCapabilities(((PhantomJSDriver) webDriver).getCapabilities());
-      setSessionId(((PhantomJSDriver) webDriver).getSessionId());
+    // PhantomJS support removed - use Chrome/Firefox headless instead
     } else if (webDriver instanceof HtmlUnitDriver) {
       setCapabilities(((HtmlUnitDriver) webDriver).getCapabilities());
       // setSessionId(((HtmlUnitDriver) webDriver).getSessionId())
@@ -717,9 +715,7 @@ public class SeleniumWebDriver {
       case "iphone":
         desiredCapabilities = new DesiredCapabilities();
         break;
-      case "phantomjs":
-        desiredCapabilities = new DesiredCapabilities();
-        break;
+      // PhantomJS support removed - use Chrome/Firefox headless instead
       case Browser.SAFARI:
         SafariOptions safariOpts = new SafariOptions();
         desiredCapabilities = new DesiredCapabilities();
