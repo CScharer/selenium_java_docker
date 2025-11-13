@@ -75,6 +75,17 @@ jobs:
           echo "URL: ${{ inputs.base_url }}"
           echo ""
 
+          # Create Allure environment properties file
+          mkdir -p target/allure-results
+          cat > target/allure-results/environment.properties << EOF
+          Environment=${{ inputs.environment }}
+          Test.Suite=smoke
+          Base.URL=${{ inputs.base_url }}
+          Browser=Chrome
+          Selenium.Hub=localhost:4444
+          Execution.Type=CI/CD
+          EOF
+
           ./mvnw test \
             -Dtest.environment=${{ inputs.environment }} \
             -DsuiteXmlFile=testng-smoke-suite.xml
@@ -160,6 +171,18 @@ jobs:
           echo "Suite: ${{ inputs.test_suite }}"
           echo ""
 
+          # Create Allure environment properties file
+          mkdir -p target/allure-results
+          cat > target/allure-results/environment.properties << EOF
+          Environment=${{ inputs.environment }}
+          Test.Suite=${{ inputs.test_suite }}
+          Base.URL=${{ inputs.base_url }}
+          Browser=${{ matrix.browser }}
+          Selenium.Hub=localhost:4444
+          Execution.Type=CI/CD
+          Grid.Type=Selenium Grid
+          EOF
+
           ./mvnw test \
             -Dtest.environment=${{ inputs.environment }} \
             -Dbrowser=${{ matrix.browser }} \
@@ -226,6 +249,18 @@ jobs:
           echo "URL: ${{ inputs.base_url }}"
           echo ""
 
+          # Create Allure environment properties file
+          mkdir -p target/allure-results
+          cat > target/allure-results/environment.properties << EOF
+          Environment=${{ inputs.environment }}
+          Test.Suite=mobile-browser
+          Base.URL=${{ inputs.base_url }}
+          Browser=Chrome Mobile
+          Selenium.Hub=localhost:4444
+          Execution.Type=CI/CD
+          Device.Type=Mobile Viewport
+          EOF
+
           ./mvnw test \
             -Dtest.environment=${{ inputs.environment }} \
             -DsuiteXmlFile=testng-mobile-browser-suite.xml
@@ -290,6 +325,18 @@ jobs:
           echo "Environment: ${{ inputs.environment }}"
           echo "URL: ${{ inputs.base_url }}"
           echo ""
+
+          # Create Allure environment properties file
+          mkdir -p target/allure-results
+          cat > target/allure-results/environment.properties << EOF
+          Environment=${{ inputs.environment }}
+          Test.Suite=responsive
+          Base.URL=${{ inputs.base_url }}
+          Browser=Chrome
+          Selenium.Hub=localhost:4444
+          Execution.Type=CI/CD
+          Screen.Sizes=Desktop, Tablet, Mobile
+          EOF
 
           ./mvnw test \
             -Dtest.environment=${{ inputs.environment }} \
