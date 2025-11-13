@@ -92,7 +92,7 @@ jobs:
   grid-tests:
     name: Grid Tests - ${{ matrix.browser }} (${{ inputs.environment }})
     runs-on: ubuntu-latest
-    needs: smoke-tests  # Runs in PARALLEL with mobile and responsive after smoke passes
+    # No dependencies - runs in PARALLEL with smoke, mobile, and responsive
 
     strategy:
       matrix:
@@ -178,7 +178,7 @@ jobs:
   mobile-browser-tests:
     name: Mobile Browser Tests (${{ inputs.environment }})
     runs-on: ubuntu-latest
-    needs: smoke-tests  # Runs in PARALLEL with grid and responsive after smoke passes
+    # No dependencies - runs in PARALLEL with smoke, grid, and responsive
 
     services:
       selenium-hub:
@@ -243,7 +243,7 @@ jobs:
   responsive-design-tests:
     name: Responsive Design Tests (${{ inputs.environment }})
     runs-on: ubuntu-latest
-    needs: smoke-tests  # Runs in PARALLEL with grid and mobile after smoke passes
+    # No dependencies - runs in PARALLEL with smoke, grid, and mobile
 
     services:
       selenium-hub:
