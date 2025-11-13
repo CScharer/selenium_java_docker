@@ -2,7 +2,7 @@
 # Multi-stage build for efficient test execution
 
 # Stage 1: Build stage
-FROM maven:3.9.9-eclipse-temurin-17 AS build
+FROM maven:3.9-eclipse-temurin-11 AS build
 
 LABEL maintainer="CJS Consulting, L.L.C"
 LABEL description="Selenium Test Automation Framework with Cucumber BDD"
