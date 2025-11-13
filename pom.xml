@@ -96,7 +96,7 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 		<sauce_junit.version>2.1.25</sauce_junit.version>
 		<saucerest.version>1.0.47</saucerest.version>
         <secretmanager.version>2.48.0</secretmanager.version>
-		<selenium.version>4.26.0</selenium.version>
+		<selenium.version>4.38.0</selenium.version>
 		<webdrivermanager.version>5.9.2</webdrivermanager.version>
 		<appium.version>9.3.0</appium.version>
 		<allure.version>2.25.0</allure.version>
