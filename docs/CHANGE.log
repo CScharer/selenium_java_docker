@@ -1,6 +1,198 @@
 # CHANGE LOG
 
-## [2025-11-13 03:42:23 CST] [PENDING] - 📁 Documentation Rule: All .md Files in docs/ Folder
+## [2025-11-13 03:56:42 CST] [PENDING] - 📝 Enhanced Documentation Standards: Metadata Template Required
+
+### Overview
+**WORKFLOW ENHANCEMENT:** Added mandatory metadata block for all .md files
+**User Request:** "Can we reflect option B in the rules" (document exceptions + metadata template)
+**Solution:** Enhanced Rule 2.5 in AI_WORKFLOW_RULES.md (v2.5), documented all exceptions
+**Impact:** Professional documentation standards, clear lifecycle tracking, complete exception documentation
+
+**Cursor Token Status:** Tokens Used: 195,546 / Total: 1,000,000 (804,454 remaining, 19.6% used, 80.4% remaining)
+
+---
+
+### Changes Made
+
+**AI_WORKFLOW_RULES.md Updated to Version 2.5:**
+
+**Enhanced Rule 2.5: Mandatory Metadata Block**
+
+**1. Metadata Template Required:**
+ALL new .md files must include metadata block:
+```markdown
+---
+**Type**: [Guide|Analysis|Process|ADR|Issue|Archive]
+**Purpose**: [One-line description]
+**Created**: YYYY-MM-DD
+**Last Updated**: YYYY-MM-DD
+**Maintained By**: [Team/Person]
+**Status**: [Active|Draft|Archived|Superseded|Deprecated]
+---
+```
+
+**2. Required Fields:**
+- Type: Document category
+- Purpose: One-line description
+- Created: Initial creation date
+- Last Updated: Most recent change (update when editing)
+- Maintained By: Responsible party
+- Status: Current state
+
+**3. Optional Fields:**
+- Version: For versioned docs (e.g., v2.5)
+- Related To: Links to related documents
+- Supersedes/Superseded By: Document relationships
+
+**4. Examples Provided:**
+- Guide example (Docker/infrastructure doc)
+- Analysis example (Framework analysis)
+- Process example (Workflow rules)
+
+**5. Complete Exception Documentation:**
+
+**GitHub UI Templates:**
+- .github/ISSUE_TEMPLATE/*.md (3 files)
+- .github/pull_request_template.md
+
+**Feature-Local READMEs:**
+- README.md (project root)
+- XML/README.md
+- Configurations/README.md
+- scripts/README.md
+
+**Principle**: Feature-local docs allowed when documenting specific components. docs/ folder for framework-level and cross-cutting documentation.
+
+**6. Enhanced Verification Command:**
+Updated to exclude all legitimate exceptions, showing only misplaced files.
+
+---
+
+### NAVIGATION.md Enhanced
+
+**1. Configuration READMEs Section Added:**
+- Explicitly documents 4 configuration READMEs outside docs/
+- Explains why they're exceptions
+- Shows complete project structure
+- States principle for feature-local documentation
+
+**2. Metadata Template Section Added:**
+- Complete metadata block template
+- Required and optional fields explained
+- Examples for Guide, Analysis, Process types
+- Clear guidance on when to update
+- Goal: All files have metadata within 3-6 months
+
+**3. Best Practices Enhanced:**
+- Metadata now part of documentation authoring standards
+- Clear examples for different document types
+
+---
+
+### Files Modified
+
+**Documentation Updated:**
+1. `docs/process/AI_WORKFLOW_RULES.md` (v2.4 → v2.5)
+   - Enhanced Rule 2.5 with metadata requirements (~100 lines)
+   - Documented all .md file exceptions (8 files)
+   - Improved verification command
+   - Added metadata template and examples
+   - Updated version history
+
+2. `docs/NAVIGATION.md`
+   - Added "Configuration READMEs" section
+   - Added "Standard Metadata Template" section (~110 lines)
+   - Documented all exceptions explicitly
+   - Provided metadata examples
+
+3. `docs/analysis/2025-11-13-comprehensive/PROPOSAL_DATE_STAMPING.md` (NEW)
+   - Detailed analysis of date-stamping strategies
+   - Hybrid approach recommendation
+   - Comparison of different approaches
+   - Decision framework for date-stamping
+
+---
+
+### Verification Results
+
+**Git Status:**
+```
+Modified: 2 files (AI_WORKFLOW_RULES.md v2.5, NAVIGATION.md)
+New: 1 file (PROPOSAL_DATE_STAMPING.md in correct location)
+```
+
+**Documentation-Only Change:** ✅ Yes
+
+**Exception Verification:**
+```bash
+# Ran verification command - NO unexpected files found ✅
+# All 8 exceptions properly documented
+# All framework docs in docs/ folder
+```
+
+---
+
+### Impact Summary
+
+**Before:**
+- Metadata approach not standardized
+- Configuration READMEs not explicitly documented
+- No clear guidance on metadata fields
+- Implicit exception handling
+
+**After:**
+- Mandatory metadata template for all new files
+- All 8 exceptions explicitly documented with rationale
+- Clear required and optional fields
+- Feature-local principle articulated
+- Complete verification command
+- Professional documentation standards
+
+**Benefits:**
+- 📝 Clear document age and status at a glance
+- 🎯 Easy to identify document type and purpose
+- ✅ Complete exception documentation
+- 🔍 Better discoverability and organization
+- 📊 Lifecycle tracking without filename changes
+- 🏆 Professional-grade documentation standards
+
+---
+
+### Implementation Plan
+
+**Immediate (Done):**
+- ✅ Metadata template created and documented
+- ✅ Rule 2.5 enhanced with requirements
+- ✅ All exceptions explicitly listed
+- ✅ Examples provided
+
+**Short-term (As Needed):**
+- Add metadata to files when editing them
+- No rush to retrofit all at once
+- Start with most important files
+
+**Long-term Goal:**
+- All docs have metadata within 3-6 months
+- Maintain consistency going forward
+- Update metadata when editing files
+
+---
+
+### Next Steps
+
+**Immediate:**
+- Rule is now in effect for all new .md files
+- Metadata template available in NAVIGATION.md
+- Clear exception documentation
+
+**Future:**
+- Gradually add metadata to existing files
+- Use template for all new documentation
+- Maintain professional standards
+
+---
+
+## [2025-11-13 03:42:23 CST] [385e4ebd] - 📁 Documentation Rule: All .md Files in docs/ Folder
 
 ### Overview
 **WORKFLOW UPDATE:** Added mandatory rule for .md file organization

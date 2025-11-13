@@ -1,6 +1,20 @@
 # AI Workflow Rules for Code Changes
 
-**Version:** 2.4 (Updated: 2025-11-12 - Added Markdown File Organization Rule)
+**Version:** 2.5 (Updated: 2025-11-13 - Added Mandatory Metadata Template)
+
+### 📋 Version 2.5 Changes:
+- **📝 ENHANCED:** Rule 2.5 - Added mandatory metadata block requirement
+  - ALL new .md files must include metadata block at top
+  - Standardized metadata template with required fields
+  - Examples for Guide, Analysis, Process documents
+  - Clear guidance on when to update metadata
+  - Optional fields for versioning and cross-references
+- **📚 DOCUMENTED:** Configuration README exceptions explicitly listed
+  - Project root README.md
+  - XML/README.md, Configurations/README.md, scripts/README.md
+  - Principle: Feature-local docs allowed for specific components
+- **✅ COMPLETE:** NAVIGATION.md now documents all .md file locations
+- **🎯 GOAL:** All files have metadata within 3-6 months
 
 ### 📋 Version 2.4 Changes:
 - **📁 ADDED:** Rule 2.5 - Markdown File Organization (ALL .md files in docs/)
@@ -144,8 +158,62 @@ Before making ANY code changes, you MUST:
 1. Determine the file's purpose
 2. Select appropriate folder from guide above
 3. Create file in correct location
-4. Update NAVIGATION.md if adding new category
-5. Add README.md to new folders
+4. **Add metadata block at top** (MANDATORY - see template below)
+5. Update NAVIGATION.md if adding new category
+6. Add README.md to new folders
+
+#### **Mandatory Metadata Block:**
+
+**ALL new .md files MUST start with this metadata block:**
+
+```markdown
+---
+**Type**: [Guide|Analysis|Process|ADR|Issue|Archive]
+**Purpose**: [One-line description of what this document does]
+**Created**: YYYY-MM-DD
+**Last Updated**: YYYY-MM-DD
+**Maintained By**: [CJS QA Team|AI Code Analysis System|Your Name]
+**Status**: [Active|Draft|Archived|Superseded|Deprecated]
+---
+
+# Document Title
+
+Content starts here...
+```
+
+**Required Fields**:
+- **Type**: Document category (Guide, Analysis, Process, ADR, Issue, Archive)
+- **Purpose**: One-line description
+- **Created**: Initial creation date (YYYY-MM-DD)
+- **Last Updated**: Most recent change date (update when editing)
+- **Maintained By**: Who keeps this current
+- **Status**: Current state (Active, Draft, Archived, Superseded, Deprecated)
+
+**Optional Fields** (add if relevant):
+- **Version**: For versioned docs (e.g., v2.4)
+- **Related To**: Links to related documents
+- **Supersedes**: If replacing an older document
+- **Superseded By**: If this doc is outdated
+
+**When to Update**:
+- **Created**: Set once, never change
+- **Last Updated**: Update EVERY time you edit the file
+- **Status**: Update if document state changes
+- **Version**: Increment based on change significance
+
+**Example**:
+```markdown
+---
+**Type**: Guide
+**Purpose**: Complete setup guide for Docker and Selenium Grid infrastructure
+**Created**: 2025-11-08
+**Last Updated**: 2025-11-12
+**Maintained By**: CJS QA Team
+**Status**: Active
+---
+
+# Docker & Selenium Grid Setup Guide
+```
 
 #### **Common Mistakes to Avoid:**
 - ❌ Creating issue templates in `.github/` (use `docs/issues/open/`)
@@ -153,25 +221,65 @@ Before making ANY code changes, you MUST:
 - ❌ Creating analysis in project root (use `docs/analysis/YYYY-MM-DD-topic/`)
 - ❌ Forgetting to update NAVIGATION.md
 
-#### **Exception - .github/ Templates:**
-**ONLY these .md files allowed in .github/**:
-- ✅ `.github/ISSUE_TEMPLATE/bug_report.md` (GitHub UI templates)
-- ✅ `.github/ISSUE_TEMPLATE/feature_request.md` (GitHub UI templates)
-- ✅ `.github/pull_request_template.md` (GitHub UI template)
-- ❌ Any other .md files → Move to `docs/` structure
+#### **Exceptions - .md Files Outside docs/:**
 
-**Reason**: GitHub automatically recognizes these specific template locations for the UI.
+**ONLY these .md files are allowed outside docs/ folder:**
+
+**GitHub UI Templates** (Required by GitHub):
+- ✅ `.github/ISSUE_TEMPLATE/bug_report.md`
+- ✅ `.github/ISSUE_TEMPLATE/feature_request.md`
+- ✅ `.github/ISSUE_TEMPLATE/test_failure.md`
+- ✅ `.github/pull_request_template.md`
+
+**Reason**: GitHub automatically recognizes these specific locations for its UI. Moving them would break the template functionality.
+
+**Project & Configuration READMEs** (Feature-Local Documentation):
+- ✅ `README.md` (project root - GitHub landing page)
+- ✅ `XML/README.md` (XML configuration guide)
+- ✅ `Configurations/README.md` (environment setup guide)
+- ✅ `scripts/README.md` (script usage guide)
+
+**Reason**: These document specific features/directories and should live with those features.
+
+**Principle**: Documentation can be **feature-local** when it only pertains to that specific component. The `docs/` folder is for **framework-level** and **cross-cutting** documentation.
+
+**All Other .md Files** → Must be in `docs/` structure ❌
 
 #### **Verification:**
 ```bash
-# Check for .md files outside docs/
-find . -name "*.md" -not -path "./docs/*" -not -path "./.github/ISSUE_TEMPLATE/*" -not -path "./.github/pull_request_template.md" -not -path "./node_modules/*" -not -path "./target/*"
+# Check for UNEXPECTED .md files outside docs/
+find . -name "*.md" \
+  -not -path "./docs/*" \
+  -not -path "./.github/ISSUE_TEMPLATE/*" \
+  -not -path "./.github/pull_request_template.md" \
+  -not -path "./README.md" \
+  -not -path "./XML/README.md" \
+  -not -path "./Configurations/README.md" \
+  -not -path "./scripts/README.md" \
+  -not -path "./node_modules/*" \
+  -not -path "./target/*"
 
-# Should only show:
-# README.md (project root - acceptable)
-# XML/README.md (configuration folder - acceptable)
-# Configurations/README.md (configuration folder - acceptable)
-# scripts/README.md (scripts folder - acceptable)
+# Should show NO output (all .md files in correct locations)
+# If any files show up → they need to be moved to docs/
+```
+
+**Expected .md file locations**:
+```bash
+# Framework documentation (docs/):
+docs/**/*.md                              ✅ Primary location
+
+# GitHub UI templates:
+.github/ISSUE_TEMPLATE/*.md               ✅ Exception (GitHub UI)
+.github/pull_request_template.md          ✅ Exception (GitHub UI)
+
+# Feature-local documentation:
+README.md                                  ✅ Exception (Project root)
+XML/README.md                              ✅ Exception (Config guide)
+Configurations/README.md                   ✅ Exception (Config guide)
+scripts/README.md                          ✅ Exception (Script guide)
+
+# Everything else:
+*.md anywhere else                         ❌ Move to docs/
 ```
 
 #### **Auto-Fix Process:**

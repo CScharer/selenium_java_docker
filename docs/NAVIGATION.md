@@ -9,6 +9,8 @@
 
 ## 🗺️ DOCUMENTATION STRUCTURE
 
+### Main Documentation (docs/ folder)
+
 ```
 docs/
 ├── NAVIGATION.md (this file)           📍 You are here!
@@ -67,6 +69,31 @@ docs/
         ├── ALL_QUICK_WINS_SUMMARY.md    Quick wins summary
         └── NEXT_STEPS.md                Previous action items
 ```
+
+### Configuration READMEs (Outside docs/ - Exceptions)
+
+**These .md files exist outside docs/ by design** - they document features local to their directories:
+
+```
+Project Structure:
+├── README.md                            📖 Main project README (GitHub landing page)
+├── XML/README.md                        ⚙️ XML configuration guide
+├── Configurations/README.md             ⚙️ Environment setup guide
+├── scripts/README.md                    🔧 Script usage guide
+└── .github/
+    ├── pull_request_template.md         📋 PR template (GitHub UI)
+    └── ISSUE_TEMPLATE/
+        ├── bug_report.md                📋 Bug template (GitHub UI)
+        ├── feature_request.md           📋 Feature template (GitHub UI)
+        └── test_failure.md              📋 Test failure template (GitHub UI)
+```
+
+**Why These Are Exceptions**:
+- **Project README.md**: Standard location for GitHub (shows on repo homepage)
+- **Configuration READMEs**: Local to their feature (XML/, Configurations/, scripts/)
+- **GitHub Templates**: Required locations for GitHub UI to recognize them
+
+**Principle**: Documentation can be **local to a feature** when it only pertains to that specific component. Central docs/ folder is for **cross-cutting** and **framework-level** documentation.
 
 ---
 
@@ -470,6 +497,116 @@ docs/
 1. `guides/troubleshooting/CI_TROUBLESHOOTING.md`
 2. `guides/infrastructure/DOCKER.md` → Troubleshooting
 3. Create GitHub issue if not found
+
+---
+
+## 📝 STANDARD METADATA TEMPLATE
+
+**ALL new .md files must include this metadata block at the top:**
+
+```markdown
+---
+**Type**: [Guide|Analysis|Process|ADR|Issue|Archive]
+**Purpose**: [One-line description of what this document does]
+**Created**: YYYY-MM-DD
+**Last Updated**: YYYY-MM-DD
+**Maintained By**: [CJS QA Team|AI Code Analysis System|Your Name]
+**Status**: [Active|Draft|Archived|Superseded|Deprecated]
+---
+
+# Document Title
+
+Content starts here...
+```
+
+### **Required Fields**:
+
+- **Type**: Document category
+  - `Guide` - How-to instructions
+  - `Analysis` - Project analysis/recommendations
+  - `Process` - Team processes/standards
+  - `ADR` - Architecture Decision Record
+  - `Issue` - Issue template/tracking
+  - `Archive` - Historical document
+
+- **Purpose**: One-line description (what does this doc do?)
+
+- **Created**: Date document was first created (YYYY-MM-DD format)
+
+- **Last Updated**: Date of most recent changes (update when editing)
+
+- **Maintained By**: Who keeps this current (team name or person)
+
+- **Status**: Current state
+  - `Active` - Current and maintained
+  - `Draft` - Work in progress
+  - `Archived` - No longer updated
+  - `Superseded` - Replaced by newer doc (link to replacement)
+  - `Deprecated` - Scheduled for removal
+
+### **Optional Fields**:
+
+```markdown
+**Version**: 2.4                    (for versioned docs like AI_WORKFLOW_RULES)
+**Related To**: [doc1.md, doc2.md]  (links to related documents)
+**Supersedes**: [old-doc.md]        (if replacing an older document)
+**Superseded By**: [new-doc.md]     (if this doc is outdated)
+```
+
+### **Example - Guide**:
+
+```markdown
+---
+**Type**: Guide
+**Purpose**: Complete guide for setting up Docker and Selenium Grid
+**Created**: 2025-11-08
+**Last Updated**: 2025-11-12
+**Maintained By**: CJS QA Team
+**Status**: Active
+---
+
+# Docker & Selenium Grid Setup Guide
+
+This guide will help you...
+```
+
+### **Example - Analysis**:
+
+```markdown
+---
+**Type**: Analysis
+**Purpose**: Comprehensive framework analysis with modernization recommendations
+**Created**: 2025-11-13
+**Last Updated**: 2025-11-13
+**Maintained By**: AI Code Analysis System
+**Status**: Active
+**Related To**: QUICK_ACTION_PLAN.md, MODERN_CODING_STANDARDS.md
+---
+
+# Comprehensive Repository Analysis
+```
+
+### **Example - Process**:
+
+```markdown
+---
+**Type**: Process
+**Purpose**: Workflow rules for AI-assisted code changes
+**Created**: 2025-11-10
+**Last Updated**: 2025-11-12
+**Version**: 2.4
+**Maintained By**: CJS QA Team
+**Status**: Active
+---
+
+# AI Workflow Rules for Code Changes
+```
+
+### **When to Add Metadata**:
+
+**New Files**: ALWAYS add metadata block
+**Existing Files**: Add when you edit them (no rush to retrofit all at once)
+**Goal**: All files have metadata within 3-6 months
 
 ---
 
