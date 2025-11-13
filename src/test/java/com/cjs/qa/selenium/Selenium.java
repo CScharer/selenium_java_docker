@@ -43,7 +43,7 @@ public class Selenium extends Page implements ISelenium {
     } else if (getWebDriver() instanceof InternetExplorerDriver) {
       setCapabilities(((InternetExplorerDriver) getWebDriver()).getCapabilities());
       setSessionId(((InternetExplorerDriver) getWebDriver()).getSessionId());
-    // PhantomJS support removed - use Chrome/Firefox headless instead
+      // PhantomJS support removed - use Chrome/Firefox headless instead
     } else if (getWebDriver() instanceof HtmlUnitDriver) {
       setCapabilities(((RemoteWebDriver) getWebDriver()).getCapabilities());
       setSessionId(((RemoteWebDriver) getWebDriver()).getSessionId());

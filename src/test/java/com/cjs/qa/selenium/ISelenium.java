@@ -511,7 +511,7 @@ public interface ISelenium {
       case "opera":
         desiredCapabilities = new DesiredCapabilities();
         break;
-      // PhantomJS support removed - use Chrome/Firefox headless instead
+        // PhantomJS support removed - use Chrome/Firefox headless instead
       case "safari":
         SafariOptions safariOptions = new SafariOptions();
         desiredCapabilities = new DesiredCapabilities();

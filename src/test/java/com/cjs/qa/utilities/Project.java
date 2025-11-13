@@ -2,8 +2,12 @@ package com.cjs.qa.utilities;
 
 import com.cjs.qa.core.Environment;
 import java.io.IOException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public final class Project {
+  private static final Logger log = LogManager.getLogger(Project.class);
+
   private Project() {
     // Utility class - prevent instantiation
   }
@@ -36,8 +40,7 @@ public final class Project {
         throw new IOException();
       }
     } catch (final IOException e) {
-      System.err.println("Error getting Automation Path!");
-      e.printStackTrace();
+      log.error("Error getting Automation Path!", e);
       automationPath = null;
     }
     return automationPath;

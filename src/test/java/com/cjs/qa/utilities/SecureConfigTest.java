@@ -3,6 +3,8 @@ package com.cjs.qa.utilities;
 import static org.junit.Assert.*;
 
 import com.cjs.qa.core.security.EPasswords;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 /**
@@ -15,34 +17,35 @@ import org.junit.Test;
  * @version 1.0
  */
 public class SecureConfigTest {
+  private static final Logger log = LogManager.getLogger(SecureConfigTest.class);
 
   @Test
   public void testSecretRetrieval() {
-    System.out.println("Testing SecureConfig.getPassword()...");
+    log.info("Testing SecureConfig.getPassword()...");
 
     String password = SecureConfig.getPassword("AUTO_BTSQA_PASSWORD");
     assertNotNull("Password should not be null", password);
     assertFalse("Password should not be empty", password.isEmpty());
     assertTrue("Password should have minimum length", password.length() >= 8);
 
-    System.out.println("✅ SecureConfig.getPassword() test passed!");
+    log.info("✅ SecureConfig.getPassword() test passed!");
   }
 
   @Test
   public void testEPasswordsIntegration() {
-    System.out.println("Testing EPasswords enum integration...");
+    log.info("Testing EPasswords enum integration...");
 
     String password = EPasswords.BTSQA.getValue();
     assertNotNull("EPasswords should return a value", password);
     assertFalse("EPasswords value should not be empty", password.isEmpty());
     assertTrue("EPasswords should return valid password", password.length() >= 8);
 
-    System.out.println("✅ EPasswords integration test passed!");
+    log.info("✅ EPasswords integration test passed!");
   }
 
   @Test
   public void testCaching() {
-    System.out.println("Testing SecureConfig caching...");
+    log.info("Testing SecureConfig caching...");
 
     // Clear cache
     SecureConfig.clearCache();
@@ -63,14 +66,14 @@ public class SecureConfigTest {
     assertEquals("Cached password should match", password1, password2);
     assertTrue("Cached retrieval should be faster", secondCallTime < firstCallTime);
 
-    System.out.println("  First call time: " + firstCallTime + "ms");
-    System.out.println("  Second call time (cached): " + secondCallTime + "ms");
-    System.out.println("✅ Caching test passed!");
+    log.info("  First call time: " + firstCallTime + "ms");
+    log.info("  Second call time (cached): " + secondCallTime + "ms");
+    log.info("✅ Caching test passed!");
   }
 
   @Test
   public void testMultiplePasswords() {
-    System.out.println("Testing multiple password retrieval...");
+    log.info("Testing multiple password retrieval...");
 
     String btsqa = EPasswords.BTSQA.getValue();
     String linkedin = EPasswords.LINKEDIN.getValue();
@@ -80,19 +83,19 @@ public class SecureConfigTest {
     assertNotNull("LinkedIn password should not be null", linkedin);
     assertNotNull("Dropbox password should not be null", dropbox);
 
-    System.out.println("  BTSQA: " + (btsqa != null ? "✅" : "❌"));
-    System.out.println("  LinkedIn: " + (linkedin != null ? "✅" : "❌"));
-    System.out.println("  Dropbox: " + (dropbox != null ? "✅" : "❌"));
-    System.out.println("✅ Multiple password test passed!");
+    log.info("  BTSQA: " + (btsqa != null ? "✅" : "❌"));
+    log.info("  LinkedIn: " + (linkedin != null ? "✅" : "❌"));
+    log.info("  Dropbox: " + (dropbox != null ? "✅" : "❌"));
+    log.info("✅ Multiple password test passed!");
   }
 
   @Test
   public void testGetSecretKey() {
-    System.out.println("Testing EPasswords.getSecretKey()...");
+    log.info("Testing EPasswords.getSecretKey()...");
 
     String secretKey = EPasswords.BTSQA.getSecretKey();
     assertEquals("Secret key should match", "AUTO_BTSQA_PASSWORD", secretKey);
 
-    System.out.println("✅ getSecretKey() test passed!");
+    log.info("✅ getSecretKey() test passed!");
   }
 }

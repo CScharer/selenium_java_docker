@@ -31,9 +31,13 @@ import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.CDATASection;
 
 public class WebService {
+  private static final Logger log = LogManager.getLogger(WebService.class);
+
   private static String xml = null;
   private static String requestName = null;
   private static String responseName = null;
@@ -376,9 +380,8 @@ public class WebService {
       // writeSOAPMessageToOutputStream(soapMessage);
       soapMessage.saveChanges();
       /* Print the request message */
-      System.out.print("Request SOAP Message = ");
+      log.debug("Request SOAP Message created");
       // writeSOAPMessageToOutputStream(soapMessage);
-      System.out.println();
       return soapMessage;
     } catch (final Exception e) {
       Environment.sysOut(e);

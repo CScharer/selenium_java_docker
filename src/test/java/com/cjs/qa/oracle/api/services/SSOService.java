@@ -13,11 +13,14 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 
 public class SSOService extends WebService {
+  private static final Logger log = LogManager.getLogger(SSOService.class);
   private final String baseAPISSO =
       "https://SSOAPI."
           + OracleConstants.API_BASE
@@ -195,7 +198,7 @@ public class SSOService extends WebService {
         WebService.getAPIJSONResponse("POST", requestURL, apiRequest, ssoUserTokenId);
     map.put("JSON", json);
     if (!json.contains(OracleConstants.API_JSON_SUCCESS)) {
-      System.out.println(json);
+      log.debug(json);
     }
     return map;
   }
@@ -223,7 +226,7 @@ public class SSOService extends WebService {
         WebService.getAPIJSONResponse("DELETE", requestURL, apiRequest, ssoUserTokenId);
     map.put("JSON", json);
     if (!json.contains(OracleConstants.API_JSON_SUCCESS)) {
-      System.out.println(json);
+      log.debug(json);
     }
     return map;
   }
@@ -251,8 +254,8 @@ public class SSOService extends WebService {
         }
       }
       if (!"200".equals(responseCode)) {
-        System.out.println(responseCode);
-        System.out.println(responseMessage);
+        log.warn("Response Code: {}", responseCode);
+        log.warn("Response Message: {}", responseMessage);
       }
       oHttpURLConnection.disconnect();
     } catch (final Exception e) {
@@ -260,7 +263,7 @@ public class SSOService extends WebService {
     }
     map.put("JSON", json);
     if (!json.contains(OracleConstants.API_JSON_SUCCESS)) {
-      System.out.println(json);
+      log.debug(json);
     }
     return map;
   }
@@ -298,7 +301,7 @@ public class SSOService extends WebService {
         WebService.getAPIJSONResponse("PUT", requestURL, apiRequest, ssoUserTokenId);
     map.put("JSON", json);
     if (!json.contains(OracleConstants.API_JSON_SUCCESS)) {
-      System.out.println(json);
+      log.debug(json);
     }
     return map;
   }
@@ -372,7 +375,7 @@ public class SSOService extends WebService {
       name = ENCODER.getEncodedValue("");
     }
     final String eMail = name + CJSConstants.MAILDOMAIN_GMAIL;
-    System.out.println(
+    log.debug(
         "Registering:["
             + eMail
             + "] (confirmUser:["
@@ -483,7 +486,7 @@ public class SSOService extends WebService {
     if (confirmUser) {
       final String jsonConfirmUser = confirmUser(eMail);
       if (!jsonConfirmUser.contains(OracleConstants.API_JSON_SUCCESS)) {
-        System.out.println(jsonConfirmUser);
+        log.debug(jsonConfirmUser);
       }
     }
     return eMail;
@@ -521,7 +524,7 @@ public class SSOService extends WebService {
         WebService.getAPIJSONResponse("PUT", requestURL, apiRequest, ssoUserTokenId);
     map.put("JSON", json);
     if (!json.contains(OracleConstants.API_JSON_SUCCESS)) {
-      System.out.println(json);
+      log.debug(json);
     }
     return map;
   }

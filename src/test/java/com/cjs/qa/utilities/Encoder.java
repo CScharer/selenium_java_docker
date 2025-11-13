@@ -4,8 +4,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Encoder {
+  private static final Logger log = LogManager.getLogger(Encoder.class);
   private static final String characters26 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   private static final String characters52 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   private String characterSet;
@@ -48,7 +51,7 @@ public class Encoder {
     stringBuilder.append(dateTimeStamp + Constants.NL);
     dateTimeStamp = formatNano.format(date);
     stringBuilder.append(dateTimeStamp);
-    System.out.println(stringBuilder.toString());
+    log.debug(stringBuilder.toString());
   }
 
   public String getDecodedValue(String sValue, String base) {
