@@ -5,7 +5,7 @@
 **Last Updated**: 2025-11-13
 **Maintained By**: CJS QA Team
 **Status**: Active
-**Related To**: GITHUB_ACTIONS.md, CI_TROUBLESHOOTING.md
+**Related To**: GITHUB_ACTIONS.md, CI_TROUBLESHOOTING.md, MULTI_ENVIRONMENT_IMPLEMENTATION_PLAN.md
 ---
 
 # CI/CD Pipeline Workflow Reference
@@ -13,7 +13,7 @@
 
 **Workflow File**: `.github/workflows/ci.yml`
 **Performance Workflow**: `.github/workflows/performance.yml`
-**Last Pipeline Update**: 2025-11-12 (detect-changes optimization)
+**Last Pipeline Update**: 2025-11-13 (multi-environment support added)
 
 ---
 
@@ -43,7 +43,72 @@
 - Documentation-only: ~30 seconds (optimized!)
 - Code changes: ~20-30 minutes (full pipeline)
 
-**Total Jobs**: 11 jobs organized in 5 stages
+**Total Jobs**: 15 jobs organized in 6 stages
+
+**🆕 NEW**: Multi-environment support added! Can now test DEV, TEST, and PROD environments independently or all sequentially.
+
+---
+
+## 🌍 MULTI-ENVIRONMENT SUPPORT (Added 2025-11-13)
+
+### **Environment Selection**
+
+**Manual Trigger Options**:
+1. **All Environments** (default): Runs DEV → TEST → PROD sequentially
+2. **DEV Only**: Tests only development environment
+3. **TEST Only**: Tests only test environment
+4. **PROD Only**: Tests only production environment
+
+**Test Suite Selection**:
+- **smoke**: Quick smoke tests (~2 min per environment)
+- **ci**: CI test suite (~5 min per environment)
+- **extended**: Extended test suite (~10 min per environment)
+- **all**: All test suites
+
+### **How It Works**:
+
+**Automatic Runs** (push/PR):
+- Default: Tests all environments sequentially (dev → test → prod)
+- Uses smoke test suite for speed
+
+**Manual Runs** (workflow_dispatch):
+1. Go to Actions → "Selenium Grid CI/CD Pipeline"
+2. Click "Run workflow"
+3. Select environment: `all`, `dev`, `test`, or `prod`
+4. Select test suite: `smoke`, `ci`, `extended`, or `all`
+5. Click "Run workflow"
+
+**Environment Parameter**:
+- Passed to tests via `-Dtest.environment=dev|test|prod`
+- Framework reads from system property
+- Overrides XML configuration
+
+**Sequential Execution** (when `environment=all`):
+```
+1. DEV environment tests run first
+   ↓ (only if success)
+2. TEST environment tests run
+   ↓ (only if success)
+3. PROD environment tests run
+```
+
+**Independent Execution** (when `environment=dev|test|prod`):
+```
+Only selected environment runs
+Other environments are skipped
+```
+
+### **Environment URLs**:
+
+**Configured in workflow**:
+```yaml
+env:
+  DEV_BASE_URL: 'https://dev.yourapp.com'
+  TEST_BASE_URL: 'https://test.yourapp.com'
+  PROD_BASE_URL: 'https://prod.yourapp.com'
+```
+
+**Update these URLs** in `.github/workflows/ci.yml` to match your actual environment URLs.
 
 ---
 
@@ -65,13 +130,15 @@ on:
 2. Select "Selenium Grid CI/CD Pipeline"
 3. Click "Run workflow"
 4. Select branch
-5. Click "Run workflow" button
+5. **Select environment**: `all`, `dev`, `test`, or `prod`
+6. **Select test suite**: `smoke`, `ci`, `extended`, or `all`
+7. Click "Run workflow" button
 
 ---
 
 ## 📈 JOB FLOW DIAGRAM
 
-### **Stage 1: Change Detection** (Always Runs)
+### **Stage 1: Change & Environment Detection** (Always Runs)
 ```
 ┌────────────────────┐
 │  detect-changes    │ ← Determines if code or docs changed
@@ -83,6 +150,17 @@ on:
       │         │
    [Full]   [Skip]
    Pipeline  Tests
+      │
+      ▼
+┌─────────────────────────┐
+│ determine-environments  │ ← Determines which environments to test
+└───────────┬─────────────┘
+            │
+    ┌───────┼───────┐
+    │       │       │
+  [DEV]  [TEST]  [PROD]
+    │       │       │
+  [Run]   [Run]   [Run]  (based on selection)
 ```
 
 ### **Stage 2: Build & Quality** (If Code Changed)
@@ -102,7 +180,30 @@ on:
         [Chrome]   [Firefox]
 ```
 
-### **Stage 3: Testing** (Parallel Matrix)
+### **Stage 3: Environment Testing** (Sequential or Selected)
+```
+┌────────────────────────┐
+│ test-dev-environment   │ ← Tests DEV environment
+└───────────┬────────────┘
+            │ (if run_dev=true)
+            ▼
+┌────────────────────────┐
+│ test-test-environment  │ ← Tests TEST environment
+└───────────┬────────────┘  (only if DEV success)
+            │ (if run_test=true)
+            ▼
+┌────────────────────────┐
+│ test-prod-environment  │ ← Tests PROD environment
+└────────────────────────┘  (only if TEST success)
+   (if run_prod=true)
+```
+
+**Execution Examples**:
+- `environment=all`: All three run sequentially
+- `environment=dev`: Only DEV runs (TEST & PROD skipped)
+- `environment=test`: Only TEST runs (DEV & PROD skipped)
+
+### **Stage 4: Additional Testing** (Parallel Matrix)
 ```
 ┌──────────────────────────────────────┐
 │   selenium-grid-tests (Matrix)       │
@@ -125,7 +226,7 @@ on:
     [Complete]
 ```
 
-### **Stage 4: Reporting & Quality**
+### **Stage 5: Reporting & Quality**
 ```
 ┌────────────────┬────────────────┐
 │                │                │
@@ -138,7 +239,7 @@ allure-report   code-quality   test-summary
 (if main branch)
 ```
 
-### **Stage 5: Deployment** (If main branch)
+### **Stage 6: Deployment** (If main branch)
 ```
 ┌──────────┐     ┌──────────┐     ┌──────────┐
 │ deploy-  │ ──► │ deploy-  │ ──► │ deploy-  │
@@ -146,7 +247,7 @@ allure-report   code-quality   test-summary
 └──────────┘     └──────────┘     └──────────┘
 ```
 
-### **Stage 6: Summary** (Always Runs)
+### **Stage 7: Summary** (Always Runs)
 ```
 ┌─────────────────────┐
 │  pipeline-summary   │ ← Shows what ran/skipped
@@ -184,7 +285,45 @@ allure-report   code-quality   test-summary
 
 ---
 
-### **Job 2: build-and-compile** (Conditional - Stage 2)
+### **Job 2: determine-environments** (Conditional - Stage 1)
+
+**Purpose**: Determine which environments to test based on workflow input
+
+**Condition**: `if: needs.detect-changes.outputs.code-changed == 'true'`
+
+**Inputs Processed**:
+- `github.event.inputs.environment` (all, dev, test, prod)
+- `github.event.inputs.test_suite` (smoke, ci, extended, all)
+
+**Logic**:
+```bash
+# If environment='all' (or not set):
+run_dev=true, run_test=true, run_prod=true
+
+# If environment='dev':
+run_dev=true, run_test=false, run_prod=false
+
+# If environment='test':
+run_dev=false, run_test=true, run_prod=false
+
+# If environment='prod':
+run_dev=false, run_test=false, run_prod=true
+```
+
+**Outputs**:
+- `run_dev`: Boolean (whether to run DEV tests)
+- `run_test`: Boolean (whether to run TEST tests)
+- `run_prod`: Boolean (whether to run PROD tests)
+- `test_suite`: Test suite to execute (smoke, ci, extended, all)
+- `selected_env`: Environment selection made (all, dev, test, prod)
+
+**Duration**: ~10 seconds
+
+**Depends On**: `detect-changes`
+
+---
+
+### **Job 3: build-and-compile** (Conditional - Stage 2)
 
 **Purpose**: Compile Java code and run static analysis
 
@@ -238,7 +377,128 @@ allure-report   code-quality   test-summary
 
 ---
 
-### **Job 4: selenium-grid-tests** (Conditional Matrix - Stage 3)
+### **Job 4: test-dev-environment** (Conditional - Stage 3)
+
+**Purpose**: Test DEV environment with selected test suite
+
+**Condition**: `if: needs.determine-environments.outputs.run_dev == 'true'`
+
+**Environment**:
+- **Name**: DEV (Development)
+- **URL**: `$DEV_BASE_URL` (configured in workflow env vars)
+- **Parameter**: `-Dtest.environment=dev`
+
+**Test Suite**: Dynamic (based on `determine-environments.outputs.test_suite`)
+- Could be: smoke, ci, extended, or all
+
+**Services**:
+- `selenium-hub`: Selenium Grid hub
+- `chrome-node`: Chrome browser node
+
+**Steps**:
+1. Start Selenium Grid
+2. Wait for Grid ready
+3. Run tests with: `./mvnw test -Dtest.environment=dev -DsuiteXmlFile=testng-{suite}-suite.xml`
+4. Upload test results
+
+**Duration**: ~5-15 minutes (depending on suite)
+
+**Timeout**: 15 minutes
+
+**Artifacts Produced**:
+- `test-results-dev-environment` (7 days)
+
+**Depends On**: `detect-changes`, `determine-environments`, `build-and-compile`, `smoke-tests`
+
+**Execution Logic**:
+- Runs if `run_dev=true` (set by determine-environments)
+- When `environment=all`: Always runs first
+- When `environment=dev`: Runs (others skip)
+- When `environment=test` or `prod`: Skipped
+
+---
+
+### **Job 5: test-test-environment** (Conditional - Stage 3)
+
+**Purpose**: Test TEST environment with selected test suite
+
+**Condition**: `if: needs.determine-environments.outputs.run_test == 'true' && (test-dev-environment success or skipped)`
+
+**Environment**:
+- **Name**: TEST (Testing/QA)
+- **URL**: `$TEST_BASE_URL` (configured in workflow env vars)
+- **Parameter**: `-Dtest.environment=test`
+
+**Test Suite**: Dynamic (based on `determine-environments.outputs.test_suite`)
+
+**Services**:
+- `selenium-hub`: Selenium Grid hub
+- `chrome-node`: Chrome browser node
+
+**Steps**:
+1. Start Selenium Grid
+2. Wait for Grid ready
+3. Run tests with: `./mvnw test -Dtest.environment=test -DsuiteXmlFile=testng-{suite}-suite.xml`
+4. Upload test results
+
+**Duration**: ~5-15 minutes (depending on suite)
+
+**Timeout**: 15 minutes
+
+**Artifacts Produced**:
+- `test-results-test-environment` (7 days)
+
+**Depends On**: `detect-changes`, `determine-environments`, `build-and-compile`, `smoke-tests`, `test-dev-environment`
+
+**Execution Logic**:
+- Runs if `run_test=true` AND (DEV success OR DEV skipped)
+- When `environment=all`: Runs second (after DEV)
+- When `environment=test`: Runs (others skip)
+- When `environment=dev` or `prod`: Skipped
+
+---
+
+### **Job 6: test-prod-environment** (Conditional - Stage 3)
+
+**Purpose**: Test PROD environment with selected test suite
+
+**Condition**: `if: needs.determine-environments.outputs.run_prod == 'true' && (test-test-environment success or skipped)`
+
+**Environment**:
+- **Name**: PROD (Production)
+- **URL**: `$PROD_BASE_URL` (configured in workflow env vars)
+- **Parameter**: `-Dtest.environment=prod`
+
+**Test Suite**: Dynamic (based on `determine-environments.outputs.test_suite`)
+
+**Services**:
+- `selenium-hub`: Selenium Grid hub
+- `chrome-node`: Chrome browser node
+
+**Steps**:
+1. Start Selenium Grid
+2. Wait for Grid ready
+3. Run tests with: `./mvnw test -Dtest.environment=prod -DsuiteXmlFile=testng-{suite}-suite.xml`
+4. Upload test results
+
+**Duration**: ~5-15 minutes (depending on suite)
+
+**Timeout**: 15 minutes
+
+**Artifacts Produced**:
+- `test-results-prod-environment` (7 days)
+
+**Depends On**: `detect-changes`, `determine-environments`, `build-and-compile`, `smoke-tests`, `test-test-environment`
+
+**Execution Logic**:
+- Runs if `run_prod=true` AND (TEST success OR TEST skipped)
+- When `environment=all`: Runs third (after TEST)
+- When `environment=prod`: Runs (others skip)
+- When `environment=dev` or `test`: Skipped
+
+---
+
+### **Job 7: selenium-grid-tests** (Conditional Matrix - Stage 4)
 
 **Purpose**: Comprehensive UI testing across browsers
 
@@ -583,6 +843,9 @@ done
 |---------------|-------------|-----------|------|---------|
 | `pmd-report` | build-and-compile | 7 days | ~1 MB | Code analysis |
 | `compiled-classes` | build-and-compile | 1 day | ~50 MB | Compiled code |
+| `test-results-dev-environment` | test-dev-environment | 7 days | ~10 MB | DEV env test results |
+| `test-results-test-environment` | test-test-environment | 7 days | ~10 MB | TEST env test results |
+| `test-results-prod-environment` | test-prod-environment | 7 days | ~10 MB | PROD env test results |
 | `test-results-chrome` | grid-tests | 7 days | ~10 MB | Test results + screenshots |
 | `test-results-firefox` | grid-tests | 7 days | ~10 MB | Test results + screenshots |
 | `screenshots-{browser}` | grid-tests | 7 days | ~5 MB | Failure screenshots |
@@ -863,6 +1126,20 @@ See pipeline workflow documentation for details.
 ---
 
 ## 📝 CHANGE LOG
+
+### **2025-11-13: Added Multi-Environment Support** 🆕
+- Added `determine-environments` job to select which environments to test
+- Added three environment-specific test jobs:
+  - `test-dev-environment` - Tests DEV environment
+  - `test-test-environment` - Tests TEST environment
+  - `test-prod-environment` - Tests PROD environment
+- Added workflow_dispatch inputs:
+  - `environment` selection (all, dev, test, prod)
+  - `test_suite` selection (smoke, ci, extended, all)
+- Updated Environment.java to read `-Dtest.environment` system property
+- Sequential execution: DEV → TEST → PROD (when environment=all)
+- Independent execution: Run only selected environment
+- **Impact**: Can test specific environments independently, proper environment isolation
 
 ### **2025-11-12: Added Documentation-Only Detection**
 - Added `detect-changes` job

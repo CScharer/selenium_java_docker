@@ -348,6 +348,18 @@ public class Environment {
   private static void setEnvironment(String node, String config) {
     try {
       final StringBuilder stringBuilder = new StringBuilder();
+
+      // PRIORITY 1: Check for system property override (for CI/CD pipeline)
+      final String envFromSystem = System.getProperty("test.environment");
+      if (envFromSystem != null && !envFromSystem.isEmpty()) {
+        environment = envFromSystem.toUpperCase();
+        stringBuilder.append(node + " (from system property):[" + environment + "]");
+        sysOut(stringBuilder.toString());
+        sysOut("✅ Environment set from CI/CD parameter: " + environment);
+        return;
+      }
+
+      // PRIORITY 2: Read from XML configuration file
       final String value = XML.getNode(FILE_CONFIG_XML, config, node);
       if (value != null) {
         environment = value;
