@@ -67,7 +67,7 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 		<htmlunit-driver.version>4.21.0</htmlunit-driver.version>
 		<httpclient.version>4.5.14</httpclient.version>
 		<httpmime.version>4.5.14</httpmime.version>
-		<ipp-v3-java.version>6.0.7</ipp-v3-java.version>
+		<ipp-v3-java.version>6.7.0</ipp-v3-java.version>
 		<jackcess.version>4.0.7</jackcess.version>
 		<javax.mail-api.version>1.6.2</javax.mail-api.version>
 		<javax.persistence-api>2.2</javax.persistence-api>
