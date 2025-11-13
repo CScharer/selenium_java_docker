@@ -279,7 +279,8 @@ jobs:
       always() &&
       needs.detect-changes.outputs.code-changed == 'true' &&
       needs.determine-environments.outputs.run_test == 'true' &&
-      (needs.test-dev-environment.result == 'success' || needs.test-dev-environment.result == 'skipped')
+      (needs.test-dev-environment.result == 'success' || 
+       (needs.test-dev-environment.result == 'skipped' && needs.determine-environments.outputs.run_dev == 'false'))
     uses: ./.github/workflows/test-environment.yml
     with:
       environment: 'test'
@@ -330,7 +331,8 @@ jobs:
       always() &&
       needs.detect-changes.outputs.code-changed == 'true' &&
       needs.determine-environments.outputs.run_prod == 'true' &&
-      (needs.test-test-environment.result == 'success' || needs.test-test-environment.result == 'skipped')
+      (needs.test-test-environment.result == 'success' || 
+       (needs.test-test-environment.result == 'skipped' && needs.determine-environments.outputs.run_test == 'false'))
     uses: ./.github/workflows/test-environment.yml
     with:
       environment: 'prod'
