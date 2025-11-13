@@ -1,6 +1,18 @@
 # AI Workflow Rules for Code Changes
 
-**Version:** 2.5 (Updated: 2025-11-13 - Added Mandatory Metadata Template)
+**Version:** 2.6 (Updated: 2025-11-13 - Added Feature Branch Workflow)
+
+### 📋 Version 2.6 Changes:
+- **🌿 ADDED:** Rule 8 - Feature Branch Workflow
+  - When to use feature branches vs direct commits to main
+  - Branch naming conventions (feature/, fix/, refactor/, docs/, test/)
+  - Mandatory 6-step process: Create → Develop → Validate → Merge → Cleanup → Iterate
+  - Use --no-ff for merge commits (preserves history)
+  - Documentation requirements for feature branches
+  - Exception handling for emergency hotfixes
+  - Benefits and best practices
+- **✅ CODIFIED:** Based on successful multi-environment pipeline and dependency removal workflows
+- **🎯 GOAL:** Ensure main branch always stable, enable safe validation before merge
 
 ### 📋 Version 2.5 Changes:
 - **📝 ENHANCED:** Rule 2.5 - Added mandatory metadata block requirement
@@ -640,6 +652,129 @@ If you pushed code that breaks the build:
 2. Identify the breaking commit: `git log --oneline -5`
 3. Propose rollback: `git revert <commit-hash>` OR fix forward
 4. Wait for user approval before proceeding
+
+---
+
+### **Rule 8: Feature Branch Workflow** 🌿 **NEW**
+
+**When to Use Feature Branches:**
+
+Use feature branches for:
+- ✅ Risky changes (dependency updates, refactoring, architecture changes)
+- ✅ Multi-step tasks that span multiple commits
+- ✅ Changes requiring validation before merge
+- ✅ Pipeline/workflow modifications
+- ✅ Changes that might need rollback
+
+**Skip feature branches for:**
+- ⏭️ Documentation-only updates
+- ⏭️ Quick fixes (single file, low risk)
+- ⏭️ Hotfixes that need immediate deployment
+
+**Mandatory Process:**
+
+**1. Create Feature Branch:**
+```bash
+git checkout -b feature/descriptive-name
+# Examples:
+#   feature/multi-environment-pipeline
+#   feature/remove-dangerous-dependencies
+#   feature/standardize-logging
+#   feature/add-data-driven-testing
+```
+
+**Branch Naming Convention:**
+- `feature/` - New features or enhancements
+- `fix/` - Bug fixes
+- `refactor/` - Code refactoring
+- `docs/` - Major documentation changes
+- `test/` - Test-related changes
+
+**2. Development on Feature Branch:**
+- ✅ Make incremental commits (one logical change per commit)
+- ✅ Test after each significant change
+- ✅ Push to origin regularly (`git push -u origin feature/name`)
+- ✅ Follow all other rules (compilation, testing, verification)
+- ✅ Update documentation as you go
+
+**3. Validation Before Merge:**
+- ✅ **Compilation**: `./mvnw clean compile test-compile` must succeed
+- ✅ **Tests**: Run relevant tests (smoke tests minimum)
+- ✅ **Docker** (if applicable): Test with Grid running
+- ✅ **Documentation**: Update CHANGE.log, related docs
+- ✅ **User Review**: Get user confirmation flow is correct
+
+**4. Merge to Main:**
+```bash
+# On main branch:
+git checkout main
+git merge --no-ff feature/name -m "Merge feature/name: Description
+
+[Detailed commit message explaining:
+ - What was changed
+ - Why it was changed
+ - Testing performed
+ - Impact/benefits]"
+
+git push origin main
+```
+
+**Use `--no-ff`** (no fast-forward) to:
+- ✅ Preserve feature branch history
+- ✅ Make rollback easier
+- ✅ Clear merge point in git log
+- ✅ Better audit trail
+
+**5. Cleanup After Successful Merge:**
+```bash
+# Delete local branch
+git branch -d feature/name
+
+# Delete remote branch
+git push origin --delete feature/name
+```
+
+**6. If Changes Need Iteration:**
+- ✅ Make changes on feature branch
+- ✅ Push updates
+- ✅ Re-test
+- ✅ Merge when ready
+- ❌ Don't merge half-working features to main
+
+**Exception: Emergency Hotfixes**
+
+For critical production issues requiring immediate fix:
+```bash
+# Create hotfix branch from main
+git checkout -b hotfix/critical-issue-description
+
+# Fix, test, commit
+git add .
+git commit -m "hotfix: Description"
+
+# Merge immediately
+git checkout main
+git merge --no-ff hotfix/critical-issue-description
+git push origin main
+
+# Cleanup
+git branch -d hotfix/critical-issue-description
+git push origin --delete hotfix/critical-issue-description
+```
+
+**Benefits of Feature Branch Workflow:**
+- ✅ **Safety**: Main branch always stable
+- ✅ **Testing**: Validate on branch before affecting main
+- ✅ **Collaboration**: Others can review/test branch
+- ✅ **Rollback**: Easy to abandon branch if needed
+- ✅ **CI/CD**: Can test pipeline changes on branch first
+- ✅ **History**: Clear feature development timeline
+
+**Documentation Requirements:**
+- Update CHANGE.log when merging to main
+- Note branch name in CHANGE.log entry
+- Document commits made on feature branch
+- Include testing performed before merge
 
 ---
 
