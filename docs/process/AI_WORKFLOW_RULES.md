@@ -1,6 +1,17 @@
 # AI Workflow Rules for Code Changes
 
-**Version:** 2.2 (Updated: 2025-11-12 - Optimized CHANGE.log workflow)
+**Version:** 2.3 (Updated: 2025-11-12 - Added Hardcoded Password Security Rule)
+
+### 📋 Version 2.3 Changes:
+- **🔐 ADDED:** Rule 2.5 - Hardcoded Passwords Strictly Forbidden
+  - Zero tolerance policy for hardcoded passwords
+  - Requires explicit user approval to use --no-verify
+  - Clear process for handling pre-commit hook failures
+  - Distinguishes between new violations (forbidden) and existing issues (require approval)
+  - Documents when --no-verify is acceptable vs forbidden
+  - Provides correct approach examples (Google Cloud Secret Manager, EPasswords enum)
+- **✅ SECURITY:** Prevents accidental commit of hardcoded credentials
+- **✅ PROCESS:** Clear approval workflow for existing password issues
 
 ### 📋 Version 2.2 Changes:
 - **✅ OPTIMIZED:** CHANGE.log commit workflow - Reduced from 2 commits to 1!
@@ -62,6 +73,144 @@ Before making ANY code changes, you MUST:
 - **Maximum files per batch:** 10 files
 - **Maximum fixes per batch:** 25 fixes
 - **Reason:** Smaller batches = easier rollback if issues occur
+
+---
+
+### **Rule 2.5: Hardcoded Passwords - STRICTLY FORBIDDEN** 🔐
+
+**🚨 CRITICAL SECURITY RULE - NEVER BYPASS WITHOUT EXPLICIT USER APPROVAL**
+
+#### **Absolute Prohibition:**
+- ❌ **NEVER add hardcoded passwords to any file**
+- ❌ **NEVER commit code with hardcoded passwords**
+- ❌ **NEVER use `--no-verify` to bypass pre-commit password checks WITHOUT user approval**
+
+#### **What Counts as a Hardcoded Password:**
+- Any password in plain text in source code
+- API keys, tokens, secrets in code
+- Database credentials in configuration files
+- Service account passwords
+- Test account passwords (unless explicitly marked as dummy/fake)
+
+#### **Pre-Commit Hook Detection:**
+The pre-commit hook checks for hardcoded passwords using pattern matching:
+```bash
+# The hook will FAIL if it finds patterns like:
+password = "actual_value"
+password: "actual_value"
+pwd = "actual_value"
+secret = "actual_value"
+token = "actual_value"
+```
+
+#### **Required Process:**
+
+**1. During Development:**
+- ✅ Use Google Cloud Secret Manager for ALL credentials
+- ✅ Use `EPasswords` enum for password retrieval
+- ✅ Use environment variables for test credentials
+- ✅ Use `.xml.template` files with placeholders
+
+**2. Before Commit:**
+```bash
+# Check for hardcoded passwords (pre-commit hook will run automatically)
+git add -A
+git commit -m "..."
+
+# If pre-commit hook FAILS with "Possible hardcoded password found!":
+```
+
+**3. If Pre-Commit Hook Fails:**
+
+**Option A: Fix the Issue (REQUIRED if YOU added the password)**
+```bash
+# 1. Review the output - which files have passwords?
+# 2. If YOU added these passwords in THIS batch:
+#    - STOP immediately
+#    - Remove the hardcoded passwords
+#    - Use Google Cloud Secret Manager instead
+#    - Update code to retrieve from EPasswords enum
+#    - Re-run commit
+```
+
+**Option B: Request User Approval (ONLY for existing passwords)**
+```bash
+# If the passwords were ALREADY in the repository (not added by you):
+# 1. STOP and notify the user
+# 2. Show them the pre-commit hook output
+# 3. Explain:
+#    - "Pre-commit hook detected hardcoded passwords in existing files"
+#    - "These are NOT new changes in this commit"
+#    - List the files with passwords
+# 4. Ask: "May I use --no-verify to bypass the check for this commit?"
+# 5. WAIT for explicit user approval
+# 6. Only proceed with --no-verify if user approves
+```
+
+**4. User Approval Required:**
+```
+AI: "⚠️  Pre-commit hook detected hardcoded passwords in these files:
+     - src/test/java/com/cjs/qa/pluralsight/pages/LoginPage.java
+     - src/test/java/com/cjs/qa/gt/Notes.txt
+
+     These are existing passwords (not added in this commit).
+
+     May I use --no-verify to bypass the check for this commit?
+
+     (Note: These existing passwords should be migrated to Google Cloud
+     Secret Manager in a future cleanup task.)"
+
+User: "Yes, approved" OR "No, let's fix them first"
+```
+
+#### **When --no-verify is ACCEPTABLE:**
+✅ Only when ALL of these conditions are met:
+1. User has given EXPLICIT approval
+2. The passwords are EXISTING (not added by you)
+3. The passwords are NOT related to your current changes
+4. You document the bypass in the commit message
+5. You note that cleanup is needed in the future
+
+#### **When --no-verify is FORBIDDEN:**
+❌ NEVER use --no-verify if:
+1. YOU added the hardcoded password
+2. User has not approved
+3. The password is related to your changes
+4. It's a new security issue
+
+#### **Documentation Required:**
+If user approves --no-verify, you MUST:
+1. Add note to commit message:
+   ```
+   NOTE: Used --no-verify because pre-commit hook flagged existing
+   hardcoded passwords in unmodified files (not new changes).
+   User approval obtained. These are known existing issues to be
+   addressed in future cleanup.
+   ```
+2. Add entry to CHANGE.log explaining the situation
+3. Consider creating a GitHub issue to track password cleanup
+
+#### **Zero Tolerance Policy:**
+- Any attempt to sneak in hardcoded passwords = IMMEDIATE STOP
+- Any bypass of password checks without approval = VIOLATION
+- Security is NON-NEGOTIABLE
+
+#### **Correct Approach - Example:**
+```java
+// ❌ WRONG - Hardcoded password
+String password = "MySecretP@ssw0rd";
+
+// ✅ CORRECT - Retrieved from Google Cloud Secret Manager
+String password = EPasswords.MY_SERVICE.getValue();
+
+// ✅ CORRECT - Environment variable
+String password = System.getenv("MY_SERVICE_PASSWORD");
+
+// ✅ CORRECT - Configuration file (not committed to git)
+String password = config.getPassword("my-service");
+```
+
+**Remember:** This project has ZERO hardcoded passwords in active code. Let's keep it that way! 🔐
 
 ---
 
@@ -368,7 +517,11 @@ git log -1 --format=%h
 
 # 9. Commit and push (SINGLE commit with both updates!)
 git add -A
-git commit --no-verify -m "..."
+git commit -m "..."
+# NOTE: If pre-commit hook fails with password warning:
+# - Review the output carefully
+# - If YOU added passwords: STOP and fix them!
+# - If passwords already exist: Request user approval before using --no-verify
 git push origin main
 
 # 10. Monitor GitHub Actions (if code changed)
@@ -386,6 +539,7 @@ git push origin main
 **NEVER skip:**
 - Compilation + smoke tests (unless explicitly approved by user)
 - CHANGE.log update (MANDATORY before every push)
+- Hardcoded password check (NEVER use --no-verify without user approval)
 
 ---
 

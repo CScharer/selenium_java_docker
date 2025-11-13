@@ -1,6 +1,206 @@
 # CHANGE LOG
 
-## [2025-11-12 21:54:25 CST] [PENDING] - 📚 Documentation Reorganization: Logical Folder Structure
+## [2025-11-12 21:59:33 CST] [PENDING] - 🔐 Security Enhancement: Hardcoded Password Rules Added
+
+### Overview
+**SECURITY POLICY UPDATE:** Added strict rules prohibiting hardcoded passwords
+**User Request:** "Please update the rules to not allow any hard coded passwords without approval"
+**Solution:** Added comprehensive Rule 2.5 to AI_WORKFLOW_RULES.md (v2.3)
+**Impact:** Zero tolerance for hardcoded passwords, explicit user approval required for bypassing checks
+
+**Cursor Token Status:** Tokens Used: 138,169 / Total: 1,000,000 (861,831 remaining, 13.8% used, 86.2% remaining)
+
+---
+
+### Changes Made
+
+**AI_WORKFLOW_RULES.md Updated to Version 2.3:**
+
+**New Rule 2.5: Hardcoded Passwords - STRICTLY FORBIDDEN 🔐**
+
+**1. Absolute Prohibitions:**
+- ❌ NEVER add hardcoded passwords to any file
+- ❌ NEVER commit code with hardcoded passwords
+- ❌ NEVER use `--no-verify` to bypass pre-commit password checks WITHOUT user approval
+
+**2. What Counts as Hardcoded Password:**
+- Passwords in plain text in source code
+- API keys, tokens, secrets in code
+- Database credentials in configuration files
+- Service account passwords
+- Test account passwords (unless explicitly marked as dummy/fake)
+
+**3. Pre-Commit Hook Detection:**
+- Automatically checks for password patterns
+- Fails commit if passwords detected
+- Shows which files contain passwords
+
+**4. Required Process:**
+
+**During Development:**
+- Use Google Cloud Secret Manager for ALL credentials
+- Use `EPasswords` enum for password retrieval
+- Use environment variables for test credentials
+- Use `.xml.template` files with placeholders
+
+**If Pre-Commit Hook Fails:**
+
+**Option A: Fix It (if YOU added the password)**
+- STOP immediately
+- Remove hardcoded password
+- Use Google Cloud Secret Manager instead
+- Update code to retrieve from EPasswords enum
+- Re-run commit
+
+**Option B: Request User Approval (ONLY for existing passwords)**
+- STOP and notify user
+- Show pre-commit hook output
+- Explain these are existing issues (not new)
+- Ask: "May I use --no-verify to bypass?"
+- WAIT for explicit user approval
+- Only proceed with --no-verify if approved
+
+**5. User Approval Template:**
+```
+⚠️  Pre-commit hook detected hardcoded passwords in these files:
+   - [list of files]
+
+   These are existing passwords (not added in this commit).
+
+   May I use --no-verify to bypass the check for this commit?
+
+   (Note: These should be migrated to Google Cloud Secret Manager
+   in a future cleanup task.)
+```
+
+**6. When --no-verify is Acceptable:**
+✅ Only when ALL conditions met:
+1. User has given EXPLICIT approval
+2. Passwords are EXISTING (not added by AI)
+3. Passwords NOT related to current changes
+4. Bypass documented in commit message
+5. Cleanup noted for future
+
+**7. When --no-verify is FORBIDDEN:**
+❌ NEVER if:
+1. AI added the hardcoded password
+2. User has not approved
+3. Password related to current changes
+4. It's a new security issue
+
+**8. Documentation Required:**
+If user approves --no-verify:
+1. Add note to commit message explaining bypass
+2. Add entry to CHANGE.log explaining situation
+3. Consider creating GitHub issue for cleanup
+
+**9. Zero Tolerance Policy:**
+- Any attempt to add hardcoded passwords = IMMEDIATE STOP
+- Any bypass without approval = VIOLATION
+- Security is NON-NEGOTIABLE
+
+**10. Correct Approach Examples:**
+```java
+// ❌ WRONG - Hardcoded password
+String password = "MySecretP@ssw0rd";
+
+// ✅ CORRECT - Retrieved from Google Cloud Secret Manager
+String password = EPasswords.MY_SERVICE.getValue();
+
+// ✅ CORRECT - Environment variable
+String password = System.getenv("MY_SERVICE_PASSWORD");
+
+// ✅ CORRECT - Configuration file (not committed)
+String password = config.getPassword("my-service");
+```
+
+---
+
+### Additional Updates
+
+**Quick Reference Section:**
+- Added hardcoded password check to "NEVER skip" list
+- Updated commit example to remove automatic `--no-verify`
+- Added warning about reviewing pre-commit hook failures
+
+**Commit Process (Step 9):**
+- Removed automatic `--no-verify` flag
+- Added conditional logic for password warnings
+- Requires review and approval before bypass
+
+---
+
+### Files Modified
+
+**Documentation Updated:**
+- `docs/process/AI_WORKFLOW_RULES.md` (v2.2 → v2.3)
+  - Added Rule 2.5 (130+ lines)
+  - Updated version history
+  - Updated Quick Reference
+  - Updated commit examples
+
+**Lines Changed:**
+- Added: ~150 lines of security policy
+- Modified: 5 lines (version, quick reference, commit example)
+
+---
+
+### Verification Results
+
+**Git Status:**
+```
+M docs/process/AI_WORKFLOW_RULES.md
+```
+
+**Documentation-Only Change:** ✅ Yes (skip build/test per Rule 3)
+
+**Security Review:**
+- ✅ Rule clearly defines prohibited actions
+- ✅ User approval process documented
+- ✅ Distinction between new vs existing violations
+- ✅ Zero tolerance policy established
+- ✅ Correct approach examples provided
+
+---
+
+### Impact Summary
+
+**Before:**
+- No explicit rules about hardcoded passwords
+- `--no-verify` could be used without approval
+- Unclear process for pre-commit hook failures
+
+**After:**
+- Zero tolerance policy for hardcoded passwords
+- Explicit user approval required for `--no-verify`
+- Clear process: fix it OR request approval
+- Distinguishes new violations (forbidden) from existing issues (require approval)
+- Documentation requirements for bypassing checks
+
+**Benefits:**
+- 🔐 Enhanced security posture
+- ✅ Clear approval workflow
+- 📝 Better documentation of security decisions
+- 🚫 Prevents accidental credential commits
+- 🎯 Maintains project's zero-password policy
+
+---
+
+### Next Steps
+
+**Immediate:**
+- Rule is now in effect for all future work
+- AI will always follow this process
+- User approval required for any `--no-verify` usage
+
+**Future:**
+- Consider creating GitHub issue to track existing hardcoded passwords
+- Plan cleanup sprint to migrate remaining passwords
+- Document migration to Google Cloud Secret Manager
+
+---
+
+## [2025-11-12 21:54:25 CST] [99cfbfc4] - 📚 Documentation Reorganization: Logical Folder Structure
 
 ### Overview
 **DOCUMENTATION RESTRUCTURE:** Reorganized all documentation into professional, scalable folder structure
