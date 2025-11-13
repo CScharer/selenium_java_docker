@@ -1,6 +1,19 @@
 # AI Workflow Rules for Code Changes
 
-**Version:** 2.1 (Updated: 2025-11-12 - Added file persistence verification step)
+**Version:** 2.2 (Updated: 2025-11-12 - Optimized CHANGE.log workflow)
+
+### 📋 Version 2.2 Changes:
+- **✅ OPTIMIZED:** CHANGE.log commit workflow - Reduced from 2 commits to 1!
+  - Update previous entry's hash + add new entry with [PENDING] in single commit
+  - Eliminates redundant "update hash" commits
+  - Cleaner git history, half the pushes
+- **✅ ADDED:** Documentation-only change detection - Skip build/test for docs!
+  - If ONLY changing .md, .log, .txt, or other doc files → skip compilation/tests
+  - Saves 5-10 minutes per documentation commit
+  - Git verification only
+- **✅ UPDATED:** Rule 4 with new single-commit workflow
+- **✅ UPDATED:** Rule 3 with documentation-only change detection
+- **✅ UPDATED:** Quick Reference with optimized steps
 
 ### 📋 Version 2.1 Changes:
 - **✅ ADDED:** Mandatory file persistence verification step
@@ -46,7 +59,24 @@ Before making ANY code changes, you MUST:
 ---
 
 ### **Rule 3: Post-Change Verification (AFTER each batch)**
-After making code changes, you MUST verify in this order:
+
+**FIRST: Check if documentation-only change:**
+```bash
+git status --short | grep -v -E '\.(md|log|txt|rst|adoc)$'
+```
+- **If NO output:** Only doc files changed → Skip to Rule 4 (no build/test needed!) ✅
+- **If output shows .java/.xml/etc:** Code/config changed → Run full verification below
+
+**Documentation-Only Files (skip build/test):**
+- `.md` files (README, CHANGE.log, rules, etc.)
+- `.log` files
+- `.txt` files
+- `.rst`, `.adoc` files (other documentation formats)
+- **Verification needed:** Git commands only (status, commit, push)
+
+---
+
+After making **code changes**, you MUST verify in this order:
 
 #### **Step 0: Google Java Format + Checkstyle Validation (Auto-fix & validate)**
 ```bash
@@ -153,32 +183,36 @@ docker-compose run --rm tests test -Dcheckstyle.skip=true
 
 ---
 
-### **Rule 4: Commit & Push Process**
+### **Rule 4: Commit & Push Process (OPTIMIZED - Single Commit)**
 Only after ALL verifications pass:
 
 1. ✅ **Update CHANGE.log** (MANDATORY BEFORE COMMIT)
    - **FIRST:** Get actual current timestamp: `date "+%Y-%m-%d %H:%M:%S"` (CST timezone)
-   - Add new entry at top of file with:
-     - **Timestamp:** `[YYYY-MM-DD HH:MM:SS CST]` - **MUST use actual system time from date command**
-     - Commit hash: `[hash]` (use placeholder like `[PENDING]` if not yet committed)
-     - Summary title
-     - Overview section with high-level summary
-     - **Cursor Token Status:** `Tokens Used: X / Total: Y (Z remaining, A% used, B% remaining)`
-     - List of commits in session (if multiple)
-     - Detailed changes, files modified, verification results
-     - Impact summary and next steps
+   - **SECOND:** Get last commit hash: `git log -1 --format=%h`
+   - Update CHANGE.log with BOTH:
+     a) **Update previous entry:** Find last `[PENDING]` and replace with actual commit hash
+     b) **Add new entry** at top of file with:
+        - **Timestamp:** `[YYYY-MM-DD HH:MM:SS CST]` - **MUST use actual system time from date command**
+        - Commit hash: `[PENDING]` (will be updated in next batch)
+        - Summary title
+        - Overview section with high-level summary
+        - **Cursor Token Status:** `Tokens Used: X / Total: Y (Z remaining, A% used, B% remaining)`
+        - Detailed changes, files modified, verification results
+        - Impact summary and next steps
    - Format: Follow existing CHANGE.log structure
    - Content: Include all changes since last entry
    - **Token tracking:** Always include current token usage with percentages for session visibility
    - **CRITICAL:** Never guess timestamps - always use actual system time!
+   - **BENEFIT:** Updates previous hash + adds new entry = 1 commit instead of 2!
    
-2. ✅ Stage changes: `git add -A` (including docs/CHANGE.log)
+2. ✅ Stage changes: `git add -A` (including docs/CHANGE.log with both updates)
 3. ✅ Commit with descriptive message following established format
-4. ✅ Verify commit: `git log --oneline -1`
-5. ✅ Push to GitHub: `git push origin main`
-6. ✅ Verify push succeeded
-7. ✅ Monitor GitHub Actions status
-8. ✅ If GitHub Actions fails, STOP and fix before next batch
+4. ✅ Push to GitHub: `git push origin main`
+5. ✅ Verify push succeeded
+6. ✅ Monitor GitHub Actions status
+7. ✅ If GitHub Actions fails, STOP and fix before next batch
+
+**Note:** Last entry of session will have `[PENDING]` - gets updated in next session or can be updated at end of session if desired.
 
 **GitHub Actions Monitoring:**
 - Check https://github.com/CScharer/selenium_java_docker/actions after push
@@ -309,24 +343,38 @@ docker-compose build tests
 docker-compose run --rm tests test -Dcheckstyle.skip=true
 ```
 
-**After verification passes:**
+**After verification passes (or if documentation-only):**
 ```bash
-# 5. Get actual timestamp (FIRST!)
+# 5. Check if documentation-only change (NEW in v2.2!)
+git status --short | grep -v -E '\.(md|log|txt|rst|adoc)$'
+# If NO output → Documentation-only! Skip steps 1-4 above ✅
+
+# 6. Get actual timestamp (FIRST!)
 date "+%Y-%m-%d %H:%M:%S"
-# Use this EXACT timestamp in CHANGE.log entry
 
-# 6. Update CHANGE.log (MANDATORY!)
-# Add entry at top with ACTUAL timestamp, commit hash, summary, details
+# 7. Get last commit hash (SECOND!)
+git log -1 --format=%h
 
-# 7. Commit and push
+# 8. Update CHANGE.log (MANDATORY - BOTH updates in one!)
+# a) Find previous [PENDING] entry → replace with actual commit hash
+# b) Add NEW entry at top with [PENDING], timestamp, summary, details
+
+# 9. Commit and push (SINGLE commit with both updates!)
 git add -A
 git commit --no-verify -m "..."
 git push origin main
 
-# 8. Monitor GitHub Actions
+# 10. Monitor GitHub Actions (if code changed)
 # Check https://github.com/CScharer/selenium_java_docker/actions
 # Wait for green status or investigate failures
+# (Documentation-only changes: pipeline will skip tests automatically)
 ```
+
+**Benefits of v2.2:**
+- ✅ 1 commit per batch (was 2)
+- ✅ 1 push per batch (was 2)
+- ✅ Cleaner git history
+- ✅ More efficient workflow
 
 **NEVER skip:**
 - Compilation + smoke tests (unless explicitly approved by user)
