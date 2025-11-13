@@ -15,9 +15,46 @@ env:
   MAVEN_OPTS: -Xmx2048m
 
 jobs:
+  detect-changes:
+    name: Detect File Changes
+    runs-on: ubuntu-latest
+    outputs:
+      code-changed: ${{ steps.filter.outputs.code-changed }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # Need at least 2 commits to compare
+      
+      - name: Detect changed files
+        id: filter
+        run: |
+          # Get list of changed files
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
+          else
+            CHANGED_FILES=$(git diff --name-only HEAD^1 HEAD 2>/dev/null || git ls-files)
+          fi
+          
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
+          
+          # Check if any non-documentation files changed
+          CODE_CHANGED=$(echo "$CHANGED_FILES" | grep -v -E '\.(md|log|txt|rst|adoc)$' || true)
+          
+          if [ -z "$CODE_CHANGED" ]; then
+            echo "✅ Documentation-only change detected - will skip build/test"
+            echo "code-changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "📝 Code files changed - will run full pipeline"
+            echo "code-changed=true" >> $GITHUB_OUTPUT
+          fi
+
   build-and-compile:
     name: Build & Compile
     runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.code-changed == 'true'
 
     steps:
       - name: Checkout code
@@ -66,7 +103,8 @@ jobs:
   smoke-tests:
     name: Smoke Tests (Fast Check)
     runs-on: ubuntu-latest
-    needs: build-and-compile
+    needs: [detect-changes, build-and-compile]
+    if: needs.detect-changes.outputs.code-changed == 'true'
 
     services:
       selenium-hub:
@@ -201,7 +239,8 @@ jobs:
   selenium-grid-tests:
     name: Grid Tests - ${{ matrix.browser }}
     runs-on: ubuntu-latest
-    needs: build-and-compile
+    needs: [detect-changes, build-and-compile]
+    if: needs.detect-changes.outputs.code-changed == 'true'
 
     strategy:
       matrix:
@@ -382,7 +421,8 @@ jobs:
   mobile-browser-tests:
     name: Mobile Browser Tests
     runs-on: ubuntu-latest
-    needs: build-and-compile
+    needs: [detect-changes, build-and-compile]
+    if: needs.detect-changes.outputs.code-changed == 'true'
     
     services:
       selenium-hub:
@@ -506,7 +546,8 @@ jobs:
   responsive-design-tests:
     name: Responsive Design Tests
     runs-on: ubuntu-latest
-    needs: build-and-compile
+    needs: [detect-changes, build-and-compile]
+    if: needs.detect-changes.outputs.code-changed == 'true'
     
     services:
       selenium-hub:
@@ -630,8 +671,8 @@ jobs:
   allure-report:
     name: Generate Allure Report
     runs-on: ubuntu-latest
-    needs: [smoke-tests, selenium-grid-tests, mobile-browser-tests, responsive-design-tests]
-    if: always()
+    needs: [detect-changes, smoke-tests, selenium-grid-tests, mobile-browser-tests, responsive-design-tests]
+    if: always() && needs.detect-changes.outputs.code-changed == 'true'
     
     steps:
       - name: Checkout code
@@ -717,7 +758,8 @@ jobs:
   code-quality:
     name: Code Quality Analysis
     runs-on: ubuntu-latest
-    needs: build-and-compile
+    needs: [detect-changes, build-and-compile]
+    if: needs.detect-changes.outputs.code-changed == 'true'
 
     steps:
       - name: Checkout code
@@ -751,6 +793,8 @@ jobs:
   docker-build:
     name: Docker Build Test
     runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.code-changed == 'true'
 
     steps:
       - name: Checkout code
@@ -768,8 +812,8 @@ jobs:
   test-summary:
     name: Test Summary
     runs-on: ubuntu-latest
-    needs: [smoke-tests, selenium-grid-tests, mobile-browser-tests, responsive-design-tests, allure-report]
-    if: always()
+    needs: [detect-changes, smoke-tests, selenium-grid-tests, mobile-browser-tests, responsive-design-tests, allure-report]
+    if: always() && needs.detect-changes.outputs.code-changed == 'true'
 
     steps:
       - name: Download test results
@@ -813,8 +857,8 @@ jobs:
   deploy-dev:
     name: Deploy to DEV
     runs-on: ubuntu-latest
-    needs: [smoke-tests, selenium-grid-tests, mobile-browser-tests, responsive-design-tests, code-quality, docker-build]
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: [detect-changes, smoke-tests, selenium-grid-tests, mobile-browser-tests, responsive-design-tests, code-quality, docker-build]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && needs.detect-changes.outputs.code-changed == 'true'
     environment:
       name: development
       url: https://your-development-url.com
@@ -852,8 +896,8 @@ jobs:
   deploy-test:
     name: Deploy to TEST
     runs-on: ubuntu-latest
-    needs: deploy-dev
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: [detect-changes, deploy-dev]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && needs.detect-changes.outputs.code-changed == 'true'
     environment:
       name: test
       url: https://your-test-url.com
@@ -886,8 +930,8 @@ jobs:
   deploy-prod:
     name: Deploy to PROD
     runs-on: ubuntu-latest
-    needs: deploy-test
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: [detect-changes, deploy-test]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && needs.detect-changes.outputs.code-changed == 'true'
     environment:
       name: production
       url: https://your-production-url.com
@@ -919,4 +963,32 @@ jobs:
           echo "   ⏭️  Production environment protection enabled"
           echo ""
           echo "✅ PROD deployment validation: PASSED"
+          echo "═══════════════════════════════════════════════════════════════════════════════"
+
+  pipeline-summary:
+    name: Pipeline Summary
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    if: always()
+    
+    steps:
+      - name: Pipeline Summary
+        run: |
+          echo "═══════════════════════════════════════════════════════════════════════════════"
+          echo "📊 PIPELINE EXECUTION SUMMARY"
+          echo "═══════════════════════════════════════════════════════════════════════════════"
+          echo ""
+          if [ "${{ needs.detect-changes.outputs.code-changed }}" = "true" ]; then
+            echo "📝 Change Type: CODE CHANGES DETECTED"
+            echo "✅ Full pipeline executed (build, test, quality checks)"
+          else
+            echo "📄 Change Type: DOCUMENTATION-ONLY"
+            echo "⏭️  Skipped: Build, tests, quality checks (not needed for docs)"
+            echo "✅ Documentation changes processed successfully"
+          fi
+          echo ""
+          echo "Commit: ${{ github.sha }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Author: ${{ github.actor }}"
+          echo ""
           echo "═══════════════════════════════════════════════════════════════════════════════"

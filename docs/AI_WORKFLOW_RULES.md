@@ -8,12 +8,19 @@
   - Eliminates redundant "update hash" commits
   - Cleaner git history, half the pushes
 - **✅ ADDED:** Documentation-only change detection - Skip build/test for docs!
-  - If ONLY changing .md, .log, .txt, or other doc files → skip compilation/tests
-  - Saves 5-10 minutes per documentation commit
+  - **Local:** If ONLY changing .md, .log, .txt, or other doc files → skip compilation/tests
+  - **Pipeline:** GitHub Actions auto-detects and skips build/test/deploy for doc-only changes
+  - Saves 5-10 minutes locally, ~10-15 minutes in pipeline per doc commit
   - Git verification only
+- **✅ OPTIMIZED:** GitHub Actions pipeline with smart change detection
+  - New `detect-changes` job runs first
+  - Skips build/compile/test/quality/deploy for documentation-only changes
+  - Always shows pipeline summary (code vs doc-only)
+  - Massive time savings on documentation commits!
 - **✅ UPDATED:** Rule 4 with new single-commit workflow
 - **✅ UPDATED:** Rule 3 with documentation-only change detection
 - **✅ UPDATED:** Quick Reference with optimized steps
+- **✅ UPDATED:** .github/workflows/ci.yml with smart skip logic
 
 ### 📋 Version 2.1 Changes:
 - **✅ ADDED:** Mandatory file persistence verification step
