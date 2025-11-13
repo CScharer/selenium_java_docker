@@ -160,7 +160,7 @@ locust -f src/test/locust/api_load_test.py --worker --master-host=<master-ip>
 ```
 - Ramp: 1 to 50 users over 30 seconds
 - Sustain: 50 users for 60 seconds
-- Assertions: 
+- Assertions:
   - Max response time < 5s
   - Mean response time < 1s
   - Success rate > 95%
@@ -526,7 +526,7 @@ target/
 class ApiUser(HttpUser):
     wait_time = between(1, 3)  # Wait time range
     host = "https://api.example.com"
-    
+
     @task(10)  # Weight: appears 10 times more often
     def common_task(self):
         pass
@@ -808,10 +808,10 @@ performance-tests:
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
-    
+
     - name: Install Locust
       run: pip install -r requirements.txt
-    
+
     - name: Run Locust Tests
       run: |
         locust -f src/test/locust/api_load_test.py \
@@ -820,7 +820,7 @@ performance-tests:
                --spawn-rate 5 \
                --run-time 2m \
                --html target/locust/report.html
-    
+
     - name: Upload Results
       uses: actions/upload-artifact@v4
       with:
@@ -877,4 +877,3 @@ performance-tests:
 8. **Analyze Failures**: Investigate errors immediately
 9. **Compare Tools**: Cross-validate with multiple tools
 10. **Document Results**: Track trends over time
-

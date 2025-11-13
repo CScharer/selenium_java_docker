@@ -137,7 +137,7 @@ docker-compose down
 - JsonValidationTests (7 tests)
 - **Total: 31 tests**
 
-**Requires:** Nothing! No Grid, no Docker  
+**Requires:** Nothing! No Grid, no Docker
 **Just:** Network access to jsonplaceholder.typicode.com
 
 ---
@@ -305,4 +305,3 @@ docker-compose run --rm tests -Dtest=SmokeTests  # UI
 - UI tests require Selenium Grid
 - All tests generate Allure reports
 - Logs available in target/logs/
-

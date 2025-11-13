@@ -277,6 +277,5 @@ After enabling GitHub Pages, verify:
 
 ---
 
-**Created**: November 8, 2025  
+**Created**: November 8, 2025
 **Last Updated**: November 8, 2025
-

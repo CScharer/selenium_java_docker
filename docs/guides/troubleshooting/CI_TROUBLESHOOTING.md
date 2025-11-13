@@ -1,7 +1,7 @@
 # CI/CD Troubleshooting Guide
 
-**Date**: November 8, 2025  
-**Pipeline**: GitHub Actions  
+**Date**: November 8, 2025
+**Pipeline**: GitHub Actions
 **Workflow**: `.github/workflows/ci.yml`
 
 ---
@@ -28,7 +28,7 @@ docker-compose: command not found
 Error: Process completed with exit code 127
 ```
 
-**Cause:**  
+**Cause:**
 GitHub Actions runners use Docker Compose V2 (built into Docker CLI)
 
 **Solution:**
@@ -52,10 +52,10 @@ openjdk:8-jre-alpine: not found
 ERROR: failed to build
 ```
 
-**Cause:**  
+**Cause:**
 Third-party action `simple-elf/allure-report-action` uses deprecated Docker image
 
-**Solution:**  
+**Solution:**
 Use direct Allure CLI installation:
 ```yaml
 - name: Install Allure CLI
@@ -77,7 +77,7 @@ Use direct Allure CLI installation:
 Allure results directory not found
 ```
 
-**Cause:**  
+**Cause:**
 Tests didn't run or results weren't uploaded properly
 
 **Solution:**
@@ -111,7 +111,7 @@ Tests run: 0, Failures: 0, Errors: 0, Skipped: 0
 ```
 But tests are written in JUnit.
 
-**Solution:**  
+**Solution:**
 Ensure tests use the detected provider (TestNG in our case), or configure Surefire explicitly:
 ```xml
 <configuration>
@@ -157,10 +157,10 @@ Could not start a new session. Could not connect to Grid
 org.openqa.selenium.SessionNotCreatedException: Could not connect to http://selenium-hub:4444
 ```
 
-**Cause:**  
+**Cause:**
 Grid not ready when tests start
 
-**Solution:**  
+**Solution:**
 Add wait step in workflow:
 ```yaml
 - name: Wait for Selenium Grid
@@ -215,7 +215,7 @@ retention-days: 7  # Check if expired
 selenium-hub service is unhealthy
 ```
 
-**Cause:**  
+**Cause:**
 Health check failing
 
 **Debug:**
@@ -243,7 +243,7 @@ services:
 The job running on runner has exceeded the maximum execution time of 360 minutes
 ```
 
-**Cause:**  
+**Cause:**
 Job hanging or taking too long
 
 **Solutions:**
@@ -305,7 +305,7 @@ Failed to capture screenshot
 ClassCastException: cannot cast to TakesScreenshot
 ```
 
-**Cause:**  
+**Cause:**
 Driver isn't RemoteWebDriver or doesn't support screenshots
 
 **Solution:**
@@ -344,7 +344,7 @@ git checkout main
 
 **B) Permissions Issue**
 
-**Solution:**  
+**Solution:**
 Enable workflow write permissions:
 1. Go to repo Settings → Actions → General
 2. Scroll to "Workflow permissions"
@@ -566,6 +566,5 @@ on:
 
 ---
 
-**Last Updated**: November 8, 2025  
+**Last Updated**: November 8, 2025
 **Maintainer**: CJS QA Team
-

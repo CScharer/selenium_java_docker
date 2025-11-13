@@ -93,7 +93,7 @@ docker-compose run --rm tests com.spotify.fmt:fmt-maven-plugin:format -Dchecksty
 # (Optional but recommended) Run Checkstyle to catch remaining style issues
 docker-compose run --rm tests checkstyle:checkstyle -DskipTests
 ```
-**Purpose:** 
+**Purpose:**
 - Auto-fixes redundant/unused imports
 - Ensures consistent code formatting
 - Validates against Checkstyle rules (optional)
@@ -211,7 +211,7 @@ Only after ALL verifications pass:
    - **Token tracking:** Always include current token usage with percentages for session visibility
    - **CRITICAL:** Never guess timestamps - always use actual system time!
    - **BENEFIT:** Updates previous hash + adds new entry = 1 commit instead of 2!
-   
+
 2. ✅ Stage changes: `git add -A` (including docs/CHANGE.log with both updates)
 3. ✅ Commit with descriptive message following established format
 4. ✅ Push to GitHub: `git push origin main`
@@ -433,11 +433,11 @@ BUILD SUCCESS
 1. **Gatling** (Scala-based load testing)
    - Files: `src/test/scala/*LoadSimulation.scala`
    - Reason: Resource-intensive, generates load on systems
-   
+
 2. **Locust** (Python-based load testing)
    - Files: `src/test/locust/*_test.py`
    - Reason: Generates HTTP load, requires specific configuration
-   
+
 3. **JMeter** (Performance testing)
    - Files: `src/test/jmeter/*.jmx`
    - Reason: Performance benchmarking, not functional testing
@@ -483,4 +483,3 @@ BUILD SUCCESS
 **Last Updated:** 2025-11-12 01:59:00 CST
 **Version:** 1.0
 **Applies To:** All AI-driven code changes in this repository
-

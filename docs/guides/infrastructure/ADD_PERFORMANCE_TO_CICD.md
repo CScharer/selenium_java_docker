@@ -56,19 +56,19 @@ jobs:
   locust-performance:
     name: Locust Performance Tests (40%)
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-      
+
       - name: Install Locust
         run: pip install -r requirements.txt
-      
+
       - name: Run Locust Tests
         run: |
           mkdir -p target/locust
@@ -79,7 +79,7 @@ jobs:
                  --run-time 3m \
                  --html target/locust/api-report.html \
                  --csv target/locust/api-stats
-      
+
       - name: Upload Locust Results
         uses: actions/upload-artifact@v4
         if: always()
@@ -87,25 +87,25 @@ jobs:
           name: locust-results
           path: target/locust/
           retention-days: 30
-  
+
   gatling-performance:
     name: Gatling Performance Tests (30%)
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: 'maven'
-      
+
       - name: Run Gatling Tests
         run: ./mvnw gatling:test -Pgatling
-      
+
       - name: Upload Gatling Results
         uses: actions/upload-artifact@v4
         if: always()
@@ -113,25 +113,25 @@ jobs:
           name: gatling-results
           path: target/gatling/
           retention-days: 30
-  
+
   jmeter-performance:
     name: JMeter Performance Tests (30%)
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: 'maven'
-      
+
       - name: Run JMeter Tests
         run: ./mvnw jmeter:jmeter jmeter:results
-      
+
       - name: Upload JMeter Results
         uses: actions/upload-artifact@v4
         if: always()
@@ -139,19 +139,19 @@ jobs:
           name: jmeter-results
           path: target/jmeter/
           retention-days: 30
-  
+
   performance-summary:
     name: Performance Test Summary
     runs-on: ubuntu-latest
     needs: [locust-performance, gatling-performance, jmeter-performance]
     if: always()
-    
+
     steps:
       - name: Download All Results
         uses: actions/download-artifact@v4
         with:
           path: performance-results
-      
+
       - name: Display Summary
         run: |
           echo "📊 Performance Test Results Available:"
@@ -213,19 +213,19 @@ quick-performance-check:
   runs-on: ubuntu-latest
   needs: build-and-compile
   if: github.ref == 'refs/heads/main'  # Only on main branch
-  
+
   steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
-    
+
     - name: Install Locust
       run: pip install locust==2.20.0
-    
+
     - name: Quick API Performance Test
       run: |
         locust -f src/test/locust/api_load_test.py \
@@ -304,4 +304,3 @@ Keep performance tests manual for now because:
 | **Smoke Tests** | Every push (automatic) | GitHub Actions CI/CD |
 
 **Performance tests are available whenever you need them, just not automated yet!**
-

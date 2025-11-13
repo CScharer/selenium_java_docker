@@ -1,8 +1,8 @@
 # Allure Test Reporting
 
-**Status**: ✅ Configured  
-**Version**: Allure 2.25.0  
-**Framework**: TestNG  
+**Status**: ✅ Configured
+**Version**: Allure 2.25.0
+**Framework**: TestNG
 **Date**: November 8, 2025
 
 ---
@@ -164,9 +164,9 @@ Allure.addAttachment("Browser Log", "text/plain", browserLog);
 ### EnhancedGridTests (8 tests)
 - **Epic**: Selenium Grid Testing
 - **Feature**: Enhanced Grid Tests
-- **Stories**: 
+- **Stories**:
   - Homepage Navigation
-  - Search Functionality  
+  - Search Functionality
   - Multi-Site Navigation
   - Performance Testing
   - Browser Features
@@ -301,7 +301,7 @@ public void tearDown(ITestResult result) {
     if (result.getStatus() == ITestResult.FAILURE) {
         // Capture screenshot
         byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        Allure.addAttachment("Failure Screenshot", 
+        Allure.addAttachment("Failure Screenshot",
             new ByteArrayInputStream(screenshot));
     }
     driver.quit();
@@ -506,10 +506,9 @@ Your browser will automatically open showing:
 
 ---
 
-**Status**: ✅ Ready to use!  
+**Status**: ✅ Ready to use!
 **Next Step**: Run `./scripts/generate-allure-report.sh` or install Allure CLI
 
 ---
 
 **Last Updated**: November 8, 2025
-

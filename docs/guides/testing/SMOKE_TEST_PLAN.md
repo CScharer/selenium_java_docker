@@ -1,8 +1,8 @@
 # Smoke Test Suite - Implementation Plan
 
-**Priority**: High  
-**Estimated Time**: 1-2 hours  
-**Impact**: Very High - Fast feedback loops  
+**Priority**: High
+**Estimated Time**: 1-2 hours
+**Impact**: Very High - Fast feedback loops
 **Target Completion**: Next session
 
 ---
@@ -161,10 +161,10 @@ import java.time.Duration;
 @Epic("Smoke Tests")
 @Feature("Critical Path Verification")
 public class SmokeTests {
-    
+
     private WebDriver driver;
     private String gridUrl;
-    
+
     @BeforeMethod
     public void setUp() throws Exception {
         // Fast setup - no extra options
@@ -172,24 +172,24 @@ public class SmokeTests {
         if (gridUrl == null || gridUrl.isEmpty()) {
             gridUrl = "http://localhost:4444/wd/hub";
         }
-        
+
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
-        
+
         driver = new RemoteWebDriver(new URL(gridUrl), options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
     }
-    
+
     @Test(priority = 1)
     @Tag("smoke")
     @Severity(SeverityLevel.BLOCKER)
     public void smokeTest_GridConnection() {
         // Test implementation
     }
-    
+
     @AfterMethod
     public void tearDown(ITestResult result) {
         if (driver != null) {
@@ -258,10 +258,10 @@ jobs:
   smoke-tests:
     name: Smoke Tests (Fast)
     runs-on: ubuntu-latest
-    
+
     steps:
       # ... setup steps ...
-      
+
       - name: Run Smoke Tests
         run: |
           docker compose up -d selenium-hub chrome-node-1
@@ -566,24 +566,24 @@ import java.time.Duration;
 @Epic("Smoke Tests")
 @Feature("Critical Path Verification")
 public class SmokeTests {
-    
+
     private WebDriver driver;
     private String gridUrl;
-    
+
     @BeforeMethod
     public void setUp() throws Exception {
         gridUrl = System.getenv("SELENIUM_REMOTE_URL");
         if (gridUrl == null || gridUrl.isEmpty()) {
             gridUrl = "http://localhost:4444/wd/hub";
         }
-        
+
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage");
         driver = new RemoteWebDriver(new URL(gridUrl), options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
     }
-    
+
     @Test(priority = 1, groups = "smoke")
     @Severity(SeverityLevel.BLOCKER)
     @Description("Verify Selenium Grid connection")
@@ -591,21 +591,21 @@ public class SmokeTests {
         Allure.step("Verify driver initialized");
         Assert.assertNotNull(driver, "Driver should be initialized");
     }
-    
+
     @Test(priority = 2, groups = "smoke")
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify homepage loads")
     public void smokeTest_HomepageLoads() {
         Allure.step("Navigate to homepage");
         driver.get("https://www.google.com");
-        
+
         Allure.step("Verify page loaded");
         String title = driver.getTitle();
         Assert.assertTrue(title.contains("Google"));
     }
-    
+
     // Add 3 more tests...
-    
+
     @AfterMethod
     public void tearDown(ITestResult result) {
         if (driver != null) {
@@ -671,7 +671,7 @@ jobs:
   smoke-tests:
     name: Smoke Tests (Fast Check)
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -679,18 +679,18 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: 'maven'
-      
+
       - name: Start Grid
         run: docker compose -f docker-compose.dev.yml up -d
-      
+
       - name: Run Smoke Tests
         timeout-minutes: 3
         run: docker compose run --rm tests -Dtest=SmokeTests
-      
+
       - name: Stop Grid
         if: always()
         run: docker compose down
-  
+
   full-tests:
     name: Full Test Suite
     needs: smoke-tests  # Only run if smoke passes
@@ -753,11 +753,10 @@ Track these after implementation:
 
 ---
 
-**Status**: 📋 Planned for next session  
-**Priority**: 🔥 High  
+**Status**: 📋 Planned for next session
+**Priority**: 🔥 High
 **Estimated ROI**: Very High (2+ hours/day time savings)
 
 ---
 
 **Ready to implement? This will be a quick, high-value addition!** 🚀
-

@@ -560,4 +560,3 @@ alias dcr="docker-compose restart"
 **Built with ❤️ by the CJS QA Team**
 
 </div>
-
