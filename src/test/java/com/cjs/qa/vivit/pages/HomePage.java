@@ -79,7 +79,7 @@ public class HomePage extends Page {
     Environment.sysOut("Loading:[" + VivitEnvironment.URL_LOGIN + "]");
     WebElement webElement = null;
     int attempt = 0;
-    final int ATTEMPTS_MAX = 3;
+    final int attemptsMax = 3;
     String logoSource = null;
     do {
       try {
@@ -94,7 +94,7 @@ public class HomePage extends Page {
       } catch (final Exception e) {
         Environment.sysOut(
             QAException.ERROR + JavaHelpers.getCurrentClassMethodName() + ":Error Finding Logo.");
-        if (attempt > ATTEMPTS_MAX) {
+        if (attempt > attemptsMax) {
           throw new QAException("***ERROR***:[" + e.getMessage() + "]", e);
         }
       }
@@ -109,7 +109,7 @@ public class HomePage extends Page {
   public void signIn(String eMail, String password, String rememberMe) throws QAException {
     boolean success = false;
     int attempt = 0;
-    final int ATTEMPTS_MAX = 3;
+    final int attemptsMax = 3;
     do {
       attempt++;
       try {
@@ -125,7 +125,7 @@ public class HomePage extends Page {
       } catch (Exception e) {
         Environment.sysOut(
             QAException.ERROR + JavaHelpers.getCurrentClassMethodName() + ":Error Signing In.");
-        if (attempt > ATTEMPTS_MAX) {
+        if (attempt > attemptsMax) {
           throw new QAException(QAException.ERROR + "[" + e.getMessage() + "]", e);
         }
       }

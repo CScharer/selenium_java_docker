@@ -23,8 +23,8 @@ public class SearchPage extends Page {
   public void searchSites() {
     try {
       final String fileName = Environment.getFolderData() + "searchVivitSites" + IExtension.CSV;
-      final String LIGS = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
-      final String SIGS = VivitEnvironment.URL_LOGIN + "?page=SIGS";
+      final String ligs = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
+      final String sigs = VivitEnvironment.URL_LOGIN + "?page=SIGS";
       final By ligLinks = By.xpath(".//*[@id='CustomPageBody']//a[text()!='contact us today!']");
       final By sigLinks = By.xpath(".//*[@id='CustomPageBody']//a[text()!='contact us today!']");
       final By hrefLinks = By.xpath(".//*[@id='ctl00_PageContent_tdZone2']/table/tbody/tr/td/a");
@@ -41,7 +41,7 @@ public class SearchPage extends Page {
       // VivitEnvironment.sysOut("Searching:[" + url + "]");
       // getWebDriver().get(url);
       // }
-      getWebDriver().get(LIGS);
+      getWebDriver().get(ligs);
       sleep(1, 0);
       List<WebElement> links = getWebDriver().findElements(ligLinks);
       for (int index = 0; index < links.size(); index++) {
@@ -60,12 +60,12 @@ public class SearchPage extends Page {
           Environment.sysOut("Href:[" + href + "]");
         }
         if (index < links.size()) {
-          getWebDriver().get(LIGS);
+          getWebDriver().get(ligs);
           sleep(1, 0);
           links = getWebDriver().findElements(ligLinks);
         }
       }
-      getWebDriver().get(SIGS);
+      getWebDriver().get(sigs);
       sleep(1, 0);
       links = getWebDriver().findElements(sigLinks);
       for (int index = 0; index < links.size(); index++) {
@@ -84,7 +84,7 @@ public class SearchPage extends Page {
           Environment.sysOut("Href:[" + href + "]");
         }
         if (index < links.size()) {
-          getWebDriver().get(SIGS);
+          getWebDriver().get(sigs);
           sleep(1, 0);
           getWebDriver().findElements(sigLinks);
         }
@@ -105,9 +105,9 @@ public class SearchPage extends Page {
 
   public void validateGroup(String group) {
     // Default
-    final String GROUP = group.toUpperCase(Locale.ENGLISH);
+    final String groupUpper = group.toUpperCase(Locale.ENGLISH);
     String url = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
-    switch (GROUP) {
+    switch (groupUpper) {
       case "LUGS":
         url = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
         break;
@@ -115,12 +115,12 @@ public class SearchPage extends Page {
         url = VivitEnvironment.URL_LOGIN + "?page=SIGS";
         break;
       default:
-        Environment.sysOut("Unknown group type: " + GROUP + ". Using default LUGS URL.");
+        Environment.sysOut("Unknown group type: " + groupUpper + ". Using default LUGS URL.");
         break;
     }
     getWebDriver().get(url);
     final List<WebElement> webElements = getWebDriver().findElements(linksGroups);
-    Environment.sysOut("Total " + GROUP + ":[" + webElements.size() + "]");
+    Environment.sysOut("Total " + groupUpper + ":[" + webElements.size() + "]");
     StringBuilder stringBuilder = new StringBuilder();
     for (int index = 0; index < webElements.size(); index++) {
       final WebElement webElement = webElements.get(index);

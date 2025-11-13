@@ -10,7 +10,7 @@ public class AddNewPolicyPage extends Page {
     super(webDriver);
   }
 
-  private final String nodePolicyDetails = "form1:policy:";
+  private static final String nodePolicyDetails = "form1:policy:";
   // @FindBy(how = How.ID, using = "usernameT") private WebElement
   // editUsername;
   // @FindBy(id = nodePolicyDetails + "renewalPolicyBI") private By

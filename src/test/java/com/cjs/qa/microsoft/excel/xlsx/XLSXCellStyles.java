@@ -210,9 +210,9 @@ public class XLSXCellStyles {
 
   public static CellStyle getCellStyle(XSSFWorkbook xssfWorkbook, String styleName)
       throws QAException {
-    for (final XLSXCellStyles XLSXCellStyles : getStylesList()) {
-      if (XLSXCellStyles.getStyleName().equals(styleName)) {
-        return xssfWorkbook.getCellStyleAt(XLSXCellStyles.getStyleIndex());
+    for (final XLSXCellStyles cellStyle : getStylesList()) {
+      if (cellStyle.getStyleName().equals(styleName)) {
+        return xssfWorkbook.getCellStyleAt(cellStyle.getStyleIndex());
       }
     }
     return null;

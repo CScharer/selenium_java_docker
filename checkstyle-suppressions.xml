@@ -83,6 +83,11 @@
   -->
   <suppress checks="ConstantNameCheck" files="src/test/java/.*/pages/.*\.java$"/>
   <suppress checks="ConstantNameCheck" files="src/test/java/com/cjs/qa/core/pages/.*\.java$"/>
+  
+  <!-- Suppress ConstantNameCheck for utility class fields that aren't true constants -->
+  <suppress checks="ConstantNameCheck" files="src/test/java/com/cjs/qa/selenium/Page\.java$"/>
+  <suppress checks="ConstantNameCheck" files="src/test/java/com/cjs/qa/utilities/Encoder\.java$"/>
+  <suppress checks="ConstantNameCheck" files="src/test/java/com/cjs/qa/utilities/WebDriverUtils\.java$"/>
 
   <!--
     WhitespaceAround & EmptyForIteratorPad - Google Java Format Compatibility
