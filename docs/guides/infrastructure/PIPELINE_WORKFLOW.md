@@ -5,15 +5,18 @@
 **Last Updated**: 2025-11-13
 **Maintained By**: CJS QA Team
 **Status**: Active
-**Related To**: GITHUB_ACTIONS.md, CI_TROUBLESHOOTING.md
+**Related To**: GITHUB_ACTIONS.md, CI_TROUBLESHOOTING.md, MULTI_ENVIRONMENT_IMPLEMENTATION_PLAN.md
+**Version**: 2.0 - Reusable Workflow Architecture
 ---
 
 # CI/CD Pipeline Workflow Reference
 ## Complete Guide to GitHub Actions Pipeline
 
-**Workflow File**: `.github/workflows/ci.yml`
-**Performance Workflow**: `.github/workflows/performance.yml`
-**Last Pipeline Update**: 2025-11-12 (detect-changes optimization)
+**Main Workflow**: `.github/workflows/ci.yml` (524 lines - orchestrator)
+**Reusable Workflow**: `.github/workflows/test-environment.yml` (413 lines - per-environment testing)
+**Performance Workflow**: `.github/workflows/performance.yml` (separate, not modified)
+**Architecture**: Reusable Workflow Pattern (DRY principle)
+**Last Pipeline Update**: 2025-11-13 (multi-environment + reusable workflow architecture)
 
 ---
 
@@ -39,11 +42,181 @@
 
 **Purpose**: Automated testing, quality checks, and deployment
 **Trigger**: Push/PR to `main` or `develop` branches
+**Architecture**: Reusable workflow pattern for clean, maintainable code
 **Duration**:
 - Documentation-only: ~30 seconds (optimized!)
-- Code changes: ~20-30 minutes (full pipeline)
+- Single environment: ~15 minutes (shared setup + one environment)
+- All environments: ~33 minutes (shared setup + 3 environments @ ~8min each)
 
-**Total Jobs**: 11 jobs organized in 5 stages
+**Total Jobs in ci.yml**: 12 main orchestrator jobs
+**Jobs per Environment** (in test-environment.yml): 6 jobs (smoke, grid×2, mobile, responsive, allure, summary)
+
+**🆕 NEW Features**:
+- ✅ Multi-environment support (DEV, TEST, PROD)
+- ✅ Reusable workflow architecture (59% smaller main workflow)
+- ✅ Parallel test execution within each environment
+- ✅ Sequential environment gating (DEV → TEST → PROD)
+
+---
+
+## 🌍 MULTI-ENVIRONMENT SUPPORT (Added 2025-11-13)
+
+### **Environment Selection**
+
+**Manual Trigger Options**:
+1. **All Environments** (default): Runs DEV → TEST → PROD sequentially
+2. **DEV Only**: Tests only development environment
+3. **TEST Only**: Tests only test environment
+4. **PROD Only**: Tests only production environment
+
+**Test Suite Selection**:
+- **smoke**: Quick smoke tests (~2 min per environment)
+- **ci**: CI test suite (~5 min per environment)
+- **extended**: Extended test suite (~10 min per environment)
+- **all**: All test suites
+
+### **How It Works**:
+
+**Automatic Runs** (push/PR):
+- Default: Tests all environments sequentially (dev → test → prod)
+- Uses smoke test suite for speed
+
+**Manual Runs** (workflow_dispatch):
+1. Go to Actions → "Selenium Grid CI/CD Pipeline"
+2. Click "Run workflow"
+3. Select environment: `all`, `dev`, `test`, or `prod`
+4. Select test suite: `smoke`, `ci`, `extended`, or `all`
+5. Click "Run workflow"
+
+**Environment Parameter**:
+- Passed to tests via `-Dtest.environment=dev|test|prod`
+- Framework reads from system property
+- Overrides XML configuration
+
+**Sequential Execution** (when `environment=all`):
+```
+1. DEV environment tests run first
+   ↓ (waits for DEV tests to pass, not deployment)
+2. TEST environment tests run
+   ↓ (waits for TEST tests to pass, not deployment)
+3. PROD environment tests run
+
+Note: Deployments are optional final steps (only run on main branch)
+      Test sequencing works on all branches for validation
+```
+
+**Independent Execution** (when `environment=dev|test|prod`):
+```
+Only selected environment runs
+Other environments are skipped
+```
+
+### **Environment URLs**:
+
+**Configured in workflow**:
+```yaml
+env:
+  DEV_BASE_URL: 'https://dev.yourapp.com'
+  TEST_BASE_URL: 'https://test.yourapp.com'
+  PROD_BASE_URL: 'https://prod.yourapp.com'
+```
+
+**Update these URLs** in `.github/workflows/ci.yml` to match your actual environment URLs.
+
+---
+
+## 🏗️ REUSABLE WORKFLOW ARCHITECTURE (Added 2025-11-13)
+
+### **Why Reusable Workflows?**
+
+**Problem**: Testing three environments meant duplicating test logic 3× in ci.yml
+**Solution**: Extract environment testing into a reusable workflow
+
+### **Architecture**:
+
+```
+ci.yml (Main Orchestrator - 524 lines)
+├── Shared setup (run once)
+│   ├── detect-changes
+│   ├── determine-environments
+│   ├── build-and-compile
+│   ├── code-quality
+│   └── docker-build
+│
+├── DEV Environment
+│   ├── test-dev-environment → calls test-environment.yml
+│   └── deploy-dev
+│
+├── TEST Environment
+│   ├── test-test-environment → calls test-environment.yml
+│   └── deploy-test
+│
+├── PROD Environment
+│   ├── test-prod-environment → calls test-environment.yml
+│   └── deploy-prod
+│
+└── Final Reporting
+    ├── combined-allure-report
+    └── pipeline-summary
+
+test-environment.yml (Reusable - 413 lines)
+├── Inputs: environment, test_suite, base_url
+└── Jobs (all run in PARALLEL after trigger):
+    ├── smoke-tests
+    ├── grid-tests (matrix: chrome, firefox)
+    ├── mobile-browser-tests
+    ├── responsive-design-tests
+    ├── environment-allure-report (waits for all tests)
+    └── environment-test-summary (waits for all tests)
+```
+
+### **Benefits**:
+
+1. **Cleaner Code**: 59% reduction in main workflow size (1285 → 524 lines)
+2. **DRY Principle**: Test logic defined once, reused 3× (for each environment)
+3. **Easier Maintenance**: Update test steps in one place, applies to all environments
+4. **Better Organization**: Clear separation between orchestration and execution
+5. **Parallel Execution**: All tests within an environment run simultaneously
+
+### **How It Works**:
+
+**Calling the Reusable Workflow**:
+```yaml
+test-dev-environment:
+  uses: ./.github/workflows/test-environment.yml
+  with:
+    environment: 'dev'
+    test_suite: 'smoke'
+    base_url: 'https://dev.yourapp.com'
+```
+
+**Inside test-environment.yml**:
+```yaml
+on:
+  workflow_call:
+    inputs:
+      environment:   # Which environment (dev/test/prod)
+      test_suite:    # Which tests (smoke/ci/extended/all)
+      base_url:      # Environment URL
+```
+
+### **Test Execution Pattern**:
+
+**Within Each Environment** (all PARALLEL):
+```
+START
+  ├── smoke-tests (3min)
+  ├── grid-chrome (5min)
+  ├── grid-firefox (5min)
+  ├── mobile-tests (4min)
+  └── responsive-tests (3min)
+         ↓ (all complete)
+     ├── allure-report
+     └── test-summary
+END
+```
+
+**Result**: ~8 minutes per environment (vs ~20 minutes if sequential)
 
 ---
 
@@ -65,13 +238,15 @@ on:
 2. Select "Selenium Grid CI/CD Pipeline"
 3. Click "Run workflow"
 4. Select branch
-5. Click "Run workflow" button
+5. **Select environment**: `all`, `dev`, `test`, or `prod`
+6. **Select test suite**: `smoke`, `ci`, `extended`, or `all`
+7. Click "Run workflow" button
 
 ---
 
 ## 📈 JOB FLOW DIAGRAM
 
-### **Stage 1: Change Detection** (Always Runs)
+### **Stage 1: Change & Environment Detection** (Always Runs)
 ```
 ┌────────────────────┐
 │  detect-changes    │ ← Determines if code or docs changed
@@ -83,6 +258,17 @@ on:
       │         │
    [Full]   [Skip]
    Pipeline  Tests
+      │
+      ▼
+┌─────────────────────────┐
+│ determine-environments  │ ← Determines which environments to test
+└───────────┬─────────────┘
+            │
+    ┌───────┼───────┐
+    │       │       │
+  [DEV]  [TEST]  [PROD]
+    │       │       │
+  [Run]   [Run]   [Run]  (based on selection)
 ```
 
 ### **Stage 2: Build & Quality** (If Code Changed)
@@ -102,7 +288,30 @@ on:
         [Chrome]   [Firefox]
 ```
 
-### **Stage 3: Testing** (Parallel Matrix)
+### **Stage 3: Environment Testing** (Sequential or Selected)
+```
+┌────────────────────────┐
+│ test-dev-environment   │ ← Tests DEV environment
+└───────────┬────────────┘
+            │ (if run_dev=true)
+            ▼
+┌────────────────────────┐
+│ test-test-environment  │ ← Tests TEST environment
+└───────────┬────────────┘  (only if DEV success)
+            │ (if run_test=true)
+            ▼
+┌────────────────────────┐
+│ test-prod-environment  │ ← Tests PROD environment
+└────────────────────────┘  (only if TEST success)
+   (if run_prod=true)
+```
+
+**Execution Examples**:
+- `environment=all`: All three run sequentially
+- `environment=dev`: Only DEV runs (TEST & PROD skipped)
+- `environment=test`: Only TEST runs (DEV & PROD skipped)
+
+### **Stage 4: Additional Testing** (Parallel Matrix)
 ```
 ┌──────────────────────────────────────┐
 │   selenium-grid-tests (Matrix)       │
@@ -125,7 +334,7 @@ on:
     [Complete]
 ```
 
-### **Stage 4: Reporting & Quality**
+### **Stage 5: Reporting & Quality**
 ```
 ┌────────────────┬────────────────┐
 │                │                │
@@ -138,7 +347,7 @@ allure-report   code-quality   test-summary
 (if main branch)
 ```
 
-### **Stage 5: Deployment** (If main branch)
+### **Stage 6: Deployment** (If main branch)
 ```
 ┌──────────┐     ┌──────────┐     ┌──────────┐
 │ deploy-  │ ──► │ deploy-  │ ──► │ deploy-  │
@@ -146,7 +355,7 @@ allure-report   code-quality   test-summary
 └──────────┘     └──────────┘     └──────────┘
 ```
 
-### **Stage 6: Summary** (Always Runs)
+### **Stage 7: Summary** (Always Runs)
 ```
 ┌─────────────────────┐
 │  pipeline-summary   │ ← Shows what ran/skipped
@@ -184,7 +393,45 @@ allure-report   code-quality   test-summary
 
 ---
 
-### **Job 2: build-and-compile** (Conditional - Stage 2)
+### **Job 2: determine-environments** (Conditional - Stage 1)
+
+**Purpose**: Determine which environments to test based on workflow input
+
+**Condition**: `if: needs.detect-changes.outputs.code-changed == 'true'`
+
+**Inputs Processed**:
+- `github.event.inputs.environment` (all, dev, test, prod)
+- `github.event.inputs.test_suite` (smoke, ci, extended, all)
+
+**Logic**:
+```bash
+# If environment='all' (or not set):
+run_dev=true, run_test=true, run_prod=true
+
+# If environment='dev':
+run_dev=true, run_test=false, run_prod=false
+
+# If environment='test':
+run_dev=false, run_test=true, run_prod=false
+
+# If environment='prod':
+run_dev=false, run_test=false, run_prod=true
+```
+
+**Outputs**:
+- `run_dev`: Boolean (whether to run DEV tests)
+- `run_test`: Boolean (whether to run TEST tests)
+- `run_prod`: Boolean (whether to run PROD tests)
+- `test_suite`: Test suite to execute (smoke, ci, extended, all)
+- `selected_env`: Environment selection made (all, dev, test, prod)
+
+**Duration**: ~10 seconds
+
+**Depends On**: `detect-changes`
+
+---
+
+### **Job 3: build-and-compile** (Conditional - Stage 2)
 
 **Purpose**: Compile Java code and run static analysis
 
@@ -238,7 +485,128 @@ allure-report   code-quality   test-summary
 
 ---
 
-### **Job 4: selenium-grid-tests** (Conditional Matrix - Stage 3)
+### **Job 4: test-dev-environment** (Conditional - Stage 3)
+
+**Purpose**: Test DEV environment with selected test suite
+
+**Condition**: `if: needs.determine-environments.outputs.run_dev == 'true'`
+
+**Environment**:
+- **Name**: DEV (Development)
+- **URL**: `$DEV_BASE_URL` (configured in workflow env vars)
+- **Parameter**: `-Dtest.environment=dev`
+
+**Test Suite**: Dynamic (based on `determine-environments.outputs.test_suite`)
+- Could be: smoke, ci, extended, or all
+
+**Services**:
+- `selenium-hub`: Selenium Grid hub
+- `chrome-node`: Chrome browser node
+
+**Steps**:
+1. Start Selenium Grid
+2. Wait for Grid ready
+3. Run tests with: `./mvnw test -Dtest.environment=dev -DsuiteXmlFile=testng-{suite}-suite.xml`
+4. Upload test results
+
+**Duration**: ~5-15 minutes (depending on suite)
+
+**Timeout**: 15 minutes
+
+**Artifacts Produced**:
+- `test-results-dev-environment` (7 days)
+
+**Depends On**: `detect-changes`, `determine-environments`, `build-and-compile`, `smoke-tests`
+
+**Execution Logic**:
+- Runs if `run_dev=true` (set by determine-environments)
+- When `environment=all`: Always runs first
+- When `environment=dev`: Runs (others skip)
+- When `environment=test` or `prod`: Skipped
+
+---
+
+### **Job 5: test-test-environment** (Conditional - Stage 3)
+
+**Purpose**: Test TEST environment with selected test suite
+
+**Condition**: `if: needs.determine-environments.outputs.run_test == 'true' && (test-dev-environment success or skipped)`
+
+**Environment**:
+- **Name**: TEST (Testing/QA)
+- **URL**: `$TEST_BASE_URL` (configured in workflow env vars)
+- **Parameter**: `-Dtest.environment=test`
+
+**Test Suite**: Dynamic (based on `determine-environments.outputs.test_suite`)
+
+**Services**:
+- `selenium-hub`: Selenium Grid hub
+- `chrome-node`: Chrome browser node
+
+**Steps**:
+1. Start Selenium Grid
+2. Wait for Grid ready
+3. Run tests with: `./mvnw test -Dtest.environment=test -DsuiteXmlFile=testng-{suite}-suite.xml`
+4. Upload test results
+
+**Duration**: ~5-15 minutes (depending on suite)
+
+**Timeout**: 15 minutes
+
+**Artifacts Produced**:
+- `test-results-test-environment` (7 days)
+
+**Depends On**: `detect-changes`, `determine-environments`, `build-and-compile`, `smoke-tests`, `test-dev-environment`
+
+**Execution Logic**:
+- Runs if `run_test=true` AND (DEV success OR DEV skipped)
+- When `environment=all`: Runs second (after DEV)
+- When `environment=test`: Runs (others skip)
+- When `environment=dev` or `prod`: Skipped
+
+---
+
+### **Job 6: test-prod-environment** (Conditional - Stage 3)
+
+**Purpose**: Test PROD environment with selected test suite
+
+**Condition**: `if: needs.determine-environments.outputs.run_prod == 'true' && (test-test-environment success or skipped)`
+
+**Environment**:
+- **Name**: PROD (Production)
+- **URL**: `$PROD_BASE_URL` (configured in workflow env vars)
+- **Parameter**: `-Dtest.environment=prod`
+
+**Test Suite**: Dynamic (based on `determine-environments.outputs.test_suite`)
+
+**Services**:
+- `selenium-hub`: Selenium Grid hub
+- `chrome-node`: Chrome browser node
+
+**Steps**:
+1. Start Selenium Grid
+2. Wait for Grid ready
+3. Run tests with: `./mvnw test -Dtest.environment=prod -DsuiteXmlFile=testng-{suite}-suite.xml`
+4. Upload test results
+
+**Duration**: ~5-15 minutes (depending on suite)
+
+**Timeout**: 15 minutes
+
+**Artifacts Produced**:
+- `test-results-prod-environment` (7 days)
+
+**Depends On**: `detect-changes`, `determine-environments`, `build-and-compile`, `smoke-tests`, `test-test-environment`
+
+**Execution Logic**:
+- Runs if `run_prod=true` AND (TEST success OR TEST skipped)
+- When `environment=all`: Runs third (after TEST)
+- When `environment=prod`: Runs (others skip)
+- When `environment=dev` or `test`: Skipped
+
+---
+
+### **Job 7: selenium-grid-tests** (Conditional Matrix - Stage 4)
 
 **Purpose**: Comprehensive UI testing across browsers
 
@@ -583,6 +951,9 @@ done
 |---------------|-------------|-----------|------|---------|
 | `pmd-report` | build-and-compile | 7 days | ~1 MB | Code analysis |
 | `compiled-classes` | build-and-compile | 1 day | ~50 MB | Compiled code |
+| `test-results-dev-environment` | test-dev-environment | 7 days | ~10 MB | DEV env test results |
+| `test-results-test-environment` | test-test-environment | 7 days | ~10 MB | TEST env test results |
+| `test-results-prod-environment` | test-prod-environment | 7 days | ~10 MB | PROD env test results |
 | `test-results-chrome` | grid-tests | 7 days | ~10 MB | Test results + screenshots |
 | `test-results-firefox` | grid-tests | 7 days | ~10 MB | Test results + screenshots |
 | `screenshots-{browser}` | grid-tests | 7 days | ~5 MB | Failure screenshots |
@@ -863,6 +1234,36 @@ See pipeline workflow documentation for details.
 ---
 
 ## 📝 CHANGE LOG
+
+### **2025-11-13: Reusable Workflow Architecture** 🔥 **MAJOR REFACTOR**
+- **Created reusable workflow**: `.github/workflows/test-environment.yml` (413 lines)
+- **Refactored main workflow**: Reduced from 1,285 lines to 524 lines (59% reduction)
+- **Architecture change**: DRY principle - test logic defined once, reused 3×
+- **Improved dependencies**: Environments now wait for previous TEST completion, not deployments
+  - `test-test-environment` depends on `test-dev-environment` (not `deploy-dev`)
+  - `test-prod-environment` depends on `test-test-environment` (not `deploy-test`)
+  - Benefit: Sequential testing works on all branches, not just main
+- **Parallel execution**: All tests within each environment run simultaneously
+  - Smoke, grid (Chrome + Firefox), mobile, and responsive tests start together
+  - Allure report and test summary wait for all tests to complete
+  - Result: ~8 min per environment (vs ~20 min sequential)
+- **Cleaner separation**: Orchestration (ci.yml) vs execution (test-environment.yml)
+- **Easier maintenance**: Update test steps in one place, applies to all environments
+- **Feature branch tested**: `feature/multi-environment-pipeline`
+
+### **2025-11-13: Added Multi-Environment Support** 🆕
+- Added `determine-environments` job to select which environments to test
+- Added three environment-specific test jobs:
+  - `test-dev-environment` - Calls reusable workflow for DEV
+  - `test-test-environment` - Calls reusable workflow for TEST
+  - `test-prod-environment` - Calls reusable workflow for PROD
+- Added workflow_dispatch inputs:
+  - `environment` selection (all, dev, test, prod)
+  - `test_suite` selection (smoke, ci, extended, all)
+- Updated Environment.java to read `-Dtest.environment` system property
+- Sequential execution: DEV → TEST → PROD (when environment=all)
+- Independent execution: Run only selected environment
+- **Impact**: Can test specific environments independently, proper environment isolation
 
 ### **2025-11-12: Added Documentation-Only Detection**
 - Added `detect-changes` job
