@@ -45,52 +45,53 @@ public final class ODBCMSAccess {
                 + IExtension.MDB)) {
       if (connection != null) {
         final ODBCSQLite odbcSQLite = new ODBCSQLite();
-        final Connection connectionSQLite =
+        try (final Connection connectionSQLite =
             ODBCSQLite.connectDb(
                 "C:"
                     + Constants.DELIMETER_PATH
                     + "Automation"
                     + Constants.DELIMETER_PATH
-                    + "BTS.sqlite");
-        String sql = JDBCConstants.DELETE_FROM + "[Core];";
-        odbcSQLite.executeUpdate(connectionSQLite, sql);
-        int recordCount = 0;
-        try (Statement statement = connection.createStatement();
-            ResultSet resultSet =
-                statement.executeQuery(
-                    JDBCConstants.SELECT_ALL_FROM
-                        + "[tblSubmissionLog] "
-                        + JDBCConstants.ORDER_BY
-                        + "[SubmissionID]")) {
-          while (resultSet.next()) {
-            // System.out.println(oResultSet.getString(1));
-            final StringBuilder sqlPre = new StringBuilder();
-            sqlPre.append(JDBCConstants.INSERT_INTO + "[Core] (");
-            final StringBuilder sqlValues = new StringBuilder();
-            for (int fieldIndex = 0; fieldIndex < listFields.size(); fieldIndex++) {
-              final String field = listFields.get(fieldIndex);
-              final String value = resultSet.getString(field);
-              // map.put("SubmissionID",
-              // resultSet.getString("SubmissionID"));
-              // map.put(field, value);
-              if (value != null) {
-                if (fieldIndex == listFields.size() - 1) {
-                  sqlPre.append("[" + field + "]) VALUES (");
-                  sqlValues.append("'" + value + "');");
-                } else {
-                  sqlPre.append("[" + field + "], ");
-                  sqlValues.append("'" + value + "', ");
+                    + "BTS.sqlite")) {
+          String sql = JDBCConstants.DELETE_FROM + "[Core];";
+          odbcSQLite.executeUpdate(connectionSQLite, sql);
+          int recordCount = 0;
+          try (Statement statement = connection.createStatement();
+              ResultSet resultSet =
+                  statement.executeQuery(
+                      JDBCConstants.SELECT_ALL_FROM
+                          + "[tblSubmissionLog] "
+                          + JDBCConstants.ORDER_BY
+                          + "[SubmissionID]")) {
+            while (resultSet.next()) {
+              // System.out.println(oResultSet.getString(1));
+              final StringBuilder sqlPre = new StringBuilder();
+              sqlPre.append(JDBCConstants.INSERT_INTO + "[Core] (");
+              final StringBuilder sqlValues = new StringBuilder();
+              for (int fieldIndex = 0; fieldIndex < listFields.size(); fieldIndex++) {
+                final String field = listFields.get(fieldIndex);
+                final String value = resultSet.getString(field);
+                // map.put("SubmissionID",
+                // resultSet.getString("SubmissionID"));
+                // map.put(field, value);
+                if (value != null) {
+                  if (fieldIndex == listFields.size() - 1) {
+                    sqlPre.append("[" + field + "]) VALUES (");
+                    sqlValues.append("'" + value + "');");
+                  } else {
+                    sqlPre.append("[" + field + "], ");
+                    sqlValues.append("'" + value + "', ");
+                  }
                 }
               }
+              sql = sqlPre.toString() + sqlValues.toString();
+              recordCount += odbcSQLite.executeUpdate(connectionSQLite, sql);
+              if (recordCount % 100 == 0) {
+                System.out.println(recordCount + " records");
+              }
+              // System.out.println(map.toString());
             }
-            sql = sqlPre.toString() + sqlValues.toString();
-            recordCount += odbcSQLite.executeUpdate(connectionSQLite, sql);
-            if (recordCount % 100 == 0) {
-              System.out.println(recordCount + " records");
-            }
-            // System.out.println(map.toString());
+            System.out.println(recordCount + " records");
           }
-          System.out.println(recordCount + " records");
         }
       }
     } catch (final Exception oException) {

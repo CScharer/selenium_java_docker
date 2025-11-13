@@ -18,10 +18,6 @@ public class VerifyInformationInterruptPage extends Page {
       By.xpath(
           "//div[@data-orgtext][contains(text(),'What is your regular brand of"
               + " cigarettes, that is, the brand you buy most often?')]/../span/select");
-  private By optionRegularBrand =
-      By.xpath(
-          ".//div[.='Please tell us about your regular"
-              + " brand.']/..//label[contains(text(),'Non-Menthol')]/..");
   private By dropdownRegularBrandNonMenthol =
       By.xpath(
           "//div[@data-orgtext][contains(text(),'What Non-Menthol pack do you buy most"
