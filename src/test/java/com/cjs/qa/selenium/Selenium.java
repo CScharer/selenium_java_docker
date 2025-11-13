@@ -10,7 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 // HtmlUnitDriverOptions not available in this version
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
+// PhantomJS removed - use Chrome/Firefox headless instead
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
 import org.openqa.selenium.safari.SafariDriver;
@@ -43,9 +43,7 @@ public class Selenium extends Page implements ISelenium {
     } else if (getWebDriver() instanceof InternetExplorerDriver) {
       setCapabilities(((InternetExplorerDriver) getWebDriver()).getCapabilities());
       setSessionId(((InternetExplorerDriver) getWebDriver()).getSessionId());
-    } else if (getWebDriver() instanceof PhantomJSDriver) {
-      setCapabilities(((PhantomJSDriver) getWebDriver()).getCapabilities());
-      setSessionId(((PhantomJSDriver) getWebDriver()).getSessionId());
+    // PhantomJS support removed - use Chrome/Firefox headless instead
     } else if (getWebDriver() instanceof HtmlUnitDriver) {
       setCapabilities(((RemoteWebDriver) getWebDriver()).getCapabilities());
       setSessionId(((RemoteWebDriver) getWebDriver()).getSessionId());
