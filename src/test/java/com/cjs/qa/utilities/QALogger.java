@@ -1,12 +1,13 @@
 package com.cjs.qa.utilities;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @SuppressWarnings("PMD.DoNotExtendJavaLangThrowable") // Custom logging exception design
 public class QALogger extends Throwable {
   private static final long serialVersionUID = 1L;
-  private static final Logger LOG = Logger.getLogger(QALogger.class);
-  private static final Logger LOGGER = Logger.getRootLogger();
+  private static final Logger LOG = LogManager.getLogger(QALogger.class);
+  private static final Logger LOGGER = LogManager.getRootLogger();
 
   public QALogger(Exception e) {
     LOG.debug(e);

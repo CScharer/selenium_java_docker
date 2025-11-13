@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import org.apache.log4j.BasicConfigurator;
+// BasicConfigurator not needed in log4j 2.x (auto-configuration)
 import org.junit.Assert;
 
 public class Environment {
@@ -69,7 +69,7 @@ public class Environment {
   private static boolean logSQL = true;
 
   public Environment() {
-    BasicConfigurator.configure();
+    // Log4j 2.x uses auto-configuration (log4j2.xml), no manual configuration needed
     setEnvironmentVariableValues();
   }
 
