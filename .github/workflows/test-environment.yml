@@ -92,7 +92,7 @@ jobs:
   grid-tests:
     name: Grid Tests - ${{ matrix.browser }} (${{ inputs.environment }})
     runs-on: ubuntu-latest
-    needs: smoke-tests
+    needs: smoke-tests  # Runs in PARALLEL with mobile and responsive after smoke passes
 
     strategy:
       matrix:
@@ -178,7 +178,7 @@ jobs:
   mobile-browser-tests:
     name: Mobile Browser Tests (${{ inputs.environment }})
     runs-on: ubuntu-latest
-    needs: grid-tests
+    needs: smoke-tests  # Runs in PARALLEL with grid and responsive after smoke passes
 
     services:
       selenium-hub:
@@ -243,7 +243,7 @@ jobs:
   responsive-design-tests:
     name: Responsive Design Tests (${{ inputs.environment }})
     runs-on: ubuntu-latest
-    needs: mobile-browser-tests
+    needs: smoke-tests  # Runs in PARALLEL with grid and mobile after smoke passes
 
     services:
       selenium-hub:
@@ -308,7 +308,7 @@ jobs:
   environment-allure-report:
     name: Allure Report (${{ inputs.environment }})
     runs-on: ubuntu-latest
-    needs: [smoke-tests, grid-tests, mobile-browser-tests, responsive-design-tests]
+    needs: [smoke-tests, grid-tests, mobile-browser-tests, responsive-design-tests]  # Wait for ALL tests
     if: always()
 
     steps:
@@ -362,7 +362,7 @@ jobs:
   environment-test-summary:
     name: Test Summary (${{ inputs.environment }})
     runs-on: ubuntu-latest
-    needs: [smoke-tests, grid-tests, mobile-browser-tests, responsive-design-tests]
+    needs: [smoke-tests, grid-tests, mobile-browser-tests, responsive-design-tests]  # Wait for ALL tests
     if: always()
 
     steps:
