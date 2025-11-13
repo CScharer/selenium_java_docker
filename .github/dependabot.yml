@@ -7,7 +7,7 @@ updates:
       interval: "weekly"
       day: "monday"
       time: "09:00"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 3
     reviewers:
       - "CScharer"
     labels:
@@ -16,6 +16,10 @@ updates:
     commit-message:
       prefix: "chore(deps)"
       include: "scope"
+    ignore:
+      # Ignore major Selenium updates (test carefully before upgrading)
+      - dependency-name: "org.seleniumhq.selenium:*"
+        update-types: ["version-update:semver-major"]
     
   # GitHub Actions
   - package-ecosystem: "github-actions"
@@ -50,4 +54,10 @@ updates:
     commit-message:
       prefix: "chore(deps)"
       include: "scope"
+    ignore:
+      # Stay on Java 17 (ignore Java 11, 18, 19, 20, 21, 25, etc.)
+      - dependency-name: "eclipse-temurin"
+        versions: ["11-*", "18-*", "19-*", "20-*", "21-*", "25-*"]
+      - dependency-name: "maven"
+        versions: ["*-eclipse-temurin-11"]
 
