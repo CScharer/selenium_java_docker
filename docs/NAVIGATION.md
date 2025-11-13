@@ -54,6 +54,12 @@ docs/
 │   └── decisions/                       Architecture Decision Records
 │       └── README.md                    ADR guide (ADRs to be added)
 │
+├── issues/                              📋 Issue Tracking & Work Items
+│   ├── README.md                        Issue management guide
+│   └── open/                            Pending issues (to be created on GitHub)
+│       ├── cleanup-hardcoded-passwords.md
+│       └── missing-performance-test-files.md
+│
 └── archive/                             📦 Historical Documents
     └── 2025-11/                         November 2025 completed work
         ├── SESSION_SUMMARY_NOV8.md      Nov 8 work summary
@@ -218,6 +224,38 @@ docs/
 - ADR-0002: Google Cloud Secret Manager
 - ADR-0003: Docker + Selenium Grid
 - ADR-0004: Multi-Suite Testing Strategy
+
+---
+
+### 📂 `issues/` - Issue Tracking & Work Items
+
+**Purpose**: Track planned improvements, bugs, and technical debt before creating GitHub Issues.
+
+**Lifecycle**: **TRANSITIONAL**
+- Create well-documented issue templates in `open/`
+- Move to GitHub Issues when ready
+- Archive completed issues
+
+**Subfolders**:
+- **`open/`**: Pending issues to be created on GitHub
+
+**When to add**:
+- Technical debt that needs tracking
+- Planned enhancements
+- Known bugs to fix later
+- Missing implementations
+- Cleanup tasks
+
+**Workflow**:
+1. Create detailed .md file in `open/`
+2. Include: priority, effort, impact, solution, acceptance criteria
+3. Create GitHub Issue from template
+4. Track progress on GitHub
+5. Archive .md file when issue resolved
+
+**Current Open Issues**:
+- `cleanup-hardcoded-passwords.md` - Migrate 5 existing passwords (2-3 hours)
+- `missing-performance-test-files.md` - Create Locust/Gatling/JMeter tests (12-16 hours)
 
 ---
 
@@ -396,13 +434,14 @@ docs/
 
 | Category | Files | Pages | Status |
 |----------|-------|-------|--------|
-| **Analysis** (Latest) | 4 | 125 | ⭐ Current |
+| **Analysis** (Latest) | 5 | 125 | ⭐ Current |
 | **Analysis** (Previous) | 5 | ~100 | 📦 Historical |
 | **Guides** | 11 | ~200 | ✅ Active |
 | **Process** | 2 | ~10 | ✅ Active |
 | **Architecture** | 1 | ~5 | 🔨 In Progress |
-| **Archive** | 4 | ~50 | 📦 Historical |
-| **Total** | 27 | ~490 | 🎯 Well-Organized |
+| **Issues** | 3 | ~15 | 🔄 Transitional |
+| **Archive** | 5 | ~50 | 📦 Historical |
+| **Total** | 32 | ~505 | 🎯 Well-Organized |
 
 ---
 

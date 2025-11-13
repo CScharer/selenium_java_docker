@@ -1,6 +1,18 @@
 # AI Workflow Rules for Code Changes
 
-**Version:** 2.3 (Updated: 2025-11-12 - Added Hardcoded Password Security Rule)
+**Version:** 2.4 (Updated: 2025-11-12 - Added Markdown File Organization Rule)
+
+### 📋 Version 2.4 Changes:
+- **📁 ADDED:** Rule 2.5 - Markdown File Organization (ALL .md files in docs/)
+  - Mandatory placement of all .md files in docs/ folder structure
+  - Clear folder selection guide by purpose
+  - Exceptions documented (.github/ISSUE_TEMPLATE/ only)
+  - Verification command to check for misplaced files
+  - Auto-fix process for mistakes
+- **🔐 RENUMBERED:** Hardcoded Password rule moved to 2.6
+- **✅ ORGANIZATION:** Created `docs/issues/open/` for issue templates
+- **✅ MOVED:** Issue templates from `.github/` to `docs/issues/open/`
+- **✅ UPDATED:** NAVIGATION.md to include issues/ folder
 
 ### 📋 Version 2.3 Changes:
 - **🔐 ADDED:** Rule 2.5 - Hardcoded Passwords Strictly Forbidden
@@ -76,7 +88,105 @@ Before making ANY code changes, you MUST:
 
 ---
 
-### **Rule 2.5: Hardcoded Passwords - STRICTLY FORBIDDEN** 🔐
+### **Rule 2.5: Markdown File Organization** 📁
+
+**ALL .md FILES MUST BE IN docs/ FOLDER STRUCTURE**
+
+#### **Mandatory Placement:**
+- ✅ **ALL** .md files must be created in the appropriate `docs/` subfolder
+- ❌ **NEVER** create .md files in `.github/`, project root, or other locations
+- ✅ Organize by purpose and lifecycle
+
+#### **Folder Selection Guide:**
+
+**Analysis & Recommendations** → `docs/analysis/YYYY-MM-DD-topic/`
+- Code reviews
+- Project audits
+- Improvement recommendations
+- Technical assessments
+
+**How-To Guides** → `docs/guides/[infrastructure|testing|setup|troubleshooting]/`
+- Setup instructions
+- Usage guides
+- Best practices
+- Troubleshooting steps
+
+**Team Processes** → `docs/process/`
+- Team standards
+- Workflow rules
+- Code of conduct
+- Contributing guidelines
+
+**Architecture Decisions** → `docs/architecture/decisions/`
+- Significant design decisions
+- Technology choices
+- Pattern selections
+- Use ADR format
+
+**Issue Templates** → `docs/issues/open/`
+- Planned improvements
+- Known bugs to fix
+- Technical debt items
+- Missing implementations
+
+**Historical Work** → `docs/archive/YYYY-MM/`
+- Completed work summaries
+- Superseded documents
+- Historical milestones
+
+**Project Overview** → `docs/` (root only for major files)
+- README.md
+- NAVIGATION.md
+- CHANGE.log
+- REORGANIZATION_COMPLETE.md (transitional)
+
+#### **Before Creating ANY .md File:**
+1. Determine the file's purpose
+2. Select appropriate folder from guide above
+3. Create file in correct location
+4. Update NAVIGATION.md if adding new category
+5. Add README.md to new folders
+
+#### **Common Mistakes to Avoid:**
+- ❌ Creating issue templates in `.github/` (use `docs/issues/open/`)
+- ❌ Creating guides in project root (use `docs/guides/`)
+- ❌ Creating analysis in project root (use `docs/analysis/YYYY-MM-DD-topic/`)
+- ❌ Forgetting to update NAVIGATION.md
+
+#### **Exception - .github/ Templates:**
+**ONLY these .md files allowed in .github/**:
+- ✅ `.github/ISSUE_TEMPLATE/bug_report.md` (GitHub UI templates)
+- ✅ `.github/ISSUE_TEMPLATE/feature_request.md` (GitHub UI templates)
+- ✅ `.github/pull_request_template.md` (GitHub UI template)
+- ❌ Any other .md files → Move to `docs/` structure
+
+**Reason**: GitHub automatically recognizes these specific template locations for the UI.
+
+#### **Verification:**
+```bash
+# Check for .md files outside docs/
+find . -name "*.md" -not -path "./docs/*" -not -path "./.github/ISSUE_TEMPLATE/*" -not -path "./.github/pull_request_template.md" -not -path "./node_modules/*" -not -path "./target/*"
+
+# Should only show:
+# README.md (project root - acceptable)
+# XML/README.md (configuration folder - acceptable)
+# Configurations/README.md (configuration folder - acceptable)
+# scripts/README.md (scripts folder - acceptable)
+```
+
+#### **Auto-Fix Process:**
+If you create a .md file in the wrong location:
+1. STOP immediately when you realize
+2. Move file to appropriate docs/ subfolder
+3. Update any references/links
+4. Update NAVIGATION.md if needed
+5. Commit the correction
+
+**Remember**: Well-organized documentation is as important as well-organized code! 📚
+
+---
+
+### **Rule 2.6: Hardcoded Passwords - STRICTLY FORBIDDEN** 🔐
 
 **🚨 CRITICAL SECURITY RULE - NEVER BYPASS WITHOUT EXPLICIT USER APPROVAL**
 

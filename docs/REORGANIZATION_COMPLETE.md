@@ -40,6 +40,10 @@ docs/
 │   └── decisions/                     Architecture Decision Records
 │       └── README.md                  ADR guide (ready for ADRs)
 │
+├── 📋 issues/                          Issue Tracking & Work Items
+│   ├── README.md                      Issue management guide
+│   └── open/                          Pending GitHub issues (2 items)
+│
 └── 📦 archive/                         Historical Documents
     └── 2025-11/                       November 2025 completed work
         ├── README.md                  Archive summary
@@ -186,11 +190,12 @@ Use the quick reference tables in NAVIGATION.md:
 | **Analysis (Latest)** | 5 | 125 | Current recommendations |
 | **Analysis (Previous)** | 5 | ~100 | Historical context |
 | **Guides** | 11 | ~200 | How-to documentation |
-| **Process** | 2 | ~10 | Team standards |
+| **Process** | 2 | ~15 | Team standards |
 | **Architecture** | 1 | ~5 | Design decisions |
+| **Issues** | 3 | ~15 | Open issue templates |
 | **Archive** | 5 | ~50 | Historical work |
 | **Root** | 3 | ~15 | Navigation & overview |
-| **TOTAL** | **32** | **~505** | Well-organized! |
+| **TOTAL** | **35** | **~525** | Well-organized! |
 
 ---
 

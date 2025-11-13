@@ -16,7 +16,7 @@ While most passwords have been successfully migrated to Google Cloud Secret Mana
 ```java
 final String password = "C@Training";
 ```
-**Type**: Training/test account password  
+**Type**: Training/test account password
 **Action**: Migrate to Google Cloud Secret Manager or mark as dummy/example
 
 ---
@@ -25,8 +25,8 @@ final String password = "C@Training";
 ```bash
 curl -X POST ... "password"&user_id="jill.vivit@yahoo.com"&password="vivitrules1"
 ```
-**Type**: API credentials in curl example  
-**Action**: 
+**Type**: API credentials in curl example
+**Action**:
 - If active credentials: Migrate to Secret Manager
 - If example/documentation: Replace with placeholder `[PASSWORD]`
 - Consider moving to separate documentation file
@@ -37,7 +37,7 @@ curl -X POST ... "password"&user_id="jill.vivit@yahoo.com"&password="vivitrules1
 ```java
 curlStringBuilder.append("&password=\"" + PASSWORD + "\"");
 ```
-**Type**: String building for API call  
+**Type**: String building for API call
 **Action**: Verify PASSWORD constant source - ensure it retrieves from EPasswords enum
 
 ---
@@ -46,7 +46,7 @@ curlStringBuilder.append("&password=\"" + PASSWORD + "\"");
 ```java
 String password = "";
 ```
-**Type**: Empty password string  
+**Type**: Empty password string
 **Action**: Low priority - verify this is intentional test case
 
 ---
@@ -55,7 +55,7 @@ String password = "";
 ```java
 final String password = "********";
 ```
-**Type**: Masked password placeholder  
+**Type**: Masked password placeholder
 **Action**: Replace with Secret Manager retrieval or mark as dummy
 
 ---
@@ -211,8 +211,7 @@ This issue was created following the addition of **Rule 2.5** to `AI_WORKFLOW_RU
 
 ---
 
-**Created**: 2025-11-12  
-**Detected By**: Pre-commit hook (`check-secrets`)  
-**Related Commit**: d77311af (Added password security rules)  
+**Created**: 2025-11-12
+**Detected By**: Pre-commit hook (`check-secrets`)
+**Related Commit**: d77311af (Added password security rules)
 **Reference**: AI_WORKFLOW_RULES.md v2.3, Rule 2.5
-

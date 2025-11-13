@@ -1,6 +1,167 @@
 # CHANGE LOG
 
-## [2025-11-12 21:59:33 CST] [PENDING] - 🔐 Security Enhancement: Hardcoded Password Rules Added
+## [2025-11-13 03:42:23 CST] [PENDING] - 📁 Documentation Rule: All .md Files in docs/ Folder
+
+### Overview
+**WORKFLOW UPDATE:** Added mandatory rule for .md file organization
+**User Request:** "I'd like any new .md files that are created to be put in the appropriate docs folder"
+**Solution:** Added Rule 2.5 to AI_WORKFLOW_RULES.md (v2.4), created docs/issues/ structure
+**Impact:** All documentation properly organized, no stray .md files, improved maintainability
+
+**Cursor Token Status:** Tokens Used: 172,766 / Total: 1,000,000 (827,234 remaining, 17.3% used, 82.7% remaining)
+
+---
+
+### Changes Made
+
+**AI_WORKFLOW_RULES.md Updated to Version 2.4:**
+
+**New Rule 2.5: Markdown File Organization 📁**
+
+**1. Mandatory Placement:**
+- ALL .md files must be in docs/ folder structure
+- Organized by purpose and lifecycle
+- Never create .md files in .github/, project root, or other locations
+
+**2. Folder Selection Guide:**
+- **Analysis** → `docs/analysis/YYYY-MM-DD-topic/`
+- **Guides** → `docs/guides/[infrastructure|testing|setup|troubleshooting]/`
+- **Processes** → `docs/process/`
+- **Architecture** → `docs/architecture/decisions/`
+- **Issue Templates** → `docs/issues/open/`
+- **Historical** → `docs/archive/YYYY-MM/`
+- **Project Overview** → `docs/` root (README.md, NAVIGATION.md, CHANGE.log only)
+
+**3. Exceptions Documented:**
+- Only .github/ISSUE_TEMPLATE/ files allowed outside docs/
+- Reason: GitHub UI recognizes these specific locations
+- Any other .md files must be in docs/
+
+**4. Verification Command:**
+```bash
+find . -name "*.md" -not -path "./docs/*" -not -path "./.github/ISSUE_TEMPLATE/*"
+```
+
+**5. Auto-Fix Process:**
+- Stop immediately when misplaced file detected
+- Move to appropriate docs/ subfolder
+- Update references and links
+- Update NAVIGATION.md
+- Commit correction
+
+---
+
+### New Folder Created
+
+**docs/issues/** - Issue Tracking & Work Items
+
+**Purpose:**
+- Track planned improvements before GitHub Issues
+- Document technical debt
+- Create well-structured issue templates
+
+**Structure:**
+- `README.md` - Issue management guide
+- `open/` - Pending issues to create on GitHub
+
+**Current Contents:**
+- `cleanup-hardcoded-passwords.md` (moved from .github/)
+- `missing-performance-test-files.md` (moved from .github/)
+
+---
+
+### Files Modified
+
+**Documentation Updated:**
+1. `docs/process/AI_WORKFLOW_RULES.md` (v2.3 → v2.4)
+   - Added Rule 2.5 (Markdown File Organization, ~90 lines)
+   - Renumbered password rule to 2.6
+   - Updated version history
+
+2. `docs/NAVIGATION.md`
+   - Added issues/ folder to structure
+   - Added description of issues/ folder purpose
+   - Updated statistics (32 → 35 files, ~505 → ~525 pages)
+
+3. `docs/REORGANIZATION_COMPLETE.md`
+   - Added issues/ folder to structure diagram
+   - Updated statistics table
+
+4. `docs/issues/README.md` (NEW)
+   - Issue management guide
+   - Workflow for creating GitHub Issues
+   - Lifecycle management
+   - Current open issues list
+
+**Files Moved:**
+- `.github/ISSUE_CLEANUP_PASSWORDS.md` → `docs/issues/open/cleanup-hardcoded-passwords.md`
+- `.github/ISSUE_MISSING_PERFORMANCE_TESTS.md` → `docs/issues/open/missing-performance-test-files.md`
+
+---
+
+### Verification Results
+
+**Git Status:**
+```
+Modified: 3 files (AI_WORKFLOW_RULES.md, NAVIGATION.md, REORGANIZATION_COMPLETE.md)
+New: 1 file (docs/issues/README.md)
+Moved: 2 files (issue templates to docs/issues/open/)
+```
+
+**Documentation-Only Change:** ✅ Yes
+
+**Organization Check:**
+- ✅ All .md files now in docs/ structure
+- ✅ New issues/ folder properly documented
+- ✅ NAVIGATION.md updated
+- ✅ Statistics reflect new folder
+- ✅ Clear folder selection guide provided
+
+---
+
+### Impact Summary
+
+**Before:**
+- No rule about .md file placement
+- Issue templates created in .github/
+- Inconsistent organization
+- No guidance for new files
+
+**After:**
+- Mandatory rule: ALL .md files in docs/
+- Clear folder selection guide
+- Issue templates in docs/issues/open/
+- Verification command provided
+- Auto-fix process documented
+
+**Benefits:**
+- 📁 Consistent organization
+- 🎯 Clear guidance for new files
+- ✅ All documentation in one place
+- 🔍 Easy to find and maintain
+- 📊 Better structure visibility
+
+---
+
+### Next Steps
+
+**Immediate:**
+- Rule is now in effect
+- All future .md files will be properly organized
+- Issue templates ready to create on GitHub
+
+**Short-term:**
+- Create GitHub issues from templates in docs/issues/open/
+- Continue following organized structure
+
+**Long-term:**
+- Maintain clean docs/ organization
+- Archive resolved issues
+- Keep structure well-documented
+
+---
+
+## [2025-11-12 21:59:33 CST] [5e94c89b] - 🔐 Security Enhancement: Hardcoded Password Rules Added
 
 ### Overview
 **SECURITY POLICY UPDATE:** Added strict rules prohibiting hardcoded passwords
