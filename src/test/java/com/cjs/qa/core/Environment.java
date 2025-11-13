@@ -31,9 +31,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 // BasicConfigurator not needed in log4j 2.x (auto-configuration)
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 
 public class Environment {
+  private static final Logger log = LogManager.getLogger(Environment.class);
+  
   public static final String NOT_FOUND_USING_DEFAULT = " NOT FOUND.  USING DEFAULT-";
   public static final String COMPANY = "Core";
   public static final String EMAIL_SIGNATURE =
@@ -223,7 +227,7 @@ public class Environment {
       // stringBuilder.append(getStackInfo())
       // stringBuilder.append(Constants.DELIMETER_LIST)
       stringBuilder.append(value);
-      System.out.println(stringBuilder.toString());
+      log.info(stringBuilder.toString());  // Modernized: Using log4j 2.x instead of System.out
       // stringBuilder.append(Constants.NEWLINE)
       // FSOTests.fileWrite(fileLog, stringBuilder.toString(), true)
     }
@@ -239,14 +243,12 @@ public class Environment {
   }
 
   public static void sysOut(Exception e) {
-    sysOut(e.getMessage());
-    e.printStackTrace();
+    log.error("Exception occurred", e);  // Modernized: Using log4j 2.x with exception
     Assert.fail();
   }
 
   public static void sysOut(Throwable e) {
-    sysOut(e.getMessage());
-    e.printStackTrace();
+    log.error("Throwable occurred", e);  // Modernized: Using log4j 2.x with throwable
   }
 
   public static void sysOut(String[] value) {
