@@ -269,17 +269,17 @@ jobs:
 
   # ==================================================================================
   # STAGE 4: TEST ENVIRONMENT TESTING & DEPLOYMENT
-  # (Only runs if deploy-dev succeeded or if environment=test only)
+  # (Only runs if test-dev-environment succeeded or if environment=test only)
   # ==================================================================================
 
   test-test-environment:
     name: Test TEST Environment
-    needs: [detect-changes, determine-environments, build-and-compile, deploy-dev]
+    needs: [detect-changes, determine-environments, build-and-compile, test-dev-environment]
     if: |
       always() &&
       needs.detect-changes.outputs.code-changed == 'true' &&
       needs.determine-environments.outputs.run_test == 'true' &&
-      (needs.deploy-dev.result == 'success' || needs.deploy-dev.result == 'skipped')
+      (needs.test-dev-environment.result == 'success' || needs.test-dev-environment.result == 'skipped')
     uses: ./.github/workflows/test-environment.yml
     with:
       environment: 'test'
@@ -320,17 +320,17 @@ jobs:
 
   # ==================================================================================
   # STAGE 5: PROD ENVIRONMENT TESTING & DEPLOYMENT
-  # (Only runs if deploy-test succeeded or if environment=prod only)
+  # (Only runs if test-test-environment succeeded or if environment=prod only)
   # ==================================================================================
 
   test-prod-environment:
     name: Test PROD Environment
-    needs: [detect-changes, determine-environments, build-and-compile, deploy-test]
+    needs: [detect-changes, determine-environments, build-and-compile, test-test-environment]
     if: |
       always() &&
       needs.detect-changes.outputs.code-changed == 'true' &&
       needs.determine-environments.outputs.run_prod == 'true' &&
-      (needs.deploy-test.result == 'success' || needs.deploy-test.result == 'skipped')
+      (needs.test-test-environment.result == 'success' || needs.test-test-environment.result == 'skipped')
     uses: ./.github/workflows/test-environment.yml
     with:
       environment: 'prod'
