@@ -10,9 +10,12 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 public class MarshallTests {
+  private static final Logger log = LogManager.getLogger(MarshallTests.class);
   private static final String FILE_PATH_NAME_XML =
       "C:\\Workspace\\Data\\Vivit\\Data\\Events\\temp.xml";
   private static final String FILE_PATH_NAME_NEW_XML =
@@ -60,7 +63,7 @@ public class MarshallTests {
     Environment.sysOut(yourMembershipResponse.getSaEventsEventRegistrationGet().toString());
     String xml = yourMembershipResponseMarshall(yourMembershipResponse, FILE_PATH_NAME_NEW_XML);
     Environment.sysOut("TESTING XML CREATION" + Constants.NEWLINE + xml);
-    System.out.println(
+    log.info(
         "Getting the Phone Number:"
             + yourMembershipResponse
                 .getSaEventsEventRegistrationGet()

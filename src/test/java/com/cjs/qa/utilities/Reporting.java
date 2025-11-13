@@ -10,8 +10,12 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.List;
 import java.util.Map;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public final class Reporting {
+  private static final Logger log = LogManager.getLogger(Reporting.class);
+
   private Reporting() {
     // Utility class - prevent instantiation
   }
@@ -39,10 +43,10 @@ public final class Reporting {
         byteBuffer.put(byteOut);
         int bytesRead = fileChannel.read(byteBuffer);
         while (bytesRead != -1) {
-          System.out.println("Read " + bytesRead);
+          log.debug("Read {} bytes", bytesRead);
           byteBuffer.flip();
           while (byteBuffer.hasRemaining()) {
-            System.out.print((char) byteBuffer.get());
+            // Removed System.out.print - use log.debug if character output needed
             fileChannel.write(byteBuffer);
           }
           byteBuffer.clear();

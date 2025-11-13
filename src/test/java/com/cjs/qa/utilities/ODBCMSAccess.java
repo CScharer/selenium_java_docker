@@ -9,8 +9,12 @@ import java.sql.Statement;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JOptionPane;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public final class ODBCMSAccess {
+  private static final Logger log = LogManager.getLogger(ODBCMSAccess.class);
+
   private ODBCMSAccess() {
     // Utility class - prevent instantiation
   }
@@ -63,7 +67,7 @@ public final class ODBCMSAccess {
                           + JDBCConstants.ORDER_BY
                           + "[SubmissionID]")) {
             while (resultSet.next()) {
-              // System.out.println(oResultSet.getString(1));
+              // log.info(oResultSet.getString(1));
               final StringBuilder sqlPre = new StringBuilder();
               sqlPre.append(JDBCConstants.INSERT_INTO + "[Core] (");
               final StringBuilder sqlValues = new StringBuilder();
@@ -86,29 +90,29 @@ public final class ODBCMSAccess {
               sql = sqlPre.toString() + sqlValues.toString();
               recordCount += odbcSQLite.executeUpdate(connectionSQLite, sql);
               if (recordCount % 100 == 0) {
-                System.out.println(recordCount + " records");
+                log.info(recordCount + " records");
               }
-              // System.out.println(map.toString());
+              // log.info(map.toString());
             }
-            System.out.println(recordCount + " records");
+            log.info(recordCount + " records");
           }
         }
       }
     } catch (final Exception oException) {
-      System.out.println(oException.getMessage());
+      log.info(oException.getMessage());
       oException.printStackTrace();
     }
   }
 
   public static Connection connectDb(String database) {
-    System.out.println("Connecting to [" + database + "]");
+    log.info("Connecting to [" + database + "]");
     try {
       // String dir = System.getProperty("user.dir");
       Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
       return DriverManager.getConnection("jdbc:ucanaccess://" + database);
     } catch (ClassNotFoundException | SQLException oException) {
       JOptionPane.showMessageDialog(null, "Problem connecting to database [" + database + "]");
-      System.out.println(oException.getMessage());
+      log.info(oException.getMessage());
       oException.printStackTrace();
       return null;
     }

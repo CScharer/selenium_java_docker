@@ -24,6 +24,8 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.xml.security.c14n.CanonicalizationException;
 import org.apache.xml.security.c14n.Canonicalizer;
 import org.apache.xml.security.c14n.InvalidCanonicalizerException;
@@ -40,6 +42,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 public class XML {
+  private static final Logger log = LogManager.getLogger(XML.class);
   public static final XPathFactory XPATH_FACTORY = XPathFactory.newInstance();
   public static final XPath XPATH = XPATH_FACTORY.newXPath();
   public static final String ENCLOSURE_DELIMETER = "/";
@@ -454,14 +457,7 @@ public class XML {
    */
   public static void transformFromFile(
       String filePathXSL, String filePathInput, String filePathOutput) {
-    System.out.println(
-        "Creating ["
-            + filePathOutput
-            + "] From ["
-            + filePathInput
-            + "] Using ["
-            + filePathXSL
-            + "]");
+    log.info("Creating [{}] From [{}] Using [{}]", filePathOutput, filePathInput, filePathXSL);
     final StreamSource streamSourceXSL = new StreamSource(new File(filePathXSL));
     final StreamSource streamSourceIn = new StreamSource(new File(filePathInput));
     final StreamResult streamResultOut = new StreamResult(new File(filePathOutput));
@@ -471,14 +467,7 @@ public class XML {
       transformer = transformerFactory.newTransformer(streamSourceXSL);
       try {
         transformer.transform(streamSourceIn, streamResultOut);
-        System.out.println(
-            "Created ["
-                + filePathOutput
-                + "] From ["
-                + filePathInput
-                + "] Using ["
-                + filePathXSL
-                + "]");
+        log.info("Created [{}] From [{}] Using [{}]", filePathOutput, filePathInput, filePathXSL);
       } catch (final TransformerException e) {
         e.printStackTrace();
       }
@@ -493,7 +482,7 @@ public class XML {
    * @param filePathOutput
    */
   public static void transformFromString(String xsl, String input, String filePathOutput) {
-    System.out.println("Creating [" + filePathOutput + "] using string inputs");
+    log.info("Creating [{}] using string inputs", filePathOutput);
     try (StringReader xslReader = new StringReader(xsl);
         StringReader inputReader = new StringReader(input)) {
       final StreamSource streamSourceXSL = new StreamSource(xslReader);
@@ -505,7 +494,7 @@ public class XML {
         transformer = transformerFactory.newTransformer(streamSourceXSL);
         try {
           transformer.transform(streamSourceIn, streamResultOut);
-          System.out.println("Created [" + filePathOutput + "] using string inputs");
+          log.info("Created [{}] using string inputs", filePathOutput);
         } catch (final TransformerException e) {
           e.printStackTrace();
         }

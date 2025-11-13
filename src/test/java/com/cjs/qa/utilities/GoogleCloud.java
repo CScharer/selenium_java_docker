@@ -5,8 +5,12 @@ import com.google.cloud.secretmanager.v1.SecretManagerServiceClient;
 import com.google.cloud.secretmanager.v1.SecretVersionName;
 import com.google.protobuf.ByteString;
 import java.io.IOException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public final class GoogleCloud {
+  private static final Logger log = LogManager.getLogger(GoogleCloud.class);
+
   private GoogleCloud() {
     // Utility class - prevent instantiation
   }
@@ -45,10 +49,9 @@ public final class GoogleCloud {
 
     try {
       String keyValue = getKeyValue(projectId, secretId);
-      System.out.println(keyValue);
+      log.debug("Retrieved secret value for {}: {}", secretId, keyValue);
     } catch (IOException e) {
-      System.err.println("Failed to access secret: " + e.getMessage());
-      e.printStackTrace();
+      log.error("Failed to access secret: {}", e.getMessage(), e);
     }
   }
 }

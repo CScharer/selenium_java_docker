@@ -4,10 +4,13 @@ import io.cucumber.datatable.DataTable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 // import java.util.Optional;
 
 public class Processes {
+  private static final Logger log = LogManager.getLogger(Processes.class);
   public static final String NO_RESULTS =
       "INFO: No tasks are running which match the specified criteria.";
   private List<ProcessUtil> processList = new ArrayList<>();
