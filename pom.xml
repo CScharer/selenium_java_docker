@@ -687,7 +687,7 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 			<plugin>
 				<groupId>io.qameta.allure</groupId>
 				<artifactId>allure-maven</artifactId>
-				<version>2.14.0</version>
+				<version>2.16.1</version>
 				<configuration>
 					<reportVersion>${allure.version}</reportVersion>
 					<resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
