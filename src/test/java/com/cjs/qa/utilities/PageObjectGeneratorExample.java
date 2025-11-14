@@ -3,8 +3,8 @@ package com.cjs.qa.utilities;
 /**
  * Example usage of PageObjectGenerator.
  *
- * <p>This class demonstrates how to use the PageObjectGenerator to create Page Object classes
- * from URLs.
+ * <p>This class demonstrates how to use the PageObjectGenerator to create Page Object classes from
+ * URLs.
  *
  * <p>Usage Example:
  *
@@ -30,6 +30,7 @@ package com.cjs.qa.utilities;
  * </pre>
  *
  * <p>After generation:
+ *
  * <ol>
  *   <li>Review the generated code
  *   <li>Adjust locators if needed
