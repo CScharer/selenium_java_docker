@@ -38,7 +38,7 @@ env:
   # Environment URLs - Update these with your actual environment URLs
   DEV_BASE_URL: 'https://dev.yourapp.com'
   TEST_BASE_URL: 'https://test.yourapp.com'
-  PROD_BASE_URL: 'https://prod.yourapp.com'
+  PROD_BASE_URL: 'https://yourapp.com'
 
 jobs:
   # ==================================================================================
@@ -244,8 +244,7 @@ jobs:
       always() &&
       needs.detect-changes.outputs.code-changed == 'true' &&
       needs.determine-environments.outputs.run_dev == 'true' &&
-      needs.test-dev-environment.result != 'skipped' &&
-      needs.test-dev-environment.result != 'cancelled' &&
+      (needs.test-dev-environment.result == 'success' || needs.test-dev-environment.result == 'failure') &&
       github.ref == 'refs/heads/main' &&
       github.event_name == 'push'
     environment:
@@ -331,8 +330,7 @@ jobs:
       always() &&
       needs.detect-changes.outputs.code-changed == 'true' &&
       needs.determine-environments.outputs.run_test == 'true' &&
-      needs.test-test-environment.result != 'skipped' &&
-      needs.test-test-environment.result != 'cancelled' &&
+      (needs.test-test-environment.result == 'success' || needs.test-test-environment.result == 'failure') &&
       github.ref == 'refs/heads/main' &&
       github.event_name == 'push'
     environment:
@@ -409,7 +407,7 @@ jobs:
     with:
       environment: 'prod'
       test_suite: ${{ needs.determine-environments.outputs.test_suite }}
-      base_url: ${{ vars.PROD_BASE_URL || 'https://prod.yourapp.com' }}
+      base_url: ${{ vars.PROD_BASE_URL || 'https://yourapp.com' }}
 
   deploy-prod:
     name: Deploy to PROD
@@ -419,13 +417,12 @@ jobs:
       always() &&
       needs.detect-changes.outputs.code-changed == 'true' &&
       needs.determine-environments.outputs.run_prod == 'true' &&
-      needs.test-prod-environment.result != 'skipped' &&
-      needs.test-prod-environment.result != 'cancelled' &&
+      (needs.test-prod-environment.result == 'success' || needs.test-prod-environment.result == 'failure') &&
       github.ref == 'refs/heads/main' &&
       github.event_name == 'push'
     environment:
       name: production
-      url: ${{ vars.PROD_BASE_URL || 'https://prod.yourapp.com' }}
+      url: ${{ vars.PROD_BASE_URL || 'https://yourapp.com' }}
 
     steps:
       - name: Checkout code
@@ -471,7 +468,7 @@ jobs:
           echo "⚠️  PRODUCTION DEPLOYMENT"
           echo ""
           echo "Environment: PROD"
-          echo "URL: ${{ vars.PROD_BASE_URL || 'https://prod.yourapp.com' }}"
+          echo "URL: ${{ vars.PROD_BASE_URL || 'https://yourapp.com' }}"
           echo "Commit: ${{ github.sha }}"
           echo ""
           echo "✅ All PROD environment tests passed!"
