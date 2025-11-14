@@ -13,6 +13,7 @@
         </groups>
         <classes>
             <class name="com.cjs.qa.junit.tests.SmokeTests"/>
+            <class name="com.cjs.qa.utilities.PageObjectGeneratorBrowserTest"/>
         </classes>
     </test>
 </suite>
