@@ -16,7 +16,7 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
 
 ### Switch Expressions
 
-**Total Converted**: 10 switch statements
+**Total Converted**: 12 switch statements
 
 1. ✅ **ExcelDataProvider.java** - `getCellValue()` method
    - Converted to switch expression with block syntax for complex NUMERIC case
@@ -70,6 +70,25 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
     - Text block for string formatting
     - Uses `.formatted()` for variable substitution
 
+14. ✅ **SQL.java** - `execute()` method - 2 switch expressions
+    - `messagePre` switch: Multiple case labels with arrow syntax
+    - `messagePost` switch: Multiple case labels with arrow syntax
+
+15. ✅ **SQL.java** - `parseQuote()` method
+    - Pattern matching for instanceof: `if (value instanceof String valueNew)`
+
+16. ✅ **SeleniumWebDriver.java** - `getExecutableVersion()` method
+    - Switch expression returning value directly
+    - Multiple case labels for browser types
+
+17. ✅ **SeleniumWebDriver.java** - `getWebDriverCapabilities()` method
+    - Switch expression returning value directly
+    - Multiple case labels for browser types
+
+18. ✅ **Selenium.java** - `getSessionInformation()` method
+    - Pattern matching for instanceof (7 checks)
+    - Eliminates explicit casting for all WebDriver types
+
 ---
 
 ## 📊 Migration Statistics
@@ -84,11 +103,12 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
 - `src/test/java/com/cjs/qa/selenium/SeleniumWebDriver.java`
 - `src/test/java/com/cjs/qa/jdbc/SQL.java`
 - `src/test/java/com/cjs/qa/bitcoin/Bitcoin.java`
+- `src/test/java/com/cjs/qa/selenium/Selenium.java`
 
 ### Lines Changed
-- **Insertions**: ~90 lines (switch expressions, text blocks, pattern matching)
-- **Deletions**: ~110 lines (traditional switch statements, instanceof casts)
-- **Net**: -20 lines (more concise code!)
+- **Insertions**: ~110 lines (switch expressions, text blocks, pattern matching)
+- **Deletions**: ~140 lines (traditional switch statements, instanceof casts)
+- **Net**: -30 lines (more concise code!)
 
 ### Code Quality Improvements
 - ✅ No `break` statements needed (prevents fall-through bugs)
@@ -142,6 +162,8 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
 
 **Completed**:
 - ✅ `SeleniumWebDriver.java` - `getSessionInformation()` method (7 instanceof checks)
+- ✅ `SQL.java` - `parseQuote()` method (1 instanceof check)
+- ✅ `Selenium.java` - `getSessionInformation()` method (7 instanceof checks)
 
 **Remaining Candidates**:
 - Search for remaining `instanceof` followed by explicit casting

@@ -433,30 +433,20 @@ public class SQL {
         messagePost = "VIEW CREATED";
       }
 
+      // Java 17: Switch expression with multiple case labels
       switch (messagePre) {
-        case "DROPPING TABLE":
-        case "DROPPING VIEW":
-        case "CREATING TABLE":
-        case "CREATING VIEW":
-          Environment.sysOut(
-              messagePre + " " + sql.substring(sql.indexOf('['), sql.indexOf(']') + 1));
-          break;
-        default:
-          Environment.sysOut(messagePre + " [" + (records.length - 1) + "] RECORD(S)");
-          break;
+        case "DROPPING TABLE", "DROPPING VIEW", "CREATING TABLE", "CREATING VIEW" ->
+            Environment.sysOut(
+                messagePre + " " + sql.substring(sql.indexOf('['), sql.indexOf(']') + 1));
+        default -> Environment.sysOut(messagePre + " [" + (records.length - 1) + "] RECORD(S)");
       }
       recordsUpdated = jdbc.executeUpdate(sql, false);
+      // Java 17: Switch expression with multiple case labels
       switch (messagePost) {
-        case "TABLE DROPPED":
-        case "TABLE CREATED":
-        case "VIEW DROPPED":
-        case "VIEW CREATED":
-          Environment.sysOut(
-              sql.substring(sql.indexOf('['), sql.indexOf(']') + 1) + " " + messagePost);
-          break;
-        default:
-          Environment.sysOut("[" + recordsUpdated + "] RECORD(S) " + messagePost);
-          break;
+        case "TABLE DROPPED", "TABLE CREATED", "VIEW DROPPED", "VIEW CREATED" ->
+            Environment.sysOut(
+                sql.substring(sql.indexOf('['), sql.indexOf(']') + 1) + " " + messagePost);
+        default -> Environment.sysOut("[" + recordsUpdated + "] RECORD(S) " + messagePost);
       }
     } catch (final Exception e) {
       Environment.sysOut(e);
@@ -720,8 +710,8 @@ public class SQL {
   }
 
   public static Object parseQuote(Object value) {
-    if (value instanceof String) {
-      String valueNew = (String) value;
+    // Java 17: Pattern matching for instanceof
+    if (value instanceof String valueNew) {
       if (valueNew.contains("'")) {
         return valueNew.replaceAll("'", "''");
       } else {

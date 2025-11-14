@@ -225,19 +225,13 @@ public class SeleniumWebDriver {
   public String getExecutableVersion(Capabilities capabilities) {
     String executableVersion = "";
     // (String)capabilities.getCapability("version")
-    switch (getBrowser().toLowerCase(Locale.ENGLISH)) {
-      case Browser.EDGE:
-        executableVersion = (String) capabilities.getCapability("browserVersion");
-        break;
-      case Browser.CHROME:
-      case Browser.FIREFOX:
-      case Browser.IE:
-      case Browser.INTERNET_EXPLORER:
-      default:
-        executableVersion = (String) capabilities.getCapability("version");
-        break;
-    }
-    return executableVersion;
+    // Java 17: Switch expression returning value directly
+    return switch (getBrowser().toLowerCase(Locale.ENGLISH)) {
+      case Browser.EDGE -> (String) capabilities.getCapability("browserVersion");
+      case Browser.CHROME, Browser.FIREFOX, Browser.IE, Browser.INTERNET_EXPLORER ->
+          (String) capabilities.getCapability("version");
+      default -> (String) capabilities.getCapability("version");
+    };
   }
 
   public String getGridHub() {
@@ -338,28 +332,18 @@ public class SeleniumWebDriver {
   }
 
   public Capabilities getWebDriverCapabilities() {
-    Capabilities capabilities = null;
     if (isRemote()) {
-      capabilities = ((RemoteWebDriver) getWebDriver()).getCapabilities();
-    } else {
-      switch (getBrowser().toLowerCase(Locale.ENGLISH)) {
-        case Browser.EDGE:
-          capabilities = ((EdgeDriver) getWebDriver()).getCapabilities();
-          break;
-        case Browser.FIREFOX:
-          capabilities = ((FirefoxDriver) getWebDriver()).getCapabilities();
-          break;
-        case Browser.IE:
-        case Browser.INTERNET_EXPLORER:
-          capabilities = ((InternetExplorerDriver) getWebDriver()).getCapabilities();
-          break;
-        case Browser.CHROME:
-        default:
-          capabilities = ((ChromeDriver) getWebDriver()).getCapabilities();
-          break;
-      }
+      return ((RemoteWebDriver) getWebDriver()).getCapabilities();
     }
-    return capabilities;
+    // Java 17: Switch expression returning value directly
+    return switch (getBrowser().toLowerCase(Locale.ENGLISH)) {
+      case Browser.EDGE -> ((EdgeDriver) getWebDriver()).getCapabilities();
+      case Browser.FIREFOX -> ((FirefoxDriver) getWebDriver()).getCapabilities();
+      case Browser.IE, Browser.INTERNET_EXPLORER ->
+          ((InternetExplorerDriver) getWebDriver()).getCapabilities();
+      case Browser.CHROME -> ((ChromeDriver) getWebDriver()).getCapabilities();
+      default -> ((ChromeDriver) getWebDriver()).getCapabilities();
+    };
   }
 
   public void getWebDriverInfo() {
