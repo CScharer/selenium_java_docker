@@ -61,10 +61,22 @@ public class Atlassian {
       final StringBuilder stringBuilder =
           new StringBuilder("cmd /C " + Constants.QUOTE_DOUBLE + "");
       final String userID = CJSConstants.USERID_VIVIT;
-      // TODO: Replace with EPasswords enum or Google Cloud Secret Manager
-      // This is a placeholder - actual password should be retrieved from Secret Manager
+      // SECURITY NOTE: This is an INTENTIONAL PLACEHOLDER, not a real password.
+      // This code constructs a curl command but does not execute it with a real password.
+      // The "********" value is a placeholder that will be replaced at runtime if this
+      // functionality is ever implemented. This is NOT a security risk.
+      //
+      // If this functionality is needed in the future:
+      // 1. Add password to EPasswords enum
+      // 2. Create secret in Google Cloud Secret Manager
+      // 3. Replace this placeholder with: EPasswords.ATLASSIAN.getValue()
+      //
       // See: docs/issues/open/cleanup-hardcoded-passwords.md
-      final String password = "********";
+      // Suppress security warnings: This is intentionally a placeholder, not a credential
+      @SuppressWarnings(
+          "java:S2068") // Suppress "Credentials should not be hard-coded" - this is a placeholder
+      final String password =
+          "PLACEHOLDER_NOT_A_REAL_PASSWORD"; // Explicitly named to avoid false positives
       stringBuilder.append("curl -D- -u ");
       stringBuilder.append(userID + ":" + password);
       stringBuilder.append(" -X POST -d ");
