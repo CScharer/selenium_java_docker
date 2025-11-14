@@ -1,5 +1,96 @@
 # CHANGE LOG
 
+## [2025-11-14 04:12:54 CST] [a39e171e] - 🧹 CLEANUP: Remove Deprecated API Credential Constants
+
+### Overview
+**CLEANUP:** Removed deprecated hardcoded credential constants after successful Secret Manager migration
+**User Request:** Remove deprecated constants now that secrets are in Google Cloud
+**Solution:** Removed all @Deprecated constants, code now uses enum getters exclusively
+**Impact:** Cleaner codebase, no hardcoded credentials, full Secret Manager integration complete
+**Branch:** feature/remove-deprecated-api-credentials (merged to main)
+
+**Cursor Token Status:** Tokens Used: ~370,000 / Total: 1,000,000 (estimated, ~37% used, ~63% remaining)
+
+---
+
+### Changes Made
+
+**Files Modified (2 total):**
+
+**1. `src/test/java/com/cjs/qa/gt/api/services/GTWebinarServiceTests.java`**
+- Removed `@Deprecated public static final String USER_ID`
+- Removed `@Deprecated public static final String PASSWORD`
+- Removed `@Deprecated public static final String API_CONSUMER_KEY`
+- Removed `@Deprecated public static final String API_CONSUMER_SECRET`
+- All functionality preserved via enum getters (`getUserId()`, `getPassword()`, etc.)
+
+**2. `src/test/java/com/cjs/qa/ym/api/services/YMService.java`**
+- Removed `@Deprecated public static final String API_KEY`
+- Removed `@Deprecated public static final String API_SA_PASSCODE`
+- All functionality preserved via enum getters (`getApiKeyValue()`, `getApiSaPasscodeValue()`)
+
+**Files Created (1 total):**
+
+**3. `docs/PERFORMANCE_TEST_FILES_EXPLANATION.md`**
+- Explanation of missing performance test files issue (item #3)
+- Options for addressing the issue
+- Impact assessment and recommendations
+
+**Lines Changed:**
+- Insertions: +136 (documentation)
+- Deletions: -22 (deprecated constants)
+- Net: +114 lines
+
+---
+
+### Impact
+
+**Security Benefits:**
+- ✅ **Zero Hardcoded Credentials**: All deprecated constants removed
+- ✅ **Full Secret Manager Integration**: Code exclusively uses enum getters
+- ✅ **Clean Codebase**: No deprecated code remaining
+- ✅ **No Breaking Changes**: All functionality preserved
+
+**Code Quality:**
+- ✅ **Cleaner Code**: Removed 22 lines of deprecated code
+- ✅ **Single Source of Truth**: All credentials via Secret Manager
+- ✅ **Better Maintainability**: No confusion about which method to use
+
+**Verification:**
+- ✅ Code compiles successfully
+- ✅ No references to deprecated constants found
+- ✅ All getter methods functional
+- ✅ Secrets successfully retrieved from Google Cloud
+
+---
+
+### Migration Complete
+
+**Status**: ✅ **COMPLETE**
+- Secrets created in Google Cloud Secret Manager
+- Code updated to use enum getters
+- Deprecated constants removed
+- Full Secret Manager integration achieved
+
+**Total Credentials Migrated**: 6
+- `AUTO_VIVIT_GT_WEBINAR_USER_ID`
+- `AUTO_VIVIT_GT_WEBINAR_PASSWORD`
+- `AUTO_VIVIT_GT_WEBINAR_CONSUMER_KEY`
+- `AUTO_VIVIT_GT_WEBINAR_CONSUMER_SECRET`
+- `AUTO_VIVIT_YM_API_KEY`
+- `AUTO_VIVIT_YM_API_SA_PASSCODE`
+
+---
+
+### Related
+
+**Purpose:** Complete API keys migration by removing deprecated code
+**Related To:** `docs/issues/open/hardcoded-api-keys-and-secrets.md`
+**Migration Guide:** `docs/guides/setup/API_KEYS_MIGRATION_GUIDE.md`
+**Previous:** API keys migration (682756ec)
+
+---
+
 ## [2025-11-14 03:35:47 CST] [682756ec] - 🔑 SECURITY: Migrate API Keys and Credentials to Google Cloud Secret Manager
 
 ### Overview
