@@ -61,15 +61,16 @@ public final class SystemProcesses {
         final List<String> fieldsList = FIELDS_PROCESS_MAP.get(processType);
         importData(dateTimeStamp, tableName, fieldsList);
         final StringBuilder sqlStringBuilder = new StringBuilder();
+        // Java 17: Switch expression with block syntax
         switch (processType) {
-          case "M":
+          case "M" -> {
             sqlStringBuilder.append(JDBCConstants.INSERT_INTO + "[t_Core_Processes] ");
             sqlStringBuilder.append("([DateTimeStamp],[PID],[Image Name],[Modules]) ");
             sqlStringBuilder.append(
                 JDBCConstants.SELECT + "[DateTimeStamp],[PID],[Image Name],[Modules] ");
             sqlStringBuilder.append(JDBCConstants.FROM + "[t_Core_Processes_" + processType + "];");
-            break;
-          default:
+          }
+          default -> {
             final List<Map<String, String>> records =
                 jdbc.queryResultsString(
                     JDBCConstants.SELECT_ALL_FROM + "[t_Core_Processes_" + processType + "]", true);
@@ -109,7 +110,7 @@ public final class SystemProcesses {
                 sqlStringBuilder.append(Constants.NEWLINE);
               }
             }
-            break;
+          }
         }
         SQL.execute(sqlStringBuilder.toString());
       }

@@ -22,14 +22,12 @@ public class Encoder {
   }
 
   private void setCharacterSet(String base) {
-    switch (base) {
-      case "52":
-        setCharacterSet(characters52);
-        break;
-      default:
-        setCharacterSet(characters26);
-        break;
-    }
+    // Java 17: Switch expression
+    setCharacterSet(
+        switch (base) {
+          case "52" -> characters52;
+          default -> characters26;
+        });
   }
 
   public void main(String[] args) {
@@ -62,17 +60,18 @@ public class Encoder {
     String decoded = "";
     setCharacterSet(base);
     encoded = sValue;
+    // Java 17: Switch expression with block syntax for multiple statements
     switch (base) {
-      case "52":
+      case "52" -> {
         decodedDate = decode(encoded.substring(0, 5));
         decodedTime = decode(encoded.substring(5, 9));
         decodedNano = decode(encoded.substring(9));
-        break;
-      default:
+      }
+      default -> {
         decodedDate = decode(encoded.substring(0, 6));
         decodedTime = decode(encoded.substring(6, 11));
         decodedNano = decode(encoded.substring(11));
-        break;
+      }
     }
     decoded = String.valueOf(decodedDate);
     decoded += String.valueOf(decodedTime);
