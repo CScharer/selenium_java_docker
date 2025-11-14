@@ -600,26 +600,26 @@ public class XLSX implements IExcel {
   }
 
   private void setCellValue(Object value) throws QAException {
-    if (value instanceof Boolean) {
-      getWorkCell().setCellValue((Boolean) value);
+    // Java 17: Pattern matching for instanceof
+    if (value instanceof Boolean boolValue) {
+      getWorkCell().setCellValue(boolValue);
     }
-    if (value instanceof Double) {
-      getWorkCell().setCellValue((Double) value);
+    if (value instanceof Double doubleValue) {
+      getWorkCell().setCellValue(doubleValue);
       getWorkCell()
           .setCellStyle(XLSXCellStyles.getCellStyle(getWorkbook(), IExcel.FORMAT_NAME_NUMBER));
     }
-    if (value instanceof Float) {
-      getWorkCell().setCellValue((Float) value);
+    if (value instanceof Float floatValue) {
+      getWorkCell().setCellValue(floatValue);
       getWorkCell()
           .setCellStyle(XLSXCellStyles.getCellStyle(getWorkbook(), IExcel.FORMAT_NAME_NUMBER));
     }
-    if (value instanceof Integer) {
-      getWorkCell().setCellValue((Integer) value);
+    if (value instanceof Integer intValue) {
+      getWorkCell().setCellValue(intValue);
       getWorkCell()
           .setCellStyle(XLSXCellStyles.getCellStyle(getWorkbook(), IExcel.FORMAT_NAME_NUMBER));
     }
-    if (value instanceof String) {
-      final String stringValue = (String) value;
+    if (value instanceof String stringValue) {
       boolean isNumeric = false;
       boolean containsPercentSign = false;
       if (stringValue.contains("%")) {

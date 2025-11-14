@@ -196,67 +196,62 @@ public class ScenariosTests {
     getJenkinsInfo();
     setSeleniumWebDriver(new SeleniumWebDriver(null, Environment.isRunRemote(), null, null, null));
     methodTest = methodTest.toLowerCase(Locale.ENGLISH);
+    // Java 17: Switch expression with block syntax for complex cases
     switch (methodTest) {
-      case "americanairlines":
-        setAmericanAirlines(new AmericanAirlines(getSeleniumWebDriver().getWebDriver()));
-        break;
-      case "dropbox":
-        setDropbox(new Dropbox(getSeleniumWebDriver().getWebDriver()));
-        break;
-      case "everyonesocial":
-        setEveryoneSocial(new EveryoneSocial(getSeleniumWebDriver().getWebDriver()));
-        break;
-      case "google":
-        setGoogle(new Google(getSeleniumWebDriver().getWebDriver()));
-        break;
-      case "hardees":
-        setHardees(new Hardees(getSeleniumWebDriver().getWebDriver()));
-        break;
-      case "iadhs":
+      case "americanairlines" ->
+          setAmericanAirlines(new AmericanAirlines(getSeleniumWebDriver().getWebDriver()));
+      case "dropbox" -> setDropbox(new Dropbox(getSeleniumWebDriver().getWebDriver()));
+      case "everyonesocial" ->
+          setEveryoneSocial(new EveryoneSocial(getSeleniumWebDriver().getWebDriver()));
+      case "google" -> setGoogle(new Google(getSeleniumWebDriver().getWebDriver()));
+      case "hardees" -> setHardees(new Hardees(getSeleniumWebDriver().getWebDriver()));
+      case "iadhs" -> {
         Environment.setScrollToObject(false);
         setIadhs(new IaDhs(getSeleniumWebDriver().getWebDriver()));
-        break;
-      case "jenkins":
-        break;
-      case "linkedin":
+      }
+      case "jenkins" -> {
+        // No action needed for jenkins
+      }
+      case "linkedin" -> {
         setLinkedIn(new LinkedIn(getSeleniumWebDriver().getWebDriver()));
         Environment.setScrollToObject(false);
-        break;
-      case "marlboro":
+      }
+      case "marlboro" -> {
         final boolean overrideDay = true;
         // Environment.setScrollToObject(false)
         final String dayExpect = "1";
         final String monthDay = DateHelpersTests.getCurrentDateTime("d");
+        // overrideDay is currently always true, but kept for future flexibility
         if (!overrideDay && !monthDay.equals(dayExpect)) {
           Assert.fail(
               "The month day [" + monthDay + "] is not the expected day [" + dayExpect + "].");
-          break;
+          return; // Early return if validation fails
         }
+        // Set Marlboro if overrideDay is true or day matches
         setMarlboro(new Marlboro(getSeleniumWebDriver().getWebDriver()));
-        break;
-      case "microsoft":
+      }
+      case "microsoft" -> {
         getSeleniumWebDriver().killBrowser();
         getSeleniumWebDriver().setBrowser("Edge");
         getSeleniumWebDriver().initializeWebDriver();
         setMicrosoft(new Microsoft(getSeleniumWebDriver().getWebDriver()));
-        break;
-      case "polkcounty":
-        setPolkCounty(new PolkCounty(getSeleniumWebDriver().getWebDriver()));
-        break;
-      case "united":
+      }
+      case "polkcounty" -> setPolkCounty(new PolkCounty(getSeleniumWebDriver().getWebDriver()));
+      case "united" -> {
         Environment.setScrollToObject(false);
         setUnited(new United(getSeleniumWebDriver().getWebDriver()));
-        break;
-      case "vivit":
+      }
+      case "vivit" -> {
         Environment.setScrollToObject(false);
         setVivit(new Vivit(getSeleniumWebDriver().getWebDriver()));
-        break;
-      case "wellmark":
+      }
+      case "wellmark" -> {
         Environment.setScrollToObject(false);
         setWellmark(new Wellmark(getSeleniumWebDriver().getWebDriver()));
-        break;
-      default:
-        break;
+      }
+      default -> {
+        // Unknown test method - no action
+      }
     }
   }
 
@@ -293,13 +288,12 @@ public class ScenariosTests {
     Environment.sysOut(dataTable.toString());
     int count = 0;
     for (final Entry<String, Integer> entry : mapTestCount.entrySet()) {
+      // Java 17: Switch expression with multiple case labels
       switch (entry.getKey()) {
-        case "finished":
-        case "starting":
-          break;
-        default:
-          count += entry.getValue();
-          break;
+        case "finished", "starting" -> {
+          // Skip these entries
+        }
+        default -> count += entry.getValue();
       }
       Environment.sysOut(entry.getKey() + ":[" + entry.getValue() + "]");
     }

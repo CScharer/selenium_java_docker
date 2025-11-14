@@ -28,31 +28,35 @@ public class Selenium extends Page implements ISelenium {
   }
 
   public void getSessionInformation() {
-    if (getWebDriver() instanceof RemoteWebDriver) {
-      setCapabilities(((RemoteWebDriver) getWebDriver()).getCapabilities());
-      setSessionId(((RemoteWebDriver) getWebDriver()).getSessionId());
-    } else if (getWebDriver() instanceof ChromeDriver) {
-      setCapabilities(((ChromeDriver) getWebDriver()).getCapabilities());
-      setSessionId(((ChromeDriver) getWebDriver()).getSessionId());
-    } else if (getWebDriver() instanceof EdgeDriver) {
-      setCapabilities(((EdgeDriver) getWebDriver()).getCapabilities());
-      setSessionId(((EdgeDriver) getWebDriver()).getSessionId());
-    } else if (getWebDriver() instanceof FirefoxDriver) {
-      setCapabilities(((FirefoxDriver) getWebDriver()).getCapabilities());
-      setSessionId(((FirefoxDriver) getWebDriver()).getSessionId());
-    } else if (getWebDriver() instanceof InternetExplorerDriver) {
-      setCapabilities(((InternetExplorerDriver) getWebDriver()).getCapabilities());
-      setSessionId(((InternetExplorerDriver) getWebDriver()).getSessionId());
+    // Java 17: Pattern matching for instanceof (simplifies type checking and casting)
+    if (getWebDriver() instanceof RemoteWebDriver remoteDriver) {
+      setCapabilities(remoteDriver.getCapabilities());
+      setSessionId(remoteDriver.getSessionId());
+    } else if (getWebDriver() instanceof ChromeDriver chromeDriver) {
+      setCapabilities(chromeDriver.getCapabilities());
+      setSessionId(chromeDriver.getSessionId());
+    } else if (getWebDriver() instanceof EdgeDriver edgeDriver) {
+      setCapabilities(edgeDriver.getCapabilities());
+      setSessionId(edgeDriver.getSessionId());
+    } else if (getWebDriver() instanceof FirefoxDriver firefoxDriver) {
+      setCapabilities(firefoxDriver.getCapabilities());
+      setSessionId(firefoxDriver.getSessionId());
+    } else if (getWebDriver() instanceof InternetExplorerDriver ieDriver) {
+      setCapabilities(ieDriver.getCapabilities());
+      setSessionId(ieDriver.getSessionId());
       // PhantomJS support removed - use Chrome/Firefox headless instead
-    } else if (getWebDriver() instanceof HtmlUnitDriver) {
-      setCapabilities(((RemoteWebDriver) getWebDriver()).getCapabilities());
-      setSessionId(((RemoteWebDriver) getWebDriver()).getSessionId());
-    } else if (getWebDriver() instanceof RemoteWebDriver) {
-      setCapabilities(((RemoteWebDriver) getWebDriver()).getCapabilities());
-      setSessionId(((RemoteWebDriver) getWebDriver()).getSessionId());
-    } else if (getWebDriver() instanceof SafariDriver) {
-      setCapabilities(((SafariDriver) getWebDriver()).getCapabilities());
-      setSessionId(((SafariDriver) getWebDriver()).getSessionId());
+    } else if (getWebDriver() instanceof HtmlUnitDriver htmlUnitDriver) {
+      setCapabilities(htmlUnitDriver.getCapabilities());
+      // HtmlUnitDriver doesn't have getSessionId(), using RemoteWebDriver cast as fallback
+      if (getWebDriver() instanceof RemoteWebDriver remoteDriver) {
+        setSessionId(remoteDriver.getSessionId());
+      }
+    } else if (getWebDriver() instanceof RemoteWebDriver remoteDriver) {
+      setCapabilities(remoteDriver.getCapabilities());
+      setSessionId(remoteDriver.getSessionId());
+    } else if (getWebDriver() instanceof SafariDriver safariDriver) {
+      setCapabilities(safariDriver.getCapabilities());
+      setSessionId(safariDriver.getSessionId());
     }
     // Note: OperaDriver support commented out
     // else if (getWebDriver() instanceof OperaDriver) {

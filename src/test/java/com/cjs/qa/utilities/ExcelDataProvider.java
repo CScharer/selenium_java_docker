@@ -174,27 +174,25 @@ public final class ExcelDataProvider {
       cellType = cell.getCachedFormulaResultType();
     }
 
-    switch (cellType) {
-      case STRING:
-        return cell.getStringCellValue().trim();
-      case NUMERIC:
+    // Java 17: Switch expression (more concise and expression-based)
+    return switch (cellType) {
+      case STRING -> cell.getStringCellValue().trim();
+      case NUMERIC -> {
         // Check if it's a date
         if (org.apache.poi.ss.usermodel.DateUtil.isCellDateFormatted(cell)) {
-          return cell.getDateCellValue();
+          yield cell.getDateCellValue();
         }
         // Check if it's an integer
         double numericValue = cell.getNumericCellValue();
         if (numericValue == (long) numericValue) {
-          return (long) numericValue;
+          yield (long) numericValue;
         }
-        return numericValue;
-      case BOOLEAN:
-        return cell.getBooleanCellValue();
-      case BLANK:
-        return "";
-      default:
-        return cell.toString().trim();
-    }
+        yield numericValue;
+      }
+      case BOOLEAN -> cell.getBooleanCellValue();
+      case BLANK -> "";
+      default -> cell.toString().trim();
+    };
   }
 
   /**

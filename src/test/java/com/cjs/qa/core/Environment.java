@@ -145,69 +145,68 @@ public class Environment {
   public static void setEnvironmentFileStructure(String project) {
     sysOut("Setting Environment File Structure for the [" + project + "] Project");
     project = project.toLowerCase(Locale.ENGLISH);
+    // Java 17: Switch expression with multiple case labels and block syntax
     switch (project) {
-      case "americanairlines":
+      case "americanairlines" -> {
         setFolderData(AmericanAirlinesEnvironment.FOLDER_DATA);
         setFileLog(AmericanAirlinesEnvironment.FILE_LOG);
-        break;
-      case "core":
-      case "jenkins":
-      case "testclasssetup":
-        break;
-      case "dropbox":
+      }
+      case "core", "jenkins", "testclasssetup" -> {
+        // No action needed for these projects
+      }
+      case "dropbox" -> {
         setFolderData(DropboxEnvironment.FOLDER_DATA);
         setFileLog(DropboxEnvironment.FILE_LOG);
-        break;
-      case "everyonesocial":
+      }
+      case "everyonesocial" -> {
         setFolderData(EveryoneSocialEnvironment.FOLDER_DATA);
         setFileLog(EveryoneSocialEnvironment.FILE_LOG);
-        break;
-      case "google":
+      }
+      case "google" -> {
         setFolderData(GoogleEnvironment.FOLDER_DATA);
         setFileLog(GoogleEnvironment.FILE_LOG);
-        break;
-      case "hardees":
+      }
+      case "hardees" -> {
         setFolderData(HardeesEnvironment.FOLDER_DATA);
         setFileLog(HardeesEnvironment.FILE_LOG);
-        break;
-      case "iadhs":
+      }
+      case "iadhs" -> {
         setFolderData(IaDhsEnvironment.FOLDER_DATA);
         setFileLog(IaDhsEnvironment.FILE_LOG);
-        break;
-      case "linkedin":
+      }
+      case "linkedin" -> {
         setFolderData(LinkedInEnvironment.FOLDER_DATA);
         setFileLog(LinkedInEnvironment.FILE_LOG);
-        break;
-      case "marlboro":
+      }
+      case "marlboro" -> {
         setFolderData(MarlboroEnvironment.FOLDER_DATA);
         setFileLog(MarlboroEnvironment.FILE_LOG);
-        break;
-      case "microsoft":
+      }
+      case "microsoft" -> {
         setFolderData(MicrosoftEnvironment.FOLDER_DATA);
         setFileLog(MarlboroEnvironment.FILE_LOG);
-        break;
-      case "polkcounty":
+      }
+      case "polkcounty" -> {
         setFolderData(PolkCountyEnvironment.FOLDER_DATA);
         setFileLog(PolkCountyEnvironment.FILE_LOG);
-        break;
-      case "united":
+      }
+      case "united" -> {
         setFolderData(UnitedEnvironment.FOLDER_DATA);
         setFileLog(UnitedEnvironment.FILE_LOG);
-        break;
-      case "vivit":
+      }
+      case "vivit" -> {
         setFolderData(VivitEnvironment.FOLDER_DATA);
         setFileLog(VivitEnvironment.FILE_LOG);
-        break;
-      case "wellmark":
+      }
+      case "wellmark" -> {
         setFolderData(WellmarkEnvironment.FOLDER_DATA);
         setFileLog(WellmarkEnvironment.FILE_LOG);
-        break;
-      default:
-        Assert.fail(
-            "The setEnvironmentFileStructure has not been defined for the ["
-                + project
-                + "] Project");
-        break;
+      }
+      default ->
+          Assert.fail(
+              "The setEnvironmentFileStructure has not been defined for the ["
+                  + project
+                  + "] Project");
     }
   }
 

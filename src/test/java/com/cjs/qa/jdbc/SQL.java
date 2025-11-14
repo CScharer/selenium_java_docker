@@ -433,30 +433,20 @@ public class SQL {
         messagePost = "VIEW CREATED";
       }
 
+      // Java 17: Switch expression with multiple case labels
       switch (messagePre) {
-        case "DROPPING TABLE":
-        case "DROPPING VIEW":
-        case "CREATING TABLE":
-        case "CREATING VIEW":
-          Environment.sysOut(
-              messagePre + " " + sql.substring(sql.indexOf('['), sql.indexOf(']') + 1));
-          break;
-        default:
-          Environment.sysOut(messagePre + " [" + (records.length - 1) + "] RECORD(S)");
-          break;
+        case "DROPPING TABLE", "DROPPING VIEW", "CREATING TABLE", "CREATING VIEW" ->
+            Environment.sysOut(
+                messagePre + " " + sql.substring(sql.indexOf('['), sql.indexOf(']') + 1));
+        default -> Environment.sysOut(messagePre + " [" + (records.length - 1) + "] RECORD(S)");
       }
       recordsUpdated = jdbc.executeUpdate(sql, false);
+      // Java 17: Switch expression with multiple case labels
       switch (messagePost) {
-        case "TABLE DROPPED":
-        case "TABLE CREATED":
-        case "VIEW DROPPED":
-        case "VIEW CREATED":
-          Environment.sysOut(
-              sql.substring(sql.indexOf('['), sql.indexOf(']') + 1) + " " + messagePost);
-          break;
-        default:
-          Environment.sysOut("[" + recordsUpdated + "] RECORD(S) " + messagePost);
-          break;
+        case "TABLE DROPPED", "TABLE CREATED", "VIEW DROPPED", "VIEW CREATED" ->
+            Environment.sysOut(
+                sql.substring(sql.indexOf('['), sql.indexOf(']') + 1) + " " + messagePost);
+        default -> Environment.sysOut("[" + recordsUpdated + "] RECORD(S) " + messagePost);
       }
     } catch (final Exception e) {
       Environment.sysOut(e);
@@ -622,27 +612,29 @@ public class SQL {
     // "+JDBCConstants.FROM+"[tblURLs]
     // "+JDBCConstants.WHERE+"[ABBREVIATION] = '" + company + "'
     // " +
-    // JDBCConstants.AND + "[ENVIRONMENT] = '" + environment +
-    // "'"
+    // Java 17: Text block for cleaner SQL query construction
     String sql =
-        JDBCConstants.SELECT
-            + "["
-            + TABLE_ENVIRONMENTS
-            + "].[URL] "
-            + JDBCConstants.FROM
-            + "["
-            + TABLE_ENVIRONMENTS
-            + "] "
-            + JDBCConstants.WHERE
-            + "["
-            + TABLE_ENVIRONMENTS
-            + "].[Environment]='"
-            + environment
-            + "'";
-    if (!"".equals(company)) {
-      sql +=
-          " " + JDBCConstants.AND + "[" + TABLE_ENVIRONMENTS + "].[Abbreviation]='" + company + "'";
-    }
+            """
+        %s[%s].[URL] %s[%s] %s[%s].[Environment]='%s'%s
+        """
+            .formatted(
+                JDBCConstants.SELECT,
+                TABLE_ENVIRONMENTS,
+                JDBCConstants.FROM,
+                TABLE_ENVIRONMENTS,
+                JDBCConstants.WHERE,
+                TABLE_ENVIRONMENTS,
+                environment,
+                (!"".equals(company)
+                    ? " "
+                        + JDBCConstants.AND
+                        + "["
+                        + TABLE_ENVIRONMENTS
+                        + "].[Abbreviation]='"
+                        + company
+                        + "'"
+                    : ""))
+            .trim();
     String url = null;
     final JDBC jdbc = new JDBC("", DATABASE_DEFINITION);
     try (ResultSet resultSet = jdbc.queryResults(sql)) {
@@ -660,31 +652,29 @@ public class SQL {
 
   public static String getUserName(String company, String environment)
       throws SQLException, ClassNotFoundException {
-    // final String sql = JDBCConstants.SELECT+"[UserName]
-    // "+JDBCConstants.FROM+"[tblURLs] WHERE [ABBREVIATION] = '"
-    // +
-    // company + "' "+JDBCConstants.AND+"[ENVIRONMENT] = '" +
-    // environment
-    // + "'"
+    // Java 17: Text block for cleaner SQL query construction
     String sql =
-        JDBCConstants.SELECT
-            + "["
-            + TABLE_ENVIRONMENTS
-            + "].[UserName] "
-            + JDBCConstants.FROM
-            + "["
-            + TABLE_ENVIRONMENTS
-            + "] "
-            + JDBCConstants.WHERE
-            + "["
-            + TABLE_ENVIRONMENTS
-            + "].[Environment]='"
-            + environment
-            + "'";
-    if (!"".equals(company)) {
-      sql +=
-          " " + JDBCConstants.AND + "[" + TABLE_ENVIRONMENTS + "].[Abbreviation]='" + company + "'";
-    }
+            """
+        %s[%s].[UserName] %s[%s] %s[%s].[Environment]='%s'%s
+        """
+            .formatted(
+                JDBCConstants.SELECT,
+                TABLE_ENVIRONMENTS,
+                JDBCConstants.FROM,
+                TABLE_ENVIRONMENTS,
+                JDBCConstants.WHERE,
+                TABLE_ENVIRONMENTS,
+                environment,
+                (!"".equals(company)
+                    ? " "
+                        + JDBCConstants.AND
+                        + "["
+                        + TABLE_ENVIRONMENTS
+                        + "].[Abbreviation]='"
+                        + company
+                        + "'"
+                    : ""))
+            .trim();
     String userName = null;
     final JDBC jdbc = new JDBC("", DATABASE_DEFINITION);
     try (ResultSet resultSet = jdbc.queryResults(sql)) {
@@ -720,8 +710,8 @@ public class SQL {
   }
 
   public static Object parseQuote(Object value) {
-    if (value instanceof String) {
-      String valueNew = (String) value;
+    // Java 17: Pattern matching for instanceof
+    if (value instanceof String valueNew) {
       if (valueNew.contains("'")) {
         return valueNew.replaceAll("'", "''");
       } else {

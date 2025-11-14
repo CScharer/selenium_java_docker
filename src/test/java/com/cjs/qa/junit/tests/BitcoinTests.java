@@ -88,8 +88,9 @@ public class BitcoinTests {
           final BigDecimal rateLong = jsonObjectUSD.getBigDecimal("rate_float");
           Bitcoin bitcoinCurrent = new Bitcoin(rate, rateLong, dateTimeStamp);
           if (bitcoinPrevious != null) {
-            String bitcoinRateFloatCurrent = bitcoinCurrent.getRateFloat().toString();
-            String bitcoinRateFloatPrevious = bitcoinPrevious.getRateFloat().toString();
+            // Java 17: Records use direct accessor methods (no 'get' prefix)
+            String bitcoinRateFloatCurrent = bitcoinCurrent.rateFloat().toString();
+            String bitcoinRateFloatPrevious = bitcoinPrevious.rateFloat().toString();
             bitcoinPrevious = bitcoinCurrent;
             if (!bitcoinRateFloatCurrent.equals(bitcoinRateFloatPrevious)) {
               stringBuilderSQL = appendRecord(stringBuilderSQL, bitcoinCurrent);
@@ -100,7 +101,8 @@ public class BitcoinTests {
             stringBuilderSQL = appendRecord(stringBuilderSQL, bitcoinCurrent);
             Environment.sysOut("bitcoinCurrent:[" + bitcoinCurrent.toString() + "]");
           }
-          Environment.sysOut(dateTimeStamp + "-rate:[$" + bitcoinCurrent.getRate() + "]");
+          // Java 17: Records use direct accessor methods (no 'get' prefix)
+          Environment.sysOut(dateTimeStamp + "-rate:[$" + bitcoinCurrent.rate() + "]");
         } else {
           Environment.sysOut(dateTimeStamp + "-[No Response]");
         }
@@ -119,9 +121,10 @@ public class BitcoinTests {
     stringBuilder.append(JDBCConstants.INSERT_INTO + " [t_Bitcoin] ");
     stringBuilder.append("([DateTimeStamp],[Rate],[RateFloat]");
     stringBuilder.append(") VALUES (");
-    stringBuilder.append("'" + bitcoin.getDateTimeStamp() + "',");
-    stringBuilder.append("'" + bitcoin.getRate() + "',");
-    stringBuilder.append("'" + bitcoin.getRateFloat() + "');");
+    // Java 17: Records use direct accessor methods (no 'get' prefix)
+    stringBuilder.append("'" + bitcoin.dateTimeStamp() + "',");
+    stringBuilder.append("'" + bitcoin.rate() + "',");
+    stringBuilder.append("'" + bitcoin.rateFloat() + "');");
     stringBuilder.append(Constants.NEWLINE);
     stringBuilderSQL.append(stringBuilder.toString());
     if (!stringBuilderSQL.toString().isEmpty()

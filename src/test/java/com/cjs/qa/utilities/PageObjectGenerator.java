@@ -497,22 +497,16 @@ public class PageObjectGenerator {
   /** Get locator variable name for an element. */
   private String getLocatorName(ElementInfo element) {
     String name = element.getName().toLowerCase();
-    switch (element.getType()) {
-      case TYPE_EDIT:
-        return "edit" + name;
-      case TYPE_BUTTON:
-        return "button" + name;
-      case TYPE_LINK:
-        return "link" + name;
-      case TYPE_CHECKBOX:
-        return "checkbox" + name;
-      case TYPE_RADIOBUTTON:
-        return "radio" + name;
-      case TYPE_DROPDOWN:
-        return "dropdown" + name;
-      default:
-        return "element" + name;
-    }
+    // Java 17: Switch expression
+    return switch (element.getType()) {
+      case TYPE_EDIT -> "edit" + name;
+      case TYPE_BUTTON -> "button" + name;
+      case TYPE_LINK -> "link" + name;
+      case TYPE_CHECKBOX -> "checkbox" + name;
+      case TYPE_RADIOBUTTON -> "radio" + name;
+      case TYPE_DROPDOWN -> "dropdown" + name;
+      default -> "element" + name;
+    };
   }
 
   /** Format locator as Java code. */
@@ -700,35 +694,26 @@ public class PageObjectGenerator {
   /** Get method call for populatePage() switch case. */
   private String getPopulateMethodCall(ElementInfo element) {
     String methodName = element.getName();
-    switch (element.getType()) {
-      case TYPE_EDIT:
-        return "setEdit" + methodName + "(value);";
-      case TYPE_BUTTON:
-      case TYPE_LINK:
-        return "click" + element.getType() + methodName + "();";
-      case TYPE_CHECKBOX:
-        return "set" + element.getType() + methodName + "(value);";
-      case TYPE_DROPDOWN:
-      case TYPE_RADIOBUTTON:
-        return "select" + element.getType() + methodName + "();";
-      default:
-        return "// TODO: Implement for " + element.getType();
-    }
+    // Java 17: Switch expression
+    return switch (element.getType()) {
+      case TYPE_EDIT -> "setEdit" + methodName + "(value);";
+      case TYPE_BUTTON, TYPE_LINK -> "click" + element.getType() + methodName + "();";
+      case TYPE_CHECKBOX -> "set" + element.getType() + methodName + "(value);";
+      case TYPE_DROPDOWN, TYPE_RADIOBUTTON -> "select" + element.getType() + methodName + "();";
+      default -> "// TODO: Implement for " + element.getType();
+    };
   }
 
   /** Get method call for validatePage() switch case. */
   private String getValidateMethodCall(ElementInfo element) {
     String methodName = element.getName();
-    switch (element.getType()) {
-      case TYPE_EDIT:
-        return "actual.put(field, getEdit" + methodName + "());";
-      case TYPE_CHECKBOX:
-        return "actual.put(field, get" + element.getType() + methodName + "());";
-      case TYPE_DROPDOWN:
-        return "actual.put(field, get" + element.getType() + methodName + "());";
-      default:
-        return "// TODO: Implement validation for " + element.getType();
-    }
+    // Java 17: Switch expression
+    return switch (element.getType()) {
+      case TYPE_EDIT -> "actual.put(field, getEdit" + methodName + "());";
+      case TYPE_CHECKBOX, TYPE_DROPDOWN ->
+          "actual.put(field, get" + element.getType() + methodName + "());";
+      default -> "// TODO: Implement validation for " + element.getType();
+    };
   }
 
   /** Write generated code to file. */

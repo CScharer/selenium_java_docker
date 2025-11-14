@@ -225,19 +225,13 @@ public class SeleniumWebDriver {
   public String getExecutableVersion(Capabilities capabilities) {
     String executableVersion = "";
     // (String)capabilities.getCapability("version")
-    switch (getBrowser().toLowerCase(Locale.ENGLISH)) {
-      case Browser.EDGE:
-        executableVersion = (String) capabilities.getCapability("browserVersion");
-        break;
-      case Browser.CHROME:
-      case Browser.FIREFOX:
-      case Browser.IE:
-      case Browser.INTERNET_EXPLORER:
-      default:
-        executableVersion = (String) capabilities.getCapability("version");
-        break;
-    }
-    return executableVersion;
+    // Java 17: Switch expression returning value directly
+    return switch (getBrowser().toLowerCase(Locale.ENGLISH)) {
+      case Browser.EDGE -> (String) capabilities.getCapability("browserVersion");
+      case Browser.CHROME, Browser.FIREFOX, Browser.IE, Browser.INTERNET_EXPLORER ->
+          (String) capabilities.getCapability("version");
+      default -> (String) capabilities.getCapability("version");
+    };
   }
 
   public String getGridHub() {
@@ -293,28 +287,29 @@ public class SeleniumWebDriver {
   }
 
   public void getSessionInformation() {
-    if (webDriver instanceof RemoteWebDriver || webDriver instanceof RemoteWebDriver) {
-      setCapabilities(((RemoteWebDriver) webDriver).getCapabilities());
-      setSessionId(((RemoteWebDriver) webDriver).getSessionId());
-    } else if (webDriver instanceof ChromeDriver) {
-      setCapabilities(((ChromeDriver) webDriver).getCapabilities());
-      setSessionId(((ChromeDriver) webDriver).getSessionId());
-    } else if (webDriver instanceof EdgeDriver) {
-      setCapabilities(((EdgeDriver) webDriver).getCapabilities());
-      setSessionId(((EdgeDriver) webDriver).getSessionId());
-    } else if (webDriver instanceof FirefoxDriver) {
-      setCapabilities(((FirefoxDriver) webDriver).getCapabilities());
-      setSessionId(((FirefoxDriver) webDriver).getSessionId());
-    } else if (webDriver instanceof InternetExplorerDriver) {
-      setCapabilities(((InternetExplorerDriver) webDriver).getCapabilities());
-      setSessionId(((InternetExplorerDriver) webDriver).getSessionId());
+    // Java 17: Pattern matching for instanceof (simplifies type checking and casting)
+    if (webDriver instanceof RemoteWebDriver remoteDriver) {
+      setCapabilities(remoteDriver.getCapabilities());
+      setSessionId(remoteDriver.getSessionId());
+    } else if (webDriver instanceof ChromeDriver chromeDriver) {
+      setCapabilities(chromeDriver.getCapabilities());
+      setSessionId(chromeDriver.getSessionId());
+    } else if (webDriver instanceof EdgeDriver edgeDriver) {
+      setCapabilities(edgeDriver.getCapabilities());
+      setSessionId(edgeDriver.getSessionId());
+    } else if (webDriver instanceof FirefoxDriver firefoxDriver) {
+      setCapabilities(firefoxDriver.getCapabilities());
+      setSessionId(firefoxDriver.getSessionId());
+    } else if (webDriver instanceof InternetExplorerDriver ieDriver) {
+      setCapabilities(ieDriver.getCapabilities());
+      setSessionId(ieDriver.getSessionId());
       // PhantomJS support removed - use Chrome/Firefox headless instead
-    } else if (webDriver instanceof HtmlUnitDriver) {
-      setCapabilities(((HtmlUnitDriver) webDriver).getCapabilities());
+    } else if (webDriver instanceof HtmlUnitDriver htmlUnitDriver) {
+      setCapabilities(htmlUnitDriver.getCapabilities());
       // setSessionId(((HtmlUnitDriver) webDriver).getSessionId())
-    } else if (webDriver instanceof SafariDriver) {
-      setCapabilities(((SafariDriver) webDriver).getCapabilities());
-      setSessionId(((SafariDriver) webDriver).getSessionId());
+    } else if (webDriver instanceof SafariDriver safariDriver) {
+      setCapabilities(safariDriver.getCapabilities());
+      setSessionId(safariDriver.getSessionId());
     } // Opera driver deprecated in Selenium 4
     // // else if (webDriver instanceof OperaDriver)
     // {
@@ -337,28 +332,18 @@ public class SeleniumWebDriver {
   }
 
   public Capabilities getWebDriverCapabilities() {
-    Capabilities capabilities = null;
     if (isRemote()) {
-      capabilities = ((RemoteWebDriver) getWebDriver()).getCapabilities();
-    } else {
-      switch (getBrowser().toLowerCase(Locale.ENGLISH)) {
-        case Browser.EDGE:
-          capabilities = ((EdgeDriver) getWebDriver()).getCapabilities();
-          break;
-        case Browser.FIREFOX:
-          capabilities = ((FirefoxDriver) getWebDriver()).getCapabilities();
-          break;
-        case Browser.IE:
-        case Browser.INTERNET_EXPLORER:
-          capabilities = ((InternetExplorerDriver) getWebDriver()).getCapabilities();
-          break;
-        case Browser.CHROME:
-        default:
-          capabilities = ((ChromeDriver) getWebDriver()).getCapabilities();
-          break;
-      }
+      return ((RemoteWebDriver) getWebDriver()).getCapabilities();
     }
-    return capabilities;
+    // Java 17: Switch expression returning value directly
+    return switch (getBrowser().toLowerCase(Locale.ENGLISH)) {
+      case Browser.EDGE -> ((EdgeDriver) getWebDriver()).getCapabilities();
+      case Browser.FIREFOX -> ((FirefoxDriver) getWebDriver()).getCapabilities();
+      case Browser.IE, Browser.INTERNET_EXPLORER ->
+          ((InternetExplorerDriver) getWebDriver()).getCapabilities();
+      case Browser.CHROME -> ((ChromeDriver) getWebDriver()).getCapabilities();
+      default -> ((ChromeDriver) getWebDriver()).getCapabilities();
+    };
   }
 
   public void getWebDriverInfo() {
@@ -475,15 +460,16 @@ public class SeleniumWebDriver {
         }
       } else {
 
+        // Java 17: Switch expression with block syntax for complex cases
         switch (getBrowser().toLowerCase(Locale.ENGLISH)) {
-          case Browser.EDGE:
+          case Browser.EDGE -> {
             // WebDriverManager automatically downloads and sets up Edge driver
             WebDriverManager.edgedriver().setup();
             EdgeOptions edgeOpts = new EdgeOptions();
             edgeOpts.merge(desiredCapabilities);
             setWebDriver(new EdgeDriver(edgeOpts));
-            break;
-          case Browser.FIREFOX:
+          }
+          case Browser.FIREFOX -> {
             // WebDriverManager automatically downloads and sets up Gecko driver
             WebDriverManager.firefoxdriver().setup();
             final FirefoxOptions firefoxOptions = new FirefoxOptions();
@@ -518,8 +504,8 @@ public class SeleniumWebDriver {
                 service.stop();
               }
             }
-            break;
-          case Browser.HTML_UNIT:
+          }
+          case Browser.HTML_UNIT -> {
             // setWebDriver(new
             // HtmlUnitDriver(desiredCapabilities));
             setWebDriver(new HtmlUnitDriver(desiredCapabilities));
@@ -535,20 +521,20 @@ public class SeleniumWebDriver {
             // {
             // Environment.sysOut(e);
             // }
-            break;
-          case Browser.IE: // (very slow)
-          case Browser.INTERNET_EXPLORER:
+          }
+          case Browser.IE, Browser.INTERNET_EXPLORER -> {
+            // (very slow)
             // WebDriverManager automatically downloads and sets up IE driver
             WebDriverManager.iedriver().setup();
             InternetExplorerOptions ieOpts = new InternetExplorerOptions();
             ieOpts.merge(desiredCapabilities);
             setWebDriver(new InternetExplorerDriver(ieOpts));
-            break;
-          case Browser.SAFARI:
+          }
+          case Browser.SAFARI -> {
             // Safari driver is bundled with Safari - no WebDriverManager needed
             setWebDriver(new SafariDriver());
-            break;
-          case Browser.CHROME:
+          }
+          case Browser.CHROME -> {
             // WebDriverManager automatically downloads and sets up Chrome driver
             WebDriverManager.chromedriver().setup();
             // final ChromeOptions chromeOptions =
@@ -557,13 +543,13 @@ public class SeleniumWebDriver {
             final ChromeOptions chromeOptions = setChromeOptions(null, null);
             setWebDriver(new ChromeDriver(chromeOptions));
             // setWebDriver(new ChromeDriver(desiredCapabilities));
-            break;
-          default:
+          }
+          default -> {
             // Default to Chrome
             WebDriverManager.chromedriver().setup();
             final ChromeOptions defaultChromeOptions = setChromeOptions(null, null);
             setWebDriver(new ChromeDriver(defaultChromeOptions));
-            break;
+          }
         }
       }
       getSessionInformation();
@@ -671,35 +657,32 @@ public class SeleniumWebDriver {
     final EDriverProperties eDriverProperties =
         EDriverProperties.fromString(browser.toUpperCase(Locale.ENGLISH));
     DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+    // Java 17: Switch expression with block syntax for complex cases
     switch (browser.toLowerCase(Locale.ENGLISH)) {
-      case "android":
-        desiredCapabilities = new DesiredCapabilities();
-        break;
-      case Browser.CHROME:
+      case "android" -> desiredCapabilities = new DesiredCapabilities();
+      case Browser.CHROME -> {
         final ChromeOptions chromeOptions = setChromeOptions(null, null);
         desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.merge(chromeOptions);
-        break;
-      case Browser.EDGE:
+      }
+      case Browser.EDGE -> {
         EdgeOptions edgeOpts2 = new EdgeOptions();
         desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.merge(edgeOpts2);
-        break;
-      case Browser.FIREFOX:
+      }
+      case Browser.FIREFOX -> {
         final FirefoxOptions firefoxOptions = new FirefoxOptions();
         firefoxOptions.setBinary(eDriverProperties.getPathBinary());
         desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.merge(firefoxOptions);
-        break;
-      case Browser.HTML_UNIT:
+      }
+      case Browser.HTML_UNIT -> {
         desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setBrowserName(Browser.HTML_UNIT);
-        break;
-      case Browser.HTML_UNIT_WITH_JS:
-        desiredCapabilities = new DesiredCapabilities();
-        break;
-      case Browser.IE: // (very slow)
-      case Browser.INTERNET_EXPLORER:
+      }
+      case Browser.HTML_UNIT_WITH_JS -> desiredCapabilities = new DesiredCapabilities();
+      case Browser.IE, Browser.INTERNET_EXPLORER -> {
+        // (very slow)
         InternetExplorerOptions ieOpts2 = new InternetExplorerOptions();
         ieOpts2.introduceFlakinessByIgnoringSecurityDomains();
         ieOpts2.ignoreZoomSettings();
@@ -708,78 +691,42 @@ public class SeleniumWebDriver {
         desiredCapabilities.merge(ieOpts2);
         desiredCapabilities.setCapability(
             eDriverProperties.getWebDriverType(), eDriverProperties.getPathDriver());
-        break;
-      case "ipad":
-        desiredCapabilities = new DesiredCapabilities();
-        break;
-      case "iphone":
-        desiredCapabilities = new DesiredCapabilities();
-        break;
+      }
+      case "ipad", "iphone" -> desiredCapabilities = new DesiredCapabilities();
         // PhantomJS support removed - use Chrome/Firefox headless instead
-      case Browser.SAFARI:
+      case Browser.SAFARI -> {
         SafariOptions safariOpts = new SafariOptions();
         desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.merge(safariOpts);
-        break;
-      default:
+      }
+      default -> {
         Environment.sysOut("Unknown browser: " + browser + ". Using default capabilities.");
         desiredCapabilities = new DesiredCapabilities();
-        break;
+      }
     }
+    // Java 17: Switch expression with multiple case labels
     switch (operatingSystem.toLowerCase(Locale.ENGLISH)) {
-      case OS.ANDROID:
-        desiredCapabilities.setPlatform(Platform.ANDROID);
-        break;
-      case OS.ANY:
-        desiredCapabilities.setPlatform(Platform.ANY);
-        break;
-      case OS.EL_CAPITAN:
-        desiredCapabilities.setPlatform(Platform.EL_CAPITAN);
-        break;
-      case OS.LINUX:
-        desiredCapabilities.setPlatform(Platform.LINUX);
-        break;
-      case OS.MAC:
-        desiredCapabilities.setPlatform(Platform.MAC);
-        break;
-      case OS.MAVERICKS:
-        desiredCapabilities.setPlatform(Platform.MAVERICKS);
-        break;
-      case OS.MOINTAIN_LION:
-        desiredCapabilities.setPlatform(Platform.MOUNTAIN_LION);
-        break;
-      case OS.SNOW_LEOPARD:
-        desiredCapabilities.setPlatform(Platform.SNOW_LEOPARD);
-        break;
-      case OS.UNIX:
-        desiredCapabilities.setPlatform(Platform.UNIX);
-        break;
-      case OS.VISTA:
-        desiredCapabilities.setPlatform(Platform.VISTA);
-        break;
-      case OS.WIN8:
-        desiredCapabilities.setPlatform(Platform.WIN8);
-        break;
-      case OS.WIN8_1:
-        desiredCapabilities.setPlatform(Platform.WIN8_1);
-        break;
-      case OS.WINDOWS:
-        desiredCapabilities.setPlatform(Platform.WINDOWS);
-        break;
-      case OS.WINDOWS_10:
-        desiredCapabilities.setPlatform(Platform.WIN10);
-        break;
-      case OS.XP:
-        desiredCapabilities.setPlatform(Platform.XP);
-        break;
-      case OS.YOSEMITE:
-        desiredCapabilities.setPlatform(Platform.YOSEMITE);
-        break;
-      default:
+      case OS.ANDROID -> desiredCapabilities.setPlatform(Platform.ANDROID);
+      case OS.ANY -> desiredCapabilities.setPlatform(Platform.ANY);
+      case OS.EL_CAPITAN -> desiredCapabilities.setPlatform(Platform.EL_CAPITAN);
+      case OS.LINUX -> desiredCapabilities.setPlatform(Platform.LINUX);
+      case OS.MAC -> desiredCapabilities.setPlatform(Platform.MAC);
+      case OS.MAVERICKS -> desiredCapabilities.setPlatform(Platform.MAVERICKS);
+      case OS.MOINTAIN_LION -> desiredCapabilities.setPlatform(Platform.MOUNTAIN_LION);
+      case OS.SNOW_LEOPARD -> desiredCapabilities.setPlatform(Platform.SNOW_LEOPARD);
+      case OS.UNIX -> desiredCapabilities.setPlatform(Platform.UNIX);
+      case OS.VISTA -> desiredCapabilities.setPlatform(Platform.VISTA);
+      case OS.WIN8 -> desiredCapabilities.setPlatform(Platform.WIN8);
+      case OS.WIN8_1 -> desiredCapabilities.setPlatform(Platform.WIN8_1);
+      case OS.WINDOWS -> desiredCapabilities.setPlatform(Platform.WINDOWS);
+      case OS.WINDOWS_10 -> desiredCapabilities.setPlatform(Platform.WIN10);
+      case OS.XP -> desiredCapabilities.setPlatform(Platform.XP);
+      case OS.YOSEMITE -> desiredCapabilities.setPlatform(Platform.YOSEMITE);
+      default -> {
         Environment.sysOut(
             "Unknown operating system: " + operatingSystem + ". Using ANY platform.");
         desiredCapabilities.setPlatform(Platform.ANY);
-        break;
+      }
     }
     return desiredCapabilities;
   }
@@ -815,20 +762,20 @@ public class SeleniumWebDriver {
   private void setLocalExecutables() {
     final EDriverProperties eDriverProperties =
         EDriverProperties.fromString(getBrowser().toUpperCase(Locale.ENGLISH));
+    // Java 17: Switch expression with block syntax for complex cases
     switch (getBrowser().toLowerCase(Locale.ENGLISH)) {
-      case Browser.SAFARI:
+      case Browser.SAFARI -> {
         // If you wish for safari to forget session everytime
         // SafariOptions.setUseCleanSession(true); // Removed in Selenium 4
         setWebDriver(new SafariDriver());
-        break;
-      case Browser.CHROME:
-      case Browser.EDGE:
-      case Browser.FIREFOX:
-      case Browser.IE: // (very slow)
-      case Browser.INTERNET_EXPLORER: // (very slow)
-      default:
+      }
+      case Browser.CHROME, Browser.EDGE, Browser.FIREFOX, Browser.IE, Browser.INTERNET_EXPLORER -> {
+        // (IE is very slow)
         System.setProperty(eDriverProperties.getWebDriverType(), eDriverProperties.getPathDriver());
-        break;
+      }
+      default -> {
+        System.setProperty(eDriverProperties.getWebDriverType(), eDriverProperties.getPathDriver());
+      }
     }
     Environment.sysOut(
         JavaHelpers.getCurrentMethodName()
@@ -863,8 +810,9 @@ public class SeleniumWebDriver {
       setGridHub("http://" + getGridHubName() + ":" + getGridHubPort() + "/wd/hub");
     }
     String proxyAddress = getGridHubName() + ":" + getGridHubPort();
+    // Java 17: Switch expression with block syntax for complex cases
     switch (browser) {
-      case Browser.FIREFOX:
+      case Browser.FIREFOX -> {
         JsonObject json = new JsonObject();
         json.addProperty("proxyType", "MANUAL");
         json.addProperty("httpProxy", getGridHub());
@@ -872,13 +820,17 @@ public class SeleniumWebDriver {
         json.addProperty("sslProxy", getGridHub());
         json.addProperty("sslProxyPort", getGridHubPort());
         desiredCapabilities.setCapability("proxy", json);
-        break;
-      case Browser.CHROME:
-      default:
+      }
+      case Browser.CHROME -> {
         Proxy proxy = new Proxy();
         proxy.setHttpProxy(proxyAddress).setFtpProxy(proxyAddress).setSslProxy(proxyAddress);
         desiredCapabilities.setCapability(CapabilityType.PROXY, proxy);
-        break;
+      }
+      default -> {
+        Proxy proxy = new Proxy();
+        proxy.setHttpProxy(proxyAddress).setFtpProxy(proxyAddress).setSslProxy(proxyAddress);
+        desiredCapabilities.setCapability(CapabilityType.PROXY, proxy);
+      }
     }
   }
 
