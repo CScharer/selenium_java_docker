@@ -8,7 +8,7 @@ import com.cjs.qa.utilities.SecureConfig;
  * <p>All passwords are now stored securely in Google Cloud Secret Manager with AUTO_ prefix. This
  * enum references the secret keys, not the actual password values.
  *
- * <p>Migration Date: 2025-11-08 Total Secrets: 19 (updated 2025-11-14)
+ * <p>Migration Date: 2025-11-08 Total Secrets: 20 (updated 2025-11-14)
  *
  * @author CJS QA Team
  * @version 2.0 - Migrated to Google Cloud Secret Manager
@@ -32,7 +32,8 @@ public enum EPasswords {
   UNITED_SECURITY_QUESTIONS("AUTO_UNITED_SECURITY_QUESTIONS"),
   UNITED_SECURITY_ANSWERS("AUTO_UNITED_SECURITY_ANSWERS"),
   VIVIT("AUTO_VIVIT_PASSWORD"),
-  VIVIT_GT_WEBINAR_PASSWORD("AUTO_VIVIT_GT_WEBINAR_PASSWORD");
+  VIVIT_GT_WEBINAR_PASSWORD("AUTO_VIVIT_GT_WEBINAR_PASSWORD"),
+  PLURALSIGHT_TRAINING_PASSWORD("AUTO_PLURALSIGHT_TRAINING_PASSWORD");
 
   private final String secretKey;
 

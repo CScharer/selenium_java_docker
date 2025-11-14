@@ -1,5 +1,7 @@
 package com.cjs.qa.pluralsight.pages;
 
+import com.cjs.qa.core.security.EAPIKeys;
+import com.cjs.qa.core.security.EPasswords;
 import com.cjs.qa.selenium.Page;
 import com.cjs.qa.utilities.IExtension;
 import org.openqa.selenium.By;
@@ -29,10 +31,10 @@ public class LoginPage extends Page {
 
   public void login() {
     getWebDriver().get(DEFAULT_URL);
-    final String userName = "tgenzen";
-    // DUMMY PASSWORD - For testing/training only, not a real credential
-    // TODO: Migrate to Google Cloud Secret Manager if this becomes a production credential
-    final String password = "C@Training";
+    // Credentials migrated to Google Cloud Secret Manager
+    // See: docs/issues/open/cleanup-hardcoded-passwords.md
+    final String userName = EAPIKeys.PLURALSIGHT_TRAINING_USERNAME.getValue();
+    final String password = EPasswords.PLURALSIGHT_TRAINING_PASSWORD.getValue();
     editUserNameSet(userName);
     editPasswordSet(password);
     buttonSignInClick();

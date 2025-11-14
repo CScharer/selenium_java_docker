@@ -8,7 +8,7 @@ import com.cjs.qa.utilities.SecureConfig;
  * <p>All API keys and secrets are stored securely in Google Cloud Secret Manager with AUTO_ prefix.
  * This enum references the secret keys, not the actual key/secret values.
  *
- * <p>Migration Date: 2025-11-14 Total Secrets: 5
+ * <p>Migration Date: 2025-11-14 Total Secrets: 6
  *
  * <p>Naming Convention: VIVIT_ prefix for Vivit-related API credentials
  *
@@ -24,7 +24,10 @@ public enum EAPIKeys {
 
   // YourMembership API credentials
   VIVIT_YM_API_KEY("AUTO_VIVIT_YM_API_KEY"),
-  VIVIT_YM_API_SA_PASSCODE("AUTO_VIVIT_YM_API_SA_PASSCODE");
+  VIVIT_YM_API_SA_PASSCODE("AUTO_VIVIT_YM_API_SA_PASSCODE"),
+
+  // Pluralsight Training credentials
+  PLURALSIGHT_TRAINING_USERNAME("AUTO_PLURALSIGHT_TRAINING_USERNAME");
 
   private final String secretKey;
 
