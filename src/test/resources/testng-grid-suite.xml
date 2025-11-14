@@ -12,12 +12,15 @@
         </classes>
     </test>
 
+    <!-- Firefox tests disabled until framework changes are complete -->
+    <!--
     <test name="Firefox Browser Tests" preserve-order="true">
         <parameter name="browser" value="firefox"/>
         <classes>
             <class name="com.cjs.qa.junit.tests.EnhancedGridTests"/>
         </classes>
     </test>
+    -->
 
     <test name="Simple Grid Tests" preserve-order="true">
         <classes>

@@ -93,34 +93,34 @@ services:
       timeout: 5s
       retries: 5
 
-  # Firefox Node
-  firefox-node:
-    image: seleniarm/node-firefox:latest
-    container_name: firefox-node
-    platform: linux/arm64
-    depends_on:
-      selenium-hub:
-        condition: service_healthy
-    environment:
-      - SE_EVENT_BUS_HOST=selenium-hub
-      - SE_EVENT_BUS_PUBLISH_PORT=4442
-      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-      - SE_NODE_MAX_SESSIONS=5
-      - SE_NODE_SESSION_TIMEOUT=300
-      - SE_VNC_NO_PASSWORD=1
-      - SE_SCREEN_WIDTH=1920
-      - SE_SCREEN_HEIGHT=1080
-    ports:
-      - "5902:5900"      # VNC port for debugging
-      - "7902:7900"      # noVNC web interface
-    shm_size: 2gb
-    networks:
-      - selenium-grid
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5555/status"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+  # Firefox Node - Disabled until framework changes are complete
+  # firefox-node:
+  #   image: seleniarm/node-firefox:latest
+  #   container_name: firefox-node
+  #   platform: linux/arm64
+  #   depends_on:
+  #     selenium-hub:
+  #       condition: service_healthy
+  #   environment:
+  #     - SE_EVENT_BUS_HOST=selenium-hub
+  #     - SE_EVENT_BUS_PUBLISH_PORT=4442
+  #     - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+  #     - SE_NODE_MAX_SESSIONS=5
+  #     - SE_NODE_SESSION_TIMEOUT=300
+  #     - SE_VNC_NO_PASSWORD=1
+  #     - SE_SCREEN_WIDTH=1920
+  #     - SE_SCREEN_HEIGHT=1080
+  #   ports:
+  #     - "5902:5900"      # VNC port for debugging
+  #     - "7902:7900"      # noVNC web interface
+  #   shm_size: 2gb
+  #   networks:
+  #     - selenium-grid
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:5555/status"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
 
   # Edge Node (Note: Not available for ARM, using Chromium instead)
   edge-node:
@@ -164,8 +164,8 @@ services:
         condition: service_healthy
       chrome-node-2:
         condition: service_healthy
-      firefox-node:
-        condition: service_healthy
+      # firefox-node:  # Disabled until framework changes are complete
+      #   condition: service_healthy
       edge-node:
         condition: service_healthy
     environment:
@@ -241,7 +241,8 @@ volumes:
 
 # Usage:
 # 1. Start Selenium Grid only:
-#    docker-compose up -d selenium-hub chrome-node-1 chrome-node-2 firefox-node edge-node
+#    docker-compose up -d selenium-hub chrome-node-1 chrome-node-2 edge-node
+#    # Note: firefox-node disabled until framework changes are complete
 #
 # 2. Run tests:
 #    docker-compose up tests

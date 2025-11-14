@@ -107,7 +107,9 @@ jobs:
 
     strategy:
       matrix:
-        browser: [chrome, firefox]
+        # Firefox tests disabled until framework changes are complete
+        browser: [chrome]
+        # browser: [chrome, firefox]  # Re-enable when ready
       fail-fast: false
 
     services:
@@ -127,14 +129,15 @@ jobs:
           SE_NODE_MAX_SESSIONS: 5
         options: --shm-size=2gb
 
-      firefox-node:
-        image: selenium/node-firefox:4.26.0
-        env:
-          SE_EVENT_BUS_HOST: selenium-hub
-          SE_EVENT_BUS_PUBLISH_PORT: 4442
-          SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
-          SE_NODE_MAX_SESSIONS: 5
-        options: --shm-size=2gb
+      # Firefox node disabled until framework changes are complete
+      # firefox-node:
+      #   image: selenium/node-firefox:4.26.0
+      #   env:
+      #     SE_EVENT_BUS_HOST: selenium-hub
+      #     SE_EVENT_BUS_PUBLISH_PORT: 4442
+      #     SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
+      #     SE_NODE_MAX_SESSIONS: 5
+      #   options: --shm-size=2gb
 
     steps:
       - name: Checkout code

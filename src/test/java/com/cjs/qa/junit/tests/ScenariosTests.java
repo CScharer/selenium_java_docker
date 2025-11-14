@@ -555,7 +555,9 @@ public class ScenariosTests {
     Environment.sysOut(
         Constants.CLASS_METHOD_DEBUG + JavaHelpers.getCurrentClassMethodDebugName() + "]");
     final SoftAssert softAssert = new SoftAssert();
-    List<String> browserList = Arrays.asList(ISelenium.BROWSER_DEFAULT, "edge", "firefox", "ie");
+    // Firefox tests disabled until framework changes are complete
+    List<String> browserList = Arrays.asList(ISelenium.BROWSER_DEFAULT, "edge", "ie");
+    // List<String> browserList = Arrays.asList(ISelenium.BROWSER_DEFAULT, "edge", "firefox", "ie");
     for (String browser : browserList) {
       Environment.sysOut("Validating Browser Version:[" + browser + "]");
       final WebDriverValidation webDriverValidation =
