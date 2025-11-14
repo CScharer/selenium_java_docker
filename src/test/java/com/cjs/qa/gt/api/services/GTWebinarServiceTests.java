@@ -14,6 +14,9 @@ import org.junit.Test;
 @SuppressWarnings("PMD.ClassNamingConventions")
 public class GTWebinarServiceTests {
   public static final String USER_ID = "jill.vivit@yahoo.com";
+  // TODO: Migrate to Google Cloud Secret Manager (EPasswords enum)
+  // This password is currently hardcoded and should be moved to Secret Manager
+  // See: docs/issues/open/cleanup-hardcoded-passwords.md
   public static final String PASSWORD = "vivitrules1";
   public static final String API_CONSUMER_KEY = "WGhbDnxCGUwKNABGKeymjoII4gqalCa3";
   public static final String API_CONSUMER_SECRET = "DdkRQTJGLq4VF20t";

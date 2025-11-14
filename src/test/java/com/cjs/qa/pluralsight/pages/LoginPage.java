@@ -30,6 +30,8 @@ public class LoginPage extends Page {
   public void login() {
     getWebDriver().get(DEFAULT_URL);
     final String userName = "tgenzen";
+    // DUMMY PASSWORD - For testing/training only, not a real credential
+    // TODO: Migrate to Google Cloud Secret Manager if this becomes a production credential
     final String password = "C@Training";
     editUserNameSet(userName);
     editPasswordSet(password);

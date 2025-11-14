@@ -5,13 +5,15 @@ name: Performance Testing
 # Option 3: Hybrid - Nightly quick check at 10 PM CST (4 AM UTC)
 
 on:
-  schedule:
-    # Weekly comprehensive test: Sunday 10 PM CST = Monday 4 AM UTC
-    - cron: '0 4 * * 1'
-    # Nightly quick smoke: Every day 10 PM CST = 4 AM UTC next day
-    - cron: '0 4 * * *'
+  # DISABLED: Scheduled runs disabled until performance test files are created
+  # See: docs/issues/open/missing-performance-test-files.md
+  # schedule:
+  #   # Weekly comprehensive test: Sunday 10 PM CST = Monday 4 AM UTC
+  #   - cron: '0 4 * * 1'
+  #   # Nightly quick smoke: Every day 10 PM CST = 4 AM UTC next day
+  #   - cron: '0 4 * * *'
   
-  workflow_dispatch:  # Option 2: Manual trigger
+  workflow_dispatch:  # Manual trigger only (until test files are implemented)
     inputs:
       test_type:
         description: 'Test type to run'
