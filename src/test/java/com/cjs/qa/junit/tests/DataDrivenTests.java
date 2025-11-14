@@ -65,13 +65,10 @@ public class DataDrivenTests {
 
   @DataProvider(name = "searchQueries")
   public Object[][] searchQueriesProvider() {
-    return new Object[][] {
-      {"Selenium WebDriver", true},
-      {"TestNG Framework", true},
-      {"Docker Containers", true},
-      {"Java Programming", true},
-      {"CI/CD Pipeline", true}
-    };
+    // Using JSONDataProvider to read from external file
+    // This allows test data to be updated without code changes
+    return com.cjs.qa.utilities.JSONDataProvider.readJSONArray(
+        "test-data/search-queries.json", "queries");
   }
 
   @Test(dataProvider = "searchQueries")
