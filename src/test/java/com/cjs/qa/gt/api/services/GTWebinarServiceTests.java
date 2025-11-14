@@ -33,21 +33,6 @@ public class GTWebinarServiceTests {
     return EAPIKeys.VIVIT_GT_WEBINAR_CONSUMER_SECRET.getValue();
   }
 
-  // Deprecated: Use getUserId() instead
-  // Will be removed after migration to Secret Manager is complete
-  @Deprecated public static final String USER_ID = "jill.vivit@yahoo.com";
-
-  // Deprecated: Use getPassword() instead
-  // Will be removed after migration to Secret Manager is complete
-  @Deprecated public static final String PASSWORD = "vivitrules1";
-
-  // Deprecated: Use getApiConsumerKey() instead
-  // Will be removed after migration to Secret Manager is complete
-  @Deprecated public static final String API_CONSUMER_KEY = "WGhbDnxCGUwKNABGKeymjoII4gqalCa3";
-
-  // Deprecated: Use getApiConsumerSecret() instead
-  // Will be removed after migration to Secret Manager is complete
-  @Deprecated public static final String API_CONSUMER_SECRET = "DdkRQTJGLq4VF20t";
   public static final String API_VERSION = "v2";
   public static final String URL_GT = "https://api.getgo" + IExtension.COM + "/";
   public static final String API_GT_AUTH = URL_GT + "/oauth/" + API_VERSION;
