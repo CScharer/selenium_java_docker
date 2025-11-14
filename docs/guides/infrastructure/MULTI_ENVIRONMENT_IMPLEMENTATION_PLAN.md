@@ -147,7 +147,7 @@ env:
   # Environment URLs (update these with your actual URLs)
   DEV_URL: 'https://dev.yourapp.com'
   TEST_URL: 'https://test.yourapp.com'
-  PROD_URL: 'https://prod.yourapp.com'
+  PROD_URL: 'https://yourapp.com'
 ```
 
 ---

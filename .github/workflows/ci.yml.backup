@@ -38,7 +38,7 @@ env:
   # Environment URLs - Update these with your actual URLs
   DEV_BASE_URL: 'https://dev.yourapp.com'
   TEST_BASE_URL: 'https://test.yourapp.com'
-  PROD_BASE_URL: 'https://prod.yourapp.com'
+  PROD_BASE_URL: 'https://yourapp.com'
 
 jobs:
   detect-changes:

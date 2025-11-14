@@ -118,7 +118,7 @@ Other environments are skipped
 env:
   DEV_BASE_URL: 'https://dev.yourapp.com'
   TEST_BASE_URL: 'https://test.yourapp.com'
-  PROD_BASE_URL: 'https://prod.yourapp.com'
+  PROD_BASE_URL: 'https://yourapp.com'
 ```
 
 **Update these URLs** in `.github/workflows/ci.yml` to match your actual environment URLs.
