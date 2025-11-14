@@ -21,10 +21,14 @@ import org.testng.annotations.Test;
 public class RetryAnalyzerTest {
   private static final Logger LOGGER = LogManager.getLogger(RetryAnalyzerTest.class);
   private static int testCounter = 0;
+  private static int failingTestCounter = 0;
 
   @BeforeMethod
   public void setUp() {
-    testCounter = 0;
+    // Reset only for non-retry tests
+    if (!Thread.currentThread().getStackTrace()[2].getMethodName().contains("Failing")) {
+      testCounter = 0;
+    }
   }
 
   @Test(retryAnalyzer = RetryAnalyzer.class)
@@ -36,12 +40,15 @@ public class RetryAnalyzerTest {
   @Test(retryAnalyzer = RetryAnalyzer.class)
   public void testRetryAnalyzerWithFailingTest() {
     // This test will fail and should be retried
-    testCounter++;
-    LOGGER.info("Test attempt: {}", testCounter);
+    // Use static counter that persists across retries
+    failingTestCounter++;
+    LOGGER.info("Test attempt: {}", failingTestCounter);
     // Fail first 2 times, pass on 3rd (if max retry is 3)
-    if (testCounter < 3) {
-      Assert.fail("Intentionally failing test (attempt " + testCounter + ")");
+    if (failingTestCounter < 3) {
+      Assert.fail("Intentionally failing test (attempt " + failingTestCounter + ")");
     }
+    // Reset counter after successful test
+    failingTestCounter = 0;
     Assert.assertTrue(true, "Test passes on retry");
   }
 
