@@ -63,7 +63,9 @@ public class GTWebinarDataTests extends Environment {
   public void testAuth() throws Throwable {
     AuthNamespace authNamespace = new AuthNamespace();
     authNamespace.oauth(
-        GTWebinarServiceTests.API_CONSUMER_KEY + ":" + GTWebinarServiceTests.API_CONSUMER_SECRET);
+        GTWebinarServiceTests.getApiConsumerKey()
+            + ":"
+            + GTWebinarServiceTests.getApiConsumerSecret());
     Environment.sysOut("AccessToken:[" + GTWebinarServiceTests.getAccessToken() + "]");
     WebinarsNamespace webinarsNamespace = new WebinarsNamespace();
     webinarsNamespace.getAllWebinarsForAnAccount("", GTWebinarServiceTests.getAccountKey());
