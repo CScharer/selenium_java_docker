@@ -16,7 +16,7 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
 
 ### Switch Expressions
 
-**Total Converted**: 6 switch statements
+**Total Converted**: 8 switch statements
 
 1. ✅ **ExcelDataProvider.java** - `getCellValue()` method
    - Converted to switch expression with block syntax for complex NUMERIC case
@@ -43,6 +43,14 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
 7. ✅ **SystemProcesses.java** - Process type switch
    - Switch expression with block syntax for complex SQL building logic
 
+8. ✅ **ReadFromExcel.java** - `whichTestType()` method
+   - Void method using switch expression with block syntax
+   - Cleaner arrow syntax for all cases
+
+9. ✅ **ScenariosTests.java** - `testWatcher()` method
+   - Switch expression with multiple case labels ("finished", "starting")
+   - Expression-based default case
+
 ---
 
 ## 📊 Migration Statistics
@@ -52,11 +60,13 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
 - `src/test/java/com/cjs/qa/utilities/Encoder.java`
 - `src/test/java/com/cjs/qa/utilities/PageObjectGenerator.java`
 - `src/test/java/com/cjs/qa/utilities/SystemProcesses.java`
+- `src/test/java/com/cjs/qa/utilities/ReadFromExcel.java`
+- `src/test/java/com/cjs/qa/junit/tests/ScenariosTests.java`
 
 ### Lines Changed
-- **Insertions**: ~50 lines (switch expressions)
-- **Deletions**: ~60 lines (traditional switch statements)
-- **Net**: -10 lines (more concise code!)
+- **Insertions**: ~60 lines (switch expressions)
+- **Deletions**: ~75 lines (traditional switch statements)
+- **Net**: -15 lines (more concise code!)
 
 ### Code Quality Improvements
 - ✅ No `break` statements needed (prevents fall-through bugs)
@@ -71,8 +81,8 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
 ### Switch Statements to Convert
 
 **High Priority** (Simple conversions):
-- `ReadFromExcel.java` - `whichTestType()` method
-- `ScenariosTests.java` - `jenkins()` method (2 switch statements)
+- ✅ `ReadFromExcel.java` - `whichTestType()` method (COMPLETED)
+- `ScenariosTests.java` - `jenkins()` method (1 large switch - may need refactoring)
 
 **Medium Priority** (Complex, may need refactoring):
 - `PageObjectGenerator.java` - `generateMethodsForElement()` method
