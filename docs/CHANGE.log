@@ -1,5 +1,107 @@
 # CHANGE LOG
 
+## [2025-11-14 03:11:23 CST] [1a675852] - 🚫 FEATURE: Disable Firefox Tests Until Framework Changes Complete
+
+### Overview
+**TEMPORARY DISABLE:** Firefox browser tests disabled across all configurations
+**User Request:** "First I would like to disable the Firefox tests as they are not needed until we're fully complete with our changes"
+**Solution:** Commented out Firefox tests in CI/CD, TestNG suites, Docker, and test code
+**Impact:** Faster CI/CD execution, resource savings, focus on framework improvements
+**Branch:** feature/disable-firefox-tests (merged to main via PR #13)
+
+**Cursor Token Status:** Tokens Used: ~350,000 / Total: 1,000,000 (estimated, ~35% used, ~65% remaining)
+
+---
+
+### Changes Made
+
+**Files Modified (4 total):**
+
+**1. `.github/workflows/test-environment.yml`**
+- Removed `firefox` from browser matrix (now `[chrome]` only)
+- Commented out `firefox-node` service definition
+- Added explanatory comments for temporary disable
+
+**2. `src/test/resources/testng-grid-suite.xml`**
+- Commented out Firefox Browser Tests section
+- Chrome and Simple Grid tests remain active
+
+**3. `src/test/java/com/cjs/qa/junit/tests/ScenariosTests.java`**
+- Removed `firefox` from browserList in `jenkins()` test method
+- Added comment explaining temporary disable
+
+**4. `docker-compose.yml`**
+- Commented out entire `firefox-node` service definition
+- Removed `firefox-node` from tests service `depends_on`
+- Updated usage comments to reflect Firefox disable
+
+**Lines Changed:**
+- Insertions: +50
+- Deletions: -41
+- Net: +9 lines (comments/documentation)
+
+---
+
+### Impact
+
+**Benefits:**
+- ✅ **Faster CI/CD**: Pipeline only runs Chrome tests (reduces execution time)
+- ✅ **Resource Savings**: Docker won't start Firefox node (saves memory/CPU)
+- ✅ **Focus**: Can concentrate on framework improvements without Firefox overhead
+- ✅ **Reversible**: All Firefox code preserved (commented out) for easy re-enable
+
+**No Breaking Changes:**
+- ✅ Chrome tests continue to work normally
+- ✅ All test infrastructure remains functional
+- ✅ No code removed, only commented out
+
+---
+
+### Re-Enable Instructions
+
+When ready to re-enable Firefox tests:
+1. Uncomment firefox entries in all 4 modified files
+2. Restore `firefox` to browser matrix/arrays
+3. Uncomment `firefox-node` service in docker-compose.yml
+4. Test Firefox functionality
+
+**Files to update:**
+- `.github/workflows/test-environment.yml` (matrix + service)
+- `src/test/resources/testng-grid-suite.xml` (test section)
+- `src/test/java/com/cjs/qa/junit/tests/ScenariosTests.java` (browserList)
+- `docker-compose.yml` (service + depends_on)
+
+---
+
+### Testing & Validation
+
+**Compilation Tests:**
+```bash
+./mvnw clean compile test-compile
+Result: ✅ BUILD SUCCESS
+```
+
+**Test Execution:**
+- ✅ TestNG grid suite runs (Chrome only)
+- ✅ No Firefox references in active test execution
+- ✅ All changes compile successfully
+
+**Verification:**
+- ✅ Code compiles successfully
+- ✅ All Firefox code preserved (commented out)
+- ✅ No breaking changes
+- ✅ PR #13 merged successfully
+
+---
+
+### Related
+
+**Purpose:** Focus on framework improvements without Firefox test overhead
+**Duration:** Temporary - until framework changes are complete
+**Re-enable:** When ready, uncomment all Firefox-related code
+
+---
+
 ## [2025-11-14 02:45:00 CST] [710c2b07] - 🔧 FIX: Disable Performance Workflow & Cleanup Hardcoded Passwords
 
 ### Overview
