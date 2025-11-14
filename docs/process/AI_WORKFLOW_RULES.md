@@ -1,6 +1,14 @@
 # AI Workflow Rules for Code Changes
 
-**Version:** 2.6 (Updated: 2025-11-13 - Added Feature Branch Workflow)
+**Version:** 2.7 (Updated: 2025-11-13 - Added Test Case Maintenance Rule)
+
+### 📋 Version 2.7 Changes:
+- **🧪 ADDED:** Rule 9 - Test Case Maintenance & Modernization
+  - Guidelines for maintaining old test cases with new standards
+  - Option to preserve legacy test cases without updates
+  - Data-driven testing approach for new test cases
+  - Clear process for when to modernize vs preserve
+  - Balance between backward compatibility and modernization
 
 ### 📋 Version 2.6 Changes:
 - **🌿 ADDED:** Rule 8 - Feature Branch Workflow
@@ -778,6 +786,236 @@ git push origin --delete hotfix/critical-issue-description
 
 ---
 
+### **Rule 9: Test Case Maintenance & Modernization** 🧪 **NEW**
+
+**Principle:** Balance backward compatibility with modernization - preserve legacy tests when needed, modernize when beneficial.
+
+#### **Core Philosophy:**
+
+**1. New Test Cases (Data-Driven Approach):**
+- ✅ **New test cases** should be added **WITHOUT code changes** when possible
+- ✅ Use **data-driven testing** (Excel, JSON, CSV) for new test scenarios
+- ✅ New tests follow **current standards and best practices**
+- ✅ Example: Add new login scenarios via Excel file, not new test methods
+
+**2. Old Test Cases (Modernization with Flexibility):**
+- ✅ **Old test cases should be kept current** with new standards and processes
+- ✅ **BUT** there is an **option to preserve legacy tests** without updates
+- ✅ Modernization is **recommended but not mandatory** for existing tests
+- ✅ User can explicitly opt-out of modernizing specific test cases
+
+#### **When to Modernize Old Test Cases:**
+
+**✅ MODERNIZE (Default Approach):**
+- When touching a test file for other reasons (bug fix, enhancement)
+- When test is actively maintained and frequently modified
+- When modernization improves maintainability significantly
+- When test is part of critical path or frequently executed
+- When user explicitly requests modernization
+
+**⏸️ PRESERVE (Opt-Out Available):**
+- When test is stable and rarely changed
+- When modernization would require extensive refactoring
+- When test is legacy/deprecated but still functional
+- When user explicitly requests preservation
+- When modernization risk outweighs benefits
+
+#### **Modernization Process:**
+
+**Step 1: Identify Test Cases to Modernize**
+```bash
+# When working on a test file, check:
+# - Does it use old patterns (System.out, old logging, etc.)?
+# - Does it follow current standards?
+# - Is it actively maintained?
+```
+
+**Step 2: Ask User (If Unsure):**
+```
+AI: "I found test cases in [File.java] that could be modernized:
+     - Uses old logging pattern (could use log4j 2.x)
+     - Uses hardcoded test data (could use data-driven approach)
+     - Uses deprecated methods (could use modern alternatives)
+
+     Would you like me to:
+     A) Modernize these test cases (recommended)
+     B) Preserve them as-is (no changes)
+     C) Modernize only specific ones (you choose)"
+```
+
+**Step 3: Execute Based on User Choice:**
+- **Option A (Modernize):** Update to current standards
+- **Option B (Preserve):** Leave unchanged, document why
+- **Option C (Selective):** Modernize only specified tests
+
+#### **Data-Driven Testing for New Test Cases:**
+
+**Structure:**
+```java
+// ✅ NEW APPROACH - Data-driven (no code changes for new test cases)
+@DataProvider(name = "loginScenarios")
+public Object[][] getLoginData() {
+    return ExcelReader.read("test-data/login-scenarios.xlsx", "Sheet1");
+}
+
+@Test(dataProvider = "loginScenarios")
+public void testLogin(String email, String password, String expectedResult) {
+    // Test logic - same for all scenarios
+    // New scenarios added via Excel file only
+}
+```
+
+**Benefits:**
+- ✅ Add new test cases by updating Excel/JSON/CSV
+- ✅ No code changes required
+- ✅ Easier maintenance
+- ✅ Business-friendly (non-developers can add cases)
+
+#### **Legacy Test Preservation:**
+
+**When Preserving Legacy Tests:**
+```java
+// ⏸️ LEGACY TEST - Preserved as-is per user request
+// Note: Uses old patterns but functional
+// Last updated: [date]
+// Reason for preservation: [reason]
+@Test
+public void legacyTestOldPattern() {
+    // Old code preserved intentionally
+    System.out.println("Legacy test - preserved");
+    // ... old test logic
+}
+```
+
+**Documentation Required:**
+- Add comment explaining why test is preserved
+- Note date of last review
+- Document any known limitations
+- Link to modernization plan (if exists)
+
+#### **Modernization Checklist:**
+
+When modernizing a test case, update:
+- ✅ Logging (System.out → log4j 2.x)
+- ✅ Test data (hardcoded → data-driven)
+- ✅ Assertions (old style → modern assertions)
+- ✅ Page Objects (if applicable)
+- ✅ Error handling (improved patterns)
+- ✅ Documentation (JavaDoc, comments)
+
+#### **User Override Process:**
+
+**User Can Request:**
+1. **"Modernize all tests in this file"** → Full modernization
+2. **"Preserve all legacy tests"** → No changes, document why
+3. **"Modernize only [specific tests]"** → Selective modernization
+4. **"Skip modernization for now"** → Defer to later
+
+**AI Must:**
+- ✅ Respect user's explicit choice
+- ✅ Document the decision
+- ✅ Not modernize if user says "preserve"
+- ✅ Ask if unclear (don't assume)
+
+#### **Examples:**
+
+**Example 1: Modernize During Bug Fix**
+```java
+// BEFORE (old pattern):
+@Test
+public void testLogin() {
+    System.out.println("Testing login");
+    // ... test code
+}
+
+// AFTER (modernized):
+@Test
+public void testLogin() {
+    log.info("Testing login");
+    // ... test code (same logic, modern logging)
+}
+```
+
+**Example 2: Preserve Legacy Test**
+```java
+// LEGACY TEST - Preserved per user request (2025-11-13)
+// Reason: Stable test, rarely modified, modernization risk > benefit
+@Test
+public void legacyTestOldPattern() {
+    System.out.println("Legacy test - preserved");
+    // ... old test logic unchanged
+}
+```
+
+**Example 3: Data-Driven New Test**
+```java
+// NEW TEST - Data-driven approach
+@DataProvider(name = "userScenarios")
+public Object[][] getUserData() {
+    return ExcelReader.read("test-data/users.xlsx", "Sheet1");
+}
+
+@Test(dataProvider = "userScenarios")
+public void testUserFlow(String username, String role, String expected) {
+    // New scenarios added via Excel only - no code changes needed
+}
+```
+
+#### **Best Practices:**
+
+**For New Tests:**
+- ✅ Always use data-driven approach when possible
+- ✅ Follow current standards from day one
+- ✅ Use modern patterns (log4j 2.x, parameterized logging, etc.)
+- ✅ Document test purpose and data sources
+
+**For Old Tests:**
+- ✅ Modernize when touching for other reasons
+- ✅ Preserve if user requests or test is stable
+- ✅ Document preservation decisions
+- ✅ Plan modernization in batches (not all at once)
+
+**For Mixed Scenarios:**
+- ✅ Modernize new code, preserve old code in same file
+- ✅ Use clear comments to distinguish
+- ✅ Document modernization plan for future
+
+#### **Documentation Requirements:**
+
+When preserving legacy tests:
+```java
+/**
+ * LEGACY TEST - Preserved as-is
+ *
+ * Last Modernized: Never (preserved per user request)
+ * Reason: Stable test, low maintenance, modernization risk > benefit
+ * Modernization Plan: Consider in future batch modernization effort
+ *
+ * @deprecated Uses old patterns but functional
+ */
+@Test
+public void legacyTest() {
+    // ... old code
+}
+```
+
+When modernizing:
+```java
+/**
+ * Modernized: 2025-11-13
+ * Changes: Updated logging, converted to data-driven, improved assertions
+ * Previous Pattern: Hardcoded data, System.out logging
+ */
+@Test(dataProvider = "scenarios")
+public void modernizedTest(String data) {
+    // ... modern code
+}
+```
+
+**Remember:** The goal is maintainable, functional tests - not perfect code. Balance modernization with stability! 🧪
+
+---
+
 ## 📋 VERIFICATION CHECKLIST TEMPLATE
 
 Use this checklist for EVERY batch:
@@ -987,6 +1225,6 @@ BUILD SUCCESS
 
 ---
 
-**Last Updated:** 2025-11-12 01:59:00 CST
-**Version:** 1.0
+**Last Updated:** 2025-11-13 15:00:00 CST
+**Version:** 2.7
 **Applies To:** All AI-driven code changes in this repository
