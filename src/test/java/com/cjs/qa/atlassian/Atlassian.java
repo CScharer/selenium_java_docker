@@ -61,6 +61,9 @@ public class Atlassian {
       final StringBuilder stringBuilder =
           new StringBuilder("cmd /C " + Constants.QUOTE_DOUBLE + "");
       final String userID = CJSConstants.USERID_VIVIT;
+      // TODO: Replace with EPasswords enum or Google Cloud Secret Manager
+      // This is a placeholder - actual password should be retrieved from Secret Manager
+      // See: docs/issues/open/cleanup-hardcoded-passwords.md
       final String password = "********";
       stringBuilder.append("curl -D- -u ");
       stringBuilder.append(userID + ":" + password);

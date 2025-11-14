@@ -4,10 +4,10 @@
 
 https://www.gotomeeting.com/ 
 Username:  jill.vivit@yahoo.com
-Password:  vivitrules1
+Password:  [PASSWORD]
 
-curl -X POST -H "Accept:application/json" -H "Content-Type: application/x-www-form-urlencoded" "https://api.getgo.com/oauth/access_token" -d 'grant_type=password&user_id=jill.vivit@yahoo.com&password=vivitrules1&client_id={WGhbDnxCGUwKNABGKeymjoII4gqalCa3}'
-curl -X POST -H "Accept:application/json" -H "Content-Type: application/x-www-form-urlencoded" "https://api.getgo.com/oauth/access_token" -d "grant_type="password"&user_id="jill.vivit@yahoo.com"&password="vivitrules1"&client_id="WGhbDnxCGUwKNABGKeymjoII4gqalCa3"
+curl -X POST -H "Accept:application/json" -H "Content-Type: application/x-www-form-urlencoded" "https://api.getgo.com/oauth/access_token" -d 'grant_type=password&user_id=jill.vivit@yahoo.com&password=[PASSWORD]&client_id={WGhbDnxCGUwKNABGKeymjoII4gqalCa3}'
+curl -X POST -H "Accept:application/json" -H "Content-Type: application/x-www-form-urlencoded" "https://api.getgo.com/oauth/access_token" -d "grant_type="password"&user_id="jill.vivit@yahoo.com"&password="[PASSWORD]"&client_id="WGhbDnxCGUwKNABGKeymjoII4gqalCa3"
 
 Application Name: YM Seamless Registration 
 Consumer Key: WGhbDnxCGUwKNABGKeymjoII4gqalCa3

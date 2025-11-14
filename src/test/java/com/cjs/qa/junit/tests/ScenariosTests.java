@@ -958,6 +958,7 @@ public class ScenariosTests {
     final String date = new Date().toString();
     final String subject = "Test-Send Email";
     String from = "";
+    // Empty password is intentional - will be set from EPasswords enum below
     String password = "";
     String body = "<h1>Test</h1><p>Send <b>Email</b>.</p><p>" + date + "</p>";
     String signatureFile = "";
