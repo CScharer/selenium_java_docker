@@ -27,8 +27,8 @@ public class AuthNamespace extends GTWebinarServiceTests {
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append(Constants.nlTab(0, 0) + "{");
     stringBuilder.append(Constants.nlTab(1, 1) + "\"grant_type\":\"" + "password" + "\",");
-    stringBuilder.append(Constants.nlTab(1, 1) + "\"user_id\":\"" + USER_ID + "\",");
-    stringBuilder.append(Constants.nlTab(1, 1) + "\"password\":\"" + PASSWORD + "\",");
+    stringBuilder.append(Constants.nlTab(1, 1) + "\"user_id\":\"" + getUserId() + "\",");
+    stringBuilder.append(Constants.nlTab(1, 1) + "\"password\":\"" + getPassword() + "\",");
     stringBuilder.append(Constants.nlTab(1, 1) + "\"client_id\":\"" + getApiConsumerKey() + "\"");
     stringBuilder.append(Constants.nlTab(1, 0) + "}");
     // Map<String, String> mapResponse = getAPIJSONResponse(credentials,
@@ -41,8 +41,8 @@ public class AuthNamespace extends GTWebinarServiceTests {
     curlStringBuilder.append("-H \"Content-Type: application/x-www-form-urlencoded\" ");
     curlStringBuilder.append("\"https://api.getgo.com/oauth/access_token\" ");
     curlStringBuilder.append("-d \"grant_type=\"password\"");
-    curlStringBuilder.append("&user_id=\"" + USER_ID + "\"");
-    curlStringBuilder.append("&password=\"" + PASSWORD + "\"");
+    curlStringBuilder.append("&user_id=\"" + getUserId() + "\"");
+    curlStringBuilder.append("&password=\"" + getPassword() + "\"");
     curlStringBuilder.append("&client_id=\"" + getApiConsumerKey() + "\"");
     String command = "cmd /C " + curlStringBuilder.toString();
     Environment.sysOut("command:[" + command + "]");

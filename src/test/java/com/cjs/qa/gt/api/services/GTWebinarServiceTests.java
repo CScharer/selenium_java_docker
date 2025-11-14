@@ -2,6 +2,7 @@ package com.cjs.qa.gt.api.services;
 
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.security.EAPIKeys;
+import com.cjs.qa.core.security.EPasswords;
 import com.cjs.qa.rest.REST;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.IExtension;
@@ -14,14 +15,16 @@ import org.junit.Test;
 
 @SuppressWarnings("PMD.ClassNamingConventions")
 public class GTWebinarServiceTests {
-  public static final String USER_ID = "jill.vivit@yahoo.com";
-  // TODO: Migrate to Google Cloud Secret Manager (EPasswords enum)
-  // This password is currently hardcoded and should be moved to Secret Manager
-  // See: docs/issues/open/cleanup-hardcoded-passwords.md
-  public static final String PASSWORD = "vivitrules1";
-
-  // API credentials migrated to Google Cloud Secret Manager via EAPIKeys enum
+  // Credentials migrated to Google Cloud Secret Manager
   // See: docs/issues/open/hardcoded-api-keys-and-secrets.md
+  public static String getUserId() {
+    return EAPIKeys.VIVIT_GT_WEBINAR_USER_ID.getValue();
+  }
+
+  public static String getPassword() {
+    return EPasswords.VIVIT_GT_WEBINAR_PASSWORD.getValue();
+  }
+
   public static String getApiConsumerKey() {
     return EAPIKeys.VIVIT_GT_WEBINAR_CONSUMER_KEY.getValue();
   }
@@ -29,6 +32,14 @@ public class GTWebinarServiceTests {
   public static String getApiConsumerSecret() {
     return EAPIKeys.VIVIT_GT_WEBINAR_CONSUMER_SECRET.getValue();
   }
+
+  // Deprecated: Use getUserId() instead
+  // Will be removed after migration to Secret Manager is complete
+  @Deprecated public static final String USER_ID = "jill.vivit@yahoo.com";
+
+  // Deprecated: Use getPassword() instead
+  // Will be removed after migration to Secret Manager is complete
+  @Deprecated public static final String PASSWORD = "vivitrules1";
 
   // Deprecated: Use getApiConsumerKey() instead
   // Will be removed after migration to Secret Manager is complete

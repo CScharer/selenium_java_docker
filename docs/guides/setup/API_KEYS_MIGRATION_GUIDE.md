@@ -42,6 +42,18 @@ gcloud projects get-iam-policy cscharer --flatten="bindings[].members" --filter=
 
 #### GoToWebinar API Credentials:
 ```bash
+# User ID
+echo -n "jill.vivit@yahoo.com" | gcloud secrets create AUTO_VIVIT_GT_WEBINAR_USER_ID \
+  --data-file=- \
+  --project=cscharer \
+  --replication-policy="automatic"
+
+# Password
+echo -n "vivitrules1" | gcloud secrets create AUTO_VIVIT_GT_WEBINAR_PASSWORD \
+  --data-file=- \
+  --project=cscharer \
+  --replication-policy="automatic"
+
 # Consumer Key
 echo -n "WGhbDnxCGUwKNABGKeymjoII4gqalCa3" | gcloud secrets create AUTO_VIVIT_GT_WEBINAR_CONSUMER_KEY \
   --data-file=- \
@@ -73,7 +85,7 @@ echo -n "HNe6RO84P5sI" | gcloud secrets create AUTO_VIVIT_YM_API_SA_PASSCODE \
 ### Step 2: Verify Secrets Were Created
 
 ```bash
-# List all secrets (should see the 4 new ones)
+# List all secrets (should see the 6 new ones)
 gcloud secrets list --project=cscharer | grep AUTO_VIVIT
 
 # Verify a secret value (optional - for testing)
@@ -82,6 +94,8 @@ gcloud secrets versions access latest --secret="AUTO_VIVIT_GT_WEBINAR_CONSUMER_K
 
 **Expected Output:**
 ```
+AUTO_VIVIT_GT_WEBINAR_USER_ID
+AUTO_VIVIT_GT_WEBINAR_PASSWORD
 AUTO_VIVIT_GT_WEBINAR_CONSUMER_KEY
 AUTO_VIVIT_GT_WEBINAR_CONSUMER_SECRET
 AUTO_VIVIT_YM_API_KEY
@@ -95,7 +109,17 @@ If your application service account needs access:
 # Get your service account email (from credentials file)
 # Usually looks like: YOUR_PROJECT@appspot.gserviceaccount.com
 
-# Grant access to all 4 secrets
+# Grant access to all 6 secrets
+gcloud secrets add-iam-policy-binding AUTO_VIVIT_GT_WEBINAR_USER_ID \
+  --member="serviceAccount:YOUR_SERVICE_ACCOUNT@cscharer.iam.gserviceaccount.com" \
+  --role="roles/secretmanager.secretAccessor" \
+  --project=cscharer
+
+gcloud secrets add-iam-policy-binding AUTO_VIVIT_GT_WEBINAR_PASSWORD \
+  --member="serviceAccount:YOUR_SERVICE_ACCOUNT@cscharer.iam.gserviceaccount.com" \
+  --role="roles/secretmanager.secretAccessor" \
+  --project=cscharer
+
 gcloud secrets add-iam-policy-binding AUTO_VIVIT_GT_WEBINAR_CONSUMER_KEY \
   --member="serviceAccount:YOUR_SERVICE_ACCOUNT@cscharer.iam.gserviceaccount.com" \
   --role="roles/secretmanager.secretAccessor" \
@@ -124,23 +148,29 @@ gcloud secrets add-iam-policy-binding AUTO_VIVIT_YM_API_SA_PASSCODE \
 The following code changes have been made:
 
 1. **Created `EAPIKeys.java` enum** with VIVIT_ prefix:
+   - `VIVIT_GT_WEBINAR_USER_ID`
    - `VIVIT_GT_WEBINAR_CONSUMER_KEY`
    - `VIVIT_GT_WEBINAR_CONSUMER_SECRET`
    - `VIVIT_YM_API_KEY`
    - `VIVIT_YM_API_SA_PASSCODE`
 
-2. **Updated `GTWebinarServiceTests.java`**:
+2. **Updated `EPasswords.java` enum**:
+   - Added `VIVIT_GT_WEBINAR_PASSWORD`
+
+3. **Updated `GTWebinarServiceTests.java`**:
+   - Added `getUserId()` method (uses `EAPIKeys.VIVIT_GT_WEBINAR_USER_ID`)
+   - Added `getPassword()` method (uses `EPasswords.VIVIT_GT_WEBINAR_PASSWORD`)
    - Added `getApiConsumerKey()` and `getApiConsumerSecret()` methods
-   - Marked old constants as `@Deprecated`
+   - Marked old constants (`USER_ID`, `PASSWORD`, `API_CONSUMER_KEY`, `API_CONSUMER_SECRET`) as `@Deprecated`
    - Updated `getAPIKey()` to use new getter
 
-3. **Updated `YMService.java`**:
+4. **Updated `YMService.java`**:
    - Added `getApiKeyValue()` and `getApiSaPasscodeValue()` methods
    - Marked old constants as `@Deprecated`
    - Updated `getAPIKey()` and `getSAPasscode()` to use new getters
 
-4. **Updated references**:
-   - `AuthNamespace.java` - Uses `getApiConsumerKey()`
+5. **Updated references**:
+   - `AuthNamespace.java` - Uses `getUserId()`, `getPassword()`, and `getApiConsumerKey()`
    - `GTWebinarDataTests.java` - Uses new getters
 
 ---
@@ -229,6 +259,8 @@ gcloud secrets describe AUTO_VIVIT_GT_WEBINAR_CONSUMER_KEY --project=cscharer
 ## Quick Reference
 
 **Secret Names:**
+- `AUTO_VIVIT_GT_WEBINAR_USER_ID`
+- `AUTO_VIVIT_GT_WEBINAR_PASSWORD`
 - `AUTO_VIVIT_GT_WEBINAR_CONSUMER_KEY`
 - `AUTO_VIVIT_GT_WEBINAR_CONSUMER_SECRET`
 - `AUTO_VIVIT_YM_API_KEY`
@@ -237,6 +269,8 @@ gcloud secrets describe AUTO_VIVIT_GT_WEBINAR_CONSUMER_KEY --project=cscharer
 **Project ID:** `cscharer`
 
 **Enum Values:**
+- `EAPIKeys.VIVIT_GT_WEBINAR_USER_ID.getValue()`
+- `EPasswords.VIVIT_GT_WEBINAR_PASSWORD.getValue()`
 - `EAPIKeys.VIVIT_GT_WEBINAR_CONSUMER_KEY.getValue()`
 - `EAPIKeys.VIVIT_GT_WEBINAR_CONSUMER_SECRET.getValue()`
 - `EAPIKeys.VIVIT_YM_API_KEY.getValue()`

@@ -8,7 +8,7 @@ import com.cjs.qa.utilities.SecureConfig;
  * <p>All API keys and secrets are stored securely in Google Cloud Secret Manager with AUTO_ prefix.
  * This enum references the secret keys, not the actual key/secret values.
  *
- * <p>Migration Date: 2025-11-14 Total Secrets: 4
+ * <p>Migration Date: 2025-11-14 Total Secrets: 5
  *
  * <p>Naming Convention: VIVIT_ prefix for Vivit-related API credentials
  *
@@ -18,6 +18,7 @@ import com.cjs.qa.utilities.SecureConfig;
  */
 public enum EAPIKeys {
   // GoToWebinar API credentials
+  VIVIT_GT_WEBINAR_USER_ID("AUTO_VIVIT_GT_WEBINAR_USER_ID"),
   VIVIT_GT_WEBINAR_CONSUMER_KEY("AUTO_VIVIT_GT_WEBINAR_CONSUMER_KEY"),
   VIVIT_GT_WEBINAR_CONSUMER_SECRET("AUTO_VIVIT_GT_WEBINAR_CONSUMER_SECRET"),
 
