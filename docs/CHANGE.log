@@ -1,5 +1,74 @@
 # CHANGE LOG
 
+## [2025-11-14 08:50:00 CST] [263cef72] - ✨ FEATURE: Secret Manager Smoke Test for API Secret Verification
+
+### Overview
+**FEATURE IMPLEMENTATION:** Added automated smoke test to verify Google Cloud Secret Manager integration
+**User Request:** "Maybe we could just create one additional smoke test that tests that a password or secret value can be retrieved?"
+**Solution:** Created SecretManagerSmokeTest with 3 test scenarios covering password, API key, and direct secret retrieval
+**Impact:** Automated verification that secrets are accessible, early detection of Secret Manager issues
+**Branch:** feature/secret-manager-smoke-test (merged via PR #16)
+
+**Cursor Token Status:** Tokens Used: ~620,000 / Total: 1,000,000 (estimated, ~62% used, ~38% remaining)
+
+---
+
+### Changes Made
+
+**Files Created (2 total):**
+
+**1. `src/test/java/com/cjs/qa/junit/tests/SecretManagerSmokeTest.java`**
+- New smoke test class with 3 test scenarios
+- Tests password retrieval via `EPasswords` enum
+- Tests API key retrieval via `EAPIKeys` enum
+- Tests direct secret retrieval via `SecureConfig`
+- Uses TestNG with `@Test(groups = "smoke")`
+- Includes Allure annotations for reporting
+- Fast execution (~2.6 seconds)
+
+**2. `docs/guides/setup/API_SECRET_VERIFICATION.md`**
+- Complete guide explaining API secret verification
+- Step-by-step verification instructions
+- Troubleshooting guide for common issues
+- Verification checklist
+
+**Files Modified (1 total):**
+
+**1. `src/test/resources/testng-smoke-suite.xml`**
+- Added `SecretManagerSmokeTest` to smoke test suite
+- Ensures secret verification runs automatically in CI/CD
+
+---
+
+### Statistics
+
+- **3 test scenarios** covering all secret retrieval methods
+- **~2.6 seconds** execution time
+- **100% pass rate** (3/3 tests passing)
+- **0 failures, 0 errors**
+
+---
+
+### Testing
+
+- ✅ All code compiles successfully
+- ✅ All 3 smoke tests pass locally
+- ✅ Added to smoke test suite
+- ✅ No linter errors
+- ✅ Fast execution time
+
+---
+
+### Benefits
+
+- **Automated Verification**: Secrets are verified automatically in CI/CD pipeline
+- **Early Detection**: Fails fast if secrets are missing or inaccessible
+- **Clear Feedback**: Logs show which secrets were tested
+- **Fast**: Minimal execution time (~2.6 seconds)
+- **Comprehensive**: Tests all three secret retrieval methods
+
+---
+
 ## [2025-11-14 07:30:00 CST] [1477f42f] - ✨ FEATURE: Java 17 Modernization Sprint - Switch Expressions, Pattern Matching, Records, and Test Retry Logic
 
 ### Overview
