@@ -16,7 +16,7 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
 
 ### Switch Expressions
 
-**Total Converted**: 12 switch statements
+**Total Converted**: 15 switch statements
 
 1. ✅ **ExcelDataProvider.java** - `getCellValue()` method
    - Converted to switch expression with block syntax for complex NUMERIC case
@@ -89,6 +89,18 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
     - Pattern matching for instanceof (7 checks)
     - Eliminates explicit casting for all WebDriver types
 
+19. ✅ **SeleniumWebDriver.java** - `setDesiredCapabilities()` method - operating system switch
+    - Large switch expression with 16 OS cases
+    - All cases use arrow syntax for cleaner code
+
+20. ✅ **SeleniumWebDriver.java** - `setLocalExecutables()` method
+    - Switch expression with block syntax
+    - Handles Safari separately, other browsers grouped
+
+21. ✅ **SeleniumWebDriver.java** - `setProxy()` method
+    - Switch expression with block syntax for complex Firefox case
+    - Chrome and default cases handled separately
+
 ---
 
 ## 📊 Migration Statistics
@@ -106,9 +118,9 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
 - `src/test/java/com/cjs/qa/selenium/Selenium.java`
 
 ### Lines Changed
-- **Insertions**: ~110 lines (switch expressions, text blocks, pattern matching)
-- **Deletions**: ~140 lines (traditional switch statements, instanceof casts)
-- **Net**: -30 lines (more concise code!)
+- **Insertions**: ~130 lines (switch expressions, text blocks, pattern matching)
+- **Deletions**: ~180 lines (traditional switch statements, instanceof casts)
+- **Net**: -50 lines (more concise code!)
 
 ### Code Quality Improvements
 - ✅ No `break` statements needed (prevents fall-through bugs)

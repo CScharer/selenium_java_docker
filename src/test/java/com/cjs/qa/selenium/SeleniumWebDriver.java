@@ -711,60 +711,29 @@ public class SeleniumWebDriver {
         desiredCapabilities = new DesiredCapabilities();
         break;
     }
+    // Java 17: Switch expression with multiple case labels
     switch (operatingSystem.toLowerCase(Locale.ENGLISH)) {
-      case OS.ANDROID:
-        desiredCapabilities.setPlatform(Platform.ANDROID);
-        break;
-      case OS.ANY:
-        desiredCapabilities.setPlatform(Platform.ANY);
-        break;
-      case OS.EL_CAPITAN:
-        desiredCapabilities.setPlatform(Platform.EL_CAPITAN);
-        break;
-      case OS.LINUX:
-        desiredCapabilities.setPlatform(Platform.LINUX);
-        break;
-      case OS.MAC:
-        desiredCapabilities.setPlatform(Platform.MAC);
-        break;
-      case OS.MAVERICKS:
-        desiredCapabilities.setPlatform(Platform.MAVERICKS);
-        break;
-      case OS.MOINTAIN_LION:
-        desiredCapabilities.setPlatform(Platform.MOUNTAIN_LION);
-        break;
-      case OS.SNOW_LEOPARD:
-        desiredCapabilities.setPlatform(Platform.SNOW_LEOPARD);
-        break;
-      case OS.UNIX:
-        desiredCapabilities.setPlatform(Platform.UNIX);
-        break;
-      case OS.VISTA:
-        desiredCapabilities.setPlatform(Platform.VISTA);
-        break;
-      case OS.WIN8:
-        desiredCapabilities.setPlatform(Platform.WIN8);
-        break;
-      case OS.WIN8_1:
-        desiredCapabilities.setPlatform(Platform.WIN8_1);
-        break;
-      case OS.WINDOWS:
-        desiredCapabilities.setPlatform(Platform.WINDOWS);
-        break;
-      case OS.WINDOWS_10:
-        desiredCapabilities.setPlatform(Platform.WIN10);
-        break;
-      case OS.XP:
-        desiredCapabilities.setPlatform(Platform.XP);
-        break;
-      case OS.YOSEMITE:
-        desiredCapabilities.setPlatform(Platform.YOSEMITE);
-        break;
-      default:
+      case OS.ANDROID -> desiredCapabilities.setPlatform(Platform.ANDROID);
+      case OS.ANY -> desiredCapabilities.setPlatform(Platform.ANY);
+      case OS.EL_CAPITAN -> desiredCapabilities.setPlatform(Platform.EL_CAPITAN);
+      case OS.LINUX -> desiredCapabilities.setPlatform(Platform.LINUX);
+      case OS.MAC -> desiredCapabilities.setPlatform(Platform.MAC);
+      case OS.MAVERICKS -> desiredCapabilities.setPlatform(Platform.MAVERICKS);
+      case OS.MOINTAIN_LION -> desiredCapabilities.setPlatform(Platform.MOUNTAIN_LION);
+      case OS.SNOW_LEOPARD -> desiredCapabilities.setPlatform(Platform.SNOW_LEOPARD);
+      case OS.UNIX -> desiredCapabilities.setPlatform(Platform.UNIX);
+      case OS.VISTA -> desiredCapabilities.setPlatform(Platform.VISTA);
+      case OS.WIN8 -> desiredCapabilities.setPlatform(Platform.WIN8);
+      case OS.WIN8_1 -> desiredCapabilities.setPlatform(Platform.WIN8_1);
+      case OS.WINDOWS -> desiredCapabilities.setPlatform(Platform.WINDOWS);
+      case OS.WINDOWS_10 -> desiredCapabilities.setPlatform(Platform.WIN10);
+      case OS.XP -> desiredCapabilities.setPlatform(Platform.XP);
+      case OS.YOSEMITE -> desiredCapabilities.setPlatform(Platform.YOSEMITE);
+      default -> {
         Environment.sysOut(
             "Unknown operating system: " + operatingSystem + ". Using ANY platform.");
         desiredCapabilities.setPlatform(Platform.ANY);
-        break;
+      }
     }
     return desiredCapabilities;
   }
@@ -800,20 +769,20 @@ public class SeleniumWebDriver {
   private void setLocalExecutables() {
     final EDriverProperties eDriverProperties =
         EDriverProperties.fromString(getBrowser().toUpperCase(Locale.ENGLISH));
+    // Java 17: Switch expression with block syntax for complex cases
     switch (getBrowser().toLowerCase(Locale.ENGLISH)) {
-      case Browser.SAFARI:
+      case Browser.SAFARI -> {
         // If you wish for safari to forget session everytime
         // SafariOptions.setUseCleanSession(true); // Removed in Selenium 4
         setWebDriver(new SafariDriver());
-        break;
-      case Browser.CHROME:
-      case Browser.EDGE:
-      case Browser.FIREFOX:
-      case Browser.IE: // (very slow)
-      case Browser.INTERNET_EXPLORER: // (very slow)
-      default:
+      }
+      case Browser.CHROME, Browser.EDGE, Browser.FIREFOX, Browser.IE, Browser.INTERNET_EXPLORER -> {
+        // (IE is very slow)
         System.setProperty(eDriverProperties.getWebDriverType(), eDriverProperties.getPathDriver());
-        break;
+      }
+      default -> {
+        System.setProperty(eDriverProperties.getWebDriverType(), eDriverProperties.getPathDriver());
+      }
     }
     Environment.sysOut(
         JavaHelpers.getCurrentMethodName()
@@ -848,8 +817,9 @@ public class SeleniumWebDriver {
       setGridHub("http://" + getGridHubName() + ":" + getGridHubPort() + "/wd/hub");
     }
     String proxyAddress = getGridHubName() + ":" + getGridHubPort();
+    // Java 17: Switch expression with block syntax for complex cases
     switch (browser) {
-      case Browser.FIREFOX:
+      case Browser.FIREFOX -> {
         JsonObject json = new JsonObject();
         json.addProperty("proxyType", "MANUAL");
         json.addProperty("httpProxy", getGridHub());
@@ -857,13 +827,17 @@ public class SeleniumWebDriver {
         json.addProperty("sslProxy", getGridHub());
         json.addProperty("sslProxyPort", getGridHubPort());
         desiredCapabilities.setCapability("proxy", json);
-        break;
-      case Browser.CHROME:
-      default:
+      }
+      case Browser.CHROME -> {
         Proxy proxy = new Proxy();
         proxy.setHttpProxy(proxyAddress).setFtpProxy(proxyAddress).setSslProxy(proxyAddress);
         desiredCapabilities.setCapability(CapabilityType.PROXY, proxy);
-        break;
+      }
+      default -> {
+        Proxy proxy = new Proxy();
+        proxy.setHttpProxy(proxyAddress).setFtpProxy(proxyAddress).setSslProxy(proxyAddress);
+        desiredCapabilities.setCapability(CapabilityType.PROXY, proxy);
+      }
     }
   }
 
