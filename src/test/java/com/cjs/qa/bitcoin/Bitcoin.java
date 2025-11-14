@@ -39,10 +39,12 @@ public class Bitcoin {
 
   @Override
   public String toString() {
-    StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("Date Time Stamp:[" + getDateTimeStamp() + "], ");
-    stringBuilder.append("Rate:[" + getRate() + "], ");
-    stringBuilder.append("Rate Float:[" + getRateFloat() + "]");
-    return stringBuilder.toString();
+    // Java 17: Text block for cleaner string formatting
+    return
+        """
+        Date Time Stamp:[%s], Rate:[%s], Rate Float:[%s]
+        """
+        .formatted(getDateTimeStamp(), getRate(), getRateFloat())
+        .trim();
   }
 }

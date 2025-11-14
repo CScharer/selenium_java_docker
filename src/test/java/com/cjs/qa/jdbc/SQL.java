@@ -622,27 +622,29 @@ public class SQL {
     // "+JDBCConstants.FROM+"[tblURLs]
     // "+JDBCConstants.WHERE+"[ABBREVIATION] = '" + company + "'
     // " +
-    // JDBCConstants.AND + "[ENVIRONMENT] = '" + environment +
-    // "'"
+    // Java 17: Text block for cleaner SQL query construction
     String sql =
-        JDBCConstants.SELECT
-            + "["
-            + TABLE_ENVIRONMENTS
-            + "].[URL] "
-            + JDBCConstants.FROM
-            + "["
-            + TABLE_ENVIRONMENTS
-            + "] "
-            + JDBCConstants.WHERE
-            + "["
-            + TABLE_ENVIRONMENTS
-            + "].[Environment]='"
-            + environment
-            + "'";
-    if (!"".equals(company)) {
-      sql +=
-          " " + JDBCConstants.AND + "[" + TABLE_ENVIRONMENTS + "].[Abbreviation]='" + company + "'";
-    }
+            """
+        %s[%s].[URL] %s[%s] %s[%s].[Environment]='%s'%s
+        """
+            .formatted(
+                JDBCConstants.SELECT,
+                TABLE_ENVIRONMENTS,
+                JDBCConstants.FROM,
+                TABLE_ENVIRONMENTS,
+                JDBCConstants.WHERE,
+                TABLE_ENVIRONMENTS,
+                environment,
+                (!"".equals(company)
+                    ? " "
+                        + JDBCConstants.AND
+                        + "["
+                        + TABLE_ENVIRONMENTS
+                        + "].[Abbreviation]='"
+                        + company
+                        + "'"
+                    : ""))
+            .trim();
     String url = null;
     final JDBC jdbc = new JDBC("", DATABASE_DEFINITION);
     try (ResultSet resultSet = jdbc.queryResults(sql)) {
@@ -660,31 +662,29 @@ public class SQL {
 
   public static String getUserName(String company, String environment)
       throws SQLException, ClassNotFoundException {
-    // final String sql = JDBCConstants.SELECT+"[UserName]
-    // "+JDBCConstants.FROM+"[tblURLs] WHERE [ABBREVIATION] = '"
-    // +
-    // company + "' "+JDBCConstants.AND+"[ENVIRONMENT] = '" +
-    // environment
-    // + "'"
+    // Java 17: Text block for cleaner SQL query construction
     String sql =
-        JDBCConstants.SELECT
-            + "["
-            + TABLE_ENVIRONMENTS
-            + "].[UserName] "
-            + JDBCConstants.FROM
-            + "["
-            + TABLE_ENVIRONMENTS
-            + "] "
-            + JDBCConstants.WHERE
-            + "["
-            + TABLE_ENVIRONMENTS
-            + "].[Environment]='"
-            + environment
-            + "'";
-    if (!"".equals(company)) {
-      sql +=
-          " " + JDBCConstants.AND + "[" + TABLE_ENVIRONMENTS + "].[Abbreviation]='" + company + "'";
-    }
+            """
+        %s[%s].[UserName] %s[%s] %s[%s].[Environment]='%s'%s
+        """
+            .formatted(
+                JDBCConstants.SELECT,
+                TABLE_ENVIRONMENTS,
+                JDBCConstants.FROM,
+                TABLE_ENVIRONMENTS,
+                JDBCConstants.WHERE,
+                TABLE_ENVIRONMENTS,
+                environment,
+                (!"".equals(company)
+                    ? " "
+                        + JDBCConstants.AND
+                        + "["
+                        + TABLE_ENVIRONMENTS
+                        + "].[Abbreviation]='"
+                        + company
+                        + "'"
+                    : ""))
+            .trim();
     String userName = null;
     final JDBC jdbc = new JDBC("", DATABASE_DEFINITION);
     try (ResultSet resultSet = jdbc.queryResults(sql)) {

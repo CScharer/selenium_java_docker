@@ -293,28 +293,29 @@ public class SeleniumWebDriver {
   }
 
   public void getSessionInformation() {
-    if (webDriver instanceof RemoteWebDriver || webDriver instanceof RemoteWebDriver) {
-      setCapabilities(((RemoteWebDriver) webDriver).getCapabilities());
-      setSessionId(((RemoteWebDriver) webDriver).getSessionId());
-    } else if (webDriver instanceof ChromeDriver) {
-      setCapabilities(((ChromeDriver) webDriver).getCapabilities());
-      setSessionId(((ChromeDriver) webDriver).getSessionId());
-    } else if (webDriver instanceof EdgeDriver) {
-      setCapabilities(((EdgeDriver) webDriver).getCapabilities());
-      setSessionId(((EdgeDriver) webDriver).getSessionId());
-    } else if (webDriver instanceof FirefoxDriver) {
-      setCapabilities(((FirefoxDriver) webDriver).getCapabilities());
-      setSessionId(((FirefoxDriver) webDriver).getSessionId());
-    } else if (webDriver instanceof InternetExplorerDriver) {
-      setCapabilities(((InternetExplorerDriver) webDriver).getCapabilities());
-      setSessionId(((InternetExplorerDriver) webDriver).getSessionId());
+    // Java 17: Pattern matching for instanceof (simplifies type checking and casting)
+    if (webDriver instanceof RemoteWebDriver remoteDriver) {
+      setCapabilities(remoteDriver.getCapabilities());
+      setSessionId(remoteDriver.getSessionId());
+    } else if (webDriver instanceof ChromeDriver chromeDriver) {
+      setCapabilities(chromeDriver.getCapabilities());
+      setSessionId(chromeDriver.getSessionId());
+    } else if (webDriver instanceof EdgeDriver edgeDriver) {
+      setCapabilities(edgeDriver.getCapabilities());
+      setSessionId(edgeDriver.getSessionId());
+    } else if (webDriver instanceof FirefoxDriver firefoxDriver) {
+      setCapabilities(firefoxDriver.getCapabilities());
+      setSessionId(firefoxDriver.getSessionId());
+    } else if (webDriver instanceof InternetExplorerDriver ieDriver) {
+      setCapabilities(ieDriver.getCapabilities());
+      setSessionId(ieDriver.getSessionId());
       // PhantomJS support removed - use Chrome/Firefox headless instead
-    } else if (webDriver instanceof HtmlUnitDriver) {
-      setCapabilities(((HtmlUnitDriver) webDriver).getCapabilities());
+    } else if (webDriver instanceof HtmlUnitDriver htmlUnitDriver) {
+      setCapabilities(htmlUnitDriver.getCapabilities());
       // setSessionId(((HtmlUnitDriver) webDriver).getSessionId())
-    } else if (webDriver instanceof SafariDriver) {
-      setCapabilities(((SafariDriver) webDriver).getCapabilities());
-      setSessionId(((SafariDriver) webDriver).getSessionId());
+    } else if (webDriver instanceof SafariDriver safariDriver) {
+      setCapabilities(safariDriver.getCapabilities());
+      setSessionId(safariDriver.getSessionId());
     } // Opera driver deprecated in Selenium 4
     // // else if (webDriver instanceof OperaDriver)
     // {

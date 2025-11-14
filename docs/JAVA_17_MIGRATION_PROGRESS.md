@@ -16,7 +16,7 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
 
 ### Switch Expressions
 
-**Total Converted**: 8 switch statements
+**Total Converted**: 10 switch statements
 
 1. ✅ **ExcelDataProvider.java** - `getCellValue()` method
    - Converted to switch expression with block syntax for complex NUMERIC case
@@ -51,6 +51,25 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
    - Switch expression with multiple case labels ("finished", "starting")
    - Expression-based default case
 
+10. ✅ **ScenariosTests.java** - `jenkins()` method
+    - Large switch expression with 14 cases
+    - Uses block syntax for complex cases (marlboro, microsoft, etc.)
+    - Cleaner arrow syntax throughout
+
+11. ✅ **SeleniumWebDriver.java** - `getSessionInformation()` method
+    - Pattern matching for instanceof (Java 17 feature)
+    - Eliminates explicit casting: `if (webDriver instanceof ChromeDriver chromeDriver)`
+    - Applied to 7 different WebDriver types
+
+12. ✅ **SQL.java** - `getURL()` and `getUserName()` methods
+    - Text blocks for SQL query construction
+    - Cleaner multi-line string formatting with `.formatted()`
+    - Improved readability for complex SQL queries
+
+13. ✅ **Bitcoin.java** - `toString()` method
+    - Text block for string formatting
+    - Uses `.formatted()` for variable substitution
+
 ---
 
 ## 📊 Migration Statistics
@@ -62,17 +81,22 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
 - `src/test/java/com/cjs/qa/utilities/SystemProcesses.java`
 - `src/test/java/com/cjs/qa/utilities/ReadFromExcel.java`
 - `src/test/java/com/cjs/qa/junit/tests/ScenariosTests.java`
+- `src/test/java/com/cjs/qa/selenium/SeleniumWebDriver.java`
+- `src/test/java/com/cjs/qa/jdbc/SQL.java`
+- `src/test/java/com/cjs/qa/bitcoin/Bitcoin.java`
 
 ### Lines Changed
-- **Insertions**: ~60 lines (switch expressions)
-- **Deletions**: ~75 lines (traditional switch statements)
-- **Net**: -15 lines (more concise code!)
+- **Insertions**: ~90 lines (switch expressions, text blocks, pattern matching)
+- **Deletions**: ~110 lines (traditional switch statements, instanceof casts)
+- **Net**: -20 lines (more concise code!)
 
 ### Code Quality Improvements
 - ✅ No `break` statements needed (prevents fall-through bugs)
 - ✅ Expression-based (can return values directly)
 - ✅ More readable and concise
 - ✅ Compiler ensures exhaustive coverage
+- ✅ Pattern matching eliminates explicit casting
+- ✅ Text blocks improve multi-line string readability
 
 ---
 
@@ -82,7 +106,7 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
 
 **High Priority** (Simple conversions):
 - ✅ `ReadFromExcel.java` - `whichTestType()` method (COMPLETED)
-- `ScenariosTests.java` - `jenkins()` method (1 large switch - may need refactoring)
+- ✅ `ScenariosTests.java` - `jenkins()` method (COMPLETED)
 
 **Medium Priority** (Complex, may need refactoring):
 - `PageObjectGenerator.java` - `generateMethodsForElement()` method
@@ -91,8 +115,11 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
 
 ### Text Blocks Opportunities
 
-**Potential Candidates**:
-- SQL query building in `SQL.java`
+**Completed**:
+- ✅ `SQL.java` - `getURL()` and `getUserName()` methods
+- ✅ `Bitcoin.java` - `toString()` method
+
+**Remaining Candidates**:
 - JSON/XML string building
 - HTML template generation
 - Multi-line log messages
@@ -113,8 +140,11 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
 
 ### Pattern Matching Opportunities
 
-**instanceof Checks**:
-- Search for `instanceof` followed by explicit casting
+**Completed**:
+- ✅ `SeleniumWebDriver.java` - `getSessionInformation()` method (7 instanceof checks)
+
+**Remaining Candidates**:
+- Search for remaining `instanceof` followed by explicit casting
 - Convert to pattern matching: `if (obj instanceof String str)`
 
 ---
