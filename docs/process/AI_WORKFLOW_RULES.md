@@ -792,6 +792,40 @@ git push origin --delete hotfix/critical-issue-description
 - Document commits made on feature branch
 - Include testing performed before merge
 
+**5. Post-Merge: Update CHANGE.log (MANDATORY)**
+After PR is merged to main:
+```bash
+# 1. Switch to main and pull latest
+git checkout main
+git pull origin main
+
+# 2. Get merge commit hash
+git log -1 --format=%h
+
+# 3. Get current timestamp
+date "+%Y-%m-%d %H:%M:%S"
+
+# 4. Update CHANGE.log with:
+#    - Merge commit hash (from step 2)
+#    - Current timestamp (from step 3)
+#    - PR number and branch name
+#    - Summary of all changes in the PR
+#    - Testing performed
+#    - Impact and next steps
+
+# 5. Commit and push CHANGE.log update
+git add docs/CHANGE.log
+git commit -m "docs: Update CHANGE.log for PR #X merge"
+git push origin main
+```
+
+**CRITICAL:** CHANGE.log MUST be updated after EVERY PR merge, even if:
+- PR was merged via GitHub UI (not locally)
+- Changes were small/minor
+- Documentation-only changes
+
+**Why:** CHANGE.log is the official project history. Missing entries create gaps in documentation.
+
 ---
 
 ### **Rule 9: Test Case Maintenance & Modernization** 🧪 **NEW**
