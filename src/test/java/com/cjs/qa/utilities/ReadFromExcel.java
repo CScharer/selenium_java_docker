@@ -6,23 +6,21 @@ import java.util.Locale;
 public class ReadFromExcel {
 
   public void whichTestType(String type) {
-
+    // Java 17: Switch expression (void method, so using block syntax)
     switch (type.toLowerCase(Locale.ENGLISH)) {
-      case "policyverification":
+      case "policyverification" -> {
         // go to policyVerification class to do all the things
-        break;
-      case "policyverificationbuild":
+      }
+      case "policyverificationbuild" -> {
         // go to policyVerificationBuild class to do all the things
-        break;
-      case "policyentry":
+      }
+      case "policyentry" -> {
         // go to policyEntry class to do all the things
-        break;
-      case "policyentrybuild":
+      }
+      case "policyentrybuild" -> {
         // go to policyEntryBuild class to do all the things
-        break;
-      default:
-        Environment.sysOut("Unknown test type: " + type + ". No action taken.");
-        break;
+      }
+      default -> Environment.sysOut("Unknown test type: " + type + ". No action taken.");
     }
   }
 }

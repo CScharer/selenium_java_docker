@@ -293,13 +293,12 @@ public class ScenariosTests {
     Environment.sysOut(dataTable.toString());
     int count = 0;
     for (final Entry<String, Integer> entry : mapTestCount.entrySet()) {
+      // Java 17: Switch expression with multiple case labels
       switch (entry.getKey()) {
-        case "finished":
-        case "starting":
-          break;
-        default:
-          count += entry.getValue();
-          break;
+        case "finished", "starting" -> {
+          // Skip these entries
+        }
+        default -> count += entry.getValue();
       }
       Environment.sysOut(entry.getKey() + ":[" + entry.getValue() + "]");
     }
