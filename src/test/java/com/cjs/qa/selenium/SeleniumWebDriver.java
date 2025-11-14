@@ -460,15 +460,16 @@ public class SeleniumWebDriver {
         }
       } else {
 
+        // Java 17: Switch expression with block syntax for complex cases
         switch (getBrowser().toLowerCase(Locale.ENGLISH)) {
-          case Browser.EDGE:
+          case Browser.EDGE -> {
             // WebDriverManager automatically downloads and sets up Edge driver
             WebDriverManager.edgedriver().setup();
             EdgeOptions edgeOpts = new EdgeOptions();
             edgeOpts.merge(desiredCapabilities);
             setWebDriver(new EdgeDriver(edgeOpts));
-            break;
-          case Browser.FIREFOX:
+          }
+          case Browser.FIREFOX -> {
             // WebDriverManager automatically downloads and sets up Gecko driver
             WebDriverManager.firefoxdriver().setup();
             final FirefoxOptions firefoxOptions = new FirefoxOptions();
@@ -503,8 +504,8 @@ public class SeleniumWebDriver {
                 service.stop();
               }
             }
-            break;
-          case Browser.HTML_UNIT:
+          }
+          case Browser.HTML_UNIT -> {
             // setWebDriver(new
             // HtmlUnitDriver(desiredCapabilities));
             setWebDriver(new HtmlUnitDriver(desiredCapabilities));
@@ -520,20 +521,20 @@ public class SeleniumWebDriver {
             // {
             // Environment.sysOut(e);
             // }
-            break;
-          case Browser.IE: // (very slow)
-          case Browser.INTERNET_EXPLORER:
+          }
+          case Browser.IE, Browser.INTERNET_EXPLORER -> {
+            // (very slow)
             // WebDriverManager automatically downloads and sets up IE driver
             WebDriverManager.iedriver().setup();
             InternetExplorerOptions ieOpts = new InternetExplorerOptions();
             ieOpts.merge(desiredCapabilities);
             setWebDriver(new InternetExplorerDriver(ieOpts));
-            break;
-          case Browser.SAFARI:
+          }
+          case Browser.SAFARI -> {
             // Safari driver is bundled with Safari - no WebDriverManager needed
             setWebDriver(new SafariDriver());
-            break;
-          case Browser.CHROME:
+          }
+          case Browser.CHROME -> {
             // WebDriverManager automatically downloads and sets up Chrome driver
             WebDriverManager.chromedriver().setup();
             // final ChromeOptions chromeOptions =
@@ -542,13 +543,13 @@ public class SeleniumWebDriver {
             final ChromeOptions chromeOptions = setChromeOptions(null, null);
             setWebDriver(new ChromeDriver(chromeOptions));
             // setWebDriver(new ChromeDriver(desiredCapabilities));
-            break;
-          default:
+          }
+          default -> {
             // Default to Chrome
             WebDriverManager.chromedriver().setup();
             final ChromeOptions defaultChromeOptions = setChromeOptions(null, null);
             setWebDriver(new ChromeDriver(defaultChromeOptions));
-            break;
+          }
         }
       }
       getSessionInformation();
@@ -656,35 +657,32 @@ public class SeleniumWebDriver {
     final EDriverProperties eDriverProperties =
         EDriverProperties.fromString(browser.toUpperCase(Locale.ENGLISH));
     DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+    // Java 17: Switch expression with block syntax for complex cases
     switch (browser.toLowerCase(Locale.ENGLISH)) {
-      case "android":
-        desiredCapabilities = new DesiredCapabilities();
-        break;
-      case Browser.CHROME:
+      case "android" -> desiredCapabilities = new DesiredCapabilities();
+      case Browser.CHROME -> {
         final ChromeOptions chromeOptions = setChromeOptions(null, null);
         desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.merge(chromeOptions);
-        break;
-      case Browser.EDGE:
+      }
+      case Browser.EDGE -> {
         EdgeOptions edgeOpts2 = new EdgeOptions();
         desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.merge(edgeOpts2);
-        break;
-      case Browser.FIREFOX:
+      }
+      case Browser.FIREFOX -> {
         final FirefoxOptions firefoxOptions = new FirefoxOptions();
         firefoxOptions.setBinary(eDriverProperties.getPathBinary());
         desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.merge(firefoxOptions);
-        break;
-      case Browser.HTML_UNIT:
+      }
+      case Browser.HTML_UNIT -> {
         desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setBrowserName(Browser.HTML_UNIT);
-        break;
-      case Browser.HTML_UNIT_WITH_JS:
-        desiredCapabilities = new DesiredCapabilities();
-        break;
-      case Browser.IE: // (very slow)
-      case Browser.INTERNET_EXPLORER:
+      }
+      case Browser.HTML_UNIT_WITH_JS -> desiredCapabilities = new DesiredCapabilities();
+      case Browser.IE, Browser.INTERNET_EXPLORER -> {
+        // (very slow)
         InternetExplorerOptions ieOpts2 = new InternetExplorerOptions();
         ieOpts2.introduceFlakinessByIgnoringSecurityDomains();
         ieOpts2.ignoreZoomSettings();
@@ -693,23 +691,18 @@ public class SeleniumWebDriver {
         desiredCapabilities.merge(ieOpts2);
         desiredCapabilities.setCapability(
             eDriverProperties.getWebDriverType(), eDriverProperties.getPathDriver());
-        break;
-      case "ipad":
-        desiredCapabilities = new DesiredCapabilities();
-        break;
-      case "iphone":
-        desiredCapabilities = new DesiredCapabilities();
-        break;
+      }
+      case "ipad", "iphone" -> desiredCapabilities = new DesiredCapabilities();
         // PhantomJS support removed - use Chrome/Firefox headless instead
-      case Browser.SAFARI:
+      case Browser.SAFARI -> {
         SafariOptions safariOpts = new SafariOptions();
         desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.merge(safariOpts);
-        break;
-      default:
+      }
+      default -> {
         Environment.sysOut("Unknown browser: " + browser + ". Using default capabilities.");
         desiredCapabilities = new DesiredCapabilities();
-        break;
+      }
     }
     // Java 17: Switch expression with multiple case labels
     switch (operatingSystem.toLowerCase(Locale.ENGLISH)) {
