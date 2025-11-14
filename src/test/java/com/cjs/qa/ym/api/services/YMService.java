@@ -30,13 +30,6 @@ public class YMService {
     return EAPIKeys.VIVIT_YM_API_SA_PASSCODE.getValue();
   }
 
-  // Deprecated: Use getApiKey() instead
-  // Will be removed after migration to Secret Manager is complete
-  @Deprecated public static final String API_KEY = "1879E438-29E0-41C2-AFAD-3E11A84BBEF7";
-
-  // Deprecated: Use getApiSaPasscode() instead
-  // Will be removed after migration to Secret Manager is complete
-  @Deprecated public static final String API_SA_PASSCODE = "HNe6RO84P5sI";
   // 2.25
   public static final String API_VERSION = "2.30";
   public static final String API_HEADER =
