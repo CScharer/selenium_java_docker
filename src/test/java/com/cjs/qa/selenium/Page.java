@@ -236,7 +236,8 @@ public class Page extends JavaHelpers {
       setPreviousWebElement(webElement);
       // setPreviousBorder((String)
       // (executeJavaScript(getScriptGetElementBorder(), webElement)))
-      if (getWebDriver() instanceof JavascriptExecutor) {
+      // Java 17: Pattern matching for instanceof
+      if (getWebDriver() instanceof JavascriptExecutor jsExecutor) {
         setPreviousBorder((String) executeJavaScript(getScriptGetElementBorder(), webElement));
       }
       return true;
@@ -279,7 +280,8 @@ public class Page extends JavaHelpers {
         // if there already is a highlighted element, un-highlight it
         // executeJavaScript(getScriptUnhighlightElement(),
         // getPreviousWebElement(), getPreviousBorder())
-        if (webDriver instanceof JavascriptExecutor) {
+        // Java 17: Pattern matching for instanceof
+        if (webDriver instanceof JavascriptExecutor jsExecutor) {
           executeJavaScript(
               getScriptUnhighlightElement(), getPreviousWebElement(), getPreviousBorder());
           success = true;

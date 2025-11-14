@@ -106,18 +106,16 @@ public class SearchPage extends Page {
   public void validateGroup(String group) {
     // Default
     final String groupUpper = group.toUpperCase(Locale.ENGLISH);
-    String url = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
-    switch (groupUpper) {
-      case "LUGS":
-        url = VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
-        break;
-      case "SIGS":
-        url = VivitEnvironment.URL_LOGIN + "?page=SIGS";
-        break;
-      default:
-        Environment.sysOut("Unknown group type: " + groupUpper + ". Using default LUGS URL.");
-        break;
-    }
+    // Java 17: Switch expression returning value directly
+    String url =
+        switch (groupUpper) {
+          case "LUGS" -> VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
+          case "SIGS" -> VivitEnvironment.URL_LOGIN + "?page=SIGS";
+          default -> {
+            Environment.sysOut("Unknown group type: " + groupUpper + ". Using default LUGS URL.");
+            yield VivitEnvironment.URL_LOGIN + "?page=LocalUserGroups";
+          }
+        };
     getWebDriver().get(url);
     final List<WebElement> webElements = getWebDriver().findElements(linksGroups);
     Environment.sysOut("Total " + groupUpper + ":[" + webElements.size() + "]");

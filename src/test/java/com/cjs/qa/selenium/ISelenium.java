@@ -758,8 +758,9 @@ public interface ISelenium {
       // AppEnvironment.sysOut("desiredCapabilities:[" +
       // desiredCapabilities.toString() + "]");
       final String browserLowercase = browser.toLowerCase(Locale.ENGLISH);
+      // Java 17: Switch expression with block syntax for complex cases
       switch (browserLowercase) {
-        case "firefox":
+        case "firefox" -> {
           // webDriver = new FirefoxDriver(desiredCapabilities);
           final String proxy = "localhost";
           final int port = 8080;
@@ -798,11 +799,9 @@ public interface ISelenium {
               service.stop();
             }
           }
-          break;
-        case "htmlunit":
-          webDriver = new HtmlUnitDriver(desiredCapabilities);
-          break;
-        default:
+        }
+        case "htmlunit" -> webDriver = new HtmlUnitDriver(desiredCapabilities);
+        default -> {
           if (remote) {
             if ("firefox".equals(browserLowercase)) {
               System.setProperty(
@@ -825,7 +824,7 @@ public interface ISelenium {
           } else {
             webDriver = browserProfiling(webDriver, browser);
           }
-          break;
+        }
       }
       // webDriver = (WebDriver) new
       // DefaultSelenium(SELENIUM_GRID_HUB_NAME,

@@ -16,7 +16,7 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
 
 ### Switch Expressions
 
-**Total Converted**: 17 switch statements
+**Total Converted**: 21 switch statements
 
 1. ✅ **ExcelDataProvider.java** - `getCellValue()` method
    - Converted to switch expression with block syntax for complex NUMERIC case
@@ -111,6 +111,43 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
     - Complex block syntax for Firefox (includes try-finally)
     - Handles all browser initialization scenarios
 
+24. ✅ **SearchPage.java** - `validateGroup()` method
+    - Switch expression returning URL value directly
+    - Uses yield for default case with logging
+
+25. ✅ **SystemProcesses.java** - `getFieldsProcessMap()` method
+    - Switch expression with block syntax for process type fields
+    - Handles APPS, M, SVC, V process types
+
+26. ✅ **Environment.java** - `setEnvironmentFileStructure()` method
+    - Large switch expression with 14 project cases
+    - Multiple case labels for core/jenkins/testclasssetup
+    - Block syntax for all cases
+
+27. ✅ **ISelenium.java** - `initializeWebDriver()` method
+    - Switch expression with complex Firefox case (try-finally)
+    - Handles htmlunit and default cases
+
+### Pattern Matching (instanceof)
+
+**Total Converted**: 22 instanceof checks
+
+28. ✅ **Page.java** - `highlightCurrentElement()` and `unhighlightPreviousElement()` methods
+    - 2 instanceof checks for JavascriptExecutor
+
+29. ✅ **XLSX.java** - `setCellValue()` method
+    - 5 instanceof checks (Boolean, Double, Float, Integer, String)
+
+30. ✅ **XLS.java** - `setCellValue()` method
+    - 5 instanceof checks (Boolean, Double, Float, Integer, String)
+
+### Records
+
+31. ✅ **Bitcoin.java** - Converted to Record
+    - Immutable data class with 3 fields
+    - Automatic equals(), hashCode(), toString()
+    - Updated BitcoinTests.java to use Record accessors (no 'get' prefix)
+
 ---
 
 ## 📊 Migration Statistics
@@ -126,11 +163,18 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
 - `src/test/java/com/cjs/qa/jdbc/SQL.java`
 - `src/test/java/com/cjs/qa/bitcoin/Bitcoin.java`
 - `src/test/java/com/cjs/qa/selenium/Selenium.java`
+- `src/test/java/com/cjs/qa/vivit/pages/SearchPage.java`
+- `src/test/java/com/cjs/qa/core/Environment.java`
+- `src/test/java/com/cjs/qa/selenium/ISelenium.java`
+- `src/test/java/com/cjs/qa/selenium/Page.java`
+- `src/test/java/com/cjs/qa/microsoft/excel/xlsx/XLSX.java`
+- `src/test/java/com/cjs/qa/microsoft/excel/xls/XLS.java`
+- `src/test/java/com/cjs/qa/junit/tests/BitcoinTests.java`
 
 ### Lines Changed
-- **Insertions**: ~180 lines (switch expressions, text blocks, pattern matching)
-- **Deletions**: ~250 lines (traditional switch statements, instanceof casts)
-- **Net**: -70 lines (more concise code!)
+- **Insertions**: ~250 lines (switch expressions, text blocks, pattern matching, records)
+- **Deletions**: ~350 lines (traditional switch statements, instanceof casts, getters/setters)
+- **Net**: -100 lines (more concise code!)
 
 ### Code Quality Improvements
 - ✅ No `break` statements needed (prevents fall-through bugs)
@@ -170,8 +214,11 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
 
 ### Records Opportunities
 
-**Potential Candidates** (Need careful evaluation):
-- `Bitcoin.java` - Simple data class (3 fields)
+**Completed**:
+- ✅ `Bitcoin.java` - Converted to Record (3 fields, immutable)
+  - Updated BitcoinTests.java to use Record accessors
+
+**Remaining Candidates** (Need careful evaluation):
 - `Item.java` - If not using JAXB annotations
 - Simple DTOs without setters
 
@@ -186,6 +233,9 @@ This document tracks the progress of migrating the codebase to use Java 17 featu
 - ✅ `SeleniumWebDriver.java` - `getSessionInformation()` method (7 instanceof checks)
 - ✅ `SQL.java` - `parseQuote()` method (1 instanceof check)
 - ✅ `Selenium.java` - `getSessionInformation()` method (7 instanceof checks)
+- ✅ `Page.java` - `highlightCurrentElement()` and `unhighlightPreviousElement()` (2 instanceof checks)
+- ✅ `XLSX.java` - `setCellValue()` method (5 instanceof checks)
+- ✅ `XLS.java` - `setCellValue()` method (5 instanceof checks)
 
 **Remaining Candidates**:
 - Search for remaining `instanceof` followed by explicit casting

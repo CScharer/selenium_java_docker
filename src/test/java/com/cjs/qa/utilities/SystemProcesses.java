@@ -146,30 +146,30 @@ public final class SystemProcesses {
       final List<String> listFieldsProcess = new ArrayList<>();
       List<String> listFieldsTemp = new ArrayList<>();
       listFieldsProcess.addAll(LIST_FIELDS_PROCESS_STANDARD);
+      // Java 17: Switch expression with block syntax
       switch (processType) {
-        case "APPS":
+        case "APPS" -> {
           listFieldsTemp = Arrays.asList("Mem Usage;Package Name".split(Constants.DELIMETER_LIST));
           listFieldsProcess.addAll(listFieldsTemp);
-          break;
-        case "M":
+        }
+        case "M" -> {
           listFieldsTemp = Arrays.asList("Modules".split(Constants.DELIMETER_LIST));
           listFieldsProcess.addAll(listFieldsTemp);
-          break;
-        case "SVC":
+        }
+        case "SVC" -> {
           listFieldsTemp = Arrays.asList("Services".split(Constants.DELIMETER_LIST));
           listFieldsProcess.addAll(listFieldsTemp);
-          break;
-        case "V":
+        }
+        case "V" -> {
           listFieldsTemp =
               Arrays.asList(
                   "Session Name;Session#;Mem Usage;Status;User Name;CPU Time;Window Title"
                       .split(Constants.DELIMETER_LIST));
           listFieldsProcess.addAll(listFieldsTemp);
-          break;
-        default:
-          Environment.sysOut(
-              "Unknown process type: " + processType + ". Using standard fields only.");
-          break;
+        }
+        default ->
+            Environment.sysOut(
+                "Unknown process type: " + processType + ". Using standard fields only.");
       }
       fieldsProcessMap.put(processType, listFieldsProcess);
       sqlStringBuilder.append(
