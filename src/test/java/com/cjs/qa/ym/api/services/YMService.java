@@ -2,6 +2,7 @@ package com.cjs.qa.ym.api.services;
 
 import com.cjs.qa.core.Environment;
 import com.cjs.qa.core.QAException;
+import com.cjs.qa.core.security.EAPIKeys;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.IHTTP;
@@ -19,8 +20,23 @@ import java.util.Map;
 import org.junit.Assert;
 
 public class YMService {
-  public static final String API_KEY = "1879E438-29E0-41C2-AFAD-3E11A84BBEF7";
-  public static final String API_SA_PASSCODE = "HNe6RO84P5sI";
+  // API credentials migrated to Google Cloud Secret Manager via EAPIKeys enum
+  // See: docs/issues/open/hardcoded-api-keys-and-secrets.md
+  public static String getApiKeyValue() {
+    return EAPIKeys.VIVIT_YM_API_KEY.getValue();
+  }
+
+  public static String getApiSaPasscodeValue() {
+    return EAPIKeys.VIVIT_YM_API_SA_PASSCODE.getValue();
+  }
+
+  // Deprecated: Use getApiKey() instead
+  // Will be removed after migration to Secret Manager is complete
+  @Deprecated public static final String API_KEY = "1879E438-29E0-41C2-AFAD-3E11A84BBEF7";
+
+  // Deprecated: Use getApiSaPasscode() instead
+  // Will be removed after migration to Secret Manager is complete
+  @Deprecated public static final String API_SA_PASSCODE = "HNe6RO84P5sI";
   // 2.25
   public static final String API_VERSION = "2.30";
   public static final String API_HEADER =
@@ -188,7 +204,7 @@ public class YMService {
   }
 
   public static String getAPIKey() throws Throwable {
-    return Constants.nlTab(1, 1) + "<ApiKey>" + API_KEY + "</ApiKey>";
+    return Constants.nlTab(1, 1) + "<ApiKey>" + getApiKeyValue() + "</ApiKey>";
   }
 
   public static String getCallID() throws Throwable {
@@ -205,7 +221,7 @@ public class YMService {
   }
 
   public static String getSAPasscode() throws Throwable {
-    return Constants.nlTab(1, 1) + "<SaPasscode>" + API_SA_PASSCODE + "</SaPasscode>";
+    return Constants.nlTab(1, 1) + "<SaPasscode>" + getApiSaPasscodeValue() + "</SaPasscode>";
   }
 
   public static String getVersion() throws Throwable {

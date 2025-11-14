@@ -29,7 +29,7 @@ public class AuthNamespace extends GTWebinarServiceTests {
     stringBuilder.append(Constants.nlTab(1, 1) + "\"grant_type\":\"" + "password" + "\",");
     stringBuilder.append(Constants.nlTab(1, 1) + "\"user_id\":\"" + USER_ID + "\",");
     stringBuilder.append(Constants.nlTab(1, 1) + "\"password\":\"" + PASSWORD + "\",");
-    stringBuilder.append(Constants.nlTab(1, 1) + "\"client_id\":\"" + API_CONSUMER_KEY + "\"");
+    stringBuilder.append(Constants.nlTab(1, 1) + "\"client_id\":\"" + getApiConsumerKey() + "\"");
     stringBuilder.append(Constants.nlTab(1, 0) + "}");
     // Map<String, String> mapResponse = getAPIJSONResponse(credentials,
     // "POST", stringBuilder.toString(),
@@ -43,7 +43,7 @@ public class AuthNamespace extends GTWebinarServiceTests {
     curlStringBuilder.append("-d \"grant_type=\"password\"");
     curlStringBuilder.append("&user_id=\"" + USER_ID + "\"");
     curlStringBuilder.append("&password=\"" + PASSWORD + "\"");
-    curlStringBuilder.append("&client_id=\"" + API_CONSUMER_KEY + "\"");
+    curlStringBuilder.append("&client_id=\"" + getApiConsumerKey() + "\"");
     String command = "cmd /C " + curlStringBuilder.toString();
     Environment.sysOut("command:[" + command + "]");
     final Map<String, String> mapResponse = CommandLineTests.runProcess(command, true);

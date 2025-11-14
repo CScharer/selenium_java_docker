@@ -1,6 +1,7 @@
 package com.cjs.qa.gt.api.services;
 
 import com.cjs.qa.core.Environment;
+import com.cjs.qa.core.security.EAPIKeys;
 import com.cjs.qa.rest.REST;
 import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.IExtension;
@@ -18,8 +19,24 @@ public class GTWebinarServiceTests {
   // This password is currently hardcoded and should be moved to Secret Manager
   // See: docs/issues/open/cleanup-hardcoded-passwords.md
   public static final String PASSWORD = "vivitrules1";
-  public static final String API_CONSUMER_KEY = "WGhbDnxCGUwKNABGKeymjoII4gqalCa3";
-  public static final String API_CONSUMER_SECRET = "DdkRQTJGLq4VF20t";
+
+  // API credentials migrated to Google Cloud Secret Manager via EAPIKeys enum
+  // See: docs/issues/open/hardcoded-api-keys-and-secrets.md
+  public static String getApiConsumerKey() {
+    return EAPIKeys.VIVIT_GT_WEBINAR_CONSUMER_KEY.getValue();
+  }
+
+  public static String getApiConsumerSecret() {
+    return EAPIKeys.VIVIT_GT_WEBINAR_CONSUMER_SECRET.getValue();
+  }
+
+  // Deprecated: Use getApiConsumerKey() instead
+  // Will be removed after migration to Secret Manager is complete
+  @Deprecated public static final String API_CONSUMER_KEY = "WGhbDnxCGUwKNABGKeymjoII4gqalCa3";
+
+  // Deprecated: Use getApiConsumerSecret() instead
+  // Will be removed after migration to Secret Manager is complete
+  @Deprecated public static final String API_CONSUMER_SECRET = "DdkRQTJGLq4VF20t";
   public static final String API_VERSION = "v2";
   public static final String URL_GT = "https://api.getgo" + IExtension.COM + "/";
   public static final String API_GT_AUTH = URL_GT + "/oauth/" + API_VERSION;
@@ -88,7 +105,7 @@ public class GTWebinarServiceTests {
   }
 
   public static String getAPIKey() throws Throwable {
-    return Constants.nlTab(1, 1) + "<ApiKey>" + API_CONSUMER_KEY + "</ApiKey>";
+    return Constants.nlTab(1, 1) + "<ApiKey>" + getApiConsumerKey() + "</ApiKey>";
   }
 
   public static String getAccessToken() {
