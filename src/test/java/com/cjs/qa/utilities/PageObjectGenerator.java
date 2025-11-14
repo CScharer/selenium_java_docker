@@ -2,6 +2,7 @@ package com.cjs.qa.utilities;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
@@ -155,6 +157,22 @@ public class PageObjectGenerator {
     options.addArguments("--no-sandbox");
     options.addArguments("--disable-dev-shm-usage");
     options.addArguments("--disable-gpu");
+
+    // Check if running in CI/Docker with Selenium Grid
+    String gridUrl = System.getenv("SELENIUM_REMOTE_URL");
+    if (gridUrl != null && !gridUrl.isEmpty()) {
+      log.info("Using Selenium Grid: {}", gridUrl);
+      try {
+        return new RemoteWebDriver(new URI(gridUrl).toURL(), options);
+      } catch (Exception e) {
+        log.error("Failed to connect to Grid at {}: {}", gridUrl, e.getMessage());
+        log.warn("Falling back to local ChromeDriver");
+        return new ChromeDriver(options);
+      }
+    }
+
+    // Local execution - use ChromeDriver directly
+    log.info("Using local ChromeDriver");
     return new ChromeDriver(options);
   }
 
