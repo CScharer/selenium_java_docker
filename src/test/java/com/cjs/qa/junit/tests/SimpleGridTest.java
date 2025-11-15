@@ -2,7 +2,7 @@ package com.cjs.qa.junit.tests;
 
 import com.cjs.qa.utilities.AllureHelper;
 import io.qameta.allure.*;
-import java.net.URL;
+import java.net.URI;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -46,7 +46,7 @@ public class SimpleGridTest {
     options.addArguments("--disable-dev-shm-usage");
     options.addArguments("--disable-gpu");
 
-    driver = new RemoteWebDriver(new URL(gridUrl), options);
+    driver = new RemoteWebDriver(URI.create(gridUrl).toURL(), options);
     LOGGER.info("✅ Driver initialized in {} mode", isHeadless ? "headless" : "headed");
     LOGGER.info("✅ Successfully connected to Grid!");
   }

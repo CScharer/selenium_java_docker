@@ -159,23 +159,29 @@ public class Atlassian {
   }
 
   public static String getString(Atlassian atlassian) {
-    final StringBuilder stringBuilder = new StringBuilder();
+    // final StringBuilder stringBuilder = new StringBuilder();
     final Constants c = new Constants();
     c.setFormatPretty(true);
-    int newLine = 0;
-    if (c.isFormatPretty()) {
-      newLine = 1;
-    }
+    final int newLine = c.isFormatPretty() ? 1 : 0;
     final int tab = 0;
-    stringBuilder.append(
-        Constants.nlTab(newLine, tab) + "Bamboo URL:[" + atlassian.getBamboo().getUrl() + "]");
-    stringBuilder.append(
-        Constants.nlTab(newLine, tab) + "Confluence URL:[" + atlassian.getConfluence().getUrl() + "]");
-    stringBuilder.append(
-        Constants.nlTab(newLine, tab) + "Crowd URL:[" + atlassian.getCrowd().getUrl() + "]");
-    stringBuilder.append(Constants.nlTab(newLine, tab) + "Jira URL:[" + atlassian.getJira().getUrl() + "]");
-    stringBuilder.append(
-        Constants.nlTab(newLine, tab) + "Stash URL:[" + atlassian.getStash().getUrl() + "]");
-    return stringBuilder.toString();
+    String prefix = Constants.nlTab(newLine, tab);
+    // stringBuilder
+    //   .append(Constants.nlTab(newLine, tab) + "Bamboo URL:[" + atlassian.getBamboo().getUrl() + "]")
+    //   .append(Constants.nlTab(newLine, tab) + "Confluence URL:[" + atlassian.getConfluence().getUrl() + "]")
+    //   .append(Constants.nlTab(newLine, tab) + "Crowd URL:[" + atlassian.getCrowd().getUrl() + "]")
+    //   .append(Constants.nlTab(newLine, tab) + "Jira URL:[" + atlassian.getJira().getUrl() + "]")
+    //   .append(Constants.nlTab(newLine, tab) + "Stash URL:[" + atlassian.getStash().getUrl() + "]");
+    // return stringBuilder.toString();
+    
+    // String.format handles the layout and efficient building
+    String result = String.format(
+      "%sBamboo URL:[%s]%sConfluence URL:[%s]%sCrowd URL:[%s]%sJira URL:[%s]%sStash URL:[%s]",
+      prefix, atlassian.getBamboo().getUrl(),
+      prefix, atlassian.getConfluence().getUrl(),
+      prefix, atlassian.getCrowd().getUrl(),
+      prefix, atlassian.getJira().getUrl(),
+      prefix, atlassian.getStash().getUrl()
+    );
+    return result;
   }
 }

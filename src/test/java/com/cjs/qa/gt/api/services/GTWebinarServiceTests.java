@@ -8,7 +8,7 @@ import com.cjs.qa.utilities.Constants;
 import com.cjs.qa.utilities.IExtension;
 import com.cjs.qa.utilities.IHTTP;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
 import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
@@ -53,7 +53,7 @@ public class GTWebinarServiceTests {
     if (!serviceActive) {
       try {
         final HttpURLConnection httpUrlConnection =
-            (HttpURLConnection) new URL(URL_GT).openConnection();
+            (HttpURLConnection) URI.create(URL_GT).toURL().openConnection();
         httpUrlConnection.setRequestMethod("HEAD");
         final int responseCode = httpUrlConnection.getResponseCode();
         if (!(responseCode >= HttpURLConnection.HTTP_OK

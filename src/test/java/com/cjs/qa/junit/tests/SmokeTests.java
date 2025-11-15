@@ -2,7 +2,7 @@ package com.cjs.qa.junit.tests;
 
 import com.cjs.qa.utilities.AllureHelper;
 import io.qameta.allure.*;
-import java.net.URL;
+import java.net.URI;
 import java.time.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -61,7 +61,7 @@ public class SmokeTests {
     options.addArguments("--disable-dev-shm-usage");
     options.addArguments("--disable-gpu");
 
-    driver = new RemoteWebDriver(new URL(gridUrl), options);
+    driver = new RemoteWebDriver(URI.create(gridUrl).toURL(), options);
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
 

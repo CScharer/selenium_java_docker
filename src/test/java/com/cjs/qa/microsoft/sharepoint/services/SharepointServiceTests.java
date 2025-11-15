@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -33,7 +34,7 @@ public class SharepointServiceTests {
   public SharepointServiceTests() {
     try {
       final HttpURLConnection httpUrlConnection =
-          (HttpURLConnection) new URL(URL_SHAREPOINT).openConnection();
+          (HttpURLConnection) URI.create(URL_SHAREPOINT).toURL().openConnection();
       httpUrlConnection.setRequestMethod("HEAD");
       final int responseCode = httpUrlConnection.getResponseCode();
       if (!(responseCode >= HttpURLConnection.HTTP_OK
@@ -120,7 +121,7 @@ public class SharepointServiceTests {
     int responseCode = -1;
     HttpURLConnection httpURLConnection = null;
     try {
-      final URL oURL = new URL(url);
+      final URL oURL = URI.create(url).toURL();
       httpURLConnection = (HttpURLConnection) oURL.openConnection();
       httpURLConnection.setDoOutput(true);
       // httpURLConnection.setInstanceFollowRedirects(false);
