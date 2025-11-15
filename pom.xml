@@ -737,6 +737,9 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 				<groupId>com.spotify.fmt</groupId>
 				<artifactId>fmt-maven-plugin</artifactId>
 				<version>${fmt-maven-plugin.version}</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
