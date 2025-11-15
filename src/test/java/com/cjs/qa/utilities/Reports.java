@@ -87,18 +87,18 @@ public final class Reports {
         Environment.sysOut("Aquiring Lock:[" + fileNameLock + "]");
         fileChannel.lock();
         Environment.sysOut("Lock Aquired:[" + fileNameLock + "]");
-      }
-      // Read in the excel file as Apache POI object
-      final byte[] byteArray =
-          (mapListTest.get("Summary").toString() + Constants.NEWLINE).getBytes();
-      createReportExcel(scenarioObject, mapListTest);
-      // Write to file
-      final ByteBuffer buf = ByteBuffer.allocate(1024);
-      buf.clear();
-      buf.put(byteArray);
-      buf.flip();
-      while (buf.hasRemaining()) {
-        fileChannel.write(buf);
+        // Read in the excel file as Apache POI object
+        final byte[] byteArray =
+            (mapListTest.get("Summary").toString() + Constants.NEWLINE).getBytes();
+        createReportExcel(scenarioObject, mapListTest);
+        // Write to file
+        final ByteBuffer buf = ByteBuffer.allocate(1024);
+        buf.clear();
+        buf.put(byteArray);
+        buf.flip();
+        while (buf.hasRemaining()) {
+          fileChannel.write(buf);
+        }
       }
     } finally {
       // Release lock
