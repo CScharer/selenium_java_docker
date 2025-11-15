@@ -988,7 +988,7 @@ public class YMDataTests extends Environment {
       eventID = eventID.replace(IExtension.XML, "");
       String xml = FSOTests.fileReadAll(filePathName);
       List<Map<String, String>> registrationIDMapList = getEventRegistrationIDsMapListAll(xml);
-      for (Map registrationIDMap : registrationIDMapList) {
+      for (Map<String, String> registrationIDMap : registrationIDMapList) {
         registrationIDMap.put("EventID", eventID);
         sqlStringBuilder =
             SQL.appendStringBuilderSQLInsertRecord(
@@ -1126,15 +1126,15 @@ public class YMDataTests extends Environment {
               headingsCSVMap = record.toMap();
               final List<String> headingsCSVList =
                   Convert.fromKeySetToList(headingsCSVMap.keySet());
-              headingsExpectedList = new ArrayList(headingsExpectedList);
+              headingsExpectedList = new ArrayList<>(headingsExpectedList);
               headingsExpectedList.removeAll(VivitDataTests.getDatabaseOnlyFields());
               headingsExpectedList.sort(null);
               headingsCSVList.sort(null);
               sysOut("headingsCSVList:[" + headingsCSVList + "]");
               sysOut("headingsExpectedList:[" + headingsExpectedList + "]");
               if (!headingsCSVList.equals(headingsExpectedList)) {
-                headingsExpectedMissingList = new ArrayList(headingsExpectedList);
-                headingsCSVMissingList = new ArrayList(headingsCSVList);
+                headingsExpectedMissingList = new ArrayList<>(headingsExpectedList);
+                headingsCSVMissingList = new ArrayList<>(headingsCSVList);
                 headingsExpectedMissingList.removeAll(headingsCSVList);
                 headingsCSVMissingList.removeAll(headingsExpectedList);
                 sysOut("headingsExpectedMissingList:" + headingsCSVMissingList.toString());

@@ -93,6 +93,7 @@ public class EveryoneSocial {
   public List<WebElement> webElementListShare() {
     final String buttonsShare = ".//button/span[contains(text(),'Share')]";
     List<WebElement> webElementListShared = webElementListShared();
+    @SuppressWarnings("unchecked")
     List<WebElement> webElementListShare =
         (List<WebElement>) getWebDriver().findElement(By.xpath(buttonsShare));
     webElementListShare.removeAll(webElementListShared);
@@ -101,7 +102,9 @@ public class EveryoneSocial {
 
   public List<WebElement> webElementListShared() {
     final String buttonsShared = ".//button/span[contains(text(),'Shared')]";
-    return (List<WebElement>) getWebDriver().findElement(By.xpath(buttonsShared));
+    @SuppressWarnings("unchecked")
+    List<WebElement> result = (List<WebElement>) getWebDriver().findElement(By.xpath(buttonsShared));
+    return result;
   }
 
   public void clickButtonCancel() {

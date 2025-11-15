@@ -161,8 +161,9 @@ public class JavaHelpers {
     return StringUtils.difference(string1, string2);
   }
 
+  @SuppressWarnings("unchecked")
   public static List<String> difference(List<String> list1, List<String> list2) {
-    return new ArrayList<>(CollectionUtils.disjunction(list1, list2));
+    return new ArrayList<>((Collection<String>) CollectionUtils.disjunction(list1, list2));
   }
 
   /** */

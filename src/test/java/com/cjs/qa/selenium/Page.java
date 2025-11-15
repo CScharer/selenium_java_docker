@@ -677,6 +677,7 @@ public class Page extends JavaHelpers {
         "var rect = arguments[0].getBoundingClientRect();return [ '' + parseInt(rect.left),"
             + " '' + parseInt(rect.top), '' + parseInt(rect.width), '' +"
             + " parseInt(rect.height) ]";
+    @SuppressWarnings("unchecked")
     final List<String> bounds = (List<String>) executeJavaScript(script, webElement);
     if (isLogAll()) {
       logFieldNameTagNameValue(webElement.toString(), webElement.getTagName(), bounds.toString());

@@ -76,6 +76,7 @@ public class XLSX implements IExcel {
 
   public boolean addComment(int sheet, int column, int row, String sComment, boolean visible)
       throws QAException {
+    @SuppressWarnings("rawtypes")
     final Drawing drawing = getWorkCell().getSheet().createDrawingPatriarch();
     setCreationHelper(getWorkCell().getSheet().getWorkbook().getCreationHelper());
     final ClientAnchor clientAnchor = getCreationHelper().createClientAnchor();

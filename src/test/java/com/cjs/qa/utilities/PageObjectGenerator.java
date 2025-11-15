@@ -752,8 +752,9 @@ public class PageObjectGenerator {
       return locator;
     }
 
+    @SuppressWarnings("unused")
     public String getInputType() {
-      return inputType;
+      return inputType; // Reserved for future use
     }
   }
 }
