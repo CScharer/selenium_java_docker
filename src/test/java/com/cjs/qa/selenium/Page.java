@@ -237,7 +237,7 @@ public class Page extends JavaHelpers {
       // setPreviousBorder((String)
       // (executeJavaScript(getScriptGetElementBorder(), webElement)))
       // Java 17: Pattern matching for instanceof
-      if (getWebDriver() instanceof JavascriptExecutor jsExecutor) {
+      if (getWebDriver() instanceof JavascriptExecutor) {
         setPreviousBorder((String) executeJavaScript(getScriptGetElementBorder(), webElement));
       }
       return true;
@@ -281,7 +281,7 @@ public class Page extends JavaHelpers {
         // executeJavaScript(getScriptUnhighlightElement(),
         // getPreviousWebElement(), getPreviousBorder())
         // Java 17: Pattern matching for instanceof
-        if (webDriver instanceof JavascriptExecutor jsExecutor) {
+        if (webDriver instanceof JavascriptExecutor) {
           executeJavaScript(
               getScriptUnhighlightElement(), getPreviousWebElement(), getPreviousBorder());
           success = true;

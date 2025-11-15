@@ -115,6 +115,9 @@ public class CoderTests {
       recordsCodeListMap.remove(0);
     }
     for (Map<Integer, String> mapRecord : recordsCodeListMap) {
+      if (mapCodeFields == null) {
+        continue; // Skip if mapCodeFields is null
+      }
       String type = mapRecord.get(mapCodeFields.get("Type"));
       String name = mapRecord.get(mapCodeFields.get("Name"));
       String xPath = mapRecord.get(mapCodeFields.get("xPath"));

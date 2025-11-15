@@ -1111,7 +1111,7 @@ public class YMDataTests extends Environment {
         headingsExpectedMap.put(heading, "");
       }
       try (Reader reader = new FileReader(filePathName)) {
-        Iterable<CSVRecord> records = CSVFormat.RFC4180.withHeader().parse(reader);
+        Iterable<CSVRecord> records = CSVFormat.RFC4180.builder().setHeader().build().parse(reader);
         boolean headingsMapped = false;
         Map<String, String> headingsCSVMap = null;
         sqlStringBuilder = new StringBuilder();

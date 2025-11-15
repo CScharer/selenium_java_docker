@@ -81,8 +81,11 @@ public interface ISelenium {
       Environment.sysOut("webDriver:[" + webDriver.toString() + "]");
     }
     try {
-      final byte[] screenshot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
+      // Screenshot capture - commented out for future use
+      // final byte[] screenshot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
       // scenarioObject.attach(screenshot, "image/png");
+      @SuppressWarnings("unused")
+      final byte[] screenshot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
     } catch (final Exception e) {
       Environment.sysOutFailure("Error Capturing Screenshot.");
     }

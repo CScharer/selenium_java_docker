@@ -10,7 +10,8 @@ import org.apache.logging.log4j.Logger;
 // import java.util.Optional;
 
 public class Processes {
-  private static final Logger log = LogManager.getLogger(Processes.class);
+  @SuppressWarnings("unused")
+  private static final Logger log = LogManager.getLogger(Processes.class); // Reserved for future logging
   public static final String NO_RESULTS =
       "INFO: No tasks are running which match the specified criteria.";
   private List<ProcessUtil> processList = new ArrayList<>();

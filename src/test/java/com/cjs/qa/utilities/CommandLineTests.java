@@ -120,7 +120,20 @@ public class CommandLineTests {
   public static String executeCommand(String command) throws Throwable {
     final StringBuilder stringBuilder = new StringBuilder();
     try {
-      Process process = Runtime.getRuntime().exec(command);
+      // Handle Windows shell commands (cmd /C ...) and simple commands
+      ProcessBuilder processBuilder;
+      if (command.startsWith("cmd /C ") || command.startsWith("cmd /c ")) {
+        // Shell command: split into ["cmd", "/C", "rest of command"]
+        String[] parts = command.split("\\s+", 3);
+        if (parts.length == 3) {
+          processBuilder = new ProcessBuilder(parts[0], parts[1], parts[2]);
+        } else {
+          processBuilder = new ProcessBuilder(command.split("\\s+"));
+        }
+      } else {
+        processBuilder = new ProcessBuilder(command.split("\\s+"));
+      }
+      Process process = processBuilder.start();
       try (InputStream inputStream = process.getInputStream()) {
         stringBuilder.append(printLines(inputStream));
       }
@@ -148,7 +161,8 @@ public class CommandLineTests {
   public static boolean isProcessRunningNoException(String processRunning) {
     Process process;
     try {
-      process = Runtime.getRuntime().exec(TASKLIST);
+      ProcessBuilder processBuilder = new ProcessBuilder(TASKLIST);
+      process = processBuilder.start();
       try (BufferedReader bufferedReader =
           new BufferedReader(new InputStreamReader(process.getInputStream()))) {
         String line;
@@ -174,7 +188,8 @@ public class CommandLineTests {
     if (Environment.isLogAll()) {
       Environment.sysOut("command:[" + command + "]");
     }
-    Runtime.getRuntime().exec(command);
+    ProcessBuilder processBuilder = new ProcessBuilder(command.split("\\s+"));
+    processBuilder.start();
   }
 
   private static String printLines(InputStream inputStream) throws Exception {
@@ -199,14 +214,40 @@ public class CommandLineTests {
   }
 
   public static int runProcess(String command) throws Exception {
-    final Process process = Runtime.getRuntime().exec(command);
+    // Handle Windows shell commands (cmd /C ...) and simple commands
+    ProcessBuilder processBuilder;
+    if (command.startsWith("cmd /C ") || command.startsWith("cmd /c ")) {
+      // Shell command: split into ["cmd", "/C", "rest of command"]
+      String[] parts = command.split("\\s+", 3);
+      if (parts.length == 3) {
+        processBuilder = new ProcessBuilder(parts[0], parts[1], parts[2]);
+      } else {
+        processBuilder = new ProcessBuilder(command.split("\\s+"));
+      }
+    } else {
+      processBuilder = new ProcessBuilder(command.split("\\s+"));
+    }
+    final Process process = processBuilder.start();
     printLines(process.getInputStream());
     process.waitFor();
     return process.exitValue();
   }
 
   public static Map<String, String> runProcess(String command, boolean wait) throws Exception {
-    Process process = Runtime.getRuntime().exec(command);
+    // Handle Windows shell commands (cmd /C ...) and simple commands
+    ProcessBuilder processBuilder;
+    if (command.startsWith("cmd /C ") || command.startsWith("cmd /c ")) {
+      // Shell command: split into ["cmd", "/C", "rest of command"]
+      String[] parts = command.split("\\s+", 3);
+      if (parts.length == 3) {
+        processBuilder = new ProcessBuilder(parts[0], parts[1], parts[2]);
+      } else {
+        processBuilder = new ProcessBuilder(command.split("\\s+"));
+      }
+    } else {
+      processBuilder = new ProcessBuilder(command.split("\\s+"));
+    }
+    Process process = processBuilder.start();
     final Map<String, String> mapProcess = new HashMap<>();
     final String lines = printLines(process.getInputStream());
     process.waitFor();
@@ -218,6 +259,19 @@ public class CommandLineTests {
 
   public static void runProcessNoWait(String command) throws Exception {
     Environment.sysOut("command:[" + command + "]");
-    Runtime.getRuntime().exec(command);
+    // Handle Windows shell commands (cmd /C ...) and simple commands
+    ProcessBuilder processBuilder;
+    if (command.startsWith("cmd /C ") || command.startsWith("cmd /c ")) {
+      // Shell command: split into ["cmd", "/C", "rest of command"]
+      String[] parts = command.split("\\s+", 3);
+      if (parts.length == 3) {
+        processBuilder = new ProcessBuilder(parts[0], parts[1], parts[2]);
+      } else {
+        processBuilder = new ProcessBuilder(command.split("\\s+"));
+      }
+    } else {
+      processBuilder = new ProcessBuilder(command.split("\\s+"));
+    }
+    processBuilder.start();
   }
 }

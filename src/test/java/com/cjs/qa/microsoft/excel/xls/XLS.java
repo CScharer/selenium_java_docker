@@ -22,7 +22,6 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.ClientAnchor;
 import org.apache.poi.ss.usermodel.ClientAnchor.AnchorType;
 import org.apache.poi.ss.usermodel.Comment;
@@ -995,7 +994,7 @@ public class XLS implements IExcel {
     if (getWorkCell() == null) {
       setWorkCell(getWorkRow().createCell(column));
     }
-    getWorkCell().setCellType(CellType.FORMULA);
+    // setCellType() is deprecated - setCellFormula() automatically sets cell type to FORMULA
     getWorkCell().setCellFormula(value);
     return getCellValue(getWorkCell());
   }

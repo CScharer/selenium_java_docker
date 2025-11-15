@@ -333,7 +333,7 @@ public class WebElementTableTests {
       default:
         break;
     }
-    if (!url.equals(currentURL)) {
+    if (url != null && !url.equals(currentURL)) {
       getWebDriver().get(url);
     }
     setWebElementTable(

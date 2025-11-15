@@ -107,7 +107,7 @@ public class ParameterHelper {
       Environment.sysOut(
           "Error in " + JavaHelpers.getCurrentMethodName() + "[" + e.getMessage() + "]");
     }
-    return parameterHelper.toString();
+    return parameterHelper != null ? parameterHelper.toString() : "null";
   }
 
   /**

@@ -83,9 +83,11 @@ public final class Reports {
         e.printStackTrace();
       }
       // Aquire lock
-      Environment.sysOut("Aquiring Lock:[" + fileNameLock + "]");
-      fileChannel.lock();
-      Environment.sysOut("Lock Aquired:[" + fileNameLock + "]");
+      if (fileChannel != null) {
+        Environment.sysOut("Aquiring Lock:[" + fileNameLock + "]");
+        fileChannel.lock();
+        Environment.sysOut("Lock Aquired:[" + fileNameLock + "]");
+      }
       // Read in the excel file as Apache POI object
       final byte[] byteArray =
           (mapListTest.get("Summary").toString() + Constants.NEWLINE).getBytes();

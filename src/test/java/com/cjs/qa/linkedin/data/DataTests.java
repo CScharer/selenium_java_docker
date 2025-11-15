@@ -274,18 +274,20 @@ public class DataTests {
         default:
           break;
       }
-      for (String fieldType : fieldTypeList) {
-        stringBuilderSQL.append(JDBCConstants.INSERT_INTO);
-        stringBuilderSQL.append("[" + DataTests.TABLE_LINKEDIN + "_" + tableType + "s] ");
-        stringBuilderSQL.append(JDBCConstants.SELECT);
-        stringBuilderSQL.append("[LinkedIn URL],");
-        stringBuilderSQL.append("'" + fieldType + "' as [Type],");
-        stringBuilderSQL.append("[" + tableType + " (" + fieldType + ")] ");
-        stringBuilderSQL.append(JDBCConstants.FROM);
-        stringBuilderSQL.append("[" + DataTests.TABLE_LINKEDIN + "] ");
-        stringBuilderSQL.append(JDBCConstants.WHERE);
-        stringBuilderSQL.append("[" + tableType + " (" + fieldType + ")]!='';");
-        stringBuilderSQL.append(Constants.NEWLINE);
+      if (fieldTypeList != null) {
+        for (String fieldType : fieldTypeList) {
+          stringBuilderSQL.append(JDBCConstants.INSERT_INTO);
+          stringBuilderSQL.append("[" + DataTests.TABLE_LINKEDIN + "_" + tableType + "s] ");
+          stringBuilderSQL.append(JDBCConstants.SELECT);
+          stringBuilderSQL.append("[LinkedIn URL],");
+          stringBuilderSQL.append("'" + fieldType + "' as [Type],");
+          stringBuilderSQL.append("[" + tableType + " (" + fieldType + ")] ");
+          stringBuilderSQL.append(JDBCConstants.FROM);
+          stringBuilderSQL.append("[" + DataTests.TABLE_LINKEDIN + "] ");
+          stringBuilderSQL.append(JDBCConstants.WHERE);
+          stringBuilderSQL.append("[" + tableType + " (" + fieldType + ")]!='';");
+          stringBuilderSQL.append(Constants.NEWLINE);
+        }
       }
     }
     String[] sqlArray = stringBuilderSQL.toString().split(Constants.NEWLINE);

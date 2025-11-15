@@ -28,7 +28,8 @@ public class DailyPollQuizPages extends RewardsPage {
   private static final By byAnswerWrongMessageLabel = By.xpath(".//*[@id='wrongAnswerMessage']");
 
   private String pointsAvailable;
-  private int answersNeeded;
+  @SuppressWarnings("unused")
+  private int answersNeeded; // Reserved for future use
 
   /**
    * @param webDriver
