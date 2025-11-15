@@ -729,7 +729,7 @@ public interface ISelenium {
       }
       if (remote) {
         Environment.sysOut(SELENIUM_GRID_HUB);
-        webDriver = new RemoteWebDriver(new URL(SELENIUM_GRID_HUB), desiredCapabilities);
+        webDriver = new RemoteWebDriver(URI.create(SELENIUM_GRID_HUB).toURL(), desiredCapabilities);
       } else {
         webDriver = browserProfiling(webDriver, browser);
       }
@@ -821,7 +821,7 @@ public interface ISelenium {
               // firefoxProfile);
             }
             Environment.sysOut(SELENIUM_GRID_HUB);
-            webDriver = new RemoteWebDriver(new URL(SELENIUM_GRID_HUB), desiredCapabilities);
+            webDriver = new RemoteWebDriver(URI.create(SELENIUM_GRID_HUB).toURL(), desiredCapabilities);
           } else {
             webDriver = browserProfiling(webDriver, browser);
           }
