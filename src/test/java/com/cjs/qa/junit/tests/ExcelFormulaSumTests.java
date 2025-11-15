@@ -43,9 +43,9 @@ public class ExcelFormulaSumTests {
   }
 
   private void createData(XLS excel) throws QAException {
-    for (Entry entry : COLUMNS_MAP.entrySet()) {
-      String columnName = (String) entry.getKey();
-      int column = (int) entry.getValue();
+    for (Entry<String, Integer> entry : COLUMNS_MAP.entrySet()) {
+      String columnName = entry.getKey();
+      int column = entry.getValue();
       excel.writeCell(SHEET_NAME, column, 0, columnName);
       excel.setFormatHeading(SHEET_NAME, column, 0);
       for (int row = 1; row <= COUNT_ROWS; row++) {
@@ -65,9 +65,9 @@ public class ExcelFormulaSumTests {
 
   private void sumData(XLS excel) throws QAException {
     final int rows = excel.getRowCount(SHEET_NAME);
-    for (Entry entry : COLUMNS_MAP.entrySet()) {
-      String columnName = (String) entry.getKey();
-      int column = (int) entry.getValue();
+    for (Entry<String, Integer> entry : COLUMNS_MAP.entrySet()) {
+      String columnName = entry.getKey();
+      int column = entry.getValue();
       String columnLetter = Convert.fromNumberToLetterExcel(column);
       String formulaSum = "SUM(" + columnLetter + "2:" + columnLetter + (rows + 1) + ")";
       Environment.sysOut("columnName:[" + columnName + "], formulaSum:[" + formulaSum + "]");

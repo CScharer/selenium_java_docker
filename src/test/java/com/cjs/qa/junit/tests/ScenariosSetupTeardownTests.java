@@ -1,7 +1,6 @@
 package com.cjs.qa.junit.tests;
 
 import com.cjs.qa.core.Environment;
-import com.cjs.qa.junit.reporting.RTestRun;
 import com.cjs.qa.selenium.Selenium;
 import com.cjs.qa.utilities.JavaHelpers;
 import org.junit.After;
@@ -22,7 +21,7 @@ import org.mockito.Mockito;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ScenariosSetupTeardownTests {
-  private static RTestRun rTestRun = new RTestRun("CJS", "Starting");
+  // private static RTestRun rTestRun = new RTestRun("CJS", "Starting");
   // private static RTestReporter rTestReporter = new RTestReporter();
   @Rule public TestName testName = new TestName();
 

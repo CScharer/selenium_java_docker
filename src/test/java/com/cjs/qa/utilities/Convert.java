@@ -148,11 +148,11 @@ public final class Convert {
 
   public static DataTable fromMapToDataTable(Map<String, String> map, boolean includeEmptyValues) {
     final List<List<String>> listList = new ArrayList<>();
-    for (final Entry entry : map.entrySet()) {
-      final String value = (String) entry.getValue();
+    for (final Entry<String, String> entry : map.entrySet()) {
+      final String value = entry.getValue();
       if (!value.isEmpty() || includeEmptyValues) {
         final List<String> list = new ArrayList<>();
-        final String key = (String) entry.getKey();
+        final String key = entry.getKey();
         list.add(key);
         list.add(value);
         listList.add(Collections.unmodifiableList(list));

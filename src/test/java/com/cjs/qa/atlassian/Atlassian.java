@@ -95,16 +95,16 @@ public class Atlassian {
               + Constants.QUOTE_DOUBLE
               + "");
       Environment.sysOut("CURL Command:" + stringBuilder.toString());
-      Map map = null;
+      Map<String, String> map = null;
       try {
         map = CommandLineTests.runProcess(stringBuilder.toString(), true);
       } catch (final Exception e) {
         e.printStackTrace();
       }
-      if ("0".equals(map.get("status"))) {
+      if (map != null && "0".equals(map.get("status"))) {
         Environment.sysOut("PASS!!! map:" + map.toString());
       } else {
-        Environment.sysOut("FAIL!!! map:" + map.toString());
+        Environment.sysOut("FAIL!!! map:" + (map != null ? map.toString() : "null"));
       }
       JavaHelpers.sleep(0, 1);
     }
@@ -168,14 +168,14 @@ public class Atlassian {
     }
     final int tab = 0;
     stringBuilder.append(
-        c.nlTab(newLine, tab) + "Bamboo URL:[" + atlassian.getBamboo().getUrl() + "]");
+        Constants.nlTab(newLine, tab) + "Bamboo URL:[" + atlassian.getBamboo().getUrl() + "]");
     stringBuilder.append(
-        c.nlTab(newLine, tab) + "Confluence URL:[" + atlassian.getConfluence().getUrl() + "]");
+        Constants.nlTab(newLine, tab) + "Confluence URL:[" + atlassian.getConfluence().getUrl() + "]");
     stringBuilder.append(
-        c.nlTab(newLine, tab) + "Crowd URL:[" + atlassian.getCrowd().getUrl() + "]");
-    stringBuilder.append(c.nlTab(newLine, tab) + "Jira URL:[" + atlassian.getJira().getUrl() + "]");
+        Constants.nlTab(newLine, tab) + "Crowd URL:[" + atlassian.getCrowd().getUrl() + "]");
+    stringBuilder.append(Constants.nlTab(newLine, tab) + "Jira URL:[" + atlassian.getJira().getUrl() + "]");
     stringBuilder.append(
-        c.nlTab(newLine, tab) + "Stash URL:[" + atlassian.getStash().getUrl() + "]");
+        Constants.nlTab(newLine, tab) + "Stash URL:[" + atlassian.getStash().getUrl() + "]");
     return stringBuilder.toString();
   }
 }

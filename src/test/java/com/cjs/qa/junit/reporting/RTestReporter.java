@@ -11,7 +11,7 @@ import java.util.Map.Entry;
 import org.junit.runner.Description;
 
 public class RTestReporter {
-  private List<Map<String, Map>> listMapTests = new ArrayList<>();
+  private List<Map<String, Map<String, String>>> listMapTests = new ArrayList<>();
   private Map<String, Integer> mapCounts = new HashMap<>();
   private List<String> listStatus =
       Arrays.asList("Failed;Finished;Skipped;Starting;Succeeded".split(Constants.NEWLINE));
@@ -39,7 +39,7 @@ public class RTestReporter {
 
   public void reportAll() {
     for (int indexTest = 0; indexTest < getListMapTests().size(); indexTest++) {
-      final Map<String, Map> mapTest = getListMapTests().get(indexTest);
+      final Map<String, Map<String, String>> mapTest = getListMapTests().get(indexTest);
       for (final String keyTest : mapTest.keySet()) {
         final Map<String, String> mapSteps = mapTest.get(keyTest);
         for (final String keyStep : mapSteps.keySet()) {
@@ -80,11 +80,11 @@ public class RTestReporter {
     // TODO Auto-generated method stub
   }
 
-  public List<Map<String, Map>> getListMapTests() {
+  public List<Map<String, Map<String, String>>> getListMapTests() {
     return listMapTests;
   }
 
-  public void setListMapTests(List<Map<String, Map>> listMapTests) {
+  public void setListMapTests(List<Map<String, Map<String, String>>> listMapTests) {
     this.listMapTests = listMapTests;
   }
 }

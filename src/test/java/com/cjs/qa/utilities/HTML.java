@@ -32,9 +32,9 @@ public class HTML {
 
   public static String convertStringToHTML(String stringValue) {
     final Map<String, String> map = HTML.getHTMLCodes();
-    for (final Entry entry : map.entrySet()) {
-      final String key = (String) entry.getKey();
-      final String value = (String) entry.getValue();
+    for (final Entry<String, String> entry : map.entrySet()) {
+      final String key = entry.getKey();
+      final String value = entry.getValue();
       stringValue = stringValue.replaceAll(key, value);
     }
     return stringValue;

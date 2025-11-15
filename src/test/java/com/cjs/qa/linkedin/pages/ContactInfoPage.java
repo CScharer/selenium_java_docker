@@ -392,9 +392,9 @@ public class ContactInfoPage extends Page {
     String methodName = JavaHelpers.getCurrentMethodName();
     try {
       StringBuilder stringBuilderData = new StringBuilder();
-      for (Entry entry : map.entrySet()) {
-        String fieldName = (String) entry.getKey();
-        String fieldValue = (String) entry.getValue();
+      for (Entry<String, String> entry : map.entrySet()) {
+        String fieldName = entry.getKey();
+        String fieldValue = entry.getValue();
         if (!DataTests.FIELD_LINKEDIN_URL.equals(fieldName)) {
           if (stringBuilderData.length() > 0) {
             stringBuilderData.append(",");

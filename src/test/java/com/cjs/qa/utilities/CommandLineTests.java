@@ -40,9 +40,9 @@ public class CommandLineTests {
     Environment.sysOut("jpsProcessMap:" + jpsProcessMap.toString());
     jpsProcessMap = getJpsProcessesMap(surefireBooter);
     Environment.sysOut("jpsProcessMap:" + jpsProcessMap.toString());
-    for (Entry entry : jpsProcessMap.entrySet()) {
-      String pid = (String) entry.getKey();
-      String processName = (String) entry.getValue();
+    for (Entry<String, String> entry : jpsProcessMap.entrySet()) {
+      String pid = entry.getKey();
+      String processName = entry.getValue();
       String imageName = null;
       String command = TASKLIST + " /fo:csv /nh /fi \"pid eq " + pid + "\"";
       Processes processes = new Processes(command);

@@ -69,7 +69,7 @@ public final class Reports {
   }
 
   public static synchronized void createReportExcelLock(
-      Scenario scenarioObject, Map<String, List> mapListTest) throws Exception, QAException {
+      Scenario scenarioObject, Map<String, List<Map<String, String>>> mapListTest) throws Exception, QAException {
     final String fileNameLock = CJSConstants.PATH_FILES_DATA + "Parallel.lck";
     FileChannel fileChannel = null;
     try {
@@ -107,7 +107,7 @@ public final class Reports {
     }
   }
 
-  private static void createReportExcel(Scenario scenarioObject, Map<String, List> mapListTest) {
+  private static void createReportExcel(Scenario scenarioObject, Map<String, List<Map<String, String>>> mapListTest) {
     Environment.sysOut("Writing Report:[" + mapListTest.toString() + "]");
     final String sheetNameSummary = IExcel.SHEET_SUMMARY;
     boolean writeData = true;
@@ -285,7 +285,7 @@ public final class Reports {
   }
 
   private static void writeFailureData(
-      XLS excel, String sheetName, Map<String, List> mapListTest, String section)
+      XLS excel, String sheetName, Map<String, List<Map<String, String>>> mapListTest, String section)
       throws QAException {
     try {
       final List<Map<String, String>> listMapSection = mapListTest.get(section);

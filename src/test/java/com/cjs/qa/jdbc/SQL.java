@@ -117,9 +117,9 @@ public class SQL {
   private static int addDBRecord(String tableName, Map<String, String> map) {
     StringBuilder stringBuilderFields = new StringBuilder();
     StringBuilder stringBuilderValues = new StringBuilder();
-    for (final Entry entry : map.entrySet()) {
-      String key = (String) entry.getKey();
-      String value = (String) entry.getValue();
+    for (final Entry<String, String> entry : map.entrySet()) {
+      String key = entry.getKey();
+      String value = entry.getValue();
       key = key.trim();
       if (!"".equals(stringBuilderFields.toString())) {
         stringBuilderFields.append(",");
@@ -246,8 +246,8 @@ public class SQL {
       fqR = "]";
     }
     final List<String> fieldsList = new ArrayList<>();
-    for (final Entry entry : mapRecord.entrySet()) {
-      final String fieldName = (String) entry.getKey();
+    for (final Entry<String, String> entry : mapRecord.entrySet()) {
+      final String fieldName = entry.getKey();
       fieldsList.add(fieldName);
     }
     final StringBuilder stringBuilder = new StringBuilder();

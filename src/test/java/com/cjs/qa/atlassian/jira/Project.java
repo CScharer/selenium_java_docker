@@ -27,13 +27,13 @@ public class Project {
       newLine = 1;
     }
     int tab = 0;
-    tab = c.tabIncriment(tab, newLine * 2);
+    tab = Constants.tabIncriment(tab, newLine * 2);
     stringBuilder.append(
-        c.nlTab(newLine, tab) + Constants.QUOTE_DOUBLE + "project" + Constants.QUOTE_DOUBLE + ":");
-    stringBuilder.append(c.nlTab(newLine, tab) + "{");
-    tab = c.tabIncriment(tab, newLine * 1);
+        Constants.nlTab(newLine, tab) + Constants.QUOTE_DOUBLE + "project" + Constants.QUOTE_DOUBLE + ":");
+    stringBuilder.append(Constants.nlTab(newLine, tab) + "{");
+    tab = Constants.tabIncriment(tab, newLine * 1);
     stringBuilder.append(
-        c.nlTab(newLine, tab)
+        Constants.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
             + "key"
             + Constants.QUOTE_DOUBLE
@@ -42,8 +42,8 @@ public class Project {
             + getProject()
             + Constants.QUOTE_DOUBLE
             + "");
-    tab = c.tabIncriment(tab, newLine * -1);
-    stringBuilder.append(c.nlTab(newLine, tab) + "}");
+    tab = Constants.tabIncriment(tab, newLine * -1);
+    stringBuilder.append(Constants.nlTab(newLine, tab) + "}");
     return stringBuilder.toString();
   }
 }

@@ -367,10 +367,10 @@ public final class YMAPIMethodsTests {
     StringBuilder stringBuilder;
     int methodID = 0;
     for (final Map<String, String> mapMethodLinks : listMapMethodLinks) {
-      for (Entry entry : mapMethodLinks.entrySet()) {
-        final String methodName = (String) entry.getKey();
+      for (Entry<String, String> entry : mapMethodLinks.entrySet()) {
+        final String methodName = entry.getKey();
         // final String methodURL = mapMethodLinks.get(methodName)
-        final String methodURL = (String) entry.getValue();
+        final String methodURL = entry.getValue();
         final String methodNamespace = getNamespace(methodName, listNamespaces);
         webDriver.get(methodURL);
         methodID++;

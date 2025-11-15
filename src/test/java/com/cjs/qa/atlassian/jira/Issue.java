@@ -47,9 +47,9 @@ public class Issue {
       newLine = 1;
     }
     int tab = 0;
-    tab = c.tabIncriment(tab, newLine * 2);
+    tab = Constants.tabIncriment(tab, newLine * 2);
     stringBuilder.append(
-        c.nlTab(newLine, tab)
+        Constants.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
             + "summary"
             + Constants.QUOTE_DOUBLE
@@ -59,7 +59,7 @@ public class Issue {
             + Constants.QUOTE_DOUBLE
             + ",");
     stringBuilder.append(
-        c.nlTab(newLine, tab)
+        Constants.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
             + "description"
             + Constants.QUOTE_DOUBLE
@@ -69,17 +69,17 @@ public class Issue {
             + Constants.QUOTE_DOUBLE
             + ",");
     stringBuilder.append(
-        c.nlTab(newLine, tab)
+        Constants.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
             + "issuetype"
             + Constants.QUOTE_DOUBLE
             + ": "
             + Constants.QUOTE_DOUBLE
             + "");
-    stringBuilder.append(c.nlTab(newLine, tab) + "{");
-    tab = c.tabIncriment(tab, newLine * 1);
+    stringBuilder.append(Constants.nlTab(newLine, tab) + "{");
+    tab = Constants.tabIncriment(tab, newLine * 1);
     stringBuilder.append(
-        c.nlTab(newLine, tab)
+        Constants.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
             + "name"
             + Constants.QUOTE_DOUBLE
@@ -87,8 +87,8 @@ public class Issue {
             + Constants.QUOTE_DOUBLE
             + getName()
             + Constants.QUOTE_DOUBLE);
-    tab = c.tabIncriment(tab, newLine * -1);
-    stringBuilder.append(c.nlTab(newLine, tab) + "}");
+    tab = Constants.tabIncriment(tab, newLine * -1);
+    stringBuilder.append(Constants.nlTab(newLine, tab) + "}");
     return stringBuilder.toString();
   }
 }

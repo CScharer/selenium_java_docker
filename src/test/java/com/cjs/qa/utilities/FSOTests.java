@@ -284,10 +284,10 @@ public class FSOTests {
     final String replacer = "_";
     final Map<String, String> invalidCharacters = getCharactersInvalid();
     final Map<String, String> escapedCharacters = getCharactersEsacped();
-    for (final Entry entry : invalidCharacters.entrySet()) {
-      final String replacee = (String) entry.getValue();
+    for (final Entry<String, String> entry : invalidCharacters.entrySet()) {
+        final String replacee = entry.getValue();
       if (filePathName.contains(replacee)) {
-        final String key = (String) entry.getKey();
+        final String key = entry.getKey();
         Environment.sysOut("Replacing [" + key + ":" + replacee + "] with [" + replacer + "]");
         if (escapedCharacters.containsKey(key)) {
           filePathName = replaceEscapedCharacter(filePathName, replacee, replacer);

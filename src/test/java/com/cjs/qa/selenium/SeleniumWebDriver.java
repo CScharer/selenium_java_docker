@@ -223,7 +223,6 @@ public class SeleniumWebDriver {
   }
 
   public String getExecutableVersion(Capabilities capabilities) {
-    String executableVersion = "";
     // (String)capabilities.getCapability("version")
     // Java 17: Switch expression returning value directly
     return switch (getBrowser().toLowerCase(Locale.ENGLISH)) {
@@ -893,15 +892,15 @@ public class SeleniumWebDriver {
       newLine = 1;
     }
     int tab = 0;
-    // stringBuilder.append(c.nlTab(newLine, tab) + "{");
-    // tab = c.tabIncriment(tab, (newLine * 1));
-    // stringBuilder.append(c.nlTab(newLine, tab) + Constants.QUOTE_DOUBLE +
+    // stringBuilder.append(Constants.nlTab(newLine, tab) + "{");
+    // tab = Constants.tabIncriment(tab, (newLine * 1));
+    // stringBuilder.append(Constants.nlTab(newLine, tab) + Constants.QUOTE_DOUBLE +
     // "Selenium WebDriver
     // Information" + Constants.QUOTE_DOUBLE + ":");
-    stringBuilder.append(c.nlTab(newLine, tab) + "{");
-    tab = c.tabIncriment(tab, newLine * 1);
+    stringBuilder.append(Constants.nlTab(newLine, tab) + "{");
+    tab = Constants.tabIncriment(tab, newLine * 1);
     stringBuilder.append(
-        c.nlTab(newLine, tab)
+        Constants.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
             + "Grid Hub Name"
             + Constants.QUOTE_DOUBLE
@@ -911,7 +910,7 @@ public class SeleniumWebDriver {
             + Constants.QUOTE_DOUBLE
             + ",");
     stringBuilder.append(
-        c.nlTab(newLine, tab)
+        Constants.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
             + "Grid Hub Port"
             + Constants.QUOTE_DOUBLE
@@ -921,7 +920,7 @@ public class SeleniumWebDriver {
             + Constants.QUOTE_DOUBLE
             + ",");
     stringBuilder.append(
-        c.nlTab(newLine, tab)
+        Constants.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
             + "Grid Hub"
             + Constants.QUOTE_DOUBLE
@@ -931,7 +930,7 @@ public class SeleniumWebDriver {
             + Constants.QUOTE_DOUBLE
             + ",");
     stringBuilder.append(
-        c.nlTab(newLine, tab)
+        Constants.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
             + "Operating System"
             + Constants.QUOTE_DOUBLE
@@ -941,7 +940,7 @@ public class SeleniumWebDriver {
             + Constants.QUOTE_DOUBLE
             + ",");
     stringBuilder.append(
-        c.nlTab(newLine, tab)
+        Constants.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
             + "Remote"
             + Constants.QUOTE_DOUBLE
@@ -951,7 +950,7 @@ public class SeleniumWebDriver {
     final Scenario scenario = getScenario();
     if (scenario == null) {
       stringBuilder.append(
-          c.nlTab(newLine, tab)
+          Constants.nlTab(newLine, tab)
               + Constants.QUOTE_DOUBLE
               + "Scenario"
               + Constants.QUOTE_DOUBLE
@@ -962,7 +961,7 @@ public class SeleniumWebDriver {
               + ",");
     } else {
       stringBuilder.append(
-          c.nlTab(newLine, tab)
+          Constants.nlTab(newLine, tab)
               + Constants.QUOTE_DOUBLE
               + "Scenario"
               + Constants.QUOTE_DOUBLE
@@ -973,7 +972,7 @@ public class SeleniumWebDriver {
               + ",");
     }
     stringBuilder.append(
-        c.nlTab(newLine, tab)
+        Constants.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
             + "Screenshot Count"
             + Constants.QUOTE_DOUBLE
@@ -981,7 +980,7 @@ public class SeleniumWebDriver {
             + getScreenshots()
             + ",");
     stringBuilder.append(
-        c.nlTab(newLine, tab)
+        Constants.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
             + "Session ID"
             + Constants.QUOTE_DOUBLE
@@ -993,7 +992,7 @@ public class SeleniumWebDriver {
     final WebDriver webDriver = getWebDriver();
     if (webDriver == null) {
       stringBuilder.append(
-          c.nlTab(newLine, tab)
+          Constants.nlTab(newLine, tab)
               + Constants.QUOTE_DOUBLE
               + "Web Driver"
               + Constants.QUOTE_DOUBLE
@@ -1004,7 +1003,7 @@ public class SeleniumWebDriver {
               + ",");
     } else {
       stringBuilder.append(
-          c.nlTab(newLine, tab)
+          Constants.nlTab(newLine, tab)
               + Constants.QUOTE_DOUBLE
               + "Web Driver"
               + Constants.QUOTE_DOUBLE
@@ -1015,7 +1014,7 @@ public class SeleniumWebDriver {
               + ",");
     }
     stringBuilder.append(
-        c.nlTab(newLine, tab)
+        Constants.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
             + "Vendor URL"
             + Constants.QUOTE_DOUBLE
@@ -1025,7 +1024,7 @@ public class SeleniumWebDriver {
             + Constants.QUOTE_DOUBLE
             + ",");
     stringBuilder.append(
-        c.nlTab(newLine, tab)
+        Constants.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
             + "Version"
             + Constants.QUOTE_DOUBLE
@@ -1035,15 +1034,15 @@ public class SeleniumWebDriver {
             + Constants.QUOTE_DOUBLE
             + ",");
     stringBuilder.append(
-        c.nlTab(newLine, tab)
+        Constants.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
             + "Capabilities"
             + Constants.QUOTE_DOUBLE
             + ":");
-    stringBuilder.append(c.nlTab(newLine, tab) + "{");
-    tab = c.tabIncriment(tab, newLine * 1);
+    stringBuilder.append(Constants.nlTab(newLine, tab) + "{");
+    tab = Constants.tabIncriment(tab, newLine * 1);
     stringBuilder.append(
-        c.nlTab(newLine, tab)
+        Constants.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
             + "Browser"
             + Constants.QUOTE_DOUBLE
@@ -1053,7 +1052,7 @@ public class SeleniumWebDriver {
             + Constants.QUOTE_DOUBLE
             + ",");
     stringBuilder.append(
-        c.nlTab(newLine, tab)
+        Constants.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
             + "Platform"
             + Constants.QUOTE_DOUBLE
@@ -1063,7 +1062,7 @@ public class SeleniumWebDriver {
             + Constants.QUOTE_DOUBLE
             + ",");
     stringBuilder.append(
-        c.nlTab(newLine, tab)
+        Constants.nlTab(newLine, tab)
             + Constants.QUOTE_DOUBLE
             + "Version"
             + Constants.QUOTE_DOUBLE
@@ -1072,12 +1071,12 @@ public class SeleniumWebDriver {
             + getCapabilities().getBrowserVersion()
             + Constants.QUOTE_DOUBLE
             + "");
-    tab = c.tabIncriment(tab, newLine * -1);
-    stringBuilder.append(c.nlTab(newLine, tab) + "}");
-    tab = c.tabIncriment(tab, newLine * -1);
-    stringBuilder.append(c.nlTab(newLine, tab) + "}");
-    // tab = c.tabIncriment(tab, (newLine * -1));
-    // stringBuilder.append(c.nlTab(newLine, tab) + "}");
+    tab = Constants.tabIncriment(tab, newLine * -1);
+    stringBuilder.append(Constants.nlTab(newLine, tab) + "}");
+    tab = Constants.tabIncriment(tab, newLine * -1);
+    stringBuilder.append(Constants.nlTab(newLine, tab) + "}");
+    // tab = Constants.tabIncriment(tab, (newLine * -1));
+    // stringBuilder.append(Constants.nlTab(newLine, tab) + "}");
     return stringBuilder.toString();
   }
 }
