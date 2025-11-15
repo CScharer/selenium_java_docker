@@ -13,6 +13,7 @@ import com.google.gson.JsonObject;
 import io.cucumber.java.Scenario;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -702,7 +703,7 @@ public interface ISelenium {
       stringBuilderURL.append(SELENIUM_GRID_HUB);
       final String url = stringBuilderURL.toString();
       Environment.sysOut("url:" + url + "]");
-      webDriver = new RemoteWebDriver(new URL(url), desiredCapabilities);
+      webDriver = new RemoteWebDriver(URI.create(url).toURL(), desiredCapabilities);
       final Selenium selenium = new Selenium(webDriver);
       selenium.getSessionInformation();
     } catch (final Exception e) {

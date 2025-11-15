@@ -17,6 +17,7 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -435,7 +436,7 @@ public class SeleniumWebDriver {
           do {
             attempt++;
             try {
-              setWebDriver(new RemoteWebDriver(new URL(getGridHub()), desiredCapabilities));
+              setWebDriver(new RemoteWebDriver(URI.create(getGridHub()).toURL(), desiredCapabilities));
               if (getWebDriver() != null) {
                 driverInstanciated = true;
                 Environment.sysOut("Remote Web Driver instanciated on attemp [" + attempt + "]");
@@ -455,7 +456,7 @@ public class SeleniumWebDriver {
           }
           Environment.sysOut("Grid Hub:[" + getGridHub() + "]");
         } else {
-          setWebDriver(new RemoteWebDriver(new URL(getVendorURL()), desiredCapabilities));
+          setWebDriver(new RemoteWebDriver(URI.create(getVendorURL()).toURL(), desiredCapabilities));
         }
       } else {
 

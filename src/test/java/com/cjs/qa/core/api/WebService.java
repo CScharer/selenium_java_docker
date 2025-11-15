@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -115,7 +116,7 @@ public class WebService {
     String json = "";
     String line = "";
     try {
-      final URL oURL = new URL(url);
+      final URL oURL = URI.create(url).toURL();
       httpURLConnection = (HttpURLConnection) oURL.openConnection();
       httpURLConnection.setDoOutput(true);
       httpURLConnection.setInstanceFollowRedirects(false);
@@ -305,7 +306,7 @@ public class WebService {
     String xml = "";
     String line = "";
     try {
-      final URL oURL = new URL(url);
+      final URL oURL = URI.create(url).toURL();
       httpURLConnection = (HttpURLConnection) oURL.openConnection();
       httpURLConnection.setDoOutput(true);
       httpURLConnection.setInstanceFollowRedirects(false);
