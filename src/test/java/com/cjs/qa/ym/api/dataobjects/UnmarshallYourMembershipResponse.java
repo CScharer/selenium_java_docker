@@ -34,7 +34,6 @@ public class UnmarshallYourMembershipResponse {
     return get(soapMessage);
   }
 
-  @SuppressWarnings("unchecked")
   private YourMembershipResponse get(SOAPMessage soapMessage) throws QAException {
     YourMembershipResponse yourMembershipResponse = null;
     try {

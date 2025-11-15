@@ -47,7 +47,7 @@ public class BTSConvertDatabaseToXMLTests {
       String sql = JDBCConstants.SELECT_ALL_FROM + "[tblCompany] ORDER BY [Abbreviation]";
       List<Map<String, String>> companyList = jdbc.queryResultsString(sql, true);
       for (int companyIndex = 1; companyIndex < companyList.size(); companyIndex++) {
-        Map company = companyList.get(companyIndex);
+        Map<String, String> company = companyList.get(companyIndex);
         Environment.sysOut("company:[" + company + "]");
         String companyAbbreviation = (String) company.get("Abbreviation");
         stringBuilder.append(
@@ -68,7 +68,7 @@ public class BTSConvertDatabaseToXMLTests {
         for (int serviceAccountIndex = 1;
             serviceAccountIndex < serviceAccountList.size();
             serviceAccountIndex++) {
-          Map serviceAccount = serviceAccountList.get(serviceAccountIndex);
+          Map<String, String> serviceAccount = serviceAccountList.get(serviceAccountIndex);
           Environment.sysOut("serviceAccount:[" + serviceAccount + "]");
           stringBuilder = getWrappedField(stringBuilder, serviceAccount, "Service_Account");
           stringBuilder = getWrappedField(stringBuilder, serviceAccount, "Password");
@@ -85,7 +85,7 @@ public class BTSConvertDatabaseToXMLTests {
           for (int environmentIndex = 1;
               environmentIndex < environmentList.size();
               environmentIndex++) {
-            Map environment = environmentList.get(environmentIndex);
+            Map<String, String> environment = environmentList.get(environmentIndex);
             String environmentTag = (String) environment.get("Environment");
             Environment.sysOut("environment:[" + environment + "]");
             stringBuilder.append(
@@ -106,7 +106,7 @@ public class BTSConvertDatabaseToXMLTests {
                     + "'";
             List<Map<String, String>> dbPolicyList = jdbc.queryResultsString(sql, true);
             for (int dbPolicyIndex = 1; dbPolicyIndex < dbPolicyList.size(); dbPolicyIndex++) {
-              Map dbPolicy = dbPolicyList.get(dbPolicyIndex);
+              Map<String, String> dbPolicy = dbPolicyList.get(dbPolicyIndex);
               Environment.sysOut("dbPolicy:[" + dbPolicy + "]");
               stringBuilder = getWrappedField(stringBuilder, dbPolicy, "Server");
               stringBuilder = getWrappedField(stringBuilder, dbPolicy, "PortNumber");

@@ -5,6 +5,7 @@ import com.cjs.qa.core.security.EPasswords;
 import com.cjs.qa.utilities.CJSConstants;
 import com.cjs.qa.utilities.DateHelpersTests;
 import com.cjs.qa.vivit.VivitEnvironment;
+import com.cjs.qa.ym.api.namespace.SessionNamespace;
 import com.cjs.qa.ym.api.services.YMAPI;
 import java.util.HashMap;
 import java.util.Map;
@@ -239,11 +240,11 @@ public class YMAPIDebug {
     mapResults =
         ymAPI
             .getSaMembersNamespace()
-            .groupsAdd("iD", "groupCode", (Boolean) null, (Boolean) null, (Boolean) null, "");
+            .groupsAdd("iD", "groupCode", false, false, false, "");
     mapResults =
         ymAPI
             .getSaMembersNamespace()
-            .groupsRemove("iD", "groupCode", (Boolean) null, (Boolean) null, "");
+            .groupsRemove("iD", "groupCode", false, false, "");
     mapResults = ymAPI.getSaMembersNamespace().profileCreate(true);
     mapResults = ymAPI.getSaMembersNamespace().referralsGet("iD", ymInceptionDate);
     mapResults = ymAPI.getSaMembersNamespace().subAccountsGet("iD", ymInceptionDate);
@@ -260,7 +261,7 @@ public class YMAPIDebug {
     mapResults = ymAPI.getSaPeopleNamespace().profileGroupsGet("iD");
     mapResults = ymAPI.getSaPeopleNamespace().profileUpdate("iD", "");
     // Session Namespace
-    mapResults = ymAPI.getSessionNamespace().create(true);
+    mapResults = SessionNamespace.create(true);
     mapResults = ymAPI.getSessionNamespace().ping();
     mapResults = ymAPI.getSessionNamespace().abandon();
   }

@@ -364,6 +364,7 @@ public class SeleniumWebDriver {
         String executableVersion = getExecutableVersion(capabilities);
         Environment.sysOut("executableVersion:[" + executableVersion + "]");
         if (getBrowser().equalsIgnoreCase(Browser.CHROME)) {
+          @SuppressWarnings("unchecked")
           Map<String, Object> chromeCapabilities =
               (Map<String, Object>) capabilities.getCapability(Browser.CHROME);
           // for (Entry entry : chromeCapabilities.entrySet())

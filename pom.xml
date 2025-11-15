@@ -79,7 +79,6 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 		<junit.version>4.13.2</junit.version>
 		<jxl.version>2.6.12</jxl.version>
 		<lazy.version>1.0.1</lazy.version>
-		<log4j-core.version>2.24.1</log4j-core.version>
 		<mail.version>1.4.7</mail.version>
 		<mockito-core.version>5.14.2</mockito-core.version>
 		<mssql-jdbc.version>12.8.1.jre11</mssql-jdbc.version>
@@ -144,7 +143,7 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 		<velocity.version>1.7</velocity.version>
 		<xml-apis.version>1.4.01</xml-apis.version>
 		<xmlsec.version>4.0.3</xmlsec.version>
-		<xmlunit.vesion>1.6</xmlunit.vesion>
+		<xmlunit.version>1.6</xmlunit.version>
 	</properties>
 
 	<dependencies>
@@ -372,11 +371,6 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>${log4j-core.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.pdfbox</groupId>
 			<artifactId>pdfbox</artifactId>
 			<version>${pdfbox.version}</version>
@@ -530,7 +524,7 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 		<dependency>
 		    <groupId>xmlunit</groupId>
 		    <artifactId>xmlunit</artifactId>
-		    <version>${xmlunit.vesion}</version>
+		    <version>${xmlunit.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.apache.santuario</groupId>
