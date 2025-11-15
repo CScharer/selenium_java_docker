@@ -69,7 +69,7 @@ public final class Reports {
   }
 
   public static synchronized void createReportExcelLock(
-      Scenario scenarioObject, Map<String, List> mapListTest) throws Exception, QAException {
+      Scenario scenarioObject, Map<String, List<Map<String, String>>> mapListTest) throws Exception, QAException {
     final String fileNameLock = CJSConstants.PATH_FILES_DATA + "Parallel.lck";
     FileChannel fileChannel = null;
     try {
@@ -83,20 +83,22 @@ public final class Reports {
         e.printStackTrace();
       }
       // Aquire lock
-      Environment.sysOut("Aquiring Lock:[" + fileNameLock + "]");
-      fileChannel.lock();
-      Environment.sysOut("Lock Aquired:[" + fileNameLock + "]");
-      // Read in the excel file as Apache POI object
-      final byte[] byteArray =
-          (mapListTest.get("Summary").toString() + Constants.NEWLINE).getBytes();
-      createReportExcel(scenarioObject, mapListTest);
-      // Write to file
-      final ByteBuffer buf = ByteBuffer.allocate(1024);
-      buf.clear();
-      buf.put(byteArray);
-      buf.flip();
-      while (buf.hasRemaining()) {
-        fileChannel.write(buf);
+      if (fileChannel != null) {
+        Environment.sysOut("Aquiring Lock:[" + fileNameLock + "]");
+        fileChannel.lock();
+        Environment.sysOut("Lock Aquired:[" + fileNameLock + "]");
+        // Read in the excel file as Apache POI object
+        final byte[] byteArray =
+            (mapListTest.get("Summary").toString() + Constants.NEWLINE).getBytes();
+        createReportExcel(scenarioObject, mapListTest);
+        // Write to file
+        final ByteBuffer buf = ByteBuffer.allocate(1024);
+        buf.clear();
+        buf.put(byteArray);
+        buf.flip();
+        while (buf.hasRemaining()) {
+          fileChannel.write(buf);
+        }
       }
     } finally {
       // Release lock
@@ -107,7 +109,7 @@ public final class Reports {
     }
   }
 
-  private static void createReportExcel(Scenario scenarioObject, Map<String, List> mapListTest) {
+  private static void createReportExcel(Scenario scenarioObject, Map<String, List<Map<String, String>>> mapListTest) {
     Environment.sysOut("Writing Report:[" + mapListTest.toString() + "]");
     final String sheetNameSummary = IExcel.SHEET_SUMMARY;
     boolean writeData = true;
@@ -285,7 +287,7 @@ public final class Reports {
   }
 
   private static void writeFailureData(
-      XLS excel, String sheetName, Map<String, List> mapListTest, String section)
+      XLS excel, String sheetName, Map<String, List<Map<String, String>>> mapListTest, String section)
       throws QAException {
     try {
       final List<Map<String, String>> listMapSection = mapListTest.get(section);

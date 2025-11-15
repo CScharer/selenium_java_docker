@@ -171,7 +171,7 @@ public class JavaHelpers {
     Environment.sysOut("Property Count:[" + properties.size() + "]");
     Environment.sysOut("System Properties DataTable");
     int maxLength = 0;
-    for (Entry entry : properties.entrySet()) {
+    for (Entry<Object, Object> entry : properties.entrySet()) {
       String key = (String) entry.getKey();
       if (key.length() > maxLength) {
         maxLength = key.length();
@@ -182,7 +182,7 @@ public class JavaHelpers {
     // List<List<String>> dataTableList = new ArrayList<>()
     // dataTableList.add(Arrays.asList("Key", "Value"))
     final List<String> propertyList = new ArrayList<>();
-    for (Entry entry : properties.entrySet()) {
+    for (Entry<Object, Object> entry : properties.entrySet()) {
       String key = (String) entry.getKey();
       String value = (String) entry.getValue();
       // dataTableList.add(Arrays.asList(key, value))
@@ -977,9 +977,9 @@ public class JavaHelpers {
    */
   public static String mapFormatPretty(Map<String, String> map, boolean sorted) {
     final List<String> list = new ArrayList<>();
-    for (final Entry entry : map.entrySet()) {
-      final String key = (String) entry.getKey();
-      final String value = (String) entry.getValue();
+    for (final Entry<String, String> entry : map.entrySet()) {
+      final String key = entry.getKey();
+      final String value = entry.getValue();
       list.add(Constants.TAB + key + ":" + Constants.TAB + value);
     }
     final StringBuilder formatPretty = new StringBuilder();

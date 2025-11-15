@@ -107,10 +107,10 @@ public class ExcelStatisticalTests {
       excel.setFormatHeading(sheetName, column, 0);
       excel.setFormatHeading(sheetName, column, row);
     }
-    for (final Entry entry : getExcelTimingControl().getMethodCallsMap().entrySet()) {
+    for (final Entry<String, Integer> entry : getExcelTimingControl().getMethodCallsMap().entrySet()) {
       row++;
-      final String methodNameControl = (String) entry.getKey();
-      final Integer methodCallsControl = (Integer) entry.getValue();
+      final String methodNameControl = entry.getKey();
+      final Integer methodCallsControl = entry.getValue();
       final Double methodTimeControl =
           getExcelTimingControl().getMethodTimingMap().get(methodNameControl);
       final Double methodTimeControlAverage = methodTimeControl / methodCallsControl;

@@ -123,66 +123,68 @@ public class ClaimsAndSpendingPage extends Page {
     waitPageLoaded();
     sleep(1);
     final List<String> headings = new ArrayList<>();
-    getWebDriver().findElements(byType);
-    final List<WebElement> headingElements =
-        getWebDriver()
-            .findElements(By.xpath(byType.toString().replace(byXpath, "") + "/tr[" + 1 + "]/th/a"));
-    Environment.sysOut(headingElements.toString());
-    for (int indexHeading = 0; indexHeading < headingElements.size(); indexHeading++) {
-      final WebElement element = headingElements.get(indexHeading);
-      Environment.sysOut(element.toString());
-      String value = element.getText();
-      value = value.replaceAll("Not sorted", "");
-      value = value.replaceAll(Constants.NL, "");
-      value = value.trim();
-      headings.add(value);
-      if (indexHeading != 0) {
-        stringBuilder.append(",");
-      }
-      stringBuilder.append(value);
-    }
-    stringBuilder.append(Constants.NEWLINE);
-    Environment.sysOut(listHeadings);
-    Environment.sysOut(headings);
-    Assert.assertEquals("Headings " + type, listHeadings, headings);
-    String xPath = byType.toString().replace(byXpath, "") + "/tr";
-    Environment.sysOut("xPath:" + xPath);
-    final List<WebElement> rowElements = getWebDriver().findElements(By.xpath(xPath));
-    for (int indexRecord = 2; indexRecord <= rowElements.size(); indexRecord++) {
-      final Map<String, String> recordMap = getHeadingMap();
-      for (int index = 0; index < listHeadings.size(); index++) {
-        final int indexField = index + 1;
-        // Environment.sysOut("xPath:" + xPath)
-        // Environment.sysOut(HEADINGS.get((index)).toString() +
-        // " xpath:[" + xPath + "]")
-        xPath =
-            byType.toString().replace(byXpath, "")
-                + "/tr["
-                + indexRecord
-                + "]/td["
-                + indexField
-                + "]"
-                + listTypes.get(index);
-        // Environment.sysOut("xPath:" + xPath)
-        final WebElement cell = getWebDriver().findElement(By.xpath(xPath));
-        // Environment.sysOut(cell.toString())
-        final String value = cell.getText().trim();
-        Environment.sysOut(listHeadings.get(index) + ":[" + value + "]");
-        if (index != 0) {
+    if (byType != null) {
+      getWebDriver().findElements(byType);
+      final List<WebElement> headingElements =
+          getWebDriver()
+              .findElements(By.xpath(byType.toString().replace(byXpath, "") + "/tr[" + 1 + "]/th/a"));
+      Environment.sysOut(headingElements.toString());
+      for (int indexHeading = 0; indexHeading < headingElements.size(); indexHeading++) {
+        final WebElement element = headingElements.get(indexHeading);
+        Environment.sysOut(element.toString());
+        String value = element.getText();
+        value = value.replaceAll("Not sorted", "");
+        value = value.replaceAll(Constants.NL, "");
+        value = value.trim();
+        headings.add(value);
+        if (indexHeading != 0) {
           stringBuilder.append(",");
         }
-        final String record = formatValue(value);
-        if (record.contains(",") || record.contains(Constants.QUOTE_DOUBLE + "")) {
-          stringBuilder.append(Constants.QUOTE_DOUBLE + record + Constants.QUOTE_DOUBLE + "");
-        } else {
-          stringBuilder.append(record);
-        }
-        recordMap.put(listHeadings.get(index), record);
+        stringBuilder.append(value);
       }
       stringBuilder.append(Constants.NEWLINE);
-      Environment.sysOut("recordMap:[" + recordMap.toString() + "]");
-      sqlStringBuilder =
-          SQL.appendStringBuilderSQLInsertRecord("t_Wellmark", sqlStringBuilder, recordMap, true);
+      Environment.sysOut(listHeadings);
+      Environment.sysOut(headings);
+      Assert.assertEquals("Headings " + type, listHeadings, headings);
+      String xPath = byType.toString().replace(byXpath, "") + "/tr";
+      Environment.sysOut("xPath:" + xPath);
+      final List<WebElement> rowElements = getWebDriver().findElements(By.xpath(xPath));
+      for (int indexRecord = 2; indexRecord <= rowElements.size(); indexRecord++) {
+        final Map<String, String> recordMap = getHeadingMap();
+        for (int index = 0; index < listHeadings.size(); index++) {
+          final int indexField = index + 1;
+          // Environment.sysOut("xPath:" + xPath)
+          // Environment.sysOut(HEADINGS.get((index)).toString() +
+          // " xpath:[" + xPath + "]")
+          xPath =
+              byType.toString().replace(byXpath, "")
+                  + "/tr["
+                  + indexRecord
+                  + "]/td["
+                  + indexField
+                  + "]"
+                  + listTypes.get(index);
+          // Environment.sysOut("xPath:" + xPath)
+          final WebElement cell = getWebDriver().findElement(By.xpath(xPath));
+          // Environment.sysOut(cell.toString())
+          final String value = cell.getText().trim();
+          Environment.sysOut(listHeadings.get(index) + ":[" + value + "]");
+          if (index != 0) {
+            stringBuilder.append(",");
+          }
+          final String record = formatValue(value);
+          if (record.contains(",") || record.contains(Constants.QUOTE_DOUBLE + "")) {
+            stringBuilder.append(Constants.QUOTE_DOUBLE + record + Constants.QUOTE_DOUBLE + "");
+          } else {
+            stringBuilder.append(record);
+          }
+          recordMap.put(listHeadings.get(index), record);
+        }
+        stringBuilder.append(Constants.NEWLINE);
+        Environment.sysOut("recordMap:[" + recordMap.toString() + "]");
+        sqlStringBuilder =
+            SQL.appendStringBuilderSQLInsertRecord("t_Wellmark", sqlStringBuilder, recordMap, true);
+      }
     }
     JDBC jdbc = new JDBC("", "QAAuto");
     try {

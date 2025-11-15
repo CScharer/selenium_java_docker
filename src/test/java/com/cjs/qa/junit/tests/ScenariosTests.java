@@ -217,16 +217,16 @@ public class ScenariosTests {
         Environment.setScrollToObject(false);
       }
       case "marlboro" -> {
-        final boolean overrideDay = true;
-        // Environment.setScrollToObject(false)
-        final String dayExpect = "1";
-        final String monthDay = DateHelpersTests.getCurrentDateTime("d");
         // overrideDay is currently always true, but kept for future flexibility
-        if (!overrideDay && !monthDay.equals(dayExpect)) {
-          Assert.fail(
-              "The month day [" + monthDay + "] is not the expected day [" + dayExpect + "].");
-          return; // Early return if validation fails
-        }
+        // If overrideDay becomes false in the future, uncomment the validation below:
+        // final boolean overrideDay = false;
+        // final String dayExpect = "1";
+        // final String monthDay = DateHelpersTests.getCurrentDateTime("d");
+        // if (!overrideDay && !monthDay.equals(dayExpect)) {
+        //   Assert.fail(
+        //       "The month day [" + monthDay + "] is not the expected day [" + dayExpect + "].");
+        //   return; // Early return if validation fails
+        // }
         // Set Marlboro if overrideDay is true or day matches
         setMarlboro(new Marlboro(getSeleniumWebDriver().getWebDriver()));
       }

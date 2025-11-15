@@ -13,7 +13,7 @@ import com.google.gson.JsonObject;
 import io.cucumber.java.Scenario;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -81,8 +81,11 @@ public interface ISelenium {
       Environment.sysOut("webDriver:[" + webDriver.toString() + "]");
     }
     try {
-      final byte[] screenshot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
+      // Screenshot capture - commented out for future use
+      // final byte[] screenshot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
       // scenarioObject.attach(screenshot, "image/png");
+      @SuppressWarnings("unused")
+      final byte[] screenshot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
     } catch (final Exception e) {
       Environment.sysOutFailure("Error Capturing Screenshot.");
     }
@@ -702,7 +705,7 @@ public interface ISelenium {
       stringBuilderURL.append(SELENIUM_GRID_HUB);
       final String url = stringBuilderURL.toString();
       Environment.sysOut("url:" + url + "]");
-      webDriver = new RemoteWebDriver(new URL(url), desiredCapabilities);
+      webDriver = new RemoteWebDriver(URI.create(url).toURL(), desiredCapabilities);
       final Selenium selenium = new Selenium(webDriver);
       selenium.getSessionInformation();
     } catch (final Exception e) {
@@ -728,7 +731,7 @@ public interface ISelenium {
       }
       if (remote) {
         Environment.sysOut(SELENIUM_GRID_HUB);
-        webDriver = new RemoteWebDriver(new URL(SELENIUM_GRID_HUB), desiredCapabilities);
+        webDriver = new RemoteWebDriver(URI.create(SELENIUM_GRID_HUB).toURL(), desiredCapabilities);
       } else {
         webDriver = browserProfiling(webDriver, browser);
       }
@@ -820,7 +823,7 @@ public interface ISelenium {
               // firefoxProfile);
             }
             Environment.sysOut(SELENIUM_GRID_HUB);
-            webDriver = new RemoteWebDriver(new URL(SELENIUM_GRID_HUB), desiredCapabilities);
+            webDriver = new RemoteWebDriver(URI.create(SELENIUM_GRID_HUB).toURL(), desiredCapabilities);
           } else {
             webDriver = browserProfiling(webDriver, browser);
           }

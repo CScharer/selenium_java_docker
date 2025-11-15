@@ -158,8 +158,8 @@ public class GroupPage extends Page {
           }
           final Map<String, By> mapByGroupURLsBy = getGroupURLs();
           final Map<String, String> mapGroupURLs = new HashMap<>();
-          for (final Entry entry : mapByGroupURLsBy.entrySet()) {
-            final String keyBy = (String) entry.getKey();
+          for (final Entry<String, By> entry : mapByGroupURLsBy.entrySet()) {
+            final String keyBy = entry.getKey();
             final By byElement = mapByGroupURLsBy.get(keyBy);
             String objectURL = null;
             if (objectExists(byElement, 1)) {

@@ -47,7 +47,6 @@ public class ParameterHelper {
    * @param includeMethodVariables
    * @return
    */
-  @SuppressWarnings({"unchecked", "rawtypes"})
   public static String getParameters(
       List<List<Object>> parameterList, boolean includeMethodVariables) {
     // Environment.sysOut(JavaHelpers.createBufferString("*", 20, ""))
@@ -107,7 +106,7 @@ public class ParameterHelper {
       Environment.sysOut(
           "Error in " + JavaHelpers.getCurrentMethodName() + "[" + e.getMessage() + "]");
     }
-    return parameterHelper.toString();
+    return parameterHelper != null ? parameterHelper.toString() : "null";
   }
 
   /**

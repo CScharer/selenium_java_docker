@@ -115,6 +115,9 @@ public class CoderTests {
       recordsCodeListMap.remove(0);
     }
     for (Map<Integer, String> mapRecord : recordsCodeListMap) {
+      if (mapCodeFields == null) {
+        continue; // Skip if mapCodeFields is null
+      }
       String type = mapRecord.get(mapCodeFields.get("Type"));
       String name = mapRecord.get(mapCodeFields.get("Name"));
       String xPath = mapRecord.get(mapCodeFields.get("xPath"));
@@ -139,9 +142,9 @@ public class CoderTests {
 
   private static Map<String, Integer> getHashMapFields(Map<Integer, String> map) {
     Map<String, Integer> mapFields = new HashMap<>();
-    for (Entry entry : map.entrySet()) {
-      int index = (int) entry.getKey();
-      String fieldName = (String) entry.getValue();
+    for (Entry<Integer, String> entry : map.entrySet()) {
+      int index = entry.getKey();
+      String fieldName = entry.getValue();
       mapFields.put(fieldName, index);
     }
     return mapFields;

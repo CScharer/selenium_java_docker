@@ -9,6 +9,7 @@ import com.cjs.qa.utilities.JavaHelpers;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -242,7 +243,7 @@ public class SSOService extends WebService {
     String json = "";
     String line = "s";
     try {
-      final URL oURL = new URL(requestURL);
+      final URL oURL = URI.create(requestURL).toURL();
       final HttpURLConnection oHttpURLConnection = (HttpURLConnection) oURL.openConnection();
       oHttpURLConnection.setRequestMethod("GET");
       final String responseCode = String.valueOf(oHttpURLConnection.getResponseCode());

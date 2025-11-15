@@ -95,16 +95,16 @@ public class Atlassian {
               + Constants.QUOTE_DOUBLE
               + "");
       Environment.sysOut("CURL Command:" + stringBuilder.toString());
-      Map map = null;
+      Map<String, String> map = null;
       try {
         map = CommandLineTests.runProcess(stringBuilder.toString(), true);
       } catch (final Exception e) {
         e.printStackTrace();
       }
-      if ("0".equals(map.get("status"))) {
+      if (map != null && "0".equals(map.get("status"))) {
         Environment.sysOut("PASS!!! map:" + map.toString());
       } else {
-        Environment.sysOut("FAIL!!! map:" + map.toString());
+        Environment.sysOut("FAIL!!! map:" + (map != null ? map.toString() : "null"));
       }
       JavaHelpers.sleep(0, 1);
     }
@@ -159,23 +159,29 @@ public class Atlassian {
   }
 
   public static String getString(Atlassian atlassian) {
-    final StringBuilder stringBuilder = new StringBuilder();
+    // final StringBuilder stringBuilder = new StringBuilder();
     final Constants c = new Constants();
     c.setFormatPretty(true);
-    int newLine = 0;
-    if (c.isFormatPretty()) {
-      newLine = 1;
-    }
+    final int newLine = c.isFormatPretty() ? 1 : 0;
     final int tab = 0;
-    stringBuilder.append(
-        c.nlTab(newLine, tab) + "Bamboo URL:[" + atlassian.getBamboo().getUrl() + "]");
-    stringBuilder.append(
-        c.nlTab(newLine, tab) + "Confluence URL:[" + atlassian.getConfluence().getUrl() + "]");
-    stringBuilder.append(
-        c.nlTab(newLine, tab) + "Crowd URL:[" + atlassian.getCrowd().getUrl() + "]");
-    stringBuilder.append(c.nlTab(newLine, tab) + "Jira URL:[" + atlassian.getJira().getUrl() + "]");
-    stringBuilder.append(
-        c.nlTab(newLine, tab) + "Stash URL:[" + atlassian.getStash().getUrl() + "]");
-    return stringBuilder.toString();
+    String prefix = Constants.nlTab(newLine, tab);
+    // stringBuilder
+    //   .append(Constants.nlTab(newLine, tab) + "Bamboo URL:[" + atlassian.getBamboo().getUrl() + "]")
+    //   .append(Constants.nlTab(newLine, tab) + "Confluence URL:[" + atlassian.getConfluence().getUrl() + "]")
+    //   .append(Constants.nlTab(newLine, tab) + "Crowd URL:[" + atlassian.getCrowd().getUrl() + "]")
+    //   .append(Constants.nlTab(newLine, tab) + "Jira URL:[" + atlassian.getJira().getUrl() + "]")
+    //   .append(Constants.nlTab(newLine, tab) + "Stash URL:[" + atlassian.getStash().getUrl() + "]");
+    // return stringBuilder.toString();
+    
+    // String.format handles the layout and efficient building
+    String result = String.format(
+      "%sBamboo URL:[%s]%sConfluence URL:[%s]%sCrowd URL:[%s]%sJira URL:[%s]%sStash URL:[%s]",
+      prefix, atlassian.getBamboo().getUrl(),
+      prefix, atlassian.getConfluence().getUrl(),
+      prefix, atlassian.getCrowd().getUrl(),
+      prefix, atlassian.getJira().getUrl(),
+      prefix, atlassian.getStash().getUrl()
+    );
+    return result;
   }
 }

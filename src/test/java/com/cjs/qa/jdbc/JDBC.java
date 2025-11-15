@@ -133,7 +133,7 @@ public class JDBC {
     // worked.
     try {
       // Class.forName(jdbcDriver)
-      Class.forName(jdbcDriver).newInstance();
+      Class.forName(jdbcDriver).getDeclaredConstructor().newInstance();
     } catch (final Exception e) {
       Environment.sysOut("Error Instanciating [" + e.getMessage() + "] Driver");
     }
@@ -377,9 +377,9 @@ public class JDBC {
       if (recordIndex == 0) {
         excel.createHeadings(sheetName, headingList);
       } else {
-        for (Entry entry : tableViewMap.entrySet()) {
-          int column = (int) entry.getKey();
-          String value = tableViewMap.get(column);
+        for (Entry<Integer, String> entry : tableViewMap.entrySet()) {
+          int column = entry.getKey();
+          String value = entry.getValue();
           if (JavaHelpers.hasValue(value)) {
             excel.writeCell(sheetName, column, recordIndex, value);
           }

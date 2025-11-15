@@ -32,7 +32,7 @@ public class StepsVivit extends Environment {
   private Scenario scenarioObject = null;
   private Selenium selenium = null;
   private WebDriver webDriver = null;
-  private final Map<String, List> mapListTest = new HashMap<>();
+  private final Map<String, List<Map<String, String>>> mapListTest = new HashMap<>();
   private final List<Map<String, String>> listMapTest = new ArrayList<>();
   private Map<String, String> mapTest = Reports.getColumnsString(Reports.STRING_SUMMARY);
   private String browser = ISelenium.BROWSER_DEFAULT;
@@ -67,7 +67,7 @@ public class StepsVivit extends Environment {
     this.webDriver = webDriver;
   }
 
-  protected Map<String, List> getMapListTest() {
+  protected Map<String, List<Map<String, String>>> getMapListTest() {
     return mapListTest;
   }
 

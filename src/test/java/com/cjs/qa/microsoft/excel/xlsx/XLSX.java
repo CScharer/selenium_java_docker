@@ -17,7 +17,6 @@ import java.util.Locale;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.common.usermodel.HyperlinkType;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.ClientAnchor;
 import org.apache.poi.ss.usermodel.ClientAnchor.AnchorType;
 import org.apache.poi.ss.usermodel.Comment;
@@ -992,7 +991,7 @@ public class XLSX implements IExcel {
     if (getWorkCell() == null) {
       setWorkCell(getWorkRow().createCell(column));
     }
-    getWorkCell().setCellType(CellType.FORMULA);
+    // setCellType() is deprecated - setCellFormula() automatically sets cell type to FORMULA
     getWorkCell().setCellFormula(value);
     return getCellValue(getWorkCell());
   }

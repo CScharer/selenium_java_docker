@@ -141,7 +141,7 @@ public class Groups {
     List<Map<String, String>> groupListMap =
         jdbc.queryResultsString(sqlStringBuilder.toString(), false);
     jdbc.close();
-    for (Map groupMap : groupListMap) {
+    for (Map<String, String> groupMap : groupListMap) {
       String groupType = groupMap.get("Type").toString();
       String pageID = groupMap.get("PageID").toString();
       String groupName = groupMap.get("Name").toString();
@@ -270,9 +270,9 @@ public class Groups {
   }
 
   public void updateURLs(Map<String, String> map) {
-    for (final Entry entry : map.entrySet()) {
-      final String field = (String) entry.getKey();
-      final String value = (String) entry.getValue();
+    for (final Entry<String, String> entry : map.entrySet()) {
+      final String field = entry.getKey();
+      final String value = entry.getValue();
       switch (field) {
         case "GroupDirectoryURL":
           setGroupDirectoryURL(value);

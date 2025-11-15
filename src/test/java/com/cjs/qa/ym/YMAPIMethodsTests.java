@@ -265,61 +265,63 @@ public final class YMAPIMethodsTests {
         }
         StringBuilder stringBuilderCallParameters = new StringBuilder();
         StringBuilder stringBuilderArguments = new StringBuilder();
-        for (final Map<String, String> mapMethodParameters : listMapMethodParameters) {
-          final String parameterPType = mapMethodParameters.get("PType");
-          if ("Call Arguments".equals(parameterPType)) {
-            final String paramterCall = mapMethodParameters.get("Name:1");
-            // final String parameterType =
-            // mapMethodParameters.get("Type")
-            // final String parameterMaxLength =
-            // mapMethodParameters.get("MaxLength")
-            // final String parameterRequired =
-            // mapMethodParameters.get("Required")
-            String parameterDeclarationType = LABEL_STRING;
-            switch (newTemplateYMAPIClass) { // type)
-              case "32-bit Int":
-              case "Decimal":
-              case LABEL_INTEGER:
-              case "Number":
-                parameterDeclarationType = "int";
-                break;
-              case LABEL_BOOLEAN:
-                parameterDeclarationType = "boolean";
-                break;
-              case "Comma Delimited List":
-              case "Date":
-              case "DateTime":
-              case "GUID":
-              case LABEL_STRING:
-              case "String Collection":
-                break;
-              default:
-                break;
+        if (listMapMethodParameters != null) {
+          for (final Map<String, String> mapMethodParameters : listMapMethodParameters) {
+            final String parameterPType = mapMethodParameters.get("PType");
+            if ("Call Arguments".equals(parameterPType)) {
+              final String paramterCall = mapMethodParameters.get("Name:1");
+              // final String parameterType =
+              // mapMethodParameters.get("Type")
+              // final String parameterMaxLength =
+              // mapMethodParameters.get("MaxLength")
+              // final String parameterRequired =
+              // mapMethodParameters.get("Required")
+              String parameterDeclarationType = LABEL_STRING;
+              switch (newTemplateYMAPIClass) { // type)
+                case "32-bit Int":
+                case "Decimal":
+                case LABEL_INTEGER:
+                case "Number":
+                  parameterDeclarationType = "int";
+                  break;
+                case LABEL_BOOLEAN:
+                  parameterDeclarationType = "boolean";
+                  break;
+                case "Comma Delimited List":
+                case "Date":
+                case "DateTime":
+                case "GUID":
+                case LABEL_STRING:
+                case "String Collection":
+                  break;
+                default:
+                  break;
+              }
+              if (!"".equals(stringBuilderArguments.toString())) {
+                stringBuilderArguments.append(",");
+              }
+              final String paramterName =
+                  paramterCall.substring(0, 1).toLowerCase(Locale.ENGLISH)
+                      + paramterCall.substring(1);
+              stringBuilderArguments.append(parameterDeclarationType + " " + paramterName);
+              stringBuilderCallParameters.append(
+                  Constants.nlTab(1, 2)
+                      + "stringBuilder.append(Constants.nlTab(1, 2) + "
+                      + Constants.QUOTE_DOUBLE
+                      + "<"
+                      + paramterCall
+                      + ">"
+                      + Constants.QUOTE_DOUBLE
+                      + " + "
+                      + paramterName
+                      + " + "
+                      + Constants.QUOTE_DOUBLE
+                      + "</"
+                      + paramterCall
+                      + ">"
+                      + Constants.QUOTE_DOUBLE
+                      + ");");
             }
-            if (!"".equals(stringBuilderArguments.toString())) {
-              stringBuilderArguments.append(",");
-            }
-            final String paramterName =
-                paramterCall.substring(0, 1).toLowerCase(Locale.ENGLISH)
-                    + paramterCall.substring(1);
-            stringBuilderArguments.append(parameterDeclarationType + " " + paramterName);
-            stringBuilderCallParameters.append(
-                Constants.nlTab(1, 2)
-                    + "stringBuilder.append(Constants.nlTab(1, 2) + "
-                    + Constants.QUOTE_DOUBLE
-                    + "<"
-                    + paramterCall
-                    + ">"
-                    + Constants.QUOTE_DOUBLE
-                    + " + "
-                    + paramterName
-                    + " + "
-                    + Constants.QUOTE_DOUBLE
-                    + "</"
-                    + paramterCall
-                    + ">"
-                    + Constants.QUOTE_DOUBLE
-                    + ");");
           }
         }
         newTemplateYMAPIClass =
@@ -367,10 +369,10 @@ public final class YMAPIMethodsTests {
     StringBuilder stringBuilder;
     int methodID = 0;
     for (final Map<String, String> mapMethodLinks : listMapMethodLinks) {
-      for (Entry entry : mapMethodLinks.entrySet()) {
-        final String methodName = (String) entry.getKey();
+      for (Entry<String, String> entry : mapMethodLinks.entrySet()) {
+        final String methodName = entry.getKey();
         // final String methodURL = mapMethodLinks.get(methodName)
-        final String methodURL = (String) entry.getValue();
+        final String methodURL = entry.getValue();
         final String methodNamespace = getNamespace(methodName, listNamespaces);
         webDriver.get(methodURL);
         methodID++;

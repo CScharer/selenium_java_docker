@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -47,7 +48,7 @@ public class YMService {
     if (!serviceActive) {
       try {
         final HttpURLConnection httpUrlConnection =
-            (HttpURLConnection) new URL(URL_YM).openConnection();
+            (HttpURLConnection) URI.create(URL_YM).toURL().openConnection();
         httpUrlConnection.setRequestMethod("HEAD");
         final int responseCode = httpUrlConnection.getResponseCode();
         if (!(responseCode >= HttpURLConnection.HTTP_OK
@@ -127,7 +128,7 @@ public class YMService {
     HttpURLConnection httpURLConnection = null;
     try {
       String xml = "";
-      final URL oURL = new URL(URL_YM);
+      final URL oURL = URI.create(URL_YM).toURL();
       httpURLConnection = (HttpURLConnection) oURL.openConnection();
       httpURLConnection.setDoOutput(true);
       httpURLConnection.setInstanceFollowRedirects(false);

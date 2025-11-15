@@ -1,6 +1,14 @@
 # AI Workflow Rules for Code Changes
 
-**Version:** 2.8 (Updated: 2025-11-13 - Added Industry Standards Requirement)
+**Version:** 2.9 (Updated: 2025-11-15 - Added Linter Fixes Documentation)
+
+### 📋 Version 2.9 Changes:
+- **🔧 ADDED:** Rule 11 - Linter Warnings Fix Process
+  - Documents current linter issues being addressed
+  - Categories of warnings (deprecated APIs, raw types, null pointers, etc.)
+  - Fix priorities and patterns
+  - Progress tracking approach
+  - Current status: 68 remaining issues (down from 229, 70% reduction)
 
 ### 📋 Version 2.8 Changes:
 - **📚 ADDED:** Rule 10 - Recommendations Must Include Industry Standards
@@ -1302,6 +1310,226 @@ public void testLogin() {
 
 ---
 
+### **Rule 11: Linter Warnings Fix Process** 🔧 **NEW**
+
+**Principle:** Systematically address IDE linter warnings to improve code quality, maintainability, and reduce technical debt.
+
+#### **Current Status (2025-11-15):**
+- **Starting Point:** 229 linter warnings
+- **Current:** 68 linter warnings remaining
+- **Progress:** 70% reduction (161 warnings fixed)
+- **Target:** Continue systematic reduction of remaining issues
+
+#### **Categories of Linter Warnings Being Addressed:**
+
+**1. Deprecated API Usage (HIGH PRIORITY):**
+- ✅ **Deprecated `URL(String)` constructor** - COMPLETED (20+ instances)
+  - **Fix:** Replace `new URL(url)` with `URI.create(url).toURL()`
+  - **Reason:** Deprecated in Java 20, URI-based approach is safer
+  - **Files Fixed:** SmokeTests, SimpleGridTest, GridConnectionTest, AdvancedFeaturesTests, DataDrivenTests, NegativeTests, EnhancedGridTests, MobileTestsConfiguration, GTWebinarServiceTests, SharepointServiceTests, SSOService, REST, FSOTests, YMService, ISelenium, SeleniumWebDriver, WebService
+
+- ⏳ **Deprecated `Runtime.exec(String)`** - IN PROGRESS (6 instances)
+  - **Fix:** Replace with `ProcessBuilder` API
+  - **Reason:** More secure and flexible process execution
+  - **Files:** CommandLineTests.java (6 instances)
+
+- ⏳ **Deprecated `Cell.setCellType()`** - PENDING (2 instances)
+  - **Fix:** Use `Cell.setBlank()` or appropriate setter methods
+  - **Reason:** Deprecated in Apache POI 5.x
+  - **Files:** XLS.java, XLSX.java
+
+- ⏳ **Deprecated `CSVFormat.withHeader()`** - PENDING (2 instances)
+  - **Fix:** Use `CSVFormat.Builder` pattern
+  - **Reason:** Deprecated in Apache Commons CSV 1.9+
+  - **Files:** SystemProcesses.java, YMDataTests.java
+
+**2. Raw Type Warnings (MEDIUM PRIORITY):**
+- ✅ **Map.Entry raw types** - COMPLETED (~30 instances)
+  - **Fix:** Parameterize with `Entry<String, String>`, `Entry<Object, Object>`, etc.
+  - **Files Fixed:** SQL.java, CommandLineTests.java, Convert.java, HTML.java, JavaHelpers.java, SoftAssert.java, FSOTests.java, ExcelFormulaSumTests.java, ExcelStatisticalTests.java, SauceUtils.java, ContactInfoPage.java, GroupPage.java, Groups.java, YMAPIMethodsTests.java, RTestReporter.java, StepsVivit.java, Reports.java, VitivDataTests.java, Atlassian.java
+
+- ⏳ **Map raw types** - IN PROGRESS (~15 instances)
+  - **Fix:** Parameterize with appropriate types `Map<String, String>`, `Map<String, Object>`, etc.
+  - **Files:** BTSConvertDatabaseToXMLTests.java, YMDataTests.java, RTestReporter.java
+
+- ⏳ **List/ArrayList raw types** - IN PROGRESS (~10 instances)
+  - **Fix:** Parameterize with `List<String>`, `ArrayList<String>`, etc.
+  - **Files:** YMDataTests.java, JavaHelpers.java, StepsVivit.java, RTestReporter.java
+
+- ⏳ **Drawing raw type** - PENDING (2 instances)
+  - **Fix:** Parameterize with `Drawing<?>` or specific type
+  - **Files:** XLS.java, XLSX.java
+
+**3. Null Pointer Access Warnings (MEDIUM PRIORITY):**
+- ⏳ **Potential null pointer access** - IN PROGRESS (~8 instances)
+  - **Fix:** Add null checks before accessing variables
+  - **Pattern:** `if (variable != null && condition)` or `Objects.requireNonNull()`
+  - **Files:** CoderTests.java, WebElementTableTests.java, DataTests.java, BingPage.java, ParameterHelper.java, Reports.java, ClaimsAndSpendingPage.java, YMAPIMethodsTests.java
+
+- ⏳ **Null pointer access (Boolean auto-unboxing)** - PENDING (5 instances)
+  - **Fix:** Check for null before unboxing or use `Boolean.TRUE.equals(value)`
+  - **Files:** YMAPIDebug.java (5 instances)
+
+**4. Unused Variables/Fields (LOW PRIORITY):**
+- ⏳ **Unused local variables** - PENDING (~3 instances)
+  - **Fix:** Remove if truly unused, or use if needed
+  - **Files:** ISelenium.java (screenshot), Page.java (jsExecutor x2)
+
+- ⏳ **Unused fields** - PENDING (~2 instances)
+  - **Fix:** Remove or mark with `@SuppressWarnings("unused")` if intentionally kept
+  - **Files:** DailyPollQuizPages.java (answersNeeded), Processes.java (log)
+
+- ⏳ **Unused methods** - PENDING (1 instance)
+  - **Fix:** Remove if not needed, or document why kept
+  - **Files:** PageObjectGenerator.java (getInputType)
+
+**5. Type Safety Warnings (MEDIUM PRIORITY):**
+- ⏳ **Unchecked casts** - IN PROGRESS (~5 instances)
+  - **Fix:** Add proper type checks or use `@SuppressWarnings("unchecked")` with justification
+  - **Files:** EveryoneSocial.java (WebElement to List), Page.java (Object to List<String>), SeleniumWebDriver.java (Object to Map)
+
+- ⏳ **Unnecessary @SuppressWarnings** - PENDING (2 instances)
+  - **Fix:** Remove if warning is resolved or no longer needed
+  - **Files:** ParameterHelper.java, UnmarshallYourMembershipResponse.java
+
+**6. Static Method Access (COMPLETED):**
+- ✅ **Static method access** - COMPLETED (~50 instances)
+  - **Fix:** Use `Constants.nlTab()` instead of `c.nlTab()` (instance access)
+  - **Files Fixed:** Multiple files across the codebase
+
+#### **Fix Priority Order:**
+
+**Phase 1: Deprecated APIs (HIGH PRIORITY)** ✅ IN PROGRESS
+1. ✅ URL(String) constructor - COMPLETED
+2. ⏳ Runtime.exec(String) - NEXT
+3. ⏳ Cell.setCellType() - PENDING
+4. ⏳ CSVFormat.withHeader() - PENDING
+
+**Phase 2: Type Safety (MEDIUM PRIORITY)** ⏳ IN PROGRESS
+1. ✅ Map.Entry raw types - COMPLETED
+2. ⏳ Map raw types - IN PROGRESS
+3. ⏳ List/ArrayList raw types - IN PROGRESS
+4. ⏳ Unchecked casts - IN PROGRESS
+5. ⏳ Drawing raw type - PENDING
+
+**Phase 3: Null Safety (MEDIUM PRIORITY)** ⏳ IN PROGRESS
+1. ⏳ Potential null pointer access - IN PROGRESS
+2. ⏳ Boolean auto-unboxing - PENDING
+
+**Phase 4: Code Cleanup (LOW PRIORITY)** ⏳ PENDING
+1. ⏳ Unused variables/fields - PENDING
+2. ⏳ Unnecessary @SuppressWarnings - PENDING
+3. ⏳ Static method access - COMPLETED
+
+#### **Fix Patterns:**
+
+**Deprecated URL Constructor:**
+```java
+// ❌ OLD (deprecated):
+final URL url = new URL(urlString);
+
+// ✅ NEW (Java 20+ compatible):
+final URL url = URI.create(urlString).toURL();
+// Don't forget to add: import java.net.URI;
+```
+
+**Raw Type Map.Entry:**
+```java
+// ❌ OLD (raw type):
+for (Map.Entry entry : map.entrySet()) {
+    String key = (String) entry.getKey();
+}
+
+// ✅ NEW (parameterized):
+for (Map.Entry<String, String> entry : map.entrySet()) {
+    String key = entry.getKey(); // No cast needed
+}
+```
+
+**Null Pointer Safety:**
+```java
+// ❌ OLD (potential NPE):
+if (map.get("status").equals("0")) { }
+
+// ✅ NEW (null-safe):
+if (map != null && "0".equals(map.get("status"))) { }
+```
+
+**Static Method Access:**
+```java
+// ❌ OLD (instance access to static):
+final Constants c = new Constants();
+String result = c.nlTab(1, 0);
+
+// ✅ NEW (static access):
+String result = Constants.nlTab(1, 0);
+```
+
+#### **Progress Tracking:**
+
+**Before Starting:**
+- Check current linter warning count: `read_lints` tool
+- Note starting count and categories
+
+**During Fixes:**
+- Fix in batches of 10-15 warnings
+- Verify compilation after each batch
+- Run smoke tests periodically
+
+**After Fixes:**
+- Verify warning count reduction
+- Update CHANGE.log with progress
+- Commit with descriptive message
+
+#### **Verification Requirements:**
+
+**After Each Batch:**
+1. ✅ Compilation: `mvn clean compile test-compile -DskipTests`
+2. ✅ Smoke Tests: `mvn test -Dtest=SmokeTests -DskipTests=false`
+3. ✅ Linter Check: Verify warning count decreased
+
+**Before Committing:**
+1. ✅ All changes compile successfully
+2. ✅ Smoke tests pass
+3. ✅ No new warnings introduced
+4. ✅ Warning count reduced
+
+#### **Documentation:**
+
+**Commit Messages Should Include:**
+- Category of warnings fixed (e.g., "Fix deprecated URL constructors")
+- Number of instances fixed
+- Files modified
+- Progress: "X warnings remaining (Y% reduction)"
+
+**Example Commit Message:**
+```
+fix: replace deprecated URL(String) constructor with URI.create()
+
+- Replaced 20+ instances of deprecated URL(String) constructor
+- Updated imports to include java.net.URI
+- Removed unused URL imports where applicable
+- Progress: 68 warnings remaining (70% reduction from 229)
+```
+
+#### **Known Limitations:**
+
+**Some warnings may require:**
+- Library updates (e.g., Apache POI, Commons CSV)
+- Refactoring of complex code paths
+- User approval for breaking changes
+- Additional testing for null safety fixes
+
+**When to Defer:**
+- Warnings requiring major refactoring
+- Warnings in rarely-used code paths
+- Warnings that would break existing functionality
+- Warnings requiring library version updates
+
+**Remember:** Systematic reduction of linter warnings improves code quality, but prioritize correctness and stability over speed! 🔧
+
+---
+
 ## 📋 VERIFICATION CHECKLIST TEMPLATE
 
 Use this checklist for EVERY batch:
@@ -1511,6 +1739,6 @@ BUILD SUCCESS
 
 ---
 
-**Last Updated:** 2025-11-13 15:30:00 CST
-**Version:** 2.8
+**Last Updated:** 2025-11-15 06:00:00 CST
+**Version:** 2.9
 **Applies To:** All AI-driven code changes in this repository

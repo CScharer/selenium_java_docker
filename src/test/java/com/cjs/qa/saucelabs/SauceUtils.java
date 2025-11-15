@@ -53,9 +53,9 @@ public final class SauceUtils {
    * @param updates String,Object pair containing job updates
    */
   private static void addBuildNumberToUpdate(Map<String, Object> updates) {
-    for (Entry entry : getBuildNumerKeyValues().entrySet()) {
-      String key = (String) entry.getKey();
-      String value = (String) entry.getValue();
+    for (Entry<String, String> entry : getBuildNumerKeyValues().entrySet()) {
+      String key = entry.getKey();
+      String value = entry.getValue();
       String buildNumber = JavaHelpers.readPropertyOrEnv(value, null);
       Environment.sysOut(
           "Key:[" + key + "], Value:[" + value + "], buildNumber:[" + buildNumber + "]");
@@ -144,8 +144,8 @@ public final class SauceUtils {
     final Map<String, Object> propertiesDefined = new HashMap<>();
     final Map<String, Object> propertiesUndefined = new HashMap<>();
     Object propertyDefault = null;
-    for (final Entry entry : propertiesDefault.entrySet()) {
-      final String setting = (String) entry.getKey();
+    for (final Entry<String, Object> entry : propertiesDefault.entrySet()) {
+      final String setting = entry.getKey();
       final Object propertyDefined = System.getProperty(setting);
       if (propertyDefined != null) {
         propertiesDefined.put(setting, propertyDefined);
@@ -154,15 +154,15 @@ public final class SauceUtils {
       }
     }
     Environment.sysOut("Defined Properties (" + propertiesDefined.size() + ")");
-    for (final Entry entry : propertiesDefined.entrySet()) {
-      final String setting = (String) entry.getKey();
+    for (final Entry<String, Object> entry : propertiesDefined.entrySet()) {
+      final String setting = entry.getKey();
       final Object propertyDefined = System.getProperty(setting);
       Environment.sysOut("***Defined***-" + setting + ":[" + propertyDefined + "]");
       desiredCapabilities.setCapability(setting, propertyDefined);
     }
     Environment.sysOut("Undefined Properties (" + propertiesUndefined.size() + ")");
-    for (final Entry entry : propertiesUndefined.entrySet()) {
-      final String setting = (String) entry.getKey();
+    for (final Entry<String, Object> entry : propertiesUndefined.entrySet()) {
+      final String setting = entry.getKey();
       propertyDefault = propertiesDefault.get(setting);
       Environment.sysOut("***Undefined***-" + setting + ":[" + propertyDefault + "]");
       System.setProperty(setting, String.valueOf(propertyDefault));

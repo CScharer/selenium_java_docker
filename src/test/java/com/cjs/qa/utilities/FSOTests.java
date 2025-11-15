@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -194,7 +195,7 @@ public class FSOTests {
   public static boolean fileDownload(String linkURL, String filePathName) throws QAException {
     final File file = new File(filePathName);
     try {
-      final URL url = new URL(linkURL);
+      final URL url = URI.create(linkURL).toURL();
       // FileUtils.copyURLToFile(url, file)
       FileUtils.copyURLToFile(url, file, URL_TIMEOUT_CONNECTION, URL_TIMEOUT_READ);
     } catch (final Exception e) {
@@ -217,7 +218,7 @@ public class FSOTests {
       attempt++;
       Environment.sysOut(JavaHelpers.getCurrentMethodName() + " attempt " + attempt);
       try {
-        final URL url = new URL(exportURI);
+        final URL url = URI.create(exportURI).toURL();
         final File file = new File(filePathName);
         // FileUtils.copyURLToFile(url, file)
         FileUtils.copyURLToFile(url, file, URL_TIMEOUT_CONNECTION, URL_TIMEOUT_READ);
@@ -284,10 +285,10 @@ public class FSOTests {
     final String replacer = "_";
     final Map<String, String> invalidCharacters = getCharactersInvalid();
     final Map<String, String> escapedCharacters = getCharactersEsacped();
-    for (final Entry entry : invalidCharacters.entrySet()) {
-      final String replacee = (String) entry.getValue();
+    for (final Entry<String, String> entry : invalidCharacters.entrySet()) {
+        final String replacee = entry.getValue();
       if (filePathName.contains(replacee)) {
-        final String key = (String) entry.getKey();
+        final String key = entry.getKey();
         Environment.sysOut("Replacing [" + key + ":" + replacee + "] with [" + replacer + "]");
         if (escapedCharacters.containsKey(key)) {
           filePathName = replaceEscapedCharacter(filePathName, replacee, replacer);

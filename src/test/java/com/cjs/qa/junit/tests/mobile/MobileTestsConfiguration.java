@@ -6,7 +6,7 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
 import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import org.openqa.selenium.Dimension;
@@ -106,7 +106,7 @@ public final class MobileTestsConfiguration {
     options.addArguments("--disable-dev-shm-usage");
     options.addArguments("--no-sandbox");
 
-    return new RemoteWebDriver(new URL(gridUrl), options);
+    return new RemoteWebDriver(URI.create(gridUrl).toURL(), options);
   }
 
   /**
@@ -127,7 +127,7 @@ public final class MobileTestsConfiguration {
         "Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 "
             + "(KHTML, like Gecko) Chrome/91.0.4472.120 Mobile Safari/537.36");
 
-    RemoteWebDriver driver = new RemoteWebDriver(new URL(gridUrl), options);
+    RemoteWebDriver driver = new RemoteWebDriver(URI.create(gridUrl).toURL(), options);
 
     // Set window size to match mobile device
     driver.manage().window().setSize(device.getDimension());
@@ -157,7 +157,7 @@ public final class MobileTestsConfiguration {
     options.setAutomationName("UiAutomator2");
     options.setNoReset(true);
 
-    return new AndroidDriver(new URL(appiumUrl), options);
+    return new AndroidDriver(URI.create(appiumUrl).toURL(), options);
   }
 
   /**
@@ -179,7 +179,7 @@ public final class MobileTestsConfiguration {
     options.setAutomationName("XCUITest");
     options.setNoReset(true);
 
-    return new IOSDriver(new URL(appiumUrl), options);
+    return new IOSDriver(URI.create(appiumUrl).toURL(), options);
   }
 
   /**
@@ -192,7 +192,7 @@ public final class MobileTestsConfiguration {
    */
   public static AppiumDriver createAppiumDriver(String appiumUrl, MutableCapabilities capabilities)
       throws MalformedURLException {
-    return new AppiumDriver(new URL(appiumUrl), capabilities);
+    return new AppiumDriver(URI.create(appiumUrl).toURL(), capabilities);
   }
 
   /**

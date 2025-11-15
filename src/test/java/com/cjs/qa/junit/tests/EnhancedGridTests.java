@@ -2,7 +2,7 @@ package com.cjs.qa.junit.tests;
 
 import com.cjs.qa.utilities.AllureHelper;
 import io.qameta.allure.*;
-import java.net.URL;
+import java.net.URI;
 import java.time.Duration;
 import java.util.Locale;
 import org.apache.logging.log4j.LogManager;
@@ -55,7 +55,7 @@ public class EnhancedGridTests {
       if (isHeadless) {
         options.addArguments("--headless");
       }
-      driver = new RemoteWebDriver(new URL(gridUrl), options);
+      driver = new RemoteWebDriver(URI.create(gridUrl).toURL(), options);
     } else {
       // Default to Chrome
       ChromeOptions options = new ChromeOptions();
@@ -65,7 +65,7 @@ public class EnhancedGridTests {
       options.addArguments("--no-sandbox");
       options.addArguments("--disable-dev-shm-usage");
       options.addArguments("--disable-gpu");
-      driver = new RemoteWebDriver(new URL(gridUrl), options);
+      driver = new RemoteWebDriver(URI.create(gridUrl).toURL(), options);
     }
 
     LOGGER.info("✅ Driver initialized in {} mode", isHeadless ? "headless" : "headed");

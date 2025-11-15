@@ -998,8 +998,8 @@ public class VivitDataTests extends Environment {
     }
     jdbc.close();
     String embeddedReport = FSOTests.fileReadAll(VivitFoldersFiles.REPORT_HTM_AUTOMATION_TEMPLATE);
-    for (Entry entry : reportMap.entrySet()) {
-      String key = (String) entry.getKey();
+    for (Entry<String, String> entry : reportMap.entrySet()) {
+      String key = entry.getKey();
       final String replacee = key.replace(VivitViews.PREFIX, "");
       final String replacer = reportMap.get(key);
       embeddedReport = embeddedReport.replace(replacee, replacer);
@@ -1704,13 +1704,13 @@ public class VivitDataTests extends Environment {
     // Budget
     String sheetSummary = IExcel.SHEET_SUMMARY;
     String sheetFlights = "Flights";
-    jdbc.exportDataFromTableView(
+    JDBC.exportDataFromTableView(
         VivitViews.VIVIT_COMMUTE_BDGET_WTOTALS,
         VivitFoldersFiles.DATA_FLIGHTS,
         sheetSummary,
         VivitDataTests.DATABASE_DEFINITION,
         true);
-    jdbc.exportDataFromTableView(
+    JDBC.exportDataFromTableView(
         VivitTables.DOM_VIVIT_FLIGHTS,
         VivitFoldersFiles.DATA_FLIGHTS,
         sheetFlights,
@@ -1954,7 +1954,7 @@ public class VivitDataTests extends Environment {
                 + ">");
         stringBuilder.append("<thead>");
         stringBuilder.append("<tr>");
-        for (final Entry entry : brokenLinkMap.entrySet()) {
+        for (final Entry<Integer, String> entry : brokenLinkMap.entrySet()) {
           stringBuilder.append(
               "<th style="
                   + Constants.QUOTE_DOUBLE
@@ -1976,7 +1976,7 @@ public class VivitDataTests extends Environment {
       } else {
         // stringBuilder.append("<tbody>")
         stringBuilder.append("<tr>");
-        for (final Entry entry : brokenLinkMap.entrySet()) {
+        for (final Entry<Integer, String> entry : brokenLinkMap.entrySet()) {
 
           stringBuilder.append(
               "<td style="
@@ -2075,7 +2075,7 @@ public class VivitDataTests extends Environment {
                 + ">");
         stringBuilder.append("<thead>");
         stringBuilder.append("<tr>");
-        for (final Entry entry : brokenLinkMap.entrySet()) {
+        for (final Entry<Integer, String> entry : brokenLinkMap.entrySet()) {
           stringBuilder.append(
               "<th style="
                   + Constants.QUOTE_DOUBLE
@@ -2097,7 +2097,7 @@ public class VivitDataTests extends Environment {
       } else {
         // stringBuilder.append("<tbody>")
         stringBuilder.append("<tr>");
-        for (final Entry entry : brokenLinkMap.entrySet()) {
+        for (final Entry<Integer, String> entry : brokenLinkMap.entrySet()) {
           stringBuilder.append(
               "<td style="
                   + Constants.QUOTE_DOUBLE
@@ -2187,7 +2187,7 @@ public class VivitDataTests extends Environment {
                 + ">");
         stringBuilder.append("<thead>");
         stringBuilder.append("<tr>");
-        for (final Entry entry : testInformationLinkMap.entrySet()) {
+        for (final Entry<Integer, String> entry : testInformationLinkMap.entrySet()) {
           stringBuilder.append(
               "<th style="
                   + Constants.QUOTE_DOUBLE
@@ -2209,7 +2209,7 @@ public class VivitDataTests extends Environment {
       } else {
         // stringBuilder.append("<tbody>")
         stringBuilder.append("<tr>");
-        for (final Entry entry : testInformationLinkMap.entrySet()) {
+        for (final Entry<Integer, String> entry : testInformationLinkMap.entrySet()) {
           stringBuilder.append(
               "<td style="
                   + Constants.QUOTE_DOUBLE
@@ -2346,7 +2346,7 @@ public class VivitDataTests extends Environment {
                 + ">");
         stringBuilder.append("<thead>");
         stringBuilder.append("<tr>");
-        for (final Entry entry : gtwEventsMap.entrySet()) {
+        for (final Entry<Integer, String> entry : gtwEventsMap.entrySet()) {
           stringBuilder.append(
               "<th style="
                   + Constants.QUOTE_DOUBLE
@@ -2368,7 +2368,7 @@ public class VivitDataTests extends Environment {
       } else {
         // stringBuilder.append("<tbody>")
         stringBuilder.append("<tr>");
-        for (final Entry entry : gtwEventsMap.entrySet()) {
+        for (final Entry<Integer, String> entry : gtwEventsMap.entrySet()) {
           stringBuilder.append(
               "<td style="
                   + Constants.QUOTE_DOUBLE
@@ -2474,7 +2474,7 @@ public class VivitDataTests extends Environment {
                 + ">");
         stringBuilder.append("<thead>");
         stringBuilder.append("<tr>");
-        for (final Entry entry : gtwEventsMap.entrySet()) {
+        for (final Entry<Integer, String> entry : gtwEventsMap.entrySet()) {
           stringBuilder.append(
               "<th style="
                   + Constants.QUOTE_DOUBLE
@@ -2496,7 +2496,7 @@ public class VivitDataTests extends Environment {
       } else {
         // stringBuilder.append("<tbody>")
         stringBuilder.append("<tr>");
-        for (final Entry entry : gtwEventsMap.entrySet()) {
+        for (final Entry<Integer, String> entry : gtwEventsMap.entrySet()) {
 
           stringBuilder.append(
               "<td style="
@@ -2606,7 +2606,7 @@ public class VivitDataTests extends Environment {
                 + ">");
         stringBuilder.append("<thead>");
         stringBuilder.append("<tr>");
-        for (final Entry entry : gtwEventAttendeesMap.entrySet()) {
+        for (final Entry<Integer, String> entry : gtwEventAttendeesMap.entrySet()) {
           stringBuilder.append(
               "<th style="
                   + Constants.QUOTE_DOUBLE
@@ -2628,7 +2628,7 @@ public class VivitDataTests extends Environment {
       } else {
         // stringBuilder.append("<tbody>")
         stringBuilder.append("<tr>");
-        for (final Entry entry : gtwEventAttendeesMap.entrySet()) {
+        for (final Entry<Integer, String> entry : gtwEventAttendeesMap.entrySet()) {
 
           stringBuilder.append(
               "<td style="
@@ -2747,7 +2747,7 @@ public class VivitDataTests extends Environment {
                 + ">");
         stringBuilder.append("<thead>");
         stringBuilder.append("<tr>");
-        for (final Entry entry : gtwEventRegistrationsMap.entrySet()) {
+        for (final Entry<Integer, String> entry : gtwEventRegistrationsMap.entrySet()) {
           stringBuilder.append(
               "<th style="
                   + Constants.QUOTE_DOUBLE
@@ -2769,7 +2769,7 @@ public class VivitDataTests extends Environment {
       } else {
         // stringBuilder.append("<tbody>")
         stringBuilder.append("<tr>");
-        for (final Entry entry : gtwEventRegistrationsMap.entrySet()) {
+        for (final Entry<Integer, String> entry : gtwEventRegistrationsMap.entrySet()) {
 
           stringBuilder.append(
               "<td style="

@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -35,7 +36,7 @@ public final class REST {
     final StringBuilder stringBuilderJSON = new StringBuilder();
     String line = "";
     try {
-      final URL oURL = new URL(url);
+      final URL oURL = URI.create(url).toURL();
       httpURLConnection = (HttpURLConnection) oURL.openConnection();
       httpURLConnection.setDoInput(true);
       httpURLConnection.setDoOutput(true);

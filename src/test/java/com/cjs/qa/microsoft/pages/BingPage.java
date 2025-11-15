@@ -215,12 +215,14 @@ public class BingPage extends Page {
         break;
       }
     }
-    Environment.sysOut(
-        "webElement:[" + webElement.getAttribute("tagName") + "], href:[" + href + "]");
-    try {
-      clickObject(webElement);
-    } catch (final Exception e) {
-      Environment.sysOut(e.getMessage());
+    if (webElement != null) {
+      Environment.sysOut(
+          "webElement:[" + webElement.getAttribute("tagName") + "], href:[" + href + "]");
+      try {
+        clickObject(webElement);
+      } catch (final Exception e) {
+        Environment.sysOut(e.getMessage());
+      }
     }
     search(href);
   }
