@@ -150,7 +150,7 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Run Smoke Tests
+      - name: Compile project
         run: ./mvnw clean compile test-compile
 
       - name: Upload compiled classes
@@ -177,7 +177,7 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Build with Maven
+      - name: Run Checkstyle
         run: |
           echo "Running Checkstyle..."
           ./mvnw checkstyle:check
@@ -267,7 +267,7 @@ jobs:
         run: |
           TOTAL_FAILURES=0
           TOTAL_ERRORS=0
-          
+
           for xml_file in test-results/**/TEST-*.xml; do
             if [ -f "$xml_file" ]; then
               failures=$(grep -oP 'failures="\K[0-9]+' "$xml_file" | head -1 || echo "0")
@@ -276,7 +276,7 @@ jobs:
               TOTAL_ERRORS=$((TOTAL_ERRORS + ${errors:-0}))
             fi
           done
-          
+
           if [ "$TOTAL_FAILURES" -gt "0" ] || [ "$TOTAL_ERRORS" -gt "0" ]; then
             echo "❌ Tests failed - deployment cancelled"
             echo "tests_passed=false" >> $GITHUB_OUTPUT
@@ -314,7 +314,7 @@ jobs:
       always() &&
       needs.detect-changes.outputs.code-changed == 'true' &&
       needs.determine-environments.outputs.run_test == 'true' &&
-      (needs.test-dev-environment.result == 'success' || 
+      (needs.test-dev-environment.result == 'success' ||
        (needs.test-dev-environment.result == 'skipped' && needs.determine-environments.outputs.run_dev == 'false'))
     uses: ./.github/workflows/test-environment.yml
     with:
@@ -353,7 +353,7 @@ jobs:
         run: |
           TOTAL_FAILURES=0
           TOTAL_ERRORS=0
-          
+
           for xml_file in test-results/**/TEST-*.xml; do
             if [ -f "$xml_file" ]; then
               failures=$(grep -oP 'failures="\K[0-9]+' "$xml_file" | head -1 || echo "0")
@@ -362,7 +362,7 @@ jobs:
               TOTAL_ERRORS=$((TOTAL_ERRORS + ${errors:-0}))
             fi
           done
-          
+
           if [ "$TOTAL_FAILURES" -gt "0" ] || [ "$TOTAL_ERRORS" -gt "0" ]; then
             echo "❌ Tests failed - deployment cancelled"
             echo "tests_passed=false" >> $GITHUB_OUTPUT
@@ -401,7 +401,7 @@ jobs:
       always() &&
       needs.detect-changes.outputs.code-changed == 'true' &&
       needs.determine-environments.outputs.run_prod == 'true' &&
-      (needs.test-test-environment.result == 'success' || 
+      (needs.test-test-environment.result == 'success' ||
        (needs.test-test-environment.result == 'skipped' && needs.determine-environments.outputs.run_test == 'false'))
     uses: ./.github/workflows/test-environment.yml
     with:
@@ -440,7 +440,7 @@ jobs:
         run: |
           TOTAL_FAILURES=0
           TOTAL_ERRORS=0
-          
+
           for xml_file in test-results/**/TEST-*.xml; do
             if [ -f "$xml_file" ]; then
               failures=$(grep -oP 'failures="\K[0-9]+' "$xml_file" | head -1 || echo "0")
@@ -449,7 +449,7 @@ jobs:
               TOTAL_ERRORS=$((TOTAL_ERRORS + ${errors:-0}))
             fi
           done
-          
+
           if [ "$TOTAL_FAILURES" -gt "0" ] || [ "$TOTAL_ERRORS" -gt "0" ]; then
             echo "❌ Tests failed - deployment cancelled"
             echo "tests_passed=false" >> $GITHUB_OUTPUT

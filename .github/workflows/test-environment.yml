@@ -54,7 +54,7 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Run Accessibility Tests
+      - name: Wait for Selenium Grid
         run: |
           echo "⏳ Waiting for Grid..."
           timeout 60 bash -c 'until curl -sf http://localhost:4444/wd/hub/status; do sleep 2; done'
