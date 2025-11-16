@@ -38,6 +38,9 @@
   - Enables tracking which AI tool performs token consumption
   - Maintains backward compatibility with token usage format
 
+**Repository Housekeeping:**
+- Removed tracked binary `src/test/resources/Drivers/chromedriver.exe` from the repository and ensured driver binaries are ignored via `.gitignore`. This reduces repository bloat and prevents accidental commits of platform-specific binaries. See `.gitignore` under "WebDriver Binaries" for the ignore pattern.
+
 ---
 
 ### Verification Results
