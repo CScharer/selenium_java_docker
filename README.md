@@ -3,7 +3,7 @@
 ![CI Pipeline](https://github.com/CScharer/selenium_java_docker/workflows/Selenium%20Grid%20CI%2FCD%20Pipeline/badge.svg)
 [![Tests](https://img.shields.io/badge/tests-77%20total%20(UI:%2046%20%7C%20API:%2031)-brightgreen)](https://github.com/CScharer/selenium_java_docker/actions)
 [![Allure Report](https://img.shields.io/badge/📊_Allure-Report-orange.svg)](https://cscharer.github.io/selenium_java_docker/)
-[![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://www.oracle.com/java/)
+[![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
 [![Selenium](https://img.shields.io/badge/Selenium-4.26.0-green.svg)](https://www.selenium.dev/)
 [![Cucumber](https://img.shields.io/badge/Cucumber-7.20.1-brightgreen.svg)](https://cucumber.io/)
 [![REST Assured](https://img.shields.io/badge/REST%20Assured-5.4.0-blue.svg)](https://rest-assured.io/)
@@ -54,7 +54,7 @@ A comprehensive Selenium-based test automation framework supporting **30+ test s
 - 🧪 **Professional Testing** - Log4j 2, Allure, TestNG, REST Assured
 
 ### Modern Technology Stack
-- **Java 17** - Latest LTS version
+- **Java 21** - Latest LTS version
 - **Selenium 4.26.0** - Modern WebDriver API with Grid support
 - **REST Assured 5.4.0** - REST API testing & validation
 - **Cucumber 7.20.1** - BDD framework with Gherkin
@@ -135,7 +135,7 @@ cp XML/UserSettings.xml.template XML/UserSettings.xml
 ## 📦 Prerequisites
 
 ### Required
-- **Java 17+** - [Download JDK](https://adoptium.net/)
+- **Java 21+** - [Download JDK](https://adoptium.net/)
 - **Google Cloud SDK** - [Install gcloud](https://cloud.google.com/sdk/docs/install)
 - **Git** - For version control
 

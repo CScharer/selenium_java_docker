@@ -142,7 +142,7 @@ on:
 **Add environment URLs**:
 ```yaml
 env:
-  JAVA_VERSION: '17'
+  JAVA_VERSION: '21'
   MAVEN_OPTS: -Xmx2048m
   # Environment URLs (update these with your actual URLs)
   DEV_URL: 'https://dev.yourapp.com'

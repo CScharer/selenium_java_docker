@@ -718,7 +718,7 @@ git branch
         - Commit hash: `[PENDING]` (will be updated in next batch)
         - Summary title
         - Overview section with high-level summary
-        - **Cursor Token Status:** `Tokens Used: X / Total: Y (Z remaining, A% used, B% remaining)`
+        - **AI Tool & Token Status:** `[Tool: Cursor|GitHub Copilot|Other] - Tokens Used: X / Total: Y (Z remaining, A% used, B% remaining)`
         - Detailed changes, files modified, verification results
         - Impact summary and next steps
    - Format: Follow existing CHANGE.log structure
@@ -3034,7 +3034,7 @@ All tests pass locally, but CI shows failures
    ```
 
 2. **Check environment differences:**
-   - Java version (CI uses Java 17)
+   - Java version (CI uses Java 21)
    - Maven version
    - System properties
    - Environment variables

@@ -18,14 +18,14 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 	<properties>
 		<!-- Maven Dependencies-->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>17</java.version>
+		<java.version>21</java.version>
 		<meminitial>128m</meminitial>
 		<maxmem>512m</maxmem>
 		<maven.version>3.9.9</maven.version>
 		<maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+		<maven-compiler-plugin.version>3.13.1</maven-compiler-plugin.version>
 		<maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
 		<maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
 		<!-- Cucumber Dependencies-->
@@ -603,6 +603,7 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
+					<release>${java.version}</release>
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
 					<meminitial>${meminitial}</meminitial>

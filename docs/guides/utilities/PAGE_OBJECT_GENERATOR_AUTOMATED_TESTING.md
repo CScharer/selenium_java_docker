@@ -117,7 +117,7 @@ You can review these to see what the generator produces!
 
 **Required**:
 - ✅ ChromeDriver installed and in PATH
-- ✅ Java 17+
+- ✅ Java 21+
 - ✅ Maven
 
 **Install ChromeDriver** (if needed):

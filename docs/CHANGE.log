@@ -1,5 +1,114 @@
 # CHANGE LOG
 
+## [2025-11-16 08:45:41 CST] [PENDING] - Java 21 LTS Upgrade & AI Tool Token Tracking
+
+### Overview
+**STATUS:** Feature branch PR #18 created - Build fix applied
+**SUMMARY:** Successfully upgraded Java runtime from 17 to 21 LTS; updated workflow rules to track AI tool performing updates; fixed maven-compiler-plugin for Java 21 compatibility
+**Impact:** Project now targets Java 21 LTS (support through September 2031); improved token usage tracking across Cursor and GitHub Copilot; build now compiles successfully
+**Branch:** feature/upgrade-java-21-lts
+**PR:** #18
+
+**AI Tool & Token Status:** Tool: GitHub Copilot - Tokens Used: ~65,000 / Total: 500,000 (435,000 remaining, 13% used, 87% remaining)
+
+---
+
+### Changes Made
+
+**Files Modified (3 total):**
+
+**1. Build Configuration (2 files):**
+- `pom.xml` - Maven configuration
+  - Updated `<java.version>17</java.version>` → `<java.version>21</java.version>`
+  - Upgraded `maven-compiler-plugin` from 3.13.0 to 3.13.1 for Java 21 support
+  - Added explicit `<release>${java.version}</release>` configuration for proper Java 21 recognition
+  - Maven compiler source and target now reference Java 21
+  - All dependencies verified compatible with Java 21
+
+- `Dockerfile` - Docker multi-stage build
+  - Build stage: `maven:3.9.9-eclipse-temurin-17` → `maven:3.9.9-eclipse-temurin-21`
+  - Runtime stage: `eclipse-temurin:17-jdk` → `eclipse-temurin:21-jdk`
+  - Ensures consistency between local and containerized builds
+
+**2. Documentation (1 file):**
+- `docs/process/AI_WORKFLOW_RULES.md` - Workflow rule enhancement
+  - Updated Rule 4 (Commit & Push Process) token status line
+  - Changed from: `**Cursor Token Status:**` to `**AI Tool & Token Status:**`
+  - Format now includes: `[Tool: Cursor|GitHub Copilot|Other]`
+  - Enables tracking which AI tool performs token consumption
+  - Maintains backward compatibility with token usage format
+
+**Repository Housekeeping:**
+- Removed tracked binary `src/test/resources/Drivers/chromedriver.exe` from the repository and ensured driver binaries are ignored via `.gitignore`. This reduces repository bloat and prevents accidental commits of platform-specific binaries. See `.gitignore` under "WebDriver Binaries" for the ignore pattern.
+
+---
+
+### Verification Results
+
+**Build Verification (FIXED):**
+- ✅ Project compiles successfully with Java 21: `mvnw clean compile` (was failing, now fixed)
+- ✅ Project packages successfully: `mvnw clean package -DskipTests`
+- ✅ Tests compile successfully: `test-compile`
+- ✅ Docker images build successfully with Java 21
+- ✅ Fixed: "invalid target release: 21" error resolved with maven-compiler-plugin 3.13.1 + release config
+
+**Java Version Confirmation:**
+- ✅ Java 21.0.7 (Eclipse Adoptium Temurin)
+- ✅ Maven 3.9.11
+- ✅ All compiler configurations pointing to Java 21
+- ✅ Release configuration properly configured for Java 21
+
+**Compatibility:**
+- ✅ Selenium 4.26.0 compatible with Java 21
+- ✅ Cucumber 7.20.1 compatible with Java 21
+- ✅ All test dependencies compatible with Java 21
+- ✅ No breaking changes in Maven plugins
+
+---
+
+### Commits
+
+1. **f248c1cc** - "Upgrade Java runtime from 17 to 21 LTS"
+   - Updated pom.xml and Dockerfile to Java 21
+
+2. **8a5b80e8** - "docs: Update AI_WORKFLOW_RULES to specify AI tool in token status"
+   - Updated token status tracking rule in workflow documentation
+
+3. **e1331116** - "docs: Update CHANGE.log with Java 21 upgrade and AI tool token tracking"
+   - Full session documentation with verification results
+
+4. **f42a0e1d** - "fix: Update maven-compiler-plugin to 3.13.1 and add release config for Java 21"
+   - Fixed "invalid target release: 21" compilation error
+   - Build now compiles successfully
+
+---
+
+### Impact Summary
+
+**Technology Stack:**
+- Java Runtime: 17 LTS → 21 LTS (6-year long-term support)
+- Build System: No breaking changes - all Maven plugins compatible
+- Container Images: Updated to Java 21 Alpine/JDK images
+- Deployment: Ready for Java 21 production environments
+
+**Team Process:**
+- AI Tool Tracking: Can now distinguish between Cursor and GitHub Copilot usage
+- Token Visibility: Better understanding of token consumption across different AI assistants
+- Workflow Clarity: Clear format for documenting which tool performed work
+
+---
+
+### Next Steps
+
+1. ✅ Changes committed to feature branch
+2. ✅ Changes pushed to remote: `origin/feature/upgrade-java-21-lts`
+3. ⏳ Create Pull Request for code review
+4. ⏳ Wait for GitHub Actions CI/CD verification
+5. ⏳ Merge to main after approval
+6. ⏳ Update CHANGE.log with actual commit hash when merged
+
+---
+
 ## [2025-11-16 03:56:41 CST] [3391031e] - 🚀 MAJOR: AI Workflow Rules v3.0 - Comprehensive Improvements (MERGED)
 
 ### Overview

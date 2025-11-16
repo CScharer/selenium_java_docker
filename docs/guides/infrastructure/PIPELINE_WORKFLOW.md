@@ -439,7 +439,7 @@ run_dev=false, run_test=false, run_prod=true
 
 **Steps**:
 1. Checkout code
-2. Set up JDK 17
+2. Set up JDK 21
 3. Compile: `./mvnw clean compile test-compile`
 4. Run Checkstyle: `./mvnw checkstyle:check`
 5. Run PMD: `./mvnw pmd:check`
