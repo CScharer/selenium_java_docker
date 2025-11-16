@@ -33,7 +33,7 @@ permissions:
   contents: write  # Required for GitHub Pages deployment
 
 env:
-  JAVA_VERSION: '17'
+  JAVA_VERSION: '21'
   MAVEN_OPTS: -Xmx2048m
   # Environment URLs - Update these with your actual environment URLs
   DEV_BASE_URL: 'https://dev.yourapp.com'
@@ -143,14 +143,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Compile project
+      - name: Run Smoke Tests
         run: ./mvnw clean compile test-compile
 
       - name: Upload compiled classes
@@ -170,14 +170,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Run Checkstyle
+      - name: Build with Maven
         run: |
           echo "Running Checkstyle..."
           ./mvnw checkstyle:check

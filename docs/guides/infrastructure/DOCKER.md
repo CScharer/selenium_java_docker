@@ -371,7 +371,7 @@ docker-compose up -d --scale firefox-node=3 --scale edge-node=2
 Build custom test image:
 
 ```dockerfile
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:21-jre-alpine
 
 # Add custom tools
 RUN apk add --no-cache jq curl bash

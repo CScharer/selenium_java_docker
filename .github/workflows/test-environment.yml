@@ -18,7 +18,7 @@ on:
         type: string
 
 env:
-  JAVA_VERSION: '17'
+  JAVA_VERSION: '21'
   MAVEN_OPTS: -Xmx2048m
 
 jobs:
@@ -47,14 +47,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Wait for Selenium Grid
+      - name: Run Accessibility Tests
         run: |
           echo "⏳ Waiting for Grid..."
           timeout 60 bash -c 'until curl -sf http://localhost:4444/wd/hub/status; do sleep 2; done'

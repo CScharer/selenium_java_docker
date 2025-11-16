@@ -61,7 +61,7 @@ Automated CI/CD pipeline that runs on every push and pull request, executing tes
 
 ### **1. Build & Compile**
 - Checkout code
-- Setup JDK 17
+- Setup JDK 21
 - Cache Maven dependencies
 - Compile main and test sources
 - Upload compiled artifacts

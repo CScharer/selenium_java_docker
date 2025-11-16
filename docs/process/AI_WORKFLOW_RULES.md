@@ -3034,7 +3034,7 @@ All tests pass locally, but CI shows failures
    ```
 
 2. **Check environment differences:**
-   - Java version (CI uses Java 17)
+   - Java version (CI uses Java 21)
    - Maven version
    - System properties
    - Environment variables

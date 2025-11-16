@@ -410,7 +410,7 @@ Browser=Chrome
 Browser.Version=120
 Selenium.Version=4.26.0
 Grid.URL=http://selenium-hub:4444
-Java.Version=17
+Java.Version=21
 ```
 
 ### Categories (Custom)

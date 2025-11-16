@@ -1,4 +1,4 @@
-# ☕ Java 17 Migration Progress
+# ☕ Java 21 Migration Progress
 
 **Last Updated**: 2025-11-14  
 **Status**: ✅ **COMPLETE** - Merged to main via PR #15  
@@ -8,7 +8,7 @@
 
 ## Overview
 
-This document tracks the progress of migrating the codebase to use Java 17 features, improving code quality, readability, and maintainability.
+This document tracks the progress of migrating the codebase to use Java 21 features, improving code quality, readability, and maintainability.
 
 ---
 

@@ -55,7 +55,7 @@ updates:
       prefix: "chore(deps)"
       include: "scope"
     ignore:
-      # Stay on Java 17 (ignore Java 11, 18, 19, 20, 21, 25, etc.)
+      # Stay on Java 21 (ignore Java 11, 17, 22, 23, 24, 25, etc.)
       - dependency-name: "eclipse-temurin"
         versions: ["11-*", "18-*", "19-*", "20-*", "21-*", "25-*"]
       - dependency-name: "maven"

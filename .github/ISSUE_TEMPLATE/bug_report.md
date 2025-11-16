@@ -32,7 +32,7 @@ Paste logs here
 - **Browser**: [e.g. Chrome 120, Firefox 121]
 - **Environment**: [e.g. DEV, TEST, PROD]
 - **OS**: [e.g. macOS 14, Windows 11, Ubuntu 22.04]
-- **Java Version**: 17
+- **Java Version**: 21
 - **Selenium Version**: 4.27.0
 - **Test Suite**: [e.g. smoke, ci, extended]
 
