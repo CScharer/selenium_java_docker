@@ -18,7 +18,7 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 	<properties>
 		<!-- Maven Dependencies-->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>17</java.version>
+		<java.version>21</java.version>
 		<meminitial>128m</meminitial>
 		<maxmem>512m</maxmem>
 		<maven.version>3.9.9</maven.version>
