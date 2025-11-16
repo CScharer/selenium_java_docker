@@ -1,122 +1,220 @@
 # AI Workflow Rules for Code Changes
 
-**Version:** 2.9 (Updated: 2025-11-15 - Added Linter Fixes Documentation)
+**Version:** 3.0 (Updated: 2025-11-15 - Major Reorganization & New Workflows)
+**Last Updated:** 2025-11-15
+**Applies To:** All AI-driven code changes in this repository
 
-### 📋 Version 2.9 Changes:
-- **🔧 ADDED:** Rule 11 - Linter Warnings Fix Process
-  - Documents current linter issues being addressed
-  - Categories of warnings (deprecated APIs, raw types, null pointers, etc.)
-  - Fix priorities and patterns
-  - Progress tracking approach
-  - Current status: 68 remaining issues (down from 229, 70% reduction)
+---
 
-### 📋 Version 2.8 Changes:
-- **📚 ADDED:** Rule 10 - Recommendations Must Include Industry Standards
-  - All suggestions must cite current industry standards
-  - Explain changes in industry standards over time
-  - Provide context and justification for recommendations
-  - Include references to authoritative sources when possible
-  - Help user understand "why" not just "what"
+## 🚀 ULTRA-QUICK REFERENCE (Daily Use)
 
-### 📋 Version 2.7 Changes:
-- **🧪 ADDED:** Rule 9 - Test Case Maintenance & Modernization
-  - Guidelines for maintaining old test cases with new standards
-  - Option to preserve legacy test cases without updates
-  - Data-driven testing approach for new test cases
-  - Clear process for when to modernize vs preserve
-  - Balance between backward compatibility and modernization
+**Most common commands - copy/paste ready:**
 
-### 📋 Version 2.6 Changes:
-- **🌿 ADDED:** Rule 8 - Feature Branch Workflow
-  - When to use feature branches vs direct commits to main
-  - Branch naming conventions (feature/, fix/, refactor/, docs/, test/)
-  - Mandatory 6-step process: Create → Develop → Validate → Merge → Cleanup → Iterate
-  - Use --no-ff for merge commits (preserves history)
-  - Documentation requirements for feature branches
-  - Exception handling for emergency hotfixes
-  - Benefits and best practices
-- **✅ CODIFIED:** Based on successful multi-environment pipeline and dependency removal workflows
-- **🎯 GOAL:** Ensure main branch always stable, enable safe validation before merge
+```bash
+# 0. ALWAYS create branch first (Rule #0 - CRITICAL!)
+git checkout main
+git pull origin main
+git checkout -b feature/your-branch-name
 
-### 📋 Version 2.5 Changes:
-- **📝 ENHANCED:** Rule 2.5 - Added mandatory metadata block requirement
-  - ALL new .md files must include metadata block at top
-  - Standardized metadata template with required fields
-  - Examples for Guide, Analysis, Process documents
-  - Clear guidance on when to update metadata
-  - Optional fields for versioning and cross-references
-- **📚 DOCUMENTED:** Configuration README exceptions explicitly listed
-  - Project root README.md
-  - XML/README.md, Configurations/README.md, scripts/README.md
-  - Principle: Feature-local docs allowed for specific components
-- **✅ COMPLETE:** NAVIGATION.md now documents all .md file locations
-- **🎯 GOAL:** All files have metadata within 3-6 months
+# 1. Pre-flight check
+docker-compose run --rm tests compile test-compile
+docker-compose run --rm tests test -Dtest=SmokeTests -Dcheckstyle.skip=true
 
-### 📋 Version 2.4 Changes:
-- **📁 ADDED:** Rule 2.5 - Markdown File Organization (ALL .md files in docs/)
-  - Mandatory placement of all .md files in docs/ folder structure
-  - Clear folder selection guide by purpose
-  - Exceptions documented (.github/ISSUE_TEMPLATE/ only)
-  - Verification command to check for misplaced files
-  - Auto-fix process for mistakes
-- **🔐 RENUMBERED:** Hardcoded Password rule moved to 2.6
-- **✅ ORGANIZATION:** Created `docs/issues/open/` for issue templates
-- **✅ MOVED:** Issue templates from `.github/` to `docs/issues/open/`
-- **✅ UPDATED:** NAVIGATION.md to include issues/ folder
+# 2. Format code (before changes)
+docker-compose run --rm tests com.spotify.fmt:fmt-maven-plugin:format -Dcheckstyle.skip=true
 
-### 📋 Version 2.3 Changes:
-- **🔐 ADDED:** Rule 2.5 - Hardcoded Passwords Strictly Forbidden
-  - Zero tolerance policy for hardcoded passwords
-  - Requires explicit user approval to use --no-verify
-  - Clear process for handling pre-commit hook failures
-  - Distinguishes between new violations (forbidden) and existing issues (require approval)
-  - Documents when --no-verify is acceptable vs forbidden
-  - Provides correct approach examples (Google Cloud Secret Manager, EPasswords enum)
-- **✅ SECURITY:** Prevents accidental commit of hardcoded credentials
-- **✅ PROCESS:** Clear approval workflow for existing password issues
+# 3. Verify changes persist
+git status --short
 
-### 📋 Version 2.2 Changes:
-- **✅ OPTIMIZED:** CHANGE.log commit workflow - Reduced from 2 commits to 1!
-  - Update previous entry's hash + add new entry with [PENDING] in single commit
-  - Eliminates redundant "update hash" commits
-  - Cleaner git history, half the pushes
-- **✅ ADDED:** Documentation-only change detection - Skip build/test for docs!
-  - **Local:** If ONLY changing .md, .log, .txt, or other doc files → skip compilation/tests
-  - **Pipeline:** GitHub Actions auto-detects and skips build/test/deploy for doc-only changes
-  - Saves 5-10 minutes locally, ~10-15 minutes in pipeline per doc commit
-  - Git verification only
-- **✅ OPTIMIZED:** GitHub Actions pipeline with smart change detection
-  - New `detect-changes` job runs first
-  - Skips build/compile/test/quality/deploy for documentation-only changes
-  - Always shows pipeline summary (code vs doc-only)
-  - Massive time savings on documentation commits!
-- **✅ UPDATED:** Rule 4 with new single-commit workflow
-- **✅ UPDATED:** Rule 3 with documentation-only change detection
-- **✅ UPDATED:** Quick Reference with optimized steps
-- **✅ UPDATED:** .github/workflows/ci.yml with smart skip logic
+# 4. After code changes
+docker-compose run --rm tests compile test-compile
+docker-compose run --rm tests test -Dtest=SmokeTests -Dcheckstyle.skip=true
 
-### 📋 Version 2.1 Changes:
-- **✅ ADDED:** Mandatory file persistence verification step
-  - Verify changes actually saved to files before proceeding
-  - Command: `git status --short` to see modified files
-  - Prevents "phantom fixes" that don't persist
-- **✅ ADDED:** Example verification workflow
-- **✅ UPDATED:** Quick Reference with persistence check
+# 5. Check if docs-only (skip build/test if true)
+git status --short | grep -v -E '\.(md|log|txt|rst|adoc)$'
 
-### 📋 Version 2.0 Changes:
-- **✅ FIXED:** Docker config mount issues - Checkstyle now runs locally!
-  - Added `checkstyle-custom.xml` and `checkstyle-suppressions.xml` volume mounts
-  - Enables local Checkstyle validation before pushing
-- **✅ ADDED:** Optional Checkstyle validation in Step 0 (post-format)
-  - Command: `docker-compose run --rm tests checkstyle:checkstyle -DskipTests`
-  - Shows violation count for monitoring progress
-  - Non-blocking (BUILD SUCCESS even with violations)
-- **✅ UPDATED:** Quick Reference with Checkstyle validation step
-- **✅ REMOVED:** Outdated notes about Checkstyle config mount issues
+# 6. Commit process (ON FEATURE BRANCH!)
+date "+%Y-%m-%d %H:%M:%S"  # Get timestamp
+git log -1 --format=%h      # Get commit hash
+# Update CHANGE.log (both updates in one!)
+git add -A
+git commit -m "..."
+git push origin feature/your-branch-name  # Push to FEATURE BRANCH, NOT main!
+# Then create PR or merge following Rule 8/15
+```
+
+**⏱️ Time Estimates:** Pre-flight (2-3 min) | Format (30-60 sec) | Smoke Tests (2-3 min) | Full Suite (10-15 min)
+
+---
+
+## 📑 TABLE OF CONTENTS
+
+### MANDATORY RULES
+- [Rule 0: NEVER Commit Directly to Main/Master](#rule-0-never-commit-directly-to-mainmaster--critical) 🚨
+- [Rule 1: Pre-Flight Verification](#rule-1-pre-flight-verification-before-any-code-changes)
+- [Rule 2: Batch Size Limits](#rule-2-batch-size-limits)
+- [Rule 3: Post-Change Verification](#rule-3-post-change-verification-after-each-batch)
+- [Rule 4: Commit & Push Process](#rule-4-commit--push-process-optimized---single-commit)
+- [Rule 5: Error Handling](#rule-5-error-handling)
+- [Rule 6: Documentation](#rule-6-documentation)
+- [Rule 7: Error Recovery & Rollback](#rule-7-error-recovery--rollback-enhanced)
+
+### CODE QUALITY & TESTING
+- [Rule 8: Feature Branch Workflow](#rule-8-feature-branch-workflow--new)
+- [Rule 9: Test Case Maintenance & Modernization](#rule-9-test-case-maintenance--modernization--new)
+- [Rule 11: Linter Warnings Fix Process](#rule-11-linter-warnings-fix-process--new)
+- [Rule 12: API Testing Workflow](#rule-12-api-testing-workflow--new)
+- [Rule 13: Multi-Environment Testing Workflow](#rule-13-multi-environment-testing-workflow--new)
+- [Rule 14: Performance Testing Workflow](#rule-14-performance-testing-workflow--new)
+- [Rule 16: Dependency Update Workflow](#rule-16-dependency-update-workflow--new)
+- [Rule 17: Code Review Checklist](#rule-17-code-review-checklist--new)
+
+### DOCUMENTATION & STANDARDS
+- [Rule 2.5: Markdown File Organization](#rule-25-markdown-file-organization-)
+- [Rule 10: Recommendations Must Include Industry Standards](#rule-10-recommendations-must-include-industry-standards--new)
+
+### SECURITY
+- [Rule 2.6: Hardcoded Passwords - STRICTLY FORBIDDEN](#rule-26-hardcoded-passwords---strictly-forbidden-)
+
+### COLLABORATION & REVIEW
+- [Rule 15: Pull Request Workflow](#rule-15-pull-request-workflow--new)
+
+### REFERENCE SECTIONS
+- [📋 Verification Checklist Template](#-verification-checklist-template)
+- [🎯 Exception Handling](#-exception-handling)
+- [✅ Quick Reference (Detailed)](#-quick-reference)
+- [🎯 Smoke Tests](#-smoke-tests)
+- [🚫 Excluded Tests](#-excluded-tests---never-run-automatically)
+- [🔧 Troubleshooting](#-troubleshooting)
+- [💡 Common Code Patterns](#-common-code-patterns)
+- [📝 Notes](#-notes)
+- [📋 Version History](#-version-history)
+
+---
+
+## 📋 RULE INDEX (Quick Find)
+
+| Rule | Topic | Section | Priority |
+|------|-------|---------|----------|
+| 0 | NEVER Commit to Main | Mandatory | 🚨 **CRITICAL** |
+| 1 | Pre-Flight Verification | Mandatory | 🔴 Critical |
+| 2 | Batch Size Limits | Mandatory | 🔴 Critical |
+| 2.5 | Markdown File Organization | Documentation | 🟡 Medium |
+| 2.6 | Hardcoded Passwords | Security | 🔴 Critical |
+| 3 | Post-Change Verification | Mandatory | 🔴 Critical |
+| 4 | Commit & Push Process | Mandatory | 🔴 Critical |
+| 5 | Error Handling | Mandatory | 🔴 Critical |
+| 6 | Documentation | Mandatory | 🟡 Medium |
+| 7 | Rollback Plan | Mandatory | 🔴 Critical |
+| 8 | Feature Branch Workflow | Branching | 🟡 Medium |
+| 9 | Test Maintenance | Testing | 🟡 Medium |
+| 10 | Industry Standards | Documentation | 🟢 Low |
+| 11 | Linter Fixes | Code Quality | 🟡 Medium |
+| 12 | API Testing Workflow | Testing | 🟡 Medium |
+| 13 | Multi-Environment Testing | Testing | 🟡 Medium |
+| 14 | Performance Testing | Testing | 🟢 Low |
+| 15 | Pull Request Workflow | Collaboration | 🟡 Medium |
+| 16 | Dependency Updates | Maintenance | 🟡 Medium |
+| 17 | Code Review Checklist | Quality | 🟡 Medium |
+
+---
+
+## 🎯 COMMAND CHEAT SHEET
+
+| Task | Command | Duration | When |
+|------|---------|----------|------|
+| **Pre-flight check** | `docker-compose run --rm tests compile test-compile` | 1-2 min | Before any work |
+| **Smoke tests** | `docker-compose run --rm tests test -Dtest=SmokeTests -Dcheckstyle.skip=true` | 2-3 min | Before every batch |
+| **Format code** | `docker-compose run --rm tests com.spotify.fmt:fmt-maven-plugin:format -Dcheckstyle.skip=true` | 30-60 sec | After changes |
+| **Checkstyle** | `docker-compose run --rm tests checkstyle:checkstyle -DskipTests` | 20-30 sec | Optional, monitor progress |
+| **Verify changes** | `git status --short` | 5 sec | After any edits |
+| **Check docs-only** | `git status --short | grep -v -E '\.(md|log|txt|rst|adoc)$'` | 5 sec | Before commit |
+| **Full test suite** | `docker-compose run --rm tests test -Dcheckstyle.skip=true` | 10-15 min | Every 5-10 batches |
+| **Docker build** | `docker-compose build tests` | 3-5 min | Every 3-5 batches |
+| **Get timestamp** | `date "+%Y-%m-%d %H:%M:%S"` | 1 sec | Before commit |
+| **Get commit hash** | `git log -1 --format=%h` | 1 sec | Before commit |
 
 ---
 
 ## 🚨 MANDATORY RULES - NEVER SKIP THESE STEPS
+
+### **Rule 0: NEVER Commit Directly to Main/Master** 🚨 **CRITICAL**
+
+> **This is the #1 rule - ALWAYS create a feature branch first!**
+
+**🚨 ABSOLUTE PROHIBITION:**
+- ❌ **NEVER commit directly to main/master branch**
+- ❌ **NEVER push changes to main/master without a branch**
+- ❌ **NEVER make changes on main/master branch**
+
+**✅ REQUIRED WORKFLOW:**
+
+**1. ALWAYS Create Branch First:**
+```bash
+# Before making ANY changes:
+git checkout main
+git pull origin main          # Ensure main is up to date
+git checkout -b feature/descriptive-name
+# Examples:
+#   feature/ai-workflow-rules-v3
+#   feature/add-api-testing-workflow
+#   feature/fix-linter-warnings
+#   docs/update-workflow-rules
+#   fix/compilation-error
+```
+
+**2. Make Changes on Feature Branch:**
+```bash
+# All your work happens on the feature branch
+# Edit files, make changes, commit to feature branch
+git add .
+git commit -m "feat: add new workflow rules"
+git push -u origin feature/descriptive-name
+```
+
+**3. Merge to Main:**
+- Create Pull Request (see [Rule 15: Pull Request Workflow](#rule-15-pull-request-workflow--new))
+- OR merge locally with `--no-ff` (see [Rule 8: Feature Branch Workflow](#rule-8-feature-branch-workflow--new))
+- **NEVER** push directly to main
+
+#### **Why This Rule Exists:**
+- ✅ **Safety**: Main branch always stable and deployable
+- ✅ **Review**: Changes can be reviewed before merge
+- ✅ **Testing**: Changes can be tested on branch before affecting main
+- ✅ **Rollback**: Easy to abandon branch if needed
+- ✅ **Collaboration**: Others can review/test branch independently
+- ✅ **History**: Clear feature development timeline
+
+#### **Exceptions (EMERGENCY ONLY):**
+**Emergency hotfixes** require immediate fix to main:
+```bash
+# ONLY for critical production issues:
+git checkout -b hotfix/critical-issue-description
+# Fix issue
+git commit -m "hotfix: Fix critical production issue"
+git checkout main
+git merge --no-ff hotfix/critical-issue-description
+git push origin main
+# Cleanup
+git branch -d hotfix/critical-issue-description
+```
+
+**Even hotfixes use a branch first!** Never commit directly to main.
+
+#### **Verification:**
+```bash
+# Before making changes, verify you're NOT on main:
+git branch
+# Should show: * feature/your-branch-name
+# NOT: * main
+
+# If you see: * main
+# STOP immediately and create a branch!
+```
+
+**Remember:** This is rule #0 for a reason - it's the foundation of safe development! 🚨
+
+---
 
 ### **Rule 1: Pre-Flight Verification (BEFORE any code changes)**
 Before making ANY code changes, you MUST:
@@ -332,6 +430,8 @@ If you create a .md file in the wrong location:
 
 ### **Rule 2.6: Hardcoded Passwords - STRICTLY FORBIDDEN** 🔐
 
+> **Related:** See [Rule 4: Commit & Push Process](#rule-4-commit--push-process-optimized---single-commit) for how this affects commit workflow.
+
 **🚨 CRITICAL SECURITY RULE - NEVER BYPASS WITHOUT EXPLICIT USER APPROVAL**
 
 #### **Absolute Prohibition:**
@@ -470,6 +570,8 @@ String password = config.getPassword("my-service");
 
 ### **Rule 3: Post-Change Verification (AFTER each batch)**
 
+> **Related:** See [Rule 4: Commit & Push Process](#rule-4-commit--push-process-optimized---single-commit) for what to do after verification passes.
+
 **FIRST: Check if documentation-only change:**
 ```bash
 git status --short | grep -v -E '\.(md|log|txt|rst|adoc)$'
@@ -594,7 +696,17 @@ docker-compose run --rm tests test -Dcheckstyle.skip=true
 ---
 
 ### **Rule 4: Commit & Push Process (OPTIMIZED - Single Commit)**
+
+> **CRITICAL:** See [Rule 0: NEVER Commit Directly to Main/Master](#rule-0-never-commit-directly-to-mainmaster--critical) - ALWAYS use feature branch!
+
 Only after ALL verifications pass:
+
+**🚨 REMINDER:** You MUST be on a feature branch! Verify:
+```bash
+git branch
+# Should show: * feature/your-branch-name
+# NOT: * main
+```
 
 1. ✅ **Update CHANGE.log** (MANDATORY BEFORE COMMIT)
    - **FIRST:** Get actual current timestamp: `date "+%Y-%m-%d %H:%M:%S"` (CST timezone)
@@ -617,10 +729,11 @@ Only after ALL verifications pass:
 
 2. ✅ Stage changes: `git add -A` (including docs/CHANGE.log with both updates)
 3. ✅ Commit with descriptive message following established format
-4. ✅ Push to GitHub: `git push origin main`
+4. ✅ Push to feature branch: `git push origin feature/your-branch-name` ⚠️ **NOT main!**
 5. ✅ Verify push succeeded
-6. ✅ Monitor GitHub Actions status
-7. ✅ If GitHub Actions fails, STOP and fix before next batch
+6. ✅ Create Pull Request (see [Rule 15: Pull Request Workflow](#rule-15-pull-request-workflow--new)) OR merge following [Rule 8: Feature Branch Workflow](#rule-8-feature-branch-workflow--new)
+7. ✅ Monitor GitHub Actions status (on PR or branch)
+8. ✅ If GitHub Actions fails, STOP and fix before merging
 
 **Note:** Last entry of session will have `[PENDING]` - gets updated in next session or can be updated at end of session if desired.
 
@@ -669,17 +782,435 @@ If you encounter ANY error:
 
 ---
 
-### **Rule 7: Rollback Plan**
-If you pushed code that breaks the build:
+### **Rule 7: Error Recovery & Rollback** (ENHANCED)
 
-1. Immediately notify user
-2. Identify the breaking commit: `git log --oneline -5`
-3. Propose rollback: `git revert <commit-hash>` OR fix forward
-4. Wait for user approval before proceeding
+> **Related:** See [Rule 5: Error Handling](#rule-5-error-handling) for error classification. See [Rule 4: Commit & Push Process](#rule-4-commit--push-process-optimized---single-commit) for normal commit workflow.
+
+**Principle:** Different error types require different recovery strategies. Classify errors correctly to apply appropriate fixes.
+
+#### **Error Classification:**
+
+**1. Recoverable Errors (Fix and Retry):**
+- ✅ Test failures (non-flaky)
+- ✅ Compilation errors
+- ✅ Linter warnings
+- ✅ Checkstyle violations
+- **Action:** Fix the issue and retry verification
+
+**2. Non-Recoverable Errors (STOP and Notify):**
+- 🚨 Security issues (hardcoded passwords, secrets)
+- 🚨 Data corruption risks
+- 🚨 Breaking changes to critical functionality
+- 🚨 Production environment failures
+- **Action:** STOP immediately, notify user, wait for approval
+
+**3. Transient Errors (Retry with Backoff):**
+- ⏳ Network errors (Docker downloads, Maven dependencies)
+- ⏳ Docker build timeouts
+- ⏳ CI/CD pipeline transient failures
+- **Action:** Retry once, if persists proceed with caution
+
+#### **Rollback Procedures:**
+
+**Scenario 1: Broken Build on Main**
+```bash
+# 1. Identify breaking commit
+git log --oneline -5
+
+# 2. Notify user immediately
+# "⚠️ Build broken by commit [hash]. Proposed rollback options:
+#  A) Revert commit: git revert <commit-hash>
+#  B) Fix forward: Create hotfix branch"
+
+# 3. Wait for user approval before proceeding
+
+# Option A: Revert (recommended if fix is complex)
+git revert <commit-hash>
+git push origin main
+
+# Option B: Fix Forward (recommended if fix is simple)
+git checkout -b hotfix/fix-build-issue
+# Make fixes
+git commit -m "hotfix: Fix build issue"
+git checkout main
+git merge --no-ff hotfix/fix-build-issue
+git push origin main
+```
+
+**Scenario 2: Failed Tests**
+```bash
+# 1. Check if known flaky tests
+# Known flaky: testWindowManagement, ResponsiveDesignTests.tearDown
+
+# 2. If NEW failure:
+#   - DO NOT push
+#   - Investigate root cause
+#   - Fix the issue
+#   - Re-run ALL verification steps
+
+# 3. If known flaky:
+#   - Document and proceed (if 65+/66 pass)
+#   - Create GitHub issue to track flaky test
+#   - Update CHANGE.log with note about flaky test
+```
+
+**Scenario 3: Docker Issues**
+```bash
+# 1. Retry command once
+docker-compose run --rm tests compile test-compile
+
+# 2. If persists:
+#   - Document: "Docker network issue, tests deferred to CI"
+#   - Note in commit message
+#   - Proceed with compilation-only verification
+#   - Inform user: "Docker network issue. Tests will run in CI."
+```
+
+**Scenario 4: Pre-Commit Hook Failures**
+```bash
+# 1. If password detection fails:
+#   - Review output carefully
+#   - If YOU added passwords: STOP and fix them
+#   - If passwords already exist: Request user approval for --no-verify
+
+# 2. See Rule 2.6 for detailed password handling
+```
+
+#### **Communication Process:**
+
+**When Errors Occur:**
+1. ✅ **Notify user immediately** - Don't hide errors
+2. ✅ **Provide context** - What happened, why, when
+3. ✅ **Propose solution** - Offer concrete options
+4. ✅ **Wait for approval** - Don't proceed without user consent
+5. ✅ **Document decisions** - Update CHANGE.log with error and resolution
+
+**Example Notification:**
+```
+AI: "⚠️ Error encountered during compilation:
+
+ERROR: Compilation failed in File.java:42
+REASON: Type mismatch - String cannot be converted to Integer
+IMPACT: Build broken, cannot proceed
+SOLUTION OPTIONS:
+  A) Fix type mismatch (recommended, ~2 min)
+  B) Revert commit (if fix is complex)
+
+Which option would you prefer?"
+```
+
+#### **Rollback Best Practices:**
+- ✅ **Always identify root cause** before rolling back
+- ✅ **Consider fix forward** vs revert (fix forward often better)
+- ✅ **Test rollback** in lower environment if possible
+- ✅ **Document rollback** in CHANGE.log
+- ✅ **Communicate changes** to team if production affected
+
+#### **Prevention Strategies:**
+- ✅ **Run pre-flight checks** (Rule 1) before changes
+- ✅ **Use feature branches** (Rule 8) for risky changes
+- ✅ **Run smoke tests** after each batch
+- ✅ **Verify changes persist** (Rule 3, Step 0b)
+- ✅ **Follow batch size limits** (Rule 2)
+
+**Remember:** Errors are learning opportunities. Document them to prevent recurrence! 🔄
+
+---
+
+### **Rule 16: Dependency Update Workflow** 📦 **NEW**
+
+> **Related:** See [Rule 3: Post-Change Verification](#rule-3-post-change-verification-after-each-batch) for verification steps. See [Rule 8: Feature Branch Workflow](#rule-8-feature-branch-workflow--new) for branch workflow.
+
+**Principle:** Dependency updates require careful validation to ensure compatibility and prevent breaking changes.
+
+#### **When to Update Dependencies:**
+
+**Immediate (Security Vulnerabilities):**
+- 🚨 Critical security vulnerabilities (CVSS 9.0+)
+- 🚨 Known exploits in dependencies
+- 🚨 End-of-life (EOL) dependencies with security issues
+
+**Planned (Major Releases):**
+- ✅ Major version releases (review release notes)
+- ✅ User requests specific dependency update
+- ✅ Framework upgrades (Selenium, TestNG, etc.)
+- ✅ Infrastructure dependencies (Docker, Maven)
+
+**Deferred:**
+- ⏭️ Minor/patch updates (unless security-related)
+- ⏭️ Breaking changes in upstream
+- ⏭️ Dependencies with known issues
+
+#### **Dependency Update Process:**
+
+**1. Identify Dependencies to Update:**
+```bash
+# Check for outdated dependencies
+./mvnw versions:display-dependency-updates
+
+# Check for outdated plugins
+./mvnw versions:display-plugin-updates
+
+# Check for security vulnerabilities
+./mvnw dependency-check:check
+```
+
+**2. Review Release Notes:**
+- Check dependency release notes for breaking changes
+- Review migration guides
+- Check compatibility with current Java version
+- Review community feedback
+
+**3. Update `pom.xml`:**
+```xml
+<!-- Update dependency version -->
+<dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-java</artifactId>
+    <version>4.26.0</version>  <!-- Update version -->
+</dependency>
+```
+
+**4. Verification Steps:**
+```bash
+# Step 1: Clean build
+./mvnw clean
+
+# Step 2: Compile
+./mvnw compile test-compile
+
+# Step 3: Run smoke tests
+./mvnw test -Dtest=SmokeTests -Dcheckstyle.skip=true
+
+# Step 4: Check for deprecated API usage
+# Review linter warnings for deprecated methods
+
+# Step 5: Full test suite (if major version)
+./mvnw test -Dcheckstyle.skip=true
+```
+
+**5. Handle Breaking Changes:**
+```bash
+# If breaking changes detected:
+# 1. Review migration guide
+# 2. Update code to use new API
+# 3. Fix deprecated method calls
+# 4. Update test code if needed
+# 5. Re-run all verification steps
+```
+
+#### **Rollback Plan:**
+
+**If Update Breaks Things:**
+```bash
+# 1. Revert pom.xml changes
+git checkout pom.xml
+
+# 2. Clean and rebuild
+./mvnw clean compile test-compile
+
+# 3. Verify build works with old version
+./mvnw test -Dtest=SmokeTests
+
+# 4. Document issue
+# - Create GitHub issue
+# - Update CHANGE.log with attempted update and failure reason
+# - Note compatibility issues for future reference
+```
+
+#### **Documentation Requirements:**
+
+**Update CHANGE.log:**
+```markdown
+## Dependency Updates
+
+### Updated Dependencies
+- Selenium: 4.25.0 → 4.26.0
+- TestNG: 7.8.0 → 7.9.0
+
+### Breaking Changes Addressed
+- Deprecated `URL(String)` constructor → `URI.create(url).toURL()`
+- Updated WebDriver API calls
+
+### Testing Performed
+- ✅ All tests pass
+- ✅ No new linter warnings
+- ✅ No breaking changes detected
+```
+
+#### **Common Dependency Updates:**
+
+**Selenium Updates:**
+- Check WebDriver API changes
+- Update deprecated methods
+- Review browser compatibility
+- Test with multiple browsers
+
+**TestNG Updates:**
+- Check test execution changes
+- Review annotation changes
+- Verify test report format
+
+**Maven Plugin Updates:**
+- Check plugin configuration changes
+- Verify build behavior
+- Review plugin documentation
+
+#### **Best Practices:**
+- ✅ **Use feature branches** for major dependency updates
+- ✅ **Test thoroughly** before merging
+- ✅ **Update incrementally** (don't update everything at once)
+- ✅ **Document breaking changes** in CHANGE.log
+- ✅ **Monitor for issues** after deployment
+
+**Remember:** Dependency updates can introduce breaking changes - test thoroughly! 📦
+
+---
+
+### **Rule 17: Code Review Checklist** ✅ **NEW**
+
+> **Related:** See [Rule 3: Post-Change Verification](#rule-3-post-change-verification-after-each-batch) for verification steps. See [Rule 4: Commit & Push Process](#rule-4-commit--push-process-optimized---single-commit) for commit workflow.
+
+**Principle:** Self-review before committing ensures code quality and reduces issues before they reach main.
+
+#### **Pre-Commit Review Checklist:**
+
+**1. Code Quality:**
+- ✅ No linter warnings introduced
+- ✅ Follows project coding standards
+- ✅ No hardcoded passwords/secrets (see [Rule 2.6](#rule-26-hardcoded-passwords---strictly-forbidden-))
+- ✅ Proper error handling
+- ✅ No TODO comments left (unless documented)
+- ✅ Code is readable and maintainable
+
+**2. Testing:**
+- ✅ All tests pass (smoke tests minimum)
+- ✅ No test code broken
+- ✅ New tests added if needed (for new features)
+- ✅ Test coverage maintained/improved
+- ✅ No flaky tests introduced
+
+**3. Documentation:**
+- ✅ CHANGE.log updated (see [Rule 4](#rule-4-commit--push-process-optimized---single-commit))
+- ✅ Code comments where needed (complex logic)
+- ✅ README updated if public API changed
+- ✅ JavaDoc added for public methods (if applicable)
+- ✅ Related documentation updated
+
+**4. Security:**
+- ✅ No credentials in code
+- ✅ Google Cloud Secret Manager used for passwords (see [Rule 2.6](#rule-26-hardcoded-passwords---strictly-forbidden-))
+- ✅ No sensitive data logged
+- ✅ Input validation where needed
+- ✅ Security best practices followed
+
+**5. Git:**
+- ✅ Meaningful commit messages (see commit message format)
+- ✅ No unnecessary files staged
+- ✅ Branch name follows convention (see [Rule 8](#rule-8-feature-branch-workflow--new))
+- ✅ Related changes grouped in same commit
+- ✅ Unrelated changes in separate commits
+
+**6. Build & Verification:**
+- ✅ Compilation successful (see [Rule 3](#rule-3-post-change-verification-after-each-batch))
+- ✅ No new Checkstyle violations
+- ✅ Docker build successful (if applicable)
+- ✅ No deprecated API warnings (unless intentional)
+- ✅ All verification steps pass
+
+#### **Commit Message Format:**
+
+```markdown
+<type>: <subject>
+
+<optional body>
+
+<optional footer>
+
+Types:
+- fix: Bug fix
+- feat: New feature
+- docs: Documentation only
+- refactor: Code refactoring
+- test: Test changes
+- chore: Maintenance tasks
+
+Examples:
+fix: resolve deprecated URL constructor warnings
+
+- Replaced 20+ instances of deprecated URL(String) constructor
+- Updated imports to include java.net.URI
+- Progress: 68 warnings remaining (70% reduction from 229)
+
+feat: add API testing workflow documentation
+
+- Added Rule 12: API Testing Workflow
+- Documented REST Assured test execution
+- Includes troubleshooting guide
+```
+
+#### **Quick Self-Review Checklist:**
+
+**Before Every Commit:**
+```
+[ ] Code compiles
+[ ] Tests pass (smoke tests minimum)
+[ ] No linter warnings
+[ ] No hardcoded passwords
+[ ] CHANGE.log updated
+[ ] Commit message descriptive
+[ ] Branch name correct (if applicable)
+```
+
+#### **Code Review Best Practices:**
+
+**For Your Own Code:**
+- ✅ Review changes in context (not just individual files)
+- ✅ Check for unintended side effects
+- ✅ Verify error handling is complete
+- ✅ Ensure tests cover edge cases
+- ✅ Review performance implications
+
+**For Team Reviews:**
+- ✅ Be constructive and respectful
+- ✅ Explain "why" not just "what"
+- ✅ Suggest improvements, don't just criticize
+- ✅ Acknowledge good practices
+- ✅ Focus on code, not person
+
+#### **Common Issues to Watch For:**
+
+**Security:**
+- ❌ Hardcoded passwords/secrets
+- ❌ Exposed credentials in logs
+- ❌ Missing input validation
+- ❌ SQL injection risks
+
+**Code Quality:**
+- ❌ Duplicate code
+- ❌ Magic numbers/strings
+- ❌ Unused imports/variables
+- ❌ Complex nested conditions
+
+**Testing:**
+- ❌ Missing test coverage
+- ❌ Flaky tests
+- ❌ Tests that don't verify behavior
+- ❌ Hardcoded test data (use data-driven)
+
+**Documentation:**
+- ❌ Missing JavaDoc for public APIs
+- ❌ Unclear variable/method names
+- ❌ Missing README updates
+- ❌ Outdated comments
+
+**Remember:** Good code review prevents issues from reaching main! ✅
 
 ---
 
 ### **Rule 8: Feature Branch Workflow** 🌿 **NEW**
+
+> **Related:** See [Rule 4: Commit & Push Process](#rule-4-commit--push-process-optimized---single-commit) for commit workflow. See [Rule 11: Linter Warnings Fix Process](#rule-11-linter-warnings-fix-process--new) for code quality checks.
 
 **When to Use Feature Branches:**
 
@@ -1126,7 +1657,7 @@ CURRENT INDUSTRY STANDARD:
 - Standard: Structured logging frameworks (log4j 2.x, SLF4J, Logback)
 - Source: Apache Logging Services, Java Logging Best Practices
 - Adoption: 95%+ of enterprise Java applications
-- Benefits: 
+- Benefits:
   * Structured output (timestamps, levels, formatting)
   * Configurable log levels without code changes
   * Log aggregation ready (ELK, CloudWatch, etc.)
@@ -1311,6 +1842,8 @@ public void testLogin() {
 ---
 
 ### **Rule 11: Linter Warnings Fix Process** 🔧 **NEW**
+
+> **Related:** See [Rule 3: Post-Change Verification](#rule-3-post-change-verification-after-each-batch) for verification steps. See [Rule 4: Commit & Push Process](#rule-4-commit--push-process-optimized---single-commit) for commit workflow.
 
 **Principle:** Systematically address IDE linter warnings to improve code quality, maintainability, and reduce technical debt.
 
@@ -1530,6 +2063,521 @@ fix: replace deprecated URL(String) constructor with URI.create()
 
 ---
 
+### **Rule 12: API Testing Workflow** 🌐 **NEW**
+
+> **Related:** See [Rule 3: Post-Change Verification](#rule-3-post-change-verification-after-each-batch) for verification steps. See [Rule 8: Feature Branch Workflow](#rule-8-feature-branch-workflow--new) for branch workflow.
+
+**Principle:** API tests run independently of Selenium Grid and have different verification needs.
+
+#### **When to Use API Tests:**
+- ✅ Testing REST endpoints
+- ✅ Contract testing
+- ✅ Fast feedback loop (no browser overhead)
+- ✅ CI/CD pipeline validation
+- ✅ When UI tests are unnecessary for the change
+
+#### **API Testing Workflow:**
+
+**1. Run API Tests:**
+```bash
+# Option 1: Using script (recommended)
+./scripts/run-api-tests.sh
+
+# Option 2: Using Maven directly
+./mvnw test -DsuiteXmlFile=testng-api-suite.xml
+
+# Option 3: Using Docker
+docker-compose run --rm tests test -DsuiteXmlFile=testng-api-suite.xml
+```
+
+**2. Verification:**
+- ✅ All 31 API tests pass (31/31)
+- ✅ Response validation successful
+- ✅ Contract tests pass
+- ✅ No Grid setup required
+- ✅ No Docker required (can run with Maven directly)
+
+#### **Benefits:**
+- ✅ **Faster execution** - No browser overhead (~3-5 min vs 10-15 min for UI tests)
+- ✅ **No Grid required** - Runs independently of Selenium Grid
+- ✅ **Easier debugging** - Direct HTTP request/response inspection
+- ✅ **Better for CI/CD** - Faster pipeline execution
+
+#### **Test Suite Breakdown:**
+**Basic API Tests (7 tests):**
+- GET requests & status codes
+- Response body validation
+- Header verification
+- Response time testing
+- Query parameters
+- Collection retrieval
+- Error handling (404)
+
+**CRUD Operations (7 tests):**
+- CREATE (POST)
+- READ (GET)
+- UPDATE (PUT)
+- DELETE
+- Validation of operations
+
+**Contract Testing (17 tests):**
+- API contract validation
+- Schema validation
+- Data type validation
+
+#### **When to Skip API Tests:**
+- ⏭️ Documentation-only changes
+- ⏭️ Markdown file updates
+- ⏭️ Configuration file updates (non-API related)
+- ⏭️ When explicitly approved by user
+
+#### **Troubleshooting:**
+**If API tests fail:**
+1. Check network connectivity
+2. Verify API endpoint is accessible
+3. Check authentication credentials (Google Cloud Secret Manager)
+4. Review API contract changes
+5. Check response format matches expected schema
+
+**Remember:** API tests provide fast feedback without Grid overhead! 🌐
+
+---
+
+### **Rule 13: Multi-Environment Testing Workflow** 🌍 **NEW**
+
+> **Related:** See [Rule 3: Post-Change Verification](#rule-3-post-change-verification-after-each-batch) for verification steps. See [Rule 8: Feature Branch Workflow](#rule-8-feature-branch-workflow--new) for branch workflow.
+
+**Principle:** Different environments (dev/test/prod) require different configurations and testing approaches.
+
+#### **Environments:**
+
+**Available Environments:**
+- **dev** - Development environment
+- **test** - Test/QA environment
+- **prod** - Production environment
+
+#### **Multi-Environment Workflow:**
+
+**1. Select Environment:**
+```bash
+# Set environment variable
+export ENV=dev  # or test, prod
+
+# Or use inline for one command
+ENV=dev docker-compose -f docker-compose.dev.yml up -d
+```
+
+**2. Use Environment-Specific Compose File:**
+```bash
+# Development environment
+docker-compose -f docker-compose.dev.yml up -d selenium-hub chrome-node-1
+
+# Test environment
+docker-compose -f docker-compose.test.yml up -d selenium-hub chrome-node-1
+
+# Production environment
+docker-compose -f docker-compose.prod.yml up -d selenium-hub chrome-node-1
+```
+
+**3. Run Environment-Specific Tests:**
+```bash
+# Dev environment
+docker-compose -f docker-compose.dev.yml run --rm tests test -Dtest=SmokeTests
+
+# Prod environment
+docker-compose -f docker-compose.prod.yml run --rm tests test -Dtest=SmokeTests
+```
+
+#### **Environment-Specific Considerations:**
+
+**Development Environment:**
+- ✅ Less strict validation
+- ✅ Debugging enabled
+- ✅ Verbose logging
+- ✅ Fast feedback priority
+
+**Test Environment:**
+- ✅ Full test suite
+- ✅ Performance monitoring
+- ✅ Integration testing
+- ✅ Pre-production validation
+
+**Production Environment:**
+- ✅ Smoke tests only (unless emergency)
+- ✅ Minimal logging
+- ✅ Security-focused
+- ✅ Monitoring enabled
+
+#### **Configuration Files:**
+- `docker-compose.dev.yml` - Development configuration
+- `docker-compose.test.yml` - Test environment configuration
+- `docker-compose.prod.yml` - Production configuration
+- `Configurations/Environments.xml` - Environment-specific test settings
+
+#### **GitHub Actions Integration:**
+The CI/CD pipeline supports multi-environment testing:
+- Automatic environment detection
+- Environment-specific test execution
+- Environment-based secrets management
+
+#### **Best Practices:**
+- ✅ Always test in dev before test environment
+- ✅ Always test in test before prod environment
+- ✅ Use feature branches for environment-specific changes
+- ✅ Document environment-specific configurations
+- ✅ Keep environment configurations synchronized where possible
+
+#### **When to Use Each Environment:**
+
+**Use Dev For:**
+- Initial development
+- Quick verification
+- Debugging
+- Experimentation
+
+**Use Test For:**
+- Pre-merge validation
+- Integration testing
+- Performance testing
+- User acceptance testing
+
+**Use Prod For:**
+- Smoke tests after deployment
+- Emergency hotfix validation
+- Production monitoring verification
+
+**Remember:** Always validate in lower environments before higher environments! 🌍
+
+---
+
+### **Rule 14: Performance Testing Workflow** ⚡ **NEW**
+
+> **Related:** See [Rule 3: Post-Change Verification](#rule-3-post-change-verification-after-each-batch) for verification steps. See [🚫 Excluded Tests](#-excluded-tests---never-run-automatically) for why these are manual-only.
+
+**Principle:** Performance tests are manual-only, resource-intensive, and require specific infrastructure setup.
+
+#### **When to Run Performance Tests:**
+- ✅ User explicitly requests performance testing
+- ✅ Before major releases (scheduled/planned)
+- ✅ Performance regression investigation
+- ✅ Load capacity planning
+- ✅ Infrastructure changes
+- ❌ NEVER during routine code changes
+- ❌ NEVER during PMD fixes or refactoring
+
+#### **Available Performance Testing Tools:**
+
+**1. Gatling (Scala-based Load Testing)**
+```bash
+# Run Gatling tests
+./scripts/run-gatling-tests.sh
+
+# Or manually
+cd src/test/scala
+# Run Gatling simulations
+```
+- **Duration:** 10-30 minutes
+- **Files:** `src/test/scala/*LoadSimulation.scala`
+- **Purpose:** Load testing, stress testing
+- **Output:** HTML reports in `target/gatling/`
+
+**2. JMeter (Java-based Performance Testing)**
+```bash
+# Run JMeter tests
+./scripts/run-jmeter-tests.sh
+
+# Or manually
+jmeter -n -t src/test/jmeter/test-plan.jmx -l results.jtl
+```
+- **Duration:** 15-30 minutes
+- **Files:** `src/test/jmeter/*.jmx`
+- **Purpose:** Performance benchmarking, load testing
+- **Output:** JTL files, HTML reports
+
+**3. Locust (Python-based Load Testing)**
+```bash
+# Run Locust tests
+./scripts/run-locust-tests.sh
+
+# Or manually
+cd src/test/locust
+locust -f load_test.py --host=https://target-url.com
+```
+- **Duration:** 10-20 minutes
+- **Files:** `src/test/locust/*_test.py`
+- **Purpose:** HTTP load testing, stress testing
+- **Output:** Web-based dashboard, CSV reports
+
+#### **Performance Testing Workflow:**
+
+**1. Pre-Testing Checklist:**
+- ✅ Confirm user request explicitly
+- ✅ Verify infrastructure is ready
+- ✅ Check target environment capacity
+- ✅ Schedule during off-hours (if production)
+- ✅ Notify relevant teams
+- ✅ Set up monitoring
+
+**2. Run Performance Tests:**
+```bash
+# Choose appropriate tool based on requirements
+./scripts/run-gatling-tests.sh    # For Scala-based load testing
+./scripts/run-jmeter-tests.sh     # For Java-based performance testing
+./scripts/run-locust-tests.sh     # For Python-based HTTP load testing
+```
+
+**3. Monitor During Execution:**
+- ✅ Monitor system resources (CPU, memory, disk)
+- ✅ Check network bandwidth
+- ✅ Watch application logs
+- ✅ Monitor target system health
+- ✅ Track response times
+
+**4. Analyze Results:**
+- ✅ Review performance metrics
+- ✅ Compare with baseline
+- ✅ Identify bottlenecks
+- ✅ Check for regressions
+- ✅ Document findings
+
+**5. Post-Testing:**
+- ✅ Document results separately
+- ✅ Create performance report
+- ✅ Share findings with team
+- ✅ Update CHANGE.log if significant findings
+- ✅ Create GitHub issue if performance regressions found
+
+#### **Performance Test Scenarios:**
+
+**Load Testing:**
+- Normal expected load
+- Peak load conditions
+- Sustained load over time
+
+**Stress Testing:**
+- Above-normal load
+- Breaking point identification
+- Recovery behavior
+
+**Spike Testing:**
+- Sudden load increases
+- System response to spikes
+- Recovery time
+
+#### **Safety Guidelines:**
+- ✅ **Never run against production** without explicit approval
+- ✅ **Always test in isolated environment first**
+- ✅ **Monitor resource usage** continuously
+- ✅ **Stop immediately** if target system shows stress
+- ✅ **Document everything** for reproducibility
+
+#### **Maven Profiles to Avoid:**
+❌ **DO NOT** use these profiles during normal workflow:
+- `-P performance`
+- `-P load-test`
+- `-P gatling`
+- `-P jmeter`
+
+#### **Expected Outputs:**
+
+**Gatling:**
+- HTML reports: `target/gatling/results/`
+- Statistics: Response times, throughput, errors
+
+**JMeter:**
+- JTL files: `results.jtl`
+- HTML reports: Dashboard with graphs and tables
+
+**Locust:**
+- Web dashboard: `http://localhost:8089`
+- CSV reports: Exportable data files
+
+**Remember:** Performance tests generate significant load - use responsibly and only when needed! ⚡
+
+---
+
+### **Rule 15: Pull Request Workflow** 🔄 **NEW**
+
+> **Related:** See [Rule 8: Feature Branch Workflow](#rule-8-feature-branch-workflow--new) for branch creation. See [Rule 4: Commit & Push Process](#rule-4-commit--push-process-optimized---single-commit) for commit workflow.
+
+**Principle:** Pull requests enable code review, validation, and collaboration before merging to main.
+
+#### **When to Create Pull Request:**
+- ✅ Feature branches (always)
+- ✅ Major refactoring
+- ✅ Breaking changes
+- ✅ Multi-file changes (>5 files)
+- ✅ User requests PR review
+- ✅ Complex changes requiring validation
+- ⏭️ Skip for: Documentation-only updates, quick fixes (<2 files, low risk)
+
+#### **PR Creation Checklist:**
+
+**Before Creating PR:**
+- ✅ All tests pass locally
+- ✅ No linter warnings introduced
+- ✅ Documentation updated (CHANGE.log, README, etc.)
+- ✅ Branch is up to date with main
+- ✅ Commit messages are descriptive
+- ✅ Related issues referenced
+
+#### **PR Creation Process:**
+
+**1. Prepare Your Branch:**
+```bash
+# Ensure branch is up to date
+git checkout feature/your-branch-name
+git pull origin main  # Get latest from main
+git merge main         # Merge latest changes
+# Or use rebase: git rebase main
+
+# Resolve any conflicts
+# Run tests again after merge
+docker-compose run --rm tests test -Dtest=SmokeTests -Dcheckstyle.skip=true
+```
+
+**2. Push Branch to Remote:**
+```bash
+git push -u origin feature/your-branch-name
+```
+
+**3. Create PR on GitHub:**
+- Go to: https://github.com/CScharer/selenium_java_docker/pulls
+- Click "New Pull Request"
+- Select: `base: main` ← `compare: feature/your-branch-name`
+- Fill in PR template
+
+**4. PR Template Requirements:**
+```markdown
+## Description
+Brief description of changes
+
+## Related Issues
+Fixes #123
+Related to #456
+
+## Changes Made
+- Change 1
+- Change 2
+- Change 3
+
+## Testing Performed
+- [ ] Smoke tests pass
+- [ ] Full test suite pass
+- [ ] Docker build successful
+- [ ] No new linter warnings
+
+## Checklist
+- [ ] Code follows project standards
+- [ ] Documentation updated
+- [ ] CHANGE.log entry ready (will add after merge)
+- [ ] No hardcoded passwords/secrets
+- [ ] All tests pass
+```
+
+#### **PR Review Process:**
+
+**1. Wait for CI/CD:**
+- GitHub Actions will run automatically
+- Wait for all jobs to complete
+- Fix any failures before requesting review
+
+**2. Request Review:**
+- Assign reviewers (if applicable)
+- Request team member review
+- Tag with appropriate labels
+
+**3. Address Review Comments:**
+```bash
+# Make changes based on feedback
+git add .
+git commit -m "Address PR review comments"
+git push origin feature/your-branch-name
+```
+
+**4. Re-test After Changes:**
+- Run smoke tests locally
+- Verify CI/CD still passes
+- Update PR description if needed
+
+#### **PR Merge Process:**
+
+**1. Pre-Merge Validation:**
+- ✅ All CI/CD jobs pass
+- ✅ Approved by reviewers (if required)
+- ✅ No merge conflicts
+- ✅ Branch is up to date with main
+
+**2. Merge Options:**
+```bash
+# Option 1: Merge via GitHub UI (recommended)
+# - Click "Merge pull request"
+# - Choose merge type:
+#   * "Create a merge commit" (preserves history)
+#   * "Squash and merge" (single commit)
+#   * "Rebase and merge" (linear history)
+
+# Option 2: Merge locally
+git checkout main
+git pull origin main
+git merge --no-ff feature/your-branch-name -m "Merge feature/branch: Description"
+git push origin main
+```
+
+**3. Post-Merge: Update CHANGE.log (MANDATORY)**
+```bash
+# 1. Switch to main and pull latest
+git checkout main
+git pull origin main
+
+# 2. Get merge commit hash
+git log -1 --format=%h
+
+# 3. Get current timestamp
+date "+%Y-%m-%d %H:%M:%S"
+
+# 4. Update CHANGE.log with:
+#    - Merge commit hash (from step 2)
+#    - Current timestamp (from step 3)
+#    - PR number and branch name
+#    - Summary of all changes in the PR
+#    - Testing performed
+#    - Impact and next steps
+
+# 5. Commit and push CHANGE.log update
+git add docs/CHANGE.log
+git commit -m "docs: Update CHANGE.log for PR #X merge"
+git push origin main
+```
+
+**4. Cleanup After Merge:**
+```bash
+# Delete local branch
+git branch -d feature/your-branch-name
+
+# Delete remote branch (if not auto-deleted)
+git push origin --delete feature/your-branch-name
+```
+
+#### **PR Best Practices:**
+- ✅ **Keep PRs focused** - One feature/fix per PR
+- ✅ **Keep PRs small** - Easier to review (< 500 lines changed)
+- ✅ **Write clear descriptions** - Help reviewers understand changes
+- ✅ **Update documentation** - Include doc changes in PR
+- ✅ **Reference issues** - Link related issues
+- ✅ **Respond to feedback** - Address review comments promptly
+
+#### **CRITICAL:** CHANGE.log MUST be updated after EVERY PR merge, even if:
+- PR was merged via GitHub UI (not locally)
+- Changes were small/minor
+- Documentation-only changes
+
+**Why:** CHANGE.log is the official project history. Missing entries create gaps in documentation.
+
+**Remember:** Pull requests enable collaboration and quality assurance before code reaches main! 🔄
+
+---
+
 ## 📋 VERIFICATION CHECKLIST TEMPLATE
 
 Use this checklist for EVERY batch:
@@ -1739,6 +2787,482 @@ BUILD SUCCESS
 
 ---
 
-**Last Updated:** 2025-11-15 06:00:00 CST
-**Version:** 2.9
-**Applies To:** All AI-driven code changes in this repository
+## 🔧 TROUBLESHOOTING
+
+### **Common Issues and Solutions**
+
+#### **Issue: Docker Build Fails**
+
+**Symptom:**
+```bash
+ERROR: failed to solve: failed to fetch https://...
+```
+
+**Solutions:**
+1. **Retry once** - Network issues are often transient
+   ```bash
+   docker-compose build tests
+   ```
+
+2. **Use --no-cache** if retry fails:
+   ```bash
+   docker-compose build --no-cache tests
+   ```
+
+3. **Check Docker daemon** is running:
+   ```bash
+   docker ps
+   ```
+
+4. **Clean Docker resources** if space issue:
+   ```bash
+   docker system prune -a
+   ```
+
+#### **Issue: Tests Timeout**
+
+**Symptom:**
+```
+Tests run: 65, Failures: 0, Errors: 1
+ERROR: testMethod (timeout: 30000ms)
+```
+
+**Solutions:**
+1. **Check Grid health:**
+   ```bash
+   ./scripts/docker/grid-health.sh
+   ```
+
+2. **Restart Grid:**
+   ```bash
+   ./scripts/docker/grid-stop.sh
+   ./scripts/docker/grid-start.sh
+   ```
+
+3. **Check Grid console:** http://localhost:4444
+   - Verify nodes are available
+   - Check session count
+
+4. **Increase timeout** in test if needed (document why)
+
+#### **Issue: Pre-Commit Hook Fails**
+
+**Symptom:**
+```
+pre-commit hook: Possible hardcoded password found!
+FAILED: password detection
+```
+
+**Solutions:**
+1. **Review output carefully** - which files have passwords?
+
+2. **If YOU added the password:**
+   - ❌ **STOP immediately**
+   - Remove hardcoded password
+   - Use Google Cloud Secret Manager (see [Rule 2.6](#rule-26-hardcoded-passwords---strictly-forbidden-))
+   - Re-commit
+
+3. **If password already exists:**
+   - Request user approval for `--no-verify`
+   - Document in commit message
+   - Create GitHub issue to track cleanup
+
+#### **Issue: Changes Don't Persist**
+
+**Symptom:**
+```bash
+git status --short
+# Shows no modified files, but you just edited files
+```
+
+**Solutions:**
+1. **Check Docker volume mounts:**
+   ```bash
+   # Verify docker-compose.yml has correct volume mounts
+   cat docker-compose.yml | grep volumes
+   ```
+
+2. **Check file permissions:**
+   ```bash
+   ls -la src/test/java/com/cjs/qa/some/File.java
+   ```
+
+3. **Try editing directly** (not through Docker):
+   ```bash
+   # Edit file in your IDE, then verify
+   git status --short
+   ```
+
+4. **Restart Docker** if volume mount issue:
+   ```bash
+   docker-compose down
+   docker-compose up -d
+   ```
+
+#### **Issue: Compilation Errors After Format**
+
+**Symptom:**
+```
+ERROR: Cannot resolve symbol 'SomeClass'
+BUILD FAILURE
+```
+
+**Solutions:**
+1. **Check imports** - Google Java Format may have removed unused imports
+   ```bash
+   # Re-run format to ensure consistency
+   docker-compose run --rm tests com.spotify.fmt:fmt-maven-plugin:format
+   ```
+
+2. **Check for missing dependencies:**
+   ```bash
+   ./mvnw dependency:tree
+   ```
+
+3. **Clean and rebuild:**
+   ```bash
+   ./mvnw clean compile test-compile
+   ```
+
+#### **Issue: Git Push Fails**
+
+**Symptom:**
+```
+ERROR: Permission denied (publickey)
+ERROR: failed to push some refs
+```
+
+**Solutions:**
+1. **Check SSH keys:**
+   ```bash
+   ssh -T git@github.com
+   ```
+
+2. **Use HTTPS instead:**
+   ```bash
+   git remote set-url origin https://github.com/CScharer/selenium_java_docker.git
+   ```
+
+3. **Check branch name** - are you pushing to feature branch?
+   ```bash
+   git branch
+   # Should be on feature branch, not main
+   ```
+
+#### **Issue: CI/CD Pipeline Fails**
+
+**Symptom:**
+GitHub Actions shows red X, tests fail in CI but pass locally
+
+**Solutions:**
+1. **Check CI logs** - what's different in CI?
+   - Environment variables
+   - Java version
+   - Maven version
+   - Test execution order
+
+2. **Run tests in Docker** (matches CI environment):
+   ```bash
+   docker-compose run --rm tests test -Dcheckstyle.skip=true
+   ```
+
+3. **Check for flaky tests** - same test failing intermittently?
+   - Document as known flaky (see [Exception Handling](#-exception-handling))
+   - Create GitHub issue
+
+4. **Verify test data** - CI might not have access to test data
+
+#### **Issue: Merge Conflicts**
+
+**Symptom:**
+```
+CONFLICT: Merge conflict in File.java
+Auto-merging failed
+```
+
+**Solutions:**
+1. **Update branch from main:**
+   ```bash
+   git checkout feature/your-branch
+   git pull origin main
+   ```
+
+2. **Resolve conflicts:**
+   - Open conflicted files
+   - Choose correct version or merge manually
+   - Mark as resolved: `git add <file>`
+
+3. **Test after resolving:**
+   ```bash
+   ./mvnw clean compile test-compile
+   ./mvnw test -Dtest=SmokeTests
+   ```
+
+4. **Commit resolution:**
+   ```bash
+   git commit -m "resolve: Merge conflicts with main"
+   ```
+
+#### **Issue: Linter Warnings Increase**
+
+**Symptom:**
+Previously had 68 warnings, now showing 75 warnings
+
+**Solutions:**
+1. **Check if warnings are new:**
+   ```bash
+   # Run linter check
+   read_lints
+   ```
+
+2. **Identify new warnings** vs existing warnings
+
+3. **If new warnings introduced:**
+   - Fix them before committing
+   - Document in CHANGE.log
+   - Follow [Rule 11: Linter Warnings Fix Process](#rule-11-linter-warnings-fix-process--new)
+
+#### **Issue: Tests Pass Locally But Fail in CI**
+
+**Symptom:**
+All tests pass locally, but CI shows failures
+
+**Solutions:**
+1. **Run tests in Docker** (matches CI environment):
+   ```bash
+   docker-compose run --rm tests test -Dcheckstyle.skip=true
+   ```
+
+2. **Check environment differences:**
+   - Java version (CI uses Java 17)
+   - Maven version
+   - System properties
+   - Environment variables
+
+3. **Check for timing issues:**
+   - Flaky tests due to timing
+   - Race conditions
+   - Network timeouts
+
+4. **Check test isolation:**
+   - Tests interfering with each other
+   - Shared state between tests
+   - Database/file cleanup issues
+
+---
+
+## 💡 COMMON CODE PATTERNS
+
+### **Deprecated API Patterns**
+
+#### **Deprecated URL Constructor:**
+```java
+// ❌ OLD (deprecated in Java 20):
+final URL url = new URL(urlString);
+
+// ✅ NEW (Java 20+ compatible):
+final URL url = URI.create(urlString).toURL();
+// Don't forget: import java.net.URI;
+```
+
+#### **Deprecated Runtime.exec:**
+```java
+// ❌ OLD (deprecated):
+Runtime.getRuntime().exec("command");
+
+// ✅ NEW (ProcessBuilder API):
+ProcessBuilder pb = new ProcessBuilder("command");
+Process process = pb.start();
+```
+
+#### **Deprecated Cell.setCellType:**
+```java
+// ❌ OLD (deprecated in Apache POI 5.x):
+cell.setCellType(CellType.STRING);
+
+// ✅ NEW:
+cell.setBlank();  // or appropriate setter
+// Or use: cell.setCellValue("value");
+```
+
+### **Raw Type Patterns**
+
+#### **Raw Map.Entry:**
+```java
+// ❌ OLD (raw type):
+for (Map.Entry entry : map.entrySet()) {
+    String key = (String) entry.getKey();
+}
+
+// ✅ NEW (parameterized):
+for (Map.Entry<String, String> entry : map.entrySet()) {
+    String key = entry.getKey(); // No cast needed
+}
+```
+
+#### **Raw Map:**
+```java
+// ❌ OLD (raw type):
+Map map = new HashMap();
+map.put("key", "value");
+String value = (String) map.get("key");
+
+// ✅ NEW (parameterized):
+Map<String, String> map = new HashMap<>();
+map.put("key", "value");
+String value = map.get("key"); // No cast needed
+```
+
+### **Null Safety Patterns**
+
+#### **Null Pointer Prevention:**
+```java
+// ❌ OLD (potential NPE):
+if (map.get("status").equals("0")) { }
+
+// ✅ NEW (null-safe):
+if (map != null && "0".equals(map.get("status"))) { }
+// Or use Objects.equals():
+if (Objects.equals(map.get("status"), "0")) { }
+```
+
+#### **Boolean Auto-Unboxing:**
+```java
+// ❌ OLD (potential NPE):
+Boolean flag = getFlag();
+if (flag) { }  // NPE if flag is null
+
+// ✅ NEW (null-safe):
+Boolean flag = getFlag();
+if (Boolean.TRUE.equals(flag)) { }
+// Or check for null:
+if (flag != null && flag) { }
+```
+
+### **Logging Patterns**
+
+#### **System.out → log4j:**
+```java
+// ❌ OLD:
+System.out.println("User logged in: " + username);
+
+// ✅ NEW (log4j 2.x):
+private static final Logger log = LogManager.getLogger(ClassName.class);
+log.info("User logged in: {}", username);
+```
+
+#### **Parameterized Logging:**
+```java
+// ❌ OLD (creates string even if not logged):
+log.debug("Processing user: " + user.getName());
+
+// ✅ NEW (lazy evaluation):
+log.debug("Processing user: {}", user.getName());
+```
+
+### **Static Method Access:**
+
+```java
+// ❌ OLD (instance access to static):
+final Constants c = new Constants();
+String result = c.nlTab(1, 0);
+
+// ✅ NEW (static access):
+String result = Constants.nlTab(1, 0);
+```
+
+### **Data-Driven Testing Patterns:**
+
+```java
+// ✅ NEW APPROACH - Data-driven (no code changes for new test cases)
+@DataProvider(name = "loginScenarios")
+public Object[][] getLoginData() {
+    return ExcelReader.read("test-data/login-scenarios.xlsx", "Sheet1");
+}
+
+@Test(dataProvider = "loginScenarios")
+public void testLogin(String email, String password, String expectedResult) {
+    // Test logic - same for all scenarios
+    // New scenarios added via Excel file only
+}
+```
+
+---
+
+## 📋 VERSION HISTORY
+
+### 📋 Version 3.0 Changes (2025-11-15):
+- **🚨 CRITICAL:** Added Rule 0 - NEVER Commit Directly to Main/Master
+  - Absolute prohibition on committing directly to main/master
+  - ALWAYS create feature branch first workflow
+  - Verification steps to ensure on feature branch
+  - Updated all workflows to emphasize feature branch usage
+  - This is the #1 rule for safe development
+
+- **📚 MAJOR REORGANIZATION:** Enhanced document structure and navigation
+  - Added Ultra-Quick Reference section at top for daily use
+  - Added comprehensive Table of Contents with categorized sections
+  - Added Rule Index for quick lookup with priority indicators
+  - Added Command Cheat Sheet table for common tasks
+  - Moved version history to end (improves daily usability)
+  - Added cross-references between related rules
+  - Better navigation and findability
+
+- **🔧 ADDED:** Rule 12 - API Testing Workflow
+  - REST Assured test execution (31 tests)
+  - No Grid required workflow
+  - Fast feedback loop documentation
+  - Troubleshooting guide
+
+- **🌍 ADDED:** Rule 13 - Multi-Environment Testing Workflow
+  - Dev/Test/Prod environment workflows
+  - Environment-specific configurations
+  - Best practices for multi-environment testing
+  - GitHub Actions integration
+
+- **⚡ ADDED:** Rule 14 - Performance Testing Workflow
+  - Gatling, JMeter, Locust execution
+  - Manual-only workflow documentation
+  - Safety guidelines and monitoring
+  - Performance test scenarios
+
+- **🔄 ADDED:** Rule 15 - Pull Request Workflow
+  - PR creation and review process
+  - PR merge procedures
+  - Post-merge CHANGE.log update workflow
+  - PR best practices and templates
+
+- **🔄 ENHANCED:** Rule 7 - Error Recovery & Rollback (previously minimal)
+  - Error classification system (Recoverable/Non-Recoverable/Transient)
+  - Detailed rollback procedures for multiple scenarios
+  - Communication process for error handling
+  - Prevention strategies
+
+- **📦 ADDED:** Rule 16 - Dependency Update Workflow
+  - When to update dependencies (security, planned, deferred)
+  - Dependency update process with verification steps
+  - Breaking change handling
+  - Rollback plan for failed updates
+
+- **✅ ADDED:** Rule 17 - Code Review Checklist
+  - Pre-commit review checklist
+  - Commit message format guidelines
+  - Common issues to watch for
+  - Code review best practices
+
+- **🔧 ADDED:** Troubleshooting Section
+  - Common issues and solutions (Docker, tests, git, CI/CD)
+  - Step-by-step troubleshooting guides
+  - Quick fixes for frequent problems
+
+- **💡 ADDED:** Common Code Patterns Section
+  - Deprecated API replacement patterns
+  - Raw type fixes
+  - Null safety patterns
+  - Logging modernization patterns
+  - Data-driven testing examples
+
+- **🎯 GOAL:** Improve daily usability while maintaining comprehensive coverage
+- **📊 RESULT:** Document now ~2,900 lines with 18 rules (Rule 0 + 17 existing), better organized, more navigable, and includes troubleshooting
+
+### 📋 Version 2.9 Changes:
