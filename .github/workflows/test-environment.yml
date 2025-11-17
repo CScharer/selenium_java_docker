@@ -92,7 +92,7 @@ jobs:
 
       - name: Upload Smoke Test Results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: smoke-results-${{ inputs.environment }}
           path: |
@@ -193,7 +193,7 @@ jobs:
 
       - name: Upload Grid Test Results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: grid-results-${{ matrix.browser }}-${{ inputs.environment }}
           path: |
@@ -270,7 +270,7 @@ jobs:
 
       - name: Upload Mobile Test Results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: mobile-results-${{ inputs.environment }}
           path: |
@@ -347,7 +347,7 @@ jobs:
 
       - name: Upload Responsive Test Results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: responsive-results-${{ inputs.environment }}
           path: |
@@ -402,7 +402,7 @@ jobs:
           echo "✅ Report generated!"
 
       - name: Upload Allure Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: allure-report-${{ inputs.environment }}
