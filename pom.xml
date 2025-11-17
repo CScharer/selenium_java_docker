@@ -93,7 +93,7 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 		<selenium.version>4.38.0</selenium.version>
 		<webdrivermanager.version>5.9.2</webdrivermanager.version>
 		<appium.version>9.3.0</appium.version>
-		<allure.version>2.25.0</allure.version>
+		<allure.version>2.31.0</allure.version>
 		<aspectj.version>1.9.22</aspectj.version>
 
 		<!-- Code Quality Tools -->
