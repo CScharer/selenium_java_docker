@@ -71,7 +71,7 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 		<javax.servlet-api.version>4.0.1</javax.servlet-api.version>
 		<jface.version>3.5.2</jface.version>
 		<joda-time.version>2.13.0</joda-time.version>
-		<h2.version>2.3.232</h2.version>
+		<h2.version>2.4.240</h2.version>
 		<eclipse-jface.version>3.5.2</eclipse-jface.version>
 		<jfreechart.version>1.5.4</jfreechart.version>
 		<json.version>20240303</json.version>
