@@ -137,7 +137,7 @@ jobs:
           fi
       
       - name: Upload Quick Check Results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: quick-performance-check
@@ -219,7 +219,7 @@ jobs:
           fi
       
       - name: Upload Locust Results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: locust-performance-results
@@ -255,7 +255,7 @@ jobs:
           ./mvnw gatling:test -Pgatling
       
       - name: Upload Gatling Results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: gatling-performance-results
@@ -382,7 +382,7 @@ jobs:
           echo "=========================================="
       
       - name: Upload JMeter Results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: jmeter-performance-results

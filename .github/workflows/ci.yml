@@ -154,7 +154,7 @@ jobs:
         run: ./mvnw clean compile test-compile
 
       - name: Upload compiled classes
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: compiled-classes
           path: target/
@@ -191,7 +191,7 @@ jobs:
 
       - name: Upload Analysis Reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: code-quality-reports
           path: |
@@ -530,7 +530,7 @@ jobs:
           echo "✅ Combined report generated!"
 
       - name: Upload Combined Allure Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: allure-report-combined-all-environments
