@@ -3,7 +3,7 @@
     {
       "name": " Edit Search",
       "type": "name",
-      "value": "q",
+      "value": "\"q\"",
       "variableName": "editSearch"
     }
   ]

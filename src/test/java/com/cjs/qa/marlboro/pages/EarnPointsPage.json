@@ -3,31 +3,31 @@
     {
       "name": " Label Points Earned",
       "type": "xpath",
-      "value": ".//div[@class='points-container']",
+      "value": "\".//div[@class='points-container']\"",
       "variableName": "labelPointsEarned"
     },
     {
       "name": " Label Codes Entered",
       "type": "xpath",
-      "value": ".//div[@class='added-code-text']/p",
+      "value": "\".//div[@class='added-code-text']/p\"",
       "variableName": "labelCodesEntered"
     },
     {
       "name": " Label Error Message",
       "type": "xpath",
-      "value": ".//div[@class='err-msg']/p",
+      "value": "\".//div[@class='err-msg']/p\"",
       "variableName": "labelErrorMessage"
     },
     {
       "name": " Edit Pack Code",
       "type": "xpath",
-      "value": ".//input[@name='snumber']",
+      "value": "\".//input[@name='snumber']\"",
       "variableName": "editPackCode"
     },
     {
       "name": " Button Submit",
       "type": "xpath",
-      "value": ".//button[@type='button'][.='Submit']",
+      "value": "\".//button[@type='button'][.='Submit']\"",
       "variableName": "buttonSubmit"
     }
   ]

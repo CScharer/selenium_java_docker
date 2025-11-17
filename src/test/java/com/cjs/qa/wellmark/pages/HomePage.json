@@ -3,7 +3,7 @@
     {
       "name": " Link See All Claims",
       "type": "xpath",
-      "value": ".//*[@id='linkToSeeAllClaims']",
+      "value": "\".//*[@id='linkToSeeAllClaims']\"",
       "variableName": "linkSeeAllClaims"
     }
   ]

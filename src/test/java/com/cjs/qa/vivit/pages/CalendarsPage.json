@@ -3,7 +3,7 @@
     {
       "name": " By Table Calendars",
       "type": "xpath",
-      "value": ".//*[@id='EventList']/tbody/tr/td[1]/div",
+      "value": "\".//*[@id='EventList']/tbody/tr/td[1]/div\"",
       "variableName": "byTableCalendars"
     }
   ]

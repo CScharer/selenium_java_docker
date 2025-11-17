@@ -3,43 +3,43 @@
     {
       "name": " Button Button",
       "type": "id",
-      "value": "Button",
+      "value": "\"Button\"",
       "variableName": "buttonButton"
     },
     {
       "name": " Checkbox Checkbox",
       "type": "id",
-      "value": "Checkbox",
+      "value": "\"Checkbox\"",
       "variableName": "checkboxCheckbox"
     },
     {
       "name": " Dropdown Dropdown",
       "type": "id",
-      "value": "Dropdown",
+      "value": "\"Dropdown\"",
       "variableName": "dropdownDropdown"
     },
     {
       "name": " Edit Edit",
       "type": "id",
-      "value": "Edit",
+      "value": "\"Edit\"",
       "variableName": "editEdit"
     },
     {
       "name": " Label Label",
       "type": "id",
-      "value": "Label",
+      "value": "\"Label\"",
       "variableName": "labelLabel"
     },
     {
       "name": " Link Link",
       "type": "id",
-      "value": "Link",
+      "value": "\"Link\"",
       "variableName": "linkLink"
     },
     {
       "name": " Option Option",
       "type": "id",
-      "value": "Option",
+      "value": "\"Option\"",
       "variableName": "optionOption"
     }
   ]

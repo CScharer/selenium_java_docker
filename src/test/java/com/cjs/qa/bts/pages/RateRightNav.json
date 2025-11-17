@@ -3,85 +3,85 @@
     {
       "name": " Sidebar Right",
       "type": "xpath",
-      "value": ".//*[@id='outer-east-open-btn']",
+      "value": "\".//*[@id='outer-east-open-btn']\"",
       "variableName": "sidebarRight"
     },
     {
       "name": " Link Exit Policy Search",
       "type": "xpath",
-      "value": ".//*[@id='requestLinkExitPolicy']",
+      "value": "\".//*[@id='requestLinkExitPolicy']\"",
       "variableName": "linkExitPolicySearch"
     },
     {
       "name": " Link Change Dates",
       "type": "xpath",
-      "value": ".//*[@id='requestLinkChangeDates']",
+      "value": "\".//*[@id='requestLinkChangeDates']\"",
       "variableName": "linkChangeDates"
     },
     {
       "name": " Link Policy Errors",
       "type": "xpath",
-      "value": ".//*[@id='policyErrorsLink']",
+      "value": "\".//*[@id='policyErrorsLink']\"",
       "variableName": "linkPolicyErrors"
     },
     {
       "name": " Link Policy Views",
-      "type": "=",
-      "value": "By.xpath",
+      "type": "xpath",
+      "value": "\".//*[@id='\" + \"form1:adminFunctions:panelGroupButtonForPolicyViews']/a\"",
       "variableName": "linkPolicyViews"
     },
     {
       "name": " Link Edit",
-      "type": "=",
-      "value": "By.xpath(",
+      "type": "xpath",
+      "value": "\".//*[@id='form1:adminFunctions:policyIssuanceFunctions:0:navigationMenuItem:menuCommandSubmittable']\"",
       "variableName": "linkEdit"
     },
     {
       "name": " Link Validate",
-      "type": "=",
-      "value": "By.xpath(",
+      "type": "xpath",
+      "value": "\".//*[@id='form1:adminFunctions:policyIssuanceFunctions:1:navigationMenuItem:menuCommandSubmittable']\"",
       "variableName": "linkValidate"
     },
     {
       "name": " Link Rate",
-      "type": "=",
-      "value": "By.xpath(",
+      "type": "xpath",
+      "value": "\".//*[@id='form1:adminFunctions:policyIssuanceFunctions:2:navigationMenuItem:menuCommandSubmittable']\"",
       "variableName": "linkRate"
     },
     {
       "name": " Link Bind",
-      "type": "=",
-      "value": "By.xpath(",
+      "type": "xpath",
+      "value": "\".//*[@id='form1:adminFunctions:policyIssuanceFunctions:3:navigationMenuItem:menuCommandSubmittable']\"",
       "variableName": "linkBind"
     },
     {
       "name": " Link Issue",
-      "type": "=",
-      "value": "By.xpath(",
+      "type": "xpath",
+      "value": "\".//*[@id='form1:adminFunctions:policyIssuanceFunctions:4:navigationMenuItem:menuCommandSubmittable']\"",
       "variableName": "linkIssue"
     },
     {
       "name": " Link Request Print",
-      "type": "=",
-      "value": "By.xpath(",
+      "type": "xpath",
+      "value": "\".//*[@id='form1:adminFunctions:policyIssuanceFunctions:5:navigationMenuItem:menuLinkSubmittable']\"",
       "variableName": "linkRequestPrint"
     },
     {
       "name": " Link Territory Information",
-      "type": "=",
-      "value": "By.xpath",
+      "type": "xpath",
+      "value": "\".//*[@id='\" + \"form1:adminFunctions:terrInfoLink']\"",
       "variableName": "linkTerritoryInformation"
     },
     {
       "name": " Link Client Information",
-      "type": "=",
-      "value": "By.xpath",
+      "type": "xpath",
+      "value": "\".//*[@id='\" + \"form1:adminFunctions:clientViewLink']\"",
       "variableName": "linkClientInformation"
     },
     {
       "name": " Link Payor Details",
-      "type": "=",
-      "value": "By.xpath",
+      "type": "xpath",
+      "value": "\".//*[@id='\" + \"form1:adminFunctions:payorDetailsLink']\"",
       "variableName": "linkPayorDetails"
     }
   ]

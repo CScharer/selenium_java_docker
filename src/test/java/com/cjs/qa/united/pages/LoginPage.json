@@ -3,26 +3,26 @@
     {
       "name": " Edit Mileage Plus Number",
       "type": "xpath",
-      "value": ".//*[@id='loginFormModel.login']",
+      "value": "\".//*[@id='loginFormModel.login']\"",
       "variableName": "editMileagePlusNumber"
     },
     {
       "name": " Edit Password",
       "type": "xpath",
-      "value": ".//*[@id='loginFormModel.password']",
+      "value": "\".//*[@id='loginFormModel.password']\"",
       "variableName": "editPassword"
     },
     {
       "name": " Checkbox Remember Me",
-      "type": "=",
-      "value": "By.xpath",
+      "type": "xpath",
+      "value": "\".//*[@id='loginFormModel']//input[@id='saveCredentials']\"",
       "variableName": "checkboxRememberMe"
     },
     {
-      "name": "//",
-      "type": "loginFormModel.rememberMe",
-      "value": "buttonSignIn",
-      "variableName": "//"
+      "name": " Button Sign In",
+      "type": "xpath",
+      "value": "\".//*[@id='loginFormModel']/button\"",
+      "variableName": "buttonSignIn"
     }
   ]
 }

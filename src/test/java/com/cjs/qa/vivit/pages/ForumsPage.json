@@ -2,8 +2,8 @@
   "locators": [
     {
       "name": " By Table Forums",
-      "type": "=",
-      "value": "By.xpath",
+      "type": "xpath",
+      "value": "\".//*[@id='SpContent_Container']/table/tbody/tr[@class!='header']\"",
       "variableName": "byTableForums"
     }
   ]

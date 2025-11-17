@@ -3,14 +3,14 @@
     {
       "name": " By Title Bar",
       "type": "xpath",
-      "value": ".//*[@id='SpTitleBar']",
+      "value": "\".//*[@id='SpTitleBar']\"",
       "variableName": "byTitleBar"
     },
     {
-      "name": "}",
-      "type": "byLinksGroups",
-      "value": "=",
-      "variableName": "}"
+      "name": " By Links Groups",
+      "type": "xpath",
+      "value": "\"//*[@id='CustomPageBody']//a[text()!='contact us today!']\"",
+      "variableName": "byLinksGroups"
     }
   ]
 }

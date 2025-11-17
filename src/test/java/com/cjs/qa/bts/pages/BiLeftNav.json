@@ -3,91 +3,91 @@
     {
       "name": " Button Basic Information",
       "type": "id",
-      "value": "basicinfonavitem",
+      "value": "\"basicinfonavitem\"",
       "variableName": "buttonBasicInformation"
     },
     {
       "name": " Button Named Insureds",
       "type": "id",
-      "value": "NamedInsuredsNamedInsureds",
+      "value": "\"NamedInsuredsNamedInsureds\"",
       "variableName": "buttonNamedInsureds"
     },
     {
       "name": " Button Addresses",
       "type": "id",
-      "value": "viewAddressId",
+      "value": "\"viewAddressId\"",
       "variableName": "buttonAddresses"
     },
     {
       "name": " Button Schedule Of Locations And Vehicles",
-      "type": "=",
-      "value": "By.id",
+      "type": "id",
+      "value": "\"ScheduleofLocationsandVehiclesScheduleofLocationsandVehicles\"",
       "variableName": "buttonScheduleOfLocationsAndVehicles"
     },
     {
       "name": " Button Insurable Interest Summary",
-      "type": "=",
-      "value": "By.id",
+      "type": "id",
+      "value": "\"InsurableInterestSummaryInsurableInterestSummary\"",
       "variableName": "buttonInsurableInterestSummary"
     },
     {
-      "name": "//",
-      "type": "***UPDATE***",
-      "value": "buttonManageProducts",
-      "variableName": "//"
+      "name": " Button Manage Products",
+      "type": "xpath",
+      "value": "\".//*[@id='left-sidebar']/div/div[2]/div/ul/li[6]\"",
+      "variableName": "buttonManageProducts"
     },
     {
-      "name": "//",
-      "type": "private",
-      "value": "By",
-      "variableName": "//"
+      "name": " Button Businessowners",
+      "type": "id",
+      "value": "\"Businessowners500914\"",
+      "variableName": "buttonBusinessowners"
     },
     {
       "name": " Button Forms",
       "type": "id",
-      "value": "FormsForms",
+      "value": "\"FormsForms\"",
       "variableName": "buttonForms"
     },
     {
       "name": " Button Commissions",
       "type": "id",
-      "value": "defaultCommissionsId",
+      "value": "\"defaultCommissionsId\"",
       "variableName": "buttonCommissions"
     },
     {
       "name": " Button Premium Modifiers",
       "type": "id",
-      "value": "PremiumModifiersPremiumModifiers",
+      "value": "\"PremiumModifiersPremiumModifiers\"",
       "variableName": "buttonPremiumModifiers"
     },
     {
       "name": " Button Premium Summary",
       "type": "id",
-      "value": "premiumSummaryId",
+      "value": "\"premiumSummaryId\"",
       "variableName": "buttonPremiumSummary"
     },
     {
       "name": " Button Policy Activity",
       "type": "id",
-      "value": "policyActivityId",
+      "value": "\"policyActivityId\"",
       "variableName": "buttonPolicyActivity"
     },
     {
       "name": " Button Notes",
       "type": "id",
-      "value": "notesId",
+      "value": "\"notesId\"",
       "variableName": "buttonNotes"
     },
     {
       "name": " Button Policy Documents",
       "type": "id",
-      "value": "policyDocumentsId",
+      "value": "\"policyDocumentsId\"",
       "variableName": "buttonPolicyDocuments"
     },
     {
       "name": " Button Export Excel",
       "type": "xpath",
-      "value": ".//*[@id='viewport']/div[2]/div/a/span",
+      "value": "\".//*[@id='viewport']/div[2]/div/a/span\"",
       "variableName": "buttonExportExcel"
     }
   ]

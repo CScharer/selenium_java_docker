@@ -3,37 +3,37 @@
     {
       "name": " Link Edit",
       "type": "id",
-      "value": "EditEdit",
+      "value": "\"EditEdit\"",
       "variableName": "linkEdit"
     },
     {
       "name": " Link Validate",
       "type": "id",
-      "value": "ValidateValidate",
+      "value": "\"ValidateValidate\"",
       "variableName": "linkValidate"
     },
     {
       "name": " Link Rate",
       "type": "id",
-      "value": "RateRate",
+      "value": "\"RateRate\"",
       "variableName": "linkRate"
     },
     {
       "name": " Link Bind",
       "type": "id",
-      "value": "BindBind",
+      "value": "\"BindBind\"",
       "variableName": "linkBind"
     },
     {
       "name": " Link Issue",
       "type": "id",
-      "value": "IssueIssue",
+      "value": "\"IssueIssue\"",
       "variableName": "linkIssue"
     },
     {
       "name": " Link Request Print",
       "type": "id",
-      "value": "requestPrintLink",
+      "value": "\"requestPrintLink\"",
       "variableName": "linkRequestPrint"
     }
   ]

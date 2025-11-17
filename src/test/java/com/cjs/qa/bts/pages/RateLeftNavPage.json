@@ -2,15 +2,9 @@
   "locators": [
     {
       "name": " Link Manage Products",
-      "type": "=",
-      "value": "By.xpath(nodeProcessedErrs",
+      "type": "xpath",
+      "value": "nodeProcessedErrs + \"5:navigationMenuItem:menuLinkSubmittable']/span\"",
       "variableName": "linkManageProducts"
-    },
-    {
-      "name": "//",
-      "type": "linkInusrableInterestSummary",
-      "value": "=",
-      "variableName": "//"
     }
   ]
 }

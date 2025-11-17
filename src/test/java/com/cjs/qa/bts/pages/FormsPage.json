@@ -2,38 +2,38 @@
   "locators": [
     {
       "name": " Button Optional Forms",
-      "type": "xpath(nodeForms1",
-      "value": "+",
+      "type": "xpath",
+      "value": "nodeForms1 + \"manualFormsBtn']\"",
       "variableName": "buttonOptionalForms"
     },
     {
       "name": " Button User Defined Forms",
-      "type": "xpath(nodeForms1",
-      "value": "+",
+      "type": "xpath",
+      "value": "nodeForms1 + \"userDefinedFormsBtn']\"",
       "variableName": "buttonUserDefinedForms"
     },
     {
       "name": " Button View Excluded Forms",
-      "type": "xpath(nodeForms1",
-      "value": "+",
+      "type": "xpath",
+      "value": "nodeForms1 + \"forms:excludedFormsBtn']\"",
       "variableName": "buttonViewExcludedForms"
     },
     {
       "name": " Button Quick Scroll",
-      "type": "=",
-      "value": "By.xpath(nodeForms1",
+      "type": "xpath",
+      "value": "nodeForms1 + \"forms:variableDataBtnGroup']/div[6]/input\"",
       "variableName": "buttonQuickScroll"
     },
     {
       "name": " Button Delete",
-      "type": "xpath(nodeForms1",
-      "value": "+",
+      "type": "xpath",
+      "value": "nodeForms1 + \"forms:deleteBtn']\"",
       "variableName": "buttonDelete"
     },
     {
       "name": " Button Update Reprint",
       "type": "xpath",
-      "value": ".//*[@id='form1:forms:printBtn']",
+      "value": "\".//*[@id='form1:forms:printBtn']\"",
       "variableName": "buttonUpdateReprint"
     }
   ]

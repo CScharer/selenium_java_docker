@@ -3,43 +3,43 @@
     {
       "name": " Dropdown Test Status",
       "type": "id",
-      "value": "modeBI",
+      "value": "\"modeBI\"",
       "variableName": "dropdownTestStatus"
     },
     {
       "name": " Link Exit Policy",
       "type": "id",
-      "value": "requestLinkSearch1",
+      "value": "\"requestLinkSearch1\"",
       "variableName": "linkExitPolicy"
     },
     {
       "name": " Link Scheduled Processes",
       "type": "id",
-      "value": "requestLinkScheduleProcess",
+      "value": "\"requestLinkScheduleProcess\"",
       "variableName": "linkScheduledProcesses"
     },
     {
       "name": " Link Web Services",
       "type": "id",
-      "value": "requestLinkForWebServices",
+      "value": "\"requestLinkForWebServices\"",
       "variableName": "linkWebServices"
     },
     {
       "name": " Link Mass Notes",
       "type": "id",
-      "value": "requestLinkForMassNotes",
+      "value": "\"requestLinkForMassNotes\"",
       "variableName": "linkMassNotes"
     },
     {
       "name": " Link View Export Requests",
       "type": "id",
-      "value": "requestLinkExportRequest",
+      "value": "\"requestLinkExportRequest\"",
       "variableName": "linkViewExportRequests"
     },
     {
       "name": " Link Queries Tools",
       "type": "id",
-      "value": "requestLinkQueriesTools",
+      "value": "\"requestLinkQueriesTools\"",
       "variableName": "linkQueriesTools"
     }
   ]

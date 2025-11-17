@@ -3,31 +3,31 @@
     {
       "name": " Button Save",
       "type": "id",
-      "value": "save",
+      "value": "\"save\"",
       "variableName": "buttonSave"
     },
     {
       "name": " Button Save Products",
       "type": "id",
-      "value": "saveProducts",
+      "value": "\"saveProducts\"",
       "variableName": "buttonSaveProducts"
     },
     {
       "name": " Button Cancel",
       "type": "id",
-      "value": "cancel",
+      "value": "\"cancel\"",
       "variableName": "buttonCancel"
     },
     {
       "name": " Button Quick Scroll",
       "type": "id",
-      "value": "quickScroll",
+      "value": "\"quickScroll\"",
       "variableName": "buttonQuickScroll"
     },
     {
       "name": " Button Open Close Left Nav",
-      "type": "=",
-      "value": "By.xpath",
+      "type": "xpath",
+      "value": "\"html/body/div[1]/nav/div/div[1]/div[1]/button\"",
       "variableName": "buttonOpenCloseLeftNav"
     }
   ]

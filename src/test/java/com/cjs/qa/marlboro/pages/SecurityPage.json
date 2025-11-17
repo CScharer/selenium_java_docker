@@ -3,7 +3,7 @@
     {
       "name": " Button Enter Pin",
       "type": "xpath",
-      "value": ".//*[@id='btnEnterPin']",
+      "value": "\".//*[@id='btnEnterPin']\"",
       "variableName": "buttonEnterPin"
     }
   ]

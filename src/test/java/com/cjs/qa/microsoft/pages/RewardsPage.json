@@ -2,26 +2,26 @@
   "locators": [
     {
       "name": " By Button Sign In With Microsoft",
-      "type": "=",
-      "value": "By.xpath",
+      "type": "xpath",
+      "value": "\".//span[.='SIGN IN WITH MICROSOFT']\"",
       "variableName": "byButtonSignInWithMicrosoft"
     },
     {
       "name": " By Points Daily Set",
-      "type": "=",
-      "value": "By.xpath",
+      "type": "xpath",
+      "value": "\".//*[@id='daily-sets']/mee-card-group[1]/div/mee-card\"",
       "variableName": "byPointsDailySet"
     },
     {
       "name": " By Points More Activities",
-      "type": "=",
-      "value": "By.xpath",
+      "type": "xpath",
+      "value": "\".//*[@id='more-activities']/div/mee-card\"",
       "variableName": "byPointsMoreActivities"
     },
     {
       "name": " By Points Available Sneak Peek",
-      "type": "=",
-      "value": "By.xpath",
+      "type": "xpath",
+      "value": "\".//*[@id='daily-sets']/mee-card-group[2]/div/mee-card\"",
       "variableName": "byPointsAvailableSneakPeek"
     }
   ]

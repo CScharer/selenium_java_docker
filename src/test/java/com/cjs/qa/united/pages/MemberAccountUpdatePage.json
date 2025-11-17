@@ -3,31 +3,31 @@
     {
       "name": " Label Address",
       "type": "xpath",
-      "value": "./\"",
+      "value": "\"./\" + nodeLabel + \"/h3[.='Address']/../div\"",
       "variableName": "labelAddress"
     },
     {
       "name": " Label Email Address",
-      "type": "=",
-      "value": "By.xpath",
+      "type": "xpath",
+      "value": "\"./\" + nodeLabel + \"/h3[.='Email address']/../div\"",
       "variableName": "labelEmailAddress"
     },
     {
       "name": " Label Phone Number",
-      "type": "=",
-      "value": "By.xpath",
+      "type": "xpath",
+      "value": "\"./\" + nodeLabel + \"/h3[.='Phone number']/../div\"",
       "variableName": "labelPhoneNumber"
     },
     {
       "name": " Button Accept And Submit",
       "type": "xpath",
-      "value": ".//*[@id='btnAccept']",
+      "value": "\".//*[@id='btnAccept']\"",
       "variableName": "buttonAcceptAndSubmit"
     },
     {
       "name": " Button Accept And Update Later",
       "type": "xpath",
-      "value": ".//*[@id='btnUpdateLater']",
+      "value": "\".//*[@id='btnUpdateLater']\"",
       "variableName": "buttonAcceptAndUpdateLater"
     }
   ]

@@ -3,19 +3,19 @@
     {
       "name": " Dropdown Selectthe Prior Policy Prefix",
       "type": "id",
-      "value": "PRI_POL_PRE",
+      "value": "\"PRI_POL_PRE\"",
       "variableName": "dropdownSelectthePriorPolicyPrefix"
     },
     {
       "name": " Edit Enterthe Prior Policy Number",
       "type": "id",
-      "value": "PRI_POL_NUM",
+      "value": "\"PRI_POL_NUM\"",
       "variableName": "editEnterthePriorPolicyNumber"
     },
     {
       "name": " Edit Enterthe Prior Policy Mod",
       "type": "id",
-      "value": "PRI_POL_MOD",
+      "value": "\"PRI_POL_MOD\"",
       "variableName": "editEnterthePriorPolicyMod"
     }
   ]

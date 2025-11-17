@@ -3,31 +3,31 @@
     {
       "name": " Checkbox Keep Me Signed In",
       "type": "xpath",
-      "value": ".//input[@name='KMSI']",
+      "value": "\".//input[@name='KMSI']\"",
       "variableName": "checkboxKeepMeSignedIn"
     },
     {
       "name": " Edit Email",
       "type": "xpath",
-      "value": ".//input[@name='loginfmt']",
+      "value": "\".//input[@name='loginfmt']\"",
       "variableName": "editEmail"
     },
     {
       "name": " Edit Password",
       "type": "xpath",
-      "value": ".//input[@name='passwd']",
+      "value": "\".//input[@name='passwd']\"",
       "variableName": "editPassword"
     },
     {
       "name": " Button Next",
       "type": "xpath",
-      "value": ".//input[@value='Next']",
+      "value": "\".//input[@value='Next']\"",
       "variableName": "buttonNext"
     },
     {
       "name": " Button Sign In",
       "type": "xpath",
-      "value": ".//input[@value='Sign",
+      "value": "\".//input[@value='Sign in']\"",
       "variableName": "buttonSignIn"
     }
   ]

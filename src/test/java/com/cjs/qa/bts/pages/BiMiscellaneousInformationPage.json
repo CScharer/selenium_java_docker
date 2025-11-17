@@ -3,85 +3,85 @@
     {
       "name": " Checkbox Package Modification",
       "type": "id",
-      "value": "packageModification",
+      "value": "\"packageModification\"",
       "variableName": "checkboxPackageModification"
     },
     {
       "name": " Checkbox Auditable",
       "type": "id",
-      "value": "auditable",
+      "value": "\"auditable\"",
       "variableName": "checkboxAuditable"
     },
     {
       "name": " Dropdown Legal Entity",
       "type": "id",
-      "value": "legalEntity",
+      "value": "\"legalEntity\"",
       "variableName": "dropdownLegalEntity"
     },
     {
       "name": " Dropdown Audit Basis",
       "type": "id",
-      "value": "auditBasis",
+      "value": "\"auditBasis\"",
       "variableName": "dropdownAuditBasis"
     },
     {
       "name": " Dropdown Type Of Policy",
       "type": "id",
-      "value": "typeOfPolicy",
+      "value": "\"typeOfPolicy\"",
       "variableName": "dropdownTypeOfPolicy"
     },
     {
       "name": " Dropdown External Audit Indicator",
       "type": "id",
-      "value": "externalAuditIndicator",
+      "value": "\"externalAuditIndicator\"",
       "variableName": "dropdownExternalAuditIndicator"
     },
     {
       "name": " Dropdown Policy Symbol",
       "type": "id",
-      "value": "policySymbol",
+      "value": "\"policySymbol\"",
       "variableName": "dropdownPolicySymbol"
     },
     {
       "name": " Edit Naics Code",
       "type": "id",
-      "value": "naicsCode",
+      "value": "\"naicsCode\"",
       "variableName": "editNaicsCode"
     },
     {
       "name": " Edit Business Description",
       "type": "id",
-      "value": "businessDescription",
+      "value": "\"businessDescription\"",
       "variableName": "editBusinessDescription"
     },
     {
       "name": " Edit Owners Legal Name",
       "type": "id",
-      "value": "ownersLegalName",
+      "value": "\"ownersLegalName\"",
       "variableName": "editOwnersLegalName"
     },
     {
       "name": " Edit Financial Reliability Code",
       "type": "id",
-      "value": "financialReliabilityCode",
+      "value": "\"financialReliabilityCode\"",
       "variableName": "editFinancialReliabilityCode"
     },
     {
       "name": " Edit National Account Indicator",
       "type": "id",
-      "value": "nationalAccountIndicator",
+      "value": "\"nationalAccountIndicator\"",
       "variableName": "editNationalAccountIndicator"
     },
     {
       "name": " Dropdown Reporting Company",
       "type": "id",
-      "value": "reportingCompany",
+      "value": "\"reportingCompany\"",
       "variableName": "dropdownReportingCompany"
     },
     {
       "name": " Button Frame",
       "type": "id",
-      "value": "miscInformation-title",
+      "value": "\"miscInformation-title\"",
       "variableName": "buttonFrame"
     }
   ]

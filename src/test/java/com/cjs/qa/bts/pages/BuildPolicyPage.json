@@ -3,91 +3,91 @@
     {
       "name": " Checkbox Renewal Policy",
       "type": "id",
-      "value": "renewalPolicyBI",
+      "value": "\"renewalPolicyBI\"",
       "variableName": "checkboxRenewalPolicy"
     },
     {
       "name": " Edit Effective Date",
       "type": "id",
-      "value": "policyBuildTitleTxtId",
+      "value": "\"policyBuildTitleTxtId\"",
       "variableName": "editEffectiveDate"
     },
     {
       "name": " Dropdown Term",
       "type": "id",
-      "value": "termBI",
+      "value": "\"termBI\"",
       "variableName": "dropdownTerm"
     },
     {
       "name": " Dropdown Renewal Term",
       "type": "id",
-      "value": "renewalTermBI",
+      "value": "\"renewalTermBI\"",
       "variableName": "dropdownRenewalTerm"
     },
     {
       "name": " Edit Expiration Date",
       "type": "id",
-      "value": "expirationDtBI",
+      "value": "\"expirationDtBI\"",
       "variableName": "editExpirationDate"
     },
     {
       "name": " Dropdown Rating Company",
       "type": "id",
-      "value": "policyCompanyBI",
+      "value": "\"policyCompanyBI\"",
       "variableName": "dropdownRatingCompany"
     },
     {
       "name": " Dropdown Issuing Company",
       "type": "id",
-      "value": "policyProductBI",
+      "value": "\"policyProductBI\"",
       "variableName": "dropdownIssuingCompany"
     },
     {
       "name": " Dropdown Program",
       "type": "id",
-      "value": "policyProgramBI",
+      "value": "\"policyProgramBI\"",
       "variableName": "dropdownProgram"
     },
     {
       "name": " Dropdown Primary State",
       "type": "id",
-      "value": "policyStateBI",
+      "value": "\"policyStateBI\"",
       "variableName": "dropdownPrimaryState"
     },
     {
       "name": " Edit Release Date",
       "type": "id",
-      "value": "releaseDtBI",
+      "value": "\"releaseDtBI\"",
       "variableName": "editReleaseDate"
     },
     {
       "name": " Checkbox User Entered Policy Number",
       "type": "id",
-      "value": "userEnteredPolicyBI",
+      "value": "\"userEnteredPolicyBI\"",
       "variableName": "checkboxUserEnteredPolicyNumber"
     },
     {
       "name": " Edit Policy Number",
       "type": "id",
-      "value": "policyNbrBI",
+      "value": "\"policyNbrBI\"",
       "variableName": "editPolicyNumber"
     },
     {
       "name": " Edit Sequence Number",
       "type": "id",
-      "value": "policyNbrSeqBI",
+      "value": "\"policyNbrSeqBI\"",
       "variableName": "editSequenceNumber"
     },
     {
       "name": " Button Save",
       "type": "id",
-      "value": "button1",
+      "value": "\"button1\"",
       "variableName": "buttonSave"
     },
     {
       "name": " Button Cancel",
       "type": "id",
-      "value": "button2",
+      "value": "\"button2\"",
       "variableName": "buttonCancel"
     }
   ]

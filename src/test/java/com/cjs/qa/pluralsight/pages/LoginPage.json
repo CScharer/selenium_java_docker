@@ -3,19 +3,19 @@
     {
       "name": " Edit User Name",
       "type": "id",
-      "value": "Username",
+      "value": "\"Username\"",
       "variableName": "editUserName"
     },
     {
       "name": " Edit Password",
       "type": "id",
-      "value": "Password",
+      "value": "\"Password\"",
       "variableName": "editPassword"
     },
     {
       "name": " Button Sign In",
       "type": "id",
-      "value": "login",
+      "value": "\"login\"",
       "variableName": "buttonSignIn"
     }
   ]

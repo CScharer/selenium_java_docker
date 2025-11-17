@@ -16,12 +16,10 @@ public class VerifyInformationInterruptPage extends Page {
   private static final By checkboxCigarettes = By.xpath(".//span[.='Cigarettes']/../div/span");
   private static final By dropdownRegularBrand =
       By.xpath(
-          "//div[@data-orgtext][contains(text(),'What is your regular brand of"
-              + " cigarettes, that is, the brand you buy most often?')]/../span/select");
+          "//div[@data-orgtext][contains(text(),'What is your regular brand of cigarettes, that is, the brand you buy most often?')]/../span/select");
   private By dropdownRegularBrandNonMenthol =
       By.xpath(
-          "//div[@data-orgtext][contains(text(),'What Non-Menthol pack do you buy most"
-              + " often?')]/../span/select");
+          "//div[@data-orgtext][contains(text(),'What Non-Menthol pack do you buy most often?')]/../span/select");
   private static final By buttonNext = By.xpath(".//*[@id='verifyinfoInterruptnxtBtn']");
 
   private By getCheckboxCigarettes() {

@@ -18,8 +18,7 @@ public class OffersAndActivityPage extends Page {
   // By.xpath(".//*[@id='container']//span[.='CLAIM YOURS']");
   private static final By buttonGetYoursByMail =
       By.xpath(
-          ".//div[@class='image-cta-link']//div[@class='inner-content']/button"
-              + "/i[contains(@class,'btn-ctaIcon')]/../..");
+          ".//div[@class='image-cta-link']//div[@class='inner-content']/button/i[contains(@class,'btn-ctaIcon')]/../..");
   private static final By buttonCOUPONS =
       By.xpath(".//li[contains(@class,'menu-list-desk')]/a[@data-dtmtext='COUPONS']");
   private static final By buttonSubmit = By.xpath(".//*[@id='cpn-submit']");
@@ -29,8 +28,7 @@ public class OffersAndActivityPage extends Page {
       By.xpath(".//div[@class='coupon-heading']/h6[.='THANK YOU FOR YOUR REQUEST.']");
   private static final By labelCouponInTheMail =
       By.xpath(
-          ".//div[@class='coupon-heading']/h6[.='LOOKS LIKE YOUR MONTHLY COUPON IS"
-              + " ALREADY IN THE MAIL.']");
+          ".//div[@class='coupon-heading']/h6[.='LOOKS LIKE YOUR MONTHLY COUPON IS ALREADY IN THE MAIL.']");
 
   private By getButton3DollarsOffACarton() {
     return button3DollarsOffACarton;

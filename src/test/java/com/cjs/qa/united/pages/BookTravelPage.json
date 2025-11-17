@@ -3,31 +3,31 @@
     {
       "name": " Edit From",
       "type": "xpath",
-      "value": ".//*[@id='flightSearch']//input[@id='Origin']",
+      "value": "\".//*[@id='flightSearch']//input[@id='Origin']\"",
       "variableName": "editFrom"
     },
     {
       "name": " Edit To",
       "type": "xpath",
-      "value": ".//*[@id='flightSearch']//input[@id='Destination']",
+      "value": "\".//*[@id='flightSearch']//input[@id='Destination']\"",
       "variableName": "editTo"
     },
     {
       "name": " Edit Depart Date",
-      "type": "=",
-      "value": "By.xpath",
+      "type": "xpath",
+      "value": "\".//*[@id='flightSearch']//input[@id='DepartDate']\"",
       "variableName": "editDepartDate"
     },
     {
       "name": " Edit Return Date",
-      "type": "=",
-      "value": "By.xpath",
+      "type": "xpath",
+      "value": "\".//*[@id='flightSearch']//input[@id='ReturnDate']\"",
       "variableName": "editReturnDate"
     },
     {
       "name": " Button Search",
       "type": "xpath",
-      "value": ".//*[@id='flightBookingSubmit']",
+      "value": "\".//*[@id='flightBookingSubmit']\"",
       "variableName": "buttonSearch"
     }
   ]

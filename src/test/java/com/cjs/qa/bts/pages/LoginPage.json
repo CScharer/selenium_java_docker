@@ -3,19 +3,19 @@
     {
       "name": " Edit User Name",
       "type": "id",
-      "value": "username",
+      "value": "\"username\"",
       "variableName": "editUserName"
     },
     {
       "name": " Edit Password",
       "type": "id",
-      "value": "password",
+      "value": "\"password\"",
       "variableName": "editPassword"
     },
     {
       "name": " Button Submit",
       "type": "id",
-      "value": "//button[.='Submit']",
+      "value": "\"//button[.='Submit']\"",
       "variableName": "buttonSubmit"
     }
   ]

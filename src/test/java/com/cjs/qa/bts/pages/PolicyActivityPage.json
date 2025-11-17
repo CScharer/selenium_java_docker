@@ -3,7 +3,7 @@
     {
       "name": " Exit Policy Search",
       "type": "xpath",
-      "value": ".//*[@id='requestLinkSearch1']",
+      "value": "\".//*[@id='requestLinkSearch1']\"",
       "variableName": "exitPolicySearch"
     }
   ]
