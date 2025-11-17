@@ -1,0 +1,40 @@
+{
+  "locators": [
+    {
+      "name": " Button Optional Forms",
+      "type": "xpath(nodeForms1",
+      "value": "+",
+      "variableName": "buttonOptionalForms"
+    },
+    {
+      "name": " Button User Defined Forms",
+      "type": "xpath(nodeForms1",
+      "value": "+",
+      "variableName": "buttonUserDefinedForms"
+    },
+    {
+      "name": " Button View Excluded Forms",
+      "type": "xpath(nodeForms1",
+      "value": "+",
+      "variableName": "buttonViewExcludedForms"
+    },
+    {
+      "name": " Button Quick Scroll",
+      "type": "=",
+      "value": "By.xpath(nodeForms1",
+      "variableName": "buttonQuickScroll"
+    },
+    {
+      "name": " Button Delete",
+      "type": "xpath(nodeForms1",
+      "value": "+",
+      "variableName": "buttonDelete"
+    },
+    {
+      "name": " Button Update Reprint",
+      "type": "xpath",
+      "value": ".//*[@id='form1:forms:printBtn']",
+      "variableName": "buttonUpdateReprint"
+    }
+  ]
+}

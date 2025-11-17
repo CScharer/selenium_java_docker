@@ -11,7 +11,7 @@ public class PolicyActivityPage extends Page {
   }
 
   private static final String addRtnPrem = ".//*/tr[contains(.,'";
-  private final By exitPolicySearch = By.xpath(".//*[@id='requestLinkSearch1']");
+  private static final By exitPolicySearch = By.xpath(".//*[@id='requestLinkSearch1']");
   private static final String pageTitle = "Genesys - Policy Activity";
 
   public String getPageTitle() {

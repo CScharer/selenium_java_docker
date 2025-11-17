@@ -1,0 +1,16 @@
+{
+  "locators": [
+    {
+      "name": " Button Export Excel",
+      "type": "xpath(nodeViewPort",
+      "value": "+",
+      "variableName": "buttonExportExcel"
+    },
+    {
+      "name": " Sub Headers",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "subHeaders"
+    }
+  ]
+}

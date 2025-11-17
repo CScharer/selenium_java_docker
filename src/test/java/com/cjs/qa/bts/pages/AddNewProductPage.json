@@ -1,0 +1,40 @@
+{
+  "locators": [
+    {
+      "name": " Dropdown Product",
+      "type": "id",
+      "value": "productId",
+      "variableName": "dropdownProduct"
+    },
+    {
+      "name": " Dropdown Program",
+      "type": "id",
+      "value": "programId",
+      "variableName": "dropdownProgram"
+    },
+    {
+      "name": " Dropdown Rating Company",
+      "type": "=",
+      "value": "By.id",
+      "variableName": "dropdownRatingCompany"
+    },
+    {
+      "name": " Dropdown State",
+      "type": "id",
+      "value": "stateCode",
+      "variableName": "dropdownState"
+    },
+    {
+      "name": " Button Add",
+      "type": "id",
+      "value": "add",
+      "variableName": "buttonAdd"
+    },
+    {
+      "name": " Button Add Product Coverages",
+      "type": "id",
+      "value": "addProductCoverages",
+      "variableName": "buttonAddProductCoverages"
+    }
+  ]
+}

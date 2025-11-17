@@ -1,0 +1,16 @@
+{
+  "locators": [
+    {
+      "name": " By Title Bar",
+      "type": "xpath",
+      "value": ".//*[@id='SpTitleBar']",
+      "variableName": "byTitleBar"
+    },
+    {
+      "name": "}",
+      "type": "byLinksGroups",
+      "value": "=",
+      "variableName": "}"
+    }
+  ]
+}

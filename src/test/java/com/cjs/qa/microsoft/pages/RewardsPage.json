@@ -1,0 +1,28 @@
+{
+  "locators": [
+    {
+      "name": " By Button Sign In With Microsoft",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "byButtonSignInWithMicrosoft"
+    },
+    {
+      "name": " By Points Daily Set",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "byPointsDailySet"
+    },
+    {
+      "name": " By Points More Activities",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "byPointsMoreActivities"
+    },
+    {
+      "name": " By Points Available Sneak Peek",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "byPointsAvailableSneakPeek"
+    }
+  ]
+}

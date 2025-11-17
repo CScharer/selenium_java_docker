@@ -10,12 +10,12 @@ public class SidbarAdminFunctionsPage extends Page {
   }
 
   // DECLARATIONS
-  private final By linkEdit = By.id("EditEdit");
-  private final By linkValidate = By.id("ValidateValidate");
-  private final By linkRate = By.id("RateRate");
-  private final By linkBind = By.id("BindBind");
-  private final By linkIssue = By.id("IssueIssue");
-  private final By linkRequestPrint = By.id("requestPrintLink");
+  private static final By linkEdit = By.id("EditEdit");
+  private static final By linkValidate = By.id("ValidateValidate");
+  private static final By linkRate = By.id("RateRate");
+  private static final By linkBind = By.id("BindBind");
+  private static final By linkIssue = By.id("IssueIssue");
+  private static final By linkRequestPrint = By.id("requestPrintLink");
 
   // METHODS SET
   public void clickLinkEdit() {

@@ -14,7 +14,7 @@ public class VerifyInformationInterruptPage extends Page {
   private final String urlVerifyInformation =
       MarlboroEnvironment.URL_BASE + "/marlboro/Security/VerifyInformationInterrupt";
   private static final By checkboxCigarettes = By.xpath(".//span[.='Cigarettes']/../div/span");
-  private final By dropdownRegularBrand =
+  private static final By dropdownRegularBrand =
       By.xpath(
           "//div[@data-orgtext][contains(text(),'What is your regular brand of"
               + " cigarettes, that is, the brand you buy most often?')]/../span/select");

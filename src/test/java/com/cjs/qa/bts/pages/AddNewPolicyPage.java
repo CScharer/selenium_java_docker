@@ -10,27 +10,27 @@ public class AddNewPolicyPage extends Page {
     super(webDriver);
   }
 
-  private static final String nodePolicyDetails = "form1:policy:";
+//   private static final String nodePolicyDetails = "form1:policy:";
   // @FindBy(how = How.ID, using = "usernameT") private WebElement
   // editUsername;
   // @FindBy(id = nodePolicyDetails + "renewalPolicyBI") private By
   // checkboxRenewalPolicy;
-  private final By checkboxRenewalPolicy = By.id(nodePolicyDetails + "renewalPolicyBI");
-  private final By editEffectiveDate = By.id(nodePolicyDetails + "effectiveDtBI");
-  private final By dropdownTerm = By.id(nodePolicyDetails + "termBI");
-  private final By dropdownRenewalTerm = By.id(nodePolicyDetails + "renewalTermBI");
-  private final By editExpirationDate = By.id(nodePolicyDetails + "expirationDtBI");
-  private final By dropdownRatingCompany = By.id(nodePolicyDetails + "policyCompanyBI");
-  private final By dropdownIssuingCompany = By.id(nodePolicyDetails + "policyProductBI");
-  private final By dropdownProgram = By.id(nodePolicyDetails + "policyProgramBI");
-  private final By dropdownPrimaryState = By.id(nodePolicyDetails + "policyStateBI");
-  private final By editReleaseDate = By.id(nodePolicyDetails + "releaseDtBI");
-  private final By checkboxUserEnteredPolicyNum = By.id(nodePolicyDetails + "userEnteredPolicyBI");
-  private final By editPolicyNum = By.id(nodePolicyDetails + "policyNbrBI");
-  private final By buttonSave = By.id(nodePolicyDetails + "button1");
-  private final By buttonCancel = By.id(nodePolicyDetails + "button2");
-  private final By clickOffDate = By.id(nodePolicyDetails + "buildPolicyGrp");
-  private final By editPolicyNumSeq = By.id(nodePolicyDetails + "policyNbrSeqBI");
+  private static final By checkboxRenewalPolicy = By.id("form1:policy:renewalPolicyBI");
+  private static final By editEffectiveDate = By.id("form1:policy:effectiveDtBI");
+  private static final By dropdownTerm = By.id("form1:policy:termBI");
+  private static final By dropdownRenewalTerm = By.id("form1:policy:renewalTermBI");
+  private static final By editExpirationDate = By.id("form1:policy:expirationDtBI");
+  private static final By dropdownRatingCompany = By.id("form1:policy:policyCompanyBI");
+  private static final By dropdownIssuingCompany = By.id("form1:policy:policyProductBI");
+  private static final By dropdownProgram = By.id("form1:policy:policyProgramBI");
+  private static final By dropdownPrimaryState = By.id("form1:policy:policyStateBI");
+  private static final By editReleaseDate = By.id("form1:policy:releaseDtBI");
+  private static final By checkboxUserEnteredPolicyNum = By.id("form1:policy:userEnteredPolicyBI");
+  private static final By editPolicyNum = By.id("form1:policy:policyNbrBI");
+  private static final By buttonSave = By.id("form1:policy:button1");
+  private static final By buttonCancel = By.id("form1:policy:button2");
+  private static final By clickOffDate = By.id("form1:policy:buildPolicyGrp");
+  private static final By editPolicyNumSeq = By.id("form1:policy:policyNbrSeqBI");
   private static final String pageTitle = "AddNewPolicyPage";
 
   private String getPageTitle() {

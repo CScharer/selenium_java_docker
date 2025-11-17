@@ -9,8 +9,8 @@ public class BiBillingPage extends Page {
     super(webDriver);
   }
 
-  private final By numberOfGroupMembers = By.id("NUM_GRP_MBR");
-  private final By buttonFrame = By.id("billing-title");
+  private static final By numberOfGroupMembers = By.id("NUM_GRP_MBR");
+  private static final By buttonFrame = By.id("billing-title");
   private static final String pageTitle = "BI_BillingPage";
 
   private String getPageTitle() {

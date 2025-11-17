@@ -1,0 +1,52 @@
+{
+  "locators": [
+    {
+      "name": " Button3 Dollars Off A Carton",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "button3DollarsOffACarton"
+    },
+    {
+      "name": " Button Get Yours By Mail",
+      "type": "=",
+      "value": "By.xpath(",
+      "variableName": "buttonGetYoursByMail"
+    },
+    {
+      "name": " Button C O U P O N S",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "buttonCOUPONS"
+    },
+    {
+      "name": " Button Submit",
+      "type": "xpath",
+      "value": ".//*[@id='cpn-submit']",
+      "variableName": "buttonSubmit"
+    },
+    {
+      "name": " Button Log Out",
+      "type": "xpath",
+      "value": ".//*[@id='logout']/span",
+      "variableName": "buttonLogOut"
+    },
+    {
+      "name": " Label Message",
+      "type": "xpath",
+      "value": ".//div[@class='coupon-heading']/h6",
+      "variableName": "labelMessage"
+    },
+    {
+      "name": " Label Thanks",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "labelThanks"
+    },
+    {
+      "name": " Label Coupon In The Mail",
+      "type": "=",
+      "value": "By.xpath(",
+      "variableName": "labelCouponInTheMail"
+    }
+  ]
+}

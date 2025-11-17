@@ -18,21 +18,21 @@ public class BuildPolicyPage extends Page {
   }
 
   // DECLARATIONS
-  private final By checkboxRenewalPolicy = By.id("renewalPolicyBI");
-  private final By editEffectiveDate = By.id("policyBuildTitleTxtId");
-  private final By dropdownTerm = By.id("termBI");
-  private final By dropdownRenewalTerm = By.id("renewalTermBI");
-  private final By editExpirationDate = By.id("expirationDtBI");
-  private final By dropdownRatingCompany = By.id("policyCompanyBI");
-  private final By dropdownIssuingCompany = By.id("policyProductBI");
-  private final By dropdownProgram = By.id("policyProgramBI");
-  private final By dropdownPrimaryState = By.id("policyStateBI");
-  private final By editReleaseDate = By.id("releaseDtBI");
-  private final By checkboxUserEnteredPolicyNumber = By.id("userEnteredPolicyBI");
-  private final By editPolicyNumber = By.id("policyNbrBI");
-  private final By editSequenceNumber = By.id("policyNbrSeqBI");
-  private final By buttonSave = By.id("button1");
-  private final By buttonCancel = By.id("button2");
+  private static final By checkboxRenewalPolicy = By.id("renewalPolicyBI");
+  private static final By editEffectiveDate = By.id("policyBuildTitleTxtId");
+  private static final By dropdownTerm = By.id("termBI");
+  private static final By dropdownRenewalTerm = By.id("renewalTermBI");
+  private static final By editExpirationDate = By.id("expirationDtBI");
+  private static final By dropdownRatingCompany = By.id("policyCompanyBI");
+  private static final By dropdownIssuingCompany = By.id("policyProductBI");
+  private static final By dropdownProgram = By.id("policyProgramBI");
+  private static final By dropdownPrimaryState = By.id("policyStateBI");
+  private static final By editReleaseDate = By.id("releaseDtBI");
+  private static final By checkboxUserEnteredPolicyNumber = By.id("userEnteredPolicyBI");
+  private static final By editPolicyNumber = By.id("policyNbrBI");
+  private static final By editSequenceNumber = By.id("policyNbrSeqBI");
+  private static final By buttonSave = By.id("button1");
+  private static final By buttonCancel = By.id("button2");
   private static final String pageTitle = "BuildPolicyPage";
 
   private String getPageTitle() {

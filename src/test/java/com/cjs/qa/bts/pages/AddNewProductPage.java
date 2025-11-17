@@ -18,13 +18,13 @@ public class AddNewProductPage extends Page {
   }
 
   // DECLARATIONS
-  private final By dropdownProduct = By.id("productId");
-  private final By dropdownProgram = By.id("programId");
-  private final By dropdownRatingCompany =
+  private static final By dropdownProduct = By.id("productId");
+  private static final By dropdownProgram = By.id("programId");
+  private static final By dropdownRatingCompany =
       By.id(".//*[@id='addProductForm']/div[3]/div[1]/div[2]/div[1]/div[4]/div[1]/div/select");
-  private final By dropdownState = By.id("stateCode");
-  private final By buttonAdd = By.id("");
-  private final By buttonAddProductCoverages = By.id("");
+  private static final By dropdownState = By.id("stateCode");
+  private static final By buttonAdd = By.id("add");
+  private static final By buttonAddProductCoverages = By.id("addProductCoverages");
   private static final String pageTitle = "AddNewProductPage";
 
   private String getPageTitle() {

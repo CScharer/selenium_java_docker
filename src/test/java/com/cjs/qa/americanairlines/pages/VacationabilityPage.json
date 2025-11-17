@@ -1,0 +1,52 @@
+{
+  "locators": [
+    {
+      "name": " Label Loading",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "labelLoading"
+    },
+    {
+      "name": " Edit First Name",
+      "type": "xpath",
+      "value": ".//*[@id='txtFirst']",
+      "variableName": "editFirstName"
+    },
+    {
+      "name": " Edit Last Name",
+      "type": "xpath",
+      "value": ".//*[@id='txtLast']",
+      "variableName": "editLastName"
+    },
+    {
+      "name": " Edit Email",
+      "type": "xpath",
+      "value": ".//*[@id='txtEmail']",
+      "variableName": "editEmail"
+    },
+    {
+      "name": " Edit A A Number",
+      "type": "xpath",
+      "value": ".//*[@id='txtAANumber']",
+      "variableName": "editAANumber"
+    },
+    {
+      "name": " Checkbox Agree",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "checkboxAgree"
+    },
+    {
+      "name": " Button Register",
+      "type": "xpath",
+      "value": ".//*[@id='btnRegister']",
+      "variableName": "buttonRegister"
+    },
+    {
+      "name": " Label Thank You",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "labelThankYou"
+    }
+  ]
+}

@@ -17,25 +17,25 @@ public class BiBasicInfoPage extends Page {
     super(webDriver);
   }
 
-  private final By labelPolicyNumber = By.xpath("//li[@ng-bind='policy.formattedPolicyNumber']");
-  private final By editEffectiveDate = By.id("effectiveDate");
-  private final By editExpirationDate = By.id("expirationDate");
-  private final By editOriginalEffectiveDate = By.id("originalEffectiveDate");
-  private final By dropdownRenewalTerm = By.id("renewalTerm");
-  private final By editPriorPolicyNumber = By.id("priorPolicyNumber");
-  private final By checkboxRenewalPolicy = By.id("renewalPolicy");
-  private final By editPriorCarrier = By.id("priorCarrier");
-  private final By editGuaranteedOn = By.id("guaranteedOn");
-  private final By editRatingCompany = By.id("ratingCompany");
-  private final By editPolicyDescription = By.id("policyDescription");
-  private final By editPrimaryState = By.id("primaryState");
-  private final By editCombinedQuote1 = By.id("combinedQuote1");
-  private final By editCombinedQuote2 = By.id("combinedQuote2");
-  private final By editSubmissionNumber = By.id("submissionNumber");
-  private final By editInternalDescription = By.id("policyDescription");
-  private final By checkboxMultiPolicy = By.id("multiPolicy");
-  private final By editMultiPolicyDiscount = By.id("multiPolicyDiscount");
-  private final By buttonFrame = By.id("basicInformation-title");
+  private static final By labelPolicyNumber = By.xpath("//li[@ng-bind='policy.formattedPolicyNumber']");
+  private static final By editEffectiveDate = By.id("effectiveDate");
+  private static final By editExpirationDate = By.id("expirationDate");
+  private static final By editOriginalEffectiveDate = By.id("originalEffectiveDate");
+  private static final By dropdownRenewalTerm = By.id("renewalTerm");
+  private static final By editPriorPolicyNumber = By.id("priorPolicyNumber");
+  private static final By checkboxRenewalPolicy = By.id("renewalPolicy");
+  private static final By editPriorCarrier = By.id("priorCarrier");
+  private static final By editGuaranteedOn = By.id("guaranteedOn");
+  private static final By editRatingCompany = By.id("ratingCompany");
+  private static final By editPolicyDescription = By.id("policyDescription");
+  private static final By editPrimaryState = By.id("primaryState");
+  private static final By editCombinedQuote1 = By.id("combinedQuote1");
+  private static final By editCombinedQuote2 = By.id("combinedQuote2");
+  private static final By editSubmissionNumber = By.id("submissionNumber");
+  private static final By editInternalDescription = By.id("policyDescription");
+  private static final By checkboxMultiPolicy = By.id("multiPolicy");
+  private static final By editMultiPolicyDiscount = By.id("multiPolicyDiscount");
+  private static final By buttonFrame = By.id("basicInformation-title");
   private static final String pageTitle = "BI_BasicInfoPage";
 
   private String getPageTitle() {

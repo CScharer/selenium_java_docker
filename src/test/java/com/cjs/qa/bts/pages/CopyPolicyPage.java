@@ -19,29 +19,29 @@ public class CopyPolicyPage extends Page {
   }
 
   private static final String nodeCopyPolicy = "form1:copyPolicy:";
-  private final By editEffectiveDate = By.id(nodeCopyPolicy + "effectiveDtBI");
+  private static final By editEffectiveDate = By.id(nodeCopyPolicy + "effectiveDtBI");
   // private By dropdownEffectiveDate = By.id(nodeCopyPolicy + "termBI");
-  private final By dropdownTerm = By.id(nodeCopyPolicy + "termBI");
-  private final By dropdownRenewalTerm = By.id(nodeCopyPolicy + "renewalTermBI");
-  private final By editExpirationDate = By.id(nodeCopyPolicy + "expirationDtBI");
-  private final By editReleaseDate = By.id(nodeCopyPolicy + "releaseDtBI");
-  private final By dropdownCorporation = By.id(nodeCopyPolicy + "corporationBI");
-  private final By dropdownCompany = By.id(nodeCopyPolicy + "policyCompanyBI");
-  private final By dropdownPolicyType = By.id(nodeCopyPolicy + "policyProductBI");
-  private final By dropdownProgram = By.id(nodeCopyPolicy + "policyProgramBI");
-  private final By dropdownPolicyState = By.id(nodeCopyPolicy + "policyStateBI");
-  private final By checkboxRenewalPolicy = By.id(nodeCopyPolicy + "targetRenewalPolicy");
-  private final By checkboxUseCurrentRateRules = By.id(nodeCopyPolicy + "currentRules");
-  private final By checkboxRetainBaseNumber = By.id(nodeCopyPolicy + "retainBaseNbrBI");
-  private final By checkboxUserEnteredPolicyNumber = By.id(nodeCopyPolicy + "userEnteredPolNbrBI");
-  private final By editCopyFromPolicyNumber = By.id(nodeCopyPolicy + "sourcePolicyNbrId");
-  private final By editCopyToPolicyNumber = By.id(nodeCopyPolicy + "targetPolicyNbrId");
+  private static final By dropdownTerm = By.id(nodeCopyPolicy + "termBI");
+  private static final By dropdownRenewalTerm = By.id(nodeCopyPolicy + "renewalTermBI");
+  private static final By editExpirationDate = By.id(nodeCopyPolicy + "expirationDtBI");
+  private static final By editReleaseDate = By.id(nodeCopyPolicy + "releaseDtBI");
+  private static final By dropdownCorporation = By.id(nodeCopyPolicy + "corporationBI");
+  private static final By dropdownCompany = By.id(nodeCopyPolicy + "policyCompanyBI");
+  private static final By dropdownPolicyType = By.id(nodeCopyPolicy + "policyProductBI");
+  private static final By dropdownProgram = By.id(nodeCopyPolicy + "policyProgramBI");
+  private static final By dropdownPolicyState = By.id(nodeCopyPolicy + "policyStateBI");
+  private static final By checkboxRenewalPolicy = By.id(nodeCopyPolicy + "targetRenewalPolicy");
+  private static final By checkboxUseCurrentRateRules = By.id(nodeCopyPolicy + "currentRules");
+  private static final By checkboxRetainBaseNumber = By.id(nodeCopyPolicy + "retainBaseNbrBI");
+  private static final By checkboxUserEnteredPolicyNumber = By.id(nodeCopyPolicy + "userEnteredPolNbrBI");
+  private static final By editCopyFromPolicyNumber = By.id(nodeCopyPolicy + "sourcePolicyNbrId");
+  private static final By editCopyToPolicyNumber = By.id(nodeCopyPolicy + "targetPolicyNbrId");
   // private By ExistingProductsInformationCheckbox() { }
-  private final By buttonDelete = By.id(nodeCopyPolicy + "DelBtn");
-  private final By buttonCopy = By.id(nodeCopyPolicy + "copyBtn");
-  private final By buttonCancel = By.id(nodeCopyPolicy + "cancelBtn");
-  private final By buttonCopySuccess = By.xpath("*//button[@type='button']//span[.='OK']");
-  private final By buttonPendingChangesOK = By.xpath(".//*/span[.='OK']");
+  private static final By buttonDelete = By.id(nodeCopyPolicy + "DelBtn");
+  private static final By buttonCopy = By.id(nodeCopyPolicy + "copyBtn");
+  private static final By buttonCancel = By.id(nodeCopyPolicy + "cancelBtn");
+  private static final By buttonCopySuccess = By.xpath("*//button[@type='button']//span[.='OK']");
+  private static final By buttonPendingChangesOK = By.xpath(".//*/span[.='OK']");
   private static final String pageTitle = "CopyPolicyPage";
 
   private String getPageTitle() {

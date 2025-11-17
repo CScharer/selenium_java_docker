@@ -13,16 +13,16 @@ public class VacationabilityPage extends Page {
   }
 
   private int searches = 180;
-  private final By labelLoading =
+  private static final By labelLoading =
       By.xpath(".//*[@id='cphBody_divLoader']//div[@class='loader-text']");
-  private final By editFirstName = By.xpath(".//*[@id='txtFirst']");
-  private final By editLastName = By.xpath(".//*[@id='txtLast']");
-  private final By editEmail = By.xpath(".//*[@id='txtEmail']");
-  private final By editAANumber = By.xpath(".//*[@id='txtAANumber']");
-  private final By checkboxAgree =
+  private static final By editFirstName = By.xpath(".//*[@id='txtFirst']");
+  private static final By editLastName = By.xpath(".//*[@id='txtLast']");
+  private static final By editEmail = By.xpath(".//*[@id='txtEmail']");
+  private static final By editAANumber = By.xpath(".//*[@id='txtAANumber']");
+  private static final By checkboxAgree =
       By.xpath(".//*[@id='divRegistration']//label[@for='chkAgree']/span");
-  private final By buttonRegister = By.xpath(".//*[@id='btnRegister']");
-  private final By labelThankYou =
+  private static final By buttonRegister = By.xpath(".//*[@id='btnRegister']");
+  private static final By labelThankYou =
       By.xpath(".//*[@id='cphBody_divStaticPage']//div[@class='box-title-copy']");
 
   private int getSearches() {

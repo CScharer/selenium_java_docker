@@ -10,28 +10,28 @@ public class SearchResultsPage extends Page {
     super(webDriver);
   }
 
-  private final By editTerm = By.xpath("//label[.='Term']/../p");
-  private final By editStatus = By.xpath("//label[.='Status']/../p");
+  private static final By editTerm = By.xpath("//label[.='Term']/../p");
+  private static final By editStatus = By.xpath("//label[.='Status']/../p");
   // private By buttonClient =
   // By.xpath("//a[@ng-click='populateClientActions(client)']//i[contains(@class,'fa-caret-down')]");
-  private final By buttonClient = By.xpath("//a[@ng-click='populateClientActions(client)']");
+  private static final By buttonClient = By.xpath("//a[@ng-click='populateClientActions(client)']");
   // private By buttonPolicy =
   // By.xpath("//a[@ng-click='populatePolicyActions(policy)']//i[contains(@class,'fa-caret-down')]");
   // private By buttonPolicy =
   // By.xpath("//a[@ng-click='populatePolicyActions(policy)']");
-  private final By buttonPolicy =
+  private static final By buttonPolicy =
       By.xpath("//a[@ng-click='populatePolicyActions(policy)']/div[contains(@class,'ng-binding')]");
-  // private final By buttonRequestPrint =
+  // private static final By buttonRequestPrint =
   // By.xpath("html/body/div[4]/div[2]/div/div[1]/div[2]/div[1]/div[2]/ul/li/div/div[1]/ul/li[10]/a/div[2]")
-  private final By buttonInquireOnPrompt = By.xpath(".//*[@id='btn-ok']");
-  // private final By PolicyToPolicy = By.linkText("Policy To Policy");
+  private static final By buttonInquireOnPrompt = By.xpath(".//*[@id='btn-ok']");
+  // private static final By PolicyToPolicy = By.linkText("Policy To Policy");
   private static final String pageTitle = "SearchResultsPage";
 
   private String getPageTitle() {
     return pageTitle;
   }
 
-  private final By releaseLock =
+  private static final By releaseLock =
       By.xpath(
           "html/body/div[4]/div[2]/div/div[1]/div[2]/div[1]/div[2]/ul/li/div/div[3]/a[1]/i[2]");
 

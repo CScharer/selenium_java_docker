@@ -19,7 +19,7 @@ public class CPLResultsPage extends Page {
     verifyTitle(getPageTitle());
   }
 
-  private final By buttonClose = By.xpath("html/body/div[8]/div[1]/a/span");
+  private static final By buttonClose = By.xpath("html/body/div[8]/div[1]/a/span");
 
   private By buttonOk() {
     if (getWebElement(By.xpath("html/body/div[8]/div[11]/div/button")).isDisplayed()) {

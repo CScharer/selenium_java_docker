@@ -1,0 +1,28 @@
+{
+  "locators": [
+    {
+      "name": " Button Add",
+      "type": "id(nodeForm1",
+      "value": "+",
+      "variableName": "buttonAdd"
+    },
+    {
+      "name": " Button Delete",
+      "type": "id(nodeForm1",
+      "value": "+",
+      "variableName": "buttonDelete"
+    },
+    {
+      "name": " Button Create New Name Seq",
+      "type": "id(nodeForm1",
+      "value": "+",
+      "variableName": "buttonCreateNewNameSeq"
+    },
+    {
+      "name": " Button Add Exist Name Seq",
+      "type": "id(nodeForm1",
+      "value": "+",
+      "variableName": "buttonAddExistNameSeq"
+    }
+  ]
+}

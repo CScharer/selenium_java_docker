@@ -9,27 +9,27 @@ public class BiLeftNav extends Page {
     super(webDriver);
   }
 
-  private final By buttonBasicInformation = By.id("basicinfonavitem");
-  private final By buttonNamedInsureds = By.id("NamedInsuredsNamedInsureds");
-  private final By buttonAddresses = By.id("viewAddressId");
-  private final By buttonScheduleOfLocationsAndVehicles =
+  private static final By buttonBasicInformation = By.id("basicinfonavitem");
+  private static final By buttonNamedInsureds = By.id("NamedInsuredsNamedInsureds");
+  private static final By buttonAddresses = By.id("viewAddressId");
+  private static final By buttonScheduleOfLocationsAndVehicles =
       By.id("ScheduleofLocationsandVehiclesScheduleofLocationsandVehicles");
-  private final By buttonInsurableInterestSummary =
+  private static final By buttonInsurableInterestSummary =
       By.id("InsurableInterestSummaryInsurableInterestSummary");
   // ***UPDATE***
-  private final By buttonManageProducts =
+  private static final By buttonManageProducts =
       By.xpath(".//*[@id='left-sidebar']/div/div[2]/div/ul/li[6]");
   // .id("manageProductsId");
   // private By CWG() { }
-  private final By buttonBusinessowners = By.id("Businessowners500914");
-  private final By buttonForms = By.id("FormsForms");
-  private final By buttonCommissions = By.id("defaultCommissionsId");
-  private final By buttonPremiumModifiers = By.id("PremiumModifiersPremiumModifiers");
-  private final By buttonPremiumSummary = By.id("premiumSummaryId");
-  private final By buttonPolicyActivity = By.id("policyActivityId");
-  private final By buttonNotes = By.id("notesId");
-  private final By buttonPolicyDocuments = By.id("policyDocumentsId");
-  private final By buttonExportExcel = By.xpath(".//*[@id='viewport']/div[2]/div/a/span");
+  private static final By buttonBusinessowners = By.id("Businessowners500914");
+  private static final By buttonForms = By.id("FormsForms");
+  private static final By buttonCommissions = By.id("defaultCommissionsId");
+  private static final By buttonPremiumModifiers = By.id("PremiumModifiersPremiumModifiers");
+  private static final By buttonPremiumSummary = By.id("premiumSummaryId");
+  private static final By buttonPolicyActivity = By.id("policyActivityId");
+  private static final By buttonNotes = By.id("notesId");
+  private static final By buttonPolicyDocuments = By.id("policyDocumentsId");
+  private static final By buttonExportExcel = By.xpath(".//*[@id='viewport']/div[2]/div/a/span");
   private static final String pageTitle = "BI_LeftNav";
 
   private String getPageTitle() {

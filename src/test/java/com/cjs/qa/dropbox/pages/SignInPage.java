@@ -16,14 +16,14 @@ public class SignInPage extends Page {
   }
 
   private By checkboxRememberMeInput = By.xpath(".//*[@name='remember_me']");
-  private final By checkboxRememberMe = By.xpath(".//*[@name='remember_me']/..");
-  private final By editEmail = By.xpath(".//*[@name='login_email']");
-  private final By editPassword = By.xpath(".//*[@name='login_password']");
-  private final By buttonNext = By.xpath(".//input[@value='Next']");
-  private final By buttonSignIn = By.xpath(".//button[@id='sign-up-in']");
-  private final By buttonSignInRegular =
+  private static final By checkboxRememberMe = By.xpath(".//*[@name='remember_me']/..");
+  private static final By editEmail = By.xpath(".//*[@name='login_email']");
+  private static final By editPassword = By.xpath(".//*[@name='login_password']");
+  private static final By buttonNext = By.xpath(".//input[@value='Next']");
+  private static final By buttonSignIn = By.xpath(".//button[@id='sign-up-in']");
+  private static final By buttonSignInRegular =
       By.xpath(".//button[contains(@class,'signin-button')][@type='submit']");
-  private final By buttonSignInWithGoogle =
+  private static final By buttonSignInWithGoogle =
       By.xpath(".//button[contains(@class,'auth-google')][@type='button']");
 
   private By getCheckboxRememberMeInput() {

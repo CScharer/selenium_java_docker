@@ -35,9 +35,9 @@ public class StaffPage extends Page {
   // DECLARATIONS
   public static final String PAGE_TITLE = "Staff List - Vivit Worldwide";
   public static final String URL = "https://www.vivit-worldwide.org/staff/";
-  private final By labelNameTitle = By.id("Name-Title");
-  private final By linkeMail = By.id("eMail");
-  private final By labelPhone = By.id("Phone");
+  private static final By labelNameTitle = By.id("Name-Title");
+  private static final By linkeMail = By.id("eMail");
+  private static final By labelPhone = By.id("Phone");
 
   public void verifyPage() {
     verifyTitle(PAGE_TITLE);

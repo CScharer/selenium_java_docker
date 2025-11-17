@@ -11,8 +11,8 @@ public class IssuePageLeftNav extends Page {
 
   // private final String nodeProcessedErrs =
   // ".//*[@id='form1:viewNavigationMenu:navigationMenuLevel1:"
-  private final By linkPremiumSummary = By.linkText("Premium Summary");
-  private final By linkPolicyActivity = By.linkText("Policy Activity");
+  private static final By linkPremiumSummary = By.linkText("Premium Summary");
+  private static final By linkPolicyActivity = By.linkText("Policy Activity");
 
   // .xpath(nodeProcessedErrs +
   // "11:navigationMenuItem:menuLinkSubmittable']/span");

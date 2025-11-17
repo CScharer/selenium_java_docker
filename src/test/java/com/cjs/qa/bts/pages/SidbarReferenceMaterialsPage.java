@@ -10,9 +10,9 @@ public class SidbarReferenceMaterialsPage extends Page {
   }
 
   // DECLARATIONS
-  private final By linkTerritoryInformation = By.id("terrInfoLink");
-  private final By linkClientInformation = By.id("clientViewLink");
-  private final By linkPayorDetails = By.id("payorViewLink");
+  private static final By linkTerritoryInformation = By.id("terrInfoLink");
+  private static final By linkClientInformation = By.id("clientViewLink");
+  private static final By linkPayorDetails = By.id("payorViewLink");
 
   // METHODS SET
   public void clickLinkTerritoryInformation() {

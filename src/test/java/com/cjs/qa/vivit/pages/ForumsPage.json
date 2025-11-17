@@ -1,0 +1,10 @@
+{
+  "locators": [
+    {
+      "name": " By Table Forums",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "byTableForums"
+    }
+  ]
+}

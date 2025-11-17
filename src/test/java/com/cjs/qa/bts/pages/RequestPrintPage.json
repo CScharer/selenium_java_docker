@@ -1,0 +1,70 @@
+{
+  "locators": [
+    {
+      "name": " Dropdown Reports",
+      "type": "id(nodeRequestPrint",
+      "value": "+",
+      "variableName": "dropdownReports"
+    },
+    {
+      "name": " Dropdown Effective Date",
+      "type": "id(nodeRequestPrint",
+      "value": "+",
+      "variableName": "dropdownEffectiveDate"
+    },
+    {
+      "name": " Dropdown Processed Date",
+      "type": "id(nodeRequestPrint",
+      "value": "+",
+      "variableName": "dropdownProcessedDate"
+    },
+    {
+      "name": " Checkbox Pull Print",
+      "type": "id(nodeRequestPrint",
+      "value": "+",
+      "variableName": "checkboxPullPrint"
+    },
+    {
+      "name": " Checkbox Print Work Sheets",
+      "type": "=",
+      "value": "By.id(nodeRequestPrint",
+      "variableName": "checkboxPrintWorkSheets"
+    },
+    {
+      "name": " Dropdown Printer",
+      "type": "id(nodeRequestPrint",
+      "value": "+",
+      "variableName": "dropdownPrinter"
+    },
+    {
+      "name": " Checkbox S P L Print",
+      "type": "id(nodeRequestPrint",
+      "value": "+",
+      "variableName": "checkboxSPLPrint"
+    },
+    {
+      "name": " Button Print",
+      "type": "id(nodeRequestPrint",
+      "value": "+",
+      "variableName": "buttonPrint"
+    },
+    {
+      "name": " Button Cancel",
+      "type": "id(nodeRequestPrint",
+      "value": "+",
+      "variableName": "buttonCancel"
+    },
+    {
+      "name": " Button Minimize Transaction Information",
+      "type": "=",
+      "value": "By.id(nodeRequestPrint",
+      "variableName": "buttonMinimizeTransactionInformation"
+    },
+    {
+      "name": " Button Minimize Print Options",
+      "type": "=",
+      "value": "By.id(nodeRequestPrint",
+      "variableName": "buttonMinimizePrintOptions"
+    }
+  ]
+}

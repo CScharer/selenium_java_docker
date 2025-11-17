@@ -1,0 +1,10 @@
+{
+  "locators": [
+    {
+      "name": " Links Groups",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "linksGroups"
+    }
+  ]
+}

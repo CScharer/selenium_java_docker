@@ -18,19 +18,19 @@ public class RequestPrintPage extends Page {
   }
 
   private static final String nodeRequestPrint = "form1:requestPrint:";
-  private final By dropdownReports = By.id(nodeRequestPrint + "reportId");
-  private final By dropdownEffectiveDate = By.id(nodeRequestPrint + "effectiveDtId");
-  private final By dropdownProcessedDate = By.id(nodeRequestPrint + "processedDt");
-  private final By checkboxPullPrint = By.id(nodeRequestPrint + "printPolicyId:pullPrint");
-  private final By checkboxPrintWorkSheets =
+  private static final By dropdownReports = By.id(nodeRequestPrint + "reportId");
+  private static final By dropdownEffectiveDate = By.id(nodeRequestPrint + "effectiveDtId");
+  private static final By dropdownProcessedDate = By.id(nodeRequestPrint + "processedDt");
+  private static final By checkboxPullPrint = By.id(nodeRequestPrint + "printPolicyId:pullPrint");
+  private static final By checkboxPrintWorkSheets =
       By.id(nodeRequestPrint + "printPolicyId:printWorksheet");
-  private final By dropdownPrinter = By.id(nodeRequestPrint + "printPolicyId:printer");
-  private final By checkboxSPLPrint = By.id(nodeRequestPrint + "printPolicyId:splPrint");
-  private final By buttonPrint = By.id(nodeRequestPrint + "buttonOk");
-  private final By buttonCancel = By.id(nodeRequestPrint + "cancelBtn");
-  private final By buttonMinimizeTransactionInformation =
+  private static final By dropdownPrinter = By.id(nodeRequestPrint + "printPolicyId:printer");
+  private static final By checkboxSPLPrint = By.id(nodeRequestPrint + "printPolicyId:splPrint");
+  private static final By buttonPrint = By.id(nodeRequestPrint + "buttonOk");
+  private static final By buttonCancel = By.id(nodeRequestPrint + "cancelBtn");
+  private static final By buttonMinimizeTransactionInformation =
       By.id(nodeRequestPrint + "heading3form1:requestPrint:heading3");
-  private final By buttonMinimizePrintOptions =
+  private static final By buttonMinimizePrintOptions =
       By.id(nodeRequestPrint + "printPolicyId:printheading");
   private static final String pageTitle = "RequestPrintPage";
 

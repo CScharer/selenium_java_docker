@@ -9,13 +9,13 @@ public class AdminFunctionsPage extends Page {
     super(webDriver);
   }
 
-  private final By dropdownTestStatus = By.id("modeBI");
-  private final By linkExitPolicy = By.id("requestLinkSearch1");
-  private final By linkScheduledProcesses = By.id("requestLinkScheduleProcess");
-  private final By linkWebServices = By.id("requestLinkForWebServices");
-  private final By linkMassNotes = By.id("requestLinkForMassNotes");
-  private final By linkViewExportRequests = By.id("requestLinkExportRequest");
-  private final By linkQueriesTools = By.id("requestLinkQueriesTools");
+  private static final By dropdownTestStatus = By.id("modeBI");
+  private static final By linkExitPolicy = By.id("requestLinkSearch1");
+  private static final By linkScheduledProcesses = By.id("requestLinkScheduleProcess");
+  private static final By linkWebServices = By.id("requestLinkForWebServices");
+  private static final By linkMassNotes = By.id("requestLinkForMassNotes");
+  private static final By linkViewExportRequests = By.id("requestLinkExportRequest");
+  private static final By linkQueriesTools = By.id("requestLinkQueriesTools");
   private static final String pageTitle = "AdminFunctionsPage";
 
   private String getPageTitle() {

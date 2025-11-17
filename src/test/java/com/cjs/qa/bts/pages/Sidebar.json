@@ -1,0 +1,16 @@
+{
+  "locators": [
+    {
+      "name": " Sidebar Left",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "sidebarLeft"
+    },
+    {
+      "name": " Sidebar Right",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "sidebarRight"
+    }
+  ]
+}

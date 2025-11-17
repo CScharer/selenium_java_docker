@@ -31,13 +31,13 @@ public class GroupPage extends Page {
   }
 
   private final List<String> listGroupLeaders = new ArrayList<>();
-  private final By byTitleBar = By.xpath(".//*[@id='SpTitleBar']");
+  private static final By byTitleBar = By.xpath(".//*[@id='SpTitleBar']");
 
   public List<String> getListGroupLeaders() {
     return listGroupLeaders;
   }
 
-  private final By byLinksGroups =
+  private static final By byLinksGroups =
       By.xpath("//*[@id='CustomPageBody']//a[text()!='contact us today!']");
 
   public void getGroupPageData() throws Throwable {

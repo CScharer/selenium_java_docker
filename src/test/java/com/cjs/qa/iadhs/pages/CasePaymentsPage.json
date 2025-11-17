@@ -1,0 +1,22 @@
+{
+  "locators": [
+    {
+      "name": " Headings By",
+      "type": "xpath",
+      "value": ".//*[@id='content']//div/div[2]/div[2]//b",
+      "variableName": "headingsBy"
+    },
+    {
+      "name": "//",
+      "type": "Payments",
+      "value": "//",
+      "variableName": "//"
+    },
+    {
+      "name": " Last Payment By",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "lastPaymentBy"
+    }
+  ]
+}

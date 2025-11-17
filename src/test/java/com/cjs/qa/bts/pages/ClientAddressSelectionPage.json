@@ -1,0 +1,22 @@
+{
+  "locators": [
+    {
+      "name": " Button Create New Name Seq",
+      "type": "id(nodeClientSelection",
+      "value": "+",
+      "variableName": "buttonCreateNewNameSeq"
+    },
+    {
+      "name": " Button Ok",
+      "type": "id(nodeClientSelection",
+      "value": "+",
+      "variableName": "buttonOk"
+    },
+    {
+      "name": " Button Cancel",
+      "type": "id(nodeClientSelection",
+      "value": "+",
+      "variableName": "buttonCancel"
+    }
+  ]
+}

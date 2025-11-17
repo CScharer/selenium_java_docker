@@ -1,0 +1,22 @@
+{
+  "locators": [
+    {
+      "name": " By Section",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "bySection"
+    },
+    {
+      "name": " By Heading2",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "byHeading2"
+    },
+    {
+      "name": " By Heading3",
+      "type": "xpath",
+      "value": ".//h3",
+      "variableName": "byHeading3"
+    }
+  ]
+}

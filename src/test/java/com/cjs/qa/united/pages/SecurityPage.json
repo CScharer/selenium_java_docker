@@ -1,0 +1,16 @@
+{
+  "locators": [
+    {
+      "name": " Option Dont Remember This Device",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "optionDontRememberThisDevice"
+    },
+    {
+      "name": " Button Next",
+      "type": "xpath",
+      "value": ".//*[@id='btnNext']",
+      "variableName": "buttonNext"
+    }
+  ]
+}

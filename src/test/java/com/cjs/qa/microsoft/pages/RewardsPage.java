@@ -48,11 +48,11 @@ public class RewardsPage extends Page {
   private Selenium selenium = new Selenium(getWebDriver());
   private static final By byButtonSignInWithMicrosoft =
       By.xpath(".//span[.='SIGN IN WITH MICROSOFT']");
-  private final By byPointsDailySet =
+  private static final By byPointsDailySet =
       By.xpath(".//*[@id='daily-sets']/mee-card-group[1]/div/mee-card");
   private static final By byPointsMoreActivities =
       By.xpath(".//*[@id='more-activities']/div/mee-card");
-  private final By byPointsAvailableSneakPeek =
+  private static final By byPointsAvailableSneakPeek =
       By.xpath(".//*[@id='daily-sets']/mee-card-group[2]/div/mee-card");
   public static final String XPAPTH_USER_BANNER = ".//*[@id='userBanner']";
 

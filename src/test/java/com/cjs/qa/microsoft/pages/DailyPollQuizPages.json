@@ -1,0 +1,58 @@
+{
+  "locators": [
+    {
+      "name": " By Search Edit",
+      "type": "xpath",
+      "value": ".//input[@name='q']",
+      "variableName": "bySearchEdit"
+    },
+    {
+      "name": " By Points Available Label",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "byPointsAvailableLabel"
+    },
+    {
+      "name": " By Points Earned Label",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "byPointsEarnedLabel"
+    },
+    {
+      "name": " By Welcome Label",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "byWelcomeLabel"
+    },
+    {
+      "name": " By Start Playing Button",
+      "type": "xpath",
+      "value": ".//*[@id='rqStartQuiz']",
+      "variableName": "byStartPlayingButton"
+    },
+    {
+      "name": " By Question I D",
+      "type": "xpath",
+      "value": ".//*[@id='questionId']",
+      "variableName": "byQuestionID"
+    },
+    {
+      "name": " By Quiz Complete",
+      "type": "xpath",
+      "value": ".//*[@id='quizCompleteContainer']/div",
+      "variableName": "byQuizComplete"
+    },
+    {
+      "name": " By Answer Correct Message Label",
+      "type": "xpath",
+      "value": ".//*[@id='rqcorrectAns']",
+      "variableName": "byAnswerCorrectMessageLabel"
+    },
+    {
+      "name": " By Answer Wrong Message Label",
+      "type": "xpath",
+      "value": ".//*[@id='wrongAnswerMessage']",
+      "variableName": "byAnswerWrongMessageLabel"
+    }
+  ]
+}

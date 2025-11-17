@@ -12,12 +12,12 @@ public class IssuePage extends Page {
   // DECLERATIONS
   private static final String nodeForm1PrintPolicy = "form1:printPolicyId:";
   private static final String nodeForm1ProcessedResults = "form1:cplProcessedResults:";
-  private final By checkboxPullPrint = By.id(nodeForm1PrintPolicy + "pullPrint");
-  private final By checkboxPrintWorksheets = By.id(nodeForm1PrintPolicy + "printWorksheet");
-  private final By dropdownPrinter = By.id(nodeForm1PrintPolicy + "printer");
-  private final By buttonIssueNow = By.xpath(".//input[@value='Issue Now']");
+  private static final By checkboxPullPrint = By.id(nodeForm1PrintPolicy + "pullPrint");
+  private static final By checkboxPrintWorksheets = By.id(nodeForm1PrintPolicy + "printWorksheet");
+  private static final By dropdownPrinter = By.id(nodeForm1PrintPolicy + "printer");
+  private static final By buttonIssueNow = By.xpath(".//input[@value='Issue Now']");
   // id(nodeForm1ProcessedResults + "flashScreenRateButton");
-  private final By buttonIssueLater = By.id(nodeForm1ProcessedResults + "buttonLater");
+  private static final By buttonIssueLater = By.id(nodeForm1ProcessedResults + "buttonLater");
   private static final String pageTitle = "IssuePage";
 
   public String getPageTitle() {

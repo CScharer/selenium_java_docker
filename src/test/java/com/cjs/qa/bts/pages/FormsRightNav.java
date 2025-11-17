@@ -12,21 +12,21 @@ public class FormsRightNav extends Page {
   // DECLARATIONS
   private static final String nodeForm1Admin = "form1:adminFunctions:";
   private static final String nodeNavigationMenu = ":navigationMenuItem:";
-  private final By sidebarRightOpen = By.xpath(".//*[@id='outer-east-open-btn']");
-  private final By sidebarRightClose = By.xpath(".//*[@'outer-east-close-btn']");
-  private final By linkExitPolicySearch = By.xpath(".//*[@id='requestLinkExitPolicy']");
-  private final By linkPolicyErrors = By.xpath(".//*[@id='policyErrorsLink']");
-  private final By linkPolicyViews =
+  private static final By sidebarRightOpen = By.xpath(".//*[@id='outer-east-open-btn']");
+  private static final By sidebarRightClose = By.xpath(".//*[@'outer-east-close-btn']");
+  private static final By linkExitPolicySearch = By.xpath(".//*[@id='requestLinkExitPolicy']");
+  private static final By linkPolicyErrors = By.xpath(".//*[@id='policyErrorsLink']");
+  private static final By linkPolicyViews =
       By.xpath(".//*[@id='" + nodeForm1Admin + "panelGroupButtonForPolicyViews']/a");
-  private final By linkRequestPrint =
+  private static final By linkRequestPrint =
       By.xpath(".//*[@id='" + nodeForm1Admin + "0" + nodeNavigationMenu + "menuLinkSubmittable']");
-  private final By linkTerritoryInformation =
+  private static final By linkTerritoryInformation =
       By.xpath(".//*[@id='" + nodeForm1Admin + "terrInfoLink']");
-  private final By linkClientInformation =
+  private static final By linkClientInformation =
       By.xpath(".//*[@id='" + nodeForm1Admin + "clientViewLink']");
-  private final By linkPayorDetails =
+  private static final By linkPayorDetails =
       By.xpath(".//*[@id='" + nodeForm1Admin + "payorDetailsLink']");
-  private final By linkRate =
+  private static final By linkRate =
       By.xpath(
           ".//*[@id='"
               + nodeForm1Admin

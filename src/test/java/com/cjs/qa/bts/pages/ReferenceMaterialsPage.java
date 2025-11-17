@@ -9,9 +9,9 @@ public class ReferenceMaterialsPage extends Page {
     super(webDriver);
   }
 
-  private final By linkTerritoryInformation = By.id("terrInfoLink");
-  private final By linkClientInformation = By.id("clientViewLink");
-  private final By linkPayorDetails = By.id("payorViewLink");
+  private static final By linkTerritoryInformation = By.id("terrInfoLink");
+  private static final By linkClientInformation = By.id("clientViewLink");
+  private static final By linkPayorDetails = By.id("payorViewLink");
   private static final String pageTitle = "ReferenceMaterialsPage";
 
   private String getPageTitle() {

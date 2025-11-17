@@ -21,11 +21,12 @@ public class SurveyPage extends Page {
   private static final By editCN3 = By.xpath(".//*[@id='CN3']");
   private static final By editCN4 = By.xpath(".//*[@id='CN4']");
   private static final By editCN5 = By.xpath(".//*[@id='CN5']");
-  private final By editCN6 = By.xpath(".//*[@id='CN6']");
-  private final By buttonStart = By.xpath(".//*[@id='NextButton']");
-  private final By buttonNext = buttonStart; // By.xpath(".//*[@id='NextButton']");
-  private final By checkboxAgree = By.xpath("");
-  private final By labelThankYou = By.xpath("");
+  private static final By editCN6 = By.xpath(".//*[@id='CN6']");
+  private static final By buttonStart = By.xpath(".//*[@id='NextButton']");
+  // Same as buttonStart
+  private static final By buttonNext = By.xpath(".//*[@id='NextButton']");
+  private static final By checkboxAgree = By.name("checkboxAgree");
+  private static final By labelThankYou = By.name("labelThankYou");
 
   private By getCheckboxAgree() {
     return checkboxAgree;

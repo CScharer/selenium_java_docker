@@ -9,20 +9,20 @@ public class BiMiscellaneousInformationPage extends Page {
     super(webDriver);
   }
 
-  private final By checkboxPackageModification = By.id("packageModification");
-  private final By checkboxAuditable = By.id("auditable");
-  private final By dropdownLegalEntity = By.id("legalEntity");
-  private final By dropdownAuditBasis = By.id("auditBasis");
-  private final By dropdownTypeOfPolicy = By.id("typeOfPolicy");
-  private final By dropdownExternalAuditIndicator = By.id("externalAuditIndicator");
-  private final By dropdownPolicySymbol = By.id("policySymbol");
-  private final By editNaicsCode = By.id("naicsCode");
-  private final By editBusinessDescription = By.id("businessDescription");
-  private final By editOwnersLegalName = By.id("ownersLegalName");
-  private final By editFinancialReliabilityCode = By.id("financialReliabilityCode");
-  private final By editNationalAccountIndicator = By.id("nationalAccountIndicator");
-  private final By dropdownReportingCompany = By.id("reportingCompany");
-  private final By buttonFrame = By.id("miscInformation-title");
+  private static final By checkboxPackageModification = By.id("packageModification");
+  private static final By checkboxAuditable = By.id("auditable");
+  private static final By dropdownLegalEntity = By.id("legalEntity");
+  private static final By dropdownAuditBasis = By.id("auditBasis");
+  private static final By dropdownTypeOfPolicy = By.id("typeOfPolicy");
+  private static final By dropdownExternalAuditIndicator = By.id("externalAuditIndicator");
+  private static final By dropdownPolicySymbol = By.id("policySymbol");
+  private static final By editNaicsCode = By.id("naicsCode");
+  private static final By editBusinessDescription = By.id("businessDescription");
+  private static final By editOwnersLegalName = By.id("ownersLegalName");
+  private static final By editFinancialReliabilityCode = By.id("financialReliabilityCode");
+  private static final By editNationalAccountIndicator = By.id("nationalAccountIndicator");
+  private static final By dropdownReportingCompany = By.id("reportingCompany");
+  private static final By buttonFrame = By.id("miscInformation-title");
   private static final String pageTitle = "BI_MiscellaneousInformationPage";
 
   private String getPageTitle() {

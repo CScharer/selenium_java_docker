@@ -10,20 +10,20 @@ public class ManageProductsRightNav extends Page {
   }
 
   // DECLARATIONS
-  private final By sidebarRight = By.xpath(".//*[@id='outer-east-open-btn']");
-  private final By linkExitPolicySearch = By.xpath(".//*[@id='requestLinkSearch1']");
-  private final By linkChangeDates = By.xpath(".//*[@id='changeDateLink']");
-  private final By linkPolicyErrors = By.xpath(".//*[@id='policyErrorsLink']");
-  private final By linkPolicyViews = By.xpath(".//*[@id='policyViewsLink']");
-  private final By linkEdit = By.xpath(".//*[@id='EditEdit']");
-  private final By linkValidate = By.xpath(".//*[@id='ValidateValidate']");
-  private final By linkRate = By.xpath(".//*[@id='RateRate']");
-  private final By linkBind = By.xpath(".//*[@id='BindBind']");
-  private final By linkIssue = By.xpath(".//*[@id='IssueIssue']");
-  private final By linkRequestPrint = By.xpath(".//*[@id='requestPrintLink']");
-  private final By linkTerritoryInformation = By.xpath(".//*[@id='terrInfoLink']");
-  private final By linkClientInformation = By.xpath(".//*[@id='clientViewLink']");
-  private final By linkPayorDetails = By.xpath(".//*[@id='payorViewLink']");
+  private static final By sidebarRight = By.xpath(".//*[@id='outer-east-open-btn']");
+  private static final By linkExitPolicySearch = By.xpath(".//*[@id='requestLinkSearch1']");
+  private static final By linkChangeDates = By.xpath(".//*[@id='changeDateLink']");
+  private static final By linkPolicyErrors = By.xpath(".//*[@id='policyErrorsLink']");
+  private static final By linkPolicyViews = By.xpath(".//*[@id='policyViewsLink']");
+  private static final By linkEdit = By.xpath(".//*[@id='EditEdit']");
+  private static final By linkValidate = By.xpath(".//*[@id='ValidateValidate']");
+  private static final By linkRate = By.xpath(".//*[@id='RateRate']");
+  private static final By linkBind = By.xpath(".//*[@id='BindBind']");
+  private static final By linkIssue = By.xpath(".//*[@id='IssueIssue']");
+  private static final By linkRequestPrint = By.xpath(".//*[@id='requestPrintLink']");
+  private static final By linkTerritoryInformation = By.xpath(".//*[@id='terrInfoLink']");
+  private static final By linkClientInformation = By.xpath(".//*[@id='clientViewLink']");
+  private static final By linkPayorDetails = By.xpath(".//*[@id='payorViewLink']");
 
   // METHODS SET
   public void toggleSidebarRight() {

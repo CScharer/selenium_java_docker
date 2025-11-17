@@ -19,9 +19,9 @@ public class BiAPlusFarmPage extends Page {
 
   //
   // DECLARATIONS
-  private final By dropdownSelectthePriorPolicyPrefix = By.id("PRI_POL_PRE");
-  private final By editEnterthePriorPolicyNumber = By.id("PRI_POL_NUM");
-  private final By editEnterthePriorPolicyMod = By.id("PRI_POL_MOD");
+  private static final By dropdownSelectthePriorPolicyPrefix = By.id("PRI_POL_PRE");
+  private static final By editEnterthePriorPolicyNumber = By.id("PRI_POL_NUM");
+  private static final By editEnterthePriorPolicyMod = By.id("PRI_POL_MOD");
   private static final String pageTitle = "BI_APlusFarmPage";
 
   private String getPageTitle() {

@@ -26,22 +26,22 @@ public class PremiumSummaryPage extends Page {
   private static final String nodeViewPort = ".//*[@id='viewport']";
   // private final String nodePolicyInfoDiv =
   // "/div[1]/div[1]/div[2]/div[1]/div/";
-  // private final By textPremium = By.xpath(nodeViewPort +
+  // private static final By textPremium = By.xpath(nodeViewPort +
   // nodePolicyInfoDiv + "div[2]/span");
-  // private final By textMinimumAdjustment = By.xpath(nodeViewPort +
+  // private static final By textMinimumAdjustment = By.xpath(nodeViewPort +
   // nodePolicyInfoDiv + "div[5]/span");
-  // private final By textTaxes = By.xpath(nodeViewPort + nodePolicyInfoDiv
+  // private static final By textTaxes = By.xpath(nodeViewPort + nodePolicyInfoDiv
   // + "div[8]/span");
-  // private final By textFees = By.xpath(nodeViewPort + nodePolicyInfoDiv +
+  // private static final By textFees = By.xpath(nodeViewPort + nodePolicyInfoDiv +
   // "div[11]/span");
-  // private final By textSurcharge = By.xpath(nodeViewPort +
+  // private static final By textSurcharge = By.xpath(nodeViewPort +
   // nodePolicyInfoDiv + "div[14]/span");
-  // private final By textPolicyTotal = By.xpath(nodeViewPort +
+  // private static final By textPolicyTotal = By.xpath(nodeViewPort +
   // nodePolicyInfoDiv + "div[17]/span");
-  // private final By textTotalManualPremium = By.xpath(nodeViewPort +
+  // private static final By textTotalManualPremium = By.xpath(nodeViewPort +
   // nodePolicyInfoDiv + "div[20]/span");
-  private final By buttonExportExcel = By.xpath(nodeViewPort + "/div[2]/div/a/span");
-  private final By subHeaders =
+  private static final By buttonExportExcel = By.xpath(nodeViewPort + "/div[2]/div/a/span");
+  private static final By subHeaders =
       By.xpath(".//*[@id='productsPanel']/div[5]/div/div[@class='table']/div/..");
   private static final String pageTitle = "PremiumSummaryPage";
 

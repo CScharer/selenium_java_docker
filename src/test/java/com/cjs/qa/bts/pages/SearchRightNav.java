@@ -10,14 +10,14 @@ public class SearchRightNav extends Page {
   }
 
   // DECLARATIONS
-  private final By sidebarRight = By.xpath("html/body/div[1]/nav/div/div[1]/div[4]/button");
-  private final By linkExitPolicySearch = By.xpath(".//*[@id='requestLinkSearch1']");
-  private final By linkScheduleProcesses = By.xpath(".//*[@id='requestLinkScheduleProcess']");
-  private final By linkWebServices = By.xpath(".//*[@id='requestLinkForWebServices']");
-  private final By linkMassNotes = By.xpath(".//*[@id='requestLinkForMassNotes']");
-  private final By linkViewExportRequests = By.xpath(".//*[@id='requestLinkExportRequest']");
-  private final By linkQueriesTools = By.xpath(".//*[@id='requestLinkQueriesTools']");
-  private final By dropdownTestStatus = By.xpath(".//*[@id='modeBI']");
+  private static final By sidebarRight = By.xpath("html/body/div[1]/nav/div/div[1]/div[4]/button");
+  private static final By linkExitPolicySearch = By.xpath(".//*[@id='requestLinkSearch1']");
+  private static final By linkScheduleProcesses = By.xpath(".//*[@id='requestLinkScheduleProcess']");
+  private static final By linkWebServices = By.xpath(".//*[@id='requestLinkForWebServices']");
+  private static final By linkMassNotes = By.xpath(".//*[@id='requestLinkForMassNotes']");
+  private static final By linkViewExportRequests = By.xpath(".//*[@id='requestLinkExportRequest']");
+  private static final By linkQueriesTools = By.xpath(".//*[@id='requestLinkQueriesTools']");
+  private static final By dropdownTestStatus = By.xpath(".//*[@id='modeBI']");
 
   // METHODS SET
   public void toggleSidebarRight() {

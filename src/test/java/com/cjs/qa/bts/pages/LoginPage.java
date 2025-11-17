@@ -60,9 +60,9 @@ public class LoginPage extends Page {
   // private String password = Passwords.BTSROBOT_0.getValue();
   // private String uName = "btsrobot";
   // BLD A Genesys
-  private final By editUserName = By.id("username");
-  private final By editPassword = By.id("password");
-  private final By buttonSubmit = By.id("//button[.='Submit']");
+  private static final By editUserName = By.id("username");
+  private static final By editPassword = By.id("password");
+  private static final By buttonSubmit = By.id("//button[.='Submit']");
   private static final String pageTitle = "LoginPage";
 
   private String getPageTitle() {

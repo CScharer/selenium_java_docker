@@ -40,13 +40,13 @@ public class BtsCrosswordChallengePage extends Page {
     super(webDriver);
   }
 
-  private final By buttonContinue = By.xpath(".//input[@value='Continue']");
-  private final By buttonCheck = By.xpath(".//*[@id='game']/div[1]/div/div/span[.='Check']");
-  private final By buttonSave = By.xpath(".//*[@id='game']/div[1]/div/div/span[.='Save']");
-  private final By buttonSubmit = By.xpath(".//*[@id='game']/div[1]/div/div/span[.='Submit']");
-  private final By editName = By.xpath("html/body/div[1]/form/div/table/tbody/tr[1]/td[2]/input");
-  private final By editEmail = By.xpath("html/body/div[1]/form/div/table/tbody/tr[2]/td[2]/input");
-  private final By buttonOK = By.xpath("html/body/div[1]/form/div/table/tbody/tr[3]/td/input");
+  private static final By buttonContinue = By.xpath(".//input[@value='Continue']");
+  private static final By buttonCheck = By.xpath(".//*[@id='game']/div[1]/div/div/span[.='Check']");
+  private static final By buttonSave = By.xpath(".//*[@id='game']/div[1]/div/div/span[.='Save']");
+  private static final By buttonSubmit = By.xpath(".//*[@id='game']/div[1]/div/div/span[.='Submit']");
+  private static final By editName = By.xpath("html/body/div[1]/form/div/table/tbody/tr[1]/td[2]/input");
+  private static final By editEmail = By.xpath("html/body/div[1]/form/div/table/tbody/tr[2]/td[2]/input");
+  private static final By buttonOK = By.xpath("html/body/div[1]/form/div/table/tbody/tr[3]/td/input");
   private String sPageTitle = "Take the Challenge";
 
   public void clickbuttonContinue() {

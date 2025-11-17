@@ -1,0 +1,16 @@
+{
+  "locators": [
+    {
+      "name": " Link Manage Products",
+      "type": "=",
+      "value": "By.xpath(nodeProcessedErrs",
+      "variableName": "linkManageProducts"
+    },
+    {
+      "name": "//",
+      "type": "linkInusrableInterestSummary",
+      "value": "=",
+      "variableName": "//"
+    }
+  ]
+}

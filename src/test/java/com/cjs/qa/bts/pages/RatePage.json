@@ -1,0 +1,58 @@
+{
+  "locators": [
+    {
+      "name": " Label Custom Status Msg",
+      "type": "xpath(nodeProcessedErrs",
+      "value": "+",
+      "variableName": "labelCustomStatusMsg"
+    },
+    {
+      "name": " Label Print Status",
+      "type": "xpath(nodeProcessedErrs",
+      "value": "+",
+      "variableName": "labelPrintStatus"
+    },
+    {
+      "name": " Toggle Results",
+      "type": "=",
+      "value": "By.xpath(nodeProcessedErrs",
+      "variableName": "toggleResults"
+    },
+    {
+      "name": " Label Policy Total",
+      "type": "xpath(nodeProcessedErrs",
+      "value": "+",
+      "variableName": "labelPolicyTotal"
+    },
+    {
+      "name": " Label Commercial Auto",
+      "type": "=",
+      "value": "By.xpath(nodeProcessedErrs",
+      "variableName": "labelCommercialAuto"
+    },
+    {
+      "name": " Label Agricultural Output",
+      "type": "=",
+      "value": "By.xpath(nodeProcessedErrs",
+      "variableName": "labelAgriculturalOutput"
+    },
+    {
+      "name": " Label General Liability",
+      "type": "=",
+      "value": "By.xpath(nodeProcessedErrs",
+      "variableName": "labelGeneralLiability"
+    },
+    {
+      "name": " Label Policywide Coverages",
+      "type": "=",
+      "value": "By.xpath(nodeProcessedErrs",
+      "variableName": "labelPolicywideCoverages"
+    },
+    {
+      "name": " Button Rate Now",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "buttonRateNow"
+    }
+  ]
+}

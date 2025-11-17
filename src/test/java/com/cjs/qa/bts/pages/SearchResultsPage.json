@@ -1,0 +1,46 @@
+{
+  "locators": [
+    {
+      "name": " Edit Term",
+      "type": "xpath",
+      "value": "//label[.='Term']/../p",
+      "variableName": "editTerm"
+    },
+    {
+      "name": " Edit Status",
+      "type": "xpath",
+      "value": "//label[.='Status']/../p",
+      "variableName": "editStatus"
+    },
+    {
+      "name": " Button Client",
+      "type": "xpath",
+      "value": "//a[@ng-click='populateClientActions(client)']",
+      "variableName": "buttonClient"
+    },
+    {
+      "name": " Button Policy",
+      "type": "=",
+      "value": "By.xpath",
+      "variableName": "buttonPolicy"
+    },
+    {
+      "name": "//",
+      "type": "buttonRequestPrint",
+      "value": "=",
+      "variableName": "//"
+    },
+    {
+      "name": "//",
+      "type": "PolicyToPolicy",
+      "value": "linkText",
+      "variableName": "//"
+    },
+    {
+      "name": "}",
+      "type": "releaseLock",
+      "value": "=",
+      "variableName": "}"
+    }
+  ]
+}
