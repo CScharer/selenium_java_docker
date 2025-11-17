@@ -9,12 +9,12 @@ public class BiTerrorismPage extends Page {
     super(webDriver);
   }
 
-  private final By dropdownDoesTerrorismApply = By.id("TRSM_IND");
-  private final By dropdownDoesTerrorismApplyToCrime = By.id("TRSM_CRIM_IND1");
-  private final By editCertifiedActsOfTerrorismPremium = By.id("TRSM_PREM");
-  private final By editTerrorismFireFollowingPremium = By.id("TRSM_FF_PREM");
-  private final By editOtherActsOfTerrorism = By.id("TRSM_OTH_PREM");
-  private final By buttonFrame = By.id("terrorism-title");
+  private static final By dropdownDoesTerrorismApply = By.id("TRSM_IND");
+  private static final By dropdownDoesTerrorismApplyToCrime = By.id("TRSM_CRIM_IND1");
+  private static final By editCertifiedActsOfTerrorismPremium = By.id("TRSM_PREM");
+  private static final By editTerrorismFireFollowingPremium = By.id("TRSM_FF_PREM");
+  private static final By editOtherActsOfTerrorism = By.id("TRSM_OTH_PREM");
+  private static final By buttonFrame = By.id("terrorism-title");
   private static final String pageTitle = "BI_TerrorismPage";
 
   private String getPageTitle() {

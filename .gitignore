@@ -141,7 +141,10 @@ Data/*.lck
 .idea/shelf/
 
 # Eclipse
+.classpath
+.settings/
 .settings/org.eclipse.core.resources.prefs
+.settings/org.eclipse.jdt.core.prefs
 
 # VS Code
 .vscode/settings.json

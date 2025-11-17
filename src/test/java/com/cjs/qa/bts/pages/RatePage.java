@@ -25,20 +25,20 @@ public class RatePage extends Page {
 
   private static final String nodeProcessedErrs =
       ".//*[@id='form1:cplProcessedResults:cplProcessedErrs:";
-  private final By labelCustomStatusMsg = By.xpath(nodeProcessedErrs + "customStatusMsg']");
-  private final By labelPrintStatus = By.xpath(nodeProcessedErrs + "processTransactionStatus']");
-  private final By toggleResults =
+  private static final By labelCustomStatusMsg = By.xpath(nodeProcessedErrs + "customStatusMsg']");
+  private static final By labelPrintStatus = By.xpath(nodeProcessedErrs + "processTransactionStatus']");
+  private static final By toggleResults =
       By.xpath(nodeProcessedErrs + "cplProcessedErrorsTable']/div[1]/span[1]/button");
-  private final By labelPolicyTotal = By.xpath(nodeProcessedErrs + "overviewTotM']");
-  private final By labelCommercialAuto =
+  private static final By labelPolicyTotal = By.xpath(nodeProcessedErrs + "overviewTotM']");
+  private static final By labelCommercialAuto =
       By.xpath(nodeProcessedErrs + "productsTableEx1:0:overviewTotM1']");
-  private final By labelAgriculturalOutput =
+  private static final By labelAgriculturalOutput =
       By.xpath(nodeProcessedErrs + "productsTableEx1:1:overviewTotM1']");
-  private final By labelGeneralLiability =
+  private static final By labelGeneralLiability =
       By.xpath(nodeProcessedErrs + "productsTableEx1:2:overviewTotM1']");
-  private final By labelPolicywideCoverages =
+  private static final By labelPolicywideCoverages =
       By.xpath(nodeProcessedErrs + "productsTableEx1:3:overviewTotM1']");
-  private final By buttonRateNow =
+  private static final By buttonRateNow =
       By.xpath(".//*[@id='form1:cplProcessedResults:flashScreenRateButton']");
 
   public void verifyCustomStatusMsg(String value) {

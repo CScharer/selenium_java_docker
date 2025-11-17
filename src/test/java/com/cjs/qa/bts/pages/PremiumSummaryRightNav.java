@@ -15,16 +15,16 @@ public class PremiumSummaryRightNav extends Page {
   // "policyIssuanceFunctions:";
   // private final String nodeNavigationMenu = ":navigationMenuItem:";
   // private final String nodeMenuCsubmit = "menuCommandSubmittable";
-  private final By sidebarRightOpen = By.xpath(".//*[@id='outer-east-open-btn']");
-  private final By sidebarRightClose = By.xpath(".//*[@'outer-east-close-btn']");
-  private final By linkExitPolicySearch = By.xpath(".//*[@id='requestLinkSearch1']");
-  private final By linkChangeDates = By.xpath(".//*[@id='changeDateLink']");
-  private final By linkPolicyErrors = By.xpath(".//*[@id='policyErrorsLink']");
-  private final By linkPolicyViews = By.xpath(".//*[@id='policyViewsLink']");
-  private final By linkRequestPrint = By.xpath(".//*[@id='requestPrintLink']");
-  private final By linkTerritoryInformation = By.xpath(".//*[@id='terrInfoLink']");
-  private final By linkClientInformation = By.xpath(".//*[@id='clientViewLink']");
-  private final By linkPayorDetails = By.xpath(".//*[@id='payorViewLink']");
+  private static final By sidebarRightOpen = By.xpath(".//*[@id='outer-east-open-btn']");
+  private static final By sidebarRightClose = By.xpath(".//*[@'outer-east-close-btn']");
+  private static final By linkExitPolicySearch = By.xpath(".//*[@id='requestLinkSearch1']");
+  private static final By linkChangeDates = By.xpath(".//*[@id='changeDateLink']");
+  private static final By linkPolicyErrors = By.xpath(".//*[@id='policyErrorsLink']");
+  private static final By linkPolicyViews = By.xpath(".//*[@id='policyViewsLink']");
+  private static final By linkRequestPrint = By.xpath(".//*[@id='requestPrintLink']");
+  private static final By linkTerritoryInformation = By.xpath(".//*[@id='terrInfoLink']");
+  private static final By linkClientInformation = By.xpath(".//*[@id='clientViewLink']");
+  private static final By linkPayorDetails = By.xpath(".//*[@id='payorViewLink']");
 
   // METHODS
   public boolean isSidebarOpen() {

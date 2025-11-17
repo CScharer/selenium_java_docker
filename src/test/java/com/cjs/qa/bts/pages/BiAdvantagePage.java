@@ -9,19 +9,19 @@ public class BiAdvantagePage extends Page {
     super(webDriver);
   }
 
-  private final By editYearBusinessStarted = By.id("YR_BUS_STRT");
-  private final By editYearAgencyObtainClient = By.id("YR_CLT_OBTND");
-  private final By checkboxCurrentAutoCoverage = By.id("INSD_AUTO_CVG");
-  private final By checkboxCurrentWorkCompCoverage = By.id("INSD_WC_CVG");
-  private final By checkboxCurrentUmbrellaCoverage = By.id("INSD_UMB_CVG");
-  private final By checkboxCurrentOtherCoverage = By.id("INSD_OTH_CVG");
-  private final By editDescribeOtherCoverage = By.id("DESC_OTH_CVG");
-  private final By dropdownApplicantPartOfFranchise = By.id("APL_FRN_IND");
-  private final By dropdownFormalSafetyProgramInPlace = By.id("FRML_SFTY_PGM_IND");
-  private final By editNumberOfLossesGL = By.id("NUM_LOSE_GL");
-  private final By editNumberOfLossesProperty = By.id("NUM_LOSE_PROP");
-  private final By editNumberOfEmployees = By.id("NUM_EMP");
-  private final By buttonFrame = By.id("advantage-title");
+  private static final By editYearBusinessStarted = By.id("YR_BUS_STRT");
+  private static final By editYearAgencyObtainClient = By.id("YR_CLT_OBTND");
+  private static final By checkboxCurrentAutoCoverage = By.id("INSD_AUTO_CVG");
+  private static final By checkboxCurrentWorkCompCoverage = By.id("INSD_WC_CVG");
+  private static final By checkboxCurrentUmbrellaCoverage = By.id("INSD_UMB_CVG");
+  private static final By checkboxCurrentOtherCoverage = By.id("INSD_OTH_CVG");
+  private static final By editDescribeOtherCoverage = By.id("DESC_OTH_CVG");
+  private static final By dropdownApplicantPartOfFranchise = By.id("APL_FRN_IND");
+  private static final By dropdownFormalSafetyProgramInPlace = By.id("FRML_SFTY_PGM_IND");
+  private static final By editNumberOfLossesGL = By.id("NUM_LOSE_GL");
+  private static final By editNumberOfLossesProperty = By.id("NUM_LOSE_PROP");
+  private static final By editNumberOfEmployees = By.id("NUM_EMP");
+  private static final By buttonFrame = By.id("advantage-title");
   private static final String pageTitle = "BI_AdvantagePage";
 
   private String getPageTitle() {

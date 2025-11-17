@@ -933,10 +933,10 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
         with:
           fetch-depth: 0  # Full history for SonarQube
 
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
           cache: maven
 
@@ -973,10 +973,10 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
       steps:
         - uses: actions/checkout@v4
 
-        - name: Set up JDK 17
+        - name: Set up JDK 21
           uses: actions/setup-java@v4
           with:
-            java-version: '17'
+            java-version: '21'
             distribution: 'temurin'
             cache: maven
 
@@ -1013,10 +1013,10 @@ This document provides a **step-by-step action plan** to transform the CJS QA Fr
       steps:
         - uses: actions/checkout@v4
 
-        - name: Set up JDK 17
+        - name: Set up JDK 21
           uses: actions/setup-java@v4
           with:
-            java-version: '17'
+            java-version: '21'
             distribution: 'temurin'
             cache: maven
 

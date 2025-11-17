@@ -9,14 +9,14 @@ public class BiBillingInformationPage extends Page {
     super(webDriver);
   }
 
-  private final By editBillingAccountNumber = By.id("billingAccountNumber");
-  private final By dropdownBillType = By.id("billType");
-  private final By dropdownPayPlan = By.id("payPlan");
-  private final By dropdownAmendmentDistribution = By.id("amendmentDistribution");
-  private final By editDepositAmount = By.id("depositAmount");
-  private final By dropdownDepositType = By.id("depositType");
-  private final By editDepositPercent = By.id("depositPercent");
-  private final By buttonFrame = By.id("billingInformation-title");
+  private static final By editBillingAccountNumber = By.id("billingAccountNumber");
+  private static final By dropdownBillType = By.id("billType");
+  private static final By dropdownPayPlan = By.id("payPlan");
+  private static final By dropdownAmendmentDistribution = By.id("amendmentDistribution");
+  private static final By editDepositAmount = By.id("depositAmount");
+  private static final By dropdownDepositType = By.id("depositType");
+  private static final By editDepositPercent = By.id("depositPercent");
+  private static final By buttonFrame = By.id("billingInformation-title");
   private static final String pageTitle = "BI_BillingInformationPage";
 
   private String getPageTitle() {

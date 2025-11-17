@@ -11,10 +11,10 @@ public class RateLeftNavPage extends Page {
 
   private static final String nodeProcessedErrs =
       ".//*[@id='form1:viewNavigationMenu:navigationMenuLevel1:";
-  private final By linkManageProducts =
+  private static final By linkManageProducts =
       By.xpath(nodeProcessedErrs + "5:navigationMenuItem:menuLinkSubmittable']/span");
 
-  // private final By linkInusrableInterestSummary =
+  // private static final By linkInusrableInterestSummary =
   // By.xpath(nodeProcessedErrs +
   // "4:navigationMenuItem:menuCommandSubmittable']/span")
 

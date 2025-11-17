@@ -19,32 +19,32 @@ public class AmendPage extends Page {
 
   // DECLARATIONS
   // private final String nodeAmendForm = ".//*[@id='amendForm:amendPanel']";
-  private final By editPolicyEffectiveDate = By.id("amendForm:policyOriginalEfftDt");
-  private final By editPolicyExpirationDate = By.id("amendForm:policyExpDtDisp");
-  private final By optionAmendmentType = By.id("amendForm:amendOpt");
-  private final By dropdownExistingAmendment = By.id("amendForm:openAmendment");
-  private final By editAmendDescription = By.id("amendForm:amendmentDesc");
-  private final By editAmendEffectiveDate = By.id("amendForm:effectiveDt");
-  private final By editAmendExpirationDate = By.id("amendForm:expirationDt");
-  private final By dropdownAvailable = By.id("amendForm:avlAmendReasons");
-  private final By dropdownSelected = By.id("amendForm:amendReasons");
-  private final By editAmendReasonText = By.id("amendForm:amendReasonText");
-  private final By dropdownPrintCopies = By.id("amendForm:printCopies");
-  private final By checkboxApplyToRenewal = By.id("amendForm:applyToRenewal']/..");
-  private final By checkboxAutoDeleteUnissuedAmendment =
+  private static final By editPolicyEffectiveDate = By.id("amendForm:policyOriginalEfftDt");
+  private static final By editPolicyExpirationDate = By.id("amendForm:policyExpDtDisp");
+  private static final By optionAmendmentType = By.id("amendForm:amendOpt");
+  private static final By dropdownExistingAmendment = By.id("amendForm:openAmendment");
+  private static final By editAmendDescription = By.id("amendForm:amendmentDesc");
+  private static final By editAmendEffectiveDate = By.id("amendForm:effectiveDt");
+  private static final By editAmendExpirationDate = By.id("amendForm:expirationDt");
+  private static final By dropdownAvailable = By.id("amendForm:avlAmendReasons");
+  private static final By dropdownSelected = By.id("amendForm:amendReasons");
+  private static final By editAmendReasonText = By.id("amendForm:amendReasonText");
+  private static final By dropdownPrintCopies = By.id("amendForm:printCopies");
+  private static final By checkboxApplyToRenewal = By.id("amendForm:applyToRenewal']/..");
+  private static final By checkboxAutoDeleteUnissuedAmendment =
       By.id("amendForm:autoDeleteUnissuedAmend']/..");
-  private final By optionApplyType = By.id("amendForm:applyWaiveRule");
-  private final By buttonAdd = By.id("amendForm:btnRight");
-  private final By buttonRemove = By.id("amendForm:btnLeft");
-  private final By buttonOK = By.id("amendForm:buttonOk");
-  private final By buttonCancel = By.id("amendForm:cancelBtn");
+  private static final By optionApplyType = By.id("amendForm:applyWaiveRule");
+  private static final By buttonAdd = By.id("amendForm:btnRight");
+  private static final By buttonRemove = By.id("amendForm:btnLeft");
+  private static final By buttonOK = By.id("amendForm:buttonOk");
+  private static final By buttonCancel = By.id("amendForm:cancelBtn");
   private static final String pageTitle = "AmendPage";
 
   private String getPageTitle() {
     return pageTitle;
   }
 
-  private final By iFrame = By.xpath(".//*/iframe");
+  private static final By iFrame = By.xpath(".//*/iframe");
 
   public void verifyPage() {
     verifyTitle(getPageTitle());

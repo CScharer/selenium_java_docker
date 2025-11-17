@@ -9,12 +9,12 @@ public class PolicyIssuancePage extends Page {
     super(webDriver);
   }
 
-  private final By buttonEdit = By.id("EditEdit");
-  private final By buttonValidate = By.id("ValidateValidate");
-  private final By buttonRate = By.id("RateRate");
-  private final By buttonBind = By.id("BindBind");
-  private final By buttonIssue = By.id("form1:cplProcessedResults:buttonRate");
-  private final By buttonRequestPrint = By.id("requestPrintLink");
+  private static final By buttonEdit = By.id("EditEdit");
+  private static final By buttonValidate = By.id("ValidateValidate");
+  private static final By buttonRate = By.id("RateRate");
+  private static final By buttonBind = By.id("BindBind");
+  private static final By buttonIssue = By.id("form1:cplProcessedResults:buttonRate");
+  private static final By buttonRequestPrint = By.id("requestPrintLink");
   private static final String pageTitle = "PolicyIssuancePage";
 
   private String getPageTitle() {

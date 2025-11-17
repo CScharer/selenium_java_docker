@@ -19,9 +19,9 @@ public class ClientAddressSelectionPage extends Page {
 
   // DECLARATIONS
   private static final String nodeClientSelection = "clientSelectionForm:";
-  private final By buttonCreateNewNameSeq = By.id(nodeClientSelection + "createNewNameBtn");
-  private final By buttonOk = By.id(nodeClientSelection + "buttonOk");
-  private final By buttonCancel = By.id(nodeClientSelection + "cancelBtn");
+  private static final By buttonCreateNewNameSeq = By.id(nodeClientSelection + "createNewNameBtn");
+  private static final By buttonOk = By.id(nodeClientSelection + "buttonOk");
+  private static final By buttonCancel = By.id(nodeClientSelection + "cancelBtn");
   private static final String pageTitle = "ClientAddressSelectionPage";
 
   private String getPageTitle() {

@@ -21,7 +21,7 @@ public class SecurityPage extends Page {
     super(webDriver);
   }
 
-  private final By optionDontRememberThisDevice =
+  private static final By optionDontRememberThisDevice =
       By.xpath(".//*[@id='authQuestionsForm']/div/div/label[@for='IsRememberDevice_False']");
   private static final By buttonNext = By.xpath(".//*[@id='btnNext']");
 

@@ -19,31 +19,31 @@ public class AddNewAddressClientPage extends Page {
   }
 
   // DECLARATIONS
-  private final By dropdownType = By.id("form1:availableList:clientBusinessTypeOneMenu");
-  private final By dropdownOwner = By.id("form1:availableList:ownerTypeMenu");
-  private final By editName1 = By.id("form1:availableList:businessNameAddCli");
-  private final By dropdownName1Type = By.id("form1:availableList:nameType1");
-  private final By editName2 = By.id("form1:availableList:businessName2AddCli");
-  private final By dropdownName2Type = By.id("form1:availableList:nameType2");
-  private final By optionPrimary = By.id("form1:availableList:radio1");
-  private final By editFirstName = By.id("form1:availableList:firstNameAddCli");
-  private final By editLastName = By.id("form1:availableList:lastNameAddCli");
-  private final By editAddrNo = By.id("form1:availableList:addressPanelId:houseNumberId");
-  private final By editAddrLine1 = By.id("form1:availableList:addressPanelId:addrLine1Id");
-  private final By editAddrLine2 = By.id("form1:availableList:addressPanelId:addrLine2Id");
-  private final By editAddrLine3 = By.id("form1:availableList:addressPanelId:addrLine3Id");
-  private final By editAddrLine4 = By.id("form1:availableList:addressPanelId:addrLine4Id");
-  private final By dropdownCountry = By.id("form1:availableList:addressPanelId:countryId");
-  private final By dropdownState = By.id("form1:availableList:addressPanelId:stateId");
-  private final By editCity = By.id("form1:availableList:addressPanelId:cityDisplay");
-  private final By editCounty = By.id("form1:availableList:addressPanelId:countyDisplay");
-  private final By editPostalCode = By.id("form1:availableList:addressPanelId:postalCodeId");
-  private final By buttonClearAddress =
+  private static final By dropdownType = By.id("form1:availableList:clientBusinessTypeOneMenu");
+  private static final By dropdownOwner = By.id("form1:availableList:ownerTypeMenu");
+  private static final By editName1 = By.id("form1:availableList:businessNameAddCli");
+  private static final By dropdownName1Type = By.id("form1:availableList:nameType1");
+  private static final By editName2 = By.id("form1:availableList:businessName2AddCli");
+  private static final By dropdownName2Type = By.id("form1:availableList:nameType2");
+  private static final By optionPrimary = By.id("form1:availableList:radio1");
+  private static final By editFirstName = By.id("form1:availableList:firstNameAddCli");
+  private static final By editLastName = By.id("form1:availableList:lastNameAddCli");
+  private static final By editAddrNo = By.id("form1:availableList:addressPanelId:houseNumberId");
+  private static final By editAddrLine1 = By.id("form1:availableList:addressPanelId:addrLine1Id");
+  private static final By editAddrLine2 = By.id("form1:availableList:addressPanelId:addrLine2Id");
+  private static final By editAddrLine3 = By.id("form1:availableList:addressPanelId:addrLine3Id");
+  private static final By editAddrLine4 = By.id("form1:availableList:addressPanelId:addrLine4Id");
+  private static final By dropdownCountry = By.id("form1:availableList:addressPanelId:countryId");
+  private static final By dropdownState = By.id("form1:availableList:addressPanelId:stateId");
+  private static final By editCity = By.id("form1:availableList:addressPanelId:cityDisplay");
+  private static final By editCounty = By.id("form1:availableList:addressPanelId:countyDisplay");
+  private static final By editPostalCode = By.id("form1:availableList:addressPanelId:postalCodeId");
+  private static final By buttonClearAddress =
       By.id("form1:availableList:addressPanelId:clearAddressBtnId");
-  private final By buttonLookup = By.id("form1:availableList:addressPanelId:lookupPostalCdButton");
-  private final By buttonAdd = By.id("form1:availableList:addressPanelId:btnAdd");
-  private final By buttonDelete = By.id("form1:availableList:addressPanelId:btnDelete");
-  private final By buttonSave = By.id("form1:availableList:addressPanelId:btnSave");
+  private static final By buttonLookup = By.id("form1:availableList:addressPanelId:lookupPostalCdButton");
+  private static final By buttonAdd = By.id("form1:availableList:addressPanelId:btnAdd");
+  private static final By buttonDelete = By.id("form1:availableList:addressPanelId:btnDelete");
+  private static final By buttonSave = By.id("form1:availableList:addressPanelId:btnSave");
   private static final String pageTitle = "AddNewAddressClientPage";
 
   private String getPageTitle() {

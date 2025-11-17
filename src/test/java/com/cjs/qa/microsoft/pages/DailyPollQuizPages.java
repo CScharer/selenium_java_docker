@@ -15,11 +15,11 @@ import org.openqa.selenium.WebElement;
 public class DailyPollQuizPages extends RewardsPage {
   private List<Answers> answersList;
   private static final By bySearchEdit = By.xpath(".//input[@name='q']");
-  private final By byPointsAvailableLabel =
+  private static final By byPointsAvailableLabel =
       By.xpath(".//*[@id='quizWelcomeContainer']//span[@class='rqWcCredits']");
-  private final By byPointsEarnedLabel =
+  private static final By byPointsEarnedLabel =
       By.xpath(".//*[@id='btoHeadPanel']//span[@class='rqECredits']");
-  private final By byWelcomeLabel =
+  private static final By byWelcomeLabel =
       By.xpath(".//*[@id='quizWelcomeContainer']/div[@class='rqText']");
   private static final By byStartPlayingButton = By.xpath(".//*[@id='rqStartQuiz']");
   private static final By byQuestionID = By.xpath(".//*[@id='questionId']");

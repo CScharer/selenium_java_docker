@@ -16,21 +16,19 @@ public class OffersAndActivityPage extends Page {
       By.xpath(".//span[contains(text(),'$3 Off a Carton')]");
   // final By buttonClaimYours =
   // By.xpath(".//*[@id='container']//span[.='CLAIM YOURS']");
-  private final By buttonGetYoursByMail =
+  private static final By buttonGetYoursByMail =
       By.xpath(
-          ".//div[@class='image-cta-link']//div[@class='inner-content']/button"
-              + "/i[contains(@class,'btn-ctaIcon')]/../..");
-  private final By buttonCOUPONS =
+          ".//div[@class='image-cta-link']//div[@class='inner-content']/button/i[contains(@class,'btn-ctaIcon')]/../..");
+  private static final By buttonCOUPONS =
       By.xpath(".//li[contains(@class,'menu-list-desk')]/a[@data-dtmtext='COUPONS']");
   private static final By buttonSubmit = By.xpath(".//*[@id='cpn-submit']");
   private static final By buttonLogOut = By.xpath(".//*[@id='logout']/span");
   private static final By labelMessage = By.xpath(".//div[@class='coupon-heading']/h6");
-  private final By labelThanks =
+  private static final By labelThanks =
       By.xpath(".//div[@class='coupon-heading']/h6[.='THANK YOU FOR YOUR REQUEST.']");
-  private final By labelCouponInTheMail =
+  private static final By labelCouponInTheMail =
       By.xpath(
-          ".//div[@class='coupon-heading']/h6[.='LOOKS LIKE YOUR MONTHLY COUPON IS"
-              + " ALREADY IN THE MAIL.']");
+          ".//div[@class='coupon-heading']/h6[.='LOOKS LIKE YOUR MONTHLY COUPON IS ALREADY IN THE MAIL.']");
 
   private By getButton3DollarsOffACarton() {
     return button3DollarsOffACarton;

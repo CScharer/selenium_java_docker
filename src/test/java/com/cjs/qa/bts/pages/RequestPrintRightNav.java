@@ -10,35 +10,35 @@ public class RequestPrintRightNav extends Page {
   }
 
   // DECLARATIONS
-  private final By sidebarRight = By.xpath(".//*[@id='outer-east-open-btn']");
-  private final By linkExitPolicySearch = By.xpath(".//*[@id='requestLinkExitPolicy']");
-  private final By linkChangeDates = By.xpath(".//*[@id='requestLinkChangeDates']");
-  private final By linkPolicyErrors = By.xpath(".//*[@id='policyErrorsLink']");
-  private final By linkPolicyViews =
+  private static final By sidebarRight = By.xpath(".//*[@id='outer-east-open-btn']");
+  private static final By linkExitPolicySearch = By.xpath(".//*[@id='requestLinkExitPolicy']");
+  private static final By linkChangeDates = By.xpath(".//*[@id='requestLinkChangeDates']");
+  private static final By linkPolicyErrors = By.xpath(".//*[@id='policyErrorsLink']");
+  private static final By linkPolicyViews =
       By.xpath(".//*[@id='form1:adminFunctions:panelGroupButtonForPolicyViews']/a");
-  private final By linkEdit =
+  private static final By linkEdit =
       By.xpath(
           ".//*[@id='form1:adminFunctions:policyIssuanceFunctions:0:navigationMenuItem:menuCommandSubmittable']");
-  private final By linkValidate =
+  private static final By linkValidate =
       By.xpath(
           ".//*[@id='form1:adminFunctions:policyIssuanceFunctions:1:navigationMenuItem:menuCommandSubmittable']");
-  private final By linkRate =
+  private static final By linkRate =
       By.xpath(
           ".//*[@id='form1:adminFunctions:policyIssuanceFunctions:2:navigationMenuItem:menuCommandSubmittable']");
-  private final By linkBind =
+  private static final By linkBind =
       By.xpath(
           ".//*[@id='form1:adminFunctions:policyIssuanceFunctions:3:navigationMenuItem:menuCommandSubmittable']");
-  private final By linkIssue =
+  private static final By linkIssue =
       By.xpath(
           ".//*[@id='form1:adminFunctions:policyIssuanceFunctions:4:navigationMenuItem:menuCommandSubmittable']");
-  private final By linkRequestPrint =
+  private static final By linkRequestPrint =
       By.xpath(
           ".//*[@id='form1:adminFunctions:policyIssuanceFunctions:5:navigationMenuItem:menuLinkSubmittable']");
-  private final By linkTerritoryInformation =
+  private static final By linkTerritoryInformation =
       By.xpath(".//*[@id='form1:adminFunctions:terrInfoLink']");
-  private final By linkClientInformation =
+  private static final By linkClientInformation =
       By.xpath(".//*[@id='form1:adminFunctions:clientViewLink']");
-  private final By linkPayorDetails = By.xpath(".//*[@id='form1:adminFunctions:payorDetailsLink']");
+  private static final By linkPayorDetails = By.xpath(".//*[@id='form1:adminFunctions:payorDetailsLink']");
 
   // METHODS SET
   public void toggleSidebarRight() {

@@ -9,13 +9,13 @@ public class ManageProductsPage extends Page {
     super(webDriver);
   }
 
-  private final By buttonDeleteProductList = By.id("deleteButton");
-  private final By buttonAddNewProductAdd = By.id("addProductBtn");
-  private final By buttonAddNewProductAddProductCoveragegs = By.id("addProductCvgBtn");
-  private final By dropdownProduct = By.id("productId");
-  private final By dropdownProgram = By.id("programId");
-  private final By dropdownRatingCompany = By.id("addProductForm");
-  private final By dropdownState = By.id("stateCode");
+  private static final By buttonDeleteProductList = By.id("deleteButton");
+  private static final By buttonAddNewProductAdd = By.id("addProductBtn");
+  private static final By buttonAddNewProductAddProductCoveragegs = By.id("addProductCvgBtn");
+  private static final By dropdownProduct = By.id("productId");
+  private static final By dropdownProgram = By.id("programId");
+  private static final By dropdownRatingCompany = By.id("addProductForm");
+  private static final By dropdownState = By.id("stateCode");
   private static final String pageTitle = "ManageProductsPage";
 
   private String getPageTitle() {

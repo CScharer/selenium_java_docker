@@ -15,9 +15,9 @@ public class LogInPage extends Page {
     super(webDriver);
   }
 
-  private final By editUserID = By.xpath(".//*[@id='ctl00_body_userid']");
-  private final By editPassword = By.xpath(".//*[@id='ctl00_body_password']");
-  private final By buttonOK = By.xpath(".//*[@id='ctl00_body_btnOk']");
+  private static final By editUserID = By.xpath(".//*[@id='ctl00_body_userid']");
+  private static final By editPassword = By.xpath(".//*[@id='ctl00_body_password']");
+  private static final By buttonOK = By.xpath(".//*[@id='ctl00_body_btnOk']");
 
   public void buttonOKClick() throws QAException {
     clickObject(buttonOK);

@@ -9,14 +9,14 @@ public class BiAgencyInformationPage extends Page {
     super(webDriver);
   }
 
-  private final By dropdownBranch = By.id("branch");
-  private final By dropdownUnderwriter = By.id("underwriter");
-  private final By editAgencyCode = By.id("agencyCode");
-  private final By editAgencyName = By.id("agencyName");
-  private final By buttonSearchAgencyName = By.id("agencyName-lookup");
-  private final By editProducerCode = By.id("producerCode");
-  private final By dropdownProducerName = By.id("producerName");
-  private final By buttonFrame = By.id("agencyInformation-title");
+  private static final By dropdownBranch = By.id("branch");
+  private static final By dropdownUnderwriter = By.id("underwriter");
+  private static final By editAgencyCode = By.id("agencyCode");
+  private static final By editAgencyName = By.id("agencyName");
+  private static final By buttonSearchAgencyName = By.id("agencyName-lookup");
+  private static final By editProducerCode = By.id("producerCode");
+  private static final By dropdownProducerName = By.id("producerName");
+  private static final By buttonFrame = By.id("agencyInformation-title");
   private static final String pageTitle = "BI_AgencyInformationPage";
 
   private String getPageTitle() {

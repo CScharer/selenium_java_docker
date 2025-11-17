@@ -10,8 +10,8 @@ public class PopUpPage extends Page {
     super(webDriver);
   }
 
-  private final By labelInvitationPrompt = By.xpath(".//*[@id='oo_invitation_prompt']");
-  private final By buttonNoThanks = By.xpath(".//*[@id='oo_no_thanks']");
+  private static final By labelInvitationPrompt = By.xpath(".//*[@id='oo_invitation_prompt']");
+  private static final By buttonNoThanks = By.xpath(".//*[@id='oo_no_thanks']");
 
   public void linkNoThanksClick() throws QAException {
     waitPageLoaded();

@@ -10,7 +10,7 @@ public class HomePage extends Page {
     super(webDriver);
   }
 
-  private final By linkSeeAllClaims = By.xpath(".//*[@id='linkToSeeAllClaims']");
+  private static final By linkSeeAllClaims = By.xpath(".//*[@id='linkToSeeAllClaims']");
 
   public void linkSeeAllClaimsClick() throws QAException {
     waitPageLoaded();

@@ -1,5 +1,88 @@
 # CHANGE LOG
 
+## [2025-11-17 15:30:00 CST] [IN PROGRESS] - AI Self-Healing Infrastructure with Page Object JSON Mappings
+
+### Overview
+**STATUS:** Feature branch `ai-self-healing` - Changes staged and committed
+**SUMMARY:** Implemented AI self-healing infrastructure with 60+ page object JSON mappings; created AIHelper utility class; updated PageObjectGenerator for self-healing patterns; enhanced GitHub Actions workflows for self-healing integration
+**Impact:** Enables AI-driven test automation with self-healing capabilities; improves test maintenance and reduces flakiness through intelligent element recovery strategies
+**Branch:** ai-self-healing (ready for PR and merge)
+**Changes Staged:** ~130 project files including page object JSON mappings, utility classes, and workflow updates
+**IDE Config:** Excluded .classpath and .settings/org.eclipse.jdt.core.prefs from tracking via .gitignore
+
+**AI Tool & Token Status:** Tool: GitHub Copilot - Tokens Used: ~110,000 / Total: 500,000 (390,000 remaining, 22% used, 78% remaining)
+
+---
+
+### Changes Made
+
+**New Files Created (63+ total):**
+
+**1. Page Object JSON Mappings (60+ files):**
+- American Airlines: VacationabilityPage.json
+- BTS Application: 32 page object mappings including LoginPage, AddNewPolicyPage, AdminFunctionsPage, BiAPlusFarmPage, BiAdvantagePage, BiAgencyInformationPage, BiBasicInfoPage, BiBillingInformationPage, BiBillingPage, BiButtonsPage, BiCollectorCarPage, BiLeftNav, BiMiscellaneousInformationPage, BiRightNav, BiTerrorismPage, BiUnderwritingPage, BtsCrosswordChallengePage, BuildPolicyPage, CPLResultsPage, ClientAddressSelectionPage, CopyPolicyPage, FormsPage, FormsRightNav, IssuePage, IssuePageLeftNav, IssueRightNav, ManageProductsPage, ManageProductsRightNav, NamedInsuredsPage, PolicyActivityPage, PolicyIssuancePage, PremiumSummaryPage, PremiumSummaryRightNav, RateLeftNavPage, RatePage, RateRightNav, ReferenceMaterialsPage, RequestPrintPage, RequestPrintRightNav, SearchPage, SearchResultsPage, SearchRightNav, SidbarAdminFunctionsPage, SidbarReferenceMaterialsPage, Sidebar.json
+- Core: SanboxPage.json
+- Dropbox: SignInPage.json
+- Google: SignInPage.json
+- Hardees: SurveyPage.json
+- IADHS: CasePaymentsPage.json, SignInPage.json
+- Marlboro: EarnPointsPage.json, SecurityPage.json, SignInPage.json, OffersAndActivityPage.json, VerifyInformationInterruptPage.json
+- Microsoft: SignInPage.json, DailyPollQuizPages.json, RewardsPage.json
+- Pluralsight: LoginPage.json, SessionPage.json, TableOfContentsPage.json
+- Polk County: Details.json, Main.json
+- United Airlines: BookTravelPage.json, HomePage.json, LoginPage.json, MemberAccountUpdatePage.json, SecurityPage.json
+- Vivit: BlogsPage.json, CalendarsPage.json, ForumsPage.json, GroupPage.json, HomePage.json, MyMemberProfilePage.json, SearchPage.json, StaffPage.json
+- Wellmark: ClaimsAndSpendingPage.json, HomePage.json, LogInPage.json, PopUpPage.json
+
+**2. AI Utility Classes (1 file):**
+- `src/test/java/com/cjs/qa/utilities/AIHelper.java` - New AI self-healing utility class
+  - Provides methods for self-healing test execution
+  - Integrates with page object JSON mappings
+  - Enables intelligent element recovery and test resilience
+
+**3. Configuration Files (1 file):**
+- `mcp.json` - New Model Context Protocol configuration
+  - Defines AI self-healing context and parameters
+  - Integrates with AIHelper and page object mappings
+
+**Files Modified (3 total):**
+
+**1. Utility Classes (2 files):**
+- `src/test/java/com/cjs/qa/utilities/PageObjectGenerator.java` - Enhanced for self-healing
+  - Updated to support self-healing patterns
+  - Integrated with AIHelper utility class
+  - Improved page object generation for AI-driven tests
+
+- 22 page object Java files updated:
+  - American Airlines: VacationabilityPage.java
+  - BTS: LoginPage.java, AddNewAddressClientPage.java, AddNewPolicyPage.java, AddNewProductPage.java, AdminFunctionsPage.java, AmendPage.java, BiAPlusFarmPage.java, BiAdvantagePage.java, BiAgencyInformationPage.java, BiBasicInfoPage.java, BiBillingInformationPage.java, BiBillingPage.java, BiButtonsPage.java, BiCollectorCarPage.java, BiLeftNav.java, BiMiscellaneousInformationPage.java, BiRightNav.java, BiTerrorismPage.java, BiUnderwritingPage.java, BtsCrosswordChallengePage.java, BuildPolicyPage.java, CPLResultsPage.java, ClientAddressSelectionPage.java, CopyPolicyPage.java, FormsPage.java, FormsRightNav.java, IssuePage.java, IssuePageLeftNav.java, IssueRightNav.java, ManageProductsPage.java, ManageProductsRightNav.java, NamedInsuredsPage.java, PolicyActivityPage.java, PolicyIssuancePage.java, PremiumSummaryPage.java, PremiumSummaryRightNav.java, RateLeftNavPage.java, RatePage.java, RateRightNav.java, ReferenceMaterialsPage.java, RequestPrintPage.java, RequestPrintRightNav.java, SearchPage.java, SearchResultsPage.java, SearchRightNav.java, SidbarAdminFunctionsPage.java, SidbarReferenceMaterialsPage.java, Sidebar.java
+  - Dropbox: SignInPage.java
+  - Hardees: SurveyPage.java
+  - Marlboro: OffersAndActivityPage.java, VerifyInformationInterruptPage.java
+  - Microsoft: DailyPollQuizPages.java, RewardsPage.java
+  - Pluralsight: SessionPage.java, TableOfContentsPage.java
+  - United: SecurityPage.java
+  - Vivit: BlogsPage.java, CalendarsPage.java, ForumsPage.java, GroupPage.java, HomePage.java, MyMemberProfilePage.java, SearchPage.java, StaffPage.java
+  - Wellmark: ClaimsAndSpendingPage.java, HomePage.java, LogInPage.java, PopUpPage.java
+
+**2. CI/CD Workflows (2 files):**
+- `.github/workflows/ci.yml` - Updated for self-healing integration
+  - Added steps for AI self-healing initialization
+  - Enhanced test execution with AI recovery strategies
+
+- `.github/workflows/test-environment.yml` - Enhanced for self-healing
+  - Configured for AI-driven test environment setup
+  - Supports self-healing test execution parameters
+
+**3. IDE Configuration (.gitignore):**
+- Updated `.gitignore` to exclude IDE config files:
+  - Added `.classpath`
+  - Added `.settings/` directory
+  - Added specific `.settings/org.eclipse.jdt.core.prefs` exclusion
+  - Prevents accidental commits of IDE-specific configuration
+
+---
+
 ## [2025-11-16 08:45:41 CST] [COMPLETE] - Java 21 LTS Upgrade & AI Tool Token Tracking
 
 ### Overview

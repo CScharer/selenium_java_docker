@@ -27,15 +27,15 @@ public class ClaimsAndSpendingPage extends Page {
 
   private List<String> listHeadings = null;
   private List<String> listTypes = null;
-  private final By linkMedicalAndPharmacy =
+  private static final By linkMedicalAndPharmacy =
       By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_tabAll']/a");
-  private final By linkMedical = By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_tabMedical']/a");
-  private final By linkPharmacy = By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_tabPharm']/a");
-  private final By gridMedicalAndPharmacy =
+  private static final By linkMedical = By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_tabMedical']/a");
+  private static final By linkPharmacy = By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_tabPharm']/a");
+  private static final By gridMedicalAndPharmacy =
       By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_AllClaimsGrid']/tbody");
-  private final By gridMedical =
+  private static final By gridMedical =
       By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_MedClaimsGrid']/tbody");
-  private final By gridPharmacy =
+  private static final By gridPharmacy =
       By.xpath(".//*[@id='ctl00_ContentLeft_DisplayGrid_PharmClaimsGrid']/tbody");
 
   // ClaimsAndSpendingPage

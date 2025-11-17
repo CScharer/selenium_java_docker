@@ -9,9 +9,9 @@ public class Sidebar extends Page {
     super(webDriver);
   }
 
-  private final By sidebarLeft =
+  private static final By sidebarLeft =
       By.xpath(".//div[@class='ng-scope']//button[@data-sidebar='left']/i");
-  private final By sidebarRight =
+  private static final By sidebarRight =
       By.xpath(".//div[@class='ng-scope']//button[@data-sidebar='right']/i");
 
   // private By sidebarRight = By.xpath(".//*[@id='outer-east-open-btn']");

@@ -9,11 +9,11 @@ public class BiButtonsPage extends Page {
     super(webDriver);
   }
 
-  private final By buttonSave = By.id("save");
-  private final By buttonSaveProducts = By.id("saveProducts");
-  private final By buttonCancel = By.id("cancel");
-  private final By buttonQuickScroll = By.id("quickScroll");
-  private final By buttonOpenCloseLeftNav =
+  private static final By buttonSave = By.id("save");
+  private static final By buttonSaveProducts = By.id("saveProducts");
+  private static final By buttonCancel = By.id("cancel");
+  private static final By buttonQuickScroll = By.id("quickScroll");
+  private static final By buttonOpenCloseLeftNav =
       By.xpath("html/body/div[1]/nav/div/div[1]/div[1]/button");
   private static final String pageTitle = "BI_ButtonsPage";
 

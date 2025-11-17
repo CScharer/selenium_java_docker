@@ -466,7 +466,7 @@ public class PageObjectGenerator {
     code.append("  // Locators\n");
     for (ElementInfo element : elements) {
       String locatorName = getLocatorName(element);
-      code.append("  private final By ").append(locatorName).append(" = ");
+      code.append("  private static final By ").append(locatorName).append(" = ");
       code.append(formatLocator(element.getLocator())).append(";\n");
     }
     code.append("\n");

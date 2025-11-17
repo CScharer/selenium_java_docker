@@ -14,26 +14,26 @@ public class SearchPage extends Page {
     super(webDriver);
   }
 
-  private final By editPolicyNumber = By.id("policyNumber");
-  private final By editSequenceNumber = By.id("sequenceNumber");
-  private final By checkboxIncludeAllPolicies = By.id("includeAllPolicies");
-  private final By editFirstName = By.id("firstName");
-  private final By editLastName = By.id("lastName");
-  private final By editBusinessName = By.id("businessName");
-  private final By editClientID = By.id("clientId");
-  private final By editFEIN = By.id("fein");
-  private final By buttonAddClientAndPolicy = By.id("addClientAndPolicy");
-  private final By buttonAddClientAndQuote = By.id("addClientAndQuote");
-  private final By buttonNavLeft = By.xpath("//button[contains(@data-sidebar,'left')]");
-  private final By buttonNavRight = By.xpath("//button[contains(@data-sidebar,'right')]");
-  private final By linkAddNewPolicy = By.linkText("Add New Policy");
-  private final By linkAddNewQuote = By.linkText("Add New Quote");
-  private final By linkClientInformation = By.linkText("Client Information");
-  private final By linkTransferOwnership = By.linkText("Transfer Ownership");
-  private final By imagePrimaryLogo = By.xpath("//div[@class='primary-logo']");
-  private final By buttonSearch = By.id("searchButton");
-  private final By buttonClear = By.id("clearButton");
-  private final By dropdownLogin =
+  private static final By editPolicyNumber = By.id("policyNumber");
+  private static final By editSequenceNumber = By.id("sequenceNumber");
+  private static final By checkboxIncludeAllPolicies = By.id("includeAllPolicies");
+  private static final By editFirstName = By.id("firstName");
+  private static final By editLastName = By.id("lastName");
+  private static final By editBusinessName = By.id("businessName");
+  private static final By editClientID = By.id("clientId");
+  private static final By editFEIN = By.id("fein");
+  private static final By buttonAddClientAndPolicy = By.id("addClientAndPolicy");
+  private static final By buttonAddClientAndQuote = By.id("addClientAndQuote");
+  private static final By buttonNavLeft = By.xpath("//button[contains(@data-sidebar,'left')]");
+  private static final By buttonNavRight = By.xpath("//button[contains(@data-sidebar,'right')]");
+  private static final By linkAddNewPolicy = By.linkText("Add New Policy");
+  private static final By linkAddNewQuote = By.linkText("Add New Quote");
+  private static final By linkClientInformation = By.linkText("Client Information");
+  private static final By linkTransferOwnership = By.linkText("Transfer Ownership");
+  private static final By imagePrimaryLogo = By.xpath("//div[@class='primary-logo']");
+  private static final By buttonSearch = By.id("searchButton");
+  private static final By buttonClear = By.id("clearButton");
+  private static final By dropdownLogin =
       By.xpath("//button[contains(@class,'btn-primary')][@data-toggle='Dropdown']");
   private static final String pageTitle = "SearchPage";
 
