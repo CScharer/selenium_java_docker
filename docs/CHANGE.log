@@ -9,7 +9,7 @@
 **Branch:** feature/java-21-ide-config-update
 **Files Modified:** 11 files (IDE configs, Docker compose files, monitoring configs, shell scripts)
 
-**AI Tool & Token Status:** Tool: Cursor - Tokens Used: [To be updated after commit]
+**AI Tool & Token Status:** Tool: Cursor - Tokens Used: ~15,000 / Total: 1,000,000 (estimated, ~1.5% used, ~98.5% remaining)
 
 ---
 
