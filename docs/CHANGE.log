@@ -1,5 +1,49 @@
 # CHANGE LOG
 
+## [2025-11-20 09:17:15] [PENDING] - Java 21 IDE Configuration Update and File Formatting
+
+### Overview
+**STATUS:** Feature branch `feature/java-21-ide-config-update` - Changes ready to commit
+**SUMMARY:** Updated Eclipse IDE configuration files to Java 21; added trailing newlines to YAML and shell script files for consistency
+**Impact:** Aligns IDE settings with Java 21 migration; improves file formatting consistency
+**Branch:** feature/java-21-ide-config-update
+**Files Modified:** 11 files (IDE configs, Docker compose files, monitoring configs, shell scripts)
+
+**AI Tool & Token Status:** Tool: Cursor - Tokens Used: [To be updated after commit]
+
+---
+
+### Changes Made
+
+**IDE Configuration Files (2 files):**
+- `.classpath`: Updated Java version from 17 to 21 in JRE container path
+- `.settings/org.eclipse.jdt.core.prefs`: Updated compiler settings from Java 17 to 21
+  - `org.eclipse.jdt.core.compiler.codegen.targetPlatform=21`
+  - `org.eclipse.jdt.core.compiler.compliance=21`
+  - `org.eclipse.jdt.core.compiler.source=21`
+
+**Docker Configuration Files (2 files):**
+- `docker-compose.dev.yml`: Added trailing newline
+- `docker-compose.prod.yml`: Added trailing newline
+
+**Monitoring Configuration Files (3 files):**
+- `monitoring/prometheus.yml`: Added trailing newline
+- `monitoring/grafana/dashboards/dashboard.yml`: Added trailing newline
+- `monitoring/grafana/datasources/prometheus.yml`: Added trailing newline
+
+**Shell Scripts (4 files):**
+- `scripts/docker/grid-health.sh`: Added trailing newline
+- `scripts/docker/grid-scale.sh`: Added trailing newline
+- `scripts/docker/grid-start.sh`: Added trailing newline
+- `scripts/docker/grid-stop.sh`: Added trailing newline
+
+### Verification
+- ✅ All changes reviewed
+- ✅ On feature branch (not main)
+- ✅ Changes ready for commit
+
+---
+
 ## [2025-11-17 15:30:00 CST] [IN PROGRESS] - AI Self-Healing Infrastructure with Page Object JSON Mappings
 
 ### Overview
