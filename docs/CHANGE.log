@@ -1,9 +1,54 @@
 # CHANGE LOG
 
+## [2025-11-21 07:56:14] [f64cb8475] - PR #29 Merged: Fix pom.xml Structure and Remove Deprecated Proxy Methods
+
+### Overview
+**STATUS:** ✅ **MERGED TO MAIN** - PR #29 successfully merged
+**SUMMARY:** Merged feature branch `fix/remove-deprecated-proxy-ftp` containing pom.xml structure fixes and deprecated Proxy.setFtpProxy() removal
+**Impact:** Resolves IDE errors; enables proper Maven plugin execution; removes deprecated Selenium API usage
+**PR Number:** #29
+**Branch:** fix/remove-deprecated-proxy-ftp (deleted after merge)
+**Files Modified:** 4 files (pom.xml, SeleniumWebDriver.java, pyproject.toml, CHANGE.log)
+
+**AI Tool & Token Status:** Tool: Cursor - Tokens Used: ~10,000 / Total: 1,000,000 (estimated, ~1% used, ~99% remaining)
+
+---
+
+### Changes Merged
+
+**1. pom.xml Structure Fixes:**
+- Fixed invalid XML tag: Changed `<n>cjs-app-gui</n>` to `<name>cjs-app-gui</name>` on line 7
+- Fixed pluginManagement placement: Moved `<pluginManagement>` section inside `<build>` section
+- Added M2E lifecycle mapping for `maven-checkstyle-plugin:check` execution
+- Resolves "Plugin execution not covered by lifecycle configuration" error
+
+**2. Deprecated Proxy Method Removal:**
+- Removed deprecated `Proxy.setFtpProxy()` method call from SeleniumWebDriver
+- Updated Chrome proxy case to use HTTP and SSL proxy settings only
+- Added comments explaining the change and alternative proxy options
+
+**3. File Formatting:**
+- Pre-commit hook fixes: Added trailing newlines to YAML/shell files (POSIX standard)
+- Removed blank lines from pyproject.toml
+
+### Testing Performed
+- ✅ Maven validation passes
+- ✅ XML structure valid
+- ✅ No IDE errors
+- ✅ Dependency resolution successful
+- ✅ All commits verified before merge
+
+### Post-Merge Actions
+- ✅ Local branch deleted: `fix/remove-deprecated-proxy-ftp`
+- ✅ Remote branch deleted: `origin/fix/remove-deprecated-proxy-ftp`
+- ✅ Main branch updated with merged changes
+
+---
+
 ## [2025-11-21 07:40:35] [93f2ebb81] - Fix pom.xml Structure and M2E Lifecycle Mapping
 
 ### Overview
-**STATUS:** Feature branch `fix/remove-deprecated-proxy-ftp` - Ready to commit
+**STATUS:** ✅ **MERGED** - See PR #29 merge entry above
 **SUMMARY:** Fixed pom.xml XML structure issues and added M2E lifecycle mapping for maven-checkstyle-plugin
 **Impact:** Resolves IDE errors; enables proper Maven plugin execution in Eclipse/VS Code; improves build file validity
 **Branch:** fix/remove-deprecated-proxy-ftp
