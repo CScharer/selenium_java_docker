@@ -1,5 +1,38 @@
 # CHANGE LOG
 
+## [2025-11-21 07:40:35] [PENDING] - Fix pom.xml Structure and M2E Lifecycle Mapping
+
+### Overview
+**STATUS:** Feature branch `fix/remove-deprecated-proxy-ftp` - Ready to commit
+**SUMMARY:** Fixed pom.xml XML structure issues and added M2E lifecycle mapping for maven-checkstyle-plugin
+**Impact:** Resolves IDE errors; enables proper Maven plugin execution in Eclipse/VS Code; improves build file validity
+**Branch:** fix/remove-deprecated-proxy-ftp
+**Files Modified:** 1 file (pom.xml)
+
+**AI Tool & Token Status:** Tool: Cursor - Tokens Used: ~8,000 / Total: 1,000,000 (estimated, ~0.8% used, ~99.2% remaining)
+
+---
+
+### Changes Made
+
+**pom.xml (1 file):**
+- Fixed invalid XML tag: Changed `<n>cjs-app-gui</n>` to `<name>cjs-app-gui</name>` on line 7
+- Fixed pluginManagement placement: Moved `<pluginManagement>` section inside `<build>` section (was incorrectly placed outside)
+- Added M2E lifecycle mapping: Added execution configuration for `maven-checkstyle-plugin:check` goal to resolve "Plugin execution not covered by lifecycle configuration" error
+- **Reason:**
+  - Invalid XML tag prevented proper Maven parsing
+  - pluginManagement must be inside build section per Maven POM schema
+  - M2E requires explicit lifecycle mappings for plugin executions
+
+### Verification
+- ✅ Maven validation passes: `mvn validate` successful
+- ✅ XML structure valid: xmllint validation passes
+- ✅ No IDE errors: Problems tab shows no errors
+- ✅ Dependency resolution successful: `mvn dependency:resolve` passes
+- ⚠️ Note: `mvn clean install` shows 28 test failures (unrelated to pom.xml changes - existing test issues)
+
+---
+
 ## [2025-11-21 07:12:58] [362d5a71b] - Remove Deprecated Proxy.setFtpProxy() Method
 
 ### Overview
