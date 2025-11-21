@@ -807,6 +807,83 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 				</executions>
 			</plugin>
 		</plugins>
+
+		<!-- Eclipse M2E lifecycle mapping configuration -->
+		<pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.m2e</groupId>
+				<artifactId>lifecycle-mapping</artifactId>
+				<version>1.0.0</version>
+				<configuration>
+					<lifecycleMappingMetadata>
+						<pluginExecutions>
+							<!-- Ignore fmt-maven-plugin format goal -->
+							<pluginExecution>
+								<pluginExecutionFilter>
+									<groupId>com.spotify.fmt</groupId>
+									<artifactId>fmt-maven-plugin</artifactId>
+									<versionRange>[0,)</versionRange>
+									<goals>
+										<goal>format</goal>
+									</goals>
+								</pluginExecutionFilter>
+								<action>
+									<ignore />
+								</action>
+							</pluginExecution>
+							<!-- Ignore jmeter-maven-plugin configure goal -->
+							<pluginExecution>
+								<pluginExecutionFilter>
+									<groupId>com.lazerycode.jmeter</groupId>
+									<artifactId>jmeter-maven-plugin</artifactId>
+									<versionRange>[0,)</versionRange>
+									<goals>
+										<goal>configure</goal>
+									</goals>
+								</pluginExecutionFilter>
+								<action>
+									<ignore />
+								</action>
+							</pluginExecution>
+							<!-- Ignore scala-maven-plugin when phase is none -->
+							<pluginExecution>
+								<pluginExecutionFilter>
+									<groupId>net.alchim31.maven</groupId>
+									<artifactId>scala-maven-plugin</artifactId>
+									<versionRange>[0,)</versionRange>
+									<goals>
+										<goal>compile</goal>
+										<goal>testCompile</goal>
+									</goals>
+								</pluginExecutionFilter>
+								<action>
+									<ignore />
+								</action>
+							</pluginExecution>
+							<!-- Execute maven-checkstyle-plugin check goal -->
+							<pluginExecution>
+								<pluginExecutionFilter>
+									<groupId>org.apache.maven.plugins</groupId>
+									<artifactId>maven-checkstyle-plugin</artifactId>
+									<versionRange>[0,)</versionRange>
+									<goals>
+										<goal>check</goal>
+									</goals>
+								</pluginExecutionFilter>
+								<action>
+									<execute>
+										<runOnIncremental>false</runOnIncremental>
+										<runOnConfiguration>false</runOnConfiguration>
+									</execute>
+								</action>
+							</pluginExecution>
+						</pluginExecutions>
+					</lifecycleMappingMetadata>
+				</configuration>
+			</plugin>
+		</plugins>
+		</pluginManagement>
 	</build>
 
 	<profiles>

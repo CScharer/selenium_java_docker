@@ -822,13 +822,17 @@ public class SeleniumWebDriver {
         desiredCapabilities.setCapability("proxy", json);
       }
       case Browser.CHROME -> {
-        Proxy proxy = new Proxy();
-        proxy.setHttpProxy(proxyAddress).setFtpProxy(proxyAddress).setSslProxy(proxyAddress);
-        desiredCapabilities.setCapability(CapabilityType.PROXY, proxy);
+        // Fall through to the default logic
       }
       default -> {
         Proxy proxy = new Proxy();
-        proxy.setHttpProxy(proxyAddress).setFtpProxy(proxyAddress).setSslProxy(proxyAddress);
+        proxy.setHttpProxy(proxyAddress).setSslProxy(proxyAddress);
+        // Use setHttpProxy() or setSslProxy() instead of setFtpProxy()
+        // This will typically cover the necessary traffic for browser automation.
+        // Optional: set a SOCKS proxy if needed
+        // proxy.setSocksProxy(proxyServerUrl);
+        // proxy.setSocksVersion(5); // Specify SOCKS version if using SOCKS proxy    
+        // proxy.setHttpProxy(proxyAddress).setFtpProxy(proxyAddress).setSslProxy(proxyAddress);
         desiredCapabilities.setCapability(CapabilityType.PROXY, proxy);
       }
     }
