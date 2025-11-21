@@ -1,11 +1,12 @@
 # CHANGE LOG
 
-## [2025-11-21 08:43:00] [PENDING] - Fix Test Failures: Window Management and Grid URL Default
+## [2025-11-21 08:43:00] [cdfb72250] - PR #30: Fix Test Failures: Window Management and Grid URL Default
 
 ### Overview
-**STATUS:** 🔄 **IN PROGRESS** - Feature branch created, changes committed
+**STATUS:** 🔄 **PR CREATED** - PR #30 created, awaiting review
 **SUMMARY:** Fixed 2 test failures: window management assertion and Grid URL default for local runs
 **Impact:** All tests now pass; SmokeTests can run locally without Docker
+**PR Number:** #30
 **Branch:** fix/test-failures-window-management-and-grid-url
 **Files Modified:** 6 files (AdvancedFeaturesTests.java, SmokeTests.java, 4 shell scripts)
 
