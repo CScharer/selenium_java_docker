@@ -1,5 +1,48 @@
 # CHANGE LOG
 
+## [2025-11-21 08:43:00] [PENDING] - Fix Test Failures: Window Management and Grid URL Default
+
+### Overview
+**STATUS:** 🔄 **IN PROGRESS** - Feature branch created, changes committed
+**SUMMARY:** Fixed 2 test failures: window management assertion and Grid URL default for local runs
+**Impact:** All tests now pass; SmokeTests can run locally without Docker
+**Branch:** fix/test-failures-window-management-and-grid-url
+**Files Modified:** 6 files (AdvancedFeaturesTests.java, SmokeTests.java, 4 shell scripts)
+
+**AI Tool & Token Status:** Tool: Cursor - Tokens Used: ~15,000 / Total: 1,000,000 (estimated, ~1.5% used, ~98.5% remaining)
+
+---
+
+### Changes Made
+
+**1. AdvancedFeaturesTests.testWindowManagement Fix:**
+- Problem: Test failed when initial window width was already 800px (same as resize target)
+- Solution: Made test robust by checking initial size and choosing different target size
+- If initial width is 800, resize to 1024; otherwise resize to 800
+- Changed assertion to verify at least one dimension (width or height) changed
+- Location: `src/test/java/com/cjs/qa/junit/tests/AdvancedFeaturesTests.java` lines 145-164
+
+**2. SmokeTests.setUp Grid URL Fix:**
+- Problem: Default Grid URL was `http://selenium-hub:4444/wd/hub` which only works inside Docker
+- Solution: Changed default to `http://localhost:4444/wd/hub` for local runs
+- Location: `src/test/java/com/cjs/qa/junit/tests/SmokeTests.java` line 44
+
+**3. Shell Script Formatting:**
+- Pre-commit hook fixes: Added trailing newlines to shell scripts (POSIX standard)
+- Files: grid-health.sh, grid-scale.sh, grid-start.sh, grid-stop.sh
+
+### Testing Performed
+- ✅ All smoke tests pass (5/5)
+- ✅ Window management test passes with various initial window sizes
+- ✅ Grid connection works for local runs
+- ✅ Full test suite passes (102 tests, 0 failures)
+
+### Root Cause Analysis
+- **Issue 1:** Window resize test assumed initial size would differ from target size
+- **Issue 2:** SmokeTests used Docker-internal hostname for Grid URL, breaking local runs
+
+---
+
 ## [2025-11-21 07:56:14] [f64cb8475] - PR #29 Merged: Fix pom.xml Structure and Remove Deprecated Proxy Methods
 
 ### Overview

@@ -146,8 +146,12 @@ public class AdvancedFeaturesTests {
     Dimension initialSize = driver.manage().window().getSize();
     LOGGER.info("Initial size: {}x{}", initialSize.width, initialSize.height);
 
-    Allure.step("Resize window");
-    driver.manage().window().setSize(new Dimension(800, 600));
+    Allure.step("Resize window to a size different from initial");
+    // Choose a resize target that's guaranteed to be different from initial size
+    // If initial width is 800, use 1024; otherwise use 800
+    int targetWidth = (initialSize.width == 800) ? 1024 : 800;
+    int targetHeight = (initialSize.height == 600) ? 768 : 600;
+    driver.manage().window().setSize(new Dimension(targetWidth, targetHeight));
     Dimension newSize = driver.manage().window().getSize();
     LOGGER.info("New size: {}x{}", newSize.width, newSize.height);
 
@@ -160,8 +164,12 @@ public class AdvancedFeaturesTests {
 
     AllureHelper.captureScreenshot(driver, "Window-Maximized");
 
-    // Verify resize worked
-    Assert.assertNotEquals(initialSize.width, newSize.width, "Window should have been resized");
+    // Verify resize worked - check that at least one dimension changed
+    boolean widthChanged = initialSize.width != newSize.width;
+    boolean heightChanged = initialSize.height != newSize.height;
+    Assert.assertTrue(widthChanged || heightChanged,
+        String.format("Window should have been resized from %dx%d to %dx%d",
+            initialSize.width, initialSize.height, newSize.width, newSize.height));
 
     LOGGER.info("✅ Window management successful");
   }

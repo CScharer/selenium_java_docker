@@ -41,7 +41,7 @@ public class SmokeTests {
 
     gridUrl = System.getenv("SELENIUM_REMOTE_URL");
     if (gridUrl == null || gridUrl.isEmpty()) {
-      gridUrl = "http://selenium-hub:4444/wd/hub";
+      gridUrl = "http://localhost:4444/wd/hub";
     }
 
     LOGGER.info("Grid URL: {}", gridUrl);
