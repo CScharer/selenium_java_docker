@@ -35,3 +35,4 @@ alerting:
 # Rule files
 rule_files:
   # - "alerts.yml"
+

@@ -1,5 +1,40 @@
 # CHANGE LOG
 
+## [2025-11-21 07:12:58] [PENDING] - Remove Deprecated Proxy.setFtpProxy() Method
+
+### Overview
+**STATUS:** Feature branch `fix/remove-deprecated-proxy-ftp` - Changes ready to commit
+**SUMMARY:** Removed deprecated `Proxy.setFtpProxy()` method call from SeleniumWebDriver; removed blank lines from pyproject.toml; added trailing newline to prometheus.yml
+**Impact:** Eliminates deprecation warning; improves code compatibility with Selenium 4.x; maintains file formatting consistency
+**Branch:** fix/remove-deprecated-proxy-ftp
+**Files Modified:** 3 files (SeleniumWebDriver.java, pyproject.toml, prometheus.yml)
+
+**AI Tool & Token Status:** Tool: Cursor - Tokens Used: ~5,000 / Total: 1,000,000 (estimated, ~0.5% used, ~99.5% remaining)
+
+---
+
+### Changes Made
+
+**SeleniumWebDriver.java (1 file):**
+- Removed deprecated `Proxy.setFtpProxy()` method call from `setProxy()` method
+- Updated Chrome proxy case to fall through to default logic
+- Added comments explaining the change and alternative proxy options
+- Changed from: `proxy.setHttpProxy(proxyAddress).setFtpProxy(proxyAddress).setSslProxy(proxyAddress)`
+- Changed to: `proxy.setHttpProxy(proxyAddress).setSslProxy(proxyAddress)`
+- **Reason:** `setFtpProxy()` is deprecated in Selenium 4.x; HTTP and SSL proxy settings are sufficient for browser automation
+
+**File Formatting (2 files):**
+- `pyproject.toml`: Removed blank lines for consistency
+- `monitoring/prometheus.yml`: Added trailing newline (pre-commit hook formatting)
+
+### Verification
+- ✅ Deprecation warning removed
+- ✅ Code compiles successfully
+- ✅ No linter errors
+- ✅ On feature branch (not main)
+
+---
+
 ## [2025-11-20 09:17:15] [ebf05b835] - Java 21 IDE Configuration Update and File Formatting
 
 ### Overview
