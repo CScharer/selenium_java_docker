@@ -1,14 +1,14 @@
 # CHANGE LOG
 
-## [2025-11-21 08:43:00] [cdfb72250] - PR #30: Fix Test Failures: Window Management and Grid URL Default
+## [2025-11-21 08:43:00] [00bf4d1cb] - PR #30 Merged: Fix Test Failures: Window Management and Grid URL Default
 
 ### Overview
-**STATUS:** 🔄 **PR CREATED** - PR #30 created, awaiting review
+**STATUS:** ✅ **MERGED TO MAIN** - PR #30 successfully merged
 **SUMMARY:** Fixed 2 test failures: window management assertion and Grid URL default for local runs
 **Impact:** All tests now pass; SmokeTests can run locally without Docker
 **PR Number:** #30
-**Branch:** fix/test-failures-window-management-and-grid-url
-**Files Modified:** 6 files (AdvancedFeaturesTests.java, SmokeTests.java, 4 shell scripts)
+**Branch:** fix/test-failures-window-management-and-grid-url (deleted after merge)
+**Files Modified:** 7 files (AdvancedFeaturesTests.java, SmokeTests.java, 4 shell scripts, CHANGE.log)
 
 **AI Tool & Token Status:** Tool: Cursor - Tokens Used: ~15,000 / Total: 1,000,000 (estimated, ~1.5% used, ~98.5% remaining)
 
@@ -41,6 +41,11 @@
 ### Root Cause Analysis
 - **Issue 1:** Window resize test assumed initial size would differ from target size
 - **Issue 2:** SmokeTests used Docker-internal hostname for Grid URL, breaking local runs
+
+### Post-Merge Actions
+- ✅ Local branch deleted: `fix/test-failures-window-management-and-grid-url`
+- ✅ Remote branch deleted: `origin/fix/test-failures-window-management-and-grid-url`
+- ✅ Main branch updated with merged changes
 
 ---
 
