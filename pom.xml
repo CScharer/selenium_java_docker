@@ -94,7 +94,7 @@ Java, Cucumber/Gherkin, APIs and Selenium.</description>
 		<webdrivermanager.version>5.9.2</webdrivermanager.version>
 		<appium.version>9.3.0</appium.version>
 		<allure.version>2.31.0</allure.version>
-		<aspectj.version>1.9.22</aspectj.version>
+		<aspectj.version>1.9.25</aspectj.version>
 
 		<!-- Code Quality Tools -->
 		<checkstyle.version>10.12.5</checkstyle.version>
