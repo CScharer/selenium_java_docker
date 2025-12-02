@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.junit.Assert;
 
@@ -263,7 +264,11 @@ public final class SystemProcesses {
         mapHeadingsExpected.put(heading, "");
       }
       try (Reader reader = new FileReader(FILE_DATA_CSV)) {
-        Iterable<CSVRecord> records = CSVFormat.RFC4180.builder().setHeader().build().parse(reader);
+        // Note: .build() is deprecated in Commons CSV 1.14.1 but still required
+        // Using CSVParser.parse() is the recommended approach
+        @SuppressWarnings("deprecation")
+        CSVFormat format = CSVFormat.RFC4180.builder().setHeader().build();
+        Iterable<CSVRecord> records = CSVParser.parse(reader, format);
         boolean headingsMapped = false;
         Map<String, String> mapHeadingsCSV = null;
         stringBuilder = new StringBuilder();

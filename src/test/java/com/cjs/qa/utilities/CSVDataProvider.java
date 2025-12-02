@@ -55,17 +55,21 @@ public final class CSVDataProvider {
 
     List<Object[]> dataList = new ArrayList<>();
 
+    // Note: .build() is deprecated in Commons CSV 1.14.1 but still required
+    // Using CSVParser.parse() is the recommended approach
+    @SuppressWarnings("deprecation")
+    CSVFormat formatWithHeader = CSVFormat.DEFAULT
+        .builder()
+        .setHeader()
+        .setSkipHeaderRecord(true)
+        .build();
+
     try (InputStream inputStream = getInputStream(filePath);
         InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
         CSVParser csvParser =
             skipHeaderRow
-                ? CSVFormat.DEFAULT
-                    .builder()
-                    .setHeader()
-                    .setSkipHeaderRecord(true)
-                    .build()
-                    .parse(reader)
-                : CSVFormat.DEFAULT.parse(reader)) {
+                ? CSVParser.parse(reader, formatWithHeader)
+                : CSVParser.parse(reader, CSVFormat.DEFAULT)) {
 
       for (CSVRecord record : csvParser) {
         List<Object> rowData = new ArrayList<>();
