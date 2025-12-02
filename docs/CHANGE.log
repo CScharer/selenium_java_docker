@@ -1,5 +1,65 @@
 # CHANGE LOG
 
+## [2025-12-02 11:31:08] [6155ef165] - PR #37: Restore Performance Test Files and Re-enable Scheduled Runs
+
+### Overview
+**STATUS:** 🔄 **IN PROGRESS** - PR #37 created, awaiting review
+**SUMMARY:** Restored performance test files that were accidentally deleted and re-enabled scheduled test runs in GitHub Actions
+**Impact:** Performance tests will now run automatically on schedule; all test files restored
+**PR Number:** #37
+**Branch:** feature/restore-performance-tests-and-schedule
+**Files Modified:** 13 files (7 performance test files, 1 workflow file, 5 YAML formatting fixes, CHANGE.log)
+
+**AI Tool & Token Status:** Tool: Cursor - Tokens Used: ~20,000 / Total: 1,000,000 (estimated, ~2% used, ~98% remaining)
+
+---
+
+### Changes Made
+
+**1. Restored Performance Test Files (from commit 01b4e1ed3):**
+- **Locust Tests (3 files):**
+  - `src/test/locust/api_load_test.py` - API load testing with JSONPlaceholder
+  - `src/test/locust/comprehensive_load_test.py` - Comprehensive multi-endpoint testing
+  - `src/test/locust/web_load_test.py` - Web page load testing across multiple sites
+- **JMeter Tests (2 files):**
+  - `src/test/jmeter/API_Performance_Test.jmx` - REST API performance test plan
+  - `src/test/jmeter/Web_Load_Test.jmx` - Web page load test plan
+- **Gatling Tests (2 files):**
+  - `src/test/scala/ApiLoadSimulation.scala` - Scala-based API load simulation
+  - `src/test/scala/WebLoadSimulation.scala` - Scala-based web load simulation
+
+**2. Re-enabled GitHub Actions Schedule:**
+- Uncommented schedule triggers in `.github/workflows/performance.yml`
+- **Weekly comprehensive test:** Sunday 10 PM CST (Monday 4 AM UTC) - `0 4 * * 1`
+- **Nightly quick smoke:** Every day 10 PM CST (4 AM UTC next day) - `0 4 * * *`
+- Manual triggers (`workflow_dispatch`) still available
+
+**3. YAML File Formatting (POSIX Standard):**
+- Added trailing newlines to 5 YAML configuration files:
+  - `docker-compose.dev.yml`
+  - `docker-compose.prod.yml`
+  - `monitoring/grafana/dashboards/dashboard.yml`
+  - `monitoring/grafana/datasources/prometheus.yml`
+  - `monitoring/prometheus.yml`
+
+### Testing Performed
+- ✅ Pre-flight verification passed (compile + test-compile)
+- ✅ Smoke tests passing (5/5 tests, 0 failures)
+- ✅ All performance test files restored and verified
+- ✅ Workflow syntax validated
+
+### Root Cause Analysis
+- **Issue:** Performance test files existed in commit `01b4e1ed3` but were deleted in a later commit
+- **Impact:** GitHub Actions schedule was disabled to prevent failures from missing files
+- **Solution:** Restored files from the commit where they existed and re-enabled the schedule
+
+### Next Steps
+- ⏳ PR #37 review and approval
+- ⏳ Merge to main branch
+- ⏳ Scheduled tests will begin running automatically after merge
+
+---
+
 ## [2025-11-21 08:43:00] [00bf4d1cb] - PR #30 Merged: Fix Test Failures: Window Management and Grid URL Default
 
 ### Overview
